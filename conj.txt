@@ -1,0 +1,18 @@
+Current conjecture:
+
+The MLQ generating function equals
+
+product of x_{b_i} over all i
+
+times
+
+product of e_{k_j}(x_1, ..., x_N) over all j
+
+times
+
+determinant of h_{j - k_{n+1-i}(S)'} (x_1, ..., x_{b_{n+1-i}}) over
+all 1 <= i <= n and all 1 <= j <= n.
+
+This is the same as the flagged Schur function for (straight) shape
+\lambda with \lambda_i = n+1-i - k_i(S)' and for flagging b_n,
+b_{n-1}, ..., b_1.
