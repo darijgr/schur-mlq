@@ -31,7 +31,10 @@
 \DeclareMathOperator{\ch}{ch} % character
 \DeclareMathOperator{\gr}{gr} % grading
 
+\newcommand{\xx}{\mathbf{x}}
+
 \newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcF}{\mathcal{F}}
 \newcommand{\mcM}{\mathcal{M}}
 
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -197,13 +200,21 @@ MLQs
 
 \subsection{Flagged Schur functions}
 
-Wachs
-
+Let $\lambda$ be a partition of length $m$ and $b = (b_1 \leq b_2 \leq \cdots \leq b_m)$.
+Let
+\[
+h_d(k) = \sum_{i_1 \leq \cdots \leq i_d \leq k} x_{i_1} \cdots x_{i_d}
+\]
+be the complete homogeneous symmetric function of degree $d$ in the variables $x_1, \dotsc, x_k$.
 A \defn{flagged Schur function} is
 \[
-\fs_{\lambda}(b; x_1, \dotsc, x_n) = \sum_T x^T,
+\fs_{\lambda}(b; \xx) = \det\big[ h_{\lambda_i - i + j}(b_i) \bigr]_{i,j=1}^m.
 \]
-where we sum over all flagged semistandard tableaux.
+We can also express the flagged Schur function combinatorially using $\mcF_{\lambda}(b)$, the semistandard tableaux of shape $\lambda$ such that the max entry in row $i$ is at most $b_i$.
+From~\cite{Wachs85}, we have
+\[
+\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
+\]
 
 
 
@@ -216,23 +227,53 @@ where we sum over all flagged semistandard tableaux.
 \section{Main result}
 \label{sec:result}
 
-We define the weight of an MLQ $M$ with spectral parameters $(x_1, \dotsc, x_N)$ by
+We define the weight of an MLQ $M$ with spectral parameters $\xx = (x_1, \dotsc, x_N)$ by
 \[
 \wt(M) = \prod_{(b_1,b_2)} x_{b_1}
 \]
 where the product is taken over the positions balls.
-
 Let
 \[
-\mcM_k(b; x_1, \dotsc, x_n) = \sum_M \wt(M).
+\mcM_k(b; \xx) = \sum_M \wt(M),
 \]
+where we sum over all MLQs with final positions $b$ and shape $k$.
 
 \begin{thm}
+Let $b = (b_1 \leq b_2 \leq \cdots \leq b_n)$ and $k$ be a strict partition.
 We have
 \[
-\mcM_k(b; x_1, \dotsc, x_n) = \fs_{\lambda}(b; x_1, \dotsc, x_n).
+\mcM_k(b; \xx) = \fs_{\lambda}(b; \xx),
+\]
+where $\lambda_{n+1-i} = i - k_{n+1-i}(S)'$.
+\end{thm}
+
+\begin{proof}
+For ordered $b$, the proof that there is no wrapping is the same as in~\cite{AasLin17} when all entries of $b$ are distinct.
+Hence the only possibility for lattice paths to intersect is when the two paths have the same color.
+
+If two paths have the same color and intersect, separate them into a non-intersecting lattice path by shifting up 1 step the entire path and all other paths above it.
+
+Thus, by the Lindstr\"om--Gessel--Viennot Lemma, we have
+\[
+\det\big[ h_{j-k_{n+1-i}(S)'}(b_{n+1-i}) \bigr]_{i,j=1}^n.
+\]
+Thus the claim follows.
+\end{proof}
+
+\Travis{This theorem is not the correct statement.}
+
+\begin{thm}
+Consider the action of the Young subgroup $S_{\mu}$.
+Then, we have
+\[
+\mcM_{\mu}(b; \xx) = \mcM_k(b; \xx).
 \]
 \end{thm}
+
+\begin{proof}
+The only wrapping the can occur is within the action of a particular Young subgroup.
+This is similar to the proof that there is no wrapping in~\cite{AasLin17}.
+\end{proof}
 
 
 
