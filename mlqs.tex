@@ -1,0 +1,222 @@
+\documentclass[reqno]{amsart}
+\usepackage{setspace,tikz,xcolor,mathrsfs,listings,multicol}
+\usepackage{rotating}
+\usepackage[vcentermath]{youngtab}
+%\usepackage{subcaption}
+%\usepackage{fullpage}
+\usepackage{enumerate}
+\usepackage[all,cmtip]{xy}
+\usetikzlibrary{arrows,matrix}
+%\usepackage[margin=1.25in]{geometry}
+%\onehalfspacing
+
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+% use these commands for typesetting doi and arXiv references in the bibliography
+\newcommand{\doi}[1]{\href{http://dx.doi.org/#1}{\texttt{doi:#1}}}
+\newcommand{\arxiv}[1]{\href{http://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+
+\newcommand{\iso}{\cong}
+%\newcommand{\qedbox}{\rule{2mm}{2mm}}
+%\renewcommand{\qedsymbol}{\qedbox}
+\newcommand{\qbinom}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
+\newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
+
+\DeclareMathOperator{\supp}{supp} % Support
+\DeclareMathOperator{\wt}{wt} % weight
+\DeclareMathOperator{\pr}{pr} % promotion
+\DeclareMathOperator{\id}{id} % identity
+\DeclareMathOperator{\ch}{ch} % character
+\DeclareMathOperator{\gr}{gr} % grading
+
+\newcommand{\mcA}{\mathcal{A}}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\bze}{\overline{0}}
+\newcommand{\bon}{\overline{1}}
+\newcommand{\btw}{\overline{2}}
+\newcommand{\bth}{\overline{3}}
+\newcommand{\bfo}{\overline{4}}
+\newcommand{\bfive}{\overline{5}}
+\newcommand{\bsix}{\overline{6}}
+\newcommand{\bseven}{\overline{7}}
+\newcommand{\beight}{\overline{8}}
+\newcommand{\bi}{\overline\imath}
+\newcommand{\bk}{\overline{k}}
+\newcommand{\brr}{\overline{r}}
+\newcommand{\bn}{\overline{n}}
+\newcommand{\ellbar}{\overline{\ell}}
+
+
+% Dark red emphasis
+\definecolor{darkred}{rgb}{0.7,0,0} % darkred color
+\newcommand{\defn}[1]{{\color{darkred}\emph{#1}}} % emphasis of a definition
+
+
+%% For typesetting code listings                                                
+\usepackage{listings}
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={False,sage,True},sensitive=true}
+\lstset{
+  frame=single,
+  showtabs=False,
+  showspaces=False,
+  showstringspaces=False,
+  commentstyle={\ttfamily\color{dgreencolor}},
+  keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+  stringstyle={\ttfamily\color{dgraycolor}\bfseries},
+  language=Sage,
+  basicstyle={\footnotesize\ttfamily},
+  aboveskip=0.75em,
+  belowskip=0.75em,
+  xleftmargin=.15in,
+}
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
+\definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblue}{\color{dbluecolor}\bf}
+\newcommand{\dred}{\color{dredcolor}\bf}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
+
+\usepackage{xparse}
+
+\makeatletter
+% \specialmergetwolists{<coupler>}{<list1>}{<list2>}{<return macro>}
+% \specialmergetwolists*{<coupler>}{<listcmd1>}{<listcmd2>}{<return macro>}
+\protected\def\specialmergetwolists{%
+  \begingroup
+  \@ifstar{\def\cnta{1}\@specialmergetwolists}
+    {\def\cnta{0}\@specialmergetwolists}%
+}
+\def\@specialmergetwolists#1#2#3#4{%
+  \def\tempa##1##2{%
+    \edef##2{%
+      \ifnum\cnta=\@ne\else\expandafter\@firstoftwo\fi
+      \unexpanded\expandafter{##1}%
+    }%
+  }%
+  \tempa{#2}\tempb\tempa{#3}\tempa
+  \def\cnta{0}\def#4{}%
+  \foreach \x in \tempb{%
+    \xdef\cnta{\the\numexpr\cnta+1}%
+    \gdef\cntb{0}%
+    \foreach \y in \tempa{%
+      \xdef\cntb{\the\numexpr\cntb+1}%
+      \ifnum\cntb=\cnta\relax
+        \xdef#4{#4\ifx#4\empty\else,\fi\x#1\y}%
+        \breakforeach
+      \fi
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{remark}[thm]{Remark}
+\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+%\setcounter{section}{-1}
+
+% For breaking equations across multiple pages
+% \allowdisplaybreaks[1]
+
+\usepackage[colorinlistoftodos]{todonotes}
+\newcommand{\darij}[1]{\todo[size=\tiny,color=red!30]{#1 \\ \hfill --- Darij}}
+\newcommand{\Darij}[1]{\todo[size=\tiny,inline,color=red!30]{#1
+      \\ \hfill --- Darij}}
+\newcommand{\travis}[1]{\todo[size=\tiny,color=blue!30]{#1 \\ \hfill --- Travis}}
+\newcommand{\Travis}[1]{\todo[size=\tiny,inline,color=blue!30]{#1
+      \\ \hfill --- Travis}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title[MLQs]{Multiline queues with special parameters}
+
+\author[D.~Grinberg]{Darij Grinberg}
+\address[D. Grinberg]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
+\email{darij.grinberg@gmail.com}
+\urladdr{http://www.math.umn.edu/~{}dgrinber/}
+
+\author[T.~Scrimshaw]{Travis Scrimshaw}
+%\address[T. Scrimshaw]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
+\email{tcscrims@gmail.com}
+\urladdr{https://sites.google.com/view/tscrim/home}
+
+\keywords{multiline queue, flagged Schur function}
+\subjclass[2010]{05E10, 17B37}
+
+%\thanks{TS was partially supported by the National Science Foundation RTG grant NSF/DMS-1148634.}
+
+\begin{abstract}
+We prove the spectral parameter version of the MLQs conjecture.
+\end{abstract}
+
+\maketitle
+
+
+
+%=====================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+To be written last.
+
+
+
+
+
+
+%=====================================================================
+\section{Background}
+\label{sec:background}
+
+\subsection{Multiline queues}
+
+MLQs
+
+\subsection{Flagged Schur functions}
+
+Wachs
+
+A \defn{flagged Schur function} is
+
+
+
+
+
+
+
+
+%=====================================================================
+\section{Main result}
+\label{sec:result}
+
+
+
+
+
+
+
+
+\bibliographystyle{alpha}
+\bibliography{queues}{}
+\end{document}
