@@ -468,8 +468,6 @@ Thus, by the Lindstr\"om--Gessel--Viennot Lemma, we have
 Thus the claim follows.
 \end{proof}
 
-\Travis{This theorem is not the correct statement.}
-
 \begin{comment}
  We hope to have
 \[
@@ -478,6 +476,12 @@ Thus the claim follows.
 \]
 where $\lambda$ is the partition $\tup{1^{m_1}, 2^{m_2}, 3^{m_3}, \ldots}$
 (in multiplicity notation), or at least some partition.
+
+But this doesn't seem to work on the nose, since either
+the partition increases or the flags decrease.
+
+Maybe ghost entries, so a more general notion of flagged
+Schur functions.
 \end{comment}
 
 
@@ -488,6 +492,8 @@ Then, we have
 \mcM_{\mu}(b; \xx) = \mcM_k(b; \xx).
 \]
 \end{thm}
+
+\Travis{This theorem is not the correct statement.}
 
 \begin{proof}
 The only wrapping the can occur is within the action of a particular Young subgroup.
