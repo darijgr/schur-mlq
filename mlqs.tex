@@ -1,5 +1,8 @@
 \documentclass[reqno]{amsart}
 \usepackage{setspace,tikz,xcolor,mathrsfs,listings,multicol}
+\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
 \usepackage{rotating}
 \usepackage[vcentermath]{youngtab}
 %\usepackage{subcaption}
@@ -7,6 +10,13 @@
 \usepackage{enumerate}
 \usepackage[all,cmtip]{xy}
 \usetikzlibrary{arrows,matrix}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
 %\usepackage[margin=1.25in]{geometry}
 %\onehalfspacing
 
@@ -32,6 +42,8 @@
 \DeclareMathOperator{\gr}{gr} % grading
 
 \newcommand{\xx}{\mathbf{x}}
+\newcommand{\mm}{\mathbf{m}}
+\newcommand{\MLQ}{\mathbf{S}}
 
 \newcommand{\mcA}{\mathcal{A}}
 \newcommand{\mcF}{\mathcal{F}}
@@ -57,6 +69,47 @@
 \newcommand{\bn}{\overline{n}}
 \newcommand{\ellbar}{\overline{\ell}}
 
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
 
 % Dark red emphasis
 \definecolor{darkred}{rgb}{0.7,0,0} % darkred color
@@ -196,7 +249,147 @@ To be written last.
 
 \subsection{Multiline queues}
 
-MLQs
+Fix a positive integer $N$.
+Let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
+
+\darij{Remember to fix the spelling of ``labelling''.}
+
+\begin{dfn}
+A \defn{labeling} of a set $X$ means a map
+$X \to \set{1, 2, 3, \ldots}$.
+If $f$ is a labeling of $X$, then the image of
+a given element $x \in X$ under $f$ is called the
+\defn{label} of $x$ (in $f$).
+\end{dfn}
+
+\begin{dfn}
+If $p$ is an element of $\ive{N}$,
+and if $S$ is a nonempty subset of $\ive{N}$,
+then an element \defn{$\min_p S$} of $S$ is defined as
+follows:
+If there exists an element of $S$ that is greater
+or equal to $p$, then we set $\min_p S$ to be the
+smallest such element;
+otherwise, we set $\min_p S$ to be the smallest
+element of $S$.
+
+(Roughly speaking, $\min_p S$ is the first element
+of $S$ you encounter when traversing the elements
+$p, p+1, \ldots, n, 1, 2, \ldots, p-1$.)
+\end{dfn}
+
+\begin{dfn} \label{def.mlqs.down}
+Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying
+$\abs{U} \leq \abs{V}$.
+Let $f$ be a labeling of $U$.
+Let $k$ be a positive integer.
+
+Then, a labeling \defn{$f \downarrow_{V, k}$} of $V$ is defined
+as follows (recursively over $\abs{U}$):
+
+\begin{itemize}
+ \item If $U = \varnothing$, then $f \downarrow_{V, k}$ sends
+       each element of $V$ to $k$.
+ \item Otherwise, pick an element $u$ of $U$ having minimum
+       label (i.e., having minimum $f \tup{u}$).
+       Let $v = \min_u V$.
+       Let $g$ be the restriction of $f$ to the subset
+       $U \setminus \set{u}$.
+       Let $g' = g \downarrow_{V \setminus \set{v}, k}$.
+       Then, the labeling $f \downarrow_{V, k}$ is defined by
+       setting
+       \[
+        \tup{f \downarrow_{V, k}} \tup{s}
+        =
+        \begin{cases}
+         f \tup{u}, & \text{ if } s = u; \\
+         g \tup{s}, & \text{ if } s \neq u
+        \end{cases}
+        \qquad \text{ for all } s \in V .
+       \]
+       Note that this does not depend on the choice of $u$
+       (according to Proposition~\ref{prop.mlqs.down.indep}).
+\end{itemize}
+
+\end{dfn}
+
+\begin{prop} \label{prop.mlqs.down.indep}
+The definition of $f \downarrow_{V, k}$ given above does not
+depend on the choice of $u$.
+\end{prop}
+
+\begin{proof}[Proof of Proposition~\ref{prop.mlqs.down.indep}.]
+Let $U, V, f, k$ be as in Definition~\ref{def.mlqs.down}.
+Let $u_1$ and $u_2$ be two elements of $U$ having minimum
+label (in $f$).
+We must prove that the labeling
+$f \downarrow_{V, k}$ obtained by taking $u = u_1$ in
+Definition~\ref{def.mlqs.down}
+is identical with the labeling
+$f \downarrow_{V, k}$ obtained by taking $u = u_2$ in
+Definition~\ref{def.mlqs.down}.
+
+......
+\end{proof}
+
+Next, we shall define the notion of an
+\textit{MLQ} (short for \textit{multiline queue}).
+This notion corresponds to what is called a
+``discrete MLQ'' in \cite[\S 2.2]{AasLin17}; we omit the
+word ``discrete'', as we will not encounter any other kind
+of MLQs.
+
+\begin{dfn} \label{def.mlqs.mlq}
+Fix a nonnegative integer $n$,
+and an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of nonnegative
+integers.
+An \defn{MLQ} of type $\mm$ is
+an $\tup{n+1}$-tuple $\tup{S_0, S_1, \ldots, S_n}$ of subsets of
+$\ive{N}$
+such that each $i \in \set{0, 1, \ldots, n}$ satisfies
+$\abs{S_i} = m_1 + m_2 + \cdots + m_i$.
+(In particular, $S_0 = \varnothing$.)
+
+We shall represent an MLQ $\tup{S_0, S_1, \ldots, S_n}$ as an
+$n \times N$-array, each row of which has some of its boxes
+marked. Namely, for each $i \in \set{1, 2, \ldots, n}$ and
+each $j \in S_i$, we mark the $j$-th box in row $i$.
+(The rows and the columns are indexed as usual for a matrix.)
+\end{dfn}
+
+\begin{dfn} \label{def.mlqs.can-lab}
+Let $n$ and $\mm$ be as in Definition~\ref{def.mlqs.mlq}.
+Let $\MLQ = \tup{S_0, S_1, \ldots, S_n}$ be an MLQ of type $\mm$.
+
+Then, for each $i \in \set{0, 1, \ldots, n}$, we can
+define a labeling $f_i$ of the set $S_i$ as follows (by
+recursion over $i$):
+\begin{itemize}
+ \item The labeling $f_0$ on $S_0$ is defined in the
+       obvious way (since $S_0 = \varnothing$).
+ \item If $f_{i-1}$ is defined for some $i \geq 1$,
+       then we define $f_i$ by
+       $f_i = f_{i-1} \downarrow_{S_i, i}$.
+\end{itemize}
+These labelings $f_0, f_1, \ldots, f_n$ are called the
+\defn{canonical labelings} of the MLQ $\MLQ$.
+
+The pair $\tup{S_n, f_n}$ is called the
+\defn{bottom row} of the MLQ $\MLQ$.
+\end{dfn}
+
+\begin{dfn} \label{def.mlq.sw}
+Let $n$ and $\mm$ be as in Definition~\ref{def.mlqs.mlq}.
+Let $\MLQ = \tup{S_0, S_1, \ldots, S_n}$ be an MLQ of type $\mm$.
+
+The \defn{spectral weight} of $\MLQ$ is defined to be the
+monomial
+\[
+ \prod_{i=0}^{n-1} \prod_{s \in S_i} x_s
+\]
+in the indeterminates $x_1, x_2, \ldots, x_N$.
+\end{dfn}
+
 
 \subsection{Flagged Schur functions}
 
