@@ -459,6 +459,10 @@ def test_c310jt(N, bs, ks):
     k_par_prime = [0] * (n - len(k_par_prime)) + k_par_prime
     print "k' (reversed) is ", k_par_prime
     print "the partition shape is ", [i - k_par_prime[i] for i in range(n)]
+    N = [[(bsr[i] + 1, - k_par_prime[i] + j)
+                    for j in range(n)] for i in range(n)]
+    for row in N:
+        print row
     M = Matrix(P, [[complete_symm(P, xs[: bsr[i] + 1], - k_par_prime[i] + j)
                     for j in range(n)] for i in range(n)])
     dM = M.det()
