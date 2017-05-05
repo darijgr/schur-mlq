@@ -22,6 +22,7 @@
 \newcommand{\qbinom}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
 \newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
+\newcommand{\fs}{\mathcal{S}} % flagged Schur function
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\wt}{wt} % weight
@@ -31,6 +32,7 @@
 \DeclareMathOperator{\gr}{gr} % grading
 
 \newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcM}{\mathcal{M}}
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -198,6 +200,10 @@ MLQs
 Wachs
 
 A \defn{flagged Schur function} is
+\[
+\fs_{\lambda}(b; x_1, \dotsc, x_n) = \sum_T x^T,
+\]
+where we sum over all flagged semistandard tableaux.
 
 
 
@@ -210,6 +216,23 @@ A \defn{flagged Schur function} is
 \section{Main result}
 \label{sec:result}
 
+We define the weight of an MLQ $M$ with spectral parameters $(x_1, \dotsc, x_N)$ by
+\[
+\wt(M) = \prod_{(b_1,b_2)} x_{b_1}
+\]
+where the product is taken over the positions balls.
+
+Let
+\[
+\mcM_k(b; x_1, \dotsc, x_n) = \sum_M \wt(M).
+\]
+
+\begin{thm}
+We have
+\[
+\mcM_k(b; x_1, \dotsc, x_n) = \fs_{\lambda}(b; x_1, \dotsc, x_n).
+\]
+\end{thm}
 
 
 
@@ -218,5 +241,5 @@ A \defn{flagged Schur function} is
 
 
 \bibliographystyle{alpha}
-\bibliography{queues}{}
+\bibliography{queue}{}
 \end{document}
