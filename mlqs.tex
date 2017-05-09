@@ -252,39 +252,45 @@ To be written last.
 Fix a positive integer $N$.
 Let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
 
-\darij{Remember to fix the spelling of ``labelling''.}
+%\begin{dfn} \label{def.mlqs.mlq}
+Fix a nonnegative integer $n$.
+A \defn{multiline queue (MLQ)} is an $(n+1)$-tuple $(S_0, S_1, \dotsc, S_n)$ such that $S_0 = \emptyset$ and, for all $1 \leq i \leq n$, we have $S_i \subseteq \ive{N}$ and $\lvert S_{i-1} \rvert < \lvert S_i \rvert$.
+We shall represent an MLQ $\tup{S_0, S_1, \ldots, S_n}$ as an
+$n \times N$-array, each row of which has some of its boxes
+marked. Namely, for each $i \in \set{1, 2, \ldots, n}$ and
+each $j \in S_i$, we mark the $j$-th box in row $i$.
+(The rows and the columns are indexed as usual for a matrix.)
+%\end{dfn}
 
-\begin{dfn}
-A \defn{labeling} of a set $X$ means a map
-$X \to \set{1, 2, 3, \ldots}$.
-If $f$ is a labeling of $X$, then the image of
-a given element $x \in X$ under $f$ is called the
-\defn{label} of $x$ (in $f$).
-\end{dfn}
+\begin{remark}
+Our notion of an MLQ corresponds to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
+We omit the word ``discrete'', as we will not encounter any other kind of MLQs.
+\end{remark}
 
-\begin{dfn}
+Let $\MLQ = (S_0, \dotsc, S_n)$ be an MLQ.
+The \defn{type} of $\MLQ$ is the  $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of nonnegative
+integers such that $\abs{S_i} = m_1 + m_2 + \cdots + m_i$.
+(In particular, $S_0 = \varnothing$.)
+
+In order to define the labeling of an MLQ, we need to setup some notation.
+
 If $p$ is an element of $\ive{N}$,
 and if $S$ is a nonempty subset of $\ive{N}$,
-then an element \defn{$\min_p S$} of $S$ is defined as
-follows:
+then an element $\min_p S$ of $S$ is defined as follows:
 If there exists an element of $S$ that is greater
 or equal to $p$, then we set $\min_p S$ to be the
 smallest such element;
 otherwise, we set $\min_p S$ to be the smallest
 element of $S$.
-
 (Roughly speaking, $\min_p S$ is the first element
 of $S$ you encounter when traversing the elements
 $p, p+1, \ldots, n, 1, 2, \ldots, p-1$.)
-\end{dfn}
 
-\begin{dfn} \label{def.mlqs.down}
 Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying
 $\abs{U} \leq \abs{V}$.
-Let $f$ be a labeling of $U$.
+Let $f \colon U \to \ive{n}$.
 Let $k$ be a positive integer.
-
-Then, a labeling \defn{$f \downarrow_{V, k}$} of $V$ is defined
+We define the map $f \downarrow_{V, k}$ of $V$ is defined
 as follows (recursively over $\abs{U}$):
 
 \begin{itemize}
@@ -307,19 +313,17 @@ as follows (recursively over $\abs{U}$):
         \end{cases}
         \qquad \text{ for all } s \in V .
        \]
-       Note that this does not depend on the choice of $u$
-       (according to Proposition~\ref{prop.mlqs.down.indep}).
 \end{itemize}
 
-\end{dfn}
-
 \begin{prop} \label{prop.mlqs.down.indep}
+Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying $\abs{U} \leq \abs{V}$.
+Let $f \colon U \to \ive{n}$.
+Let $k$ be a positive integer.
 The definition of $f \downarrow_{V, k}$ given above does not
 depend on the choice of $u$.
 \end{prop}
 
-\begin{proof}[Proof of Proposition~\ref{prop.mlqs.down.indep}.]
-Let $U, V, f, k$ be as in Definition~\ref{def.mlqs.down}.
+\begin{proof}
 Let $u_1$ and $u_2$ be two elements of $U$ having minimum
 label (in $f$).
 We must prove that the labeling
@@ -332,59 +336,19 @@ Definition~\ref{def.mlqs.down}.
 ......
 \end{proof}
 
-Next, we shall define the notion of an
-\textit{MLQ} (short for \textit{multiline queue}).
-This notion corresponds to what is called a
-``discrete MLQ'' in \cite[\S 2.2]{AasLin17}; we omit the
-word ``discrete'', as we will not encounter any other kind
-of MLQs.
+\darij{Remember to fix the spelling of ``labelling''.}
 
-\begin{dfn} \label{def.mlqs.mlq}
-Fix a nonnegative integer $n$,
-and an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of nonnegative
-integers.
-An \defn{MLQ} of type $\mm$ is
-an $\tup{n+1}$-tuple $\tup{S_0, S_1, \ldots, S_n}$ of subsets of
-$\ive{N}$
-such that each $i \in \set{0, 1, \ldots, n}$ satisfies
-$\abs{S_i} = m_1 + m_2 + \cdots + m_i$.
-(In particular, $S_0 = \varnothing$.)
+\begin{dfn}
+The \defn{labeling} of $\MLQ$ is the tuple $(f_0, f_1, \dotsc, f_n)$ given recursively as follows.
+Define $f_0 \colon S_0 \to \ive{n}$ in the obvious way (since $S_0 = \varnothing$) and then define $f_i$ by $f_i = f_{i-1} \downarrow_{S_i, i}$.
 
-We shall represent an MLQ $\tup{S_0, S_1, \ldots, S_n}$ as an
-$n \times N$-array, each row of which has some of its boxes
-marked. Namely, for each $i \in \set{1, 2, \ldots, n}$ and
-each $j \in S_i$, we mark the $j$-th box in row $i$.
-(The rows and the columns are indexed as usual for a matrix.)
-\end{dfn}
-
-\begin{dfn} \label{def.mlqs.can-lab}
-Let $n$ and $\mm$ be as in Definition~\ref{def.mlqs.mlq}.
-Let $\MLQ = \tup{S_0, S_1, \ldots, S_n}$ be an MLQ of type $\mm$.
-
-Then, for each $i \in \set{0, 1, \ldots, n}$, we can
-define a labeling $f_i$ of the set $S_i$ as follows (by
-recursion over $i$):
-\begin{itemize}
- \item The labeling $f_0$ on $S_0$ is defined in the
-       obvious way (since $S_0 = \varnothing$).
- \item If $f_{i-1}$ is defined for some $i \geq 1$,
-       then we define $f_i$ by
-       $f_i = f_{i-1} \downarrow_{S_i, i}$.
-\end{itemize}
-These labelings $f_0, f_1, \ldots, f_n$ are called the
-\defn{canonical labelings} of the MLQ $\MLQ$.
-
-The pair $\tup{S_n, f_n}$ is called the
-\defn{bottom row} of the MLQ $\MLQ$.
+We define the \defn{bottom row labels} of an MLQ $\MLQ$ with $S_n = (b_1 < b_2 < \cdots < b_n)$ to be $\tup{f_n(b_1), f_n(b_2), \dotsc, f_n(b_n)}$.
 \end{dfn}
 
 \begin{dfn} \label{def.mlq.sw}
-Let $n$ and $\mm$ be as in Definition~\ref{def.mlqs.mlq}.
 Let $\MLQ = \tup{S_0, S_1, \ldots, S_n}$ be an MLQ of type $\mm$.
-
 The \defn{spectral weight} $\wt\tup{\MLQ}$
-of $\MLQ$ is defined to be the
-monomial
+of $\MLQ$ is defined to be the monomial
 \[
  \prod_{i=0}^{n-1} \prod_{s \in S_i} x_s
 \]
@@ -392,23 +356,23 @@ in the indeterminates $x_1, x_2, \ldots, x_N$.
 \end{dfn}
 
 
-\subsection{Flagged Schur functions}
-
-Let $\lambda$ be a partition of length $m$ and $b = (b_1 \leq b_2 \leq \cdots \leq b_m)$.
-Let
-\[
-h_d(k) = \sum_{i_1 \leq \cdots \leq i_d \leq k} x_{i_1} \cdots x_{i_d}
-\]
-be the complete homogeneous symmetric function of degree $d$ in the variables $x_1, \dotsc, x_k$.
-A \defn{flagged Schur function} is
-\[
-\fs_{\lambda}(b; \xx) = \det\big[ h_{\lambda_i - i + j}(b_i) \bigr]_{i,j=1}^m.
-\]
-We can also express the flagged Schur function combinatorially using $\mcF_{\lambda}(b)$, the semistandard tableaux of shape $\lambda$ such that the max entry in row $i$ is at most $b_i$.
-From~\cite{Wachs85}, we have
-\[
-\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
-\]
+%\subsection{Flagged Schur functions}
+%
+%Let $\lambda$ be a partition of length $m$ and $b = (b_1 \leq b_2 \leq \cdots \leq b_m)$.
+%Let
+%\[
+%h_d(k) = \sum_{i_1 \leq \cdots \leq i_d \leq k} x_{i_1} \cdots x_{i_d}
+%\]
+%be the complete homogeneous symmetric function of degree $d$ in the variables $x_1, \dotsc, x_k$.
+%A \defn{flagged Schur function} is
+%\[
+%\fs_{\lambda}(b; \xx) = \det\big[ h_{\lambda_i - i + j}(b_i) \bigr]_{i,j=1}^m.
+%\]
+%We can also express the flagged Schur function combinatorially using $\mcF_{\lambda}(b)$, the semistandard tableaux of shape $\lambda$ such that the max entry in row $i$ is at most $b_i$.
+%From~\cite{Wachs85}, we have
+%\[
+%\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
+%\]
 
 
 
@@ -422,29 +386,21 @@ From~\cite{Wachs85}, we have
 \label{sec:result}
 
 
-Let
+Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
+Let $\mcM \tup{B, \mm}$ be the set of all MLQs $\MLQ = (S_0, \dotsc, S_n)$ of type $\mm$
+with $S_n = X$ and bottom row labels
 \[
-\mcM_k(b; \xx) = \sum_M \wt(M),
+(\underbrace{n, \dotsc, n}_{m_n},\, \dotsc,\, \underbrace{2, \dotsc, 2}_{m_2},\, \underbrace{1, \dotsc, 1}_{m_1}).
 \]
-where we sum over all MLQs with final positions $b$ and shape $k$.
 
 \begin{thm} \label{thm.decreasing}
 Fix a nonnegative integer $n$,
-and an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of positive
-integers.
-
-Fix a subset $S = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
-% Let $b$ be the sequence $\tup{b_1, b_2, \ldots, b_n}$.
-Let $f : S \to \set{1, 2, \ldots, n}$ be the unique
-map that is weakly decreasing on $S$ and satisfies
-$\abs{f^{-1} \tup{i}} = m_i$ for all $i$.
-
-Let $\mcM \tup{S, f}$ be the set of all MLQs of type $\mm$
-with bottom row $\tup{S, f}$.
+Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
+Fix an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of positive integers.
 
 We have
 \[
-\sum_{\MLQ \in \mcM \tup{S, f}} \wt\tup{\MLQ}
+\sum_{\MLQ \in \mcM \tup{B, f}} \wt\tup{\MLQ}
 = \det \tup{
              \tup{ h_{\gamma_i - i + j} \tup{x_1, x_2, \ldots, x_{b_i}}
                  }_{1 \leq i \leq n, \  1 \leq j \leq n}
