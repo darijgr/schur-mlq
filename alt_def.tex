@@ -1,0 +1,468 @@
+\documentclass[reqno]{amsart}
+\usepackage{setspace,tikz,xcolor,mathrsfs,listings,multicol}
+\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
+\usepackage{rotating}
+\usepackage[vcentermath]{youngtab}
+%\usepackage{subcaption}
+%\usepackage{fullpage}
+\usepackage{enumerate}
+\usepackage[all,cmtip]{xy}
+\usetikzlibrary{arrows,matrix}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%\usepackage[margin=1.25in]{geometry}
+%\onehalfspacing
+
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+% use these commands for typesetting doi and arXiv references in the bibliography
+\newcommand{\doi}[1]{\href{http://dx.doi.org/#1}{\texttt{doi:#1}}}
+\newcommand{\arxiv}[1]{\href{http://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+
+\newcommand{\iso}{\cong}
+%\newcommand{\qedbox}{\rule{2mm}{2mm}}
+%\renewcommand{\qedsymbol}{\qedbox}
+\newcommand{\qbinom}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
+\newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
+\newcommand{\fs}{\mathcal{S}} % flagged Schur function
+
+\DeclareMathOperator{\supp}{supp} % Support
+\DeclareMathOperator{\wt}{wt} % weight
+\DeclareMathOperator{\pr}{pr} % promotion
+\DeclareMathOperator{\id}{id} % identity
+\DeclareMathOperator{\ch}{ch} % character
+\DeclareMathOperator{\gr}{gr} % grading
+
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\mm}{\mathbf{m}}
+\newcommand{\MLQ}{\mathbf{S}}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcF}{\mathcal{F}}
+\newcommand{\mcM}{\mathcal{M}}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\bze}{\overline{0}}
+\newcommand{\bon}{\overline{1}}
+\newcommand{\btw}{\overline{2}}
+\newcommand{\bth}{\overline{3}}
+\newcommand{\bfo}{\overline{4}}
+\newcommand{\bfive}{\overline{5}}
+\newcommand{\bsix}{\overline{6}}
+\newcommand{\bseven}{\overline{7}}
+\newcommand{\beight}{\overline{8}}
+\newcommand{\bi}{\overline\imath}
+\newcommand{\bk}{\overline{k}}
+\newcommand{\brr}{\overline{r}}
+\newcommand{\bn}{\overline{n}}
+\newcommand{\ellbar}{\overline{\ell}}
+
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+
+% Dark red emphasis
+\definecolor{darkred}{rgb}{0.7,0,0} % darkred color
+\newcommand{\defn}[1]{{\color{darkred}\emph{#1}}} % emphasis of a definition
+
+
+%% For typesetting code listings                                                
+\usepackage{listings}
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={False,sage,True},sensitive=true}
+\lstset{
+  frame=single,
+  showtabs=False,
+  showspaces=False,
+  showstringspaces=False,
+  commentstyle={\ttfamily\color{dgreencolor}},
+  keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+  stringstyle={\ttfamily\color{dgraycolor}\bfseries},
+  language=Sage,
+  basicstyle={\footnotesize\ttfamily},
+  aboveskip=0.75em,
+  belowskip=0.75em,
+  xleftmargin=.15in,
+}
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
+\definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblue}{\color{dbluecolor}\bf}
+\newcommand{\dred}{\color{dredcolor}\bf}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
+
+\usepackage{xparse}
+
+\makeatletter
+% \specialmergetwolists{<coupler>}{<list1>}{<list2>}{<return macro>}
+% \specialmergetwolists*{<coupler>}{<listcmd1>}{<listcmd2>}{<return macro>}
+\protected\def\specialmergetwolists{%
+  \begingroup
+  \@ifstar{\def\cnta{1}\@specialmergetwolists}
+    {\def\cnta{0}\@specialmergetwolists}%
+}
+\def\@specialmergetwolists#1#2#3#4{%
+  \def\tempa##1##2{%
+    \edef##2{%
+      \ifnum\cnta=\@ne\else\expandafter\@firstoftwo\fi
+      \unexpanded\expandafter{##1}%
+    }%
+  }%
+  \tempa{#2}\tempb\tempa{#3}\tempa
+  \def\cnta{0}\def#4{}%
+  \foreach \x in \tempb{%
+    \xdef\cnta{\the\numexpr\cnta+1}%
+    \gdef\cntb{0}%
+    \foreach \y in \tempa{%
+      \xdef\cntb{\the\numexpr\cntb+1}%
+      \ifnum\cntb=\cnta\relax
+        \xdef#4{#4\ifx#4\empty\else,\fi\x#1\y}%
+        \breakforeach
+      \fi
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{remark}[thm]{Remark}
+\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+%\setcounter{section}{-1}
+
+% For breaking equations across multiple pages
+% \allowdisplaybreaks[1]
+
+\usepackage[colorinlistoftodos]{todonotes}
+\newcommand{\darij}[1]{\todo[size=\tiny,color=red!30]{#1 \\ \hfill --- Darij}}
+\newcommand{\Darij}[1]{\todo[size=\tiny,inline,color=red!30]{#1
+      \\ \hfill --- Darij}}
+\newcommand{\travis}[1]{\todo[size=\tiny,color=blue!30]{#1 \\ \hfill --- Travis}}
+\newcommand{\Travis}[1]{\todo[size=\tiny,inline,color=blue!30]{#1
+      \\ \hfill --- Travis}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title[MLQs]{Multiline queues with special parameters}
+
+\author[D.~Grinberg]{Darij Grinberg}
+\address[D. Grinberg]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
+\email{darij.grinberg@gmail.com}
+\urladdr{http://www.cip.ifi.lmu.de/~grinberg/}
+
+\author[T.~Scrimshaw]{Travis Scrimshaw}
+%\address[T. Scrimshaw]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
+\email{tcscrims@gmail.com}
+\urladdr{https://sites.google.com/view/tscrim/home}
+
+\keywords{multiline queue, flagged Schur function}
+\subjclass[2010]{05E10, 17B37}
+
+%\thanks{TS was partially supported by the National Science Foundation RTG grant NSF/DMS-1148634.}
+
+\begin{abstract}
+We prove the spectral parameter version of the MLQs conjecture.
+\end{abstract}
+
+\maketitle
+
+
+
+%=====================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+To be written last.
+
+
+
+
+
+
+%=====================================================================
+\section{Background}
+\label{sec:background}
+
+\subsection{Multiline queues}
+
+Fix a positive integer $N$.
+Let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
+
+%\begin{dfn} \label{def.mlqs.mlq}
+Fix a nonnegative integer $n$.
+A \defn{multiline queue (MLQ)} is an $(n+1)$-tuple $(S_0, S_1, \dotsc, S_n)$ such that $S_0 = \emptyset$ and, for all $1 \leq i \leq n$, we have $S_i \subseteq \ive{N}$ and $\lvert S_{i-1} \rvert < \lvert S_i \rvert$.
+We shall represent an MLQ $\tup{S_0, S_1, \ldots, S_n}$ as an
+$n \times N$-array, each row of which has some of its boxes
+marked. Namely, for each $i \in \set{1, 2, \ldots, n}$ and
+each $j \in S_i$, we mark the $j$-th box in row $i$.
+(The rows and the columns are indexed as usual for a matrix.)
+%\end{dfn}
+
+\begin{remark}
+Our notion of an MLQ corresponds to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
+We omit the word ``discrete'', as we will not encounter any other kind of MLQs.
+\end{remark}
+
+Let $\MLQ = (S_0, \dotsc, S_n)$ be an MLQ.
+The \defn{type} of $\MLQ$ is the  $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of nonnegative
+integers such that $\abs{S_i} = m_1 + m_2 + \cdots + m_i$.
+(In particular, $S_0 = \varnothing$.)
+
+In order to define the labeling of an MLQ, we need to setup some notation.
+
+If $p$ is an element of $\ive{N}$,
+and if $S$ is a nonempty subset of $\ive{N}$,
+then an element $\min_p S$ of $S$ is defined as follows:
+If there exists an element of $S$ that is greater
+or equal to $p$, then we set $\min_p S$ to be the
+smallest such element;
+otherwise, we set $\min_p S$ to be the smallest
+element of $S$.
+(Roughly speaking, $\min_p S$ is the first element
+of $S$ you encounter when traversing the elements
+$p, p+1, \ldots, n, 1, 2, \ldots, p-1$.)
+
+Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying
+$\abs{U} \leq \abs{V}$.
+Let $f \colon U \to \ive{n}$.
+Let $k$ be a positive integer.
+We define the map $f \downarrow_{V, k}$ of $V$ is defined
+as follows (recursively over $\abs{U}$):
+
+\begin{itemize}
+ \item If $U = \varnothing$, then $f \downarrow_{V, k}$ sends
+       each element of $V$ to $k$.
+ \item Otherwise, pick an element $u$ of $U$ having minimum
+       label (i.e., having minimum $f \tup{u}$).
+       Let $v = \min_u V$.
+       Let $g$ be the restriction of $f$ to the subset
+       $U \setminus \set{u}$.
+       Let $g' = g \downarrow_{V \setminus \set{v}, k}$.
+       Then, the labeling $f \downarrow_{V, k}$ is defined by
+       setting
+       \[
+        \tup{f \downarrow_{V, k}} \tup{s}
+        =
+        \begin{cases}
+         f \tup{u}, & \text{ if } s = u; \\
+         g \tup{s}, & \text{ if } s \neq u
+        \end{cases}
+        \qquad \text{ for all } s \in V .
+       \]
+\end{itemize}
+
+\begin{prop} \label{prop.mlqs.down.indep}
+Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying $\abs{U} \leq \abs{V}$.
+Let $f \colon U \to \ive{n}$.
+Let $k$ be a positive integer.
+The definition of $f \downarrow_{V, k}$ given above does not
+depend on the choice of $u$.
+\end{prop}
+
+\begin{proof}
+Let $u_1$ and $u_2$ be two elements of $U$ having minimum
+label (in $f$).
+We must prove that the labeling
+$f \downarrow_{V, k}$ obtained by taking $u = u_1$ in
+Definition~\ref{def.mlqs.down}
+is identical with the labeling
+$f \downarrow_{V, k}$ obtained by taking $u = u_2$ in
+Definition~\ref{def.mlqs.down}.
+
+......
+\end{proof}
+
+\darij{Remember to fix the spelling of ``labelling''.}
+
+\begin{dfn}
+The \defn{labeling} of $\MLQ$ is the tuple $(f_0, f_1, \dotsc, f_n)$ given recursively as follows.
+Define $f_0 \colon S_0 \to \ive{n}$ in the obvious way (since $S_0 = \varnothing$) and then define $f_i$ by $f_i = f_{i-1} \downarrow_{S_i, i}$.
+
+We define the \defn{bottom row labels} of an MLQ $\MLQ$ with $S_n = (b_1 < b_2 < \cdots < b_n)$ to be $\tup{f_n(b_1), f_n(b_2), \dotsc, f_n(b_n)}$.
+\end{dfn}
+
+\begin{dfn} \label{def.mlq.sw}
+Let $\MLQ = \tup{S_0, S_1, \ldots, S_n}$ be an MLQ of type $\mm$.
+The \defn{spectral weight} $\wt\tup{\MLQ}$
+of $\MLQ$ is defined to be the monomial
+\[
+ \prod_{i=0}^{n-1} \prod_{s \in S_i} x_s
+\]
+in the indeterminates $x_1, x_2, \ldots, x_N$.
+\end{dfn}
+
+
+%\subsection{Flagged Schur functions}
+%
+%Let $\lambda$ be a partition of length $m$ and $b = (b_1 \leq b_2 \leq \cdots \leq b_m)$.
+%Let
+%\[
+%h_d(k) = \sum_{i_1 \leq \cdots \leq i_d \leq k} x_{i_1} \cdots x_{i_d}
+%\]
+%be the complete homogeneous symmetric function of degree $d$ in the variables $x_1, \dotsc, x_k$.
+%A \defn{flagged Schur function} is
+%\[
+%\fs_{\lambda}(b; \xx) = \det\big[ h_{\lambda_i - i + j}(b_i) \bigr]_{i,j=1}^m.
+%\]
+%We can also express the flagged Schur function combinatorially using $\mcF_{\lambda}(b)$, the semistandard tableaux of shape $\lambda$ such that the max entry in row $i$ is at most $b_i$.
+%From~\cite{Wachs85}, we have
+%\[
+%\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
+%\]
+
+
+
+
+
+
+
+
+%=====================================================================
+\section{Main result}
+\label{sec:result}
+
+
+Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
+Let $\mcM \tup{B, \mm}$ be the set of all MLQs $\MLQ = (S_0, \dotsc, S_n)$ of type $\mm$
+with $S_n = X$ and bottom row labels
+\[
+(\underbrace{n, \dotsc, n}_{m_n},\, \dotsc,\, \underbrace{2, \dotsc, 2}_{m_2},\, \underbrace{1, \dotsc, 1}_{m_1}).
+\]
+
+\begin{thm} \label{thm.decreasing}
+Fix a nonnegative integer $n$,
+Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
+Fix an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of positive integers.
+
+We have
+\[
+\sum_{\MLQ \in \mcM \tup{B, f}} \wt\tup{\MLQ}
+= \det \tup{
+             \tup{ h_{\gamma_i - i + j} \tup{x_1, x_2, \ldots, x_{b_i}}
+                 }_{1 \leq i \leq n, \  1 \leq j \leq n}
+           },
+\]
+where $\gamma_i$ is the number of all
+$k \in \set{1, 2, \ldots, n-1}$ satisfying
+$m_{k + 1} + m_{k + 2} + \cdots + m_n < i$.
+\end{thm}
+
+\begin{proof}
+For ordered $b$, the proof that there is no wrapping is the same as in~\cite{AasLin17} when all entries of $b$ are distinct.
+Hence the only possibility for lattice paths to intersect is when the two paths have the same color.
+
+If two paths have the same color and intersect, separate them into a non-intersecting lattice path by shifting up 1 step the entire path and all other paths above it.
+
+Thus, by the Lindstr\"om--Gessel--Viennot Lemma, we have
+\[
+\det\big[ h_{j-k_{n+1-i}(S)'}(b_{n+1-i}) \bigr]_{i,j=1}^n.
+\]
+Thus the claim follows.
+\end{proof}
+
+\begin{comment}
+ We hope to have
+\[
+\sum_{\MLQ \in \mcM \tup{S, f}} \wt\tup{\MLQ}
+= \fs_{\lambda}(b; \xx),
+\]
+where $\lambda$ is the partition $\tup{1^{m_1}, 2^{m_2}, 3^{m_3}, \ldots}$
+(in multiplicity notation), or at least some partition.
+
+But this doesn't seem to work on the nose, since either
+the partition increases or the flags decrease.
+
+Maybe ghost entries, so a more general notion of flagged
+Schur functions.
+\end{comment}
+
+
+\begin{thm}
+Consider the action of the Young subgroup $S_{\mu}$.
+Then, we have
+\[
+\mcM_{\mu}(b; \xx) = \mcM_k(b; \xx).
+\]
+\end{thm}
+
+\Travis{This theorem is not the correct statement.}
+
+\begin{proof}
+The only wrapping the can occur is within the action of a particular Young subgroup.
+This is similar to the proof that there is no wrapping in~\cite{AasLin17}.
+\end{proof}
+
+
+
+
+
+
+
+\bibliographystyle{alpha}
+\bibliography{queue}{}
+\end{document}
+

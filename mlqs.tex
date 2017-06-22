@@ -33,6 +33,7 @@
 \newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
 \newcommand{\fs}{\mathcal{S}} % flagged Schur function
+\newcommand{\mbf}{\mathbf}
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\wt}{wt} % weight
@@ -208,6 +209,10 @@
 
 \begin{document}
 \title[MLQs]{Multiline queues with special parameters}
+
+\author[E.~Aas]{Erik Aas}
+\address[E. Aas]{Department of Mathematics, Pennsylvania State University, ??, ??}
+\email{eaas@kth.se}
 
 \author[D.~Grinberg]{Darij Grinberg}
 \address[D. Grinberg]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
@@ -424,7 +429,7 @@ From~\cite{Wachs85}, we have
 
 Let
 \[
-\mcM_k(b; \xx) = \sum_M \wt(M),
+  \mcM_k(b; \xx) = \sum_M \wt(M),
 \]
 where we sum over all MLQs with final positions $b$ and shape $k$.
 
@@ -500,12 +505,235 @@ The only wrapping the can occur is within the action of a particular Young subgr
 This is similar to the proof that there is no wrapping in~\cite{AasLin17}.
 \end{proof}
 
+\section{The projection formula}
+
+For the homogenous case, where all spectral parameters equal, it is well known that the number of multiline queues with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row. The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the {\it projection principle}. Somewhat surprisingly, this principle has a generalisation to our case with non-equal spectral parameters. We now state this generalisation.
+
+\begin{thm}
+  Let $u$ be a word of type $\mbf{m}$, and let $v$ be the word obtained from $u$ by merging classes $k$ and $k+1$.
+  Then $\sum_{u'} \wt{u} = e_{m_1+\dots+m_k}(x) \wt{v}$,
+  where $u'$ runs over all words gotten by permuting $k$ and $k+1$ in $u$.
+\end{thm}
+
+This theorem will be a corollary of Theorem [??].
+
+
+\noindent
+{\bf Example.}
+Looking at queues, we get \\
+\noindent
+
+$[13234] = x_1x_2x_3^2x_4(x_1^2+x_1x_4+x_1x_5+x_4x_5+x_5^2)$
+
+$[13245] = x_1x_2x_3^2x_4(x_1^2+x_1x_4+x_1x_5+x_4^2+x_4x_5+x_5^2)(x_1x_2x_3+x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)$.
+
+$[14235] = x_1x_2x_3^2x_4^2(x_1^3x_2+x_1^3x_3+x_1^3x_5+x_1^2x_2x_3+x_1^2x_2x_4+2x_1^2x_2x_5+x_1^2x_3x_4+2x_1^2x_3x_5+x_1^2x_4x_5+x_1^2x_5^2+x_1x_2x_3x_5+x_1x_2x_4x_5+2x_1x_2x_5^2+x_1x_3x_4x_5+2x_1x_3x_5^2+x_1x_4x_5^2+x_1x_5^3+x_2x_3x_5^2+x_2x_4x_5^2+x_2x_5^3+x_3x_4x_5^2+x_3x_5^3)
+$
+
+(We have factored the expressions for readability only.)
+
+The projection formula states that $[13234] e_3(x) = [13245] + [14235]$, as we can check directly in this case.
+
+
+\section{Generalized queues}
+
+\begin{figure}
+\label{fig_generalized_queue}
+\begin{tikzpicture}
+  \node at  (1,2){1};
+  \node at  (2,2){3};
+  \node at  (3,2){2};
+  \node at  (4,2){3};
+  \node at  (5,2){3};
+  \node at  (6,2){2};
+  \node at  (7,2){2};
+  \node at  (8,2){3};
+  \node at  (9,2){1};
+  \node at (10,2){2};
+  \node at (11,2){1};
+
+  \node at                     (1,1){4};
+  \node[circle,draw=black] at  (2,1){1};
+  \node at                     (3,1){4};
+  \node[circle,draw=black] at  (4,1){1};
+  \node[circle,draw=black] at  (5,1){2};
+  \node at                     (6,1){3};
+  \node at                     (7,1){4};
+  \node[circle,draw=black] at  (8,1){2};
+  \node at                     (9,1){3};
+  \node[circle,draw=black] at (10,1){1};
+  \node at                    (11,1){4};
+\end{tikzpicture}
+\caption{A generalized queue showing that $v = Q_S(u)$ where $S = \{2,4,5,8,10\}$, $u = 13233223121$ and $v =41412342314$. It has weight $x_2x_4x_5x_8x_{10}$.}
+\end{figure}
+
+In \cite{AAMP} a more general notion of queue was introduced. For any subset $S$ of $[N]$ we define a function $Q_S$ on words $u$ over $\{1, 2, \dots \}^<$ of length $N$, as follows.
+Let $\mbf{m}$ be the type of $u$ and let $k$ be such that $m_1 + \dots + m_k \leq |S| < m_1 + \dots + m_{k+1}$. We will mostly be interested in cases where both inequalities are strict.
+
+Think of two rows of length $N$ where the top row is labeled $u$ and the bottom row has boxes at the positions in $S$. We define a labeling $Q_S(u)$ of the bottom row as follows. Go through all particles of class $i$ for $i = 1, \dots, k-1$ and do the labeling as before. Now, go through all particles of class $i$, starting with the highest class $r$ and going \emph{downwards} to class $k+1$. For a particle of class $i$ in this case, find the first nonlabeled \emph{nonboxed} position weakly cyclically to the \emph{left}, and label it $i+1$.
+After this, label all boxed non-labeled positions $k$ and all non-boxed non-labeled positions $k+1$.
+The weight of the queue is simply $\prod_{i\in S} x_i$.
+See Figure \ref{fig_generalized_queue} for an example.
+
+\begin{dfn} A $(\sigma, \mbf{m})$-\defn{multiline queue} is an $r \times N$ array with $m_1 + \dots + m_{\sigma_i}$ boxes in row $i$ for $i = 1, \dots, r$. \end{dfn}
+
+By thinking of each row in a $(\sigma, \mbf{m})$-MLQ as a generalized queue, we get a labeling of the MLQ.
+
+
+\begin{thm}
+  Let $u$ be a word of type $\mbf{m}$. The sum of the weights of all $(\sigma, \mbf{m})$-MLQ's whose bottom row is labeled $u$ does not depend on the permutation $\sigma$.
+\end{thm}
+
+We show this by showing that the weight is the same for any permutation $\sigma$ and for any adjacent transposition $\sigma s_k$ of $\sigma$.
+
+Consider two consecutive rows in some MLQ. Suppose the set of positions of the boxes in the first row is $S_1$ and for the second row is $S_2$.
+
+For such a pair $(S_1, S_2)$ we will associate another pair $(T_1, T_2)$ with $|T_1| = |S_2|$ and $|T_2| = |S_1|$ such that $Q_{S_2}Q_{S_1} = Q_{T_2}Q_{T_1}$ considered as functions from the labeling above $S_1$ or $T_1$ to the labeling on the row of $S_2$ or $T_2$. Furthermore, $(S_1, S_2)$ will have the same weight as $(T_1, T_2)$, that is, $\prod_{i\in S_1} x_i \prod_{i\in S_2} x_i = \prod_{i\in T_1} x_i \prod_{i\in T_2} x_i$.
+
+
+%We proceed to define $(T_1, T_2)$ from $(S_1, S_2)$. To do this, put $S_1$ on top of $S_2$ and break the resulting two-row configuration into \emph{balanced blocks} (which are sets of consecutive columns).
+
+%One conceptual way to look at this is to draw an infinite periodic Dyck path, as follows. Start at $(0, 0)$ and look at the first column in the two-row configuration. If there are boxes in both or in none of the rows, take a step to the right, to $(1, 0)$. If there is a box only in the upper row, go up, to $(1, 1)$, and if there is a box only in the bottom row, then go down to $(1, -1)$. Extend this path to the right and to the left (by interpreting indices modulo $N$). This path will either be going up on average or down on average (if it stays level on average, then $|S_1| = |S_2|$, and our bijection can be taken to be the identity map).
+
+%Say that the path goes up on average. Then a balanced block corresponds to finding a local minimum of the path and finding the first time exactly to the left of this intersection where the path passes first.
+
+%Suppose $|S_1| > |S_2|$. Then the boxes to be moved (straight) down are those that satisfy the following property. Look at a box in the upper row that does not have a box below it. Start a counter at +1. Now go left (cyclically), and add +1 for every box in the upper row and -1 for every box in the bottom row. If the counter never reaches $0$, the initial box has the property.
+
+Suppose $|S_1| > |S_2|$. The case $|S_2| > |S_1|$ is analogous. We get $(T_1, T_2)$ from $(S_1, S_2)$ by taking letting $T_1 = S_1 \setminus C$ and $T_2 = S_2 \cup C$, where $C$ is the set of \emph{unbalanced boxes} in $S_1$ with respect to $(S_1, S_2)$.
+
+One possible definition of unbalanced box: a box on the upper row is unbalanced if, looking at any (cyclic) interval of length $r$ whose left end point is the box, the number of boxes on the top row is always strictly larger than the number of boxes on the bottom row. (Better definition in terms of Dyck paths.) The number of unbalanced boxes is $|S_1| - |S_2|$.
+
+
+{\bf Example.} 
+
+$(S_1, S_2)$:
+
+\scalebox{0.4}{
+\begin{tikzpicture}
+  \node[circle, draw=black] at (01, 2){\phantom{c}};
+  \node[circle, draw=black] at (02, 2){\phantom{c}};
+  \node[circle, draw=black] at (03, 2){\phantom{c}};
+  \node[circle, draw=black] at (06, 2){\phantom{c}};
+  \node[circle, draw=black] at (07, 2){\phantom{c}};
+  \node[circle, draw=black] at (08, 2){\phantom{c}};
+  \node[circle, draw=black] at (09, 2){\phantom{c}};
+  \node[circle, draw=black] at (11, 2){\phantom{c}};
+  \node[circle, draw=black] at (13, 2){\phantom{c}};
+  \node[circle, draw=black] at (18, 2){\phantom{c}};
+  \node[circle, draw=black] at (19, 2){\phantom{c}};
+  \node[circle, draw=black] at (22, 2){\phantom{c}};
+  \node[circle, draw=black] at (23, 2){\phantom{c}};
+  \node[circle, draw=black] at (24, 2){\phantom{c}};
+  \node[circle, draw=black] at (25, 2){\phantom{c}};
+  \node[circle, draw=black] at (26, 2){\phantom{c}};
+
+  \node[circle, draw=black] at (02, 1){\phantom{c}};
+  \node[circle, draw=black] at (04, 1){\phantom{c}};
+  \node[circle, draw=black] at (05, 1){\phantom{c}};
+  \node[circle, draw=black] at (06, 1){\phantom{c}};
+  \node[circle, draw=black] at (08, 1){\phantom{c}};
+  \node[circle, draw=black] at (10, 1){\phantom{c}};
+  \node[circle, draw=black] at (11, 1){\phantom{c}};
+  \node[circle, draw=black] at (12, 1){\phantom{c}};
+  \node[circle, draw=black] at (14, 1){\phantom{c}};
+  \node[circle, draw=black] at (16, 1){\phantom{c}};
+  \node[circle, draw=black] at (17, 1){\phantom{c}};
+  \node[circle, draw=black] at (19, 1){\phantom{c}};
+  \node[circle, draw=black] at (20, 1){\phantom{c}};
+  \node[circle, draw=black] at (21, 2){u};
+  \node[circle, draw=black] at (22, 1){\phantom{c}};
+  \node[circle, draw=black] at (24, 1){\phantom{c}};
+  \node[circle, draw=black] at (26, 1){\phantom{c}};
+\end{tikzpicture}
+}
+
+\vspace{2cm}
+
+$(T_1,T_2)$:
+
+\scalebox{0.4}{
+\begin{tikzpicture}
+  \node[circle, draw=black] at (01, 2){\phantom{c}};
+  \node[circle, draw=black] at (02, 2){\phantom{c}};
+  \node[circle, draw=black] at (03, 2){\phantom{c}};
+  \node[circle, draw=black] at (06, 2){\phantom{c}};
+  \node[circle, draw=black] at (07, 2){\phantom{c}};
+  \node[circle, draw=black] at (08, 2){\phantom{c}};
+  \node[circle, draw=black] at (09, 2){\phantom{c}};
+  \node[circle, draw=black] at (11, 2){\phantom{c}};
+  \node[circle, draw=black] at (13, 2){\phantom{c}};
+  \node[circle, draw=black] at (18, 2){\phantom{c}};
+  \node[circle, draw=black] at (19, 2){\phantom{c}};
+  \node[circle, draw=black] at (22, 2){\phantom{c}};
+  \node[circle, draw=black] at (23, 2){\phantom{c}};
+  \node[circle, draw=black] at (24, 2){\phantom{c}};
+  \node[circle, draw=black] at (25, 2){\phantom{c}};
+  \node[circle, draw=black] at (26, 2){\phantom{c}};
+
+  \node[circle, draw=black] at (02, 1){\phantom{c}};
+  \node[circle, draw=black] at (04, 1){\phantom{c}};
+  \node[circle, draw=black] at (05, 1){\phantom{c}};
+  \node[circle, draw=black] at (06, 1){\phantom{c}};
+  \node[circle, draw=black] at (08, 1){\phantom{c}};
+  \node[circle, draw=black] at (10, 1){\phantom{c}};
+  \node[circle, draw=black] at (11, 1){\phantom{c}};
+  \node[circle, draw=black] at (12, 1){\phantom{c}};
+  \node[circle, draw=black] at (14, 1){\phantom{c}};
+  \node[circle, draw=black] at (16, 1){\phantom{c}};
+  \node[circle, draw=black] at (17, 1){\phantom{c}};
+  \node[circle, draw=black] at (19, 1){\phantom{c}};
+  \node[circle, draw=black] at (20, 1){\phantom{c}};
+  \node[circle, draw=black] at (21, 1){u};
+  \node[circle, draw=black] at (22, 1){\phantom{c}};
+  \node[circle, draw=black] at (24, 1){\phantom{c}};
+  \node[circle, draw=black] at (26, 1){\phantom{c}};
+\end{tikzpicture}
+}
 
 
 
+\begin{lemma}
+  The map $(S_1, S_2) \to (T_1, T_2)$ is a weight-preserving bijection such that $Q_{S_2}Q_{S_1} = Q_{T_2}Q_{T_1}$ (as functions on words/labelings).
+\end{lemma}
+
+Note that since $Q_{S_1}$ et.c. are defined only in terms of relative comparisons, to prove that $Q_{S_2}Q_{S_1}$ and $Q_{T_2}Q_{T_1}$ are equal, it is enough to show that they agree on all words from $\{1, 2\} ^N$. However, it is also enough (but seemingly wasteful) to show that they agree on all permutations of $[N]$. This is what we will do since this turns out to be easier to induct on.
+
+
+
+
+{\bf Example}
+
+To compute $[135452]$ we count $(1,1,1,1,2)$-MLQ's, such as the following one.
+
+\begin{tikzpicture}\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+
+To get a word $136452$ or $135462$ we can add a new row on top, with $5$ boxes. The total weight of these additions is $e_5(x_1, \dots, x_6)$. Here is an example of such an addition.
+
+\begin{tikzpicture}\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+
+By the theorem, such queues are in 1-1 correspondence with ordinary queues counting, in this case, $[135462]$. By applying the bijection $4$ times to bring the top row to the bottom, we get the corresponding ordinary queue, as follows.\\
+
+\noindent Swap rows 1 and 2:
+
+\begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node at (2, 5){2};\node[circle, draw=black] at (3, 5){1};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture} \\
+
+\noindent Swap rows 2 and 3:
+
+\begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node at (2, 5){2};\node[circle, draw=black] at (3, 5){1};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture} \\
+
+\noindent Swap rows 3 and 4:
+
+\begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node at (2, 5){2};\node[circle, draw=black] at (3, 5){1};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture} \\
+
+\noindent Swap rows 4 and 5
+
+\begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node at (2, 5){2};\node[circle, draw=black] at (3, 5){1};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture} \\
 
 
 
 \bibliographystyle{alpha}
 \bibliography{queue}{}
+\begin{thebibliography}{ABX}
+\bibitem{AAMP} Chikashi Arita, Arvind Ayyer, Kirone Mallick and Sylvain Prolhac, Recursive structures in the multispecies TASEP, J. Phys. A 44, 335004 (2011).
+\end{thebibliography}
 \end{document}
