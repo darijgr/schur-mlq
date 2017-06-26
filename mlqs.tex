@@ -590,19 +590,11 @@ Consider two consecutive rows in some MLQ. Suppose the set of positions of the b
 
 For such a pair $(S_1, S_2)$ we will associate another pair $(T_1, T_2)$ with $|T_1| = |S_2|$ and $|T_2| = |S_1|$ such that $Q_{S_2}Q_{S_1} = Q_{T_2}Q_{T_1}$ considered as functions from the labeling above $S_1$ or $T_1$ to the labeling on the row of $S_2$ or $T_2$. Furthermore, $(S_1, S_2)$ will have the same weight as $(T_1, T_2)$, that is, $\prod_{i\in S_1} x_i \prod_{i\in S_2} x_i = \prod_{i\in T_1} x_i \prod_{i\in T_2} x_i$.
 
+We now describe how to get $(T_1, T_2)$ from $(S_1, S_2)$. Think of $(S_1,S_2)$ as two rows on top of each other, and write these as a (cyclic) word $w_1\dots w_N$ over the alphabet $\{u, d, t, n\}$. Here $u$ refers to a column where the Upper row has a box, while the bottom does not, $t$ is a column with two boxes, $n$ is a column with no boxes and $d$ is a column with one box in the bottom row.
 
-%We proceed to define $(T_1, T_2)$ from $(S_1, S_2)$. To do this, put $S_1$ on top of $S_2$ and break the resulting two-row configuration into \emph{balanced blocks} (which are sets of consecutive columns).
+Suppose $|S_1| > |S_2|$ (the case $|S_1| < |S_2|$ is analogous, and the case $|S_1| = |S_2|$ is trivial). Then any such word can be uniquely written as an alternating concatentation $\dots UBUB\dots$ where $U$ refers to a word consisting of $u$'s only, and $B$ is a \emph{balanced} word. A word is balanced if, for each $k$, the first $k$ columns in the word has at least as many boxes in the upper row as in the bottom row. [TODO: description in terms of Dyck paths]
 
-%One conceptual way to look at this is to draw an infinite periodic Dyck path, as follows. Start at $(0, 0)$ and look at the first column in the two-row configuration. If there are boxes in both or in none of the rows, take a step to the right, to $(1, 0)$. If there is a box only in the upper row, go up, to $(1, 1)$, and if there is a box only in the bottom row, then go down to $(1, -1)$. Extend this path to the right and to the left (by interpreting indices modulo $N$). This path will either be going up on average or down on average (if it stays level on average, then $|S_1| = |S_2|$, and our bijection can be taken to be the identity map).
-
-%Say that the path goes up on average. Then a balanced block corresponds to finding a local minimum of the path and finding the first time exactly to the left of this intersection where the path passes first.
-
-%Suppose $|S_1| > |S_2|$. Then the boxes to be moved (straight) down are those that satisfy the following property. Look at a box in the upper row that does not have a box below it. Start a counter at +1. Now go left (cyclically), and add +1 for every box in the upper row and -1 for every box in the bottom row. If the counter never reaches $0$, the initial box has the property.
-
-Suppose $|S_1| > |S_2|$. The case $|S_2| > |S_1|$ is analogous. We get $(T_1, T_2)$ from $(S_1, S_2)$ by taking letting $T_1 = S_1 \setminus C$ and $T_2 = S_2 \cup C$, where $C$ is the set of \emph{unbalanced boxes} in $S_1$ with respect to $(S_1, S_2)$.
-
-One possible definition of unbalanced box: a box on the upper row is unbalanced if, looking at any (cyclic) interval of length $r$ whose left end point is the box, the number of boxes on the top row is always strictly larger than the number of boxes on the bottom row. (Better definition in terms of Dyck paths.) The number of unbalanced boxes is $|S_1| - |S_2|$.
-
+Now $(T_1, T_2)$ is obtained from $(S_1, S_2)$ by replacing all $u$'s in $U$ blocks in $(S_1,S_2)$ with $d$'s.
 
 {\bf Example.} 
 
@@ -696,8 +688,23 @@ $(T_1,T_2)$:
   The map $(S_1, S_2) \to (T_1, T_2)$ is a weight-preserving bijection such that $Q_{S_2}Q_{S_1} = Q_{T_2}Q_{T_1}$ (as functions on words/labelings).
 \end{lemma}
 
-Note that since $Q_{S_1}$ et.c. are defined only in terms of relative comparisons, to prove that $Q_{S_2}Q_{S_1}$ and $Q_{T_2}Q_{T_1}$ are equal, it is enough to show that they agree on all words from $\{1, 2\} ^N$. However, it is also enough (but seemingly wasteful) to show that they agree on all permutations of $[N]$. This is what we will do since this turns out to be easier to induct on.
+\begin{proof} (TODO: this is a sketch)
 
+It is enough to prove this lemma for input words that are permutations of $[N]$\footnote{It is also enough to prove it for all words in $\{1,2\}^N$.}.
+We write $r = |S_1| > s = |S_2|$.
+Let $u$ be a permutation of $[N]$, $v_S = Q_{S_2}Q_{S_1}(u)$ and $v_T = Q_{T_2}Q_{T_1}(u)$.
+
+\begin{enumerate}
+  \item The particles labeled $\{1, \dots, r\}$ are in the same positions in $v_S$ and $v_T$.
+  \item The particles labeled $\{s+1, s+2, \dots, N\}$ are in the same positions in $v_S$ and $v_T$.
+  \item The remaining particles $\{r+1, r+2, \dots, s-1\}$ are in the same positions in $v_S$ and $v_T$
+
+Note that the claims $(1)$ and $(2)$ are equivalent, and that the bottom row is labeled by $(3)$ only in non-balanced parts of the word.
+\end{enumerate}
+
+
+
+\end{proof}
 
 
 

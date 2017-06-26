@@ -1,1 +1,0 @@
-//BERÄKNING: kedjan på 123, 132, et.c. där man lägger till en box och använder Ayyer-etal-köerna ger rätt stationärfördelning.
