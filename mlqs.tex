@@ -111,6 +111,7 @@
 % $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
 % local rewriting transformations on mathematical expressions with
 % justifications.
+\newcommand{\mlnode}[1]{\node[circle, draw=black] at (#1){\phantom{c}};}
 
 % Dark red emphasis
 \definecolor{darkred}{rgb}{0.7,0,0} % darkred color
@@ -267,13 +268,27 @@ each $j \in S_i$, we mark the $j$-th box in row $i$.
 (The rows and the columns are indexed as usual for a matrix.)
 %\end{dfn}
 
+For example, $\tup{\varnothing, \set{2, 4}, \set{1, 4, 5}}$
+is an MLQ for $n = 2$ and $N = 6$; we draw it as follows:
+\scalebox{0.4}{
+\begin{tikzpicture}
+  \mlnode{2, 2}
+  \mlnode{4, 2}
+  \mlnode{1, 1}
+  \mlnode{4, 1}
+  \mlnode{5, 1}
+\end{tikzpicture}
+}
+
 \begin{remark}
 Our notion of an MLQ corresponds to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
 We omit the word ``discrete'', as we will not encounter any other kind of MLQs.
 \end{remark}
 
 Let $\MLQ = (S_0, \dotsc, S_n)$ be an MLQ.
-The \defn{type} of $\MLQ$ is the  $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of nonnegative
+The \defn{type} of $\MLQ$ is the  $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of
+positive
+% positive, not just nonnegative, since we required the S_i to strictly grow in size
 integers such that $\abs{S_i} = m_1 + m_2 + \cdots + m_i$.
 (In particular, $S_0 = \varnothing$.)
 
@@ -293,9 +308,11 @@ $p, p+1, \ldots, n, 1, 2, \ldots, p-1$.)
 
 Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying
 $\abs{U} \leq \abs{V}$.
-Let $f \colon U \to \ive{n}$.
+Let $f \colon U \to \ive{n}$ be any map; we shall
+refer to it as a ``labeling'', and we shall refer an
+image $f \tup{u}$ as the ``label'' of $u$ in $f$.
 Let $k$ be a positive integer.
-We define the map $f \downarrow_{V, k}$ of $V$ is defined
+We define the map $f \downarrow_{V, k} : V \to \ive{n}$
 as follows (recursively over $\abs{U}$):
 
 \begin{itemize}
@@ -313,12 +330,14 @@ as follows (recursively over $\abs{U}$):
         \tup{f \downarrow_{V, k}} \tup{s}
         =
         \begin{cases}
-         f \tup{u}, & \text{ if } s = u; \\
-         g \tup{s}, & \text{ if } s \neq u
+         f \tup{u}, & \text{ if } s = v; \\
+         g \tup{s}, & \text{ if } s \neq v
         \end{cases}
         \qquad \text{ for all } s \in V .
        \]
 \end{itemize}
+
+\darij{Remember to fix the spelling of ``labelling''.}
 
 \begin{prop} \label{prop.mlqs.down.indep}
 Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying $\abs{U} \leq \abs{V}$.
@@ -329,19 +348,65 @@ depend on the choice of $u$.
 \end{prop}
 
 \begin{proof}
-Let $u_1$ and $u_2$ be two elements of $U$ having minimum
-label (in $f$).
-We must prove that the labeling
-$f \downarrow_{V, k}$ obtained by taking $u = u_1$ in
-Definition~\ref{def.mlqs.down}
-is identical with the labeling
-$f \downarrow_{V, k}$ obtained by taking $u = u_2$ in
-Definition~\ref{def.mlqs.down}.
+We can replace this definition by an equivalent one, which
+clearly does not depend on any choices:
+
+For any $p \in \ive{N}$, we define a subset
+$\operatorname{arc}\ive{p : s}$ of $\ive{N}$ by
+\[
+\operatorname{arc}\ive{p : s}
+=
+\begin{cases}
+\set{p, p+1, \ldots, s}, & \text{ if } p \leq s; \\
+\set{p, p+1, \ldots, N, 1, 2, \ldots, s}, & \text{ if } p > s
+\end{cases} .
+\]
+
+For any $0 \leq i \leq n$, we let $f^{-1} \tup{\leq i}$ be
+the subset
+$f^{-1} \tup{\ive{i}} = \set{u \in U \mid f \tup{u} \leq i}$
+of $U$.
+
+Let $s \in V$.
+If there exists some $i \in \ive{n}$ and some
+$p \in \ive{N}$ such that the set
+$\operatorname{arc}\ive{p : s}$
+contains at least as many elements of $f^{-1} \tup{\leq i}$
+as it contains elements of $V$
+(that is, it satisfies
+$\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
+\geq \abs{\operatorname{arc}\ive{p : s} \cap V}$),
+then we pick the smallest $i$
+for which this holds,
+and we set $\tup{f \downarrow_{V, k}}\tup{s} = i$.
+Otherwise, we set
+$\tup{f \downarrow_{V, k}}\tup{s} = k$.
+
+[The condition
+``$\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
+\geq \abs{\operatorname{arc}\ive{p : s} \cap V}$
+for some $p \in \ive{N}$''
+can also be restated as follows:
+If we define a circular word on $N$ letters whose $q$-th letter
+is
+\[
+\begin{cases}
+(, & \text{ if } q \in f^{-1} \tup{\leq i} \setminus V; \\
+), & \text{ if } q \in V \setminus f^{-1} \tup{\leq i}; \\
+0, & \text{ otherwise}
+\end{cases}
+,
+\]
+and if we match parentheses as usual for a circular word
+(this means, in particular, that the last $($ can match the
+first $)$),
+then the $s$-th letter is either $0$ or a matched parenthesis.
+This is strongly reminiscent of the Remmel-Shimozono proof
+of the LR rule, and suggests that something coplactic is
+going on.]
 
 ......
 \end{proof}
-
-\darij{Remember to fix the spelling of ``labelling''.}
 
 \begin{dfn}
 The \defn{labeling} of $\MLQ$ is the tuple $(f_0, f_1, \dotsc, f_n)$ given recursively as follows.
