@@ -197,6 +197,9 @@
 % \allowdisplaybreaks[1]
 
 \usepackage[colorinlistoftodos]{todonotes}
+\newcommand{\erik}[1]{\todo[size=\tiny,color=green!30]{#1 \\ \hfill --- Erik}}
+\newcommand{\Erik}[1]{\todo[size=\tiny,inline,color=green!30]{#1
+      \\ \hfill --- Erik}}
 \newcommand{\darij}[1]{\todo[size=\tiny,color=red!30]{#1 \\ \hfill --- Darij}}
 \newcommand{\Darij}[1]{\todo[size=\tiny,inline,color=red!30]{#1
       \\ \hfill --- Darij}}
@@ -270,15 +273,15 @@ each $j \in S_i$, we mark the $j$-th box in row $i$.
 
 For example, $\tup{\varnothing, \set{2, 4}, \set{1, 4, 5}}$
 is an MLQ for $n = 2$ and $N = 6$; we draw it as follows:
-\scalebox{0.4}{
-\begin{tikzpicture}
+\[
+\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.7}]
   \mlnode{2, 2}
   \mlnode{4, 2}
   \mlnode{1, 1}
   \mlnode{4, 1}
   \mlnode{5, 1}
 \end{tikzpicture}
-}
+\]
 
 \begin{remark}
 Our notion of an MLQ corresponds to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
@@ -372,15 +375,14 @@ If there exists some $i \in \ive{n}$ and some
 $p \in \ive{N}$ such that the set
 $\operatorname{arc}\ive{p : s}$
 contains at least as many elements of $f^{-1} \tup{\leq i}$
-as it contains elements of $V$
-(that is, it satisfies
-$\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
-\geq \abs{\operatorname{arc}\ive{p : s} \cap V}$),
-then we pick the smallest $i$
-for which this holds,
-and we set $\tup{f \downarrow_{V, k}}\tup{s} = i$.
-Otherwise, we set
-$\tup{f \downarrow_{V, k}}\tup{s} = k$.
+as it contains elements of $V$.
+That is, it satisfies
+\[
+\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
+\geq \abs{\operatorname{arc}\ive{p : s} \cap V}.
+\]
+Then we pick the smallest $i$ for which this holds, and we set $\tup{f \downarrow_{V, k}}\tup{s} = i$.
+Otherwise, we set $\tup{f \downarrow_{V, k}}\tup{s} = k$.
 
 [The condition
 ``$\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
@@ -391,11 +393,10 @@ If we define a circular word on $N$ letters whose $q$-th letter
 is
 \[
 \begin{cases}
-(, & \text{ if } q \in f^{-1} \tup{\leq i} \setminus V; \\
-), & \text{ if } q \in V \setminus f^{-1} \tup{\leq i}; \\
-0, & \text{ otherwise}
+(, & \text{ if } q \in f^{-1} \tup{\leq i} \setminus V, \\
+), & \text{ if } q \in V \setminus f^{-1} \tup{\leq i}, \\
+0, & \text{ otherwise},
 \end{cases}
-,
 \]
 and if we match parentheses as usual for a circular word
 (this means, in particular, that the last $($ can match the
@@ -404,6 +405,7 @@ then the $s$-th letter is either $0$ or a matched parenthesis.
 This is strongly reminiscent of the Remmel-Shimozono proof
 of the LR rule, and suggests that something coplactic is
 going on.]
+\Travis{It is not surprising to me that something coplactic is running around in the background because of the $R$-matrix interpretation by Kuniba and co. Coplactic operators are crystal operators and $R$-matrices are crystal isomorphisms. We might be able to get the proof for free by appealing to that perspective.}
 
 ......
 \end{proof}
