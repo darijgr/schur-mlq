@@ -186,7 +186,7 @@
 \newtheorem{cor}[thm]{Corollary}
 \theoremstyle{definition}
 \newtheorem{dfn}[thm]{Definition}
-\newtheorem{ex}[thm]{Example}
+\newtheorem{example}[thm]{Example}
 \newtheorem{remark}[thm]{Remark}
 \numberwithin{equation}{section}
 %\numberwithin{figure}{section}
@@ -221,7 +221,7 @@
 \urladdr{http://www.cip.ifi.lmu.de/~grinberg/}
 
 \author[T.~Scrimshaw]{Travis Scrimshaw}
-%\address[T. Scrimshaw]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
+\address[T. Scrimshaw]{School of Mathematics and Physics, University of Queensland, St. Lucia, QLD 4072, Australia}
 \email{tcscrims@gmail.com}
 \urladdr{https://sites.google.com/view/tscrim/home}
 
@@ -539,21 +539,21 @@ For the homogenous case, where all spectral parameters equal, it is well known t
 This theorem will be a corollary of Theorem [??].
 
 
-\noindent
-{\bf Example.}
-Looking at queues, we get \\
-\noindent
-
-$[13234] = x_1x_2x_3^2x_4(x_1^2+x_1x_4+x_1x_5+x_4x_5+x_5^2)$
-
-$[13245] = x_1x_2x_3^2x_4(x_1^2+x_1x_4+x_1x_5+x_4^2+x_4x_5+x_5^2)(x_1x_2x_3+x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)$.
-
-$[14235] = x_1x_2x_3^2x_4^2(x_1^3x_2+x_1^3x_3+x_1^3x_5+x_1^2x_2x_3+x_1^2x_2x_4+2x_1^2x_2x_5+x_1^2x_3x_4+2x_1^2x_3x_5+x_1^2x_4x_5+x_1^2x_5^2+x_1x_2x_3x_5+x_1x_2x_4x_5+2x_1x_2x_5^2+x_1x_3x_4x_5+2x_1x_3x_5^2+x_1x_4x_5^2+x_1x_5^3+x_2x_3x_5^2+x_2x_4x_5^2+x_2x_5^3+x_3x_4x_5^2+x_3x_5^3)
-$
-
+\begin{example}
+Looking at queues, we get
+\begin{align*}
+[13234] & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
+\\ [13245] & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
+\\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)
+\\ [14235] & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
+\\ & \hspace{55pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
+\\ & \hspace{55pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
+\\ & \hspace{55pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3)
+\end{align*}
 (We have factored the expressions for readability only.)
 
 The projection formula states that $[13234] e_3(x) = [13245] + [14235]$, as we can check directly in this case.
+\end{example}
 
 
 \section{Generalized queues}
@@ -588,13 +588,13 @@ The projection formula states that $[13234] e_3(x) = [13245] + [14235]$, as we c
 \caption{A generalized queue showing that $v = Q_S(u)$ where $S = \{2,4,5,8,10\}$, $u = 13233223121$ and $v =41412342314$. It has weight $x_2x_4x_5x_8x_{10}$.}
 \end{figure}
 
-In \cite{AAMP} a more general notion of queue was introduced. For any subset $S$ of $[N]$ we define a function $Q_S$ on words $u$ over $\{1, 2, \dots \}^<$ of length $N$, as follows.
+In~\cite{AAMP} a more general notion of queue was introduced. For any subset $S$ of $[N]$ we define a function $Q_S$ on words $u$ over $\{1, 2, \dots \}^<$ of length $N$, as follows.
 Let $\mbf{m}$ be the type of $u$ and let $k$ be such that $m_1 + \dots + m_k \leq |S| < m_1 + \dots + m_{k+1}$. We will mostly be interested in cases where both inequalities are strict.
 
 Think of two rows of length $N$ where the top row is labeled $u$ and the bottom row has boxes at the positions in $S$. We define a labeling $Q_S(u)$ of the bottom row as follows. Go through all particles of class $i$ for $i = 1, \dots, k-1$ and do the labeling as before. Now, go through all particles of class $i$, starting with the highest class $r$ and going \emph{downwards} to class $k+1$. For a particle of class $i$ in this case, find the first nonlabeled \emph{nonboxed} position weakly cyclically to the \emph{left}, and label it $i+1$.
 After this, label all boxed non-labeled positions $k$ and all non-boxed non-labeled positions $k+1$.
 The weight of the queue is simply $\prod_{i\in S} x_i$.
-See Figure \ref{fig_generalized_queue} for an example.
+See Figure~\ref{fig_generalized_queue} for an example.
 
 \begin{dfn} A $(\sigma, \mbf{m})$-\defn{multiline queue} is an $r \times N$ array with $m_1 + \dots + m_{\sigma_i}$ boxes in row $i$ for $i = 1, \dots, r$. \end{dfn}
 
@@ -761,7 +761,7 @@ By the theorem, such queues are in 1-1 correspondence with ordinary queues count
 
 \bibliographystyle{alpha}
 \bibliography{queue}{}
-\begin{thebibliography}{ABX}
-\bibitem{AAMP} Chikashi Arita, Arvind Ayyer, Kirone Mallick and Sylvain Prolhac, Recursive structures in the multispecies TASEP, J. Phys. A 44, 335004 (2011).
-\end{thebibliography}
+%\begin{thebibliography}{ABX}
+%\bibitem{AAMP} Chikashi Arita, Arvind Ayyer, Kirone Mallick and Sylvain Prolhac, Recursive structures in the multispecies TASEP, J. Phys. A 44, 335004 (2011).
+%\end{thebibliography}
 \end{document}
