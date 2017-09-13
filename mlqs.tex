@@ -376,12 +376,13 @@ $p \in \ive{N}$ such that the set
 $\operatorname{arc}\ive{p : s}$
 contains at least as many elements of $f^{-1} \tup{\leq i}$
 as it contains elements of $V$.
-That is, it satisfies
+(that is, it satisfies
 \[
 \abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
-\geq \abs{\operatorname{arc}\ive{p : s} \cap V}.
+\geq \abs{\operatorname{arc}\ive{p : s} \cap V}
 \]
-Then we pick the smallest $i$ for which this holds, and we set $\tup{f \downarrow_{V, k}}\tup{s} = i$.
+),
+then we pick the smallest $i$ for which this holds, and we set $\tup{f \downarrow_{V, k}}\tup{s} = i$.
 Otherwise, we set $\tup{f \downarrow_{V, k}}\tup{s} = k$.
 
 [The condition
@@ -466,13 +467,13 @@ with $S_n = X$ and bottom row labels
 \]
 
 \begin{thm} \label{thm.decreasing}
-Fix a nonnegative integer $n$,
+Fix a nonnegative integer $n$.
 Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
 Fix an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of positive integers.
 
 We have
 \[
-\sum_{\MLQ \in \mcM \tup{B, f}} \wt\tup{\MLQ}
+\sum_{\MLQ \in \mcM \tup{B, \mm}} \wt\tup{\MLQ}
 = \det \tup{
              \tup{ h_{\gamma_i - i + j} \tup{x_1, x_2, \ldots, x_{b_i}}
                  }_{1 \leq i \leq n, \  1 \leq j \leq n}
