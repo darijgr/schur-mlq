@@ -34,8 +34,10 @@
 \newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
 \newcommand{\fs}{\mathcal{S}} % flagged Schur function
 \newcommand{\mbf}{\mathbf}
+\newcommand{\0}{\phantom{c}}
 
 \DeclareMathOperator{\supp}{supp} % Support
+\DeclareMathOperator{\inter}{int} % queuing interval
 \DeclareMathOperator{\wt}{wt} % weight
 \DeclareMathOperator{\pr}{pr} % promotion
 \DeclareMathOperator{\id}{id} % identity
@@ -49,6 +51,7 @@
 \newcommand{\mcA}{\mathcal{A}}
 \newcommand{\mcF}{\mathcal{F}}
 \newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcW}{\mathcal{W}}
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -247,6 +250,8 @@ We prove the spectral parameter version of the MLQs conjecture.
 
 To be written last.
 
+\Erik{Mention Gorodentsev's book.}
+
 
 
 
@@ -256,10 +261,106 @@ To be written last.
 \section{Background}
 \label{sec:background}
 
-\subsection{Multiline queues}
+For a positive integer $N$, let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
 
-Fix a positive integer $N$.
-Let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
+%%%%%%%%%%
+\subsection{Words and queues}
+
+Fix a positive integer $n$.
+Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
+We will consider the indices of words to be taken modulo $n$. 
+The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ such that $u$ has $m_i$ occurrences of the letter $i$.
+We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
+Sometimes it is useful to consider only \defn{standard} words $u$ whose type $\mm$ is such that for some $r$, $m_i \neq 0$ for $1 \leq i \leq r$ and $m_i = 0$ for $i > r$.
+We call $r$ the \defn{number of classes} in $u$.
+We can \defn{merge} two adjacent classes $i,i+1$ in a standard word $u$ to obtain a new standard word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
+
+We define an \defn{$r$-queue} $q$ to be any subset of $[n]$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
+We think of $q$ as a function from $\mcW_n$ to itself as follows.
+Let $\mm$ be the type of $u$, and suppose that $m_1 + \cdots + m_t \leq r < m_{t+1} + \cdots$.
+\travis{There does not always exist such a $t$ as the example below shows.}
+The output word $v = q(u)$ will have type $(m_1, \dots, m_t, r - (m_1+\dots+m_t), m_{t+1}-r, m_{t+2}, m_{t+3}, \ldots)$.
+We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
+
+\begin{description}
+\item[Phase I]
+  Go through all $i$ such that $u_i > t$ in any order such that larger letters precede smaller ones.
+  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set. Then set $v_j = u_i + 1$. We call $\inter[j,i]$ the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
+
+\item[Phase II]
+  Go through all $i$ such that $u_i < t$ in any order such that smaller letters precede larger ones.
+  When considering a site $i$, find the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set. Then set $v_j = u_i$. Similarly, $\inter[i,j]$ is called the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
+
+\item[Phase III]
+  At this point, there are $m_t$ unset values $v_i$. For such $i$, set $v_i = t$ for $i \in q$ and $v_i = t+1$ for $i\notin q$.
+\end{description}
+
+\begin{example}
+We consider the $4$-queue $q = \{1, 4, 6, 7\}$ and consider the word $u = 3466121$. Thus, the type of $u$ is $\mm = (2, 1, 1, 1, 0, 2, 0, \ldots)$, and so $t = 3$. To compute $q(w)$:
+\[
+\begin{tikzpicture}
+\node (i1) at (1,1) {$3$};
+\node (i2) at (2,1) {$4$};
+\node (i3) at (3,1) {$6$};
+\node (i4) at (4,1) {$6$};
+\node (i5) at (5,1) {$1$};
+\node (i6) at (6,1) {$2$};
+\node (i7) at (7,1) {$1$};
+\node (t1) at (1,-1) {$6$};
+\node (t2) at (2,-1) {$6$};
+\node (t3) at (3,-1) {$6$};
+\node (t4) at (4,-1) {$2$};
+\node (t5) at (5,-1) {$4$};
+\node (t6) at (6,-1) {$1$};
+\node (t7) at (7,-1) {$1$};
+\node[circle,draw=black] (q1) at (1,0) {};
+\node[circle,draw=black] (q2) at (4,0) {};
+\node[circle,draw=black] (q3) at (6,0) {};
+\node[circle,draw=black] (q4) at (7,0) {};
+\draw[->,red] (i4) -- (q2);
+\draw[->,red] (q2) -- (2,0) -- (t2);
+\draw[->,red] (i3) -- (t3);
+\draw[->,red] (i2) -- (2,0.1) -- (q1);
+\draw[->,red] (q1) -- (0,0);
+\draw[->,red] (8,0) -- (q4);
+\draw[->,red] (q4) -- (q3);
+\draw[->,red] (q3) -- (5,0) -- (t5);
+\end{tikzpicture}
+\]
+where the arrows in red are Phase I and the blue are Phase II.
+\Travis{Something seems to be wrong with the definition. I cannot apply Phase II, quite possibly because $t$ is undefined. However, there are no conditions on $q$ to dictate that this is not allowed.}
+\end{example}
+
+Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
+We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$, and second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$.
+See Figure~1\travis{This needs to be copied over and become an explicit reference} for an example.
+
+Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
+For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that $u_i=s$, and whose queueing interval $\inter[j,i]$ contains both $k$ and $k+1$.
+Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
+
+There is an obvious duality in the definition of the labelling process above.
+Due to annoying notation, we formulate it as the following lemma (whose proof is straightforward).
+
+\begin{lemma}[Duality]
+  Let $q$ be a queue and $u$ be a standard word with $r$ classes. Define a new word $v$ by letting $v_i = r + 1 - u_{n+1-i}$ and a new queue $q'$ by letting $i \in q' \Leftrightarrow n+1-i \notin q$.
+ Then $q(u)_i = r + 2 - q'(v)_{n+1-i}$.
+\end{lemma}
+
+%\begin{remark} (Excision)
+%  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = (q(u))_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
+%\end{remark}
+
+\begin{lemma}[Monotonicity]
+\label{le:mono}
+  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then the comparison $q(f_t(u))_i \leq q(f_t(u))_j$ has the same result for all $t$.
+\end{lemma}
+
+Lemma~\ref{le:mono} tells us that $q$, considered as a function on words, is completely determined by its values $q(u)$ on words $u\in\{1,2\}^n$.
+
+
+%%%%%%%%%%
+\subsection{Multiline queues}
 
 %\begin{dfn} \label{def.mlqs.mlq}
 Fix a nonnegative integer $n$.
@@ -466,75 +567,435 @@ with $S_n = X$ and bottom row labels
 (\underbrace{n, \dotsc, n}_{m_n},\, \dotsc,\, \underbrace{2, \dotsc, 2}_{m_2},\, \underbrace{1, \dotsc, 1}_{m_1}).
 \]
 
-\begin{thm} \label{thm.decreasing}
-Fix a nonnegative integer $n$.
-Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
-Fix an $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of positive integers.
-
-We have
+For a standard word $u$ of type $\mm = (m_1, \dotsc, m_r)$, we define the \defn{amplitude} 
 \[
-\sum_{\MLQ \in \mcM \tup{B, \mm}} \wt\tup{\MLQ}
-= \det \tup{
-             \tup{ h_{\gamma_i - i + j} \tup{x_1, x_2, \ldots, x_{b_i}}
-                 }_{1 \leq i \leq n, \  1 \leq j \leq n}
-           },
+  [u] = \sum_{(q_1, \dotsc, q_{r-1})} \prod_{i=1} ^{r-1} \prod_{j \in q_i} x_j,
 \]
-where $\gamma_i$ is the number of all
-$k \in \set{1, 2, \ldots, n-1}$ satisfying
-$m_{k + 1} + m_{k + 2} + \cdots + m_n < i$.
-\end{thm}
+where we sum over all sequences $q_1, \dots, q_{r-1}$ of queues such that
+\begin{enumerate}
+\item $q_i$ is a $(m_1+\dots+m_i)$-queue, and
+\item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots)$.
+\end{enumerate}
 
-\begin{proof}
-For ordered $b$, the proof that there is no wrapping is the same as in~\cite{AasLin17} when all entries of $b$ are distinct.
-Hence the only possibility for lattice paths to intersect is when the two paths have the same color.
+Such a sequence $(q_1, \dotsc, q_{r-1}$ is called an (ordinary) \defn{multiline queue} (MLQ) of type $\mm$.
 
-If two paths have the same color and intersect, separate them into a non-intersecting lattice path by shifting up 1 step the entire path and all other paths above it.
-
-Thus, by the Lindstr\"om--Gessel--Viennot Lemma, we have
-\[
-\det\big[ h_{j-k_{n+1-i}(S)'}(b_{n+1-i}) \bigr]_{i,j=1}^n.
-\]
-Thus the claim follows.
-\end{proof}
-
-\begin{comment}
- We hope to have
-\[
-\sum_{\MLQ \in \mcM \tup{S, f}} \wt\tup{\MLQ}
-= \fs_{\lambda}(b; \xx),
-\]
-where $\lambda$ is the partition $\tup{1^{m_1}, 2^{m_2}, 3^{m_3}, \ldots}$
-(in multiplicity notation), or at least some partition.
-
-But this doesn't seem to work on the nose, since either
-the partition increases or the flags decrease.
-
-Maybe ghost entries, so a more general notion of flagged
-Schur functions.
-\end{comment}
-
+The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$. \erik{our proof is different[...]}
 
 \begin{thm}
-Consider the action of the Young subgroup $S_{\mu}$.
-Then, we have
+\label{thm:permutation}
+  For any permutation $\sigma$ of $[r-1]$, we have 
 \[
-\mcM_{\mu}(b; \xx) = \mcM_k(b; \xx).
+  [u] = \sum_{(q_1, \dots, q_{r-1})} \prod_{i=1} ^{r-1} \prod_{j\in q_i} x_j,
 \]
+where we sum over all sequences $q_1, \dotsc, q_{r-1}$ of queues such that (i) $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue and (ii) $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
 \end{thm}
 
-\Travis{This theorem is not the correct statement.}
+\begin{cor}
+  Let $\mm$ be a standard type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $m$, we have
+\[
+  [v] = e_{m_1+\dots+m_i}(x_1, \dots, x_n) \sum_u [u],
+\]
+where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ in $u$ yields $v$.
+\end{cor}
 
 \begin{proof}
-The only wrapping the can occur is within the action of a particular Young subgroup.
-This is similar to the proof that there is no wrapping in~\cite{AasLin17}.
+  Note that if $u = q_{r-1}(\dots q_2(q_1(1 \dots 1)) \dots)$ where $q_1$ is a $m_1+\dots+m_i$-queue, then $v = q_{r-1}(\dots q_2(1\dots 1)\dots)$ is the result of merging classes $i$ and $i+1$ in $u$. The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
 
+\begin{thm}
+\label{thm:determinant_form}
+  Let $1 \leq b_1 < \dots < b_k \leq n$ be integers and $v_1v_2 \dots v_k$ be a weakly decreasing (non-cyclic) standard word of length $k$ with $r-1$ classes. Define a word $u$ of length $n$ as follows,
+  $u_i = \left\{
+\begin{array}{cc}
+  v_k & \textrm{ if }i = b_k\textrm{ for some }k, \\
+  r & \textrm{ otherwise}.
+\end{array}
+ \right.$
+
+Then $[u] = \det(h_{i-j-1+\gamma_j}(x_1, \dots, x_{b_j}))_{1\leq i,j\leq n}$, where $\gamma_i$ is the number of distinct letters in $v_1\dots v_j$. We define $h_d(\dots) = 0$ for $d < 0$.
+\end{thm}
+
+\begin{proof}
+  This is an easy application of the Lindstr\"om-Gessel-Viennot lemma.
+
+  Define a graph with node set $\{1,\dots,k\} \times \{1, \dots, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
+
+  We define $k$ sources $s_i = (k+1-i, 1)$ for $i\in[k]$ and $k$ terminals $t_j = (k-j+\gamma_j,b_j)$ for $j\in[k]$, where $\gamma_j$ is the number of distinct classes in $v_1\dots v_j$.
+
+  Any non-intersecting path system from the sources to the terminals gives in straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely. See Figure 1 for an example.
+
+  Note that the weighted sum of paths from $s_i$ to $t_j$ is $h_{i-j-1+\gamma_j}(x_1,\dots,x_{b_j})$. The LGV lemma now gives us the stated formula.
+\end{proof}
+
+\begin{figure}
+$\begin{tikzpicture}
+  \node[circle,draw=black] at  (1, 0){3};
+  \node[circle,draw=black] at  (2, 0){3};
+  \node[circle,draw=black] at  (4, 0){2};
+  \node[circle,draw=black] at  (6, 0){2};
+  \node[circle,draw=black] at  (7, 0){2};
+  \node[circle,draw=black] at  (9, 0){1};
+  \node[circle,draw=black] at  (3, 1){2};
+  \node[circle,draw=black] at  (4, 1){2};
+  \node[circle,draw=black] at  (6, 1){2};
+  \node[circle,draw=black] at  (8, 1){1};
+  \node[circle,draw=black] at  (7, 2){1};
+\end{tikzpicture}$
+
+\vspace{1in}
+
+$\begin{tikzpicture}
+  \draw[densely dotted] (1, 1) -- (9, 1);
+  \draw[densely dotted] (1, 2) -- (9, 2);
+  \draw[densely dotted] (1, 3) -- (9, 3);
+  \draw[densely dotted] (1, 4) -- (9, 4);
+  \draw[densely dotted] (1, 5) -- (9, 5);
+  \draw[densely dotted] (1, 6) -- (9, 6);
+
+  \draw[densely dotted] (1, 6) -- (1, 1);
+  \draw[densely dotted] (2, 6) -- (2, 1);
+  \draw[densely dotted] (3, 6) -- (3, 1);
+  \draw[densely dotted] (4, 6) -- (4, 1);
+  \draw[densely dotted] (5, 6) -- (5, 1);
+  \draw[densely dotted] (6, 6) -- (6, 1);
+  \draw[densely dotted] (7, 6) -- (7, 1);
+  \draw[densely dotted] (8, 6) -- (8, 1);
+  \draw[densely dotted] (9, 6) -- (9, 1);
+
+  \draw[draw=red] (1,2)--(2,2);
+  \draw[draw=red] (1,3)--(3,3)--(3,2)--(4,2);
+  \draw[draw=red] (1,4)--(4,4)--(4,3)--(6,3);
+  \draw[draw=red] (1,5)--(6,5)--(6,4)--(7,4);
+  \draw[draw=red] (1,6)--(7,6)--(7,5)--(8,5)--(8,4)--(9,4);
+
+  \node at (1,1){\textbullet};
+  \node at (1,2){\textbullet};
+  \node at (1,3){\textbullet};
+  \node at (1,4){\textbullet};
+  \node at (1,5){\textbullet};
+  \node at (1,6){\textbullet};
+  \node at (2,2){\textbullet};
+  \node at (4,2){\textbullet};
+  \node at (6,3){\textbullet};
+  \node at (7,4){\textbullet};
+  \node at (9,4){\textbullet};
+\end{tikzpicture}$
+
+%\caption{Here, $n = 14, r = 3, v = 3211$.}
+\end{figure}
+
+Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In [AL], a formula for the amplitude $\left[ u((\prod_{i\in S} s_i)w_0) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
+
+Let $\varphi(S) = \left[ ( \prod_{i\in S} s_i ) w_0 \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \dots$. (Apply M\"obius inversion and be done.)
+
+
+
+
+
+
+
+
+
+
+%=====================================================================
+\section{Proof of Theorem~\ref{thm:permutation}}
+\subsection{Two line configurations}
+
+Let $q_1$ be an $r$-queue and $q_2$ be an $s$-queue.
+We refer to a pair $(q_1, q_2)$ as an $(r,s)$\emph{-configuration}.
+Any $(r,s)$-configuration $C$ gives us a map on words by composition: $C(u) = q_2(q_1(u))$.
+Furthermore, we let the \emph{weight} of $C$ simply be the product of weights of $q_1$ and $q_2$: $\wt(C)=\prod_{i\in q_1}x_i\prod_{j\in q_2}x_j$.
+Note that to prove Theorem X, it is enough to show that the quantity in (*) does not change when applying an adjacent transposition to $\sigma$.
+This we in turn prove by associating to each $(r,s)$-configuration $C$ a \emph{dual} $(s,r)$-configuration $C'$ in a bijective (in fact, involutive) manner, such that $C$ and $C'$ define the same function on words, and furthermore, the weight of $C$ and the weight of $C'$ equal. We split the proof into four parts, as follows.
+
+In part A we describe how to split any configuration into \emph{balanced} and \emph{unbalanced} blocks. In part B we define the involution promised above. In part C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$. Finally in part D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
+
+
+%%%%%%%%%%
+\subsection{Part A: splitting into balanced and unbalanced blocks}
+
+Let $C=(q_1,q_2)$ be a configuration. We say that a closed cyclic interval $\inter[i,j]$ is \emph{balanced} if the following condition holds
+\begin{itemize}
+  \item for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$, where $c^{\uparrow}(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_1$, and $c^\downarrow(i,k)$ is the number of $l\in\inter[i,k]$ such that $l\in q_2$.
+\end{itemize}
+
+We call a maximal (with respect to inclusion) balanced closed cyclic interval in a \emph{balanced block} of $C$. For $i \in [n]$, we say that $i$ is \emph{balanced} if $i$ belongs to some balanced block, and \emph{unbalanced} otherwise. Note that for a balanced block $B$, we have $|q_1 \cap B| = |q_2 \cap B|$.
+
+For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$. Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j\notin q_2$. The following notation will be useful later on: for a word $u$ and $j$ balanced with respect to $C$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \circ$ if $j\in q_1$ and $s_j = \square$ if $j\notin q_1$.
+
+
+%%%%%%%%%%
+\subsection{Part B: defining the dual configuration}
+
+For an $(r,s)$-configuration $C=(q_1,q_2)$, we define its dual $(s,r)$-configuration $C'=(q'_1, q'_2)$ by letting $q'_i \cap B = q_i \cap B$ for $i=1,2$ and each balanced block $B$ in $C$. For unbalanced $j$, we let $j\in q'_i$ if and only if $j\in q_{i'}$ for $i = 1,2$ where $1'=2$, and $2'=1$.
+
+Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ is again $C$, so our mapping is bijective. Furthermore, $\wt C = \wt C'$. 
+
+
+%%%%%%%%%%
+\subsection{Part C: three types of swaps}
+
+\begin{lemma}
+\label{le:orig}
+  Let $q$ be a queue, $u \in \{1,2\}^n$, and $i,j\in [n]$. Suppose that $i \notin q$, $j\in q$, and for $k \in \inter(i,j)$, either $k \in q$ and $u_k=1$ or $k \notin q$ and $u_k = 2$. Then $q(u) = q(u_{i\leftrightarrow j})$.
+\end{lemma}
+
+ Throughout, we assume that $C = (q_1, q_2)$ is a $(r,s)$-configuration.
+
+\begin{lemma}[BB]
+\label{le:BB}
+  Let $C$ and $u$ be as above. Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\circ)$, and that for $k\in\inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\circ),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+\end{lemma}
+\begin{proof}
+  By Lemma~\ref{le:orig}, $q_1(u) = q_1(u_{i\leftrightarrow j})$ and thus $C(u) = q_2(q_1(u)) = q_2(q_1(u_{i\leftrightarrow j})) = C(u_{i\leftrightarrow j})$.
+\end{proof}
+
+\begin{lemma}[BU]
+\label{le:BU}
+  Let $C$ and $u$ be as above. Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\circ),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+ \end{lemma} 
+\begin{proof}
+  We assume here that $r > s$, noting that the dual case $r < s$ follows from Lemma~\ref{le:UB}. Thus $i \in q_1$ for unbalanced $i$. In this case Lemma~\ref{le:orig} applies again, so $q_1(u) = q_1(u_{i\leftrightarrow j})$.
+\end{proof}
+
+\begin{lemma}[UB]
+\label{le:UB}
+  Let $C$ and $u$ be as above. Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\circ),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\circ)$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+\end{lemma}
+\begin{proof}
+  As in the proof of Lemma~\ref{le:BU}, we assume that $r > s$, noting that the case $r < s$ follows from Duality and Lemma~\ref{le:BU}.
+  
+  Note that for a balanced block $B$ contained in $\inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$ and $u_{|B^c}$. Thus we can reduce to the case when there is no such balanced block $B$ contained in $\inter(i,j)$.  
+
+  Thus suppose $i, i+1, \dots, i+k$ are unbalanced, and $i+k+1, i+k+2, \dots, j$ are balanced. We now prove that $C(u) = C(u_{i\leftrightarrow j})$ by induction on $k$. 
+  
+  \vspace{10pt}
+  \noindent{\it The base case $k = 0$.}
+
+  If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}. We are thus left with the case $q_1(u)_j = 2$.
+
+  \vspace{10pt}
+  \noindent {\it The inductive step.}
+
+  Suppose $k > 0$. Clearly, $q_1(u)_i = 1$. If $q_1(u)_{i+1} = 1$, it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$ so by our inductive hypothesis, $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
+  Now suppose $q_1(u)_{i+1} = 2$.
+  Then $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$, and for $l \in \{i+1,\dots, i+k\}$, we have $q_1(u)_l = 2$.
+  Furthermore, by our assumptions, we see that for $l \in \{i+k+1, \dots, j-1\}$ we have $q_1(u)_l = 1$ for $l \in q_1$ and $q_1(u)_l = 3$ for $l \notin q_1$.
+  Finally, $q_1(u)_j = 2$. From this we see that $q_2(q_1(u))_i = 3$.
+  Now we apply (A VARIANT) of Lemma~\ref{le:orig} to $q_2, q_1(u), i, i+1$ to conclude that $C(u) = C(u_{i\leftrightarrow j})$.
+\end{proof}
+
+
+%%%%%%%%%%
+\subsection{Part D: finishing the proof}
+
+Note that if one of Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} of applies to $C,u,i,j$ then it also applies to $C',u,i,j$. If we let $u_0$ be a (a posteriori: the) result of applying the lemmas to $u$ until this can be done no more. Thus $C(u) = C(u_0)$ and $C'(u) = C'(u_0)$, and so we have reduced the proof of Theorem X to proving that $C(u_0) = C'(u_0)$ for such $u_0$.
+
+
+
+
+
+
+
+
+%=====================================================================
+\section{Concluding (starting?) remarks}
+
+It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
+
+\vspace{10cm} 
+
+\begin{figure}
+\[
+\begin{tikzpicture}
+  \node at (0, 3){1};
+  \node at (1, 3){2};
+  \node at (2, 3){2};
+  \node at (3, 3){2};
+  \node at (4, 3){1};
+  \node at (5, 3){2};
+  \node at (6, 3){2};
+  \node at (7, 3){2};
+
+  \node[circle, draw=black] at (0,2){\0};
+  \node[circle, draw=black] at (1,2){\0};
+  \node[circle, draw=black] at (2,2){\0};
+  \node[circle, draw=black] at (3,2){\0};
+  \node[circle, draw=black] at (4,2){\0};
+  \node[rectangle, draw=black] at (5,2){\0};
+  \node[rectangle, draw=black] at (6,2){\0};
+  \node[circle, draw=black] at (7,2){\0};
+
+  \node at (0,5){\textrm{unbalanced}};
+  \draw (3.5,1)--(3.5,3);
+  \node at (5,5){\textrm{balanced}};
+  \node at (0,4){i};
+  \node at (7,4){j};
+\end{tikzpicture}\]
+\caption{A typical situation in Lemma~\ref{le:UB} (when there is no balanced block contained in $\inter(i,j)$). Here $k=3$. In the proof, we consider the case when the circles at $i$ and $i+1$ are labelled $(1,1)$ and when they are labelled $(1,2)$ separately.}
+\end{figure}
+
+\begin{figure}
+\[
+\begin{tikzpicture}{scale=0.9}
+  \node at (0,2){3};
+  \node at (1,2){2};
+  \node at (2,2){1};
+  \node at (3,2){3};
+  \node at (4,2){2};
+  \node at (5,2){2};
+  \node at (6,2){1};
+
+  \node[circle,draw=black]    at (0, 1){1};
+  \node[rectangle,draw=black] at (1, 1){3};
+  \node[circle,draw=black]    at (2, 1){1};
+  \node[rectangle,draw=black] at (3, 1){4};
+  \node[circle,draw=black]    at (4, 1){2};
+  \node[circle,draw=black]    at (5, 1){2};
+  \node[rectangle,draw=black] at (6, 1){4};
+\end{tikzpicture}
+\]
+\caption{Here, $n = 7$, $r=4$, $q = \{1,3,5,6\}$ and $u = 3213221$ then $v = q(u) = 1314224$.}
+\end{figure}
+
+\begin{figure}
+\[
+\begin{tikzpicture}
+  \node at (0,6){i};
+  \node at (5,6){j};
+  \node at(-2,5){u:};
+  \node at(-2,4){$q_1$:};
+  \node at(-1,5){$\dots$};
+  \node at(-1,4){$\dots$};
+  \node at (6,5){$\dots$};
+  \node at (6,4){$\dots$};
+  \node at (0,5){1};
+  \node at (1,5){2};
+  \node at (2,5){1};
+  \node at (3,5){1};
+  \node at (4,5){2};
+  \node at (5,5){2};
+  \node[rectangle,draw=black] at (0, 4){3};
+  \node[rectangle,draw=black] at (1, 4){3};
+  \node[circle,draw=black]    at (2, 4){1};
+  \node[circle,draw=black]    at (3, 4){1};
+  \node[rectangle,draw=black] at (4, 4){3};
+  \node[circle,draw=black]    at (5, 4){1};
+
+  \node at(-2,2){$u_{i\leftrightarrow j}$:};
+  \node at(-2,1){$q_1$:};
+  \node at(-1,2){$\dots$};
+  \node at(-1,1){$\dots$};
+  \node at (6,2){$\dots$};
+  \node at (6,1){$\dots$};
+  \node at (0,2){2};
+  \node at (1,2){2};
+  \node at (2,2){1};
+  \node at (3,2){1};
+  \node at (4,2){2};
+  \node at (5,2){1};
+  \node[rectangle,draw=black] at (0, 1){3};
+  \node[rectangle,draw=black] at (1, 1){3};
+  \node[circle,draw=black]    at (2, 1){1};
+  \node[circle,draw=black]    at (3, 1){1};
+  \node[rectangle,draw=black] at (4, 1){3};
+  \node[circle,draw=black]    at (5, 1){1};
+\end{tikzpicture}
+\]
+\caption{A BB-swap.}
+\end{figure}
+
+\begin{figure}
+\[
+\begin{tikzpicture}
+\draw (-0.5,6)--(-0.5,3);
+\draw (5.5,6)--(5.5,3);
+  \node at(-2,6){2};
+  \node at(-1,6){2};
+  \node at (0,6){1};
+  \node at (1,6){1};
+  \node at (2,6){2};
+  \node at (3,6){2};
+  \node at (4,6){2};
+  \node at (5,6){2};
+  \node at (6,6){1};
+  \node at (7,6){2};
+  \node[circle,draw=black] at (0, 5){\0};
+  \node[rectangle,draw=black] at (1, 5){\0};
+  \node[circle,draw=black] at (2, 5){\0};
+  \node[rectangle, draw=black] at (3, 5){\0};
+  \node[circle,draw=black] at (4, 5){\0};
+  \node[rectangle,draw=black] at (5, 5){\0};
+  \node[rectangle,draw=black] at (0, 4){\0};
+  \node[circle, draw=black] at (1, 4){\0};
+  \node[rectangle,draw=black] at (2, 4){\0};
+  \node[rectangle,draw=black] at (3, 4){\0};
+  \node[circle,draw=black] at (4, 4){\0};
+  \node[circle, draw=black] at (5, 4){\0};
+  \node[circle,draw=black] at (-1, 5){\0};
+  \node[circle,draw=black] at (-2, 5){\0};
+  \node at (-3,5){\dots};
+  \node[circle,draw=black] at (6, 5){\0};
+  \node[circle,draw=black] at (7, 5){\0};
+  \node at (8,5){\dots};
+\end{tikzpicture}
+\]
+\[
+\begin{tikzpicture}
+  \node at(-2,6){2};
+  \node at(-1,6){2};
+  \node at (0,6){1};
+  \node at (1,6){1};
+  \node at (2,6){2};
+  \node at (3,6){2};
+  \node at (4,6){2};
+  \node at (5,6){2};
+  \node at (6,6){1};
+  \node at (7,6){2};
+
+\draw (-0.5,6)--(-0.5,3);
+\draw (5.5,6)--(5.5,3);
+  \node[circle,draw=black] at (0, 5){\0};
+  \node[rectangle,draw=black] at (1, 5){\0};
+  \node[circle,draw=black] at (2, 5){\0};
+  \node[rectangle, draw=black] at (3, 5){\0};
+  \node[circle,draw=black] at (4, 5){\0};
+  \node[rectangle,draw=black] at (5, 5){\0};
+
+  \node[rectangle,draw=black] at (0, 4){\0};
+  \node[circle, draw=black] at (1, 4){\0};
+  \node[rectangle,draw=black] at (2, 4){\0};
+  \node[rectangle,draw=black] at (3, 4){\0};
+  \node[circle,draw=black] at (4, 4){\0};
+  \node[circle, draw=black] at (5, 4){\0};
+  
+  \node[rectangle,draw=black] at (-1, 5){\0};
+  \node[rectangle,draw=black] at (-2, 5){\0};
+  \node at (-3,5){$\dotsm$};
+
+  \node[rectangle,draw=black] at (6, 5){\0};
+  \node[rectangle,draw=black] at (7, 5){\0};
+  \node at (8,5){$\dotsm$};
+\end{tikzpicture}
+\]
+\caption{A balanced block in $C_1$, together with an input word $u = \dotsm 2211222212 \dotsm$.}
+\end{figure}
+
+
+
+
+
+
+
+
+
+%=====================================================================
 \section{The projection formula}
 
 For the homogenous case, where all spectral parameters equal, it is well known that the number of multiline queues with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row. The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the {\it projection principle}. Somewhat surprisingly, this principle has a generalisation to our case with non-equal spectral parameters. We now state this generalisation.
 
 \begin{thm}
-  Let $u$ be a word of type $\mbf{m}$, and let $v$ be the word obtained from $u$ by merging classes $k$ and $k+1$.
+  Let $u$ be a word of type $\mm$, and let $v$ be the word obtained from $u$ by merging classes $k$ and $k+1$.
   Then $\sum_{u'} \wt{u} = e_{m_1+\dots+m_k}(x) \wt{v}$,
   where $u'$ runs over all words gotten by permuting $k$ and $k+1$ in $u$.
 \end{thm}
@@ -594,20 +1055,22 @@ The projection formula states that $[13234] e_3(x) = [13245] + [14235]$, as we c
 \end{figure}
 
 In~\cite{AAMP} a more general notion of queue was introduced. For any subset $S$ of $[N]$ we define a function $Q_S$ on words $u$ over $\{1, 2, \dots \}^<$ of length $N$, as follows.
-Let $\mbf{m}$ be the type of $u$ and let $k$ be such that $m_1 + \dots + m_k \leq |S| < m_1 + \dots + m_{k+1}$. We will mostly be interested in cases where both inequalities are strict.
+Let $\mm$ be the type of $u$ and let $k$ be such that $m_1 + \dots + m_k \leq |S| < m_1 + \dots + m_{k+1}$. We will mostly be interested in cases where both inequalities are strict.
 
 Think of two rows of length $N$ where the top row is labeled $u$ and the bottom row has boxes at the positions in $S$. We define a labeling $Q_S(u)$ of the bottom row as follows. Go through all particles of class $i$ for $i = 1, \dots, k-1$ and do the labeling as before. Now, go through all particles of class $i$, starting with the highest class $r$ and going \emph{downwards} to class $k+1$. For a particle of class $i$ in this case, find the first nonlabeled \emph{nonboxed} position weakly cyclically to the \emph{left}, and label it $i+1$.
 After this, label all boxed non-labeled positions $k$ and all non-boxed non-labeled positions $k+1$.
 The weight of the queue is simply $\prod_{i\in S} x_i$.
 See Figure~\ref{fig_generalized_queue} for an example.
 
-\begin{dfn} A $(\sigma, \mbf{m})$-\defn{multiline queue} is an $r \times N$ array with $m_1 + \dots + m_{\sigma_i}$ boxes in row $i$ for $i = 1, \dots, r$. \end{dfn}
+\begin{dfn}
+A \defn{$(\sigma, \mm)$-multiline queue} is an $r \times N$ array with $m_1 + \cdots + m_{\sigma_i}$ boxes in row $i$ for $i = 1, \dotsc, r$.
+\end{dfn}
 
-By thinking of each row in a $(\sigma, \mbf{m})$-MLQ as a generalized queue, we get a labeling of the MLQ.
+By thinking of each row in a $(\sigma, \mm)$-MLQ as a generalized queue, we get a labeling of the MLQ.
 
 
 \begin{thm}
-  Let $u$ be a word of type $\mbf{m}$. The sum of the weights of all $(\sigma, \mbf{m})$-MLQ's whose bottom row is labeled $u$ does not depend on the permutation $\sigma$.
+  Let $u$ be a word of type $\mm$. The sum of the weights of all $(\sigma, \mm)$-MLQ's whose bottom row is labeled $u$ does not depend on the permutation $\sigma$.
 \end{thm}
 
 We show this by showing that the weight is the same for any permutation $\sigma$ and for any adjacent transposition $\sigma s_k$ of $\sigma$.
@@ -618,7 +1081,9 @@ For such a pair $(S_1, S_2)$ we will associate another pair $(T_1, T_2)$ with $|
 
 We now describe how to get $(T_1, T_2)$ from $(S_1, S_2)$. Think of $(S_1,S_2)$ as two rows on top of each other, and write these as a (cyclic) word $w_1\dots w_N$ over the alphabet $\{u, d, t, n\}$. Here $u$ refers to a column where the Upper row has a box, while the bottom does not, $t$ is a column with two boxes, $n$ is a column with no boxes and $d$ is a column with one box in the bottom row.
 
-Suppose $|S_1| > |S_2|$ (the case $|S_1| < |S_2|$ is analogous, and the case $|S_1| = |S_2|$ is trivial). Then any such word can be uniquely written as an alternating concatentation $\dots UBUB\dots$ where $U$ refers to a word consisting of $u$'s only, and $B$ is a \emph{balanced} word. A word is balanced if, for each $k$, the first $k$ columns in the word has at least as many boxes in the upper row as in the bottom row. [TODO: description in terms of Dyck paths]
+Suppose $|S_1| > |S_2|$ (the case $|S_1| < |S_2|$ is analogous, and the case $|S_1| = |S_2|$ is trivial). Then any such word can be uniquely written as an alternating concatenation $\dotsm UBUB \dotsm$ where $U$ refers to a word consisting of $u$'s only, and $B$ is a \defn{balanced} word. A word is balanced if, for each $k$, the first $k$ columns in the word has at least as many boxes in the upper row as in the bottom row.
+
+\Erik{TODO: description in terms of Dyck paths.}
 
 Now $(T_1, T_2)$ is obtained from $(S_1, S_2)$ by replacing all $u$'s in $U$ blocks in $(S_1,S_2)$ with $d$'s.
 
