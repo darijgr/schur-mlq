@@ -1,12 +1,8 @@
 \documentclass[reqno]{amsart}
 \usepackage{setspace,tikz,xcolor,mathrsfs,listings,multicol}
 \usepackage{amssymb}
-%\usepackage{amsmath}
-%\usepackage{amsthm}
 \usepackage{rotating}
 \usepackage[vcentermath]{youngtab}
-%\usepackage{subcaption}
-%\usepackage{fullpage}
 \usepackage{enumerate}
 \usepackage[all,cmtip]{xy}
 \usetikzlibrary{arrows,matrix}
@@ -17,6 +13,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{needspace}
 \usepackage{tabls}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
+%\usepackage{subcaption}
+%\usepackage{fullpage}
 %\usepackage[margin=1.25in]{geometry}
 %\onehalfspacing
 
@@ -120,7 +120,6 @@
 \definecolor{darkred}{rgb}{0.7,0,0} % darkred color
 \newcommand{\defn}[1]{{\color{darkred}\emph{#1}}} % emphasis of a definition
 
-
 %% For typesetting code listings                                                
 \usepackage{listings}
 \lstdefinelanguage{Sage}[]{Python}
@@ -210,8 +209,6 @@
 \newcommand{\Travis}[1]{\todo[size=\tiny,inline,color=blue!30]{#1
       \\ \hfill --- Travis}}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -242,8 +239,6 @@ We prove the spectral parameter version of the MLQs conjecture.
 
 \maketitle
 
-
-
 %=====================================================================
 \section{Introduction}
 \label{sec:introduction}
@@ -251,11 +246,6 @@ We prove the spectral parameter version of the MLQs conjecture.
 To be written last.
 
 \Erik{Mention Gorodentsev's book.}
-
-
-
-
-
 
 %=====================================================================
 \section{Background}
@@ -314,12 +304,12 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \node (i8) at (8,1) {$2$};
 \node (i9) at (9,1) {$1$};
 \node (t1) at (1,-1) {$2$};
-\node (t2) at (2,-1) {$7$};
-\node (t3) at (3,-1) {$7$};
+\node (t2) at (2,-1) {$6$};
+\node (t3) at (3,-1) {$6$};
 \node (t4) at (4,-1) {$3$};
 \node (t5) at (5,-1) {$4$};
 \node (t6) at (6,-1) {$4$};
-\node (t7) at (7,-1) {$5$};
+\node (t7) at (7,-1) {$4$};
 \node (t8) at (8,-1) {$1$};
 \node (t9) at (9,-1) {$1$};
 \node[circle,draw=black] (q1) at (1,0) {};
@@ -343,7 +333,7 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \draw[->,blue] (q1) -- (t1);
 \end{tikzpicture}
 \]
-where the arrows in red are Phase I and the blue are Phase II. Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
+where the arrows in red are Phase I and the blue are Phase II. Hence, we have $q(346613321) = 266344411$, which has type $(2,1,1,3,0,2,0,\ldots)$.
 \end{example}
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
@@ -369,10 +359,10 @@ Due to annoying notation, we formulate it as the following lemma (whose proof is
 \begin{lemma}[Monotonicity]
 \label{le:mono}
   For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then the comparison $q(f_t(u))_i \leq q(f_t(u))_j$ has the same result for all $t$.
+%and it is the same result as q(u)_i \leq q(u)_j
 \end{lemma}
 
 Lemma~\ref{le:mono} tells us that $q$, considered as a function on words, is completely determined by its values $q(u)$ on words $u\in\{1,2\}^n$.
-
 
 %%%%%%%%%%
 \subsection{Multiline queues}
@@ -563,13 +553,6 @@ in the indeterminates $x_1, x_2, \ldots, x_N$.
 %\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
 %\]
 
-
-
-
-
-
-
-
 %=====================================================================
 \section{Main result}
 \label{sec:result}
@@ -631,15 +614,15 @@ Then $[u] = \det(h_{i-j-1+\gamma_j}(x_1, \dots, x_{b_j}))_{1\leq i,j\leq n}$, wh
 \end{thm}
 
 \begin{proof}
-  This is an easy application of the Lindstr\"om-Gessel-Viennot lemma.
+This is an easy application of the Lindstr\"om-Gessel-Viennot lemma.
 
-  Define a graph with node set $\{1,\dots,k\} \times \{1, \dots, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
+Define a graph with node set $\{1,\dots,k\} \times \{1, \dots, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
 
-  We define $k$ sources $s_i = (k+1-i, 1)$ for $i\in[k]$ and $k$ terminals $t_j = (k-j+\gamma_j,b_j)$ for $j\in[k]$, where $\gamma_j$ is the number of distinct classes in $v_1\dots v_j$.
+We define $k$ sources $s_i = (k+1-i, 1)$ for $i\in[k]$ and $k$ terminals $t_j = (k-j+\gamma_j,b_j)$ for $j\in[k]$, where $\gamma_j$ is the number of distinct classes in $v_1\dots v_j$.
 
-  Any non-intersecting path system from the sources to the terminals gives in straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely. See Figure 1 for an example.
+Any non-intersecting path system from the sources to the terminals gives in straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely. See Figure 1 for an example.
 
-  Note that the weighted sum of paths from $s_i$ to $t_j$ is $h_{i-j-1+\gamma_j}(x_1,\dots,x_{b_j})$. The LGV lemma now gives us the stated formula.
+Note that the weighted sum of paths from $s_i$ to $t_j$ is $h_{i-j-1+\gamma_j}(x_1,\dots,x_{b_j})$. The LGV lemma now gives us the stated formula.
 \end{proof}
 
 \begin{figure}
@@ -703,15 +686,6 @@ Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]
 
 Let $\varphi(S) = \left[ ( \prod_{i\in S} s_i ) w_0 \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \dots$. (Apply M\"obius inversion and be done.)
 
-
-
-
-
-
-
-
-
-
 %=====================================================================
 \section{Proof of Theorem~\ref{thm:permutation}}
 \subsection{Two line configurations}
@@ -725,7 +699,6 @@ This we in turn prove by associating to each $(r,s)$-configuration $C$ a \emph{d
 
 In part A we describe how to split any configuration into \emph{balanced} and \emph{unbalanced} blocks. In part B we define the involution promised above. In part C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$. Finally in part D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
 
-
 %%%%%%%%%%
 \subsection{Part A: splitting into balanced and unbalanced blocks}
 
@@ -738,7 +711,6 @@ We call a maximal (with respect to inclusion) balanced closed cyclic interval in
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$. Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j\notin q_2$. The following notation will be useful later on: for a word $u$ and $j$ balanced with respect to $C$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \circ$ if $j\in q_1$ and $s_j = \square$ if $j\notin q_1$.
 
-
 %%%%%%%%%%
 \subsection{Part B: defining the dual configuration}
 
@@ -746,6 +718,7 @@ For an $(r,s)$-configuration $C=(q_1,q_2)$, we define its dual $(s,r)$-configura
 
 Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ is again $C$, so our mapping is bijective. Furthermore, $\wt C = \wt C'$. 
 
+%balanced blocks in C and C' are the same (because #unbalanced columns is same in both)
 
 %%%%%%%%%%
 \subsection{Part C: three types of swaps}
@@ -787,17 +760,19 @@ Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ 
   \vspace{10pt}
   \noindent{\it The base case $k = 0$.}
 
-  If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}. We are thus left with the case $q_1(u)_j = 2$.
+  If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}. We are thus left with the case $q_1(u)_j = 2$. (TODO: SIMILAR TO THE INDUCTIVE STEP.)
 
   \vspace{10pt}
   \noindent {\it The inductive step.}
 
   Suppose $k > 0$. Clearly, $q_1(u)_i = 1$. If $q_1(u)_{i+1} = 1$, it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$ so by our inductive hypothesis, $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
-  Now suppose $q_1(u)_{i+1} = 2$.
-  Then $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$, and for $l \in \{i+1,\dots, i+k\}$, we have $q_1(u)_l = 2$.
-  Furthermore, by our assumptions, we see that for $l \in \{i+k+1, \dots, j-1\}$ we have $q_1(u)_l = 1$ for $l \in q_1$ and $q_1(u)_l = 3$ for $l \notin q_1$.
-  Finally, $q_1(u)_j = 2$. From this we see that $q_2(q_1(u))_i = 3$.
-  Now we apply (A VARIANT) of Lemma~\ref{le:orig} to $q_2, q_1(u), i, i+1$ to conclude that $C(u) = C(u_{i\leftrightarrow j})$.
+
+  Now suppose $q_1(u)_{i+1} = 2$. In this case we see that the number of ones in $u$ is at most $r$ (or there wouldn't be any $k$ such that $k \in q_1$ and $q_1(u)_k=2$. This means that $k\notin q_2 \Rightarrow q_2(q_1(u))_k = 4$. We also see that $q_1(u)_l = 2$ for $l$ in all of $\{i+1,\dots, i+k\}$ as well as for $l= j$.
+
+  Since the squares in the lower row of the balanced block of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2(q_1(u))$ from $q_1(u)$, the search goes beyond $i+k+1$. Together with the previous paragraph, this means that $q_2(q_1(u))_i = 3$.
+
+  Now $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$. Therefore, the only difference between $C(u)$ and $C(u_{i\leftrightarrow j})$ would be in positions $i$ or $i+1$. We have established that $q_1(u)_l = 3$ for $l \in \{i,i+1\}$, and that this is true also for $q_1(u_{i\leftrightarrow i+1})$ is immediate.
+
 \end{proof}
 
 
