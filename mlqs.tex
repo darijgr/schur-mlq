@@ -314,12 +314,12 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \node (i8) at (8,1) {$2$};
 \node (i9) at (9,1) {$1$};
 \node (t1) at (1,-1) {$2$};
-\node (t2) at (2,-1) {$6$};
-\node (t3) at (3,-1) {$6$};
+\node (t2) at (2,-1) {$7$};
+\node (t3) at (3,-1) {$7$};
 \node (t4) at (4,-1) {$3$};
 \node (t5) at (5,-1) {$4$};
 \node (t6) at (6,-1) {$4$};
-\node (t7) at (7,-1) {$4$};
+\node (t7) at (7,-1) {$5$};
 \node (t8) at (8,-1) {$1$};
 \node (t9) at (9,-1) {$1$};
 \node[circle,draw=black] (q1) at (1,0) {};
@@ -343,7 +343,7 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \draw[->,blue] (q1) -- (t1);
 \end{tikzpicture}
 \]
-where the arrows in red are Phase I and the blue are Phase II. Hence, we have $q(346613321) = 266344411$, which has type $(2,1,1,3,0,2,0,\ldots)$.
+where the arrows in red are Phase I and the blue are Phase II. Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
