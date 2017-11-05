@@ -585,7 +585,11 @@ The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$. 
 \[
   [u] = \sum_{(q_1, \dots, q_{r-1})} \prod_{i=1} ^{r-1} \prod_{j\in q_i} x_j,
 \]
-where we sum over all sequences $q_1, \dotsc, q_{r-1}$ of queues such that (i) $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue and (ii) $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
+where we sum over all sequences $q_1, \dotsc, q_{r-1}$ of queues such that
+\begin{enumerate}
+\item $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue, and
+\item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
+\end{enumerate}
 \end{thm}
 
 \begin{cor}
@@ -691,23 +695,23 @@ Let $\varphi(S) = \left[ ( \prod_{i\in S} s_i ) w_0 \right]$, and $\psi(T) = \su
 \subsection{Two line configurations}
 
 Let $q_1$ be an $r$-queue and $q_2$ be an $s$-queue.
-We refer to a pair $(q_1, q_2)$ as an $(r,s)$\emph{-configuration}.
+We refer to a pair $(q_1, q_2)$ as an \defn{$(r,s)$-configuration}.
 Any $(r,s)$-configuration $C$ gives us a map on words by composition: $C(u) = q_2(q_1(u))$.
-Furthermore, we let the \emph{weight} of $C$ simply be the product of weights of $q_1$ and $q_2$: $\wt(C)=\prod_{i\in q_1}x_i\prod_{j\in q_2}x_j$.
-Note that to prove Theorem X, it is enough to show that the quantity in (*) does not change when applying an adjacent transposition to $\sigma$.
-This we in turn prove by associating to each $(r,s)$-configuration $C$ a \emph{dual} $(s,r)$-configuration $C'$ in a bijective (in fact, involutive) manner, such that $C$ and $C'$ define the same function on words, and furthermore, the weight of $C$ and the weight of $C'$ equal. We split the proof into four parts, as follows.
+Furthermore, we let the \defn{weight} of $C$ simply be the product of weights of $q_1$ and $q_2$: $\wt(C)=\prod_{i\in q_1}x_i\prod_{j\in q_2}x_j$.
+Note that to prove Theorem~\ref{thm:permutation}, it is enough to show that the quantity in (*) does not change when applying an adjacent transposition to $\sigma$.
+This we in turn prove by associating to each $(r,s)$-configuration $C$ a \defn{dual} $(s,r)$-configuration $C'$ in a bijective (in fact, involutive) manner, such that $C$ and $C'$ define the same function on words, and furthermore, the weight of $C$ and the weight of $C'$ equal. We split the proof into four parts, as follows.
 
-In part A we describe how to split any configuration into \emph{balanced} and \emph{unbalanced} blocks. In part B we define the involution promised above. In part C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$. Finally in part D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
+In part A we describe how to split any configuration into \defn{balanced} and \defn{unbalanced} blocks. In part B we define the involution promised above. In part C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$. Finally in part D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
 
 %%%%%%%%%%
 \subsection{Part A: splitting into balanced and unbalanced blocks}
 
-Let $C=(q_1,q_2)$ be a configuration. We say that a closed cyclic interval $\inter[i,j]$ is \emph{balanced} if the following condition holds
+Let $C=(q_1,q_2)$ be a $(r,s)$-configuration. We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if the following condition holds
 \begin{itemize}
   \item for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$, where $c^{\uparrow}(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_1$, and $c^\downarrow(i,k)$ is the number of $l\in\inter[i,k]$ such that $l\in q_2$.
 \end{itemize}
 
-We call a maximal (with respect to inclusion) balanced closed cyclic interval in a \emph{balanced block} of $C$. For $i \in [n]$, we say that $i$ is \emph{balanced} if $i$ belongs to some balanced block, and \emph{unbalanced} otherwise. Note that for a balanced block $B$, we have $|q_1 \cap B| = |q_2 \cap B|$.
+We call a maximal (with respect to inclusion) balanced closed cyclic interval in a \defn{balanced block} of $C$. For $i \in [n]$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced block, and \defn{unbalanced} otherwise. Note that for a balanced block $B$, we have $|q_1 \cap B| = |q_2 \cap B|$.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$. Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j\notin q_2$. The following notation will be useful later on: for a word $u$ and $j$ balanced with respect to $C$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \circ$ if $j\in q_1$ and $s_j = \square$ if $j\notin q_1$.
 
@@ -779,7 +783,7 @@ Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ 
 %%%%%%%%%%
 \subsection{Part D: finishing the proof}
 
-Note that if one of Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} of applies to $C,u,i,j$ then it also applies to $C',u,i,j$. If we let $u_0$ be a (a posteriori: the) result of applying the lemmas to $u$ until this can be done no more. Thus $C(u) = C(u_0)$ and $C'(u) = C'(u_0)$, and so we have reduced the proof of Theorem X to proving that $C(u_0) = C'(u_0)$ for such $u_0$.
+Note that if one of Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} of applies to $C,u,i,j$ then it also applies to $C',u,i,j$. If we let $u_0$ be a (a posteriori: the) result of applying the lemmas to $u$ until this can be done no more. Thus $C(u) = C(u_0)$ and $C'(u) = C'(u_0)$, and so we have reduced the proof of Theorem~\ref{thm:permutation} to proving that $C(u_0) = C'(u_0)$ for such $u_0$.
 
 
 
