@@ -250,6 +250,9 @@ To be written last.
 
 \Erik{Mention Gorodentsev's book.}
 
+\Darij{The construction $C \mapsto C'$, where $C'$ is the dual of the $(r,s)$-configuration, is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 3]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+
+\Travis{Mention the work of the Japanese, e.g., ``Multispecies TASEP and the tetrahedron equation'' by Kuniba, Maruyama, and Okado.}
 
 
 
@@ -264,22 +267,21 @@ To be written last.
 
 For a positive integer $N$, let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
 
-%%%%%%%%%%
-\subsection{Words and queues}
+\Travis{Do we want $N$ or $n$? We should make a decision.}
 
 Fix a positive integer $n$.
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We will consider the indices of words to be taken modulo $n$. 
-The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ such that $u$ has $m_i$ occurrences of the letter $i$.
+The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
-Sometimes it is useful to consider only \defn{standard} words $u$ whose type $\mm$ is such that for some $r$, $m_i \neq 0$ for $1 \leq i \leq r$ and $m_i = 0$ for $i > r$.
-We call $r$ the \defn{number of classes} in $u$.
+A word $u$ is \defn{standard} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
+We call $\ell$ the number of \defn{classes} in $u$.
 We can \defn{merge} two adjacent classes $i,i+1$ in a standard word $u$ to obtain a new standard word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $[n]$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
-We think of $q$ as a function from $\mcW_n$ to itself as follows.
+We equate $q$ with a function from $\mcW_n$ to itself as follows.
 Let $\mm$ be the type of $u$.
-Let $p_i = m_1 + m_2 + \cdots + m_i$.
+Define $p_i(\mm) := m_1 + m_2 + \cdots + m_i$, and when $\mm$ is clear, we simply write $p_i$.
 There exists a unique $t$ such that
 $
 p_{t-1} \leq r < p_t.
@@ -291,7 +293,7 @@ We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. 
 \begin{description}
 \item[Phase I]
   Go through all $i$ such that $u_i > t$ in any order such that larger letters precede smaller ones.
-  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set. Then set $v_j = u_i + 1$. We call $\inter[j,i]$ the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
+  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set. Then set $v_j = u_i + 1$. We call $\inter[j,i]$ the \defn{queueing interval} of $i$ with respect to $q$ and $u$.\travis{This is not yet defined}
 
 \item[Phase II]
   Go through all $i$ such that $u_i < t$ in any order such that smaller letters precede larger ones.
@@ -315,27 +317,23 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \node (i8) at (8,1) {$2$};
 \node (i9) at (9,1) {$1$};
 \node (t1) at (1,-1) {$2$};
-\node (t2) at (2,-1) {$6$};
-\node (t3) at (3,-1) {$6$};
+\node (t2) at (2,-1) {$7$};
+\node (t3) at (3,-1) {$7$};
 \node (t4) at (4,-1) {$3$};
 \node (t5) at (5,-1) {$4$};
 \node (t6) at (6,-1) {$4$};
-\node (t7) at (7,-1) {$4$};
+\node (t7) at (7,-1) {$5$};
 \node (t8) at (8,-1) {$1$};
 \node (t9) at (9,-1) {$1$};
 \node[circle,draw=black] (q1) at (1,0) {};
 \node[circle,draw=black] (q2) at (4,0) {};
 \node[circle,draw=black] (q3) at (8,0) {};
 \node[circle,draw=black] (q4) at (9,0) {};
-\draw[->,red] (i4) -- (q2);
-\draw[->,red] (q2) -- (2,0) -- (t2);
+\draw[->,red] (i4) -- (4,0.2) .. controls (3.7,0.2) and (3.4,0) .. (3,0) -- (2,0) -- (t2);
 \draw[->,red] (i3) -- (t3);
-\draw[->,red] (i2) -- (2,0.1) -- (q1);
-\draw[->,red] (q1) -- (0,0);
-\draw[>->,red] (10,0) -- (q4);
-\draw[->,red] (q4) -- (q3);
-\draw[->,red] (q3) -- (7,0) -- (t7);
-\draw[->,blue] (i5) -- (5,0.1) .. controls (7.5,0.1) .. (q3);
+\draw[->,red] (i2) -- (2,0.1) .. controls (1.7,-0.1) and (1.3,-0.2) .. (1,-0.2) -- (0,-0.2);
+\draw[>->,red] (10,-0.2) -- (8,-0.2) -- (7,-0.2) -- (t7);
+\draw[->,blue] (i5) -- (5,0) -- (q3);
 \draw[->,blue] (q3) -- (t8);
 \draw[->,blue] (i9) -- (q4);
 \draw[->,blue] (q4) -- (t9);
@@ -344,7 +342,7 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \draw[->,blue] (q1) -- (t1);
 \end{tikzpicture}
 \]
-where the arrows in red are Phase I and the blue are Phase II. Hence, we have $q(346613321) = 266344411$, which has type $(2,1,1,3,0,2,0,\ldots)$.
+where the paths in red correspond to Phase I and those in the blue are from Phase II. Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
@@ -356,11 +354,11 @@ For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that
 Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
 
 There is an obvious duality in the definition of the labelling process above.
-Due to annoying notation, we formulate it as the following lemma (whose proof is straightforward).
 
 \begin{lemma}[Duality]
-  Let $q$ be a queue and $u$ be a standard word with $r$ classes. Define a new word $v$ by letting $v_i = r + 1 - u_{n+1-i}$ and a new queue $q'$ by letting $i \in q' \Leftrightarrow n+1-i \notin q$.
- Then $q(u)_i = r + 2 - q'(v)_{n+1-i}$.
+  Let $q$ be a queue and $u$ be a standard word with $\ell$ classes.
+  Define a new word $v$ by letting $v_i = \ell + 1 - u_{n+1-i}$ and a new queue $q'$ by letting $i \in q'$ if and only if $n+1-i \notin q$.
+ Then $q(u)_i = \ell + 2 - q'(v)_{n+1-i}$.
 \end{lemma}
 
 %\begin{remark} (Excision)
@@ -369,181 +367,33 @@ Due to annoying notation, we formulate it as the following lemma (whose proof is
 
 \begin{lemma}[Monotonicity]
 \label{le:mono}
-  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then the comparison $q(f_t(u))_i \leq q(f_t(u))_j$ has the same result for all $t$.
+  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$.
+  Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$.
+  Then the comparison $q(f_t(u))_i \leq q(f_t(u))_j$ has the same result for all $t$.
 %and it is the same result as q(u)_i \leq q(u)_j
 \end{lemma}
 
-Lemma~\ref{le:mono} tells us that $q$, considered as a function on words, is completely determined by its values $q(u)$ on words $u\in\{1,2\}^n$.
-
-%%%%%%%%%%
-\subsection{Multiline queues}
-
-%\begin{dfn} \label{def.mlqs.mlq}
-Fix a nonnegative integer $n$.
-A \defn{multiline queue (MLQ)} is an $(n+1)$-tuple $(S_0, S_1, \dotsc, S_n)$ such that $S_0 = \emptyset$ and, for all $1 \leq i \leq n$, we have $S_i \subseteq \ive{N}$ and $\lvert S_{i-1} \rvert < \lvert S_i \rvert$.
-We shall represent an MLQ $\tup{S_0, S_1, \ldots, S_n}$ as an
-$n \times N$-array, each row of which has some of its boxes
-marked. Namely, for each $i \in \set{1, 2, \ldots, n}$ and
-each $j \in S_i$, we mark the $j$-th box in row $i$.
-(The rows and the columns are indexed as usual for a matrix.)
-%\end{dfn}
-
-For example, $\tup{\varnothing, \set{2, 4}, \set{1, 4, 5}}$
-is an MLQ for $n = 2$ and $N = 6$; we draw it as follows:
-\[
-\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.7}]
-  \mlnode{2, 2}
-  \mlnode{4, 2}
-  \mlnode{1, 1}
-  \mlnode{4, 1}
-  \mlnode{5, 1}
-\end{tikzpicture}
-\]
-
-\begin{remark}
-Our notion of an MLQ corresponds to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
-We omit the word ``discrete'', as we will not encounter any other kind of MLQs.
-\end{remark}
-
-Let $\MLQ = (S_0, \dotsc, S_n)$ be an MLQ.
-The \defn{type} of $\MLQ$ is the  $n$-tuple $\mm = \tup{m_1, m_2, \ldots, m_n}$ of
-positive
-% positive, not just nonnegative, since we required the S_i to strictly grow in size
-integers such that $\abs{S_i} = m_1 + m_2 + \cdots + m_i$.
-(In particular, $S_0 = \varnothing$.)
-
-In order to define the labeling of an MLQ, we need to setup some notation.
-
-If $p$ is an element of $\ive{N}$,
-and if $S$ is a nonempty subset of $\ive{N}$,
-then an element $\min_p S$ of $S$ is defined as follows:
-If there exists an element of $S$ that is greater
-or equal to $p$, then we set $\min_p S$ to be the
-smallest such element;
-otherwise, we set $\min_p S$ to be the smallest
-element of $S$.
-(Roughly speaking, $\min_p S$ is the first element
-of $S$ you encounter when traversing the elements
-$p, p+1, \ldots, n, 1, 2, \ldots, p-1$.)
-
-Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying
-$\abs{U} \leq \abs{V}$.
-Let $f \colon U \to \ive{n}$ be any map; we shall
-refer to it as a ``labeling'', and we shall refer an
-image $f \tup{u}$ as the ``label'' of $u$ in $f$.
-Let $k$ be a positive integer.
-We define the map $f \downarrow_{V, k} : V \to \ive{n}$
-as follows (recursively over $\abs{U}$):
-
-\begin{itemize}
- \item If $U = \varnothing$, then $f \downarrow_{V, k}$ sends
-       each element of $V$ to $k$.
- \item Otherwise, pick an element $u$ of $U$ having minimum
-       label (i.e., having minimum $f \tup{u}$).
-       Let $v = \min_u V$.
-       Let $g$ be the restriction of $f$ to the subset
-       $U \setminus \set{u}$.
-       Let $g' = g \downarrow_{V \setminus \set{v}, k}$.
-       Then, the labeling $f \downarrow_{V, k}$ is defined by
-       setting
-       \[
-        \tup{f \downarrow_{V, k}} \tup{s}
-        =
-        \begin{cases}
-         f \tup{u}, & \text{ if } s = v; \\
-         g \tup{s}, & \text{ if } s \neq v
-        \end{cases}
-        \qquad \text{ for all } s \in V .
-       \]
-\end{itemize}
-
-\darij{Remember to fix the spelling of ``labelling''.}
-
-\begin{prop} \label{prop.mlqs.down.indep}
-Let $U$ and $V$ be two subsets of $\ive{N}$ satisfying $\abs{U} \leq \abs{V}$.
-Let $f \colon U \to \ive{n}$.
-Let $k$ be a positive integer.
-The definition of $f \downarrow_{V, k}$ given above does not
-depend on the choice of $u$.
-\end{prop}
-
-\begin{proof}
-We can replace this definition by an equivalent one, which
-clearly does not depend on any choices:
-
-For any $p \in \ive{N}$, we define a subset
-$\operatorname{arc}\ive{p : s}$ of $\ive{N}$ by
-\[
-\operatorname{arc}\ive{p : s}
-=
-\begin{cases}
-\set{p, p+1, \ldots, s}, & \text{ if } p \leq s; \\
-\set{p, p+1, \ldots, N, 1, 2, \ldots, s}, & \text{ if } p > s
-\end{cases} .
-\]
-
-For any $0 \leq i \leq n$, we let $f^{-1} \tup{\leq i}$ be
-the subset
-$f^{-1} \tup{\ive{i}} = \set{u \in U \mid f \tup{u} \leq i}$
-of $U$.
-
-Let $s \in V$.
-If there exists some $i \in \ive{n}$ and some
-$p \in \ive{N}$ such that the set
-$\operatorname{arc}\ive{p : s}$
-contains at least as many elements of $f^{-1} \tup{\leq i}$
-as it contains elements of $V$.
-(that is, it satisfies
-\[
-\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
-\geq \abs{\operatorname{arc}\ive{p : s} \cap V}
-\]
-),
-then we pick the smallest $i$ for which this holds, and we set $\tup{f \downarrow_{V, k}}\tup{s} = i$.
-Otherwise, we set $\tup{f \downarrow_{V, k}}\tup{s} = k$.
-
-[The condition
-``$\abs{\operatorname{arc}\ive{p : s} \cap f^{-1} \tup{\leq i}}
-\geq \abs{\operatorname{arc}\ive{p : s} \cap V}$
-for some $p \in \ive{N}$''
-can also be restated as follows:
-If we define a circular word on $N$ letters whose $q$-th letter
-is
-\[
-\begin{cases}
-(, & \text{ if } q \in f^{-1} \tup{\leq i} \setminus V, \\
-), & \text{ if } q \in V \setminus f^{-1} \tup{\leq i}, \\
-0, & \text{ otherwise},
-\end{cases}
-\]
-and if we match parentheses as usual for a circular word
-(this means, in particular, that the last $($ can match the
-first $)$),
-then the $s$-th letter is either $0$ or a matched parenthesis.
-This is strongly reminiscent of the Remmel-Shimozono proof
-of the LR rule, and suggests that something coplactic is
-going on.]
-\Travis{It is not surprising to me that something coplactic is running around in the background because of the $R$-matrix interpretation by Kuniba and co. Coplactic operators are crystal operators and $R$-matrices are crystal isomorphisms. We might be able to get the proof for free by appealing to that perspective.}
-
-......
-\end{proof}
+Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-The \defn{labeling} of $\MLQ$ is the tuple $(f_0, f_1, \dotsc, f_n)$ given recursively as follows.
-Define $f_0 \colon S_0 \to \ive{n}$ in the obvious way (since $S_0 = \varnothing$) and then define $f_i$ by $f_i = f_{i-1} \downarrow_{S_i, i}$.
-
-We define the \defn{bottom row labels} of an MLQ $\MLQ$ with $S_n = (b_1 < b_2 < \cdots < b_n)$ to be $\tup{f_n(b_1), f_n(b_2), \dotsc, f_n(b_n)}$.
+A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{k-1}$ such that $q_i$ is a $p_i$-queue.
 \end{dfn}
 
-\begin{dfn} \label{def.mlq.sw}
-Let $\MLQ = \tup{S_0, S_1, \ldots, S_n}$ be an MLQ of type $\mm$.
-The \defn{spectral weight} $\wt\tup{\MLQ}$
-of $\MLQ$ is defined to be the monomial
-\[
- \prod_{i=0}^{n-1} \prod_{s \in S_i} x_s
-\]
-in the indeterminates $x_1, x_2, \ldots, x_N$.
-\end{dfn}
+\begin{remark}
+Our notion of an MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
+We omit the word ``discrete'' as these are the only MLQs in this note.
+\end{remark}
+
+%Next, fix a subset $B = \set{b_1 < b_2 < \cdots < b_n} \subseteq \ive{N}$.
+For a standard word $u$ of type $\mm$ with $\ell$ class, we define the \defn{amplitude} or \defn{spectral weight} as
+\begin{equation}
+\label{eq:amplitude}
+  [u] := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \prod_{j \in q_i} x_j,
+\end{equation}
+\Travis{This creates a big notational conflict with $[n]$. We need to change this.}
+where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ such that $u = (q_{\ell-1} \circ \cdots \circ q_1)(1\dotsm 1)$.
+
+
 
 
 %\subsection{Flagged Schur functions}
@@ -564,47 +414,43 @@ in the indeterminates $x_1, x_2, \ldots, x_N$.
 %\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
 %\]
 
+We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $x_1, x_2, \ldots$:
+\[
+e_k(x_1, \ldots) = \sum_{i_1 < \cdots < i_k} x_{i_1} \dotsm x_{i_k},
+\qquad\qquad
+h_k(x_1, \ldots) = \sum_{i_1 \leq \cdots \leq i_k} x_{i_1} \dotsm x_{i_k},
+\]
+respectively.
+We define $e_d(x_1, \ldots) = 0$ and $h_d(x_1, \ldots) = 0$ for $d < 0$.
+
+
+
+
+
+
 %=====================================================================
 \section{Main result}
 \label{sec:result}
 
-
-Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
-Let $\mcM \tup{B, \mm}$ be the set of all MLQs $\MLQ = (S_0, \dotsc, S_n)$ of type $\mm$
-with $S_n = X$ and bottom row labels
-\[
-(\underbrace{n, \dotsc, n}_{m_n},\, \dotsc,\, \underbrace{2, \dotsc, 2}_{m_2},\, \underbrace{1, \dotsc, 1}_{m_1}).
-\]
-
-For a standard word $u$ of type $\mm = (m_1, \dotsc, m_r)$, we define the \defn{amplitude} 
-\[
-  [u] = \sum_{(q_1, \dotsc, q_{r-1})} \prod_{i=1} ^{r-1} \prod_{j \in q_i} x_j,
-\]
-where we sum over all sequences $q_1, \dots, q_{r-1}$ of queues such that
-\begin{enumerate}
-\item $q_i$ is a $(m_1+\dots+m_i)$-queue, and
-\item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots)$.
-\end{enumerate}
-
-Such a sequence $(q_1, \dotsc, q_{r-1}$ is called an (ordinary) \defn{multiline queue} (MLQ) of type $\mm$.
-
-The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$. \erik{our proof is different[...]}
+We now state our main theorem.
 
 \begin{thm}
 \label{thm:permutation}
-  For any permutation $\sigma$ of $[r-1]$, we have 
-\[
-  [u] = \sum_{(q_1, \dots, q_{r-1})} \prod_{i=1} ^{r-1} \prod_{j\in q_i} x_j,
-\]
-where we sum over all sequences $q_1, \dotsc, q_{r-1}$ of queues such that
-\begin{enumerate}
-\item $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue, and
-\item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
-\end{enumerate}
+  For any permutation $\sigma$ of $[\ell_1]$, we have 
+  \[
+  [u] = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \prod_{j\in q_i} x_j,
+  \]
+  where we sum over all sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
+  \begin{enumerate}
+  \item $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue, and
+  \item $u = q_{\ell-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
+  \end{enumerate}
 \end{thm}
 
+We note that Theorem~\ref{thm:permutation} forthe special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
+
 \begin{cor}
-  Let $\mm$ be a standard type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $m$, we have
+  Let $\mm$ be a standard type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $\mm'$, we have
 \[
   [v] = e_{m_1+\dots+m_i}(x_1, \dots, x_n) \sum_u [u],
 \]
@@ -617,15 +463,14 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
 
 \begin{thm}
 \label{thm:determinant_form}
-  Let $1 \leq b_1 < \dots < b_k \leq n$ be integers and $v_1v_2 \dots v_k$ be a weakly decreasing (non-cyclic) standard word of length $k$ with $r-1$ classes. Define a word $u$ of length $n$ as follows,
-  $u_i = \left\{
-%\begin{array}{cc}
-%  v_k & \textrm{ if }i = b_k\textrm{ for some }k, \\
-%  r & \textrm{ otherwise}.
-%\end{array}
- \right.$
-
-Then $[u] = \det(h_{i-j-1+\gamma_j}(x_1, \dots, x_{b_j}))_{1\leq i,j\leq n}$, where $\gamma_i$ is the number of distinct letters in $v_1\dots v_j$. We define $h_d(\dots) = 0$ for $d < 0$.
+  Let $B = \set{b_1 < b_2 < \cdots < b_n} \subseteq \ive{N}$.
+  Let $v_1v_2 \dots v_k$ be a weakly decreasing (non-cyclic) standard word of length $k$ with $r-1$ classes.
+  Define a word $u$ of length $n$ by $u_i = v_k$ if $i = b_k$ for some $k$, otherwise $u_i = r$.
+  Then
+  \[
+  [u] = \det(h_{i-j-1+\gamma_j}(x_1, \dots, x_{b_j}))_{1\leq i,j\leq n},
+  \]
+  where $\gamma_i$ is the number of distinct letters in $v_1\dotsm v_j$.
 \end{thm}
 
 \begin{figure}
