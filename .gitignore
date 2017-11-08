@@ -11,3 +11,5 @@
 *.pdf
 *.synctex.gz
 *.out
+*.xml
+*-blx.bib
