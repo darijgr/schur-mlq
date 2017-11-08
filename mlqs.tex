@@ -242,12 +242,17 @@ We prove the spectral parameter version of the MLQs conjecture.
 \section{Introduction}
 \label{sec:introduction}
 
-In this paper we assign weights to \emph{multiline queues}, and generalize some known properties of these objects. Using these weights, we found a combinatorial proof of the Commutativity Conjecture of [AAMP]. We also extend and prove a conjecture by [AL].
+We
+\begin{itemize}
+\item Introduce a new weighting of multiline queues
+\item prove the commutativity conjecture of [AAMP]
+\item prove conjecture 3.10 of [AL]
+\item "discover" an operation already used by Danilov and Koshevoy in other contexts
+\end{itemize}
 
-
-To be written last.
-
-\Erik{Mention Gorodentsev's book.}
+%In this paper we assign weights to \emph{multiline queues}, and generalize some known properties of these objects. Using these weights, we found a combinatorial proof of the Commutativity Conjecture of [AAMP]. We also extend and prove a conjecture by [AL].
+%To be written last.
+%\Erik{Mention Gorodentsev's book.}
 
 
 
@@ -266,11 +271,11 @@ For a positive integer $N$, let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$
 \subsection{Words and queues}
 
 Fix a positive integer $n$.
-Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
+Let $\Omega_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We will consider the indices of words to be taken modulo $n$. 
 The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ such that $u$ has $m_i$ occurrences of the letter $i$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
-Sometimes it is useful to consider only \defn{standard} words $u$ whose type $\mm$ is such that for some $r$, $m_i \neq 0$ for $1 \leq i \leq r$ and $m_i = 0$ for $i > r$.
+Sometimes it is useful to consider only \defn{standard} words $u$ whose type $\mm$ is such that for some $r$, $m_i \neq 0$ for $1 \leq i \leq r$ and $m_i = 0$ for $i > r$. We denote the set of standard words of type $\mbf{m}$ by $\Omega_{\mbf{m}}$.
 We call $r$ the \defn{number of classes} in $u$.
 We can \defn{merge} two adjacent classes $i,i+1$ in a standard word $u$ to obtain a new standard word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
 
@@ -343,10 +348,12 @@ We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613
 \end{tikzpicture}
 \]
 where the arrows in red are Phase I and the blue are Phase II. Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
+
+\erik{I think the arrows are a bit confusing at the moment.}
 \end{example}
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
-We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$, and second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$.
+We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$, and second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$. Sometimes we omit the squares.\erik{fix sentence}
 See Figure~ \ref{fi:queue_example} for an example.
 
 \begin{figure}
@@ -400,8 +407,7 @@ There is an obvious duality in the definition of the labelling process above. We
 
 \begin{lemma}[Monotonicity]
 \label{le:mono}
-  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then the comparison $q(u)_i \leq q(u)_j$ if and only if $q(f_t(u))_i \leq q(f_t(u))_j$. Furthermore, if $q(u)_i < q(u)_j$ then $q(f_t(u))_i < q(f_t(u))_j$ for some $t$.
-
+  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then $q(u)_i \leq q(u)_j$ if and only if $q(f_t(u))_i \leq q(f_t(u))_j$. Furthermore, if $q(u)_i < q(u)_j$ then $q(f_t(u))_i < q(f_t(u))_j$ for some $t$.
 \end{lemma}
 
 Lemma~\ref{le:mono} tells us that $q$, considered as a function on words, is completely determined by its values $q(u)$ on words $u\in\{1,2\}^n$.
@@ -416,12 +422,12 @@ Lemma~\ref{le:mono} tells us that $q$, considered as a function on words, is com
 \label{sec:result}
 
 
-Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
-Let $\mcM \tup{B, \mm}$ be the set of all MLQs $\MLQ = (S_0, \dotsc, S_n)$ of type $\mm$
-with $S_n = X$ and bottom row labels
-\[
-(\underbrace{n, \dotsc, n}_{m_n},\, \dotsc,\, \underbrace{2, \dotsc, 2}_{m_2},\, \underbrace{1, \dotsc, 1}_{m_1}).
-\]
+%Fix a subset $B = \set{b_1 < b_2 < \cdots < b_n}$ of $\ive{N}$.
+%Let $\mcM \tup{B, \mm}$ be the set of all MLQs $\MLQ = (S_0, \dotsc, S_n)$ of type $\mm$
+%with $S_n = X$ and bottom row labels
+%\[
+%(\underbrace{n, \dotsc, n}_{m_n},\, \dotsc,\, \underbrace{2, \dotsc, 2}_{m_2},\, \underbrace{1, \dotsc, 1}_{m_1}).
+%\]
 
 For a standard word $u$ of type $\mm = (m_1, \dotsc, m_r)$, we define the \defn{amplitude} 
 \[
@@ -433,9 +439,9 @@ where we sum over all sequences $q_1, \dots, q_{r-1}$ of queues such that
 \item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots)$.
 \end{enumerate}
 
-Such a sequence $(q_1, \dotsc, q_{r-1}$ is called an (ordinary) \defn{multiline queue} (MLQ) of type $\mm$.
+Such a sequence $(q_1, \dotsc, q_{r-1}$ is called an (ordinary) \defn{multiline queue} (MLQ) of type $\mm$. For a fixed type $\mbf{m}$, the numbers $[u] \in \Omega_{\mbf{m}}$.
 
-The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$. \erik{our proof is different[...]}
+The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$.
 
 \begin{thm}
 \label{thm:permutation}
@@ -449,6 +455,7 @@ The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$. 
   \item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
   \end{enumerate}
 \end{thm}
+
 
 \begin{cor}
 \label{co:merge}
@@ -574,9 +581,60 @@ $\begin{tikzpicture}
 %\caption{Here, $n = 14, r = 3, v = 3211$.}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In [AL], a formula for the amplitude $\left[ u((\prod_{i\in S} s_i)w_0) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
+Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In [AL], a formula for the amplitude $\left[ u((\prod_{i\in S} s_i)w_0) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
 
-Let $\varphi(S) = \left[ u(( \prod_{i\in S} s_i ) w_0) \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \left(\prod_{i\in S} e_{m_1+\dots +m_i}(x_1,\dots,x_n) \right) [w]$, where $w$ is the result of merging $i$ and $i+1$ in $w_0$ for each $i\in T$. (Apply M\"obius inversion and be done.)
+Let $\varphi(S) = \left[ u(( \prod_{i\in S} s_i ) w_0) \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Theorem~\ref{thm:permutation}, $\psi(T) = \left(\prod_{i\in S} e_{m_1+\dots +m_i}(x_1,\dots,x_n) \right) [w_T]$, where $w_T$ is the result of merging $n+1-i$ and $n-i$ in $w_0$ for each $i\in T$. By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$. By Theorem~\ref{thm:determinant_form}, $[w_T] \prod_{i \in T} e_i(x_1,\dots, x_n) \det(\dots)$ \erik{FIX}. Taken together, this proves Conjecture 3.10 in [AL].
+
+\section{The TASEP connection}
+
+We now rephrase Theorem~\ref{thm:permutation} in a language more similar to that of [AAML]. Note that there are exactly $2^{n-1}$ different types of standard words of length $n$. These types are naturally indexed by subsets of $[n-1]$ as follows: the type $\mbf{m}_S$ corresponding to $S \subseteq [n-1]$ is the type of the word obtained by identifying $i$ and $i+1$ for each $i\in S$ in the word $12\dots n$ simultaneously.
+
+\begin{example}
+  For $n = 4$, we have $\mbf{m}_\emptyset = (1,1,1,1)$, $\mbf{m}_{\{1\}} = (2,1,1)$, $\mbf{m}_{\{2\}} = (1,2,1)$, $\mbf{m}_{\{3\}} = (1,1,2)$, $\mbf{m}_{\{1,2\}} = (3,1)$, $\mbf{m}_{\{1,3\}} = (2,2)$, $\mbf{m}_{\{2,3\}} = (1,3)$, and $\mbf{m}_{\{1,2,3\}} = (4)$.
+\end{example}
+
+\erik{hypercube goes here}
+
+When we let all spectral parameters equal, there is a connection between our multiline queues and the multi-species \emph{totally asymmetric exclusion process} (TASEP) on the ring, as follows. For a type $\mbf{m}_S$, $S \subseteq[n-1]$, we define a Markov chain on $\Omega_{\mbf{m}_S}$ as follows. For a state $u \in \Omega_{\mbf{m}_S}$, we generate a new state by picking a random $i\in [n]$ and either (i) if $u_i < u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$ or (ii) do nothing (i.e. stay at $u$). Let $M_S$ be the transition matrix of this Markov chain. For $i \notin S$, we have the merging map $\Phi_i : \Omega_{\mbf{m}_S} \to \Omega_{\mbf{m}_{S\cup\{i\}}}$. It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
+
+\newcommand{\exE} {
+	\begin{tikzpicture} \draw (3,8) node {321}; \draw (0,6) node
+{231}; \draw (6,6) node {312}; \draw (0,2) node {213}; \draw (6,2)
+node {132}; \draw (3,0) node {123};
+
+	\draw node at (1.5,7.5){$1/3$}; \draw node at
+(4.6,7.3){$1/3$}; \draw node at (3.4,6.5){$1/3$};
+
+	\draw node at (-0.5,4.5){$1/3$}; \draw node at
+(6.6,4.5){$1/3$};
+
+	\draw node at (1.5,4.5){$1/3$}; \draw node at
+(4.6,4.5){$1/3$};
+
+	\draw node at (1.5,1.3){$1/3$}; \draw node at
+(4.3,1.3){$1/3$};
+
+	\draw [->, >=stealth, thick] (2.7,7.7) -- (0.3,6.3);
+\draw [->, >=stealth, thick] (3.3,7.7) --
+(5.7,6.3); \draw [->, >=stealth, thick] (0,5.7) -- (0,2.3);
+\draw [<-, >=stealth, thick] (2.7,0.3) --
+(0.3,1.7); \draw [<-, >=stealth, thick] (3.3,0.3) -- (5.7,1.7);
+\draw [<-, >=stealth, thick] (6,2.3) --
+(6,5.7); \draw [->, >=stealth, thick] (3,0.3) -- (3,7.7);
+\draw [->, >=stealth, thick] (5.7,2.3) --
+(0.3,5.7); \draw [->, >=stealth, thick] (0.3,2.3) -- (5.7,5.7);
+\end{tikzpicture} }
+
+\exE
+
+
+Building on work by Ferrari-Martin, [AAMP] introduced opposite operators $\Psi_i : \Omega_{\mbf{m}_{S\cup\{i\}}} \to \Omega_{\mbf{m}_S}$ given by $\Psi(u) = \sum_q q(u)$, and showed that $\Psi M = M\Psi$. Furthermore they conjectured that $\Psi_S \Psi_T = \Psi_T \Psi_S$.
+
+In the course of proving Theorem~\ref{thm:permutation}, we prove the commutativity conjecture of [AAMP] for the weighted operators (which obviously generalize those of [AAMP]) $\Psi(u) = \sum_q \wt(q) q(u)$. This is equivalent to showing that for any $u \in \Omega_{\mbf{m}_S}$, $v \in \Omega_{\mbf{m}_{S\cup\{i,j\}}}$, [TWO THINGS EQUAL] \erik{Fix}
+
+\erik{the proof of interlacing by [AAMP] is significantly different from our approach}
+
+We have not managed to find a process similar to the TASEP whose transition matrix $M$ would satsify $M\Psi=\Psi M$ for our generalized $\Psi$ operators. Note however that queues gives us \emph{a} random process with this property: for a word $u \in \Omega_{\mbf{m}}$, a move in the chain is given by(i) picking a random queue $q$ (ii) going to the state $q(u) \in \Omega_{\mbf{m}}$.
 
 %=====================================================================
 \section{Proof of Theorem~\ref{thm:permutation}}
@@ -615,7 +673,6 @@ Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ 
 \Darij{The construction $C \mapsto C'$ is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 3]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
 
 %balanced blocks in C and C' are the same (because #unbalanced columns is same in both)
-
 %%%%%%%%%%
 \subsection{Part C: three types of swaps}
 
@@ -688,16 +745,72 @@ What do we know about $u_0$? There are three cases.
 \item If for all balanced $i$, we have $T(i) \in \{(1,\circ),(2,\square)\}$
 \end{itemize}
 
+These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectively, where $e$ is the total number of ones in $u$. In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced posititions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labellng procedure inside each balanced block is the same in $C$ and $C'$.
 
 
+\begin{example}
+We give an example of the computation inherent in the proof, showing that $C(u) = C'(u)$ for $(r,s)$-configuration $C$ in Figure \ref{fi:proof_example} and its dual $(s,r)$-configuration $C'$ where $r=5$, $s=3$ and $u = 211112$. We first find the balanced blocks: the columns 1,2,5 and 6 are balanced while 3 and 4 are unbalanced. Thus $C$ and $C'$ differ in columns 3 and 4 only. 
+
+Now apply Lemma UB with $i = 4$ and $j = 6$, getting $u_1 = 211112$.  \\
+Lemma BU with $i=2, j=4$, getting $u_2 = 221111$.  \\
+Lemma UB with $i=4, j=1$, getting $u_0 = 121211$, at which point we cannot apply any of Lemmas UB,BU,BB to $u_0$.
+
+The reader is invited to chech that indeed, $C(u) = C(u_1) = C(u_2) = C(u_0)$ and $C'(u) = C'(u_1) = C'(u_2) = C'(u_0)$.
+
+For the input word $u_0$, we have $C(u_0) = 112314 = C'(u_0)$.
+
+\erik{need more elaborate example, including Lemma BB (and possibly all three cases of Part D}
+
+\end{example}
+
+\begin{figure}
+\label{fi:proof_example}
+
+$
+\begin{tikzpicture}
+  \node[circle, draw=black] at (0, 3){\0};
+  \node[rectangle, draw=black] at (1, 3){\0};
+  \node[circle, draw=black] at (2, 3){\0};
+  \node[circle, draw=black] at (3, 3){\0};
+  \node[circle, draw=black] at (4, 3){\0};
+  \node[circle, draw=black] at (5, 3){\0};
+  \node[circle, draw=black] at (0, 2){\0};
+  \node[circle, draw=black] at (1, 2){\0};
+  \node[rectangle, draw=black] at (2, 2){\0};
+  \node[rectangle, draw=black] at (3, 2){\0};
+  \node[circle, draw=black] at (4, 2){\0};
+  \node[rectangle, draw=black] at (5, 2){\0};
+\end{tikzpicture}
+$
+\vspace{2cm}
+
+$
+\begin{tikzpicture}
+  \node[circle, draw=black] at (0, 3){\0};
+  \node[rectangle, draw=black] at (1, 3){\0};
+  \node[rectangle, draw=black] at (2, 3){\0};
+  \node[rectangle, draw=black] at (3, 3){\0};
+  \node[circle, draw=black] at (4, 3){\0};
+  \node[circle, draw=black] at (5, 3){\0};
+  \node[circle, draw=black] at (0, 2){\0};
+  \node[circle, draw=black] at (1, 2){\0};
+  \node[circle, draw=black] at (2, 2){\0};
+  \node[circle, draw=black] at (3, 2){\0};
+  \node[circle, draw=black] at (4, 2){\0};
+  \node[rectangle, draw=black] at (5, 2){\0};
+\end{tikzpicture}
+$
+\end{figure}
 
 
 
 
 %=====================================================================
-\section{Concluding (starting?) remarks}
+\section{Final remarks}
 
 It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
+
+Does our proof have any implications for the work of Danilov and Koshevoy?
 
 \vspace{10cm} 
 
@@ -878,10 +991,6 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
 \end{figure}
 
 %=====================================================================
-\section{The projection formula}
-
-For the homogenous case, where all spectral parameters equal, it is well known that the number of multiline queues with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row. The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the {\it projection principle}. Somewhat surprisingly, this principle has a generalisation to our case with non-equal spectral parameters. We now state this generalisation.
-
 
 \begin{example}
 Looking at queues, we get
@@ -1170,8 +1279,6 @@ in the indeterminates $x_1, x_2, \ldots, x_N$.
 %\[
 %\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
 %\]
-
-
 \end{comment}
 
 
