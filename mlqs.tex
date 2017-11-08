@@ -250,7 +250,7 @@ We
 \item ``discover'' an operation already used by Danilov and Koshevoy in other contexts
 \end{itemize}
 
-%In this paper we assign weights to \emph{multiline queues}, and generalize some known properties of these objects. Using these weights, we found a combinatorial proof of the Commutativity Conjecture of [AAMP]. We also extend and prove a conjecture by [AL].
+%In this paper we assign weights to \emph{multiline queues}, and generalize some known properties of these objects. Using these weights, we found a combinatorial proof of the Commutativity Conjecture of [AAMP]. We also extend and prove a conjecture by~\cite{AasLin17}.
 %To be written last.
 %\Erik{Mention Gorodentsev's book.}
 
@@ -520,13 +520,14 @@ Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges 
 
 We define $k$ sources $s_i = (k+1-i, 1)$ for $i\in[k]$ and $k$ terminals $t_j = (k-j+\gamma_j,b_j)$ for $j\in[k]$, where $\gamma_j$ is the number of distinct classes in $v_1\dotsm v_j$.
 
-Any non-intersecting path system from the sources to the terminals gives in straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely. See Figure 1 for an example.
+Any non-intersecting path system from the sources to the terminals gives in straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely. See Figure~\ref{fig:MLQ_NLP} for an example.
 
 Note that the weighted sum of paths from $s_i$ to $t_j$ is $h_{i-j-1+\gamma_j}(x_1,\dots,x_{b_j})$. The LGV lemma now gives us the stated formula.
 \end{proof}
 
 \begin{figure}
-$\begin{tikzpicture}
+\[
+\begin{tikzpicture}
   \node[circle,draw=black] at  (1, 0){3};
   \node[circle,draw=black] at  (2, 0){3};
   \node[circle,draw=black] at  (4, 0){2};
@@ -538,11 +539,10 @@ $\begin{tikzpicture}
   \node[circle,draw=black] at  (6, 1){2};
   \node[circle,draw=black] at  (8, 1){1};
   \node[circle,draw=black] at  (7, 2){1};
-\end{tikzpicture}$
-
-\vspace{1in}
-
-$\begin{tikzpicture}
+\end{tikzpicture}
+\]
+\[
+\begin{tikzpicture}
   \draw[densely dotted] (1, 1) -- (9, 1);
   \draw[densely dotted] (1, 2) -- (9, 2);
   \draw[densely dotted] (1, 3) -- (9, 3);
@@ -577,14 +577,21 @@ $\begin{tikzpicture}
   \node at (6,3){\textbullet};
   \node at (7,4){\textbullet};
   \node at (9,4){\textbullet};
-\end{tikzpicture}$
-
-%\caption{Here, $n = 14, r = 3, v = 3211$.}
+\end{tikzpicture}
+\]
+\caption{An example of the correspondence between MLQs and non-intersecting lattice paths with $n = 14$, $r = 3$, and $v = 3211$.}
+\label{fig:MLQ_NLP}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In [AL], a formula for the amplitude $\left[ u((\prod_{i\in S} s_i)w_0) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
+Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
+Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$.
+In~\cite{AasLin17}, a formula for the amplitude $\left[ u((\prod_{i\in S} s_i)w_0) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
 
-Let $\varphi(S) = \left[ u(( \prod_{i\in S} s_i ) w_0) \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Theorem~\ref{thm:permutation}, $\psi(T) = \left(\prod_{i\in S} e_{m_1+\dots +m_i}(x_1,\dots,x_n) \right) [w_T]$, where $w_T$ is the result of merging $n+1-i$ and $n-i$ in $w_0$ for each $i\in T$. By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$. By Theorem~\ref{thm:determinant_form}, $[w_T] \prod_{i \in T} e_i(x_1,\dots, x_n) \det(\dots)$ \erik{FIX}. Taken together, this proves \cite[Conj.~3.10]{AasLin17}.
+Let $\varphi(S) = \left[ u(( \prod_{i\in S} s_i ) w_0) \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
+By Theorem~\ref{thm:permutation}, $\psi(T) = \left(\prod_{i\in S} e_{m_1+\dots +m_i}(x_1,\dots,x_n) \right) [w_T]$, where $w_T$ is the result of merging $n+1-i$ and $n-i$ in $w_0$ for each $i\in T$.
+By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
+By Theorem~\ref{thm:determinant_form}, $[w_T] \prod_{i \in T} e_i(x_1,\dots, x_n) \det(\dots)$ \erik{FIX}.
+Taken together, this proves \cite[Conj.~3.10]{AasLin17}.
 
 
 
@@ -604,9 +611,18 @@ We now rephrase Theorem~\ref{thm:permutation} in a language more similar to that
 
 \erik{hypercube goes here}
 
-When we let all spectral parameters equal, there is a connection between our multiline queues and the multi-species \emph{totally asymmetric exclusion process} (TASEP) on the ring, as follows. For a type $\mbf{m}_S$, $S \subseteq[n-1]$, we define a Markov chain on $\Omega_{\mbf{m}_S}$ as follows. For a state $u \in \Omega_{\mm_S}$, we generate a new state by picking a random $i\in [n]$ and either (i) if $u_i < u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$ or (ii) do nothing (i.e. stay at $u$). Let $M_S$ be the transition matrix of this Markov chain. For $i \notin S$, we have the merging map $\Phi_i \colon \Omega_{\mbf{m}_S} \to \Omega_{\mbf{m}_{S\cup\{i\}}}$. It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
+When we let all spectral parameters equal, there is a connection between our MLQs and the multi-species \defn{totally asymmetric exclusion process} (TASEP) on the ring, as follows.
+For a type $\mbf{m}_S$, where $S \subseteq[n-1]$, we define a Markov chain on $\Omega_{\mbf{m}_S}$ as follows.
+For a state $u \in \Omega_{\mm_S}$, we generate a new state by picking a random $i\in [n]$ and either
+\begin{itemize}
+\item if $u_i < u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$, or
+\item do nothing (\textit{i.e.} stay at $u$).
+\end{itemize}
+Let $M_S$ be the transition matrix of this Markov chain.
+For $i \notin S$, we have the merging map $\Phi_i \colon \Omega_{\mbf{m}_S} \to \Omega_{\mbf{m}_{S\cup\{i\}}}$.
+It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
 
-% Do you plan to use this command elsewhere? -- Travis
+% Do you plan to use this command elsewhere?    -- Travis
 \newcommand{\exE} {
 	\begin{tikzpicture} \draw (3,8) node {321}; \draw (0,6) node
 {231}; \draw (6,6) node {312}; \draw (0,2) node {213}; \draw (6,2)
@@ -702,7 +718,7 @@ Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ 
 \subsection{Part C: three types of swaps}
 
 
-  For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result of swapping positions $i$ and $j$ in $u$.
+For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result of swapping positions $i$ and $j$ in $u$.
 
 \begin{lemma}
 \label{le:orig}
@@ -713,38 +729,41 @@ Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ 
 
 \begin{lemma}[BB]
 \label{le:BB}
-  Let $C$ and $u$ be as above. Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\circ)$, and that for $k\in\inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\circ),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+  Let $C$ and $u$ be as above. Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and that for $k\in\inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\bigcirc),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
+
 \begin{proof}
   By Lemma~\ref{le:orig}, $q_1(u) = q_1(u_{i\leftrightarrow j})$ and thus $C(u) = q_2(q_1(u)) = q_2(q_1(u_{i\leftrightarrow j})) = C(u_{i\leftrightarrow j})$.
 \end{proof}
 
 \begin{lemma}[BU]
 \label{le:BU}
-  Let $C$ and $u$ be as above. Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\circ),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+  Let $C$ and $u$ be as above. Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
  \end{lemma} 
+ 
 \begin{proof}
   We assume here that $r > s$, noting that the dual case $r < s$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:UB}. Thus $i \in q_1$ for unbalanced $i$. In this case Lemma~\ref{le:orig} applies again, so $q_1(u) = q_1(u_{i\leftrightarrow j})$.
 \end{proof}
 
 \begin{lemma}[UB]
 \label{le:UB}
-  Let $C$ and $u$ be as above. Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\circ),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\circ)$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+  Let $C$ and $u$ be as above. Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\bigcirc)$. Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
+
 \begin{proof}
   As in the proof of Lemma~\ref{le:BU}, we assume that $r > s$, noting that the case $r < s$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:BU}.
   
-  Note that for a balanced block $B$ contained in $\inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$ and $u_{|B^c}$. Thus we can reduce to the case when there is no such balanced block $B$ contained in $\inter(i,j)$.  
+  Note that for a balanced block $B$ contained in $\inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$ and $u_{|B^c|}$. Thus we can reduce to the case when there is no such balanced block $B$ contained in $\inter(i,j)$.  
 
-  Thus suppose $i, i+1, \dots, i+k$ are unbalanced, and $i+k+1, i+k+2, \dots, j$ are balanced. We now prove that $C(u) = C(u_{i\leftrightarrow j})$ by induction on $k$. 
+  Thus suppose $i, i+1, \dotsc, i+k$ are unbalanced, and $i+k+1, i+k+2, \dotsc, j$ are balanced. We now prove that $C(u) = C(u_{i\leftrightarrow j})$ by induction on $k$. 
   
   \vspace{10pt}
-  \noindent{\it The base case $k = 0$.}
+  \noindent \underline{The base case: $k = 0$}
 
   If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}. We are thus left with the case $q_1(u)_j = 2$. In this case $q_1(u_{i\leftrightarrow j}) = q_1(u)_{i\leftrightarrow j}$, and we can proceed as in the induction step below to conclude that $C(u) = C(u_{i\leftrightarrow})$.
 
   \vspace{10pt}
-  \noindent {\it The inductive step.}
+  \noindent \underline{The inductive step}
 
   Suppose $k > 0$. Clearly, $q_1(u)_i = 1$. If $q_1(u)_{i+1} = 1$, it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$ so by our inductive hypothesis, $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
 
@@ -760,21 +779,23 @@ Note that $C$ and $C'$ have the same balanced blocks. Clearly, the dual of $C'$ 
 %%%%%%%%%%
 \subsection{Part D: finishing the proof}
 
-Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$. Now let $u_0$ be a result of applying Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} until this can be done no more (such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\circ), (2,\square)\}$ increases with each swap).
+Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$. Now let $u_0$ be a result of applying Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} until this can be done no more (such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap).
 
 What do we know about $u_0$? There are three cases.
 
 \begin{itemize}
-\item If there is some balanced $i$ such that $T(i) = (1, \square)$ then there is no balanced $i$ such that $T(i) = (2,\circ)$.
-\item If there is some balanced $i$ such that $T(i) = (2, \circ)$ then there is no balanced $i$ such that $T(i) = (1,\square)$.
-\item If for all balanced $i$, we have $T(i) \in \{(1,\circ),(2,\square)\}$
+\item If there is some balanced $i$ such that $T(i) = (1, \square)$ then there is no balanced $i$ such that $T(i) = (2,\bigcirc)$.
+\item If there is some balanced $i$ such that $T(i) = (2, \bigcirc)$ then there is no balanced $i$ such that $T(i) = (1,\square)$.
+\item If for all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$
 \end{itemize}
 
-These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectively, where $e$ is the total number of ones in $u$. In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced posititions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labellng procedure inside each balanced block is the same in $C$ and $C'$.
+These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectively, where $e$ is the total number of ones in $u$. In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labellng procedure inside each balanced block is the same in $C$ and $C'$.
 
 
 \begin{example}
-We give an example of the computation inherent in the proof, showing that $C(u) = C'(u)$ for $(r,s)$-configuration $C$ in Figure \ref{fi:proof_example} and its dual $(s,r)$-configuration $C'$ where $r=5$, $s=3$ and $u = 211112$. We first find the balanced blocks: the columns 1,2,5 and 6 are balanced while 3 and 4 are unbalanced. Thus $C$ and $C'$ differ in columns 3 and 4 only. 
+We give an example of the computation inherent in the proof, showing that $C(u) = C'(u)$ for $(r,s)$-configuration $C$ in Figure~\ref{fi:proof_example} and its dual $(s,r)$-configuration $C'$ where $r=5$, $s=3$ and $u = 211112$.
+We first find the balanced blocks: the columns 1,2,5 and 6 are balanced while 3 and 4 are unbalanced.
+Thus $C$ and $C'$ differ in columns 3 and 4 only. 
 
 Now apply Lemma UB with $i = 4$ and $j = 6$, getting $u_1 = 211112$.  \\
 Lemma BU with $i=2, j=4$, getting $u_2 = 221111$.  \\
@@ -791,7 +812,7 @@ For the input word $u_0$, we have $C(u_0) = 112314 = C'(u_0)$.
 \begin{figure}
 \label{fi:proof_example}
 
-$
+\[
 \begin{tikzpicture}
   \node[circle, draw=black] at (0, 3){\0};
   \node[rectangle, draw=black] at (1, 3){\0};
@@ -806,10 +827,9 @@ $
   \node[circle, draw=black] at (4, 2){\0};
   \node[rectangle, draw=black] at (5, 2){\0};
 \end{tikzpicture}
-$
-\vspace{2cm}
-
-$
+\]
+\vspace{2em}
+\[
 \begin{tikzpicture}
   \node[circle, draw=black] at (0, 3){\0};
   \node[rectangle, draw=black] at (1, 3){\0};
@@ -824,7 +844,7 @@ $
   \node[circle, draw=black] at (4, 2){\0};
   \node[rectangle, draw=black] at (5, 2){\0};
 \end{tikzpicture}
-$
+\]
 \end{figure}
 
 
@@ -1012,7 +1032,7 @@ Does our proof have any implications for the work of Danilov and Koshevoy?
   \node at (8,5){$\dotsm$};
 \end{tikzpicture}
 \]
-\caption{A balanced block $B$ in $C$ (above) and in $C'$ (below), together with an input word $u = \dotsm 2212121212 \dotsm$ such that $T(k) \in \{(1,\circ),(2,\square)\}$ for $k \in B$.}
+\caption{A balanced block $B$ in $C$ (above) and in $C'$ (below), together with an input word $u = \dotsm 2212121212 \dotsm$ such that $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for $k \in B$.}
 \end{figure}
 
 %=====================================================================
