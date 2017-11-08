@@ -28,6 +28,7 @@
 \newcommand{\fs}{\mathcal{S}} % flagged Schur function
 \newcommand{\mbf}{\mathbf}
 \newcommand{\0}{\phantom{c}}
+\newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -394,7 +395,7 @@ We omit the word ``discrete'' as these are the only MLQs in this note.
 For a standard word $u$ of type $\mm$ with $\ell$ class, we define the \defn{amplitude} or \defn{spectral weight} as
 \begin{equation}
 \label{eq:amplitude}
-  [u] := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
+  \swt{u} := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
 \end{equation}
 where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ and $u = q_{\ell-1}( \cdots q_1(1 \dotsm 1) \cdots )$.
 \Travis{This creates a big notational conflict with $[n]$. We need to change this.}
@@ -445,7 +446,7 @@ We now state our main theorem.
 \label{thm:permutation}
   For any permutation $\sigma$ of $[\ell_1]$, we have 
   \[
-  [u] = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
+  \swt{u} = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
   \]
   where we sum over all sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
   \begin{enumerate}
@@ -454,18 +455,19 @@ We now state our main theorem.
   \end{enumerate}
 \end{thm}
 
-We note that Theorem~\ref{thm:permutation} forthe special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
+We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
 
 \begin{cor}
   Let $\mm$ be a standard type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $\mm'$, we have
 \[
-  [v] = e_{m_1+\dots+m_i}(n) \sum_u [u],
+  \swt{v} = e_{m_1+\dots+m_i}(n) \sum_u \swt{u},
 \]
 where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ in $u$ yields $v$.
 \end{cor}
 
 \begin{proof}
-  Note that if $u = q_{r-1}(\dots q_2(q_1(1 \dots 1)) \dots)$ where $q_1$ is a $m_1+\dots+m_i$-queue, then $v = q_{r-1}(\dots q_2(1\dots 1)\dots)$ is the result of merging classes $i$ and $i+1$ in $u$. The result follows from Theorem~\ref{thm:permutation}.
+  Note that if $u = q_{r-1}(\dots q_2(q_1(1 \dots 1)) \dots)$ where $q_1$ is a $m_1+\dots+m_i$-queue, then $v = q_{r-1}(\dots q_2(1\dots 1)\dots)$ is the result of merging classes $i$ and $i+1$ in $u$.
+  The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
 
 \begin{thm}
@@ -475,71 +477,62 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
   Define a word $u$ of length $n$ by $u_i = v_k$ if $i = b_k$ for some $k$, otherwise $u_i = r$.
   Then
   \[
-  [u] = \det(h_{i-j-1+\gamma_j}(b_j))_{1\leq i,j\leq n},
+  \swt{u} = \det( h_{i-j-1+\gamma_j}(b_j) )_{1\leq i,j\leq n},
   \]
   where $\gamma_i$ is the number of distinct letters in $v_1\dotsm v_j$.
 \end{thm}
 
-\begin{figure}
+\begin{figure}[t]
 \[
 \begin{tikzpicture}[xscale=1.5]
-  \node[circle,draw=black] at  (1, 0){3};
-  \node[circle,draw=black] at  (2, 0){3};
-  \node[circle,draw=black] at  (4, 0){2};
-  \node[circle,draw=black] at  (6, 0){2};
-  \node[circle,draw=black] at  (7, 0){2};
-  \node[circle,draw=black] at  (9, 0){1};
-  \node[circle,draw=black] at  (3, 1){2};
-  \node[circle,draw=black] at  (4, 1){2};
-  \node[circle,draw=black] at  (6, 1){2};
-  \node[circle,draw=black] at  (8, 1){1};
-  \node[circle,draw=black] at  (7, 2){1};
-\end{tikzpicture}
-\]
-\[
-\begin{tikzpicture}[xscale=1.5]
-  \draw[densely dotted] (1, 1) -- (9, 1);
-  \draw[densely dotted] (1, 2) -- (9, 2);
-  \draw[densely dotted] (1, 3) -- (9, 3);
-  \draw[densely dotted] (1, 4) -- (9, 4);
-  \draw[densely dotted] (1, 5) -- (9, 5);
-  \draw[densely dotted] (1, 6) -- (9, 6);
+  \begin{scope}[yshift=7.5cm]
+    \node[circle,draw=black] at  (1, 0){3};
+    \node[circle,draw=black] at  (2, 0){3};
+    \node[circle,draw=black] at  (4, 0){2};
+    \node[circle,draw=black] at  (6, 0){2};
+    \node[circle,draw=black] at  (7, 0){2};
+    \node[circle,draw=black] at  (9, 0){1};
+    \node[circle,draw=black] at  (3, 1){2};
+    \node[circle,draw=black] at  (4, 1){2};
+    \node[circle,draw=black] at  (6, 1){2};
+    \node[circle,draw=black] at  (8, 1){1};
+    \node[circle,draw=black] at  (7, 2){1};
+  \end{scope}
 
-  \draw[densely dotted] (1, 6) -- (1, 1);
-  \draw[densely dotted] (2, 6) -- (2, 1);
-  \draw[densely dotted] (3, 6) -- (3, 1);
-  \draw[densely dotted] (4, 6) -- (4, 1);
-  \draw[densely dotted] (5, 6) -- (5, 1);
-  \draw[densely dotted] (6, 6) -- (6, 1);
-  \draw[densely dotted] (7, 6) -- (7, 1);
-  \draw[densely dotted] (8, 6) -- (8, 1);
-  \draw[densely dotted] (9, 6) -- (9, 1);
+  \draw[densely dotted] (1,1) grid (9,6);
 
   \draw[draw=red] (1,2)--(2,2);
   \draw[draw=red] (1,3)--(3,3)--(3,2)--(4,2);
   \draw[draw=red] (1,4)--(4,4)--(4,3)--(6,3);
   \draw[draw=red] (1,5)--(6,5)--(6,4)--(7,4);
   \draw[draw=red] (1,6)--(7,6)--(7,5)--(8,5)--(8,4)--(9,4);
+  
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (1,1) {$3$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (2,2) {$3$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (4,2) {$2$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (3,3) {$2$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (4,4) {$2$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (6,3) {$2$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (6,5) {$2$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (7,4) {$2$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (7,6) {$1$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (8,5) {$1$};
+  \node[circle,fill=white,draw=black,inner sep=1pt] at (9,4) {$1$};
 
-  \node at (1,1){\textbullet};
-  \node at (1,2){\textbullet};
-  \node at (1,3){\textbullet};
-  \node at (1,4){\textbullet};
-  \node at (1,5){\textbullet};
-  \node at (1,6){\textbullet};
-  \node at (2,2){\textbullet};
-  \node at (4,2){\textbullet};
-  \node at (6,3){\textbullet};
-  \node at (7,4){\textbullet};
-  \node at (9,4){\textbullet};
+  \foreach \i in {2,...,6} {
+    \node at (1,\i){\textbullet};
+  }
 \end{tikzpicture}
 \]
-\caption{Here, $n = 14, r = 3, v = 3211$.}
+\caption{An example of the bijection between MLQs and non-intersecting lattice paths for the proof of Theorem~\ref{thm:determinant_form}. Here, $n = 14, r = 3, v = 3211$.}
+\label{fig:lattice_path_bijection}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In~\cite{AasLin17}, a formula for the amplitude $\left[ u\bigl( (\prod_{i\in S} s_i) w_0 \bigr) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
+Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH.
+Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$.
+In~\cite{AasLin17}, a formula for the amplitude $\swt{ u\bigl( (\prod_{i\in S} s_i) w_0 \bigr) }$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
 
-Let $\varphi(S) = \left[ ( \prod_{i\in S} s_i ) w_0 \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \dots$. (Apply M\"obius inversion and be done.)
+Let $\varphi(S) = \swt{ ( \prod_{i\in S} s_i ) w_0 }$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \dots$. (Apply M\"obius inversion and be done.)
 
 
 
@@ -580,6 +573,7 @@ Note that $C$ and $C'$ have the same balanced blocks.
 It is clear that $C'' = C$ and $\wt C = \wt C'$.
 
 \Darij{The construction $C \mapsto C'$ is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+\Travis{From the perspective of~\cite{KMO15,KMO16}, this is precisely the combinatorial $R$-matrix. The fact that it is a symmetric group action comes from the fact that they satisfy the Yang--Baxter relation.}
 
 %balanced blocks in C and C' are the same (because #unbalanced columns is same in both)
 
@@ -856,11 +850,14 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
 %=====================================================================
 \section{The projection formula}
 
-For the homogenous case, where all spectral parameters equal, it is well known that the number of multiline queues with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row. The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the {\it projection principle}. Somewhat surprisingly, this principle has a generalisation to our case with non-equal spectral parameters. We now state this generalisation.
+For the homogenous case, where all spectral parameters equal, it is well known that the number of MLQs with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row.
+The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the \defn{projection principle}.
+Somewhat surprisingly, this principle has a generalization to our case with non-equal spectral parameters.
+We now state this generalization.
 
 \begin{thm}
   Let $u$ be a word of type $\mm$, and let $v$ be the word obtained from $u$ by merging classes $k$ and $k+1$.
-  Then $\sum_{u'} \wt{u} = e_{m_1+\dots+m_k}(x) \wt{v}$,
+  Then $\sum_{u'} \wt{u} = e_{m_1+\dots+m_k}(\xx) \wt{v}$,
   where $u'$ runs over all words gotten by permuting $k$ and $k+1$ in $u$.
 \end{thm}
 
@@ -880,7 +877,7 @@ Looking at queues, we get
 \end{align*}
 (We have factored the expressions for readability only.)
 
-The projection formula states that $[13234] e_3(x) = [13245] + [14235]$, as we can check directly in this case.
+The projection formula states that $\swt{13234} e_3(\xx) = \swt{13245} + \swt{14235}$, as we can check directly in this case.
 \end{example}
 
 
@@ -1006,15 +1003,15 @@ $(T_1,T_2)$:
 
 
 \begin{example}
-To compute $[135452]$ we count $(1,1,1,1,2)$-MLQ's, such as the following one.
+To compute $\swt{135452}$ we count $(1,1,1,1,2)$-MLQ's, such as the following one.
 \[
 \begin{tikzpicture}\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
 \]
-To get a word $136452$ or $135462$ we can add a new row on top, with $5$ boxes. The total weight of these additions is $e_5(x_1, \dots, x_6)$. Here is an example of such an addition.
+To get a word $136452$ or $135462$ we can add a new row on top, with $5$ boxes. The total weight of these additions is $e_5(6)$. Here is an example of such an addition.
 \[
 \begin{tikzpicture}\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
 \]
-By the theorem, such queues are in 1-1 correspondence with ordinary queues counting, in this case, $[135462]$. By applying the bijection $4$ times to bring the top row to the bottom, we get the corresponding ordinary queue, as follows.\\
+By the theorem, such queues are in 1-1 correspondence with ordinary queues counting, in this case, $\swt{135462}$. By applying the bijection $4$ times to bring the top row to the bottom, we get the corresponding ordinary queue, as follows.\\
 
 \noindent Swap rows 1 and 2:
 \[
