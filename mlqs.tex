@@ -244,10 +244,10 @@ We prove the spectral parameter version of the MLQs conjecture.
 
 We
 \begin{itemize}
-\item Introduce a new weighting of multiline queues
-\item prove the commutativity conjecture of [AAMP]
-\item prove conjecture 3.10 of [AL]
-\item "discover" an operation already used by Danilov and Koshevoy in other contexts
+\item introduce a new weighting of multiline queues
+\item prove the commutativity conjecture of~\cite{AAMP}
+\item prove~\cite[Conj.~3.10]{AasLin17}
+\item ``discover'' an operation already used by Danilov and Koshevoy in other contexts
 \end{itemize}
 
 %In this paper we assign weights to \emph{multiline queues}, and generalize some known properties of these objects. Using these weights, we found a combinatorial proof of the Commutativity Conjecture of [AAMP]. We also extend and prove a conjecture by [AL].
@@ -438,6 +438,7 @@ where we sum over all sequences $q_1, \dots, q_{r-1}$ of queues such that
 \item $q_i$ is a $(m_1+\dots+m_i)$-queue, and
 \item $u = q_{r-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots)$.
 \end{enumerate}
+\Travis{This creates a big notational conflict with $[n]$. We should change this.}
 
 Such a sequence $(q_1, \dotsc, q_{r-1}$ is called an (ordinary) \defn{multiline queue} (MLQ) of type $\mm$. For a fixed type $\mbf{m}$, the numbers $[u] \in \Omega_{\mbf{m}}$.
 
@@ -513,7 +514,7 @@ Swap rows 4 and 5
 \end{thm}
 
 \begin{proof}
-This is an easy application of the Lindstr\"om-Gessel-Viennot lemma.
+This is an easy application of the Lindstr\"om-Gessel-Viennot Lemma.
 
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
 
@@ -583,11 +584,19 @@ $\begin{tikzpicture}
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In [AL], a formula for the amplitude $\left[ u((\prod_{i\in S} s_i)w_0) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
 
-Let $\varphi(S) = \left[ u(( \prod_{i\in S} s_i ) w_0) \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Theorem~\ref{thm:permutation}, $\psi(T) = \left(\prod_{i\in S} e_{m_1+\dots +m_i}(x_1,\dots,x_n) \right) [w_T]$, where $w_T$ is the result of merging $n+1-i$ and $n-i$ in $w_0$ for each $i\in T$. By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$. By Theorem~\ref{thm:determinant_form}, $[w_T] \prod_{i \in T} e_i(x_1,\dots, x_n) \det(\dots)$ \erik{FIX}. Taken together, this proves Conjecture 3.10 in [AL].
+Let $\varphi(S) = \left[ u(( \prod_{i\in S} s_i ) w_0) \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Theorem~\ref{thm:permutation}, $\psi(T) = \left(\prod_{i\in S} e_{m_1+\dots +m_i}(x_1,\dots,x_n) \right) [w_T]$, where $w_T$ is the result of merging $n+1-i$ and $n-i$ in $w_0$ for each $i\in T$. By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$. By Theorem~\ref{thm:determinant_form}, $[w_T] \prod_{i \in T} e_i(x_1,\dots, x_n) \det(\dots)$ \erik{FIX}. Taken together, this proves \cite[Conj.~3.10]{AasLin17}.
 
+
+
+
+
+
+
+
+%=====================================================================
 \section{The TASEP connection}
 
-We now rephrase Theorem~\ref{thm:permutation} in a language more similar to that of [AAML]. Note that there are exactly $2^{n-1}$ different types of standard words of length $n$. These types are naturally indexed by subsets of $[n-1]$ as follows: the type $\mbf{m}_S$ corresponding to $S \subseteq [n-1]$ is the type of the word obtained by identifying $i$ and $i+1$ for each $i\in S$ in the word $12\dots n$ simultaneously.
+We now rephrase Theorem~\ref{thm:permutation} in a language more similar to that of~\cite{AAML}\travis{Is this suppose to be~\cite{AAMP}? Otherwise please add the reference to the bib file.}. Note that there are exactly $2^{n-1}$ different types of standard words of length $n$. These types are naturally indexed by subsets of $[n-1]$ as follows: the type $\mbf{m}_S$ corresponding to $S \subseteq [n-1]$ is the type of the word obtained by identifying $i$ and $i+1$ for each $i\in S$ in the word $12\dots n$ simultaneously.
 
 \begin{example}
   For $n = 4$, we have $\mbf{m}_\emptyset = (1,1,1,1)$, $\mbf{m}_{\{1\}} = (2,1,1)$, $\mbf{m}_{\{2\}} = (1,2,1)$, $\mbf{m}_{\{3\}} = (1,1,2)$, $\mbf{m}_{\{1,2\}} = (3,1)$, $\mbf{m}_{\{1,3\}} = (2,2)$, $\mbf{m}_{\{2,3\}} = (1,3)$, and $\mbf{m}_{\{1,2,3\}} = (4)$.
@@ -595,8 +604,9 @@ We now rephrase Theorem~\ref{thm:permutation} in a language more similar to that
 
 \erik{hypercube goes here}
 
-When we let all spectral parameters equal, there is a connection between our multiline queues and the multi-species \emph{totally asymmetric exclusion process} (TASEP) on the ring, as follows. For a type $\mbf{m}_S$, $S \subseteq[n-1]$, we define a Markov chain on $\Omega_{\mbf{m}_S}$ as follows. For a state $u \in \Omega_{\mbf{m}_S}$, we generate a new state by picking a random $i\in [n]$ and either (i) if $u_i < u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$ or (ii) do nothing (i.e. stay at $u$). Let $M_S$ be the transition matrix of this Markov chain. For $i \notin S$, we have the merging map $\Phi_i : \Omega_{\mbf{m}_S} \to \Omega_{\mbf{m}_{S\cup\{i\}}}$. It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
+When we let all spectral parameters equal, there is a connection between our multiline queues and the multi-species \emph{totally asymmetric exclusion process} (TASEP) on the ring, as follows. For a type $\mbf{m}_S$, $S \subseteq[n-1]$, we define a Markov chain on $\Omega_{\mbf{m}_S}$ as follows. For a state $u \in \Omega_{\mm_S}$, we generate a new state by picking a random $i\in [n]$ and either (i) if $u_i < u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$ or (ii) do nothing (i.e. stay at $u$). Let $M_S$ be the transition matrix of this Markov chain. For $i \notin S$, we have the merging map $\Phi_i \colon \Omega_{\mbf{m}_S} \to \Omega_{\mbf{m}_{S\cup\{i\}}}$. It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
 
+% Do you plan to use this command elsewhere? -- Travis
 \newcommand{\exE} {
 	\begin{tikzpicture} \draw (3,8) node {321}; \draw (0,6) node
 {231}; \draw (6,6) node {312}; \draw (0,2) node {213}; \draw (6,2)
@@ -624,20 +634,35 @@ node {132}; \draw (3,0) node {123};
 \draw [->, >=stealth, thick] (5.7,2.3) --
 (0.3,5.7); \draw [->, >=stealth, thick] (0.3,2.3) -- (5.7,5.7);
 \end{tikzpicture} }
-
+\[
 \exE
+\]
 
 
-Building on work by Ferrari-Martin, [AAMP] introduced opposite operators $\Psi_i : \Omega_{\mbf{m}_{S\cup\{i\}}} \to \Omega_{\mbf{m}_S}$ given by $\Psi(u) = \sum_q q(u)$, and showed that $\Psi M = M\Psi$. Furthermore they conjectured that $\Psi_S \Psi_T = \Psi_T \Psi_S$.
+Building on work by Ferrari-Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \Omega_{\mbf{m}_{S\cup\{i\}}} \to \Omega_{\mbf{m}_S}$ given by $\Psi(u) = \sum_q q(u)$, and showed that $\Psi M = M\Psi$. Furthermore they conjectured that $\Psi_S \Psi_T = \Psi_T \Psi_S$.
 
-In the course of proving Theorem~\ref{thm:permutation}, we prove the commutativity conjecture of [AAMP] for the weighted operators (which obviously generalize those of [AAMP]) $\Psi(u) = \sum_q \wt(q) q(u)$. This is equivalent to showing that for any $u \in \Omega_{\mbf{m}_S}$, $v \in \Omega_{\mbf{m}_{S\cup\{i,j\}}}$, [TWO THINGS EQUAL] \erik{Fix}
+In the course of proving Theorem~\ref{thm:permutation}, we prove the commutativity conjecture of~\cite{AAMP} for the weighted operators (which obviously generalize those of~\cite{AAMP}) $\Psi(u) = \sum_q \wt(q) q(u)$. This is equivalent to showing that for any $u \in \Omega_{\mbf{m}_S}$, $v \in \Omega_{\mbf{m}_{S\cup\{i,j\}}}$, [TWO THINGS EQUAL] \erik{Fix}
 
-\erik{the proof of interlacing by [AAMP] is significantly different from our approach}
+\erik{the proof of interlacing by~\cite{AAMP} is significantly different from our approach}
 
-We have not managed to find a process similar to the TASEP whose transition matrix $M$ would satsify $M\Psi=\Psi M$ for our generalized $\Psi$ operators. Note however that queues gives us \emph{a} random process with this property: for a word $u \in \Omega_{\mbf{m}}$, a move in the chain is given by(i) picking a random queue $q$ (ii) going to the state $q(u) \in \Omega_{\mbf{m}}$.
+We have not managed to find a process similar to the TASEP whose transition matrix $M$ would satsify $M\Psi = \Psi M$ for our generalized $\Psi$ operators.
+Note however that queues gives us \emph{a} random process with this property: for a word $u \in \Omega_{\mm}$, a move in the chain is given by
+\begin{enumerate}
+\item picking a random queue $q$
+\item going to the state $q(u) \in \Omega_{\mm}$.
+\end{enumerate}
+
+
+
+
+
+
+
 
 %=====================================================================
 \section{Proof of Theorem~\ref{thm:permutation}}
+
+%%%%%%%%%%
 \subsection{Two line configurations}
 
 Let $q_1$ be an $r$-queue and $q_2$ be an $s$-queue.
@@ -1284,8 +1309,4 @@ in the indeterminates $x_1, x_2, \ldots, x_N$.
 
 \bibliographystyle{alpha}
 \bibliography{queue}{}
-%\begin{thebibliography}{ABX}
-%\bibitem{AL} Erik Aas, Svante Linusson: Continuous TASEP and multiline queues
-%\bibitem{AAMP} Chikashi Arita, Arvind Ayyer, Kirone Mallick and Sylvain Prolhac, Recursive structures in the multispecies TASEP, J. Phys. A 44, 335004 (2011).
-%\end{thebibliography}
 \end{document}

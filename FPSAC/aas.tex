@@ -232,7 +232,7 @@ We prove the spectral parameter version of the MLQs conjecture.
 %\resume{\lipsum[2]}
 
 
-\keywords{multiline queue, flagged Schur function, TASEP}
+\keywords{multiline queue, TASEP, symmetric functions}
 %\subjclass[2010]{05E10, 17B37}
 
 \usepackage[backend=bibtex]{biblatex}
@@ -250,9 +250,7 @@ To be written last.
 
 \Erik{Mention Gorodentsev's book.}
 
-\Darij{The construction $C \mapsto C'$, where $C'$ is the dual of the $(r,s)$-configuration, is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 3]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
-
-\Travis{Mention the work of the Japanese, e.g., ``Multispecies TASEP and the tetrahedron equation'' by Kuniba, Maruyama, and Okado.}
+\Travis{Mention the work of the Japanese~\cite{KMO15, KMO16}}
 
 
 
@@ -265,20 +263,19 @@ To be written last.
 \section{Background}
 \label{sec:background}
 
-For a positive integer $N$, let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$.
-
-\Travis{Do we want $N$ or $n$? We should make a decision.}
-
-Fix a positive integer $n$.
+Fix a positive integer $n$. Let $\ive{n}$ denote the set $\set{1, 2, \dotsc, n}$.
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
-We will consider the indices of words to be taken modulo $n$. 
-The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ where $m_i$ is the number of occurrences of $i$ in $u$.
+We will consider the indices of words to be taken modulo $n$.  Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
+
+The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 A word $u$ is \defn{standard} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We call $\ell$ the number of \defn{classes} in $u$.
 We can \defn{merge} two adjacent classes $i,i+1$ in a standard word $u$ to obtain a new standard word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
+\travis{We should introduce notation for merging in words. What about $\downarrow_i(u)$?}
 
 We define an \defn{$r$-queue} $q$ to be any subset of $[n]$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
+The \defn{weight} of a queue is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself as follows.
 Let $\mm$ be the type of $u$.
 Define $p_i(\mm) := m_1 + m_2 + \cdots + m_i$, and when $\mm$ is clear, we simply write $p_i$.
@@ -304,7 +301,9 @@ We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. 
 \end{description}
 
 \begin{example}
-We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and consider the word $u = 346613321$. Thus, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$, and so $t = 3$. To compute $q(w)$:
+We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and the word $u = 346613321$.
+Thus, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$, and so $t = 3$.
+To compute $q(w)$:
 \[
 \begin{tikzpicture}[scale=1.3]
 \node (i1) at (1,1) {$3$};
@@ -347,7 +346,7 @@ where the paths in red correspond to Phase I and those in the blue are from Phas
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$, and second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$.
-See Figure~1\travis{This needs to be copied over and become an explicit reference} for an example.
+See Figure~1 \travis{This needs to be copied over and become an explicit reference} for an example.
 
 Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
 For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that $u_i=s$, and whose queueing interval $\inter[j,i]$ contains both $k$ and $k+1$.
@@ -388,11 +387,10 @@ We omit the word ``discrete'' as these are the only MLQs in this note.
 For a standard word $u$ of type $\mm$ with $\ell$ class, we define the \defn{amplitude} or \defn{spectral weight} as
 \begin{equation}
 \label{eq:amplitude}
-  [u] := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \prod_{j \in q_i} x_j,
+  [u] := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
 \end{equation}
+where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ and $u = q_{\ell-1}( \cdots q_1(1 \dotsm 1) \cdots )$.
 \Travis{This creates a big notational conflict with $[n]$. We need to change this.}
-where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ such that $u = (q_{\ell-1} \circ \cdots \circ q_1)(1\dotsm 1)$.
-
 
 
 
@@ -414,14 +412,16 @@ where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ such th
 %\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
 %\]
 
-We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $x_1, x_2, \ldots$:
+We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$:
 \[
-e_k(x_1, \ldots) = \sum_{i_1 < \cdots < i_k} x_{i_1} \dotsm x_{i_k},
+e_k(N) = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
 \qquad\qquad
-h_k(x_1, \ldots) = \sum_{i_1 \leq \cdots \leq i_k} x_{i_1} \dotsm x_{i_k},
+h_k(N) = \sum_{1 \leq i_1 \leq \cdots \leq i_k \leq N} x_{i_1} \dotsm x_{i_k},
 \]
 respectively.
-We define $e_d(x_1, \ldots) = 0$ and $h_d(x_1, \ldots) = 0$ for $d < 0$.
+We define $e_d(N) = 0$ and $h_d(N) = 0$ for $d < 0$.
+
+
 
 
 
@@ -438,12 +438,12 @@ We now state our main theorem.
 \label{thm:permutation}
   For any permutation $\sigma$ of $[\ell_1]$, we have 
   \[
-  [u] = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \prod_{j\in q_i} x_j,
+  [u] = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
   \]
   where we sum over all sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
   \begin{enumerate}
   \item $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue, and
-  \item $u = q_{\ell-1}(\cdots q_2(q_1(1\dotsm 1)) \cdots )$.
+  \item $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
   \end{enumerate}
 \end{thm}
 
@@ -452,7 +452,7 @@ We note that Theorem~\ref{thm:permutation} forthe special case of $x_1 = \cdots 
 \begin{cor}
   Let $\mm$ be a standard type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $\mm'$, we have
 \[
-  [v] = e_{m_1+\dots+m_i}(x_1, \dots, x_n) \sum_u [u],
+  [v] = e_{m_1+\dots+m_i}(n) \sum_u [u],
 \]
 where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ in $u$ yields $v$.
 \end{cor}
@@ -468,7 +468,7 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
   Define a word $u$ of length $n$ by $u_i = v_k$ if $i = b_k$ for some $k$, otherwise $u_i = r$.
   Then
   \[
-  [u] = \det(h_{i-j-1+\gamma_j}(x_1, \dots, x_{b_j}))_{1\leq i,j\leq n},
+  [u] = \det(h_{i-j-1+\gamma_j}(b_j))_{1\leq i,j\leq n},
   \]
   where $\gamma_i$ is the number of distinct letters in $v_1\dotsm v_j$.
 \end{thm}
@@ -530,10 +530,90 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
 \caption{Here, $n = 14, r = 3, v = 3211$.}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In [AL], a formula for the amplitude $\left[ u\bigl( (\prod_{i\in S} s_i) w_0 \bigr) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
+Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH. Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$. In~\cite{AasLin17}, a formula for the amplitude $\left[ u\bigl( (\prod_{i\in S} s_i) w_0 \bigr) \right]$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
 
 Let $\varphi(S) = \left[ ( \prod_{i\in S} s_i ) w_0 \right]$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \dots$. (Apply M\"obius inversion and be done.)
 
+
+
+
+
+
+
+%=====================================================================
+\section{Proof sketch of Theorem~\ref{thm:permutation}}
+
+The proof reduced down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
+We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
+We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$ and the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, where we have $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
+
+To construct $C'$ and show it satisfies the requisite properties, we break it into four parts as follows.
+By using the monotonicity, we may assume $u \in \{1,2\}^n$.
+
+%%%%%%%%%%
+\subsection*{Part A: Splitting into balanced and unbalanced blocks}
+
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if the following condition holds:
+\begin{itemize}
+  \item for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$, where $c^{\uparrow}(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_1$, and $c^\downarrow(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_2$.
+\end{itemize}
+
+We call a maximal (with respect to inclusion) balanced closed cyclic interval in a \defn{balanced block} of $C$.
+For $i \in [n]$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced block, and \defn{unbalanced} otherwise.
+Note that for a balanced block $B$, we have $\lvert q_1 \cap B \rvert = \lvert q_2 \cap B \rvert$.
+
+For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
+Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
+The following notation will be useful later on: for a word $u$ and $j$ balanced with respect to $C$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \bigcirc$ if $j \in q_1$ and $s_j = \square$ if $j\notin q_1$.
+
+%%%%%%%%%%
+\subsection*{Part B: Defining the dual configuration}
+
+We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap B = q_i \cap B$ for $i=1,2$ and each balanced block $B$ in $C$.
+For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
+Note that $C$ and $C'$ have the same balanced blocks.
+It is clear that $C'' = C$ and $\wt C = \wt C'$.
+
+\Darij{The construction $C \mapsto C'$ is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 3]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+
+%balanced blocks in C and C' are the same (because #unbalanced columns is same in both)
+
+%%%%%%%%%%
+\subsection*{Part C: Reduction to special words}
+
+We reduce the problem to a certain set of words by performing a series of reductions based on the following lemmas.
+We denote $u_{i\leftrightarrow j}$ as the result of swapping positions $i$ and $j$ in $u$.
+For this part, we assume $i,j \in [n]$.
+
+\begin{lemma}
+\label{le:orig}
+  Suppose that $i \notin q$, $j\in q$, and for $k \in \inter(i,j)$, either $k \in q$ and $u_k=1$ or $k \notin q$ and $u_k = 2$.
+  Then $q(u) = q(u_{i\leftrightarrow j})$.
+\end{lemma}
+
+\begin{lemma}[BB]
+\label{le:BB}
+  Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and that for $k \in \inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\bigcirc),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+\end{lemma}
+
+\begin{lemma}[BU]
+\label{le:BU}
+  Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$.
+  Then $C(u) = C(u_{i \leftrightarrow j})$.
+ \end{lemma} 
+
+\begin{lemma}[UB]
+\label{le:UB}
+  Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\bigcirc)$.
+  Then $C(u) = C(u_{i \leftrightarrow j})$.
+\end{lemma}
+
+%%%%%%%%%%
+\subsection*{Part D: Finishing the proof}
+
+Note that if one of the previous lemma applies to $C$ for some $u,i,j$, then it applies to $C'$ with the same $u, i, j$.
+Thus, we show that $C(u) = C'(u)$, where $u$ is one of the words such that none of the reduction steps from Part~C apply.
 
 
 
@@ -913,6 +993,9 @@ Swap rows 4 and 5
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
 \]
 \end{example}
+
+
+
 
 %% if you use biblatex then this generates the bibliography
 %% if you use some other method then remove this and do it your own way
