@@ -601,6 +601,62 @@ For this part, we assume $i,j \in [n]$.
   Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and that for $k \in \inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\bigcirc),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
 
+\begin{example}
+Suppose $n = 8$.
+Consider the $(5,3)$-configuration $C = (\{1,2,5,6,8\}, \{5,7,8\})$ with $u$ on the left and $u_{3 \leftrightarrow 8}$ on the right:
+\[
+\begin{tikzpicture}[baseline=-3]
+  \def\sc{0.75}   % Change this to adjust the x-scaling
+  \def\lll{1.7}   % level 3
+  \def\ll{1}   % level 2
+  \def\l{0}   % level 1
+  \node[color=blue] at (3*\sc,\lll) {$1$};
+  \node[color=blue] at (8*\sc,\lll) {$2$};
+  \foreach \i in {1,5,6} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {2,4,7} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {1,2,5,6,8} { \draw (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {3,4,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,5,6,8} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {3,4,7} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {5,7,8} { \draw (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,2,3,4,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {3,4,6} { \node at (\i*\sc,\l) {$4$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {5,7,8} { \node at (\i*\sc,\l) {$1$}; }
+  \draw (2.5*\sc,2) -- (2.5*\sc,2.1) -- (8.5*\sc,2.1) -- (8.5*\sc,2);
+  \node at (5.5*\sc,2.5) {balanced};
+\end{tikzpicture}
+% t = 2 for q_1
+% t = 1 for q_2
+\hspace{20pt} = \hspace{20pt}
+\begin{tikzpicture}[baseline=-3]
+  \def\sc{0.75}   % Change this to adjust the x-scaling
+  \def\lll{1.7}   % level 3
+  \def\ll{1}   % level 2
+  \def\l{0}   % level 1
+  \node[color=blue] at (8*\sc,\lll) {$1$};
+  \node[color=blue] at (3*\sc,\lll) {$2$};
+  \foreach \i in {1,5,6} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {2,4,7} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {1,2,5,6,8} { \draw (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {3,4,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,5,6,8} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {3,4,7} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {5,7,8} { \draw (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,2,3,4,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {3,4,6} { \node at (\i*\sc,\l) {$4$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {5,7,8} { \node at (\i*\sc,\l) {$1$}; }
+  \draw (2.5*\sc,2) -- (2.5*\sc,2.1) -- (8.5*\sc,2.1) -- (8.5*\sc,2);
+  \node at (5.5*\sc,2.5) {balanced};
+\end{tikzpicture}
+\]
+\end{example}
+
 \begin{lemma}[BU]
 \label{le:BU}
   Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$.
@@ -614,22 +670,30 @@ For this part, we assume $i,j \in [n]$.
 \end{lemma}
 
 \begin{example}
-Suppose $n = 8$. Consider the $(6,2)$-configuration $C = (\{1,2,3,4,5,8\}, \{7,8\})$ with $u$ on the left and $u_{1\leftrightarrow8}$ on the right:
+Suppose $n = 8$.
+Consider the $(6,2)$-configuration $C = (\{1,2,3,4,5,8\}, \{7,8\})$ with $u$ on the left and $u_{1 \leftrightarrow 8}$ on the right:
 \[
 \begin{tikzpicture}[baseline=25]
   \def\sc{0.75}   % Change this to adjust the x-scaling
-  \foreach \i in {1,5} { \node at (\i*\sc,2.7){$1$}; }
-  \foreach \i in {2,3,4,6,7,8} { \node at (\i*\sc,2.7){$2$}; }
-  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,2) circle (0.3); }
-  \foreach \i in {6,7} { \draw (\i*\sc-.3,2-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,5} { \node at (\i*\sc,2) {$1$}; }
-  \foreach \i in {2,3,4,8} { \node at (\i*\sc,2) {$2$}; }
-  \foreach \i in {6,7} { \node at (\i*\sc,2) {$3$}; }
-  \foreach \i in {7,8} { \draw (\i*\sc,1) circle (0.3); }
-  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,1-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {5,6} { \node at (\i*\sc,1) {$4$}; }
-  \foreach \i in {7,8} { \node at (\i*\sc,1) {$1$}; }
-  \foreach \i in {1,2,3,4} { \node at (\i*\sc,1) {$3$}; }
+  \def\lll{2.7}   % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \node[color=blue] at (1*\sc,\lll) {$1$};
+  \node[color=blue] at (8*\sc,\lll) {$2$};
+  \foreach \i in {5} { \node at (\i*\sc,\lll){$1$}; }
+  \foreach \i in {2,3,4,6,7} { \node at (\i*\sc,\lll){$2$}; }
+  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {6,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \node[color=blue] at (1*\sc,\ll) {$1$};
+  \node[color=blue] at (8*\sc,\ll) {$2$};
+  \foreach \i in {5} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {2,3,4} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {6,7} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {7,8} { \draw (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {5,6} { \node at (\i*\sc,\l) {$4$}; }
+  \foreach \i in {7,8} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {1,2,3,4} { \node at (\i*\sc,\l) {$3$}; }
   \draw (4.5*\sc,3) -- (4.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
   \node at (6.5*\sc,3.5) {balanced};
 \end{tikzpicture}
@@ -638,18 +702,25 @@ Suppose $n = 8$. Consider the $(6,2)$-configuration $C = (\{1,2,3,4,5,8\}, \{7,8
 \hspace{20pt} = \hspace{20pt}
 \begin{tikzpicture}[baseline=25]
   \def\sc{0.75}   % Change this to adjust the x-scaling
-  \foreach \i in {5,8} { \node at (\i*\sc,2.7){$1$}; }
-  \foreach \i in {1,2,3,4,6,7} { \node at (\i*\sc,2.7){$2$}; }
-  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,2) circle (0.3); }
-  \foreach \i in {6,7} { \draw (\i*\sc-.3,2-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {5,8} { \node at (\i*\sc,2) {$1$}; }
-  \foreach \i in {1,2,3,4} { \node at (\i*\sc,2) {$2$}; }
-  \foreach \i in {6,7} { \node at (\i*\sc,2) {$3$}; }
-  \foreach \i in {7,8} { \draw (\i*\sc,1) circle (0.3); }
-  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,1-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {5,6} { \node at (\i*\sc,1) {$4$}; }
-  \foreach \i in {7,8} { \node at (\i*\sc,1) {$1$}; }
-  \foreach \i in {1,2,3,4} { \node at (\i*\sc,1) {$3$}; }
+  \def\lll{2.7}   % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \node[color=blue] at (8*\sc,\lll) {$1$};
+  \node[color=blue] at (1*\sc,\lll) {$2$};
+  \foreach \i in {5} { \node at (\i*\sc,\lll){$1$}; }
+  \foreach \i in {2,3,4,6,7} { \node at (\i*\sc,\lll){$2$}; }
+  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {6,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \node[color=blue] at (8*\sc,\ll) {$1$};
+  \node[color=blue] at (1*\sc,\ll) {$2$};
+  \foreach \i in {5} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {2,3,4} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {6,7} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {7,8} { \draw (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {5,6} { \node at (\i*\sc,\l) {$4$}; }
+  \foreach \i in {7,8} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {1,2,3,4} { \node at (\i*\sc,\l) {$3$}; }
   \draw (4.5*\sc,3) -- (4.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
   \node at (6.5*\sc,3.5) {balanced};
 \end{tikzpicture}
@@ -695,53 +766,6 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
 \end{tikzpicture}
 \]
 \caption{Here, $n = 7$, $r=4$, $q = \{1,3,5,6\}$ and $u = 3213221$ then $v = q(u) = 1314224$.}
-\end{figure}
-
-\begin{figure}
-\[
-\begin{tikzpicture}
-  \node at (0,6){i};
-  \node at (5,6){j};
-  \node at(-2,5){u:};
-  \node at(-2,4){$q_1$:};
-  \node at(-1,5){$\dots$};
-  \node at(-1,4){$\dots$};
-  \node at (6,5){$\dots$};
-  \node at (6,4){$\dots$};
-  \node at (0,5){1};
-  \node at (1,5){2};
-  \node at (2,5){1};
-  \node at (3,5){1};
-  \node at (4,5){2};
-  \node at (5,5){2};
-  \node[rectangle,draw=black] at (0, 4){3};
-  \node[rectangle,draw=black] at (1, 4){3};
-  \node[circle,draw=black]    at (2, 4){1};
-  \node[circle,draw=black]    at (3, 4){1};
-  \node[rectangle,draw=black] at (4, 4){3};
-  \node[circle,draw=black]    at (5, 4){1};
-
-  \node at(-2,2){$u_{i\leftrightarrow j}$:};
-  \node at(-2,1){$q_1$:};
-  \node at(-1,2){$\dots$};
-  \node at(-1,1){$\dots$};
-  \node at (6,2){$\dots$};
-  \node at (6,1){$\dots$};
-  \node at (0,2){2};
-  \node at (1,2){2};
-  \node at (2,2){1};
-  \node at (3,2){1};
-  \node at (4,2){2};
-  \node at (5,2){1};
-  \node[rectangle,draw=black] at (0, 1){3};
-  \node[rectangle,draw=black] at (1, 1){3};
-  \node[circle,draw=black]    at (2, 1){1};
-  \node[circle,draw=black]    at (3, 1){1};
-  \node[rectangle,draw=black] at (4, 1){3};
-  \node[circle,draw=black]    at (5, 1){1};
-\end{tikzpicture}
-\]
-\caption{A BB-swap.}
 \end{figure}
 
 \begin{figure}
