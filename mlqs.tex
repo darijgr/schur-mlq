@@ -695,9 +695,10 @@ In part A we describe how to split any configuration into \defn{balanced} and \d
 %%%%%%%%%%
 \subsection{Part A: splitting into balanced and unbalanced blocks}
 
-Let $C=(q_1,q_2)$ be a $(r,s)$-configuration. We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if the following condition holds
+Let $C=(q_1,q_2)$ be a $(r,s)$-configuration. We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if the following conditions holds
 \begin{itemize}
-  \item for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$, where $c^{\uparrow}(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_1$, and $c^\downarrow(i,k)$ is the number of $l\in\inter[i,k]$ such that $l\in q_2$.
+  \item for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$, where $c^{\uparrow}(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_1$, and $c^\downarrow(i,k)$ is the number of $l\in\inter[i,k]$ such that $l\in q_2$ and
+  \item $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
 \end{itemize}
 
 We call a maximal (with respect to inclusion) balanced closed cyclic interval in a \defn{balanced block} of $C$. For $i \in [n]$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced block, and \defn{unbalanced} otherwise. Note that for a balanced block $B$, we have $|q_1 \cap B| = |q_2 \cap B|$.

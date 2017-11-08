@@ -45,6 +45,7 @@
 \newcommand{\mcF}{\mathcal{F}}
 \newcommand{\mcM}{\mathcal{M}}
 \newcommand{\mcW}{\mathcal{W}}
+\newcommand{\mcI}{\mathcal{I}}
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -246,7 +247,13 @@ We prove the spectral parameter version of the MLQs conjecture.
 \section{Introduction}
 \label{sec:introduction}
 
-To be written last.
+We
+\begin{itemize}
+\item introduce a new weighting of multiline queues
+\item prove the commutativity conjecture of~\cite{AAMP}
+\item prove~\cite[Conj.~3.10]{AasLin17}
+\item ``discover'' an operation already used by Danilov and Koshevoy in other contexts
+\end{itemize}
 
 \Erik{Mention Gorodentsev's book.}
 
@@ -552,16 +559,13 @@ To construct $C'$ and show it satisfies the requisite properties, we break it in
 By using the monotonicity, we may assume $u \in \{1,2\}^n$.
 
 %%%%%%%%%%
-\subsection*{Part A: Splitting into balanced and unbalanced blocks}
+\subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if the following condition holds:
-\begin{itemize}
-  \item for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$, where $c^{\uparrow}(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_1$, and $c^\downarrow(i,k)$ is the number of $l \in \inter[i,k]$ such that $l \in q_2$.
-\end{itemize}
-
-We call a maximal (with respect to inclusion) balanced closed cyclic interval in a \defn{balanced block} of $C$.
-For $i \in [n]$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced block, and \defn{unbalanced} otherwise.
-Note that for a balanced block $B$, we have $\lvert q_1 \cap B \rvert = \lvert q_2 \cap B \rvert$.
+Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$.
+Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
+Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap B \rvert = \lvert q_2 \cap \mcI \rvert$.
+For $i \in [n]$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
@@ -570,12 +574,12 @@ The following notation will be useful later on: for a word $u$ and $j$ balanced 
 %%%%%%%%%%
 \subsection*{Part B: Defining the dual configuration}
 
-We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap B = q_i \cap B$ for $i=1,2$ and each balanced block $B$ in $C$.
+We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced block $\mcI$ in $C$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced blocks.
 It is clear that $C'' = C$ and $\wt C = \wt C'$.
 
-\Darij{The construction $C \mapsto C'$ is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 3]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+\Darij{The construction $C \mapsto C'$ is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
 
 %balanced blocks in C and C' are the same (because #unbalanced columns is same in both)
 
@@ -605,9 +609,52 @@ For this part, we assume $i,j \in [n]$.
 
 \begin{lemma}[UB]
 \label{le:UB}
-  Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\bigcirc)$.
+  Suppose $i$ is unbalanced, $j$ is balanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, and $T(j) = (2,\bigcirc)$.
   Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
+
+\begin{example}
+Suppose $n = 8$. Consider $C = (\{1,2,3,4,5,8\}, \{7,8\})$ and $u$:
+\[
+\begin{tikzpicture}[baseline=25]
+  \def\sc{0.75}   % Change this to adjust the x-scaling
+  \foreach \i in {1,5} { \node at (\i*\sc,2.7){$1$}; }
+  \foreach \i in {2,3,4,6,7,8} { \node at (\i*\sc,2.7){$2$}; }
+  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,2) circle (0.3); }
+  \foreach \i in {6,7} { \draw (\i*\sc-.3,2-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,5} { \node at (\i*\sc,2) {$1$}; }
+  \foreach \i in {2,3,4,8} { \node at (\i*\sc,2) {$2$}; }
+  \foreach \i in {6,7} { \node at (\i*\sc,2) {$3$}; }
+  \foreach \i in {7,8} { \draw (\i*\sc,1) circle (0.3); }
+  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,1-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {5,6} { \node at (\i*\sc,1) {$4$}; }
+  \foreach \i in {7,8} { \node at (\i*\sc,1) {$1$}; }
+  \foreach \i in {1,2,3,4} { \node at (\i*\sc,1) {$3$}; }
+  \draw (4.5*\sc,3) -- (4.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
+  \node at (6.5*\sc,3.5) {balanced};
+\end{tikzpicture}
+% t = 2 for q_1 = {1,2,3,4,5,8}
+% t = 2 for q_2 = {7,8}
+\hspace{20pt} = \hspace{20pt}
+\begin{tikzpicture}[baseline=25]
+  \def\sc{0.75}   % Change this to adjust the x-scaling
+  \foreach \i in {5,8} { \node at (\i*\sc,2.7){$1$}; }
+  \foreach \i in {1,2,3,4,6,7} { \node at (\i*\sc,2.7){$2$}; }
+  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,2) circle (0.3); }
+  \foreach \i in {6,7} { \draw (\i*\sc-.3,2-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {5,8} { \node at (\i*\sc,2) {$1$}; }
+  \foreach \i in {1,2,3,4} { \node at (\i*\sc,2) {$2$}; }
+  \foreach \i in {6,7} { \node at (\i*\sc,2) {$3$}; }
+  \foreach \i in {7,8} { \draw (\i*\sc,1) circle (0.3); }
+  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,1-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {5,6} { \node at (\i*\sc,1) {$4$}; }
+  \foreach \i in {7,8} { \node at (\i*\sc,1) {$1$}; }
+  \foreach \i in {1,2,3,4} { \node at (\i*\sc,1) {$3$}; }
+  \draw (4.5*\sc,3) -- (4.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
+  \node at (6.5*\sc,3.5) {balanced};
+\end{tikzpicture}
+\]
+\end{example}
 
 %%%%%%%%%%
 \subsection*{Part D: Finishing the proof}
@@ -626,38 +673,6 @@ Thus, we show that $C(u) = C'(u)$, where $u$ is one of the words such that none 
 \section{Concluding (starting?) remarks}
 
 It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
-
-\vspace{10cm} 
-
-\begin{figure}
-\[
-\begin{tikzpicture}
-  \node at (0, 3){1};
-  \node at (1, 3){2};
-  \node at (2, 3){2};
-  \node at (3, 3){2};
-  \node at (4, 3){1};
-  \node at (5, 3){2};
-  \node at (6, 3){2};
-  \node at (7, 3){2};
-
-  \node[circle, draw=black] at (0,2){\0};
-  \node[circle, draw=black] at (1,2){\0};
-  \node[circle, draw=black] at (2,2){\0};
-  \node[circle, draw=black] at (3,2){\0};
-  \node[circle, draw=black] at (4,2){\0};
-  \node[rectangle, draw=black] at (5,2){\0};
-  \node[rectangle, draw=black] at (6,2){\0};
-  \node[circle, draw=black] at (7,2){\0};
-
-  \node at (0,5){\textrm{unbalanced}};
-  \draw (3.5,1)--(3.5,3);
-  \node at (5,5){\textrm{balanced}};
-  \node at (0,4){i};
-  \node at (7,4){j};
-\end{tikzpicture}\]
-\caption{A typical situation in Lemma~\ref{le:UB} (when there is no balanced block contained in $\inter(i,j)$). Here $k=3$. In the proof, we consider the case when the circles at $i$ and $i+1$ are labelled $(1,1)$ and when they are labelled $(1,2)$ separately.}
-\end{figure}
 
 \begin{figure}
 \[
