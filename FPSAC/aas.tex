@@ -29,6 +29,7 @@
 \newcommand{\mbf}{\mathbf}
 \newcommand{\0}{\phantom{c}}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
+\newcommand{\merge}[2]{\vee_{#1}#2} % merge
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -253,12 +254,11 @@ We
 \item introduce a new weighting of multiline queues
 \item prove the commutativity conjecture of~\cite{AAMP}
 \item prove~\cite[Conj.~3.10]{AasLin17}
-\item ``discover'' an operation already used by Danilov and Koshevoy in other contexts
+\item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
 \end{itemize}
 
 \Erik{Mention Gorodentsev's book.}
-
-\Travis{Mention the work of the Japanese~\cite{KMO15, KMO16}. Actually, the DK operators seem to be the combinatorial $R$-matrix.}
 
 
 
@@ -275,12 +275,12 @@ Fix a positive integer $n$. Let $\ive{n}$ denote the set $\set{1, 2, \dotsc, n}$
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We will consider the indices of words to be taken modulo $n$.  Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
-The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
+The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
-A word $u$ is \defn{standard} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
+A word $u$ or type $\mm$ is \defn{standard} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We call $\ell$ the number of \defn{classes} in $u$.
 We can \defn{merge} two adjacent classes $i,i+1$ in a standard word $u$ to obtain a new standard word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
-\travis{We should introduce notation for merging in words. What about $\downarrow_i(u)$?}
+We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$\travis{Feel free to change this notation by changing the macro}.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $[n]$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue is $\wt(q) := \prod_{i \in q} x_i$.
@@ -298,17 +298,20 @@ We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. 
 \begin{description}
 \item[Phase I]
   Go through all $i$ such that $u_i > t$ in any order such that larger letters precede smaller ones.
-  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set. Then set $v_j = u_i + 1$. We call $\inter[j,i]$ the \defn{queueing interval} of $i$ with respect to $q$ and $u$.\travis{This is not yet defined}
+  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
+  Then set $v_j = u_i + 1$.
 
 \item[Phase II]
   Go through all $i$ such that $u_i < t$ in any order such that smaller letters precede larger ones.
-  When considering a site $i$, find the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set. Then set $v_j = u_i$. Similarly, $\inter[i,j]$ is called the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
+  When considering a site $i$, find the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set.
+  Then set $v_j = u_i$.
 
 \item[Phase III]
   At this point, there are $m_t$ unset values $v_i$. For such $i$, set $v_i = t$ for $i \in q$ and $v_i = t+1$ for $i\notin q$.
 \end{description}
 
 \begin{example}
+\label{ex:first_queue}
 We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and the word $u = 346613321$.
 Thus, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$, and so $t = 3$.
 To compute $q(w)$:
@@ -354,11 +357,24 @@ where the paths in red correspond to Phase I and those in the blue are from Phas
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$, and second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$.
-See Figure~1 \travis{This needs to be copied over and become an explicit reference} for an example.
-
-Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
-For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that $u_i=s$, and whose queueing interval $\inter[j,i]$ contains both $k$ and $k+1$.
-Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
+Using this convention, we can write Example~\ref{ex:first_queue} as
+\[
+\begin{tikzpicture}[baseline=30]
+  \foreach \i in {5,9} { \node at (\i,2) {$1$}; }
+  \foreach \i in {8} { \node at (\i,2) {$2$}; }
+  \foreach \i in {1,6,7} { \node at (\i,2) {$3$}; }
+  \foreach \i in {2} { \node at (\i,2) {$4$}; }
+  \foreach \i in {3,4} { \node at (\i,2) {$6$}; }
+  \foreach \i in {1,4,8,9} { \draw (\i,1) circle (0.3); }
+  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,1-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {8,9} { \node at (\i,1) {$1$}; }
+  \foreach \i in {1} { \node at (\i,1) {$2$}; }
+  \foreach \i in {4} { \node at (\i,1) {$3$}; }
+  \foreach \i in {5,6} { \node at (\i,1) {$4$}; }
+  \foreach \i in {7} { \node at (\i,1) {$5$}; }
+  \foreach \i in {2,3} { \node at (\i,1) {$7$}; }
+\end{tikzpicture}
+\]
 
 There is an obvious duality in the definition of the labelling process above.
 
@@ -383,7 +399,7 @@ There is an obvious duality in the definition of the labelling process above.
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{k-1}$ such that $q_i$ is a $p_i$-queue.
+A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{k-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
 \end{dfn}
 
 \begin{remark}
@@ -392,7 +408,7 @@ We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
 
 %Next, fix a subset $B = \set{b_1 < b_2 < \cdots < b_n} \subseteq \ive{N}$.
-For a standard word $u$ of type $\mm$ with $\ell$ class, we define the \defn{amplitude} or \defn{spectral weight} as
+For a standard word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{amplitude} or \defn{spectral weight} as
 \begin{equation}
 \label{eq:amplitude}
   \swt{u} := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
@@ -443,13 +459,14 @@ We now state our main theorem.
 
 \begin{thm}
 \label{thm:permutation}
-  For any permutation $\sigma$ of $[\ell_1]$, we have 
+  Let $u$ be a standard word of type $\mm$ with $\ell$ classes.
+  For any permutation $\sigma$ of $[\ell-1]$, we have 
   \[
   \swt{u} = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
   \]
   where we sum over all sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
   \begin{enumerate}
-  \item $q_i$ is a $(m_1 + \cdots + m_{\sigma_i})$-queue, and
+  \item $q_i$ is a $p_{\sigma_i}(\mm)$-queue, and
   \item $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
   \end{enumerate}
 \end{thm}
@@ -457,15 +474,16 @@ We now state our main theorem.
 We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
 
 \begin{cor}
-  Let $\mm$ be a standard type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $\mm'$, we have
+  Let $\mm$ be a standard type and $\mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
+  For any word $v$ of type $\mm'$, we have
 \[
-  \swt{v} = e_{m_1+\dots+m_i}(n) \sum_u \swt{u},
+  \swt{v} = e_{p_i(\mm)}(n) \sum_u \swt{u},
 \]
-where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ in $u$ yields $v$.
+where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \end{cor}
 
 \begin{proof}
-  Note that if $u = q_{r-1}(\dots q_2(q_1(1 \dots 1)) \dots)$ where $q_1$ is a $m_1+\dots+m_i$-queue, then $v = q_{r-1}(\dots q_2(1\dots 1)\dots)$ is the result of merging classes $i$ and $i+1$ in $u$.
+  Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i}{u}$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
 
@@ -590,9 +608,6 @@ We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced blocks.
 It is clear that $C'' = C$ and $\wt C = \wt C'$.
-
-\Darij{The construction $C \mapsto C'$ is probably somewhere in the Russian works. \cite[2.6]{DanilovKoshevoy}? \cite[A.2]{DanilovKoshevoy}? \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
-\Travis{From the perspective of~\cite{KMO15,KMO16}, this is precisely the combinatorial $R$-matrix. The fact that it is a symmetric group action comes from the fact that they satisfy the Yang--Baxter relation.}
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -944,8 +959,8 @@ Somewhat surprisingly, this principle has a generalization to our case with non-
 We now state this generalization.
 
 \begin{thm}
-  Let $u$ be a word of type $\mm$, and let $v$ be the word obtained from $u$ by merging classes $k$ and $k+1$.
-  Then $\sum_{u'} \wt{u} = e_{m_1+\dots+m_k}(\xx) \wt{v}$,
+  Let $u$ be a word of type $\mm$, and let $v = \merge{k}{u}$.
+  Then $\sum_{u'} \wt{u} = e_{p_k(\mm)}(\xx) \wt{v}$,
   where $u'$ runs over all words gotten by permuting $k$ and $k+1$ in $u$.
 \end{thm}
 
@@ -955,10 +970,10 @@ This theorem will be a corollary of Theorem [??].
 \begin{example}
 Looking at queues, we get
 \begin{align*}
-[13234] & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
-\\ [13245] & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
+\swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
+\\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
 \\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)
-\\ [14235] & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
+\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
 \\ & \hspace{55pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
 \\ & \hspace{55pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
 \\ & \hspace{55pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3)
