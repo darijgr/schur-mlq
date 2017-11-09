@@ -258,7 +258,7 @@ We
 
 \Erik{Mention Gorodentsev's book.}
 
-\Travis{Mention the work of the Japanese~\cite{KMO15, KMO16}}
+\Travis{Mention the work of the Japanese~\cite{KMO15, KMO16}. Actually, the DK operators seem to be the combinatorial $R$-matrix.}
 
 
 
@@ -487,14 +487,14 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
 \begin{tikzpicture}[xscale=1.5]
   \begin{scope}[yshift=7.5cm]
     \node[circle,draw=black] at  (1, 0){3};
-    \node[circle,draw=black] at  (2, 0){3};
+    \node[circle,draw=black,text=blue] at  (2, 0){3};
     \node[circle,draw=black] at  (4, 0){2};
-    \node[circle,draw=black] at  (6, 0){2};
-    \node[circle,draw=black] at  (7, 0){2};
+    \node[circle,draw=black,text=blue] at  (6, 0){2};
+    \node[circle,draw=black,text=darkred] at  (7, 0){2};
     \node[circle,draw=black] at  (9, 0){1};
     \node[circle,draw=black] at  (3, 1){2};
-    \node[circle,draw=black] at  (4, 1){2};
-    \node[circle,draw=black] at  (6, 1){2};
+    \node[circle,draw=black,text=blue] at  (4, 1){2};
+    \node[circle,draw=black,text=darkred] at  (6, 1){2};
     \node[circle,draw=black] at  (8, 1){1};
     \node[circle,draw=black] at  (7, 2){1};
   \end{scope}
@@ -508,13 +508,13 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
   \draw[draw=red] (1,6)--(7,6)--(7,5)--(8,5)--(8,4)--(9,4);
   
   \node[circle,fill=white,draw=black,inner sep=1pt] at (1,1) {$3$};
-  \node[circle,fill=white,draw=black,inner sep=1pt] at (2,2) {$3$};
+  \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (2,2) {$3$};
   \node[circle,fill=white,draw=black,inner sep=1pt] at (4,2) {$2$};
   \node[circle,fill=white,draw=black,inner sep=1pt] at (3,3) {$2$};
-  \node[circle,fill=white,draw=black,inner sep=1pt] at (4,4) {$2$};
-  \node[circle,fill=white,draw=black,inner sep=1pt] at (6,3) {$2$};
-  \node[circle,fill=white,draw=black,inner sep=1pt] at (6,5) {$2$};
-  \node[circle,fill=white,draw=black,inner sep=1pt] at (7,4) {$2$};
+  \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (4,4) {$2$};
+  \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (6,3) {$2$};
+  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] at (6,5) {$2$};
+  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] at (7,4) {$2$};
   \node[circle,fill=white,draw=black,inner sep=1pt] at (7,6) {$1$};
   \node[circle,fill=white,draw=black,inner sep=1pt] at (8,5) {$1$};
   \node[circle,fill=white,draw=black,inner sep=1pt] at (9,4) {$1$};
@@ -524,7 +524,7 @@ where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ 
   }
 \end{tikzpicture}
 \]
-\caption{An example of the bijection between MLQs and non-intersecting lattice paths for the proof of Theorem~\ref{thm:determinant_form}. Here, $n = 14, r = 3, v = 3211$.}
+\caption{An example of the bijection between MLQs and non-intersecting lattice paths for the proof of Theorem~\ref{thm:determinant_form}. Here, $n = 14, r = 3, v = 3211$. [TRAVIS: I don't see where these come from.]}
 \label{fig:lattice_path_bijection}
 \end{figure}
 
@@ -760,7 +760,7 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
   \node[rectangle,draw=black] at (6, 1){4};
 \end{tikzpicture}
 \]
-\caption{Here, $n = 7$, $r=4$, $q = \{1,3,5,6\}$ and $u = 3213221$ then $v = q(u) = 1314224$.}
+\caption{Here, $n = 7$, $r=4$, $q = \{1,3,5,6\}$ and $u = 3213221$ then $v = q(u) = 1314224$. [TRAVIS: I don't understand what this is suppose to illustrate.]}
 \end{figure}
 
 \begin{figure}
