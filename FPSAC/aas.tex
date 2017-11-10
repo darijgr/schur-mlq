@@ -273,7 +273,7 @@ We
 
 Fix a positive integer $n$. Let $\ive{n}$ denote the set $\set{1, 2, \dotsc, n}$.
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
-We will consider the indices of words to be taken modulo $n$.  Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
+We will consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{n+m} = u_m$ for all $m$).  Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
@@ -285,7 +285,7 @@ We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$\travis{Feel free
 We define an \defn{$r$-queue} $q$ to be any subset of $[n]$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself as follows.
-Let $\mm$ be the type of $u$.
+Let $\mm = (m_1, m_2, \ldots)$ be the type of a word $u \in \mcW_n$.
 Define $p_i(\mm) := m_1 + m_2 + \cdots + m_i$, and when $\mm$ is clear, we simply write $p_i$.
 There exists a unique $t$ such that
 $
