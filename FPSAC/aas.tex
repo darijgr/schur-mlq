@@ -249,13 +249,23 @@ We prove the spectral parameter version of the MLQs conjecture.
 \section{Introduction}
 \label{sec:introduction}
 
+The totally asymmetric exclusion process (TASEP) is a non-equilibrium stochastic process  that has received significant attention in various fields, such as probability theory, combinatorics, physics, biology, and civil engineering over the past few decades.
+For some examples, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16} and references therein.
+In this paper, we consider the TASEP on a ring with $\ell$ sites and $n$ species of particles.
+Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, n\}$ of length $\ell$, where we take the indices to be $\ZZ / \ell \ZZ$.
+We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i > u_{i+1}$ to $u_{i+1} u_i$ and is done at a uniform rate.
+
+The steady state of the TASEP is known in terms of another process using multiline queues and applying the Ferrari--Martin algorithm~\cite{FM06}.
+In~\cite{KMO15,KMO16}, the Ferrari--Martin algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using Kirillov--Reshetikhin crystals.
+This interpretation gives a connection with five vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}\travis{If we need to cut references, we can change this sentence to say ``new matrix product formula''}.
+
 We
 \begin{itemize}
 \item introduce a new weighting of multiline queues
 \item prove the commutativity conjecture of~\cite{AAMP}
 \item prove~\cite[Conj.~3.10]{AasLin17}
 \item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
-\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
+\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{NY97,Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
 \end{itemize}
 
 \Erik{Mention Gorodentsev's book.}
@@ -399,11 +409,11 @@ There is an obvious duality in the definition of the labelling process above.
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{k-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
+A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
 \end{dfn}
 
 \begin{remark}
-Our notion of an MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}.
+Our notion of an MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we recover the labelling of level $k$ by $q_k( \cdots q_1(1 \dotsm 1) \cdots )$.
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
 
@@ -490,7 +500,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \begin{thm}
 \label{thm:determinant_form}
   Let $B = \set{b_1 < b_2 < \cdots < b_n} \subseteq \ive{N}$.
-  Let $v_1v_2 \dots v_k$ be a weakly decreasing (non-cyclic) standard word of length $k$ with $r-1$ classes.
+  Let $v_1 v_2 \dotsm v_k$ \travis{Do not use $\dots$ (dots command)! It can get it wrong as it does here!} be a weakly decreasing (non-cyclic) standard word of length $k$ with $r-1$ classes.
   Define a word $u$ of length $n$ by $u_i = v_k$ if $i = b_k$ for some $k$, otherwise $u_i = r$.
   Then
   \[
@@ -545,11 +555,20 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \label{fig:lattice_path_bijection}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \dots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Lemma BLAH.
+Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$.
-In~\cite{AasLin17}, a formula for the amplitude $\swt{ u\bigl( (\prod_{i\in S} s_i) w_0 \bigr) }$ is conjectured, where $w_0$ is the reverse permutation on $[k]$; $w_0 = k(k-1)\dots 1$.
+In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ is conjectured, where $w_0 = k (k-1) \dotsm 1$ is the reverse permutation on $[k]$.
 
-Let $\varphi(S) = \swt{ ( \prod_{i\in S} s_i ) w_0 }$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$. By Lemma Y, $\psi(T) = \dots$. (Apply M\"obius inversion and be done.)
+Let $\varphi(S) = \swt{u(( \prod_{i\in S} s_i ) w_0)}$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
+By Theorem~\ref{thm:permutation}, we hav
+\[
+\psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0},
+\]
+\travis{If we keep $\wedge_j$, then we can use $\bigwedge_T$.}
+\travis{Does order matter here?}
+By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
+By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$ \erik{FIX}.
+Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 
 
