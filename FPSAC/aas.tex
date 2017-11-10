@@ -595,10 +595,11 @@ By using the monotonicity, we may assume $u \in \{1,2\}^n$.
 %%%%%%%%%%
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
-Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$.
+Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$. This is the set $\left\{i, i+1, \ldots, j\right\}$, which wraps around the ``circle'' if $i > j$.
+\darij{Is $i > j$ the right condition here?}
 Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
-Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap B \rvert = \lvert q_2 \cap \mcI \rvert$.
+Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in [n]$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
