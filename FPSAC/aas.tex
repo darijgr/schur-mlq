@@ -449,7 +449,8 @@ where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ and $u 
 %\fs_{\lambda}(b; \xx) = \sum_{T \in \mcF_{\lambda}(b)} x^T.
 %\]
 
-We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$:
+We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$,
+defined for each $N \in \left\{0,1,\ldots,n\right\}$ by
 \[
 e_k(N) = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
 \qquad\qquad
@@ -564,7 +565,7 @@ Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin 
 In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ is conjectured, where $w_0 = k (k-1) \dotsm 1$ is the reverse permutation on $[k]$.
 
 Let $\varphi(S) = \swt{u(( \prod_{i\in S} s_i ) w_0)}$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
-By Theorem~\ref{thm:permutation}, we hav
+By Theorem~\ref{thm:permutation}, we have
 \[
 \psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0},
 \]
