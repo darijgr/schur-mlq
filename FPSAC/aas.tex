@@ -504,14 +504,14 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 
 \begin{thm}
 \label{thm:determinant_form}
-  Let $B = \set{b_1 < b_2 < \cdots < b_n} \subseteq \ive{N}$.
-  Let $v_1v_2 \dotsm v_k$ \travis{Do not use $\dots$ (dots command)! It can get it wrong as it does here!} be a weakly decreasing (non-cyclic) packed word of length $k$ with $r-1$ classes.
-  Define a word $u$ of length $n$ by $u_i = v_k$ if $i = b_k$ for some $k$, otherwise $u_i = r$.
+  Let $B = \set{b_1 < b_2 < \cdots < b_k} \subseteq \ive{n}$.
+  Let $v_1v_2 \dotsm v_k$ be a weakly decreasing (non-cyclic) packed word of length $k$ with $r-1$ classes.
+  Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = r$.
   Then
   \[
-  \swt{u} = \det( h_{i-j-1+\gamma_j}(b_j) )_{1\leq i,j\leq n},
+  \swt{u} = \det( h_{i-j-1+\gamma_j}(b_j) )_{1\leq i,j\leq k},
   \]
-  where $\gamma_i$ is the number of distinct letters in $v_1\dotsm v_j$.
+  where $\gamma_i$ is the number of distinct letters in $v_1\dotsm v_i$.
 \end{thm}
 
 \begin{figure}[t]
@@ -556,7 +556,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
   }
 \end{tikzpicture}
 \]
-\caption{An example of the bijection between MLQs and non-intersecting lattice paths for the proof of Theorem~\ref{thm:determinant_form}. Here, $n = 14, r = 3, v = 3211$. [TRAVIS: I don't see where these come from.]}
+\caption{An example of the bijection between MLQs and non-intersecting lattice paths for the proof of Theorem~\ref{thm:determinant_form}. Here, $n = 9, k = 6, r = 4, v = 332221$, and $(b_1,b_2,b_3,b_4,b_5,b_6) = (1,2,4,6,7,9)$.}
 \label{fig:lattice_path_bijection}
 \end{figure}
 
