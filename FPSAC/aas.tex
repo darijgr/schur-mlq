@@ -405,9 +405,10 @@ There is an obvious duality in the definition of the labelling process above.
 \label{le:mono}
   For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$.
   Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$.
-  Then the comparison $q(f_t(u))_i \leq q(f_t(u))_j$ has the same result for all $t$.
-%and it is the same result as q(u)_i \leq q(u)_j
+  We have $q(u)_i \leq q(u)_j$ if and only if each $t$ satisfies $q(f_t(u))_i \leq q(f_t(u))_j$.
 \end{lemma}
+
+\Darij{Why does this hold?}
 
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
