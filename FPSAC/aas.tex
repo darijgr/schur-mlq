@@ -412,8 +412,7 @@ There is an obvious duality in the definition of the labelling process above.
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
-\darij{What is $\ell$? Still the index of the last nonzero entry of $\mm$?}
+A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
 \end{dfn}
 
 \begin{remark}
@@ -562,7 +561,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$.
-In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ is conjectured, where $w_0 = k (k-1) \dotsm 1$ is the reverse permutation on $[k]$.
+In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ is conjectured, where $w_0 = k (k-1) \dotsm 1$ is the reverse permutation on $[k]$ (note that the elements $(s_i : i \in S)$ commute pairwise, so $\prod_{i\in S} s_i$ well defined).
 
 Let $\varphi(S) = \swt{u(( \prod_{i\in S} s_i ) w_0)}$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
 By Theorem~\ref{thm:permutation}, we have
@@ -570,9 +569,8 @@ By Theorem~\ref{thm:permutation}, we have
 \psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0},
 \]
 \travis{If we keep $\wedge_j$, then we can use $\bigwedge_T$.}
-\travis{Does order matter here?}
 By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$ \erik{FIX}.
+By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$.
 Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 
@@ -596,7 +594,6 @@ By using the monotonicity, we may assume $u \in \{1,2\}^n$.
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
 Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$. This is the set $\left\{i, i+1, \ldots, j\right\}$, which wraps around the ``circle'' if $i > j$.
-\darij{Is $i > j$ the right condition here?}
 Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
