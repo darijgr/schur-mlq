@@ -407,13 +407,13 @@ There is an obvious duality in the definition of the labelling process above.
   Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$.
   We have $q(u)_i \leq q(u)_j$ if and only if each $t$ satisfies $q(f_t(u))_i \leq q(f_t(u))_j$.
 \end{lemma}
-
-\Darij{Why does this hold?}
+\darij{Why does this hold?}
 
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
 A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
+\darij{What is $\ell$? Still the index of the last nonzero entry of $\mm$?}
 \end{dfn}
 
 \begin{remark}
