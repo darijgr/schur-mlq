@@ -503,7 +503,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \end{proof}
 
 \begin{example}
-Looking at queues, we get
+Looking at MLQs, we get
 \begin{align*}
 \swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
 \\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
@@ -590,7 +590,6 @@ By Theorem~\ref{thm:permutation}, we have
 By Theorem~\ref{thm:determinant_form}, $\swt{\left(\prod_{j\in T} \merge{n-j}{} \right) w_0 } = \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j\leq k}$ where $\gamma_i$ is \erik{FILL IN}
 
 By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$.
 Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 
@@ -880,10 +879,6 @@ Thus, we show that $C(u) = C'(u)$, where $u$ is one of the words such that none 
 
 
 %=====================================================================
-\section{Concluding (starting?) remarks}
-
-It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
-
 \begin{figure}
 \[
 \begin{tikzpicture}{scale=0.9}
@@ -1028,92 +1023,6 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
 \end{figure}
 
 
-{\bf Example.} 
-
-$(S_1, S_2)$:
-
-\scalebox{0.4}{
-\begin{tikzpicture}
-  \node[circle, draw=black] at (1, 2){\phantom{c}};
-  \node[circle, draw=black] at (2, 2){\phantom{c}};
-  \node[circle, draw=black] at (3, 2){\phantom{c}};
-  \node[circle, draw=black] at (6, 2){\phantom{c}};
-  \node[circle, draw=black] at (7, 2){\phantom{c}};
-  \node[circle, draw=black] at (8, 2){\phantom{c}};
-  \node[circle, draw=black] at (9, 2){\phantom{c}};
-  \node[circle, draw=black] at (11, 2){\phantom{c}};
-  \node[circle, draw=black] at (13, 2){\phantom{c}};
-  \node[circle, draw=black] at (18, 2){\phantom{c}};
-  \node[circle, draw=black] at (19, 2){\phantom{c}};
-  \node[circle, draw=black] at (22, 2){\phantom{c}};
-  \node[circle, draw=black] at (23, 2){\phantom{c}};
-  \node[circle, draw=black] at (24, 2){\phantom{c}};
-  \node[circle, draw=black] at (25, 2){\phantom{c}};
-  \node[circle, draw=black] at (26, 2){\phantom{c}};
-
-  \node[circle, draw=black] at (2, 1){\phantom{c}};
-  \node[circle, draw=black] at (4, 1){\phantom{c}};
-  \node[circle, draw=black] at (5, 1){\phantom{c}};
-  \node[circle, draw=black] at (6, 1){\phantom{c}};
-  \node[circle, draw=black] at (8, 1){\phantom{c}};
-  \node[circle, draw=black] at (10, 1){\phantom{c}};
-  \node[circle, draw=black] at (11, 1){\phantom{c}};
-  \node[circle, draw=black] at (12, 1){\phantom{c}};
-  \node[circle, draw=black] at (14, 1){\phantom{c}};
-  \node[circle, draw=black] at (16, 1){\phantom{c}};
-  \node[circle, draw=black] at (17, 1){\phantom{c}};
-  \node[circle, draw=black] at (19, 1){\phantom{c}};
-  \node[circle, draw=black] at (20, 1){\phantom{c}};
-  \node[circle, draw=black] at (21, 2){u};
-  \node[circle, draw=black] at (22, 1){\phantom{c}};
-  \node[circle, draw=black] at (24, 1){\phantom{c}};
-  \node[circle, draw=black] at (26, 1){\phantom{c}};
-\end{tikzpicture}
-}
-
-\vspace{2cm}
-
-$(T_1,T_2)$:
-
-\scalebox{0.4}{
-\begin{tikzpicture}
-  \node[circle, draw=black] at (1, 2){\phantom{c}};
-  \node[circle, draw=black] at (2, 2){\phantom{c}};
-  \node[circle, draw=black] at (3, 2){\phantom{c}};
-  \node[circle, draw=black] at (6, 2){\phantom{c}};
-  \node[circle, draw=black] at (7, 2){\phantom{c}};
-  \node[circle, draw=black] at (8, 2){\phantom{c}};
-  \node[circle, draw=black] at (9, 2){\phantom{c}};
-  \node[circle, draw=black] at (11, 2){\phantom{c}};
-  \node[circle, draw=black] at (13, 2){\phantom{c}};
-  \node[circle, draw=black] at (18, 2){\phantom{c}};
-  \node[circle, draw=black] at (19, 2){\phantom{c}};
-  \node[circle, draw=black] at (22, 2){\phantom{c}};
-  \node[circle, draw=black] at (23, 2){\phantom{c}};
-  \node[circle, draw=black] at (24, 2){\phantom{c}};
-  \node[circle, draw=black] at (25, 2){\phantom{c}};
-  \node[circle, draw=black] at (26, 2){\phantom{c}};
-
-  \node[circle, draw=black] at (2, 1){\phantom{c}};
-  \node[circle, draw=black] at (4, 1){\phantom{c}};
-  \node[circle, draw=black] at (5, 1){\phantom{c}};
-  \node[circle, draw=black] at (6, 1){\phantom{c}};
-  \node[circle, draw=black] at (8, 1){\phantom{c}};
-  \node[circle, draw=black] at (10, 1){\phantom{c}};
-  \node[circle, draw=black] at (11, 1){\phantom{c}};
-  \node[circle, draw=black] at (12, 1){\phantom{c}};
-  \node[circle, draw=black] at (14, 1){\phantom{c}};
-  \node[circle, draw=black] at (16, 1){\phantom{c}};
-  \node[circle, draw=black] at (17, 1){\phantom{c}};
-  \node[circle, draw=black] at (19, 1){\phantom{c}};
-  \node[circle, draw=black] at (20, 1){\phantom{c}};
-  \node[circle, draw=black] at (21, 1){u};
-  \node[circle, draw=black] at (22, 1){\phantom{c}};
-  \node[circle, draw=black] at (24, 1){\phantom{c}};
-  \node[circle, draw=black] at (26, 1){\phantom{c}};
-\end{tikzpicture}
-}
-
 
 
 \begin{example}
@@ -1127,22 +1036,21 @@ To get a word $136452$ or $135462$ we can add a new row on top, with $5$ boxes. 
 \]
 By the theorem, such queues are in 1-1 correspondence with ordinary queues counting, in this case, $\swt{135462}$. By applying the bijection $4$ times to bring the top row to the bottom, we get the corresponding ordinary queue, as follows.\\
 
-\noindent Swap rows 1 and 2:
-\[
+$\begin{array}{cc}
+
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-Swap rows 2 and 3:
-\[
+} &
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-Swap rows 3 and 4:
-\[
+} \\
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-Swap rows 4 and 5
-\[
+} &
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
+}  \\
+\end{array}$
 \end{example}
 
 
