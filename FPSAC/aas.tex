@@ -522,7 +522,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \begin{example}
 Suppose $n = 5$.
 Let $v = 13234$, and we have that $v = \merge{3}{u}$ if and only if $u \in \set{13245, 14235}$.
-By using examining all possible MLQs for these words, we obtain
+By examining all possible MLQs for these words, we obtain
 \begin{align*}
 \swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2),
 \\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
@@ -640,10 +640,10 @@ Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 \section{Proof sketch of Theorem~\ref{thm:permutation}}
 \label{sec:proof_sketch}
 
-The proof reduced down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
+The proof reduces down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
-We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$ and the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, where we have $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
+We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
 
 To construct $C'$ and show it satisfies the requisite properties, we break it into four parts as follows.
 By using the monotonicity, we may assume $u \in \{1,2\}^n$.
