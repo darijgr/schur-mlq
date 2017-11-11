@@ -34,6 +34,8 @@
 \newcommand{\fs}{\mathcal{S}} % flagged Schur function
 \newcommand{\mbf}{\mathbf}
 \newcommand{\0}{\phantom{c}}
+\newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
+\newcommand{\merge}[2]{\vee_{#1}#2} % merge
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -228,8 +230,12 @@
 \email{tcscrims@gmail.com}
 \urladdr{https://sites.google.com/view/tscrim/home}
 
-\keywords{multiline queue, flagged Schur function}
-\subjclass[2010]{05E10, 17B37}
+\keywords{multiline queue, TASEP, R-matrix, symmetric function}
+\subjclass[2010]{
+60C05,  % Combinatorial probability
+05A19,  % Combinatorial identities, bijective combinatorics
+16T25,  % Yang--Baxter equations
+05E05}  % Symmetric functions
 
 \thanks{TS was partially supported by the Australian Research Council DP170102648 and the National Science Foundation RTG grant DMS-1148634.}
 
@@ -264,7 +270,7 @@ That is to say, we introduce an action of the symmetric group on MLQs such that 
 We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
 
 Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}.
-We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma.
+We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
 %We
@@ -432,7 +438,7 @@ There is an obvious duality in the definition of the labelling process above. We
 
 \begin{lemma}[Monotonicity]
 \label{le:mono}
-  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then $q(u)_i \leq q(u)_j$ if and only if $q(f_t(u))_i \leq q(f_t(u))_j$. Furthermore, if $q(u)_i < q(u)_j$ then $q(f_t(u))_i < q(f_t(u))_j$ for some $t$.
+  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$. Let $q$ be a queue, $u$ be any word, and $i,j\in[n]$. Then $q(u)_i \leq q(u)_j$ implies $q(f_t(u))_i \leq q(f_t(u))_j$. Furthermore, if $q(u)_i < q(u)_j$ then $q(f_t(u))_i < q(f_t(u))_j$ for some $t$.
 \end{lemma}
 
 Lemma~\ref{le:mono} tells us that $q$, considered as a function on words, is completely determined by its values $q(u)$ on words $u\in\{1,2\}^n$.
@@ -487,7 +493,7 @@ The following result is proved in~\cite{AAMP} in the case $x_1 = \cdots = x_r$.
 \label{co:merge}
   Let $\mm$ be a packed type and $\mm'$ be the result of merging the classes $i$ and $i+1$ in $\mm$. For any word $v$ of type $m$, we have
   \[
-  [v] = e_{m_1 + \cdots + m_i}(x_1, \dotsc, x_n) \sum_u [u],
+  \swt{v} e_{p_i(\mm)}(n) = \sum_u \swt{u},
   \]
   where we sum over all $u$ of type $\mm$ such that merging classes $i$ and $i+1$ in $u$ yields $v$.
 \end{cor}
@@ -539,7 +545,7 @@ Swap rows 4 and 5
 \end{thm}
 
 \begin{proof}
-This is an easy application of the Lindstr\"om-Gessel-Viennot Lemma.
+This is an easy application of the Lindstr\"om-Gessel-Viennot Lemma~\cite{Lindstrom73,GV85}.
 
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
 
