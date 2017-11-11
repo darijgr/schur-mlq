@@ -432,8 +432,7 @@ There is an obvious duality in the definition of the labelling process above.
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$ is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
-\darij{What is $\ell$? Still the index of the last nonzero entry of $\mm$?}
+A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
 \end{dfn}
 
 \begin{remark}
@@ -509,6 +508,7 @@ We now state our main theorem.
 We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
 
 \begin{cor}
+\label{co:merge}
   Let $\mm$ be a packed type and $\mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
   For any word $v$ of type $\mm'$, we have
 \[
@@ -521,6 +521,23 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
   Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i}{u}$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
+
+\begin{example}
+Looking at MLQs, we get
+\begin{align*}
+\swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
+\\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
+\\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)
+\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
+\\ & \hspace{55pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
+\\ & \hspace{55pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
+\\ & \hspace{55pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3)
+\end{align*}
+(We have factored the expressions for readability only.)
+
+Corollary \ref{co:merge} states that $\swt{13234} e_3(\xx) = \swt{13245} + \swt{14235}$, as we can check directly in this case.
+\end{example}
+
 
 \begin{thm}
 \label{thm:determinant_form}
@@ -582,17 +599,17 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_k$, and for a permutation $v$ of $[k]$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq [k-1]$ be such that $i\in S \Rightarrow i+1 \notin S$.
-In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ is conjectured, where $w_0 = k (k-1) \dotsm 1$ is the reverse permutation on $[k]$.
+In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ is conjectured, where $w_0 = k (k-1) \dotsm 1$ is the reverse permutation on $[k]$ (note that the elements $(s_i : i \in S)$ commute pairwise, so $\prod_{i\in S} s_i$ well defined).
 
 Let $\varphi(S) = \swt{u(( \prod_{i\in S} s_i ) w_0)}$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
 By Theorem~\ref{thm:permutation}, we have
 \[
-\psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0},
+  \psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0}.
 \]
-\travis{If we keep $\vee_j$, then we can use $\bigvee_T$.}
-\travis{Does order matter here?}
+
+By Theorem~\ref{thm:determinant_form}, $\swt{\left(\prod_{j\in T} \merge{n-j}{} \right) w_0 } = \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j\leq k}$ where $\gamma_i$ is \erik{FILL IN}
+
 By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$ \erik{FIX}.
 Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 
@@ -617,7 +634,6 @@ By using the monotonicity, we may assume $u \in \{1,2\}^n$.
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
 Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$. This is the set $\left\{i, i+1, \ldots, j\right\}$, which wraps around the ``circle'' if $i > j$.
-\darij{Is $i > j$ the right condition here?}
 Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
@@ -884,10 +900,6 @@ Thus, we show that $C(u) = C'(u)$, where $u$ is one of the words such that none 
 
 
 %=====================================================================
-\section{Concluding (starting?) remarks}
-
-It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
-
 \begin{figure}
 \[
 \begin{tikzpicture}{scale=0.9}
@@ -997,38 +1009,7 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
 
 
 %=====================================================================
-\section{The projection formula}
-
-For the homogenous case, where all spectral parameters equal, it is well known that the number of MLQs with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row.
-The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the \defn{projection principle}.
-Somewhat surprisingly, this principle has a generalization to our case with non-equal spectral parameters.
-We now state this generalization.
-
-\begin{thm}
-  Let $u$ be a word of type $\mm$, and let $v = \merge{k}{u}$.
-  Then $\sum_{u'} \wt{u} = e_{p_k(\mm)}(\xx) \wt{v}$,
-  where $u'$ runs over all words gotten by permuting $k$ and $k+1$ in $u$.
-\end{thm}
-
-This theorem will be a corollary of Theorem [??].
-
-
-\begin{example}
-Looking at queues, we get
-\begin{align*}
-\swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
-\\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
-\\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)
-\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
-\\ & \hspace{55pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
-\\ & \hspace{55pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
-\\ & \hspace{55pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3)
-\end{align*}
-(We have factored the expressions for readability only.)
-
-The projection formula states that $\swt{13234} e_3(\xx) = \swt{13245} + \swt{14235}$, as we can check directly in this case.
-\end{example}
-
+\section{The graveyard}
 
 \begin{figure}
 \label{fig_generalized_queue}
@@ -1063,92 +1044,6 @@ The projection formula states that $\swt{13234} e_3(\xx) = \swt{13245} + \swt{14
 \end{figure}
 
 
-{\bf Example.} 
-
-$(S_1, S_2)$:
-
-\scalebox{0.4}{
-\begin{tikzpicture}
-  \node[circle, draw=black] at (1, 2){\phantom{c}};
-  \node[circle, draw=black] at (2, 2){\phantom{c}};
-  \node[circle, draw=black] at (3, 2){\phantom{c}};
-  \node[circle, draw=black] at (6, 2){\phantom{c}};
-  \node[circle, draw=black] at (7, 2){\phantom{c}};
-  \node[circle, draw=black] at (8, 2){\phantom{c}};
-  \node[circle, draw=black] at (9, 2){\phantom{c}};
-  \node[circle, draw=black] at (11, 2){\phantom{c}};
-  \node[circle, draw=black] at (13, 2){\phantom{c}};
-  \node[circle, draw=black] at (18, 2){\phantom{c}};
-  \node[circle, draw=black] at (19, 2){\phantom{c}};
-  \node[circle, draw=black] at (22, 2){\phantom{c}};
-  \node[circle, draw=black] at (23, 2){\phantom{c}};
-  \node[circle, draw=black] at (24, 2){\phantom{c}};
-  \node[circle, draw=black] at (25, 2){\phantom{c}};
-  \node[circle, draw=black] at (26, 2){\phantom{c}};
-
-  \node[circle, draw=black] at (2, 1){\phantom{c}};
-  \node[circle, draw=black] at (4, 1){\phantom{c}};
-  \node[circle, draw=black] at (5, 1){\phantom{c}};
-  \node[circle, draw=black] at (6, 1){\phantom{c}};
-  \node[circle, draw=black] at (8, 1){\phantom{c}};
-  \node[circle, draw=black] at (10, 1){\phantom{c}};
-  \node[circle, draw=black] at (11, 1){\phantom{c}};
-  \node[circle, draw=black] at (12, 1){\phantom{c}};
-  \node[circle, draw=black] at (14, 1){\phantom{c}};
-  \node[circle, draw=black] at (16, 1){\phantom{c}};
-  \node[circle, draw=black] at (17, 1){\phantom{c}};
-  \node[circle, draw=black] at (19, 1){\phantom{c}};
-  \node[circle, draw=black] at (20, 1){\phantom{c}};
-  \node[circle, draw=black] at (21, 2){u};
-  \node[circle, draw=black] at (22, 1){\phantom{c}};
-  \node[circle, draw=black] at (24, 1){\phantom{c}};
-  \node[circle, draw=black] at (26, 1){\phantom{c}};
-\end{tikzpicture}
-}
-
-\vspace{2cm}
-
-$(T_1,T_2)$:
-
-\scalebox{0.4}{
-\begin{tikzpicture}
-  \node[circle, draw=black] at (1, 2){\phantom{c}};
-  \node[circle, draw=black] at (2, 2){\phantom{c}};
-  \node[circle, draw=black] at (3, 2){\phantom{c}};
-  \node[circle, draw=black] at (6, 2){\phantom{c}};
-  \node[circle, draw=black] at (7, 2){\phantom{c}};
-  \node[circle, draw=black] at (8, 2){\phantom{c}};
-  \node[circle, draw=black] at (9, 2){\phantom{c}};
-  \node[circle, draw=black] at (11, 2){\phantom{c}};
-  \node[circle, draw=black] at (13, 2){\phantom{c}};
-  \node[circle, draw=black] at (18, 2){\phantom{c}};
-  \node[circle, draw=black] at (19, 2){\phantom{c}};
-  \node[circle, draw=black] at (22, 2){\phantom{c}};
-  \node[circle, draw=black] at (23, 2){\phantom{c}};
-  \node[circle, draw=black] at (24, 2){\phantom{c}};
-  \node[circle, draw=black] at (25, 2){\phantom{c}};
-  \node[circle, draw=black] at (26, 2){\phantom{c}};
-
-  \node[circle, draw=black] at (2, 1){\phantom{c}};
-  \node[circle, draw=black] at (4, 1){\phantom{c}};
-  \node[circle, draw=black] at (5, 1){\phantom{c}};
-  \node[circle, draw=black] at (6, 1){\phantom{c}};
-  \node[circle, draw=black] at (8, 1){\phantom{c}};
-  \node[circle, draw=black] at (10, 1){\phantom{c}};
-  \node[circle, draw=black] at (11, 1){\phantom{c}};
-  \node[circle, draw=black] at (12, 1){\phantom{c}};
-  \node[circle, draw=black] at (14, 1){\phantom{c}};
-  \node[circle, draw=black] at (16, 1){\phantom{c}};
-  \node[circle, draw=black] at (17, 1){\phantom{c}};
-  \node[circle, draw=black] at (19, 1){\phantom{c}};
-  \node[circle, draw=black] at (20, 1){\phantom{c}};
-  \node[circle, draw=black] at (21, 1){u};
-  \node[circle, draw=black] at (22, 1){\phantom{c}};
-  \node[circle, draw=black] at (24, 1){\phantom{c}};
-  \node[circle, draw=black] at (26, 1){\phantom{c}};
-\end{tikzpicture}
-}
-
 
 
 \begin{example}
@@ -1162,22 +1057,21 @@ To get a word $136452$ or $135462$ we can add a new row on top, with $5$ boxes. 
 \]
 By the theorem, such queues are in 1-1 correspondence with ordinary queues counting, in this case, $\swt{135462}$. By applying the bijection $4$ times to bring the top row to the bottom, we get the corresponding ordinary queue, as follows.\\
 
-\noindent Swap rows 1 and 2:
-\[
+$\begin{array}{cc}
+
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-Swap rows 2 and 3:
-\[
+} &
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-Swap rows 3 and 4:
-\[
+} \\
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-Swap rows 4 and 5
-\[
+} &
+\scalebox{0.4}{
 \begin{tikzpicture}\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
+}  \\
+\end{array}$
 \end{example}
 
 \acknowledgements{
