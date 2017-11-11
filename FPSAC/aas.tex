@@ -41,6 +41,7 @@
 
 \newcommand{\xx}{\mathbf{x}}
 \newcommand{\mm}{\mathbf{m}}
+\newcommand{\qq}{\mathbf{q}}
 \newcommand{\MLQ}{\mathbf{S}}
 
 \newcommand{\mcA}{\mathcal{A}}
@@ -255,20 +256,32 @@ In this paper, we consider the TASEP on a ring with $\ell$ sites and $n$ species
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, n\}$ of length $\ell$, where we take the indices to be $\ZZ / \ell \ZZ$.
 We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i > u_{i+1}$ to $u_{i+1} u_i$ and is done at a uniform rate.
 
-The steady state of the TASEP is known in terms of another process using multiline queues and applying the Ferrari--Martin algorithm~\cite{FM06}.
-In~\cite{KMO15,KMO16}, the Ferrari--Martin algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using Kirillov--Reshetikhin crystals.
+The steady state of the TASEP is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06}.
+In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_n^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This interpretation gives a connection with five vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}\travis{If we need to cut references, we can change this sentence to say ``new matrix product formula''}.
 
-We
-\begin{itemize}
-\item introduce a new weighting of multiline queues
-\item prove the commutativity conjecture of~\cite{AAMP}
-\item prove~\cite[Conj.~3.10]{AasLin17}
-\item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
-\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{NY97,Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
-\end{itemize}
+We reformulate MLQs as functions on words of a fixed length $n$.
+We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
+This allows us to define the amplitude or spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
+We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
+Our main result is that for a fixed permutation $\sigma$, the sum over the weight of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ is equal the spectral weight of $u$.
+That is to say, we introduce an action of the symmetric group on MLQs such that under the FM algorithm corresponds to the natural action by letters on words.
+We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
 
-\Erik{Mention Gorodentsev's book.}
+Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}.
+We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma.
+By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
+
+%We
+%\begin{itemize}
+%\item introduce a new weighting of multiline queues
+%\item prove the commutativity conjecture of~\cite{AAMP}
+%\item prove~\cite[Conj.~3.10]{AasLin17}
+%\item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+%\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{NY97,Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
+%\end{itemize}
+%
+%\Erik{Mention Gorodentsev's book.}
 
 
 
@@ -479,7 +492,7 @@ We now state our main theorem.
   \[
   \swt{u} = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
   \]
-  where we sum over all sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
+  where we sum over all \defn{$\sigma$-twisted MLQs}: sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
   \begin{enumerate}
   \item $q_i$ is a $p_{\sigma_i}(\mm)$-queue, and
   \item $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
@@ -569,7 +582,7 @@ By Theorem~\ref{thm:permutation}, we have
 \[
 \psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0},
 \]
-\travis{If we keep $\wedge_j$, then we can use $\bigwedge_T$.}
+\travis{If we keep $\vee_j$, then we can use $\bigvee_T$.}
 \travis{Does order matter here?}
 By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
 By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$ \erik{FIX}.
@@ -1159,7 +1172,10 @@ Swap rows 4 and 5
 \]
 \end{example}
 
-
+\acknowledgements{
+We thank Atuso Kuniba for explaining the results in his papers~\cite{KMO15,KMO16}.
+This work benefited from computations using \textsc{SageMath}~\cite{sage}. %For the main paper, also~\cite{combinat}.
+}
 
 
 %% if you use biblatex then this generates the bibliography
