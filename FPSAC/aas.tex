@@ -41,6 +41,7 @@
 
 \newcommand{\xx}{\mathbf{x}}
 \newcommand{\mm}{\mathbf{m}}
+\newcommand{\qq}{\mathbf{q}}
 \newcommand{\MLQ}{\mathbf{S}}
 
 \newcommand{\mcA}{\mathcal{A}}
@@ -208,7 +209,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\title[MLQs with special parameters]{Multiline queues with special parameters}
+\title[MLQs with spectral parameters]{Multiline queues with spectral parameters}
 
 \author[E.~Aas \and D.~Grinberg \and T.~Scrimshaw]{Erik Aas\thanks{\email{eaas@kth.se}.}\addressmark{1}
 \and Darij Grinberg\thanks{\email{darij.grinberg@gmail.com}.}\addressmark{2}
@@ -228,7 +229,9 @@
 %\revised{}
 
 \abstract{
-We prove the spectral parameter version of the MLQs conjecture.
+We reformulate multiline queues as functions on words, and introduce the notion of a spectral weight of a word by defining a new weighting on multiline queues.
+We show that the spectral weight of a word is invariant under a natural action of the symmetric group, giving a proof of the commutativity conjecture of Arita, Ayyer, Mallick, and Prolhac.
+We give a determinant formula for the spectral weight of a word, which gives a proof of a conjecture of the first author and Linusson.
 }
 
 %% put your French abstract here, or comment this out if you don't have one
@@ -253,22 +256,40 @@ The totally asymmetric exclusion process (TASEP) is a non-equilibrium stochastic
 For some examples, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16} and references therein.
 In this paper, we consider the TASEP on a ring with $\ell$ sites and $n$ species of particles.
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, n\}$ of length $\ell$, where we take the indices to be $\ZZ / \ell \ZZ$.
-We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i > u_{i+1}$ to $u_{i+1} u_i$ and is done at a uniform rate.
+We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
 
-The steady state of the TASEP is known in terms of another process using multiline queues and applying the Ferrari--Martin algorithm~\cite{FM06}.
-In~\cite{KMO15,KMO16}, the Ferrari--Martin algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using Kirillov--Reshetikhin crystals.
-This interpretation gives a connection with five vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}\travis{If we need to cut references, we can change this sentence to say ``new matrix product formula''}.
+The steady state of the TASEP is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06}.
+In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_n^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
+This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
-We
-\begin{itemize}
-\item introduce a new weighting of multiline queues
-\item prove the commutativity conjecture of~\cite{AAMP}
-\item prove~\cite[Conj.~3.10]{AasLin17}
-\item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
-\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{NY97,Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
-\end{itemize}
+We reformulate MLQs as functions on words of a fixed length $n$.
+We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
+This allows us to define the amplitude or spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
+We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
+Our main result is that for a fixed permutation $\sigma$, the sum over the weight of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ is equal the spectral weight of $u$.
+That is to say, we introduce an action of the symmetric group on MLQs such that under the FM algorithm corresponds to the natural action by letters on words.
+We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
 
-\Erik{Mention Gorodentsev's book.}
+Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}.
+We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma.
+By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
+
+This extended abstract is organized as follows.
+In Section~\ref{sec:background}, we provide the necessary background.
+In Section~\ref{sec:result}, we state our results.
+In Section~\ref{sec:proof_sketch}, we sketch the proof of our main result.
+In Section~\ref{sec:graveyard}, we provide the graveyard.\travis{To be updated.}
+
+%We
+%\begin{itemize}
+%\item introduce a new weighting of multiline queues
+%\item prove the commutativity conjecture of~\cite{AAMP}
+%\item prove~\cite[Conj.~3.10]{AasLin17}
+%\item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
+%\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{NY97,Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
+%\end{itemize}
+%
+%\Erik{Mention Gorodentsev's book.}
 
 
 
@@ -478,7 +499,7 @@ We now state our main theorem.
   \[
   \swt{u} = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
   \]
-  where we sum over all sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
+  where we sum over all \defn{$\sigma$-twisted MLQs}: sequences $q_1, \dotsc, q_{\ell-1}$ of queues such that
   \begin{enumerate}
   \item $q_i$ is a $p_{\sigma_i}(\mm)$-queue, and
   \item $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
@@ -611,6 +632,7 @@ Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 %=====================================================================
 \section{Proof sketch of Theorem~\ref{thm:permutation}}
+\label{sec:proof_sketch}
 
 The proof reduced down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
@@ -977,6 +999,7 @@ Thus, we show that $C(u) = C'(u)$, where $u$ is one of the words such that none 
 
 %=====================================================================
 \section{The graveyard}
+\label{sec:graveyard}
 
 \begin{comment}
 \begin{figure}
@@ -1021,7 +1044,10 @@ $\begin{array}{cc}
 \end{array}$
 \end{example}
 
-
+\acknowledgements{
+We thank Atuso Kuniba for explaining the results in his papers~\cite{KMO15,KMO16}.
+This work benefited from computations using \textsc{SageMath}~\cite{sage}. %For the main paper, also~\cite{combinat}.
+}
 
 
 %% if you use biblatex then this generates the bibliography
