@@ -488,6 +488,7 @@ We now state our main theorem.
 We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
 
 \begin{cor}
+\label{co:merge}
   Let $\mm$ be a packed type and $\mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
   For any word $v$ of type $\mm'$, we have
 \[
@@ -500,6 +501,23 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
   Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i}{u}$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
+
+\begin{example}
+Looking at queues, we get
+\begin{align*}
+\swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
+\\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
+\\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)
+\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
+\\ & \hspace{55pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
+\\ & \hspace{55pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
+\\ & \hspace{55pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3)
+\end{align*}
+(We have factored the expressions for readability only.)
+
+Corollary \ref{co:merge} states that $\swt{13234} e_3(\xx) = \swt{13245} + \swt{14235}$, as we can check directly in this case.
+\end{example}
+
 
 \begin{thm}
 \label{thm:determinant_form}
@@ -566,9 +584,11 @@ In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)
 Let $\varphi(S) = \swt{u(( \prod_{i\in S} s_i ) w_0)}$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
 By Theorem~\ref{thm:permutation}, we have
 \[
-\psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0},
+  \psi(T) = \left(\prod_{i\in S} e_{m_1 + \dotsm + m_i}(x_1, \dotsc, x_n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0}.
 \]
-\travis{If we keep $\wedge_j$, then we can use $\bigwedge_T$.}
+
+By Theorem~\ref{thm:determinant_form}, $\swt{\left(\prod_{j\in T} \merge{n-j}{} \right) w_0 } = \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j\leq k}$ where $\gamma_i$ is \erik{FILL IN}
+
 By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
 By Theorem~\ref{thm:determinant_form}, $\swt{w_T} \prod_{i \in T} e_i(n) \det(\dots)$.
 Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
@@ -973,38 +993,7 @@ It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can 
 
 
 %=====================================================================
-\section{The projection formula}
-
-For the homogenous case, where all spectral parameters equal, it is well known that the number of MLQs with a given bottom row is proportional to the stationary distribution of a certain Markov chain, the multi-species TASEP on a ring, at the state corresponding to that bottom row.
-The TASEP has a property of merging classes that translates to a statement about multiline queues, usually called the \defn{projection principle}.
-Somewhat surprisingly, this principle has a generalization to our case with non-equal spectral parameters.
-We now state this generalization.
-
-\begin{thm}
-  Let $u$ be a word of type $\mm$, and let $v = \merge{k}{u}$.
-  Then $\sum_{u'} \wt{u} = e_{p_k(\mm)}(\xx) \wt{v}$,
-  where $u'$ runs over all words gotten by permuting $k$ and $k+1$ in $u$.
-\end{thm}
-
-This theorem will be a corollary of Theorem [??].
-
-
-\begin{example}
-Looking at queues, we get
-\begin{align*}
-\swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2)
-\\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
-\\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5)
-\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
-\\ & \hspace{55pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
-\\ & \hspace{55pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
-\\ & \hspace{55pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3)
-\end{align*}
-(We have factored the expressions for readability only.)
-
-The projection formula states that $\swt{13234} e_3(\xx) = \swt{13245} + \swt{14235}$, as we can check directly in this case.
-\end{example}
-
+\section{The graveyard}
 
 \begin{figure}
 \label{fig_generalized_queue}
