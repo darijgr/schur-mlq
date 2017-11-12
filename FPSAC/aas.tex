@@ -522,7 +522,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \begin{example}
 Suppose $n = 5$.
 Let $v = 13234$, and we have that $v = \merge{3}{u}$ if and only if $u \in \set{13245, 14235}$.
-By using examining all possible MLQs for these words, we obtain
+By examining all possible MLQs for these words, we obtain
 \begin{align*}
 \swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2),
 \\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
@@ -537,15 +537,20 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
 \end{example}
 
 \begin{example}
+As an example of the proof of Corollary~\ref{co:merge}, we remove the top row in the following MLQ,
 \[
-\begin{tikzpicture}
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\hspace{80pt}
-\begin{tikzpicture}
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
+\begin{tikzpicture}[baseline=82]
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture},
 \]
-\Travis{What is this an example for? The previous corollary (and example)?}
+
+getting the MLQ
+
+\[
+\begin{tikzpicture}\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}.
+\]
+
+Note that the effect on the bottom row labels is that of merging $5$ and $6$.
+
 \end{example}
 
 \begin{thm}
@@ -640,10 +645,10 @@ Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 \section{Proof sketch of Theorem~\ref{thm:permutation}}
 \label{sec:proof_sketch}
 
-The proof reduced down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
+The proof reduces down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
-We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$ and the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, where we have $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
+We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
 
 To construct $C'$ and show it satisfies the requisite properties, we break it into four parts as follows.
 By using the monotonicity, we may assume $u \in \{1,2\}^n$.
@@ -841,7 +846,7 @@ We apply $C$ to $u$ on the left and to $u_{3\leftrightarrow1}$ (note the interva
 \end{example}
 
 \begin{remark}
-The BB and BU reductions always have $q_1(u) = q_1(u_{i \leftrightarrow j})$.
+The BB reductions always has $q_1(u) = q_1(u_{i \leftrightarrow j})$.
 \end{remark}
 
 \begin{lemma}[UB]
@@ -1001,18 +1006,31 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 %\end{figure}
 
 
+\section{The TASEP connection}
 
+We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in \cite{AAMP}. The {\it totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\ive{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$. Clearly, these moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mbf{m}$. Multiline queues were first introduced in \cite{FM06} as a way to compute the stationary distribution of the TASEP. In [AAMP] a more algebraic approach is used for computing the stationary probabilities.
+Clearly, there are $2^{n-1}$ packed types of length $n$. We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12\dots n$ for each $i \in S$. Denote this type by $\mbf{m}_S$. Thus, for $n = 4$, we have $\mbf{m}_\emptyset = (1,1,1,1)$, $\mbf{m}_{\{1\}} = (2,1,1)$, $\mbf{m}_{\{2\}} = (1,2,1)$, $\mbf{m}_{\{3\}} = (1,1,2)$, $\mbf{m}_{\{1,2\}} = (3,1)$, $\mbf{m}_{\{1,3\}} = (2,2)$, $\mbf{m}_{\{2,3\}} = (1,3)$, and $\mbf{m}_{\{1,2,3\}} = (4)$. Recall that $\mcW_{\mbf{m}}$ denotes the set of words of type $\mbf{m}$.
 
+Now, let $V_S = \mathbb{R}^{\mcW_{\mbf{m}_S}}$ and let $M_S : V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_{\mbf{m}_S}$.
 
+For $i,S$ such that $i\notin S$, we define $\Psi_i : V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$ where we sum over all $i$-queues and $e_w$ is the basis vector in $V_{S\cup\{i\}}$ or $V_S$ corresponding to the word $w$.
+
+In \cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$. Therefore, if $\pi_S \in V_S$ is the unique vector with positive entries summing to $1$, satisfying $\pi_S = M_S \pi_S$, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$. This allows for computing every vector $\pi_S$ from the trivial vector $\pi_{[n]} = 1 \in \mathbb{R}$.
+
+In \cite{AAMP} it is conjectured that in general, we have $\Psi_i \Psi_j = \Psi_j\Psi_i$. By looking at the $(u,v)$ entry of both sides of this equation, this is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C(u)$. 
+
+Thus our proof in Section~\ref{sec:proof} show that $\Psi_i \Psi_j = \Psi_j \Psi_i$ for the weighted operators $\Psi_i$ given by $\Psi_i(e_u) = \sum_q \wt{q} e_{q(u)}$.
+
+We have not found any process similar to the TASEP using only "local" moves for which our weighted amplitudes $u$ are the stationary probabilities. We note, however that the Markov chain on $\mcW_{\mbf{m}}$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our weighted amplitudes $u$. 
 
 
 
 
 %=====================================================================
+\begin{comment}
 \section{The graveyard}
 \label{sec:graveyard}
 
-\begin{comment}
 \begin{figure}
 \label{fig_generalized_queue}
 \[
@@ -1023,7 +1041,6 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 \]
 \caption{A generalized queue showing that $v = Q_S(u)$ where $S = \{2,4,5,8,10\}$, $u = 13233223121$ and $v =41412342314$. It has weight $x_2x_4x_5x_8x_{10}$.}
 \end{figure}
-\end{comment}
 
 
 
@@ -1060,9 +1077,10 @@ By applying $R_4 R_3 R_2 R_1$ to bring the top row to the bottom, we get the cor
 \end{tikzpicture}
 \]
 \end{example}
+\end{comment}
 
 \acknowledgements{
-We thank Atuso Kuniba for explaining the results in his papers~\cite{KMO15,KMO16}.
+We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16}.
 This work benefited from computations using \textsc{SageMath}~\cite{sage}. %For the main paper, also~\cite{combinat}.
 }
 
