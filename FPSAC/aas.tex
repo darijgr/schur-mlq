@@ -214,7 +214,7 @@
 \and Darij Grinberg\thanks{\email{darij.grinberg@gmail.com}.}\addressmark{2}
 \and Travis Scrimshaw\thanks{\email{tcscrims@gmail.com}. Travis Scrimshaw was partially supported by the Australian Research Council DP170102648 and the National Science Foundation RTG grant DMS-1148634.}\addressmark{3}}
 
-\address{\addressmark{1}Department of Mathematics, Pennsylvania State University, McAllister Building, State College, PA 116802, USA
+\address{\addressmark{1}Department of Mathematics, Pennsylvania State University, McAllister Building, State College, PA 16802, USA
 \\ \addressmark{2}School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455, USA
 \\ \addressmark{3}School of Mathematics and Physics, University of Queensland, St. Lucia, QLD 4072, Australia}
 
@@ -261,7 +261,7 @@ The steady state of the TASEP is known in terms of another process introduced in
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
-We reformulate MLQs as functions on words of a fixed length $n$.
+Building on \cite{AAMP}, we think of queues (and MLQs in general) as functions on words of a fixed length $n$.
 We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
 This allows us to define the amplitude or spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
@@ -269,7 +269,7 @@ Our main result is that for a fixed permutation $\sigma$, the sum over the weigh
 That is to say, we introduce an action of the symmetric group on MLQs such that under the FM algorithm corresponds to the natural action by letters on words.
 We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
 
-Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}. \erik{mention algebraic approach of AAMP}
+Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we set all our weights to $1$.
 We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
@@ -591,6 +591,16 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
 
+(EXAMPLE TO BE REMOVED:)
+Is 
+$\left|\begin{array}{cccc}
+h_0(b_1) & h_0(b_2) & h_{-1}(b_3) & h_{-1}(b_4) \\
+h_1(b_1) & h_1(b_2) & h_0(b_3) & h_0(b_4) \\
+h_2(b_1) & h_2(b_2) & h_1(b_3) & h_1(b_4) \\
+h_3(b_1) & h_3(b_2) & h_2(b_3) & h_2(b_4) \\
+\end{array}\right| = x_2x_4x_5^2 + x_3x_4x_5^2+x_2x_3x_5^2+x_2x_3x_4x_5$ for $B=\{1,3,4,5\}$?
+Then the formula should be $\swt{u}=\prod_{i\in B} x_i \det(h_{i-j-1+\gamma_j}(b_j))_{1\leq i,j\leq r}$.
+
 \begin{figure}[t]
 \[
 \begin{tikzpicture}[xscale=1.5,yscale=0.9]
@@ -656,7 +666,7 @@ By Theorem~\ref{thm:determinant_form},
 \[
   \swt{\left(\prod_{j\in T} \merge{n-j}{} \right) w_0 } = \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j\leq r},
 \]
-where $\gamma_i$ is \erik{FILL IN}
+where $\gamma_i = i-|\{j\in T: j < i\}|$.
 
 By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
 Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
