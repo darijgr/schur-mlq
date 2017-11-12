@@ -350,7 +350,7 @@ To compute $q(u)$, draw the following diagram
 (whose upper row shows $u$, whose lower row shows $q(u)$,
 and whose middle row represents the set $q$ by balls in the positions of its elements):
 \[
-\begin{tikzpicture}[scale=1.3]
+\begin{tikzpicture}[scale=1.3,baseline=0]
 \node (i1) at (1,1) {$3$};
 \node (i2) at (2,1) {$4$};
 \node (i3) at (3,1) {$6$};
@@ -393,20 +393,21 @@ Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, the
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$, and second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$.
 Using this convention, we can write Example~\ref{ex:first_queue} as
 \[
-\begin{tikzpicture}[baseline=30]
-  \foreach \i in {5,9} { \node at (\i,2) {$1$}; }
-  \foreach \i in {8} { \node at (\i,2) {$2$}; }
-  \foreach \i in {1,6,7} { \node at (\i,2) {$3$}; }
-  \foreach \i in {2} { \node at (\i,2) {$4$}; }
-  \foreach \i in {3,4} { \node at (\i,2) {$6$}; }
-  \foreach \i in {1,4,8,9} { \draw (\i,1) circle (0.3); }
-  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,1-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {8,9} { \node at (\i,1) {$1$}; }
-  \foreach \i in {1} { \node at (\i,1) {$2$}; }
-  \foreach \i in {4} { \node at (\i,1) {$3$}; }
-  \foreach \i in {5,6} { \node at (\i,1) {$4$}; }
-  \foreach \i in {7} { \node at (\i,1) {$5$}; }
-  \foreach \i in {2,3} { \node at (\i,1) {$7$}; }
+\begin{tikzpicture}[baseline=10]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {1,6,7} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
+  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4} { \node at (\i,0) {$3$}; }
+  \foreach \i in {5,6} { \node at (\i,0) {$4$}; }
+  \foreach \i in {7} { \node at (\i,0) {$5$}; }
+  \foreach \i in {2,3} { \node at (\i,0) {$7$}; }
 \end{tikzpicture}
 \]
 
@@ -520,6 +521,47 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \end{proof}
 
 \begin{example}
+We give an example to illustrate the proof of Corollary~\ref{co:merge}.
+To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1,2)$.
+We take a particular MLQ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
+\[
+\qq =
+\begin{tikzpicture}[baseline=82]
+\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\xrightarrow{\hspace{30pt}}
+\begin{tikzpicture}[baseline=82]
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+= \widetilde{\qq}.
+\]
+Note that we can take any subset of $\ive{6}$ of size $5$, and so the sum over all of these choices contributes a weight change to $\qq$ by $e_5(6)$.
+Furthermore, note that $135452 = \merge{5}{135462}$.
+Now, by Theorem~\ref{thm:permutation}, such queues are in bijection with ordinary queues counting, in this case, $\swt{135462}$.
+In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
+By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
+\[
+\widetilde{\qq} \xrightarrow[\hspace{15pt}]{R_1}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\xrightarrow[\hspace{15pt}]{R_2}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\xrightarrow[\hspace{15pt}]{R_3}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+\xrightarrow[\hspace{15pt}]{R_4}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\]
+which contributes to $\swt{135462}$.
+\end{example}
+
+
+\begin{example}
 Suppose $n = 5$.
 Let $v = 13234$, and we have that $v = \merge{3}{u}$ if and only if $u \in \set{13245, 14235}$.
 By examining all possible MLQs for these words, we obtain
@@ -536,21 +578,6 @@ By examining all possible MLQs for these words, we obtain
 We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
-\begin{example}
-As an example of the proof of Corollary~\ref{co:merge}, we remove the top row in the following MLQ:
-\[
-\begin{tikzpicture}[baseline=82]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\longrightarrow
-\begin{tikzpicture}[baseline=82]
-\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\]
-
-Note that the effect on the bottom row labels is that of merging $5$ and $6$.
-
-\end{example}
 
 \begin{thm}
 \label{thm:determinant_form}
@@ -1011,19 +1038,20 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 \section{The TASEP connection}
 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in~\cite{AAMP}.
-The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\ive{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$.
-Tthese moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
-In~\cite{AAMP} a more algebraic approach is used for computing the stationary probabilities. Clearly, there are $2^{n-1}$ packed types of length $n$.
+The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$.
+These moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
+In~\cite{AAMP} a more algebraic approach is used for computing the stationary probabilities\travis{This belongs \emph{only} in the introduction.}.
+Clearly, there are $2^{n-1}$ packed types of length $n$.
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
 Thus, for $n = 4$, we have $\mm_{\emptyset} = (1,1,1,1)$, $\mm_{\{1\}} = (2,1,1)$, $\mm_{\{2\}} = (1,2,1)$, $\mm_{\{3\}} = (1,1,2)$, $\mm_{\{1,2\}} = (3,1)$, $\mm_{\{1,3\}} = (2,2)$, $\mm_{\{2,3\}} = (1,3)$, and $\mm_{\{1,2,3\}} = (4)$.
 Let $\mcW_S$ denote the set of words of type $\mm_S$.
 
-Let $V_S$ be the vector space whose basis vectors are indexed by the words in $\mcW_S$, and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
-For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$, where we sum over all $i$-queues and $e_w$ is the basis vector in $V_{S\cup\{i\}}$ or $V_S$ corresponding to the word $w$.
+Let $V_S$ be the vector space over $\RR$ with basis $\set{e_w \mid w \in \mcW_S}$, and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
+For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$, where we sum over all $i$-queues.
 
 In~\cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$.
-Therefore, if $\pi_S \in V_S$ is the unique vector with positive entries summing to $1$, satisfying $\pi_S = M_S \pi_S$, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$.
+Therefore, if $\pi_S \in V_S$ is the unique vector with non-negative entries summing to $1$, satisfying $\pi_S = M_S \pi_S$, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$.
 This allows for computing every vector $\pi_S$ from the trivial vector $\pi_{[n]} = 1 \in \RR$.
 
 In~\cite{AAMP} it is conjectured that in general, we have $\Psi_i \Psi_j = \Psi_j\Psi_i$.
@@ -1036,64 +1064,6 @@ We note, however that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$
 
 
 
-
-
-
-%=====================================================================
-
-\section{The zombie}
-\label{sec:graveyard}
-
-Oooohh Spooky!!!! It comes back from beyond the comments.
-
-\Travis{The big example below will find its way into the article somehow. Will experiment.}
-
-\begin{comment}
-\begin{figure}
-\label{fig_generalized_queue}
-\[
-\begin{tikzpicture}
-  \node at  (1,2){1};  \node at  (2,2){3};  \node at  (3,2){2};  \node at  (4,2){3};  \node at  (5,2){3};  \node at  (6,2){2};  \node at  (7,2){2};  \node at  (8,2){3};  \node at  (9,2){1};  \node at (10,2){2};  \node at (11,2){1};
-  \node at                     (1,1){4};   \node[circle,draw=black] at  (2,1){1};  \node at                     (3,1){4};  \node[circle,draw=black] at  (4,1){1};  \node[circle,draw=black] at  (5,1){2};  \node at                     (6,1){3};  \node at                     (7,1){4};  \node[circle,draw=black] at  (8,1){2};  \node at                     (9,1){3};  \node[circle,draw=black] at (10,1){1};  \node at                    (11,1){4};
-\end{tikzpicture}
-\]
-\caption{A generalized queue showing that $v = Q_S(u)$ where $S = \{2,4,5,8,10\}$, $u = 13233223121$ and $v =41412342314$. It has weight $x_2x_4x_5x_8x_{10}$.}
-\end{figure}
-\end{comment}
-
-
-\begin{example}
-To compute $\swt{135452}$, we count MLQs of type $(1,1,1,1,2)$ such as the following one:
-\[
-\begin{tikzpicture}\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-To get a word $136452$ or $135462$ we can add a new row on top, with $5$ boxes. The total weight of these additions is $e_5(6)$. Here is an example of such an addition:
-\[
-\qq =
-\begin{tikzpicture}[baseline=82]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\]
-By the theorem, such queues are in bijection with ordinary queues counting, in this case, $\swt{135462}$.
-Let $R_i(\qq)$ be the MLQ formed by taking the configuration $C = (q_i, q_{i+1})$ and replacing it with the dual configuration.
-By applying $R_4 R_3 R_2 R_1$ to bring the top row to the bottom, we get the corresponding ordinary queue, as follows:
-\[
-\qq \xrightarrow[\hspace{15pt}]{R_1}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_2}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_3}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_4}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\]
-\end{example}
 
 \acknowledgements{
 We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16}.
