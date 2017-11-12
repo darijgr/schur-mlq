@@ -258,7 +258,7 @@ Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, 
 We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
 
 The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
-In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_n^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
+In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
 We reformulate MLQs as functions on words of a fixed length $n$.
@@ -655,12 +655,14 @@ By using the monotonicity, we may assume $u \in \{1,2\}^n$.
 %%%%%%%%%%
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
-Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$. This is the set $\left\{i, i+1, \ldots, j\right\}$, which wraps around the ``circle'' if $i > j$.
+Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$.
+This is the set $\set{i, i+1, \ldots, j}$, which wraps around the ``circle'' if $i > j$.
+Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
-The maximal balanced intervals are disjoint but don't generally cover $[n]$.
+The maximal (with respect to set inclusion) balanced intervals are disjoint, and a maximal interval is $[n]$ if and only if $r = s$.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
@@ -682,7 +684,7 @@ The following notation will be useful later on: for a word $u$ and $j$ balanced 
 \end{tikzpicture}
 \]
 \caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
-The maximal (with respect to inclusion) balanced intervals are boxed.}
+The maximal balanced intervals are boxed.}
 \label{fig:balanced}
 \end{figure}
 
