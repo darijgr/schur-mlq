@@ -270,7 +270,7 @@ Our main result is that for a fixed permutation $\sigma$, the sum over the weigh
 That is to say, we introduce an action of the symmetric group on MLQs such that under the FM algorithm corresponds to the natural action by letters on words.
 We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
 
-Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}.
+Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}. \erik{mention algebraic approach of AAMP}
 We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
@@ -1011,14 +1011,13 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in~\cite{AAMP}.
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\ive{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$.
 Tthese moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
-In~\cite{AAMP} a more algebraic approach is used for computing the stationary probabilities.\travis{This sentence, if we keep it, belongs in the introduction.}
-Clearly, there are $2^{n-1}$ packed types of length $n$.
+In~\cite{AAMP} a more algebraic approach is used for computing the stationary probabilities. Clearly, there are $2^{n-1}$ packed types of length $n$.
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
 Thus, for $n = 4$, we have $\mm_{\emptyset} = (1,1,1,1)$, $\mm_{\{1\}} = (2,1,1)$, $\mm_{\{2\}} = (1,2,1)$, $\mm_{\{3\}} = (1,1,2)$, $\mm_{\{1,2\}} = (3,1)$, $\mm_{\{1,3\}} = (2,2)$, $\mm_{\{2,3\}} = (1,3)$, and $\mm_{\{1,2,3\}} = (4)$.
-Recall that $\mcW_{\mm}$ denotes the set of words of type $\mm$.
+Let $\mcW_S$ denote the set of words of type $\mm_S$.
 
-Now, let $V_S = \RR^{\mcW_{\mm_S}}$ \travis{This makes my eyes hurt.} and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_{\mbf{m}_S}$.
+Now, let $V_S = \RR^{\mcW_S}$ be the vector space whose basis vectors are indexed by the words in $\mcW_S$ and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
 
 For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$, where we sum over all $i$-queues and $e_w$ is the basis vector in $V_{S\cup\{i\}}$ or $V_S$ corresponding to the word $w$.
 
@@ -1031,7 +1030,7 @@ By looking at the $(u,v)$ entry of both sides of this equation, this is asking w
 Thus, our proof of Theorem~\ref{thm:permutation} shows that $\Psi_i \Psi_j = \Psi_j \Psi_i$ for the weighted operators $\Psi_i$ given by $\Psi_i(e_u) = \sum_q \wt(q) e_{q(u)}$.
 
 We have not found any process similar to the TASEP using only ``local'' moves for which our weighted amplitudes $u$ are the stationary probabilities.
-We note, however that the Markov chain on $\mcW_{\mm}$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our weighted amplitudes $u$. 
+We note, however that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our weighted amplitudes $u$. 
 
 
 
