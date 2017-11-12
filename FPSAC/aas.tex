@@ -27,7 +27,6 @@
 \newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
 \newcommand{\fs}{\mathcal{S}} % flagged Schur function
 \newcommand{\mbf}{\mathbf}
-\newcommand{\0}{\phantom{c}}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
 \newcommand{\merge}[2]{\vee_{#1}#2} % merge
 
@@ -70,14 +69,14 @@
 \newcommand{\bn}{\overline{n}}
 \newcommand{\ellbar}{\overline{\ell}}
 
-\let\sumnonlimits\sum
-\let\prodnonlimits\prod
-\let\cupnonlimits\bigcup
-\let\capnonlimits\bigcap
-\renewcommand{\sum}{\sumnonlimits\limits}
-\renewcommand{\prod}{\prodnonlimits\limits}
-\renewcommand{\bigcup}{\cupnonlimits\limits}
-\renewcommand{\bigcap}{\capnonlimits\limits}
+%\let\sumnonlimits\sum
+%\let\prodnonlimits\prod
+%\let\cupnonlimits\bigcup
+%\let\capnonlimits\bigcap
+%\renewcommand{\sum}{\sumnonlimits\limits}
+%\renewcommand{\prod}{\prodnonlimits\limits}
+%\renewcommand{\bigcup}{\cupnonlimits\limits}
+%\renewcommand{\bigcap}{\capnonlimits\limits}
 
 \newenvironment{verlong}{}{}
 \newenvironment{vershort}{}{}
@@ -254,8 +253,8 @@ We give a determinant formula for the spectral weight of a word, which gives a p
 
 The totally asymmetric exclusion process (TASEP) is a non-equilibrium stochastic process  that has received significant attention in various fields, such as probability theory, combinatorics, physics, biology, and civil engineering over the past few decades.
 For some examples, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16} and references therein.
-In this paper, we consider the TASEP on a ring with $\ell$ sites and $n$ species of particles.
-Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, n\}$ of length $\ell$, where we take the indices to be $\ZZ / \ell \ZZ$.
+In this paper, we consider the TASEP on a ring with $n$ sites and $\ell$ species of particles.
+Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, \ell\}$ of length $n$, where we take the indices to be $\ZZ / n \ZZ$.
 We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
 
 The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
@@ -304,7 +303,8 @@ In Section~\ref{sec:graveyard}, we provide the graveyard.\travis{To be updated.}
 
 Fix a positive integer $n$. Let $\ive{n}$ denote the set $\set{1, 2, \dotsc, n}$.
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
-We will consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{n+m} = u_m$ for all $m$).  Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
+We will consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+m} = u_k$ for all $m$).
+Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
@@ -537,16 +537,15 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
 \end{example}
 
 \begin{example}
-As an example of the proof of Corollary~\ref{co:merge}, we remove the top row in the following MLQ,
+As an example of the proof of Corollary~\ref{co:merge}, we remove the top row in the following MLQ:
 \[
 \begin{tikzpicture}[baseline=82]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture},
-\]
-
-getting the MLQ
-
-\[
-\begin{tikzpicture}\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}.
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\longrightarrow
+\begin{tikzpicture}[baseline=82]
+\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
 \]
 
 Note that the effect on the bottom row labels is that of merging $5$ and $6$.
@@ -1017,8 +1016,7 @@ Denote this type by $\mm_S$.
 Thus, for $n = 4$, we have $\mm_{\emptyset} = (1,1,1,1)$, $\mm_{\{1\}} = (2,1,1)$, $\mm_{\{2\}} = (1,2,1)$, $\mm_{\{3\}} = (1,1,2)$, $\mm_{\{1,2\}} = (3,1)$, $\mm_{\{1,3\}} = (2,2)$, $\mm_{\{2,3\}} = (1,3)$, and $\mm_{\{1,2,3\}} = (4)$.
 Let $\mcW_S$ denote the set of words of type $\mm_S$.
 
-Now, let $V_S = \RR^{\mcW_S}$ be the vector space whose basis vectors are indexed by the words in $\mcW_S$ and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
-
+Let $V_S$ be the vector space whose basis vectors are indexed by the words in $\mcW_S$, and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
 For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$, where we sum over all $i$-queues and $e_w$ is the basis vector in $V_{S\cup\{i\}}$ or $V_S$ corresponding to the word $w$.
 
 In~\cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$.
@@ -1039,10 +1037,15 @@ We note, however that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$
 
 
 %=====================================================================
-\begin{comment}
-\section{The graveyard}
+
+\section{The zombie}
 \label{sec:graveyard}
 
+Oooohh Spooky!!!! It comes back from beyond the comments.
+
+\Travis{The big example below will find its way into the article somehow. Will experiment.}
+
+\begin{comment}
 \begin{figure}
 \label{fig_generalized_queue}
 \[
@@ -1053,8 +1056,7 @@ We note, however that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$
 \]
 \caption{A generalized queue showing that $v = Q_S(u)$ where $S = \{2,4,5,8,10\}$, $u = 13233223121$ and $v =41412342314$. It has weight $x_2x_4x_5x_8x_{10}$.}
 \end{figure}
-
-
+\end{comment}
 
 
 \begin{example}
@@ -1089,7 +1091,6 @@ By applying $R_4 R_3 R_2 R_1$ to bring the top row to the bottom, we get the cor
 \end{tikzpicture}
 \]
 \end{example}
-\end{comment}
 
 \acknowledgements{
 We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16}.
