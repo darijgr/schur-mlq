@@ -258,7 +258,7 @@ In this paper, we consider the TASEP on a ring with $\ell$ sites and $n$ species
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, n\}$ of length $\ell$, where we take the indices to be $\ZZ / \ell \ZZ$.
 We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
 
-The steady state of the TASEP is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06}.
+The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_n^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
@@ -1008,20 +1008,33 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 
 \section{The TASEP connection}
 
-We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in \cite{AAMP}. The {\it totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\ive{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$. Clearly, these moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mbf{m}$. Multiline queues were first introduced in \cite{FM06} as a way to compute the stationary distribution of the TASEP. In [AAMP] a more algebraic approach is used for computing the stationary probabilities.
-Clearly, there are $2^{n-1}$ packed types of length $n$. We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12\dots n$ for each $i \in S$. Denote this type by $\mbf{m}_S$. Thus, for $n = 4$, we have $\mbf{m}_\emptyset = (1,1,1,1)$, $\mbf{m}_{\{1\}} = (2,1,1)$, $\mbf{m}_{\{2\}} = (1,2,1)$, $\mbf{m}_{\{3\}} = (1,1,2)$, $\mbf{m}_{\{1,2\}} = (3,1)$, $\mbf{m}_{\{1,3\}} = (2,2)$, $\mbf{m}_{\{2,3\}} = (1,3)$, and $\mbf{m}_{\{1,2,3\}} = (4)$. Recall that $\mcW_{\mbf{m}}$ denotes the set of words of type $\mbf{m}$.
+We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in~\cite{AAMP}.
+The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\ive{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$.
+Tthese moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
+In~\cite{AAMP} a more algebraic approach is used for computing the stationary probabilities.\travis{This sentence, if we keep it, belongs in the introduction.}
+Clearly, there are $2^{n-1}$ packed types of length $n$.
+We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
+Denote this type by $\mm_S$.
+Thus, for $n = 4$, we have $\mm_{\emptyset} = (1,1,1,1)$, $\mm_{\{1\}} = (2,1,1)$, $\mm_{\{2\}} = (1,2,1)$, $\mm_{\{3\}} = (1,1,2)$, $\mm_{\{1,2\}} = (3,1)$, $\mm_{\{1,3\}} = (2,2)$, $\mm_{\{2,3\}} = (1,3)$, and $\mm_{\{1,2,3\}} = (4)$.
+Recall that $\mcW_{\mm}$ denotes the set of words of type $\mm$.
 
-Now, let $V_S = \mathbb{R}^{\mcW_{\mbf{m}_S}}$ and let $M_S : V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_{\mbf{m}_S}$.
+Now, let $V_S = \RR^{\mcW_{\mm_S}}$ \travis{This makes my eyes hurt.} and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_{\mbf{m}_S}$.
 
-For $i,S$ such that $i\notin S$, we define $\Psi_i : V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$ where we sum over all $i$-queues and $e_w$ is the basis vector in $V_{S\cup\{i\}}$ or $V_S$ corresponding to the word $w$.
+For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(e_u) = \sum_{q} e_{q(u)}$, where we sum over all $i$-queues and $e_w$ is the basis vector in $V_{S\cup\{i\}}$ or $V_S$ corresponding to the word $w$.
 
-In \cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$. Therefore, if $\pi_S \in V_S$ is the unique vector with positive entries summing to $1$, satisfying $\pi_S = M_S \pi_S$, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$. This allows for computing every vector $\pi_S$ from the trivial vector $\pi_{[n]} = 1 \in \mathbb{R}$.
+In~\cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$.
+Therefore, if $\pi_S \in V_S$ is the unique vector with positive entries summing to $1$, satisfying $\pi_S = M_S \pi_S$, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$.
+This allows for computing every vector $\pi_S$ from the trivial vector $\pi_{[n]} = 1 \in \RR$.
 
-In \cite{AAMP} it is conjectured that in general, we have $\Psi_i \Psi_j = \Psi_j\Psi_i$. By looking at the $(u,v)$ entry of both sides of this equation, this is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C(u)$. 
+In~\cite{AAMP} it is conjectured that in general, we have $\Psi_i \Psi_j = \Psi_j\Psi_i$.
+By looking at the $(u,v)$ entry of both sides of this equation, this is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C(u)$. 
+Thus, our proof of Theorem~\ref{thm:permutation} shows that $\Psi_i \Psi_j = \Psi_j \Psi_i$ for the weighted operators $\Psi_i$ given by $\Psi_i(e_u) = \sum_q \wt(q) e_{q(u)}$.
 
-Thus our proof in Section~\ref{sec:proof} show that $\Psi_i \Psi_j = \Psi_j \Psi_i$ for the weighted operators $\Psi_i$ given by $\Psi_i(e_u) = \sum_q \wt{q} e_{q(u)}$.
+We have not found any process similar to the TASEP using only ``local'' moves for which our weighted amplitudes $u$ are the stationary probabilities.
+We note, however that the Markov chain on $\mcW_{\mm}$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our weighted amplitudes $u$. 
 
-We have not found any process similar to the TASEP using only "local" moves for which our weighted amplitudes $u$ are the stationary probabilities. We note, however that the Markov chain on $\mcW_{\mbf{m}}$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our weighted amplitudes $u$. 
+
+
 
 
 
