@@ -277,7 +277,6 @@ This extended abstract is organized as follows.
 In Section~\ref{sec:background}, we provide the necessary background.
 In Section~\ref{sec:result}, we state our results.
 In Section~\ref{sec:proof_sketch}, we sketch the proof of our main result.
-In Section~\ref{sec:graveyard}, we provide the graveyard.\travis{To be updated.}
 
 %We
 %\begin{itemize}
@@ -311,7 +310,7 @@ We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 A word $u$ or type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We call $\ell$ the number of \defn{classes} in $u$.
 We can \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
-We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$\travis{Feel free to change this notation by changing the macro}.
+We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue is $\wt(q) := \prod_{i \in q} x_i$.
@@ -590,16 +589,6 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
-
-(EXAMPLE TO BE REMOVED:)
-Is 
-$\left|\begin{array}{cccc}
-h_0(b_1) & h_0(b_2) & h_{-1}(b_3) & h_{-1}(b_4) \\
-h_1(b_1) & h_1(b_2) & h_0(b_3) & h_0(b_4) \\
-h_2(b_1) & h_2(b_2) & h_1(b_3) & h_1(b_4) \\
-h_3(b_1) & h_3(b_2) & h_2(b_3) & h_2(b_4) \\
-\end{array}\right| = x_2x_4x_5^2 + x_3x_4x_5^2+x_2x_3x_5^2+x_2x_3x_4x_5$ for $B=\{1,3,4,5\}$?
-Then the formula should be $\swt{u}=\prod_{i\in B} x_i \det(h_{i-j-1+\gamma_j}(b_j))_{1\leq i,j\leq r}$.
 
 \begin{figure}[t]
 \[
@@ -1050,7 +1039,6 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in~\cite{AAMP}.
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$.
 These moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
-In~\cite{AAMP} a more algebraic approach is used for computing the stationary probabilities\travis{This belongs \emph{only} in the introduction.}.
 Clearly, there are $2^{n-1}$ packed types of length $n$.
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
