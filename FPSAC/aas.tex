@@ -660,6 +660,7 @@ Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \i
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
+The maximal balanced intervals are disjoint but don't generally cover $[n]$.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
@@ -703,7 +704,7 @@ In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \
 \subsection*{Part C: Reduction to special words}
 
 We reduce the problem to a certain set of words by performing a series of reductions based on the following lemmas.
-We denote $u_{i\leftrightarrow j}$ as the result of swapping positions $i$ and $j$ in $u$.
+We define $u_{i\leftrightarrow j}$ as the result of swapping positions $i$ and $j$ in $u$.
 For this part, we assume $i,j \in \ive{n}$.
 
 %\begin{lemma}
