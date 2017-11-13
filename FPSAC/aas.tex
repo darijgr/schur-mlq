@@ -255,7 +255,7 @@ The totally asymmetric exclusion process (TASEP) is a non-equilibrium stochastic
 For some examples, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16} and references therein.
 In this paper, we consider the TASEP on a ring with $n$ sites and $\ell$ species of particles.
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, \ell\}$ of length $n$, where we take the indices to be $\ZZ / n \ZZ$.
-We will also consider the process to be discrete in time, where the transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
+We will also consider the process to be discrete in time.
 
 The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
@@ -433,14 +433,14 @@ Our notion of an MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
 
-%Next, fix a subset $B = \set{b_1 < b_2 < \cdots < b_n} \subseteq \ive{N}$.
+\begin{dfn}
 For a packed word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{spectral weight} or \defn{amplitude} as
 \begin{equation}
 \label{eq:amplitude}
   \swt{u} := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
 \end{equation}
 where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ and $u = q_{\ell-1}( \cdots q_1(1 \dotsm 1) \cdots )$.
-
+\end{dfn}
 
 %\subsection{Flagged Schur functions}
 %
@@ -656,11 +656,11 @@ Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 \section{Proof sketch of Theorem~\ref{thm:permutation}}
 \label{sec:proof_sketch}
 
-The proof reduces down to when we have a pair of queues since all permutations can be written as a product of simple transpositions.
+The proof reduces down to defining an action of a simple transposition on a pair of queues since all permutations can be written as a product of simple transpositions.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
 We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
-\Travis{We need to talk about Yang--Baxter here because we need this to really be an $S_m$ action for confluence.}
+Furthermore, we need to show that taking the dual configuration satisfies the braid relations.
 
 To construct $C'$ and show it satisfies the requisite properties, we break it into four parts as follows.
 By using the monotonicity, we may assume $u \in \{1,2\}^n$.
@@ -708,6 +708,7 @@ We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced intervals.
 It is clear that $C'' = C$ and $\wt C = \wt C'$.
+This corresponds to the action of the combinatorial $R$-matrix~\cite{NY97,Shimozono02}, which satisfies the Yang--Baxter equation/the braid relation.
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -1025,27 +1026,30 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 \label{sec:tasep}
 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in~\cite{AAMP}.
-The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_{n}$ with transitions $ji \to ij$ with rate $1$ for $i < j$.
+The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_{n}$ with transitions $u_i u_{i+1} \to u_{i+1} u_i$ with rate $1$ for $u_i < u_{i+1}$.
 These moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
-Clearly, there are $2^{n-1}$ packed types of length $n$.
+There are $2^{n-1}$ packed types for words of length $n$ as they are compositions of $n$.
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
-Thus, for $n = 4$, we have $\mm_{\emptyset} = (1,1,1,1)$, $\mm_{\{1\}} = (2,1,1)$, $\mm_{\{2\}} = (1,2,1)$, $\mm_{\{3\}} = (1,1,2)$, $\mm_{\{1,2\}} = (3,1)$, $\mm_{\{1,3\}} = (2,2)$, $\mm_{\{2,3\}} = (1,3)$, and $\mm_{\{1,2,3\}} = (4)$.
-Let $\mcW_S$ denote the set of words of type $\mm_S$.
+Note that $\set{p_1(\mm_S), \dotsc, p_{\ell-1}(\mm_S)} = [n-1] \setminus S$, where $\mm_S$ has $\ell$ classes, which is the complement of the usual bijection between subsets of $\ive{n-1}$ and compositions of $n$.
+For example when $n = 4$, we have $\mm_{\emptyset} = (1,1,1,1)$ and $\mm_{\{1,2,3\}} = (4)$.
 
-Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in \mcW_S}$, and let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
-For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues.
+Let $\mcW_S$ denote the set of words of type $\mm_S$.
+Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in \mcW_S}$.
+Let $M_S \colon V_S \to V_S$ be the transition matrix of the TASEP on $\mcW_S$.
+For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V_S$ by letting $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$.
 
 In~\cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$.
-Therefore, if $\pi_S \in V_S$ is the unique vector with non-negative entries summing to $1$, satisfying $\pi_S = M_S \pi_S$, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$.
-This allows for computing every vector $\pi_S$ from the trivial vector $\pi_{[n]} = 1 \in \RR$.
+Let $\pi_S \in V_S$ be the stationary distribution of $M_S$: the unique vector with non-negative entries summing to $1$ satisfying $\pi_S = M_S \pi_S$.
+Thus, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$.
+This allows for computing every stationary distribution from the trivial vector $\pi_{[n]} = 1 \in \RR$.
 
-In~\cite{AAMP} it is conjectured that in general, we have $\Psi_i \Psi_j = \Psi_j\Psi_i$.
-By looking at the $(u,v)$ entry of both sides of this equation, this is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
+It is conjectured in~\cite{AAMP} that $\Psi_i \Psi_j = \Psi_j\Psi_i$, which is called the \defn{commutativity conjecture}.
+By looking at the $(u,v)$ entry of both sides of this equation, the commutativity conjecture is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
 Thus, our proof of Theorem~\ref{thm:permutation} shows that $\Psi_i \Psi_j = \Psi_j \Psi_i$ for the weighted operators $\Psi_i$ given by $\Psi_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)}$.
 
 We have not found any process similar to the TASEP using only ``local'' moves for which our spectral weights of $u$ are the stationary probabilities.
-We note, however that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our spectral weights of $u$. 
+However, we note that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our spectral weights of $u$. 
 
 
 
