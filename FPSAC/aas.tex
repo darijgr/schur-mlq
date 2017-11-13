@@ -228,7 +228,7 @@
 %\revised{}
 
 \abstract{
-We reformulate multiline queues as functions on words, and introduce the notion of a spectral weight of a word by defining a new weighting on multiline queues.
+Using the description of multiline queues as functions on words, we introduce the notion of a spectral weight of a word by defining a new weighting on multiline queues.
 We show that the spectral weight of a word is invariant under a natural action of the symmetric group, giving a proof of the commutativity conjecture of Arita, Ayyer, Mallick, and Prolhac.
 We give a determinant formula for the spectral weight of a word, which gives a proof of a conjecture of the first author and Linusson.
 }
@@ -255,13 +255,13 @@ The totally asymmetric exclusion process (TASEP) is a non-equilibrium stochastic
 For some examples, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16} and references therein.
 In this paper, we consider the TASEP on a ring with $n$ sites and $\ell$ species of particles.
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, \ell\}$ of length $n$, where we take the indices to be $\ZZ / n \ZZ$.
-We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
+We will also consider the process to be discrete in time, where the transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$.
 
 The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
-Building on \cite{AAMP}, we reformulate queues and MLQs as functions on words of a fixed length $n$.
+We describe MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
 We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
 This allows us to define the spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
