@@ -261,13 +261,13 @@ The steady state of the TASEP is known in terms of another process introduced in
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
-Building on \cite{AAMP}, we think of queues (and MLQs in general) as functions on words of a fixed length $n$.
+Building on \cite{AAMP}, we reformulate queues and MLQs as functions on words of a fixed length $n$.
 We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
 This allows us to define the amplitude or spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
 Our main result is that for a fixed permutation $\sigma$, the sum over the weight of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ is equal the spectral weight of $u$.
 That is to say, we introduce an action of the symmetric group on MLQs such that under the FM algorithm corresponds to the natural action by letters on words.
-We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
+We show this by applying a combinatorial $R$-matrix to an MLQ\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).} does not change the MLQ as a function on words.
 
 Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we set all our weights to $1$.
 We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
@@ -310,7 +310,7 @@ We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 A word $u$ or type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We call $\ell$ the number of \defn{classes} in $u$.
 We can \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
-We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$.
+We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$, and for $T = \set{t_1, \dotsc, t_k} \subseteq \ive{\ell-1}$, we write $\bigvee_T u := \merge{t_1}{\cdots\merge{t_k}{u}}$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue is $\wt(q) := \prod_{i \in q} x_i$.
@@ -433,7 +433,7 @@ Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words,
 
 \begin{dfn}
 A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
-For a permutation $\sigma$ of $\ive{\ell-1}$, a \defn{$\sigma$-twisted MLQ} of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma_i}(\mm)$-queue.
+For a permutation $\sigma$ of $\ive{\ell-1}$, a \defn{$\sigma$-twisted MLQ} of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue.
 \end{dfn}
 
 \begin{remark}
@@ -501,7 +501,7 @@ In this section, we state our main results and prove the commutativity conjectur
   where we sum over all $\sigma$-twisted MLQs such that $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
 \end{thm}
 
-We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n$ is proven in~\cite{AAMP} using different techniques.
+We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$\travis{This is correct, right?} is proven in~\cite{AAMP} using different techniques.
 
 \begin{cor}
 \label{co:merge}
@@ -514,7 +514,7 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
 where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
 \end{cor}
 
-\begin{proof}
+\begin{proof}[Proof sketch]
   Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i}{u}$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
@@ -585,7 +585,7 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
   Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
   Then
   \[
-  \swt{u} = \det( h_{i-j-1+\gamma_j}(b_j) )_{1\leq i,j\leq r},
+  \swt{u} = \det\bigl( h_{i-j-1+\gamma_j}(b_j) \bigr)_{1\leq i,j\leq r},
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
@@ -641,23 +641,17 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
 \label{fig:lattice_path_bijection}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v$ of $\ive{r}$ let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
-Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$.
-In~\cite{AasLin17}, a formula for the amplitude $\swt{u((\prod_{i\in S} s_i)w_0)}$ \travis{This is undefined. Do we consider the permutation as a word? Does the permutation act on the word $u$? How does it act?} is conjectured, where $w_0 = r (r-1) \dotsm 1$ is the reverse permutation on $\ive{r}$ (note that the elements $(s_i \mid i \in S)$ commute pairwise, so $\prod_{i\in S} s_i$ well defined).
+Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v$ of $\ive{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
+Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$,\footnote{The elements $\{s_i \mid i \in S\}$ all commute, so the product is well-defined.} where $s_i$ is the simple transposition on $i$ and $i+1$ and $w_0(k) = r+1-k$ is the reverse permutation on $\ive{r}$.
+In~\cite{AasLin17}, a formula for the amplitude $\swt{u \sigma_S}$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
 
-Let $\varphi(S) = \swt{u(( \prod_{i\in S} s_i ) w_0)}$, and $\psi(T) = \sum_{S \subseteq T} \varphi(S)$.
+Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
 \[
-  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \left( \prod_{j \in T} \merge{n-j}{} \right) w_0}.
+  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r}.
 \]
-
-By Theorem~\ref{thm:determinant_form},
-\[
-  \swt{\left(\prod_{j\in T} \merge{n-j}{} \right) w_0 } = \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j\leq r},
-\]
-where $\gamma_i = i-|\{j\in T: j < i\}|$.
-
-By M\"obius inversion we have $\varphi(S) = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
+where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
+By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
 Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 
