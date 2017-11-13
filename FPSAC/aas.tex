@@ -275,7 +275,7 @@ Furthermore, we give a determinant expression for the spectral weight of decreas
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
 One potential application is that our weighting could be used to describe the steady state distribution for the inhomogeneous TASEP~\cite{AL14,AM13}.
-Furthermore, we expect our weighting scheme can be extended to the totally asymmetric zero range process (TARZP), where multiple particles can occupy the same site~\cite{KMO16TARZP,KMO16TARZPII}.
+Furthermore, we expect that our weighting scheme can be extended to the totally asymmetric zero range process (TARZP), where multiple particles can occupy the same site~\cite{KMO16TARZP,KMO16TARZPII}.
 This comes from the fact that the TARZP can also be realized using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
 Similarly, this extension of our results could be used to describe the steady state distribution for the inhomogeneous TARZP defined in~\cite{KMO16II}.
 
@@ -582,7 +582,7 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
   Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
   Then
   \[
-  \swt{u} = \prod_{i\in B} x_i \det\bigl( h_{i-j-1+\gamma_j}(b_j) \bigr)_{1\leq i,j\leq r},
+  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\gamma_j}(b_j) \bigr)_{1\leq i,j\leq r},
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
@@ -645,11 +645,11 @@ In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conj
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
 \[
-  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \prod_{i\in B} x_i \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r}.
+  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r}.
 \]
 where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-Taken together, and letting $x_i=1$ for all $i$, this proves~\cite[Conj.~3.10]{AasLin17}.
+Taken together with $x_1 = \cdots = x_n = 1$ proves~\cite[Conj.~3.10]{AasLin17}.
 
 
 
