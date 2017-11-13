@@ -266,12 +266,12 @@ We introduce a new weighting of MLQs, which is the weight of the MLQ considered 
 This allows us to define the spectral weight of a word $u$ to be the sum of the weights of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
 Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
-To this end, we introduce an action of the symmetric group on MLQs which, under the FM algorithm, corresponds to the natural action by letters on words.
-We show this by proving that applying a combinatorial $R$-matrix to an MLQ\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).} does not change the MLQ as a function on words.
+To this end, we construct an action of the symmetric group on MLQs that corresponds under the usual FM algorithm to the natural action by letters on words.
+This action is given by applying a combinatorial $R$-matrix to an MLQ\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}, and we show that does not change the MLQ as a function on words.
 
-Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize all our weights to $1$.
+As a consequence, we obtain a proof of the commutativity conjecture of~\cite{AAMP} when we specialize all our weight parameters to $1$.
 However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
-We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
+Furthermore, we give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
 This extended abstract is organized as follows.
@@ -660,6 +660,7 @@ The proof reduces down to when we have a pair of queues since all permutations c
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
 We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
+\Travis{We need to talk about Yang--Baxter here because we need this to really be an $S_m$ action for confluence.}
 
 To construct $C'$ and show it satisfies the requisite properties, we break it into four parts as follows.
 By using the monotonicity, we may assume $u \in \{1,2\}^n$.
