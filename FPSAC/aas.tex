@@ -271,7 +271,7 @@ This action is given by applying a combinatorial $R$-matrix to an MLQ\footnote{T
 
 As a consequence, we obtain a proof of the commutativity conjecture of~\cite{AAMP} when we specialize all our weight parameters to $1$.
 However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
-Furthermore, we give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
+Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
 One potential application is that our weighting could be used to describe the steady state distribution for the inhomogeneous TASEP~\cite{AL14,AM13}.
@@ -582,7 +582,7 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
   Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
   Then
   \[
-  \swt{u} = \det\bigl( h_{i-j-1+\gamma_j}(b_j) \bigr)_{1\leq i,j\leq r},
+  \swt{u} = \prod_{i\in B} x_i \det\bigl( h_{i-j-1+\gamma_j}(b_j) \bigr)_{1\leq i,j\leq r},
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
@@ -645,11 +645,11 @@ In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conj
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
 \[
-  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r}.
+  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \prod_{i\in B} x_i \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r}.
 \]
 where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-Taken together, this proves~\cite[Conj.~3.10]{AasLin17}.
+Taken together, and letting $x_i=1$ for all $i$, this proves~\cite[Conj.~3.10]{AasLin17}.
 
 
 
