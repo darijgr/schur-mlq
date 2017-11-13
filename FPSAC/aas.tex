@@ -28,7 +28,7 @@
 \newcommand{\fs}{\mathcal{S}} % flagged Schur function
 \newcommand{\mbf}{\mathbf}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
-\newcommand{\merge}[2]{\vee_{#1}#2} % merge
+\newcommand{\merge}[1]{\vee_{#1}} % merge
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -259,10 +259,10 @@ We will also consider the process to be discrete in time, where the transition m
 
 The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
-This connects the TASEP with five vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
+This connects the TASEP with five-vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
 We describe MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
-We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
+We introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
 This allows us to define the spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
 Our main result is that for a fixed permutation $\sigma$, the sum over the weight of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ is equal the spectral weight of $u$.
@@ -270,6 +270,7 @@ That is to say, we introduce an action of the symmetric group on MLQs such that 
 We show this by applying a combinatorial $R$-matrix to an MLQ\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).} does not change the MLQ as a function on words.
 
 Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we set all our weights to $1$.
+However, we note that our
 We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
@@ -292,7 +293,7 @@ In Section~\ref{sec:tasep}, describe the connection between our work and the TAS
 \label{sec:background}
 
 Fix a positive integer $n$. Let $\ive{n}$ denote the set $\set{1, 2, \dotsc, n}$.
-Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
+Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ in the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We will consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+n} = u_k$ for all $n$).
 Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
@@ -300,8 +301,8 @@ The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 A word $u$ or type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We call $\ell$ the number of \defn{classes} in $u$.
-We can \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
-We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i}{u}$, and for $T = \set{t_1, \dotsc, t_k} \subseteq \ive{\ell-1}$, we write $\bigvee_T u := \merge{t_1}{\cdots\merge{t_k}{u}}$.
+We \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
+We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$, and for $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we write $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue is $\wt(q) := \prod_{i \in q} x_i$.
@@ -502,11 +503,11 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
 \[
   \swt{v} e_{p_i(\mm)}(n) = \sum_u \swt{u},
 \]
-where we sum over all $u$ of type $\mm$ such that $v = \merge{i}{u}$.
+where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \end{cor}
 
 \begin{proof}[Proof sketch]
-  Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i}{u}$.
+  Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i} u$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
 
@@ -526,7 +527,7 @@ We take a particular MLQ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
 = \widetilde{\qq}.
 \]
 Note that we can take any subset of $\ive{6}$ of size $5$, and so the sum over all of these choices contributes a weight change to $\qq$ by $e_5(6)$.
-Furthermore, note that $135452 = \merge{5}{135462}$.
+Furthermore, note that $135452 = \merge{5} 135462$.
 Now, by Theorem~\ref{thm:permutation}, such queues are in bijection with ordinary queues counting, in this case, $\swt{135462}$.
 In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
 By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
@@ -553,7 +554,7 @@ which contributes to $\swt{135462}$.
 
 \begin{example}
 Suppose $n = 5$.
-Let $v = 13234$, and we have that $v = \merge{3}{u}$ if and only if $u \in \set{13245, 14235}$.
+Let $v = 13234$, and we have that $v = \merge{3} u$ if and only if $u \in \set{13245, 14235}$.
 By examining all possible MLQs for these words, we obtain
 \begin{align*}
 \swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2),

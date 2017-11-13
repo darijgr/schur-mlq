@@ -35,7 +35,7 @@
 \newcommand{\mbf}{\mathbf}
 \newcommand{\0}{\phantom{c}}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
-\newcommand{\merge}[2]{\vee_{#1}#2} % merge
+\newcommand{\merge}[1]{\vee_{#1}} % merge
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -240,7 +240,7 @@
 \thanks{TS was partially supported by the Australian Research Council DP170102648 and the National Science Foundation RTG grant DMS-1148634.}
 
 \begin{abstract}
-We reformulate multiline queues as functions on words, and introduce the notion of a spectral weight of a word by defining a new weighting on multiline queues.
+Using the description of multiline queues as functions on words, we introduce the notion of a spectral weight of a word by defining a new weighting on multiline queues.
 We show that the spectral weight of a word is invariant under a natural action of the symmetric group, giving a proof of the commutativity conjecture of Arita, Ayyer, Mallick, and Prolhac.
 We give a determinant formula for the spectral weight of a word, which gives a proof of a conjecture of the first author and Linusson.
 \end{abstract}
@@ -259,15 +259,15 @@ We will also consider our process to be discrete in time, where our transition m
 
 The steady state of the TASEP is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06}.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
-This interpretation gives a connection with five vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}\travis{If we need to cut references, we can change this sentence to say ``new matrix product formula''}.
+This interpretation gives a connection with five-vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}.
 
-We reformulate MLQs as functions on words of a fixed length $n$.
-We introduce a new weighting of MLQs, which is the weight of the MLQ considered a tensor product of Kirillov--Reshetikhin crystals.
+We describe MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
+We introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
 This allows us to define the amplitude or spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
 Our main result is that for a fixed permutation $\sigma$, the sum over the weight of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ is equal the spectral weight of $u$.
 That is to say, we introduce an action of the symmetric group on MLQs such that under the FM algorithm corresponds to the natural action by letters on words.
-We show this by applying a combinatorial $R$-matrix to an MLQ does not change the MLQ as a function on words.\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}
+We show this by applying a combinatorial $R$-matrix to an MLQ\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).} does not change the MLQ as a function on words.
 
 Our main result gives a proof of the commutativity conjecture of~\cite{AAMP} when we specialize our weighting to a single indeterminate\travis{Specialize to $1$?}.
 We also give a determinant expression for the spectral weight by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
@@ -308,7 +308,7 @@ The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ such that
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 Sometimes it is useful to consider only \defn{packed} words $u$ whose type $\mm$ is such that for some $r$, $m_i \neq 0$ for $1 \leq i \leq r$ and $m_i = 0$ for $i > r$. We denote the set of packed words of type $\mbf{m}$ by $\Omega_{\mbf{m}}$.
 We call $r$ the \defn{number of classes} in $u$.
-We can \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
+We \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $[n]$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 We think of $q$ as a function from $\mcW_n$ to itself as follows.
@@ -318,7 +318,7 @@ There exists a unique $t$ such that
 $
 p_{t-1} \leq r < p_t.
 $
-The output word $v = q(u)$ will have type $(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t+1}-r, m_{t+2}, m_{t+3}, \ldots)$.
+The output word $v = q(u)$ will have type $(m_1, \dotsc, m_{t-1}, r-p_{t-1}, p_{t+1}-r, m_{t+2}, m_{t+3}, \ldots)$.
 Note that $p_{t+1} - r = m_{t+1} + (p_t - r)$.
 We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
 
