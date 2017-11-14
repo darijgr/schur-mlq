@@ -257,24 +257,24 @@ In this paper, we consider the TASEP on a ring with $n$ sites and $\ell$ species
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, \ell\}$ of length $n$, where we take the indices to be $\ZZ / n \ZZ$.
 We will also consider the process to be discrete in time.
 
-The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using ordinary multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
+The steady state of the TASEP is known in terms of another process introduced in~\cite{FM06} using (ordinary) multiline queues (MLQs) and by applying what is now known as the Ferrari--Martin (FM) algorithm.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
-This connects the TASEP with five-vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
+Moreover, it connects the TASEP with five-vertex models, corner transfer matrices, 3D integrable lattice models, and the tetrahedron equation of~\cite{Zam80}, yielding a new matrix product formula for the steady state distribution.
 
 We describe MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
 We introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
 This allows us to define the spectral weight of a word $u$ to be the sum of the weights of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
 Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
-To this end, we construct an action of the symmetric group on MLQs that corresponds under the usual FM algorithm to the natural action by letters on words.
-This action is given by applying a combinatorial $R$-matrix to an MLQ\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).}, and we show that does not change the MLQ as a function on words.
+To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
+This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{This operation has also previously appeared in other contexts by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).} and we show that does not change the MLQ as a function on words.
 
 As a consequence, we obtain a proof of the commutativity conjecture of~\cite{AAMP} when we specialize all our weight parameters to $1$.
 However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
 Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
-One potential application is that our weighting could be used to describe the steady state distribution for the inhomogeneous TASEP~\cite{AL14,AM13}.
+One potential application is that our weighting could be used to describe the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14}.
 Furthermore, we expect that our weighting scheme can be extended to the totally asymmetric zero range process (TARZP), where multiple particles can occupy the same site~\cite{KMO16TARZP,KMO16TARZPII}.
 This comes from the fact that the TARZP can also be realized using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
 Similarly, this extension of our results could be used to describe the steady state distribution for the inhomogeneous TARZP defined in~\cite{KMO16II}.
@@ -312,7 +312,7 @@ We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$, and for $T = \se
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself as follows.
-Let $\mm = (m_1, m_2, \ldots)$ be the type of a word $u \in \mcW_n$.
+Fix a word $u \in \mcW_n$, and let $\mm = (m_1, m_2, \ldots)$ be the type of $u$.
 Define $p_i(\mm) := m_1 + m_2 + \cdots + m_i$, and when $\mm$ is clear, we simply write $p_i$.
 There exists a unique $t$ such that
 $
@@ -645,7 +645,7 @@ In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conj
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
 \[
-  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r}.
+  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r},
 \]
 where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
@@ -669,22 +669,23 @@ Furthermore, we need to show that taking the dual configuration satisfies the br
 
 To construct $C'$ and show it satisfies the requisite properties, we break it into four parts as follows.
 By using the monotonicity, we may assume $u \in \{1,2\}^n$.
+For the remainder of this section, we fix an $(r,s)$-configuration $C = (q_1, q_2)$.
 
 %%%%%%%%%%
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
-Let $\inter[i,j]$ denote a (closed cyclic) interval from $i$ to $j$.
+Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$, which wraps around the ``circle'' if $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$ and $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$.
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$ and for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 The maximal (with respect to set inclusion) balanced intervals are disjoint, and a maximal interval is $[n]$ if and only if $r = s$.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
-The following notation will be useful later on: for a word $u$ and $j$ balanced with respect to $C$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \bigcirc$ if $j \in q_1$ and $s_j = \square$ if $j\notin q_1$.
+The following notation will be useful later on: for a word $u \in \mcW_n$ and $(r,s)$-configuration $C = (q_1, q_2)$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \bigcirc$ if $j \in q_1$ and $s_j = \square$ if $j\notin q_1$.
 
 \begin{figure}[t]
 \[
@@ -712,8 +713,9 @@ The maximal balanced intervals are boxed.}
 We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ in $C$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced intervals.
-It is clear that $C'' = C$ and $\wt C = \wt C'$.
+It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
 This corresponds to the action of the combinatorial $R$-matrix~\cite{NY97,Shimozono02}, which satisfies the Yang--Baxter equation/the braid relation.
+Note that if $r = s$, then $C = C'$.
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -725,8 +727,8 @@ In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \
 \subsection*{Part C: Reduction to special words}
 
 We reduce the problem to a certain set of words by performing a series of reductions based on the following lemmas.
-We define $u_{i\leftrightarrow j}$ as the result of swapping positions $i$ and $j$ in $u$.
 For this part, we assume $i,j \in \ive{n}$.
+We define $u_{i\leftrightarrow j}$ as the result of swapping positions $i$ and $j$ in $u$.
 
 %\begin{lemma}
 %\label{le:orig}
@@ -734,7 +736,7 @@ For this part, we assume $i,j \in \ive{n}$.
 %  Then $q(u) = q(u_{i\leftrightarrow j})$.
 %\end{lemma}
 
-\begin{lemma}[BB]
+\begin{lemma}[BB reduction]
 \label{le:BB}
   Suppose $\inter[i,j]$ is a balanced interval, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all $k \in \inter(i,j)$.
   Then $C(u) = C(u_{i \leftrightarrow j})$.
@@ -799,7 +801,7 @@ We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
 \]
 \end{example}
 
-\begin{lemma}[BU]
+\begin{lemma}[BU reduction]
 \label{le:BU}
   Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for all unbalanced $k \in \inter (i,j)$, and $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k \in \inter(i,j)$.
   Then $C(u) = C(u_{i \leftrightarrow j})$.
@@ -870,7 +872,7 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 The BB and, when $r > s$, BU reductions always have $q_1(u) = q_1(u_{i \leftrightarrow j})$. 
 \end{remark}
 
-\begin{lemma}[UB]
+\begin{lemma}[UB reduction]
 \label{le:UB}
   Suppose $i$ is unbalanced, $j$ is balanced, $u_i = 1$, $T(j) = (2,\bigcirc)$, $u_k = 2$ for all unbalanced $k \in \inter(i,j)$, and $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k$ in $\inter(i,j)$.
   Then $C(u) = C(u_{i \leftrightarrow j})$.
@@ -1030,7 +1032,7 @@ Thus, we prove that $C(u) = C'(u)$, where $u$ is one of the words such that none
 \section{The TASEP connection}
 \label{sec:tasep}
 
-We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture in~\cite{AAMP}.
+We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture of~\cite{AAMP}.
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_{n}$ with transitions $u_i u_{i+1} \to u_{i+1} u_i$ with rate $1$ for $u_i < u_{i+1}$.
 These moves preserve the type of the words, so each irreducible part of the chain corresponds to a type $\mm$.
 There are $2^{n-1}$ packed types for words of length $n$ as they are compositions of $n$.
@@ -1047,11 +1049,12 @@ For $i,S$ such that $i\notin S$, we define $\Psi_i \colon V_{S \cup \{i\}} \to V
 In~\cite{AAMP}, it is shown that $M_S \Psi_i = \Psi_i M_{S\cup\{i\}}$.
 Let $\pi_S \in V_S$ be the stationary distribution of $M_S$: the unique vector with non-negative entries summing to $1$ satisfying $\pi_S = M_S \pi_S$.
 Thus, the vector $\pi_S$ can be computed from $\pi_{S\cup\{i\}}$ by $\pi_S = \Psi_i \pi_{S\cup\{i\}}$.
-This allows for computing every stationary distribution from the trivial vector $\pi_{[n]} = 1 \in \RR$.
+This allows us to compute every stationary distribution from the trivial vector $\pi_{[n]} = 1 \in \RR$.
 
-It is conjectured in~\cite{AAMP} that $\Psi_i \Psi_j = \Psi_j\Psi_i$, which is called the \defn{commutativity conjecture}.
+It is conjectured in~\cite{AAMP} that $\Psi_i \Psi_j = \Psi_j\Psi_i$, where it is called the \defn{commutativity conjecture}.
 By looking at the $(u,v)$ entry of both sides of this equation, the commutativity conjecture is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
-Thus, our proof of Theorem~\ref{thm:permutation} shows that $\Psi_i \Psi_j = \Psi_j \Psi_i$ for the weighted operators $\Psi_i$ given by $\Psi_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)}$.
+Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by $\widetilde{\Psi}_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)}$.
+Note that $\widetilde{\Psi}_i = \Psi_i$ when we specialize $x_1 = \cdots = x_n = 1$.
 
 We have not found any process similar to the TASEP using only ``local'' moves for which our spectral weights of $u$ are the stationary probabilities.
 However, we note that the Markov chain on $\mcW_n$ with transitions $u \to q(u)$ for $r$-queues $q$ (for some fixed $r$) has stationary probabilities given by our spectral weights of $u$. 
