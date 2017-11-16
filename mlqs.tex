@@ -54,6 +54,7 @@
 \newcommand{\mcF}{\mathcal{F}}
 \newcommand{\mcM}{\mathcal{M}}
 \newcommand{\mcW}{\mathcal{W}}
+\newcommand{\mcI}{\mathcal{I}}
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -303,7 +304,7 @@ For a positive integer $N$, let $\ive{N}$ denote the set $\set{1, 2, \ldots, N}$
 \subsection{Words and queues}
 
 Fix a positive integer $n$.
-Let $\Omega_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
+Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ over the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We will consider the indices of words to be taken modulo $n$. 
 The \defn{type} $\mm$ of a word $u$ is the vector $(m_1, m_2, \ldots)$ such that $u$ has $m_i$ occurrences of the letter $i$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
@@ -319,18 +320,23 @@ There exists a unique $t$ such that
 $
 p_{t-1} \leq r < p_t.
 $
-The output word $v = q(u)$ will have type $(m_1, \dotsc, m_{t-1}, r-p_{t-1}, p_{t+1}-r, m_{t+2}, m_{t+3}, \ldots)$.
-Note that $p_{t+1} - r = m_{t+1} + (p_t - r)$.
+The output word $v = q(u)$ will have type $(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots)$.
+Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
 We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
 
 \begin{description}
 \item[Phase I]
   Go through all $i$ such that $u_i > t$ in any order such that larger letters precede smaller ones.
-  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set. Then set $v_j = u_i + 1$. We call $\inter[j,i]$ the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
+  \footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
+  When considering a site $i$, find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
+  Then set $v_j = u_i + 1$.
+  We call $\inter[j,i]$ the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
 
 \item[Phase II]
   Go through all $i$ such that $u_i < t$ in any order such that smaller letters precede larger ones.
-  When considering a site $i$, find the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set. Then set $v_j = u_i$. Similarly, $\inter[i,j]$ is called the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
+  When considering a site $i$, find the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set.
+  Then set $v_j = u_i$.
+  Similarly, $\inter[i,j]$ is called the \defn{queueing interval} of $i$ with respect to $q$ and $u$.
 
 \item[Phase III]
   At this point, there are $m_t$ unset values $v_i$. For such $i$, set $v_i = t$ for $i \in q$ and $v_i = t+1$ for $i\notin q$.
