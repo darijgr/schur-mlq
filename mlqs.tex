@@ -36,6 +36,7 @@
 \newcommand{\0}{\phantom{c}}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
 \newcommand{\merge}[1]{\vee_{#1}} % merge
+\newcommand{\SymGp}[1]{\Sigma_{#1}} % symmetric group
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -294,7 +295,7 @@ Similarly, this extension of our results could be used to describe the steady st
 
 \subsection{Acknowledgements}
 
-We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO16II,KMO15,KMO16,KMO16TARZP,KMO16TARZPII}.
+We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII}.
 This work benefited from computations using \textsc{SageMath}~\cite{sage,combinat}.
 
 
@@ -309,7 +310,9 @@ This work benefited from computations using \textsc{SageMath}~\cite{sage,combina
 \section{Background}
 \label{sec:background}
 
-For a positive integer $n$. For a positive integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$.
+Fix a positive integer $n$. For a positive integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$ and $\SymGp{k}$ denote the symmetric group on $\ive{k}$.
+Let $s_i \in \SymGp{k}$ be the simple transposition of $i$ and $i+1$.
+Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1) \dotsm 321$ (written in one line notation).
 
 %%%%%%%%%%
 \subsection{Words and queues}
@@ -423,6 +426,8 @@ Using this convention, we can write Example~\ref{ex:first_queue} as
 \end{tikzpicture}
 \]
 
+\Travis{The notion of $s$-flow is currently only used here in this paragraph.}
+
 Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
 For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that $u_i=s$, and whose queueing interval $\inter[j,i]$ contains both $k$ and $k+1$.
 Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
@@ -451,7 +456,10 @@ Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words,
 
 \begin{dfn}
 A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
-For a permutation $\sigma$ of $\ive{\ell-1}$, a \defn{$\sigma$-twisted MLQ} of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue.
+\end{dfn}
+
+\begin{dfn}
+For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted MLQ} of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue.
 \end{dfn}
 
 \begin{remark}
@@ -468,7 +476,19 @@ For a packed word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{spe
 where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ and $u = q_{\ell-1}( \cdots q_1(1 \dotsm 1) \cdots )$.
 \end{dfn}
 
-%%%%%%%%%%
+We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$,
+defined for each $N \in \left\{0,1,\ldots,n\right\}$ by
+\begin{align*}
+e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
+\\ h_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 \leq \cdots \leq i_k \leq N} x_{i_1} \dotsm x_{i_k},
+\end{align*}
+respectively.
+We define $e_k(x_1, \dotsc, x_N) = 0$ and $h_k(x_1, \dotsc, x_N) = 0$ for $k < 0$.
+For more details on symmetric functions, we refer the reader to~\cite[Ch.~7]{Stanley-EC2}.
+
+
+
+
 
 
 
@@ -483,7 +503,7 @@ In this section, we state our main results and prove the commutativity conjectur
 \begin{thm}
 \label{thm:permutation}
   Let $u$ be a packed word of type $\mm$ with $\ell$ classes.
-  For any permutation $\sigma$ of $\ive{\ell-1}$, we have 
+  For any $\sigma \in \SymGp{\ell-1}$, we have 
   \[
   \swt{u} = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
   \]
@@ -498,7 +518,7 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
   Let $\mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
   For any packed word $v$ of type $\mm'$, we have
 \[
-  \swt{v} e_{p_i(\mm)}(n) = \sum_u \swt{u},
+  \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
 \]
 where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \end{cor}
@@ -507,6 +527,8 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i} u$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
+
+\Travis{This example below only makes sense (to the reader) once we have introduced the notion of a configuration and the dual configuration. So It might be better to actually move this example out of this section. Either that, or split the example into 2 parts, where the part here is just about where the $e_{p_i(\mm)}(x_1, \dotsc, x_n)$ comes from and later we talk about what $R_i$ does.}
 
 \begin{example}
 We give an example to illustrate the proof of Corollary~\ref{co:merge}.
@@ -523,7 +545,7 @@ We take a particular MLQ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
 \end{tikzpicture}
 = \widetilde{\qq}.
 \]
-Note that we can take any subset of $\ive{6}$ of size $5$, and so the sum over all of these choices contributes a weight change to $\qq$ by $e_5(6)$.
+Note that we can take any subset of $\ive{6}$ of size $5$, and so the sum over all of these choices contributes a weight change to $\qq$ by $e_5(x_1, x_2, x_3, x_4, x_5, x_6)$.
 Furthermore, note that $135452 = \merge{5} 135462$.
 Now, by Theorem~\ref{thm:permutation}, such queues are in bijection with ordinary queues counting, in this case, $\swt{135462}$.
 In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
@@ -563,7 +585,7 @@ By examining all possible MLQs for these words, we obtain
 \\ & \hspace{65pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3).
 \end{align*}
 (We have factored the expressions for readability only.)
-We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5) = \swt{13245} + \swt{14235}$.
+We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
 
@@ -574,21 +596,22 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(5)
   Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
   Then
   \[
-  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\gamma_j}(b_j) \bigr)_{1\leq i,j\leq r},
+  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j}) \bigr)_{1\leq i,j\leq r},
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
 
 \begin{proof}
-This is an easy application of the Lindstr\"om-Gessel-Viennot Lemma~\cite{Lindstrom73,GV85}.
+We show the claim by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85}.
+We refer the reader to \travis{Darij, please insert appropriate reference(s).} for details on the LGV Lemma.
 
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
+We choose the $k$ sources $\iota_i = (k+1-i, 1)$ for $i \in \ive{k}$ and the $k$ terminals $\tau_j = (k-j+\gamma_j,b_j)$ for $j\in \ive{k}$.
 
-We define $k$ sources $s_i = (k+1-i, 1)$ for $i\in[k]$ and $k$ terminals $t_j = (k-j+\gamma_j,b_j)$ for $j\in[k]$, where $\gamma_j$ is the number of distinct classes in $v_1\dotsm v_j$.
+Any non-intersecting path system from the sources to the terminals gives in a straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely \travis{To be finished?}.
 
-Any non-intersecting path system from the sources to the terminals gives in straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely.
-
-Note that the weighted sum of paths from $s_i$ to $t_j$ is $h_{i-j-1+\gamma_j}(x_1,\dots,x_{b_j})$. The LGV lemma now gives us the stated formula.
+Note that the weighted sum of paths from $\iota_i$ to $\tau_j$ is $h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j})$.
+The LGV Lemma now gives us the stated formula.
 \end{proof}
 
 \begin{figure}[t]
@@ -638,22 +661,25 @@ Note that the weighted sum of paths from $s_i$ to $t_j$ is $h_{i-j-1+\gamma_j}(x
   }
 \end{tikzpicture}
 \]
-\caption{An example of the bijection with $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$ between MLQs and non-intersecting lattice paths coming from the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73} applied to Theorem~\ref{thm:determinant_form}.}
+\caption{An example of the bijection with $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$ between MLQs and non-intersecting lattice paths in the proof of Theorem~\ref{thm:determinant_form}.}
 \label{fig:lattice_path_bijection}
 \end{figure}
 
-Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v$ of $\ive{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
-Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$,\footnote{The elements $\{s_i \mid i \in S\}$ all commute, so the product is well-defined.} where $s_i$ is the simple transposition on $i$ and $i+1$ and $w_0(k) = r+1-k$ is the reverse permutation on $\ive{r}$.
+Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
+Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$,\footnote{The elements $\{s_i \mid i \in S\}$ all commute, so the product is well-defined.} where $s_i, w_0 \in \SymGp{r}$.
 In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
 
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
-\[
-  \psi(T) = \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \swt{ \bigvee_T w_0} = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(n) \right) \det(h_{i-j+1+\gamma_j}(b_j))_{1\leq i,j \leq r},
-\]
+\begin{align*}
+  \psi(T) & = \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
+  \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j}))_{1\leq i,j \leq r},
+\end{align*}
 where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-Taken together with $x_1 = \cdots = x_n = 1$, this proves~\cite[Conj.~3.10]{AasLin17}.
+Taken together with $x_1 = \cdots = x_n = 1$, this proves~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
+This in turn proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
+
 
 
 
@@ -726,7 +752,7 @@ node {132}; \draw (3,0) node {123};
 \]
 
 
-Building on work by Ferrari-Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \Omega_{\mbf{m}_{S\cup\{i\}}} \to \Omega_{\mbf{m}_S}$ given by $\Psi(u) = \sum_q q(u)$, and showed that $\Psi M = M\Psi$.
+Building on work by Ferrari--Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_{S\cup\{i\}} \to \mcW_S$ given by $\Psi(u) = \sum_q q(u)$, and showed that $\Psi M = M \Psi$.
 Furthermore they conjectured that $\Psi_S \Psi_T = \Psi_T \Psi_S$, where it is called the \defn{commutativity conjecture}.
 
 Note that for the commutativity conjecture, it is sufficient to show that $\Psi_i \Psi_j = \Psi_j\Psi_i$.
