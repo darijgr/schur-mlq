@@ -510,8 +510,6 @@ In this section, we state our main results and prove the commutativity conjectur
   where we sum over all $\sigma$-twisted MLQs such that $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
 \end{thm}
 
-We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ is proven in~\cite{AAMP} using different techniques.
-
 \begin{cor}
 \label{co:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
@@ -693,13 +691,13 @@ This in turn proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\ci
 \section{The TASEP connection}
 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture of~\cite{AAMP}.
-Let $\mcW_S$ denote the set of words of type $\mm_S$.
-Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in \mcW_S}$.
 
 There are $2^{n-1}$ packed types for words of length $n$ as they are compositions of $n$.
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
 Note that $\set{p_1(\mm_S), \dotsc, p_{\ell-1}(\mm_S)} = [n-1] \setminus S$, where $\mm_S$ has $\ell$ classes, which is the complement of the usual bijection between subsets of $\ive{n-1}$ and compositions of $n$.
+Let $\mcW_S$ denote the set of words of type $\mm_S$.
+Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in \mcW_S}$.
 
 \begin{example}
   For $n = 4$, we have $\mbf{m}_\emptyset = (1,1,1,1)$, $\mbf{m}_{\{1\}} = (2,1,1)$, $\mbf{m}_{\{2\}} = (1,2,1)$, $\mbf{m}_{\{3\}} = (1,1,2)$, $\mbf{m}_{\{1,2\}} = (3,1)$, $\mbf{m}_{\{1,3\}} = (2,2)$, $\mbf{m}_{\{2,3\}} = (1,3)$, and $\mbf{m}_{\{1,2,3\}} = (4)$.
@@ -716,7 +714,7 @@ For a state $u \in \mcW_S$, we generate a new state by picking a random $i \in [
 \end{itemize}
 Let $M_S \colon V_S \to V_S$ be the transition matrix of this Markov chain.
 Note that these moves preserve the type of the words.
-For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ by letting $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$.
+For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ given by $\Phi_i(\epsilon_u) = \epsilon_{\merge{i}u}$\travis{Erik, please verify this is correct.}.
 It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
 
 % Do you plan to use this command elsewhere?    -- Travis
@@ -752,22 +750,22 @@ node {132}; \draw (3,0) node {123};
 \]
 
 
-Building on work by Ferrari--Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_{S\cup\{i\}} \to \mcW_S$ given by $\Psi(u) = \sum_q q(u)$, and showed that $\Psi M = M \Psi$.
-Furthermore they conjectured that $\Psi_S \Psi_T = \Psi_T \Psi_S$, where it is called the \defn{commutativity conjecture}.
-
-Note that for the commutativity conjecture, it is sufficient to show that $\Psi_i \Psi_j = \Psi_j\Psi_i$.
+Building on work by Ferrari--Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_S \to \mcW_{S \setminus \{i\}}$ given by $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$, and showed that $\Psi_i M_S = M_{S \setminus \{i\}} \Psi_i$.
+Furthermore they gave the \defn{commutativity conjecture}: that $\Psi_i \Psi_j = \Psi_j \Psi_i$.
 By looking at the $(u,v)$ entry of both sides of this equation, the commutativity conjecture is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
-Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by $\widetilde{\Psi}_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)}$.
+Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by $\widetilde{\Psi}_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)}$, where we also sum over all $i$-queues $q$.
 Note that $\widetilde{\Psi}_i = \Psi_i$ when we specialize $x_1 = \cdots = x_n = 1$, giving the connection between our MLQs and the multi-species TASEP as follows.
 
 \erik{the proof of interlacing by~\cite{AAMP} is significantly different from our approach}
 
-We have not managed to find a process similar to the TASEP whose transition matrix $M$ would satsify $M\Psi = \Psi M$ for our generalized $\Psi$ operators.
-Note however that queues gives us \emph{a} random process with this property: for a word $u \in \mcW_{\mm}$, a move in the chain is given by
+We have not managed to find a process similar to the TASEP whose transition matrix $\widetilde{M}_S$ would satisfy $\widetilde{M}_S \widetilde{\Psi}_i = \widetilde{\Psi}_i \widetilde{M}_{S \setminus \set{i}}$ for our $\widetilde{\Psi}_i$ operators.
+Note however that queues gives us \emph{a} random process with this property: for a word $u \in \mcW_S$, a move in the chain is given by
 \begin{enumerate}
 \item picking a random queue $q$
-\item going to the state $q(u) \in \mcW_{\mm}$.
+\item going to the state $q(u) \in \mcW_S$.
 \end{enumerate}
+
+\Travis{This does not seem correct. Do you also want to do an $i$-merge so that we end up back in $\mcW_S$?}
 
 
 
@@ -1173,6 +1171,8 @@ For the input word $u_0$, we have $C(u_0) = 112314 = C'(u_0)$.
 It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
 
 Does our proof have any implications for the work of Danilov and Koshevoy?
+
+We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ is proven in~\cite{AAMP} using different techniques.
 
 \Travis{I am also dumping some other stuff here to be woven in later.}
 
