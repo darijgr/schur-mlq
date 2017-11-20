@@ -310,7 +310,7 @@ This work benefited from computations using \textsc{SageMath}~\cite{sage,combina
 \section{Background}
 \label{sec:background}
 
-Fix a positive integer $n$. For a positive integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$ and $\SymGp{k}$ denote the symmetric group on $\ive{k}$.
+Fix a positive integer $n$. For a nonnegative integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$ and $\SymGp{k}$ denote the symmetric group on $\ive{k}$.
 Let $s_i \in \SymGp{k}$ be the simple transposition of $i$ and $i+1$.
 Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1) \dotsm 321$ (written in one line notation).
 
@@ -326,17 +326,20 @@ We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 A word $u$ or type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We call $\ell$ the number of \defn{classes} in $u$.
 We \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
-We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$, and for $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
+We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
+For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself as follows.
 Fix a word $u \in \mcW_n$, and let $\mm = (m_1, m_2, \ldots)$ be the type of $u$.
 Define $p_i(\mm) := m_1 + m_2 + \cdots + m_i$, and when $\mm$ is clear, we simply write $p_i$.
+(Thus, $p_0 = 0$, and $p_i = n$ for sufficiently high $i$.)
 There exists a unique $t$ such that
 $
 p_{t-1} \leq r < p_t.
 $
+\Darij{Is this really true in the case when $r = n$ ? The $p_i$ stagnate at $n$, so $r < p_t$ will never happen.}
 The output word $v = q(u)$ will have type $(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots)$.
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
 We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
@@ -526,6 +529,8 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   The result follows from Theorem~\ref{thm:permutation}.
 \end{proof}
 
+\Darij{This needs an actual proof.}
+
 \Travis{This example below only makes sense (to the reader) once we have introduced the notion of a configuration and the dual configuration. So It might be better to actually move this example out of this section. Either that, or split the example into 2 parts, where the part here is just about where the $e_{p_i(\mm)}(x_1, \dotsc, x_n)$ comes from and later we talk about what $R_i$ does.}
 
 \begin{example}
@@ -601,12 +606,12 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(x_
 
 \begin{proof}
 We show the claim by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85}.
-We refer the reader to \travis{Darij, please insert appropriate reference(s).} for details on the LGV Lemma.
+We refer the reader to \cite[\S 2]{GesVie89} for details on the LGV Lemma. (The version we shall use is \cite[Corollary 2]{GesVie89}.)
 
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
 We choose the $k$ sources $\iota_i = (k+1-i, 1)$ for $i \in \ive{k}$ and the $k$ terminals $\tau_j = (k-j+\gamma_j,b_j)$ for $j\in \ive{k}$.
 
-Any non-intersecting path system from the sources to the terminals gives in a straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely \travis{To be finished?}.
+Any non-intersecting path system from the sources to the terminals gives in a straightforward way \darij{elaborate} an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely \travis{To be finished?}.
 
 Note that the weighted sum of paths from $\iota_i$ to $\tau_j$ is $h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j})$.
 The LGV Lemma now gives us the stated formula.
@@ -1095,12 +1100,12 @@ Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} applies to $C,u
 What do we know about $u_0$? There are three cases.
 
 \begin{itemize}
-\item If there is some balanced $i$ such that $T(i) = (1, \square)$ then there is no balanced $i$ such that $T(i) = (2,\bigcirc)$.
-\item If there is some balanced $i$ such that $T(i) = (2, \bigcirc)$ then there is no balanced $i$ such that $T(i) = (1,\square)$.
-\item If for all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$
+\item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $i$ such that $T(i) = (2,\bigcirc)$.
+\item There is some balanced $i$ such that $T(i) = (2, \bigcirc)$, but there is no balanced $i$ such that $T(i) = (1,\square)$.
+\item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$
 \end{itemize}
 
-These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectively, where $e$ is the total number of ones in $u$. In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labellng procedure inside each balanced block is the same in $C$ and $C'$.
+These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectively, where $e$ is the total number of ones in $u$. In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labelling procedure inside each balanced block is the same in $C$ and $C'$.
 
 
 \begin{example}
@@ -1113,7 +1118,7 @@ Now apply Lemma UB with $i = 4$ and $j = 6$, getting $u_1 = 211112$.  \\
 Lemma BU with $i=2, j=4$, getting $u_2 = 221111$.  \\
 Lemma UB with $i=4, j=1$, getting $u_0 = 121211$, at which point we cannot apply any of Lemmas UB,BU,BB to $u_0$.
 
-The reader is invited to chech that indeed, $C(u) = C(u_1) = C(u_2) = C(u_0)$ and $C'(u) = C'(u_1) = C'(u_2) = C'(u_0)$.
+The reader is invited to check that indeed, $C(u) = C(u_1) = C(u_2) = C(u_0)$ and $C'(u) = C'(u_1) = C'(u_2) = C'(u_0)$.
 
 For the input word $u_0$, we have $C(u_0) = 112314 = C'(u_0)$.
 
