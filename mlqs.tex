@@ -310,8 +310,9 @@ This work benefited from computations using \textsc{SageMath}~\cite{sage,combina
 \section{Background}
 \label{sec:background}
 
-Fix a positive integer $n$. For a nonnegative integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$ and $\SymGp{k}$ denote the symmetric group on $\ive{k}$.
-Let $s_i \in \SymGp{k}$ be the simple transposition of $i$ and $i+1$.
+Fix a positive integer $n$.
+For a nonnegative integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$, and so $[0] = \emptyset$.
+Let $\SymGp{k}$ denote the symmetric group on $\ive{k}$, and let $s_i \in \SymGp{k}$ be the simple transposition of $i$ and $i+1$.
 Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1) \dotsm 321$ (written in one line notation).
 
 %%%%%%%%%%
@@ -323,8 +324,8 @@ Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
-A word $u$ or type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
-We call $\ell$ the number of \defn{classes} in $u$.
+Let $\ell = \max\{i \mid m_i \neq 0 \}$, which we say is the number of \defn{classes} in $u$ or $\mm$.
+A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
 We \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
 For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
@@ -333,14 +334,24 @@ We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. Whe
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself as follows.
 Fix a word $u \in \mcW_n$, and let $\mm = (m_1, m_2, \ldots)$ be the type of $u$.
-Define $p_i(\mm) := m_1 + m_2 + \cdots + m_i$, and when $\mm$ is clear, we simply write $p_i$.
+Define
+\begin{equation}
+\label{eq:type_partial_sums}
+p_i(\mm) := m_1 + m_2 + \cdots + m_i,
+\end{equation}
+and when $\mm$ is clear, we simply write $p_i$.
 (Thus, $p_0 = 0$, and $p_i = n$ for sufficiently high $i$.)
-There exists a unique $t$ such that
+If $r < n$, then there exists a unique $t$ such that
 $
-p_{t-1} \leq r < p_t.
+p_{t-1} \leq r < p_t,
 $
-\Darij{Is this really true in the case when $r = n$ ? The $p_i$ stagnate at $n$, so $r < p_t$ will never happen.}
-The output word $v = q(u)$ will have type $(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots)$.
+otherwise we set $t = \ell + 1$.
+\darij{Is this really true in the case when $r = n$ ? The $p_i$ stagnate at $n$, so $r < p_t$ will never happen.}
+\travis{Good point. Fixed.}
+The output word $v = q(u)$ will have type
+\[
+(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
+\]
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
 We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
 
@@ -368,7 +379,7 @@ To compute $q(u)$, draw the following diagram
 (whose upper row shows $u$, whose lower row shows $q(u)$,
 and whose middle row represents the set $q$ by balls in the positions of its elements):
 \[
-\begin{tikzpicture}[scale=1.3,baseline=0]
+\begin{tikzpicture}[>=latex,rounded corners,scale=1.3,baseline=0]
 \node (i1) at (1,1) {$3$};
 \node (i2) at (2,1) {$4$};
 \node (i3) at (3,1) {$6$};
@@ -391,9 +402,9 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \node[circle,draw=black] (q2) at (4,0) {};
 \node[circle,draw=black] (q3) at (8,0) {};
 \node[circle,draw=black] (q4) at (9,0) {};
-\draw[->,red] (i4) -- (4,0.2) .. controls (3.7,0.2) and (3.4,0) .. (3,0) -- (2,0) -- (t2);
+\draw[->,red,rounded corners] (i4) -- (4,0.3) .. controls (3.85,0.1) and (3.7,0) .. (3.3,0) -- (2,0) -- (t2);
 \draw[->,red] (i3) -- (t3);
-\draw[->,red] (i2) -- (2,0.1) .. controls (1.7,-0.1) and (1.3,-0.2) .. (1,-0.2) -- (0,-0.2);
+\draw[->,red] (i2) -- (2,0.1) .. controls (1.8,-0.15) and (1.6,-0.2) .. (1.3,-0.2) -- (0,-0.2);
 \draw[>->,red] (10,-0.2) -- (8,-0.2) -- (7,-0.2) -- (t7);
 \draw[->,blue] (i5) -- (5,0) -- (q3);
 \draw[->,blue] (q3) -- (t8);
@@ -606,7 +617,7 @@ We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(x_
 
 \begin{proof}
 We show the claim by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85}.
-We refer the reader to \cite[\S 2]{GesVie89} for details on the LGV Lemma. (The version we shall use is \cite[Corollary 2]{GesVie89}.)
+We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
 We choose the $k$ sources $\iota_i = (k+1-i, 1)$ for $i \in \ive{k}$ and the $k$ terminals $\tau_j = (k-j+\gamma_j,b_j)$ for $j\in \ive{k}$.
@@ -669,7 +680,8 @@ The LGV Lemma now gives us the stated formula.
 \end{figure}
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
-Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$,\footnote{The elements $\{s_i \mid i \in S\}$ all commute, so the product is well-defined.} where $s_i, w_0 \in \SymGp{r}$.
+Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
+Note that the elements $\{s_i \mid i \in S\}$ all commute, so the product, and hence $\sigma_S$, is well-defined.
 In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
 
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
@@ -718,50 +730,79 @@ For a state $u \in \mcW_S$, we generate a new state by picking a random $i \in [
 \item do nothing (\textit{i.e.} stay at $u$).
 \end{itemize}
 Let $M_S \colon V_S \to V_S$ be the transition matrix of this Markov chain.
-Note that these moves preserve the type of the words.
+Note that these moves preserve the type of the words, thus we could consider this as a Markov chain on $\mcW_n$, where $M_S$ becomes an irreducible component.
 For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ given by $\Phi_i(\epsilon_u) = \epsilon_{\merge{i}u}$\travis{Erik, please verify this is correct.}.
 It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
 
-% Do you plan to use this command elsewhere?    -- Travis
-\newcommand{\exE} {
-	\begin{tikzpicture} \draw (3,8) node {321}; \draw (0,6) node
-{231}; \draw (6,6) node {312}; \draw (0,2) node {213}; \draw (6,2)
-node {132}; \draw (3,0) node {123};
-
-	\draw node at (1.5,7.5){$1/3$}; \draw node at
-(4.6,7.3){$1/3$}; \draw node at (3.4,6.5){$1/3$};
-
-	\draw node at (-0.5,4.5){$1/3$}; \draw node at
-(6.6,4.5){$1/3$};
-
-	\draw node at (1.5,4.5){$1/3$}; \draw node at
-(4.6,4.5){$1/3$};
-
-	\draw node at (1.5,1.3){$1/3$}; \draw node at
-(4.3,1.3){$1/3$};
-
-	\draw [->, >=stealth, thick] (2.7,7.7) -- (0.3,6.3);
-\draw [->, >=stealth, thick] (3.3,7.7) --
-(5.7,6.3); \draw [->, >=stealth, thick] (0,5.7) -- (0,2.3);
-\draw [<-, >=stealth, thick] (2.7,0.3) --
-(0.3,1.7); \draw [<-, >=stealth, thick] (3.3,0.3) -- (5.7,1.7);
-\draw [<-, >=stealth, thick] (6,2.3) --
-(6,5.7); \draw [->, >=stealth, thick] (3,0.3) -- (3,7.7);
-\draw [->, >=stealth, thick] (5.7,2.3) --
-(0.3,5.7); \draw [->, >=stealth, thick] (0.3,2.3) -- (5.7,5.7);
-\end{tikzpicture} }
+\begin{figure}
 \[
-\exE
+\begin{tikzpicture}[>=stealth,thick,scale=0.8]
+\node (321) at (3,8) {$321$};
+\node (231) at (0,6) {$231$};
+\node (312) at (6,6) {$312$};
+\node (213) at (0,2) {$213$};
+\node (132) at (6,2) {$132$};
+\node (123) at (3,0) {$123$};
+\draw[->] (123) -- (321); % node[right,pos=0.8] {$1/3$};
+\draw[->] (132) -- (123); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->] (132) -- (231); % node[below=4pt,pos=0.8] {$1/3$};
+\draw[->] (213) -- (123); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->] (213) -- (312); % node[below=4pt,pos=0.8] {$1/3$};
+\draw[->] (231) -- (213); % node[left,pos=0.5] {$1/3$};
+\draw[->] (312) -- (132); % node[right,pos=0.5] {$1/3$};
+\draw[->] (321) -- (231); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->] (321) -- (312); % node[above=3pt,pos=0.5] {$1/3$};
+\end{tikzpicture}
+\hspace{40pt}
+\begin{tikzpicture}[>=stealth,thick,scale=0.8]
+\node (1223) at (0,-2) {$1223$};
+\node (3221) at (0,8) {$3221$};
+\node (2321) at (2,6) {$2321$};
+\node (3212) at (-2,6) {$3212$};
+\node (2231) at (3,4) {$2231$};
+\node (2312) at (0,4) {$2312$};
+\node (3122) at (-3,4) {$3122$};
+\node (2213) at (3,2) {$2213$};
+\node (2132) at (0,2) {$2132$};
+\node (1322) at (-3,2) {$1322$};
+\node (1232) at (-2,0) {$1232$};
+\node (2123) at (2,0) {$2123$};
+\draw[->] (1223) .. controls (2,3) and (1,6) .. (3221);
+\draw[->] (3221) -- (3212);
+\draw[->] (3221) -- (2321);
+\draw[->] (2321) -- (2231);
+\draw[->] (2321) -- (2312);
+\draw[->] (3212) -- (3122);
+\draw[->] (3212) -- (2312);
+\draw[->] (3122) -- (1322);
+\draw[->] (2312) -- (2132);
+\draw[->] (2231) -- (2213);
+\draw[->] (1322) -- (1232);
+\draw[->] (1322)  .. controls (-1,3) and (-1,6) .. (2321);
+\draw[->] (2132) -- (2123);
+\draw[->] (2132) -- (1232);
+\draw[->] (2213) .. controls (1,3) and (1,6) .. (3212);
+\draw[->] (2213) -- (2123);
+\draw[->] (1232) -- (1223);
+\draw[->] (1232) .. controls (1,0) and (1,3) .. (2231);
+\draw[->] (2123) -- (1223);
+\draw[->] (2123) .. controls (-1,0) and (-1,3) .. (3122);
+\end{tikzpicture}
 \]
-
+\caption{The states and transitions for $\mcW_{\emptyset}$ for $n =3$ (left) and $\mcW_{\set{2}}$ for $n = 4$ (right).
+All probabilities of the drawn transitions are $1/n$.}
+\end{figure}
 
 Building on work by Ferrari--Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_S \to \mcW_{S \setminus \{i\}}$ given by $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$, and showed that $\Psi_i M_S = M_{S \setminus \{i\}} \Psi_i$.
 Furthermore they gave the \defn{commutativity conjecture}: that $\Psi_i \Psi_j = \Psi_j \Psi_i$.
 By looking at the $(u,v)$ entry of both sides of this equation, the commutativity conjecture is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
-Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by $\widetilde{\Psi}_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)}$, where we also sum over all $i$-queues $q$.
-Note that $\widetilde{\Psi}_i = \Psi_i$ when we specialize $x_1 = \cdots = x_n = 1$, giving the connection between our MLQs and the multi-species TASEP as follows.
-
-\erik{the proof of interlacing by~\cite{AAMP} is significantly different from our approach}
+Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by
+\[
+\widetilde{\Psi}_i(\epsilon_u) = \sum_q \wt(q) \epsilon_{q(u)},
+\]
+where we also sum over all $i$-queues $q$.
+Note that $\widetilde{\Psi}_i = \Psi_i$ when we specialize $x_1 = \cdots = x_n = 1$, giving the connection between our MLQs and the multi-species TASEP.
+We note that the proof of interlacing given in~\cite{AAMP} is significantly different from our approach.
 
 We have not managed to find a process similar to the TASEP whose transition matrix $\widetilde{M}_S$ would satisfy $\widetilde{M}_S \widetilde{\Psi}_i = \widetilde{\Psi}_i \widetilde{M}_{S \setminus \set{i}}$ for our $\widetilde{\Psi}_i$ operators.
 Note however that queues gives us \emph{a} random process with this property: for a word $u \in \mcW_S$, a move in the chain is given by
@@ -1122,7 +1163,8 @@ The reader is invited to check that indeed, $C(u) = C(u_1) = C(u_2) = C(u_0)$ an
 
 For the input word $u_0$, we have $C(u_0) = 112314 = C'(u_0)$.
 
-\erik{need more elaborate example, including Lemma BB (and possibly all three cases of Part D}
+\Erik{need more elaborate example, including Lemma BB (and possibly all three cases of Part D}
+\Travis{Do the examples given above are satisfactory for this?}
 \end{example}
 
 \begin{figure}
