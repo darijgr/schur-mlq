@@ -474,15 +474,12 @@ There is an obvious duality in the definition of the labelling process above.
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-A (ordinary) \defn{multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_i(\mm)$-queue.
-\end{dfn}
-
-\begin{dfn}
-For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted MLQ} of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue.
+For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue.
+When $\sigma$ is the identity permutation, we call it simply an (ordinary) MLQ.
 \end{dfn}
 
 \begin{remark}
-Our notion of an MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we recover the labelling of level $k$ by $q_k( \cdots q_1(1 \dotsm 1) \cdots )$.
+Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we recover the labelling of level $k$ by $q_k( \cdots q_1(1 \dotsm 1) \cdots )$.
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
 
