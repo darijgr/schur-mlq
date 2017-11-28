@@ -846,14 +846,12 @@ For the remainder of this section, we fix an $(r,s)$-configuration $C = (q_1, q_
 Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$, and is the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
-\darij{Judging by the definition of $\inter(i, j)$, we have $\inter(i, i) = \varnothing$ (and $\inter[i,i] = \set{i}$).
-Are we sure that this is always what's intended, even in those rare cases where everything is balanced?
-(I think this breaks in the $r = s$ case.)}
 Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$ and for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$.
+\travis{We might want to change notation to $c^{\uparrow}[i,j]$ and $c^{\downarrow}[i,j]$ so as to avoid confusion with open/closed intervals.}
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
-The maximal (with respect to set inclusion) balanced intervals are disjoint, and a maximal interval is $[n]$ if and only if $r = s$.
+If $r = s$, then the entire interval $[n]$ is also balanced.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
