@@ -830,8 +830,9 @@ We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where
 We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
 Furthermore, we need to show that taking the dual configuration satisfies the braid relations.
+\Darij{Why do we NEED to show this? I thought we were just proving Theorem~\ref{thm:permutation}.}
 
-By using the monotonicity, we may assume $u \in \{1,2\}^n$.
+By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
 We split the proof into four parts, as follows.
 In Part A we describe how to split any configuration into \defn{balanced} and \defn{unbalanced} blocks. In Part B we define the involution promised above, mapping any configuration $C$ to its dual $C'$.
 In Part C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
@@ -843,9 +844,12 @@ For the remainder of this section, we fix an $(r,s)$-configuration $C = (q_1, q_
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
 Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
-This is the set $\set{i, i+1, \ldots, j}$, which wraps around the ``circle'' if $i > j$.
+This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$, and is the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
-Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+\darij{Judging by the definition of $\inter(i, j)$, we have $\inter(i, i) = \varnothing$ (and $\inter[i,i] = \set{i}$).
+Are we sure that this is always what's intended, even in those rare cases where everything is balanced?
+(I think this breaks in the $r = s$ case.)}
+Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$ and for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
