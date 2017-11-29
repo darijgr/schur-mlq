@@ -548,8 +548,8 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 
 \begin{example}
 We give an example to illustrate the proof of Corollary~\ref{co:merge}.
-To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1,2)$.
-We take a particular MLQ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
+To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1)$.
+We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
 \[
 \qq =
 \begin{tikzpicture}[baseline=82]
@@ -563,7 +563,7 @@ We take a particular MLQ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
 \]
 Note that we can take any subset of $\ive{6}$ of size $5$, and so the sum over all of these choices contributes a weight change to $\qq$ by $e_5(x_1, x_2, x_3, x_4, x_5, x_6)$.
 Furthermore, note that $135452 = \merge{5} 135462$.
-Now, by Theorem~\ref{thm:permutation}, such queues are in bijection with ordinary queues counting, in this case, $\swt{135462}$.
+Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
 In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
 By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
 \[
@@ -728,7 +728,7 @@ Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in 
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_S$, where $S \subseteq[n-1]$, as follows.
 For a state $u \in \mcW_S$, we generate a new state by picking a random $i \in [n]$ and either
 \begin{itemize}
-\item if $u_i < u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$, or
+\item if $u_i > u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$, or
 \item do nothing (\textit{i.e.} stay at $u$).
 \end{itemize}
 Let $M_S \colon V_S \to V_S$ be the transition matrix of this Markov chain.
@@ -807,7 +807,7 @@ Note that $\widetilde{\Psi}_i = \Psi_i$ when we specialize $x_1 = \cdots = x_n =
 We note that the proof of interlacing given in~\cite{AAMP} is significantly different from our approach.
 
 We have not managed to find a process similar to the TASEP whose transition matrix $\widetilde{M}_S$ would satisfy $\widetilde{M}_S \widetilde{\Psi}_i = \widetilde{\Psi}_i \widetilde{M}_{S \setminus \set{i}}$ for our $\widetilde{\Psi}_i$ operators.
-Note however that queues gives us \emph{a} random process with this property: for a word $u \in \mcW_S$, a move in the chain is given by
+Note however that queues give us \emph{a} random process with this property: for a word $u \in \mcW_S$, a move in the chain is given by
 \begin{enumerate}
 \item picking a random queue $q$
 \item going to the state $q(u) \in \mcW_S$.
