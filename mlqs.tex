@@ -474,8 +474,13 @@ There is an obvious duality in the definition of the labelling process above.
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 \begin{dfn}
-For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue} (MLQ) of type $\mm$, with $\ell$ classes, is a sequence of queues $q_1, \dotsc, q_{\ell-1}$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue.
-When $\sigma$ is the identity permutation, we call it simply an (ordinary) MLQ.
+For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue (MLQ) of type $\mm$}, with $\ell$ classes, is a sequence of queues $\qq = (q_1, \dotsc, q_{\ell-1})$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue and $m_{\ell} = n - p_{\ell-1}(\mm)$.
+When $\sigma$ is the identity permutation, we simply say an (ordinary) MLQ.
+Define the \defn{weight} by $\wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i)$.
+We also consider $\qq$ as a function on words by
+\[
+\qq(u) := q_{\ell-1}\bigl( \cdots q_2\bigl( q_1(u) \bigr) \cdots \bigr).
+\]
 \end{dfn}
 
 \begin{remark}
@@ -487,10 +492,14 @@ We omit the word ``discrete'' as these are the only MLQs in this note.
 For a packed word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{spectral weight} or \defn{amplitude} as
 \begin{equation}
 \label{eq:amplitude}
-  \swt{u} := \sum_{(q_1, \dotsc, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
+  \swt{u} := \sum_{\qq} \wt(\qq),
 \end{equation}
-where the sum is over all MLQs $(q_1, \dotsc, q_{\ell-1})$ of type $\mm$ and $u = q_{\ell-1}( \cdots q_1(1 \dotsm 1) \cdots )$.
+where the sum is over all MLQs $\qq$ of type $\mm$ and $u = \qq(1 \dotsm 1)$.
 \end{dfn}
+
+\begin{remark}
+Note that the type of $\qq(1 \dotsm 1)$ is the type of $\qq$.
+\end{remark}
 
 We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$,
 defined for each $N \in \left\{0,1,\ldots,n\right\}$ by
@@ -510,7 +519,7 @@ For more details on symmetric functions, we refer the reader to~\cite[Ch.~7]{Sta
 
 
 %=====================================================================
-\section{Main result}
+\section{Main results}
 \label{sec:result}
 
 
@@ -521,10 +530,12 @@ In this section, we state our main results and prove the commutativity conjectur
   Let $u$ be a packed word of type $\mm$ with $\ell$ classes.
   For any $\sigma \in \SymGp{\ell-1}$, we have 
   \[
-  \swt{u} = \sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i),
+  \swt{u} = \sum_{\qq} \wt(\qq),
   \]
-  where we sum over all $\sigma$-twisted MLQs such that $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$.
+  where we sum over all $\sigma$-twisted MLQs of type $\mm$ such that $u = \qq(1\dotsm 1)$.
 \end{thm}
+
+We will give the proof in Section~\ref{sec:thm_proof}.
 
 \begin{cor}
 \label{co:merge}
@@ -537,54 +548,35 @@ In this section, we state our main results and prove the commutativity conjectur
 where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \end{cor}
 
-\begin{proof}[Proof sketch]
-  Note that if $u = q_{r-1}( \cdots q_2(q_1(1 \dotsm 1)) \cdots)$, where $q_1$ is a $p_i(\mm)$-queue, then $v = q_{r-1}( \cdots q_2(1 \dotsm 1) \cdots) = \merge{i} u$.
-  The result follows from Theorem~\ref{thm:permutation}.
+\Travis{I'm considering upgrading this to a theorem considering there is a bit more involved with the other than simply applying Theorem~\ref{thm:permutation}.}
+
+\begin{proof}
+  First note that
+  \[
+  \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_{(\qq,X)} \wt(\qq) \wt(X),
+  \]
+  where we sum over all pairs $(\qq, X)$ such that
+  \begin{itemize}
+  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\mm'$ such that $v = \qq(1\cdots1)$ and
+  \item $X$ is a $p_i(\mm)$-queue.
+  \end{itemize}
+  Next, define a function $\theta$ by
+  \[
+  \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}) = \widetilde{\qq}.
+  \]
+  Thus, we have that $\widetilde{\qq}$ is a $(s_{\ell-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and $\wt(\widetilde{\qq}) = \wt(\qq) \wt(X) $.
+  Note that for
+  \[
+  u = \widetilde{\qq}(1 \dotsm 1) = \qq\bigl( X(1 \dotsm 1) \bigr),
+  \]
+  we have
+  \[
+  v = \qq(1 \dotsm 1) = \merge{i} u
+  \]
+  since $X$ is a $p_i(\mm)$-queue\travis{This probably still needs a bit more detail}.
+  By Theorem~\ref{thm:permutation}, there exists a weight preserving bijection $\omega$ between $(s_{\ell-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ and ordinary MLQs $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = u = \widetilde{\qq}'(1 \dotsm 1)$.
+  Hence, $\omega \circ \theta$ is a weight preserving bijection between pairs $(\qq, X)$ and ordinary MLQs $\widetilde{\qq}'$ of type $\mm$ such that $\widetilde{\qq}'(1 \dotsm 1) = u$, and the claim follows.
 \end{proof}
-
-\Darij{This needs an actual proof.}
-
-\Travis{This example below only makes sense (to the reader) once we have introduced the notion of a configuration and the dual configuration. So It might be better to actually move this example out of this section. Either that, or split the example into 2 parts, where the part here is just about where the $e_{p_i(\mm)}(x_1, \dotsc, x_n)$ comes from and later we talk about what $R_i$ does.}
-
-\begin{example}
-We give an example to illustrate the proof of Corollary~\ref{co:merge}.
-To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1,2)$.
-We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
-\[
-\qq =
-\begin{tikzpicture}[baseline=82]
-\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\xrightarrow{\hspace{30pt}}
-\begin{tikzpicture}[baseline=82]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-= \widetilde{\qq}.
-\]
-Note that we can take any subset of $\ive{6}$ of size $5$, and so the sum over all of these choices contributes a weight change to $\qq$ by $e_5(x_1, x_2, x_3, x_4, x_5, x_6)$.
-Furthermore, note that $135452 = \merge{5} 135462$.
-Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
-In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
-By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
-\[
-\widetilde{\qq} \xrightarrow[\hspace{15pt}]{R_1}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_2}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_3}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_4}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\]
-which contributes to $\swt{135462}$.
-\end{example}
 
 
 \begin{example}
@@ -595,13 +587,57 @@ By examining all possible MLQs for these words, we obtain
 \swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2),
 \\ \swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
 \\ & \hspace{20pt} \times (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5),
-\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5 + x_1^2x_3x_4
-\\ & \hspace{65pt} + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5 + x_1x_2x_4x_5 + 2x_1x_2x_5^2
-\\ & \hspace{65pt} + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2
-\\ & \hspace{65pt} + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3).
+\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4 + 2x_1^2x_2x_5
+\\ & \hspace{60pt} + x_1^2x_3x_4 + 2x_1^2x_3x_5 + x_1^2x_4x_5 + x_1^2x_5^2 + x_1x_2x_3x_5
+\\ & \hspace{60pt} + x_1x_2x_4x_5 + 2x_1x_2x_5^2 + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2
+\\ & \hspace{60pt} + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2 + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3).
 \end{align*}
 (We have factored the expressions for readability only.)
 We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
+\end{example}
+
+
+\Travis{This example below only makes sense (to the reader) once we have introduced the notion of a configuration and the dual configuration. So It might be better to actually move this example out of this section. Either that, or split the example into 2 parts, where the part here is just about where the $e_{p_i(\mm)}(x_1, \dotsc, x_n)$ comes from and later we talk about what $R_i$ does.}
+
+\begin{example}
+We give an example to illustrate the proof of Corollary~\ref{co:merge}.
+To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
+We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
+\[
+\qq =
+\begin{tikzpicture}[baseline=66,scale=0.8]
+\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\xrightarrow{\hspace{30pt}}
+\begin{tikzpicture}[baseline=66,scale=0.8]
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+= \widetilde{\qq}.
+\]
+Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
+Furthermore, note that $135452 = \merge{5} 135462$.
+Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
+In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
+By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
+\begin{align*}
+\widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\xrightarrow[\hspace{15pt}]{R_2}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\\[1.3em] &
+\xrightarrow[\hspace{15pt}]{R_3}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+\xrightarrow[\hspace{15pt}]{R_4}
+\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture} = \widetilde{\qq}',
+\end{align*}
+which contributes to $\swt{135462}$.
 \end{example}
 
 
@@ -632,7 +668,7 @@ The LGV Lemma now gives us the stated formula.
 
 \begin{figure}[t]
 \[
-\begin{tikzpicture}[xscale=1.5,yscale=0.9]
+\begin{tikzpicture}[xscale=1.3,yscale=0.9]
   \begin{scope}[yshift=7cm]
     \foreach \i in {1,...,9}{
       \foreach \j in {0,1,2}{
@@ -824,19 +860,23 @@ Note however that queues give us \emph{a} random process with this property: for
 
 %=====================================================================
 \section{Proof of Theorem~\ref{thm:permutation}}
+\label{sec:thm_proof}
 
 Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions
 $s_1, s_2, \ldots, s_{\ell-2}$.
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that
-the sum $\sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i)$,
-ranging over all $\sigma$-twisted MLQs such that $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$,
+the sum $\sum_{\qq} \wt(\qq)$,
+ranging over all $\sigma$-twisted MLQs such that $u = \qq(1\dotsm 1)$,
 does not change if we replace $\sigma \in \SymGp{\ell-1}$ by $\sigma s_i$.
 
 The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
 We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
-Furthermore, we shall show that taking the dual configuration satisfies the braid relations (although we will not need this for our proof of Theorem~\ref{thm:permutation}).
+
+We first consider the case $r = s$, in which we define $C' = C$.
+Moreover, it is clear that every $\sigma$ twisted MLQ is a $\sigma s_i$ twisted MLQ and the claim follows.
+Thus, for the remainder of this section we assume $r \neq s$.
 
 By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
 We split the proof into four parts, as follows.
@@ -857,7 +897,6 @@ We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\up
 \travis{We might want to change notation to $c^{\uparrow}[i,j]$ and $c^{\downarrow}[i,j]$ so as to avoid confusion with open/closed intervals.}
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
-If $r = s$, then the entire interval $[n]$ is also balanced.
 
 For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
@@ -891,9 +930,6 @@ We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced intervals.
 It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
-This corresponds to the action of the combinatorial $R$-matrix~\cite{NY97,Shimozono02}, which satisfies the Yang--Baxter equation/the braid relation.
-\darij{Needs details, but probably not here.}
-Note that if $r = s$, then $C = C'$.
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -1243,6 +1279,28 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
   For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
   It is clear from the definition of a queue that $(\sigma q)(u) = \sigma\bigl(q(u)\bigr)$, and the claim follows.
 \end{proof}
+
+Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
+Recall the combinatorial $R$-matrix acting on $B^{r,s}$ from~\cite{NY97,Shimozono02}, which is the unique crystal isomorphism $R \colon B^{r,s} \otimes B^{r',s'} \to B^{r',s'} \otimes B^{r,s}$.
+In~\cite{KMO15}, a bijection $\Xi_r$ was given relating $r$-queues with an element of the KR crystal $B^{r,1}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
+They extended this to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
+\[
+\Xi(\qq) = \Xi_{p_1}(q_1) \otimes \Xi_{p_2}(q_2) \otimes \dotsm \otimes \Xi_{p_{\ell}}(q_{\ell}).
+\]
+Thus, by comparing the description of the combinatorial $R$-matrix for $B^{r,1}$ and $B^{r',1}$ from~\cite{NY97}, we obtain that taking the dual configuration is equivalent to applying the combinatorial $R$-matrix under $\Xi$.
+
+\begin{prop}
+Let $C$ be an $(r, r')$-configuration. Then
+\[
+\Xi(C') = R\bigl( \Xi(C) \bigr).
+\]
+\end{prop}
+
+Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
+We also note that this $\SymGp{\ell}$ action on MLQs has already been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).
+Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$.
+
+\Travis{I should also add some stuff about the action and the corner transfer matrix given by~\cite{KMO15}.}
 
 \Travis{I think all of these figures (in tex) below have been become examples following the lemmas above.}
 
