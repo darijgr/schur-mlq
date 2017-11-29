@@ -825,12 +825,18 @@ Note however that queues gives us \emph{a} random process with this property: fo
 %=====================================================================
 \section{Proof of Theorem~\ref{thm:permutation}}
 
-The proof reduces down to defining an action of a simple transposition on a pair of queues since all permutations can be written as a product of simple transpositions.
+Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions
+$s_1, s_2, \ldots, s_{\ell-2}$.
+Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that
+the sum $\sum_{(q_1, \dots, q_{\ell-1})} \prod_{i=1}^{\ell-1} \wt(q_i)$,
+ranging over all $\sigma$-twisted MLQs such that $u = q_{\ell-1}(\cdots q_1(1\dotsm 1) \cdots )$,
+does not change if we replace $\sigma \in \SymGp{\ell-1}$ by $\sigma s_i$.
+
+The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
 We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
-Furthermore, we need to show that taking the dual configuration satisfies the braid relations.
-\Darij{Why do we NEED to show this? I thought we were just proving Theorem~\ref{thm:permutation}.}
+Furthermore, we shall show that taking the dual configuration satisfies the braid relations (although we will not need this for our proof of Theorem~\ref{thm:permutation}).
 
 By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
 We split the proof into four parts, as follows.
@@ -886,6 +892,7 @@ For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i =
 Note that $C$ and $C'$ have the same balanced intervals.
 It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
 This corresponds to the action of the combinatorial $R$-matrix~\cite{NY97,Shimozono02}, which satisfies the Yang--Baxter equation/the braid relation.
+\darij{Needs details, but probably not here.}
 Note that if $r = s$, then $C = C'$.
 
 \begin{example}
