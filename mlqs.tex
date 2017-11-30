@@ -36,7 +36,7 @@
 \newcommand{\0}{\phantom{c}}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
 \newcommand{\merge}[1]{\vee_{#1}} % merge
-\newcommand{\SymGp}[1]{\Sigma_{#1}} % symmetric group
+\newcommand{\SymGp}[1]{\mathfrak{S}_{#1}} % symmetric group
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -537,15 +537,16 @@ In this section, we state our main results and prove the commutativity conjectur
 \end{thm}
 
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
-In order to prove our next main result, we need the following lemma.
+In order to prove our next result, we need the following lemma.
 
 \begin{lemma}
 \label{lemma:queue_merge}
-  Let $\qq$ be a MLQ of type $\mm$, and let $X$ be a $p_i(\mm)$-queue with $m_i > 1$.
-  For a word
-  \[
+  Let $\mm$ be a packed type, and let $X$ be a $p_i(\mm)$-queue.
+  Let $\qq$ be a MLQ of packed type $\mm' = \merge{i}\mm$.
+  For the word
+  $
   u = \qq\bigl( X(1 \dotsm 1) \bigr),
-  \]
+  $
   we have
   \[
   v = \qq(1 \dotsm 1) = \merge{i} u.
@@ -555,21 +556,30 @@ In order to prove our next main result, we need the following lemma.
 \begin{proof}
   We will show this by induction on the number of queues in $\qq$.
   If $\qq$ has no queues, then the claim clearly holds.
-  Next, assume that for $\qq = (q_1, \dotsc, q_k)$, with $q_k$ being an $r$-queue, that $v = \qq(1 \dotsm 1) = \merge{i} u$.
-  Let $q^*$ be an $r^*$-queue with $r^* > r$, since we only consider packed words, and let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$).
+  
+  Next, assume that for $\qq = (q_1, \dotsc, q_k)$, with $q_k$ being an $r$-queue, of type $\mm$ that $v = \qq(1 \dotsm 1) = \merge{i} u$.
+  Let $q^*$ be an $r^*$-queue with $r^* > r$, since we only consider packed words, and the type of $(q^*, q_1, \dotsc, q_k, X)$ is
+  \[
+  \mm^* := (m_1, \dots, m_k, r^*-p_k, n - r^* - p_k, 0, 0, \ldots).
+  \]
+  \travis{We need to incorporate the $\sigma$ because this is a $\sigma$-twisted MLQ to obtain the type.}
+  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$).
   Note that $t - 1 \leq t^{\vee} \leq t$.
-  If $i \geq t$, then $t^{\vee} = t$ and the claim follows from Lemma~\ref{le:mono}.
-  Similarly, if $i < t - 1$, then $t^{\vee} = t - 1$ and the claim follows from Lemma~\ref{le:mono}.
-  If $i = t - 1$, then everything is still good.
-  If $i = t^{\vee}$ but $t^{\vee} = t - 1$, then this never happens because we want the resulting MLQ to be of packed type.
-  \travis{To be finished.}
+  If $i \geq t$, then $t^{\vee} = t$ and $q^*\bigl(v) = \merge{i+1} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $X$ is a $p_{i+1}(\mm^*)$-queue.
+  If $i < t - 1$, then $t^{\vee} = t - 1$ and $q^*\bigl(v) = \merge{i+1} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $p_i(\mm) = p_i(\mm^*)$.
+  Finally, assume $i = t - 1$, in which case the $i$'s are added during Phase~I or Phase~II of $q^*(u)$ but are instead handled by Phase~III of $q^*(v)$.
+  However, depending on high or low, they give the same answer in Phase~III because they are placed last and agree with that once things shift propertly.
+  \travis{To be finished. The $i = t$ case might need to be handled in the same way as the $i = t-1$.}
 \end{proof}
 
 \begin{thm}
 \label{thm:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
-  Let $\mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
-  For any packed word $v$ of type $\mm'$, we have
+  Let
+  \[
+  \mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots).
+  \]
+  For any packed \travis{This is a misuse of ``packed'' as we should have already said $\mm'$ was packed previously, which comes from $\mm$ being packed.} word $v$ of type $\mm'$, we have
 \[
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
 \]
@@ -778,7 +788,7 @@ Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in 
 \begin{example}
   For $n = 4$, we have
   \[
-  \begin{tikzpicture}[xscale=4.5,yscale=2.5,thick,>=latex]
+  \begin{tikzpicture}[xscale=4.5,yscale=2,thick,>=latex]
   \node (E) at (1,0) {$\mbf{m}_{\emptyset} = (1,1,1,1)$};
   \node (1) at (2,1) {$\mbf{m}_{\{1\}} = (2,1,1)$};
   \node (2) at (1,1) {$\mbf{m}_{\{2\}} = (1,2,1)$};
@@ -824,15 +834,15 @@ It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$.
 \node (213) at (0,2) {$213$};
 \node (132) at (6,2) {$132$};
 \node (123) at (3,0) {$123$};
-\draw[->] (123) -- (321); % node[right,pos=0.8] {$1/3$};
-\draw[->] (132) -- (123); % node[above=3pt,pos=0.5] {$1/3$};
-\draw[->] (132) -- (231); % node[below=4pt,pos=0.8] {$1/3$};
-\draw[->] (213) -- (123); % node[above=3pt,pos=0.5] {$1/3$};
-\draw[->] (213) -- (312); % node[below=4pt,pos=0.8] {$1/3$};
-\draw[->] (231) -- (213); % node[left,pos=0.5] {$1/3$};
-\draw[->] (312) -- (132); % node[right,pos=0.5] {$1/3$};
-\draw[->] (321) -- (231); % node[above=3pt,pos=0.5] {$1/3$};
-\draw[->] (321) -- (312); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->,blue] (123) -- (321); % node[right,pos=0.8] {$1/3$};
+\draw[->,dgreencolor] (132) -- (123); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->,red] (132) -- (231); % node[below=4pt,pos=0.8] {$1/3$};
+\draw[->,red] (213) -- (123); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->,dgreencolor] (213) -- (312); % node[below=4pt,pos=0.8] {$1/3$};
+\draw[->,blue] (231) -- (213); % node[left,pos=0.5] {$1/3$};
+\draw[->,blue] (312) -- (132); % node[right,pos=0.5] {$1/3$};
+\draw[->,dgreencolor] (321) -- (231); % node[above=3pt,pos=0.5] {$1/3$};
+\draw[->,red] (321) -- (312); % node[above=3pt,pos=0.5] {$1/3$};
 \end{tikzpicture}
 \hspace{35pt}
 \begin{tikzpicture}[>=stealth,thick,scale=0.8]
@@ -848,26 +858,26 @@ It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$.
 \node (1322) at (-3,2) {$1322$};
 \node (1232) at (-2,0) {$1232$};
 \node (2123) at (2,0) {$2123$};
-\draw[->] (1223) .. controls (2,3) and (1,6) .. (3221);
-\draw[->] (3221) -- (3212);
-\draw[->] (3221) -- (2321);
-\draw[->] (2321) -- (2231);
-\draw[->] (2321) -- (2312);
-\draw[->] (3212) -- (3122);
-\draw[->] (3212) -- (2312);
-\draw[->] (3122) -- (1322);
-\draw[->] (2312) -- (2132);
-\draw[->] (2231) -- (2213);
-\draw[->] (1322) -- (1232);
-\draw[->] (1322)  .. controls (-1,3) and (-1,6) .. (2321);
-\draw[->] (2132) -- (2123);
-\draw[->] (2132) -- (1232);
-\draw[->] (2213) .. controls (1,3) and (1,6) .. (3212);
-\draw[->] (2213) -- (2123);
-\draw[->] (1232) -- (1223);
-\draw[->] (1232) .. controls (1,0) and (1,3) .. (2231);
-\draw[->] (2123) -- (1223);
-\draw[->] (2123) .. controls (-1,0) and (-1,3) .. (3122);
+\draw[->,blue] (1223) .. controls (2,3) and (1,6) .. (3221);
+\draw[->,red] (3221) -- (3212);
+\draw[->,dgreencolor] (3221) -- (2321);
+\draw[->,dgreencolor] (2321) -- (2231);
+\draw[->,red] (2321) -- (2312);
+\draw[->,red] (3212) -- (3122);
+\draw[->,dgreencolor] (3212) -- (2312);
+\draw[->,blue] (3122) -- (1322);
+\draw[->,blue] (2312) -- (2132);
+\draw[->,blue] (2231) -- (2213);
+\draw[->,dgreencolor] (1322) -- (1232);
+\draw[->,red] (1322)  .. controls (-1,3) and (-1,6) .. (2321);
+\draw[->,dgreencolor] (2132) -- (2123);
+\draw[->,red] (2132) -- (1232);
+\draw[->,dgreencolor] (2213) .. controls (1,3) and (1,6) .. (3212);
+\draw[->,red] (2213) -- (2123);
+\draw[->,dgreencolor] (1232) -- (1223);
+\draw[->,red] (1232) .. controls (1,0) and (1,3) .. (2231);
+\draw[->,red] (2123) -- (1223);
+\draw[->,dgreencolor] (2123) .. controls (-1,0) and (-1,3) .. (3122);
 \end{tikzpicture}
 \]
 \caption{The states and transitions for $\mcW_{\emptyset}$ for $n =3$ (left) and $\mcW_{\set{2}}$ for $n = 4$ (right).
@@ -1242,6 +1252,7 @@ These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectiv
 
 \begin{example}
 \label{ex:proof_process}
+Suppose $n = 6$.
 Consider the $(5,3)$-configuration $C = (\set{1,3,4,5,6}, \set{1,2,5})$ and its dual configuration $C' = (\set{1,5,6}, \set{1,2,3,4,5})$.
 Note that $1$, $2$, $5$, and $6$ are balanced and $3$ and $4$ are unbalanced.
 We consider the word $u = 211112$, which yields (we write $C$ on the left and $C'$ on the right):
