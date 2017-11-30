@@ -281,6 +281,8 @@ Furthermore, we expect that our weighting scheme can be extended to the totally 
 This comes from the fact that the TARZP can also be realized using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
 Similarly, this extension of our results could be used to describe the steady state distribution for the inhomogeneous TARZP defined in~\cite{KMO16II}.
 
+\travis{Reference~\cite{Angel06}. who was the first to do 2-line queues.}
+
 %We
 %\begin{itemize}
 %\item introduce a new weighting of multiline queues
@@ -346,14 +348,13 @@ $
 p_{t-1} \leq r < p_t,
 $
 otherwise we set $t = \ell + 1$.
-\darij{Is this really true in the case when $r = n$ ? The $p_i$ stagnate at $n$, so $r < p_t$ will never happen.}
-\travis{Good point. Fixed.}
 The output word $v = q(u)$ will have type
 \[
 (m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
 \]
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
-We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
+We think of this as splitting the class $t$ into two new classes $t$ and $t+1$, and so we call $t$ the \defn{split class} of $q(u)$.
+The following algorithm computes $v = q(u)$. In the start no letter of $v$ is set.
 
 \begin{description}
 \item[Phase I]
@@ -535,10 +536,37 @@ In this section, we state our main results and prove the commutativity conjectur
   where we sum over all $\sigma$-twisted MLQs of type $\mm$ such that $u = \qq(1\dotsm 1)$.
 \end{thm}
 
-We will give the proof in Section~\ref{sec:thm_proof}.
+We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
+In order to prove our next main result, we need the following lemma.
 
-\begin{cor}
-\label{co:merge}
+\begin{lemma}
+\label{lemma:queue_merge}
+  Let $\qq$ be a MLQ of type $\mm$, and let $X$ be a $p_i(\mm)$-queue with $m_i > 1$.
+  For a word
+  \[
+  u = \qq\bigl( X(1 \dotsm 1) \bigr),
+  \]
+  we have
+  \[
+  v = \qq(1 \dotsm 1) = \merge{i} u.
+  \]
+\end{lemma}
+
+\begin{proof}
+  We will show this by induction on the number of queues in $\qq$.
+  If $\qq$ has no queues, then the claim clearly holds.
+  Next, assume that for $\qq = (q_1, \dotsc, q_k)$, with $q_k$ being an $r$-queue, that $v = \qq(1 \dotsm 1) = \merge{i} u$.
+  Let $q^*$ be an $r^*$-queue with $r^* > r$, since we only consider packed words, and let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$).
+  Note that $t - 1 \leq t^{\vee} \leq t$.
+  If $i \geq t$, then $t^{\vee} = t$ and the claim follows from Lemma~\ref{le:mono}.
+  Similarly, if $i < t - 1$, then $t^{\vee} = t - 1$ and the claim follows from Lemma~\ref{le:mono}.
+  If $i = t - 1$, then everything is still good.
+  If $i = t^{\vee}$ but $t^{\vee} = t - 1$, then this never happens because we want the resulting MLQ to be of packed type.
+  \travis{To be finished.}
+\end{proof}
+
+\begin{thm}
+\label{thm:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
   Let $\mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
   For any packed word $v$ of type $\mm'$, we have
@@ -546,9 +574,7 @@ We will give the proof in Section~\ref{sec:thm_proof}.
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
 \]
 where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
-\end{cor}
-
-\Travis{I'm considering upgrading this to a theorem considering there is a bit more involved with the other than simply applying Theorem~\ref{thm:permutation}.}
+\end{thm}
 
 \begin{proof}
   First note that
@@ -565,15 +591,10 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}) = \widetilde{\qq}.
   \]
   Thus, we have that $\widetilde{\qq}$ is a $(s_{\ell-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and $\wt(\widetilde{\qq}) = \wt(\qq) \wt(X) $.
-  Note that for
+  By Lemma~\ref{lemma:queue_merge}, we have
   \[
-  u = \widetilde{\qq}(1 \dotsm 1) = \qq\bigl( X(1 \dotsm 1) \bigr),
+  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \widetilde{\qq}(1 \dotsm 1).
   \]
-  we have
-  \[
-  v = \qq(1 \dotsm 1) = \merge{i} u
-  \]
-  since $X$ is a $p_i(\mm)$-queue\travis{This probably still needs a bit more detail}.
   By Theorem~\ref{thm:permutation}, there exists a weight preserving bijection $\omega$ between $(s_{\ell-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ and ordinary MLQs $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = u = \widetilde{\qq}'(1 \dotsm 1)$.
   Hence, $\omega \circ \theta$ is a weight preserving bijection between pairs $(\qq, X)$ and ordinary MLQs $\widetilde{\qq}'$ of type $\mm$ such that $\widetilde{\qq}'(1 \dotsm 1) = u$, and the claim follows.
 \end{proof}
@@ -593,14 +614,14 @@ By examining all possible MLQs for these words, we obtain
 \\ & \hspace{60pt} + x_1x_5^3 + x_2x_3x_5^2 + x_2x_4x_5^2 + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3).
 \end{align*}
 (We have factored the expressions for readability only.)
-We verify Corollary~\ref{co:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
+We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
 
 \Travis{This example below only makes sense (to the reader) once we have introduced the notion of a configuration and the dual configuration. So It might be better to actually move this example out of this section. Either that, or split the example into 2 parts, where the part here is just about where the $e_{p_i(\mm)}(x_1, \dotsc, x_n)$ comes from and later we talk about what $R_i$ does.}
 
 \begin{example}
-We give an example to illustrate the proof of Corollary~\ref{co:merge}.
+We give an example to illustrate the proof of Theorem~\ref{thm:merge}.
 To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
 We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
 \[
@@ -755,11 +776,33 @@ Let $\mcW_S$ denote the set of words of type $\mm_S$.
 Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in \mcW_S}$.
 
 \begin{example}
-  For $n = 4$, we have $\mbf{m}_\emptyset = (1,1,1,1)$, $\mbf{m}_{\{1\}} = (2,1,1)$, $\mbf{m}_{\{2\}} = (1,2,1)$, $\mbf{m}_{\{3\}} = (1,1,2)$, $\mbf{m}_{\{1,2\}} = (3,1)$, $\mbf{m}_{\{1,3\}} = (2,2)$, $\mbf{m}_{\{2,3\}} = (1,3)$, and $\mbf{m}_{\{1,2,3\}} = (4)$.
+  For $n = 4$, we have
+  \[
+  \begin{tikzpicture}[xscale=4.5,yscale=2.5,thick,>=latex]
+  \node (E) at (1,0) {$\mbf{m}_{\emptyset} = (1,1,1,1)$};
+  \node (1) at (2,1) {$\mbf{m}_{\{1\}} = (2,1,1)$};
+  \node (2) at (1,1) {$\mbf{m}_{\{2\}} = (1,2,1)$};
+  \node (3) at (0,1) {$\mbf{m}_{\{3\}} = (1,1,2)$};
+  \node (12) at (2,2) {$\mbf{m}_{\{1,2\}} = (3,1)$};
+  \node (13) at (1,2) {$\mbf{m}_{\{1,3\}} = (2,2)$};
+  \node (23) at (0,2) {$\mbf{m}_{\{2,3\}} = (1,3)$};
+  \node (123) at (1,3) {$\mbf{m}_{\{1,2,3\}} = (4)$};
+  \draw[->,red] (E) -- (1);
+  \draw[->,blue] (E) -- (2);
+  \draw[->,dgreencolor] (E) -- (3);
+  \draw[->,red] (2) -- (12);
+  \draw[->,red] (3) -- (13);
+  \draw[->,blue] (3) -- (23);
+  \draw[->,blue] (1) -- (12);
+  \draw[->,dgreencolor] (1) -- (13);
+  \draw[->,dgreencolor] (2) -- (23);
+  \draw[->,red] (23) -- (123);
+  \draw[->,blue] (13) -- (123);
+  \draw[->,dgreencolor] (12) -- (123);
+  \end{tikzpicture}
+  \]
+  where we have an arrow $m_S \to m_{S \cup \set{i}}$ for some $i \in [n-1] \setminus S$ (this is the Hasse diagram of the corresponding Boolean lattice).
 \end{example}
-
-
-\erik{Give the Hasse diagram of previous example.}
 
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_S$, where $S \subseteq[n-1]$, as follows.
 For a state $u \in \mcW_S$, we generate a new state by picking a random $i \in [n]$ and either
@@ -891,9 +934,8 @@ For the remainder of this section, we fix an $(r,s)$-configuration $C = (q_1, q_
 Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$, and is the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
-Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$ and for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$.
-\travis{We might want to change notation to $c^{\uparrow}[i,j]$ and $c^{\downarrow}[i,j]$ so as to avoid confusion with open/closed intervals.}
+Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 
@@ -903,7 +945,7 @@ The following notation will be useful later on: for a word $u \in \mcW_n$, an el
 
 \begin{figure}[t]
 \[
-\begin{tikzpicture}[scale=0.9]
+\begin{tikzpicture}[scale=0.75]
   \def\sc{0.85}   % Change this to adjust the x-scaling
   \def\ll{2}   % level 2
   \def\l{1}   % level 1
@@ -956,7 +998,10 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 \end{lemma}
 
 \begin{proof}
-  By Lemma~\ref{le:orig}, $q_1(u) = q_1(u_{i\leftrightarrow j})$ and thus $C(u) = q_2(q_1(u)) = q_2(q_1(u_{i\leftrightarrow j})) = C(u_{i\leftrightarrow j})$.
+  By Lemma~\ref{le:orig}, $q_1(u) = q_1(u_{i\leftrightarrow j})$ and thus
+  \[
+  C(u) = q_2(q_1(u)) = q_2(q_1(u_{i\leftrightarrow j})) = C(u_{i\leftrightarrow j}).
+  \]
 \end{proof}
 
 \begin{example}
@@ -989,7 +1034,7 @@ We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
 \end{tikzpicture}
 % t = 2 for q_1
 % t = 1 for q_2
-\hspace{20pt} = \hspace{20pt}
+\hspace{3pt} = \hspace{4pt}
 \begin{tikzpicture}[baseline=-3]
   \def\sc{0.75}   % Change this to adjust the x-scaling
   \def\lll{1.7}   % level 3
@@ -1059,7 +1104,7 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 \end{tikzpicture}
 % t = 1 for q_1
 % t = 1 for q_2
-\hspace{20pt} = \hspace{20pt}
+\hspace{3pt} = \hspace{4pt}
 \begin{tikzpicture}[baseline=25]
   \def\sc{0.75}   % Change this to adjust the x-scaling
   \def\lll{2.7}   % level 3
@@ -1112,9 +1157,9 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 
   Suppose $k > 0$. Clearly, $q_1(u)_i = 1$. If $q_1(u)_{i+1} = 1$, it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$ so by our inductive hypothesis, $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
 
-  Now suppose $q_1(u)_{i+1} = 2$. In this case we see that the number of ones in $u$ is at most $r$ (or there wouldn't be any $k$ such that $k \in q_1$ and $q_1(u)_k=2$. This means that $k\notin q_2 \Rightarrow q_2(q_1(u))_k = 4$. We also see that $q_1(u)_l = 2$ for $l$ in all of $\{i+1,\dots, i+k\}$ as well as for $l= j$.
+  Now suppose $q_1(u)_{i+1} = 2$. In this case we see that the number of ones in $u$ is at most $r$ (or there wouldn't be any $k$ such that $k \in q_1$ and $q_1(u)_k=2$. This means that $k \notin q_2 \Rightarrow q_2\bigl( q_1(u) \bigr)_k = 4$. We also see that $q_1(u)_l = 2$ for $l$ in all of $\set{i+1, \dotsc, i+k}$ as well as for $l= j$.
 
-  Since the squares in the lower row of the balanced block of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2(q_1(u))$ from $q_1(u)$, the search goes beyond $i+k+1$. Together with the previous paragraph, this means that $q_2(q_1(u))_i = 3$.
+  Since the squares in the lower row of the balanced block of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2\bigl( q_1(u) \bigr)$ from $q_1(u)$, the search goes beyond $i+k+1$. Together with the previous paragraph, this means that $q_2\bigl( q_1(u) \bigr)_i = 3$.
 
   Now $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$. Therefore, the only difference between $C(u)$ and $C(u_{i\leftrightarrow j})$ would be in positions $i$ or $i+1$. We have established that $q_1(u)_l = 3$ for $l \in \{i,i+1\}$, and that this is true also for $q_1(u_{i\leftrightarrow i+1})$ is immediate.
 \end{proof}
@@ -1150,7 +1195,7 @@ We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
 \end{tikzpicture}
 % t = 2 for q_1 = {1,2,3,4,5,8}
 % t = 2 for q_2 = {7,8}
-\hspace{20pt} = \hspace{20pt}
+\hspace{3pt} = \hspace{4pt}
 \begin{tikzpicture}[baseline=25]
   \def\sc{0.75}   % Change this to adjust the x-scaling
   \def\lll{2.7}   % level 3
@@ -1197,59 +1242,216 @@ These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectiv
 
 \begin{example}
 \label{ex:proof_process}
-We give an example of the computation inherent in the proof, showing that $C(u) = C'(u)$ for $(r,s)$-configuration $C$ in Figure~\ref{fi:proof_example} and its dual $(s,r)$-configuration $C'$ where $r=5$, $s=3$ and $u = 211112$.
-We first find the balanced blocks: the columns 1,2,5 and 6 are balanced while 3 and 4 are unbalanced.
-Thus $C$ and $C'$ differ in columns 3 and 4 only. 
-
-Now apply Lemma UB with $i = 4$ and $j = 6$, getting $u_1 = 211112$.  \\
-Lemma BU with $i=2, j=4$, getting $u_2 = 221111$.  \\
-Lemma UB with $i=4, j=1$, getting $u_0 = 121211$, at which point we cannot apply any of Lemmas UB,BU,BB to $u_0$.
-
-The reader is invited to check that indeed, $C(u) = C(u_1) = C(u_2) = C(u_0)$ and $C'(u) = C'(u_1) = C'(u_2) = C'(u_0)$.
-
-For the input word $u_0$, we have $C(u_0) = 112314 = C'(u_0)$.
-
-\Erik{need more elaborate example, including Lemma BB (and possibly all three cases of Part D}
-\Travis{Change to use pictures}
+Consider the $(5,3)$-configuration $C = (\set{1,3,4,5,6}, \set{1,2,5})$ and its dual configuration $C' = (\set{1,5,6}, \set{1,2,3,4,5})$.
+Note that $1$, $2$, $5$, and $6$ are balanced and $3$ and $4$ are unbalanced.
+We consider the word $u = 211112$, which yields (we write $C$ on the left and $C'$ on the right):
+\[
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,3,4,5} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {1,6} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\hspace{40pt}
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,3,4,5} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {1,6} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {3,4} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\]
+We will do the reductions given in Part~C.
+We first apply Lemma UB with $i = 4$ and $j = 6$ and obtain:
+\[
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \node[blue] at (4*\sc,\lll) {$2$};
+  \node[blue] at (6*\sc,\lll) {$1$};
+  \foreach \i in {2,3,5} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\hspace{40pt}
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \node[blue] at (4*\sc,\lll) {$2$};
+  \node[blue] at (6*\sc,\lll) {$1$};
+  \foreach \i in {2,3,5} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {3,4} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\]
+then Lemma BU with $i=2, j=4$:
+\[
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \node[blue] at (2*\sc,\lll) {$2$};
+  \node[blue] at (4*\sc,\lll) {$1$};
+  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\hspace{40pt}
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \node[blue] at (2*\sc,\lll) {$2$};
+  \node[blue] at (4*\sc,\lll) {$1$};
+  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
+  \node[blue] at (2*\sc,\ll) {$3$};
+  \node[blue] at (3*\sc,\ll) {$2$};
+  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  %\foreach \i in {3} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\]
+and finally Lemma UB with $i=4, j=1$ yields:
+\[
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \node[blue] at (4*\sc,\lll) {$2$};
+  \node[blue] at (1*\sc,\lll) {$1$};
+  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\hspace{40pt}
+\begin{tikzpicture}[scale=0.9]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\lll{3}  % level 3
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
+  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+  \node[blue] at (4*\sc,\lll) {$2$};
+  \node[blue] at (1*\sc,\lll) {$1$};
+  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
+  \foreach \i in {2} { \node at (\i*\sc,\lll) {$2$}; }
+  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\ll) {$2$}; }
+  \foreach \i in {2,4} { \node at (\i*\sc,\ll) {$3$}; }
+  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
+  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
+  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
+  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
+\end{tikzpicture}
+\]
+at which point we cannot apply any of the reductions.
+Furthermore, we have
+\begin{align*}
+C(211112) & = C(211211) = C(221111) = C(121211)
+\\ & = C'(121211) = C'(221111) = C'(211211) = C'(211112).
+\end{align*}
 \end{example}
 
-\begin{figure}
-\[
-\begin{tikzpicture}
-  \node[circle, draw=black] at (0, 3){\0};
-  \node[rectangle, draw=black] at (1, 3){\0};
-  \node[circle, draw=black] at (2, 3){\0};
-  \node[circle, draw=black] at (3, 3){\0};
-  \node[circle, draw=black] at (4, 3){\0};
-  \node[circle, draw=black] at (5, 3){\0};
-  \node[circle, draw=black] at (0, 2){\0};
-  \node[circle, draw=black] at (1, 2){\0};
-  \node[rectangle, draw=black] at (2, 2){\0};
-  \node[rectangle, draw=black] at (3, 2){\0};
-  \node[circle, draw=black] at (4, 2){\0};
-  \node[rectangle, draw=black] at (5, 2){\0};
-\end{tikzpicture}
-\]
-\vspace{2em}
-\[
-\begin{tikzpicture}
-  \node[circle, draw=black] at (0, 3){\0};
-  \node[rectangle, draw=black] at (1, 3){\0};
-  \node[rectangle, draw=black] at (2, 3){\0};
-  \node[rectangle, draw=black] at (3, 3){\0};
-  \node[circle, draw=black] at (4, 3){\0};
-  \node[circle, draw=black] at (5, 3){\0};
-  \node[circle, draw=black] at (0, 2){\0};
-  \node[circle, draw=black] at (1, 2){\0};
-  \node[circle, draw=black] at (2, 2){\0};
-  \node[circle, draw=black] at (3, 2){\0};
-  \node[circle, draw=black] at (4, 2){\0};
-  \node[rectangle, draw=black] at (5, 2){\0};
-\end{tikzpicture}
-\]
-\caption{Figure for Example~\ref{ex:proof_process}.}
-\label{fi:proof_example}
-\end{figure}
+
 
 
 
@@ -1270,15 +1472,14 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
 \Travis{I am also dumping some other stuff here to be woven in later.}
 
 \begin{prop}
-  Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
+  Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.\travis{Say this acts by positions.}
   We have $\swt{u} = \swt{\sigma u}$ for any $\sigma \in C_n$.
 \end{prop}
 
-\Travis{Darij, can you check about the sided-ness of this action? It should act on positions of the word (moving them around).}
-
 \begin{proof}
   For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
-  It is clear from the definition of a queue that $(\sigma q)(u) = \sigma\bigl(q(u)\bigr)$, and the claim follows.
+  It is clear from the definition of a queue that $(\sigma q)(u) = q(u\sigma)\sigma$, and the claim follows.
+  \travis{Check left vs right action on position.}
 \end{proof}
 
 Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
@@ -1286,8 +1487,8 @@ Recall the combinatorial $R$-matrix acting on $B^{r,s}$ from~\cite{NY97,Shimozon
 \[
 R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_2}.
 \]
-In~\cite{KMO15}, a bijection $\Xi_r$ was given relating $r$-queues with an element of the KR crystal $B^{r,1}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
-They extended this to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
+There is a well-known (in slightly different terminology) bijection $\Xi_r$ relating $r$-queues with an element of the KR crystal $B^{r,1}$ in type $A_{n-1}^{(1)}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
+In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
 \[
 \Xi(\qq) = \Xi_{p_1}(q_1) \otimes \Xi_{p_2}(q_2) \otimes \dotsm \otimes \Xi_{p_{\ell}}(q_{\ell}).
 \]
@@ -1300,6 +1501,44 @@ Let $C$ be an $(r_1, r_2)$-configuration. Then
 \]
 where $C'$ is the dual configuration of $C$.
 \end{prop}
+
+\begin{example}
+Suppose $n = 9$.
+Consider the $(4,6)$-configuration $C = (\set{1,4,5,6}, \set{2,3,4,6,7,8})$.
+Then the corresponding dual configuration is $C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7})$ and we have
+\[
+\begin{tikzpicture}[xscale=6,yscale=4,>=stealth]
+\node (C) at (0,0) { %{$(\set{1,4,5,6}, \set{2,3,4,6,7,8})$};
+\begin{tikzpicture}[scale=0.7]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \foreach \i in {1,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,7,8,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,3,4,6,7,8} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,5,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+};
+\node (Cp) at (0,-1) { %{$(\set{1,3,4,5,6,8}, \set{2,4,6,7})$};
+\begin{tikzpicture}[scale=0.7]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \foreach \i in {1,3,4,5,6,8} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,7,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,4,6,7} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,3,5,8,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+};
+\node (KR) at (1,0) {$\young(1,4,5,6) \otimes \young(2,3,4,6,7,8)$};
+\node (KRp) at (1,-1) {$\young(1,3,4,5,6,8) \otimes \young(2,4,6,7)$};
+\draw[<->] (C) -- (Cp) node[midway,anchor=east] {dual};
+\draw[<->] (C) -- (KR) node[midway,anchor=south] {$\Xi$};
+\draw[<->] (KR) -- (KRp) node[midway,anchor=west] {$R$};
+\draw[<->] (Cp) -- (KRp) node[midway,anchor=north] {$\Xi$};
+\end{tikzpicture}
+\]
+\end{example}
 
 Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
 We also note that this $\SymGp{\ell}$ action on MLQs has already been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).
