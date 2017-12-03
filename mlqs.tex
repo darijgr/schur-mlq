@@ -331,6 +331,7 @@ A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if $m_i \neq 0$ fo
 We \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
 For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
+Similarly, the $i$-merge of a type $\mm$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
@@ -541,8 +542,8 @@ In order to prove our next result, we need the following lemma.
 
 \begin{lemma}
 \label{lemma:queue_merge}
-  Let $\mm$ be a packed type, and let $X$ be a $p_i(\mm)$-queue.
-  Let $\qq$ be a MLQ of packed type $\mm' = \merge{i}\mm$.
+  Let $X$ be a $p_i(\mm)$-queue for some type $\mm$.
+  Let $\qq$ be an MLQ \travis{I don't think I used the fact it is an ordinary MLQ in the proof.} of type $\merge{i}\mm$.
   For the word
   $
   u = \qq\bigl( X(1 \dotsm 1) \bigr),
@@ -557,29 +558,25 @@ In order to prove our next result, we need the following lemma.
   We will show this by induction on the number of queues in $\qq$.
   If $\qq$ has no queues, then the claim clearly holds.
   
-  Next, assume that for $\qq = (q_1, \dotsc, q_k)$, with $q_k$ being an $r$-queue, of type $\mm$ that $v = \qq(1 \dotsm 1) = \merge{i} u$.
-  Let $q^*$ be an $r^*$-queue with $r^* > r$, since we only consider packed words, and the type of $(q^*, q_1, \dotsc, q_k, X)$ is
+  Next, assume that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes and $q_k$ is an $r$-queue.
+  Let $q^*$ be an $r^*$-queue. %with $r^* > r$.
+  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of $(q^*, q_1, \dotsc, q_k, X)$ is
   \[
-  \mm^* := (m_1, \dots, m_k, r^*-p_k, n - r^* - p_k, 0, 0, \ldots).
+  \mm^* := (m_1, \dotsc, m_{t-1}, r^* - p_{t-1}, p_t - r^*, m_{t+1}, \ldots).
   \]
-  \travis{We need to incorporate the $\sigma$ because this is a $\sigma$-twisted MLQ to obtain the type.}
-  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$).
-  Note that $t - 1 \leq t^{\vee} \leq t$.
-  If $i \geq t$, then $t^{\vee} = t$ and $q^*\bigl(v) = \merge{i+1} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $X$ is a $p_{i+1}(\mm^*)$-queue.
-  If $i < t - 1$, then $t^{\vee} = t - 1$ and $q^*\bigl(v) = \merge{i+1} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $p_i(\mm) = p_i(\mm^*)$.
-  Finally, assume $i = t - 1$, in which case the $i$'s are added during Phase~I or Phase~II of $q^*(u)$ but are instead handled by Phase~III of $q^*(v)$.
-  However, depending on high or low, they give the same answer in Phase~III because they are placed last and agree with that once things shift propertly.
-  \travis{To be finished. The $i = t$ case might need to be handled in the same way as the $i = t-1$.}
+  Note that either $t^{\vee} \leq t$ or $t^{\vee} = t - 1$.
+  If $i > t$, then $t^{\vee} = t$ and $q^*\bigl(v) = \merge{i+1} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $X$ is a $p_{i+1}(\mm^*)$-queue.
+  If $i < t - 1$, then $t^{\vee} = t - 1$ and $q^*\bigl(v) = \merge{i} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $p_i(\mm) = p_i(\mm^*)$.
+  We consider the case $i = t - 1$, where the $i$'s are added during Phase~I of $q^*(u)$ but are instead handled by Phase~III of $q^*(v)$.
+  Note that all positions of $q^*$ where $i$ was adding during Phase~I of $q^*(u)$ are remaining positions of $q^*$ in Phase~III of $q^*(v)$, so in both cases they are $i$'s.
+  The remaining positions during Phase~III of $q^*(u)$ precisely correspond to all other remaining positions in Phase~III of $q^*(v)$, and hence with Lemma~\ref{le:mono}, we have $q^*(u) = \merge{i} q^*(v)$.
+  The case when $i = t$ is similar except instead the $(i+1)$'s are normally handled during Phase~II.
 \end{proof}
 
 \begin{thm}
 \label{thm:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
-  Let
-  \[
-  \mm' = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots).
-  \]
-  For any packed \travis{This is a misuse of ``packed'' as we should have already said $\mm'$ was packed previously, which comes from $\mm$ being packed.} word $v$ of type $\mm'$, we have
+  For any packed word $v$ of type $\merge{i}\mm$, we have
 \[
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
 \]
@@ -593,7 +590,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \]
   where we sum over all pairs $(\qq, X)$ such that
   \begin{itemize}
-  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\mm'$ such that $v = \qq(1\cdots1)$ and
+  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
   \item $X$ is a $p_i(\mm)$-queue.
   \end{itemize}
   Next, define a function $\theta$ by
