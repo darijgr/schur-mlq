@@ -232,6 +232,8 @@
 \email{tcscrims@gmail.com}
 \urladdr{https://sites.google.com/view/tscrim/home}
 
+\date{\today}
+
 \keywords{multiline queue, TASEP, R-matrix, symmetric function}
 \subjclass[2010]{
 60C05,  % Combinatorial probability
@@ -476,7 +478,7 @@ Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words,
 
 \begin{dfn}
 For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue (MLQ) of type $\mm$}, with $\ell$ classes, is a sequence of queues $\qq = (q_1, \dotsc, q_{\ell-1})$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue and $m_{\ell} = n - p_{\ell-1}(\mm)$.
-When $\sigma$ is the identity permutation, we simply say an (ordinary) MLQ.
+When $\sigma$ is the identity permutation, we simply call $\qq$ an \defn{(ordinary) MLQ of type $\mm$}.
 Define the \defn{weight} by $\wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i)$.
 We also consider $\qq$ as a function on words by
 \[
@@ -549,7 +551,7 @@ In order to prove our next result, we need the following lemma.
   $
   we have
   \[
-  v = \qq(1 \dotsm 1) = \merge{i} u.
+  v := \qq(1 \dotsm 1) = \merge{i} u.
   \]
 \end{lemma}
 
