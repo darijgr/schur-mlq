@@ -255,46 +255,65 @@ We give a determinant formula for the spectral weight of a word, which gives a p
 \section{Introduction}
 \label{sec:introduction}
 
-The totally asymmetric exclusion process (TASEP) is a non-equilibrium stochastic process  that has received significant attention in various fields, such as probability theory, combinatorics, physics, biology, and civil engineering over the past few decades.
-For some examples, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16} and references therein.
+One of the fundamental models of particles moving in a 1-dimensional lattice is the asymmetric simple exclusion process (ASEP) and has received broad attention in many different variations.
+The earliest known publication of the ASEP was done to model the dynamics of ribosomes along RNA~\cite{MGP68}.
+For statistical mechanics, it is a model for gas particles in a lattice with an induced current, where the exclusion mimics the short-range interactions among the particles.
+Despite admitting very simple descriptions of the particle dynamics, the ASEP has very rich macroscopic behaviors, such as
+\begin{itemize}
+\item boundary-induced phase transitions~\cite{Krug91},
+\item spontaneous symmetry breaking~\cite{AHR98,CEM01,EFGM95,GLEMSS95},
+\item describing the formations of shocks~\cite{DJLS93,Ferrari92,FF94,Liggett76}, and
+\item phase separation and condensation~\cite{EKKM98,JNHWW09,KLMST02,RSS00}
+\end{itemize}
+(see also~\cite{PEM09,Schutz01,SZ95,TJHJ16} and references therein).
+
+The term exclusion process was coined by Spitzer~\cite{Spitzer70}, where he was focused on an application with Brownian motion with hard-core interactions, and this work initiated the investigation of exclusion processes using probability theory.
+However, the applications of the ASEP (and its variations) has since spread to other areas, such as
+\begin{itemize}
+\item transportation processes in capillary vessels~\cite{Levitt73} or proteins within the cells along actin filaments~\cite{KNL05},
+\item anistropic conductors known as solid electrolytes~\cite{CL99},
+\item discrete models of traffic flow~\cite{Schad01},
+\item partition growth processes~\cite{Lam15},
+\item random matrix theory~\cite{Johansson00,TW09}, and
+\item moments of Askey--Wilson polynomials~\cite{CW11}.
+\end{itemize}
+
+If we prohibit the particles from moving backwards, we obtain the totally asymmetric exclusion process (TASEP), a non-equilibrium stochastic process that has its own vast literature.
+For example, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16,Liggett99} and references therein.
 In this paper, we consider the TASEP on a ring with $n$ sites and $\ell$ species of particles.
 Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, \ell\}$ of length $n$, where we take the indices to be $\ZZ / n \ZZ$.
 We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$ and is done at a uniform rate.
 
-The steady state of the TASEP is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06}.
+The steady state of the TASEP on a ring is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06,FM07}.
+This is a generalization of 2-line queues used by Angel~\cite{Angel06} and the work of Ferrari, Fontes, and Kohayakawa~\cite{FFK94}.
 In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
 This interpretation gives a connection with five-vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}.
 
-We describe MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
-We introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
-This allows us to define the amplitude or spectral weight of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
-We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation.
+In this paper, we introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
+We also interpret MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
+This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
+We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly used in~\cite{AAMP}.
 Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
-This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{This operation has also previously appeared in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}).} and we show that does not change the MLQ as a function on words.
+This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{This operation has also previously appeared in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}) and van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.} and we show that does not change the MLQ as a function on words.
 
-As a consequence, we obtain a proof of the commutativity conjecture of~\cite{AAMP} when we specialize all our weight parameters to $1$.
+As a consequence of this action and specializing our weight parameters to $1$, we obtain a proof of the commutativity conjecture of~\cite{AAMP}.
 However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
 Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
 One potential application is that our weighting could be used to describe the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14}.
-Furthermore, we expect that our weighting scheme can be extended to the totally asymmetric zero range process (TARZP), where multiple particles can occupy the same site~\cite{KMO16TARZP,KMO16TARZPII}.
-This comes from the fact that the TARZP can also be realized using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
-Similarly, this extension of our results could be used to describe the steady state distribution for the inhomogeneous TARZP defined in~\cite{KMO16II}.
+Furthermore, we note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP)~\cite{KMO16TARZP,KMO16TARZPII}, where multiple particles can occupy the same site.
+This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
+Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
+Similarly, this extension of our results could potentially be used to describe the steady state distribution for the inhomogeneous TARZP defined in~\cite{KMO16II}.
 
-\travis{Reference~\cite{Angel06}. who was the first to do 2-line queues.}
-
-%We
-%\begin{itemize}
-%\item introduce a new weighting of multiline queues
-%\item prove the commutativity conjecture of~\cite{AAMP}
-%\item prove~\cite[Conj.~3.10]{AasLin17}
-%\item the dual configuration corresponds to an operation already used by Danilov and Koshevoy in other contexts~\cite{DanilovKoshevoy} \darij{See also \cite[somewhere in Ch. 4]{Gorodentsev2}? \cite[somewhere]{vanLeeuwen-dc}?}
-%\item the dual configuration also is the combinatorial $R$-matrix on a tensor product of single column KR crystals~\cite{NY97,Shimozono02}, where the connection with TASEP models was given in~\cite{KMO15, KMO16}. Note that these are known to satisfy the Yang--Baxter equation, so we have an action of the symmetric group.
-%\end{itemize}
-%
-%\Erik{Mention Gorodentsev's book.}
+This paper is organized as follows.
+In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
+In Section~\ref{sec:result}, we give our main results.
+In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
+In Section~\ref{sec:thm_proof}, we give the proof of our main theorem.
+In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 
 
 \subsection{Acknowledgements}
@@ -311,7 +330,7 @@ This work benefited from computations using \textsc{SageMath}~\cite{sage,combina
 
 
 %=====================================================================
-\section{Background}
+\section{Background and definitions}
 \label{sec:background}
 
 Fix a positive integer $n$.
@@ -465,17 +484,23 @@ There is an obvious duality in the definition of the labelling process above.
 \end{lemma}
 
 %\begin{remark} (Excision)
-%  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = (q(u))_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
+%  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
 \begin{lemma}[Monotonicity]
 \label{le:mono}
   For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$.
   Let $q$ be a queue, $u$ be any word, and $i,j \in \ive{n}$.
-  We have $q(u)_i \leq q(u)_j$ if and only if each $t$ satisfies $q(f_t(u))_i \leq q(f_t(u))_j$.
+  We have $q(u)_i \leq q(u)_j$ if and only if each $t$ satisfies $q\bigl(f_t(u)\bigr)_i \leq q\bigl(f_t(u)\bigr)_j$.
 \end{lemma}
 
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
+
+
+%%%%%%%%%%
+\subsection{Multiline queues}
+
+We now give our main definition of a multiline queue and spectral weight.
 
 \begin{dfn}
 For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue (MLQ) of type $\mm$}, with $\ell$ classes, is a sequence of queues $\qq = (q_1, \dotsc, q_{\ell-1})$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue and $m_{\ell} = n - p_{\ell-1}(\mm)$.
@@ -506,8 +531,12 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 Note that the type of $\qq(1 \dotsm 1)$ is the type of $\qq$.
 \end{remark}
 
-We will also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$,
-defined for each $N \in \left\{0,1,\ldots,n\right\}$ by
+
+%%%%%%%%%%
+\subsection{Symmetric functions}
+
+We also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$.
+Briefly, recall that they are defined for each $N \in \left\{0,1,\ldots,n\right\}$ by
 \begin{align*}
 e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
 \\ h_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 \leq \cdots \leq i_k \leq N} x_{i_1} \dotsm x_{i_k},
@@ -713,7 +742,7 @@ Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sig
 By Theorem~\ref{thm:permutation}, we have
 \begin{align*}
   \psi(T) & = \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
-  \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j}))_{1\leq i,j \leq r},
+  \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{1\leq i,j \leq r},
 \end{align*}
 where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
@@ -731,6 +760,7 @@ This in turn proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\ci
 
 %=====================================================================
 \section{The TASEP connection}
+\label{sec:tasep}
 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture of~\cite{AAMP}.
 
@@ -840,7 +870,7 @@ It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$.
 All probabilities of the drawn transitions are $1/n$.}
 \end{figure}
 
-Building on work by Ferrari--Martin~\cite{FM06}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_S \to \mcW_{S \setminus \{i\}}$ given by $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$, and showed that $\Psi_i M_S = M_{S \setminus \{i\}} \Psi_i$.
+Building on work by Ferrari and Martin~\cite{FM06,FM07}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_S \to \mcW_{S \setminus \{i\}}$ given by $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$, and showed that $\Psi_i M_S = M_{S \setminus \{i\}} \Psi_i$.
 Furthermore they gave the \defn{commutativity conjecture}: that $\Psi_i \Psi_j = \Psi_j \Psi_i$.
 By looking at the $(u,v)$ entry of both sides of this equation, the commutativity conjecture is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
 Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by
@@ -941,8 +971,6 @@ The dual configuration $C'$ is given by sliding all of the circles not in a boxe
 In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
 \end{example}
 
-\travis{Still need to check if~\cite[somewhere]{vanLeeuwen-dc} applied.}
-
 
 %balanced blocks in C and C' are the same (because #unbalanced columns is same in both)
 %%%%%%%%%%
@@ -963,7 +991,7 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 \begin{proof}
   By Lemma~\ref{le:orig}, $q_1(u) = q_1(u_{i\leftrightarrow j})$ and thus
   \[
-  C(u) = q_2(q_1(u)) = q_2(q_1(u_{i\leftrightarrow j})) = C(u_{i\leftrightarrow j}).
+  C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q_1(u_{i\leftrightarrow j}) \bigr) = C(u_{i\leftrightarrow j}).
   \]
 \end{proof}
 
@@ -1426,10 +1454,11 @@ C(211112) & = C(211211) = C(221111) = C(121211)
 
 %=====================================================================
 \section{Final remarks}
+\label{sec:remarks}
 
 It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
 
-Does our proof have any implications for the work of Danilov and Koshevoy?
+Does our proof have any implications for the work of Danilov and Koshevoy or van Leeuwen?
 
 We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ is proven in~\cite{AAMP} using different techniques.
 
@@ -1437,20 +1466,20 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
 
 \begin{prop}
   Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
-  We have $\swt{u}_{\tau} = \swt{\sigma u}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions.
+  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions.
 \end{prop}
 
 \begin{proof}
   For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
-  It is clear from the definition of a queue that $q(u \sigma) = ((\sigma q)(u)) \sigma$.
+  It is clear from the definition of a queue that $q(u \sigma) = \bigl( (\sigma q)(u) \bigr) \sigma$.
   Hence, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (u \sigma) = ((\sigma \qq)(u)) \sigma$,
+  $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
   where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
   Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (1 \cdots 1) = ((\sigma \qq)(1 \cdots 1)) \sigma$.
+  $\qq (1 \cdots 1) = \bigl( (\sigma \qq)(1 \cdots 1) \bigr) \sigma$.
   From here, the claim follows by an obvious bijection
   (given by the action of $\sigma$) between the sums defining
-  $\swt{u}_\tau$ and $\swt{\sigma u}_{\tau}$.
+  $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
 \end{proof}
 
 Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
@@ -1512,7 +1541,8 @@ Then the corresponding dual configuration is $C' = (\set{1,3,4,5,6,8}, \set{2,4,
 \end{example}
 
 Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
-We also note that this $\SymGp{\ell}$ action on MLQs has already been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
+Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$ action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, that $s_{c_1^{r_1}} s_{c_2^{r_2}}$, where $s_{\lambda}$ is a Schur function, is multiplicity free, and the Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
+Furthermore, the $\SymGp{\ell}$ action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
 Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
 
 Next, we describe how to interpret our action from looking at the corner transfer matrix described in~\cite{KMO15}, which can be given diagrammatically by
@@ -1554,22 +1584,22 @@ Our action effectively does the following on the corner transfer matrix:
 \node at (0.5,5) {$\vdots$};
 \end{tikzpicture}
 \]
-where the equality comes from applying the Yang--Baxter equation and that $R^2 = \id$.
+where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
 
 \begin{example}
 We give an example to illustrate the proof of Theorem~\ref{thm:merge}.
 To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
 We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
 \[
-\qq =
-\begin{tikzpicture}[baseline=66,scale=0.8]
+\qq = \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
 \node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
 \end{tikzpicture}
-\xrightarrow{\hspace{30pt}}
-\begin{tikzpicture}[baseline=66,scale=0.8]
+\; \xrightarrow{\hspace{30pt}} \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
 \node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
 \end{tikzpicture}
-= \widetilde{\qq}.
+\; = \widetilde{\qq}.
 \]
 Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
 Furthermore, note that $135452 = \merge{5} 135462$.
@@ -1577,22 +1607,23 @@ Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in biject
 In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
 By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
 \begin{align*}
-\widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
 \node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
 \end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_2}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\; \xrightarrow[\hspace{15pt}]{R_2} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
 \node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
 \end{tikzpicture}
 \\[1.3em] &
-\xrightarrow[\hspace{15pt}]{R_3}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\; \xrightarrow[\hspace{15pt}]{R_3} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
 \node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\xrightarrow[\hspace{15pt}]{R_4}
-\begin{tikzpicture}[xscale=0.5,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\; \xrightarrow[\hspace{15pt}]{R_4} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
 \node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture} = \widetilde{\qq}',
+\end{tikzpicture}
+\; = \widetilde{\qq}',
 \end{align*}
 which contributes to $\swt{135462}$.
 \end{example}
