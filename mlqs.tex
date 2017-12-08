@@ -573,7 +573,7 @@ In order to prove our next result, we need the following lemma.
 \begin{lemma}
 \label{lemma:queue_merge}
   Let $X$ be a $p_i(\mm)$-queue for some type $\mm$.
-  Let $\qq$ be an MLQ \travis{I don't think I used the fact it is an ordinary MLQ in the proof.} of type $\merge{i}\mm$.
+  Let $\qq$ be an MLQ of type $\merge{i}\mm$.
   For the word
   $
   u = \qq\bigl( X(1 \dotsm 1) \bigr),
@@ -604,68 +604,69 @@ In order to prove our next result, we need the following lemma.
 \end{proof}
 
 \begin{example}
-Consider $q$ from Example~\ref{ex:first_queue} and $v = 345513321$ (this is the word $u$ in Example~\ref{ex:first_queue} but replacing $6 \mapsto 5$):
+Consider $q = \set{1,4,5,9,10}$ and $v = 3455313321$:
 \[
 \begin{tikzpicture}[baseline=10]
   \def\ll{0.65}   % level 2
-  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
-  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
-  \foreach \i in {1,6,7} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {1,5,7,8} { \node at (\i,\ll) {$3$}; }
   \foreach \i in {2} { \node at (\i,\ll) {$4$}; }
   \foreach \i in {3,4} { \node at (\i,\ll) {$5$}; }
-  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
-  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
   \foreach \i in {1} { \node at (\i,0) {$2$}; }
-  \foreach \i in {4} { \node at (\i,0) {$3$}; }
-  \foreach \i in {5,6} { \node at (\i,0) {$4$}; }
-  \foreach \i in {7} { \node at (\i,0) {$5$}; }
+  \foreach \i in {4,5} { \node at (\i,0) {$3$}; }
+  \foreach \i in {6,7} { \node at (\i,0) {$4$}; }
+  \foreach \i in {8} { \node at (\i,0) {$5$}; }
   \foreach \i in {2,3} { \node at (\i,0) {$6$}; }
 \end{tikzpicture}
 \]
-Consider $u = 456613321$, and note that $v = \merge{3} u$ and
+Let $u = 3566413321$, and note that $v = \merge{3} u$ and
 \[
 \begin{tikzpicture}[baseline=10]
   \def\ll{0.65}   % level 2
-  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
-  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
-  \foreach \i in {6,7} { \node at (\i,\ll) {$3$}; }
-  \foreach \i in {1} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {1,7,8} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {5} { \node at (\i,\ll) {$4$}; }
   \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
   \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
-  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
-  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
   \foreach \i in {1} { \node at (\i,0) {$2$}; }
-  \foreach \i in {4} { \node at (\i,0) {$3$}; }
-  \foreach \i in {5} { \node at (\i,0) {$4$}; }
-  \foreach \i in {6} { \node at (\i,0) {$5$}; }
-  \foreach \i in {7} { \node at (\i,0) {$6$}; }
-  \foreach \i in {2,3} { \node at (\i,0) {$7$}; }
+  \foreach \i in {4,5} { \node at (\i,0) {$3$}; }
+  \foreach \i in {6} { \node at (\i,0) {$4$}; }
+  \foreach \i in {7} { \node[red] at (\i,0) {$5$}; }
+  \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
+  \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
 \end{tikzpicture}
 \]
-where we have $266344511 = \merge{4} 277345611$.
-Also, consider $u' = 456613421$, and note that $v = \merge{3} u'$ and
+where we have $2663344511 = \merge{4} 2773345611$.
+Similar,y, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
 \[
 \begin{tikzpicture}[baseline=10]
   \def\ll{0.65}   % level 2
-  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
-  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
-  \foreach \i in {6} { \node at (\i,\ll) {$3$}; }
-  \foreach \i in {1,7} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {7} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {1,5,8} { \node at (\i,\ll) {$4$}; }
   \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
   \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
-  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
-  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
   \foreach \i in {1} { \node at (\i,0) {$2$}; }
-  \foreach \i in {4} { \node at (\i,0) {$3$}; }
-  \foreach \i in {5,6} { \node at (\i,0) {$5$}; }
-  \foreach \i in {7} { \node at (\i,0) {$6$}; }
-  \foreach \i in {2,3} { \node at (\i,0) {$7$}; }
+  \foreach \i in {4} { \node[blue] at (\i,0) {$3$}; }
+  \foreach \i in {5} { \node[dgreencolor] at (\i,0) {$4$}; }
+  \foreach \i in {6,7} { \node[dgreencolor] at (\i,0) {$5$}; }
+  \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
+  \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
 \end{tikzpicture}
 \]
-where we have $266344511 = \merge{5} 277355611$.
+where we have $2663344511 = \merge{4} 2773455611$.
 \end{example}
 
 \begin{thm}
