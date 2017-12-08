@@ -292,7 +292,7 @@ This interpretation gives a connection with five-vertex models, corner transfer 
 In this paper, we introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
 We also interpret MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
 This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
-We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly used in~\cite{AAMP}.
+We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
 Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
 This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{This operation has also previously appeared in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}) and van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.} and we show that does not change the MLQ as a function on words.
@@ -302,11 +302,10 @@ However, we note that the interlacing property of~\cite{AAMP} does not generaliz
 Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 
-One potential application is that our weighting could be used to describe the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14}.
-Furthermore, we note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP)~\cite{KMO16TARZP,KMO16TARZPII}, where multiple particles can occupy the same site.
+We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP)~\cite{KMO16TARZP,KMO16TARZPII}, where multiple particles can occupy the same site.
 This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
 Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
-Similarly, this extension of our results could potentially be used to describe the steady state distribution for the inhomogeneous TARZP defined in~\cite{KMO16II}.
+Furthermore, one potential application of our weighting is to describe the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} and TARZP~\cite{KMO16II}.
 
 This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
@@ -396,13 +395,13 @@ The following algorithm computes $v = q(u)$. In the start no letter of $v$ is se
 
 \begin{example}
 \label{ex:first_queue}
-We consider the $4$-queue $q = \{1, 4, 8, 9\}$ and the word $u = 346613321$.
+We consider the $4$-queue $q = \{1, 4, 8, 9\}$, and let $u = 346613321$.
 Thus, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$, and so $t = 3$.
 To compute $q(u)$, draw the following diagram
 (whose upper row shows $u$, whose lower row shows $q(u)$,
 and whose middle row represents the set $q$ by balls in the positions of its elements):
 \[
-\begin{tikzpicture}[>=latex,rounded corners,scale=1.3,baseline=0]
+\begin{tikzpicture}[>=latex,rounded corners,scale=1.2,baseline=0]
 \def\passwidth{3pt};
 \node (i1) at (1,1) {$3$};
 \node (i2) at (2,1) {$4$};
@@ -591,7 +590,7 @@ In order to prove our next result, we need the following lemma.
   
   Next, assume that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes and $q_k$ is an $r$-queue.
   Let $q^*$ be an $r^*$-queue. %with $r^* > r$.
-  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of $(q^*, q_1, \dotsc, q_k, X)$ is
+  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended queue $(q^*, q_1, \dotsc, q_k, X)$ is
   \[
   \mm^* := (m_1, \dotsc, m_{t-1}, r^* - p_{t-1}, p_t - r^*, m_{t+1}, \ldots).
   \]
@@ -603,6 +602,71 @@ In order to prove our next result, we need the following lemma.
   The remaining positions during Phase~III of $q^*(u)$ precisely correspond to all other remaining positions in Phase~III of $q^*(v)$, and hence with Lemma~\ref{le:mono}, we have $q^*(u) = \merge{i} q^*(v)$.
   The case when $i = t$ is similar except instead the $(i+1)$'s are normally handled during Phase~II.
 \end{proof}
+
+\begin{example}
+Consider $q$ from Example~\ref{ex:first_queue} and $v = 345513321$ (this is the word $u$ in Example~\ref{ex:first_queue} but replacing $6 \mapsto 5$):
+\[
+\begin{tikzpicture}[baseline=10]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {1,6,7} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$5$}; }
+  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4} { \node at (\i,0) {$3$}; }
+  \foreach \i in {5,6} { \node at (\i,0) {$4$}; }
+  \foreach \i in {7} { \node at (\i,0) {$5$}; }
+  \foreach \i in {2,3} { \node at (\i,0) {$6$}; }
+\end{tikzpicture}
+\]
+Consider $u = 456613321$, and note that $v = \merge{3} u$ and
+\[
+\begin{tikzpicture}[baseline=10]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {6,7} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {1} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
+  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4} { \node at (\i,0) {$3$}; }
+  \foreach \i in {5} { \node at (\i,0) {$4$}; }
+  \foreach \i in {6} { \node at (\i,0) {$5$}; }
+  \foreach \i in {7} { \node at (\i,0) {$6$}; }
+  \foreach \i in {2,3} { \node at (\i,0) {$7$}; }
+\end{tikzpicture}
+\]
+where we have $266344511 = \merge{4} 277345611$.
+Also, consider $u' = 456613421$, and note that $v = \merge{3} u'$ and
+\[
+\begin{tikzpicture}[baseline=10]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {8} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {6} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {1,7} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
+  \foreach \i in {1,4,8,9} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,5,6,7} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {8,9} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4} { \node at (\i,0) {$3$}; }
+  \foreach \i in {5,6} { \node at (\i,0) {$5$}; }
+  \foreach \i in {7} { \node at (\i,0) {$6$}; }
+  \foreach \i in {2,3} { \node at (\i,0) {$7$}; }
+\end{tikzpicture}
+\]
+where we have $266344511 = \merge{5} 277355611$.
+\end{example}
 
 \begin{thm}
 \label{thm:merge}
@@ -669,7 +733,7 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 \end{thm}
 
 \begin{proof}
-We show the claim by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85}.
+We apply the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} to show the claim.
 We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
@@ -736,7 +800,6 @@ Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \Sy
 Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
 Note that the elements $\{s_i \mid i \in S\}$ all commute, so the product, and hence $\sigma_S$, is well-defined.
 In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
-\travis{Here we give the action on positions as a right action, whereas below it is a left. We should at least be internally consistent.}
 
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
@@ -1466,7 +1529,7 @@ We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots
 
 \begin{prop}
   Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
-  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions.
+  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions, and similarly on monomials in $\xx$.
 \end{prop}
 
 \begin{proof}
