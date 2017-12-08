@@ -401,7 +401,7 @@ To compute $q(u)$, draw the following diagram
 (whose upper row shows $u$, whose lower row shows $q(u)$,
 and whose middle row represents the set $q$ by balls in the positions of its elements):
 \[
-\begin{tikzpicture}[>=latex,rounded corners,scale=1.2,baseline=0]
+\begin{tikzpicture}[>=latex,rounded corners,yscale=1.5,xscale=1.2,baseline=0]
 \def\passwidth{3pt};
 \node (i1) at (1,1) {$3$};
 \node (i2) at (2,1) {$4$};
@@ -527,7 +527,7 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \end{dfn}
 
 \begin{remark}
-Note that the type of $\qq(1 \dotsm 1)$ is the type of $\qq$.
+Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the queue $\qq$.
 \end{remark}
 
 
@@ -1507,6 +1507,10 @@ C(211112) & = C(211211) = C(221111) = C(121211)
 \end{align*}
 \end{example}
 
+\begin{remark}
+Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
+\end{remark}
+
 
 
 
@@ -1520,13 +1524,51 @@ C(211112) & = C(211211) = C(221111) = C(121211)
 \section{Final remarks}
 \label{sec:remarks}
 
-It seems our three lemmas effectively compute $C(u)$ for $u \in \{1,2\}^n$. Can this be done in a more transparent manner (pairs of labelled periodic Dyck paths come to mind)?
+We conclude by giving some additional examples, remarks, and comments about our results.
+We begin with an example to illustrate the proof of Theorem~\ref{thm:merge} in more detail.
 
-Does our proof have any implications for the work of Danilov and Koshevoy or van Leeuwen?
+\begin{example}
+In order to compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
+We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
+\[
+\qq = \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
+\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; \xrightarrow{\hspace{30pt}} \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; = \widetilde{\qq}.
+\]
+Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
+Furthermore, note that $135452 = \merge{5} 135462$.
+Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
+In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
+By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
+\begin{align*}
+\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; \xrightarrow[\hspace{15pt}]{R_2} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\\[1.3em] &
+\; \xrightarrow[\hspace{15pt}]{R_3} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+\; \xrightarrow[\hspace{15pt}]{R_4} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; = \widetilde{\qq}',
+\end{align*}
+which contributes to $\swt{135462}$.
+\end{example}
 
-We note that Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ is proven in~\cite{AAMP} using different techniques.
-
-\Travis{I am also dumping some other stuff here to be woven in later.}
+There is the natural cyclic symmetry on our special weights.
 
 \begin{prop}
   Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
@@ -1568,8 +1610,13 @@ where $C'$ is the dual configuration of $C$.
 
 \begin{example}
 Suppose $n = 9$.
-Consider the $(4,6)$-configuration $C = (\set{1,4,5,6}, \set{2,3,4,6,7,8})$.
-Then the corresponding dual configuration is $C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7})$, and we have
+Consider the $(4,6)$-configuration and dual $(6,4)$-configuration
+\[
+C = (\set{1,4,5,6}, \set{2,3,4,6,7,8}),
+\qquad\quad
+C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7}).
+\]
+We have
 \[
 \begin{tikzpicture}[xscale=6,yscale=4,>=stealth]
 \node (C) at (0,0) { %{$(\set{1,4,5,6}, \set{2,3,4,6,7,8})$};
@@ -1605,7 +1652,7 @@ Then the corresponding dual configuration is $C' = (\set{1,3,4,5,6,8}, \set{2,4,
 \end{example}
 
 Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
-Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$ action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, that $s_{c_1^{r_1}} s_{c_2^{r_2}}$, where $s_{\lambda}$ is a Schur function, is multiplicity free~\cite{Stembridge01}, and the Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
+Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$ action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
 Furthermore, the $\SymGp{\ell}$ action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
 Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
 
@@ -1650,47 +1697,10 @@ Our action effectively does the following on the corner transfer matrix:
 \]
 where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
 
-\begin{example}
-We give an example to illustrate the proof of Theorem~\ref{thm:merge}.
-To compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
-We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
-\[
-\qq = \;
-\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
-\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; \xrightarrow{\hspace{30pt}} \;
-\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; = \widetilde{\qq}.
-\]
-Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
-Furthermore, note that $135452 = \merge{5} 135462$.
-Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
-In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
-By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
-\begin{align*}
-\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; \xrightarrow[\hspace{15pt}]{R_2} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\\[1.3em] &
-\; \xrightarrow[\hspace{15pt}]{R_3} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\; \xrightarrow[\hspace{15pt}]{R_4} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; = \widetilde{\qq}',
-\end{align*}
-which contributes to $\swt{135462}$.
-\end{example}
+We conclude with a few questions.
+Note that Lemmas~\ref{le:BB},~\ref{le:BU} and~\ref{le:UB} effectively compute $C(u)$ for $u \in \{1,2\}^n$.
+Could this be done in a more transparent manner, such as by using pairs of labelled periodic Dyck paths?
+It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
 
 
 \bibliographystyle{alpha}
