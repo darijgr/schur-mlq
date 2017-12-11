@@ -975,21 +975,22 @@ $s_1, s_2, \ldots, s_{\ell-2}$.
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 
 The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
-We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
-We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
+We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r_1,r_2)$-configuration}, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
+As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+Our proof is thus reduced to constructing the \defn{dual} $(r_2,r_1)$-configuration $C'$ to $C$ such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
 
-We first consider the case $r = s$, in which we define $C' = C$.
+We first consider the case $r_1 = r_2$, in which we define $C' = C$.
 Moreover, it is clear that every $\sigma$ twisted MLQ is a $\sigma s_i$ twisted MLQ and the claim follows.
-Thus, for the remainder of this section we assume $r \neq s$.
+Thus, for the remainder of this section we assume $r_1 \neq r_2$.
 
 By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
 We split the proof into four parts, as follows.
-In Part A we describe how to split any configuration into \defn{balanced} and \defn{unbalanced} blocks. In Part B we define the involution promised above, mapping any configuration $C$ to its dual $C'$.
-In Part C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
-Finally, in Part D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
+In Part~A we describe how to split any configuration into \defn{balanced} and \defn{unbalanced} blocks.
+In Part~B we define the involution promised above, mapping any configuration $C$ to its dual $C'$.
+In Part~C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
+Finally, in Part~D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
 
-For the remainder of this section, we fix an $(r,s)$-configuration $C = (q_1, q_2)$, and we refer to binary words simply as words.
+For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$, and we refer to binary words simply as words.
 
 %%%%%%%%%%
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
@@ -1002,9 +1003,9 @@ We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\up
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 
-For $r < s$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
-Conversely, for $r > s$ and $j$ unbalanced, $j \in q_1$ and $j \notin q_2$.
-The following notation will be useful later on: for a word $u \in \mcW_n$, an element $j \in \ive{n}$ and an $(r,s)$-configuration $C = (q_1, q_2)$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \bigcirc$ if $j \in q_1$ and $s_j = \square$ if $j\notin q_1$.
+For $r_1 < r_2$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
+Conversely, for $r_1 > r_2$ and $j$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
+The following notation will be useful later on: for a word $u \in \mcW_n$, an element $j \in \ive{n}$ and an $(r_1, r_2)$-configuration $C = (q_1, q_2)$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \bigcirc$ if $j \in q_1$ and $s_j = \square$ if $j\notin q_1$.
 
 \begin{figure}[t]
 \[
@@ -1037,7 +1038,7 @@ It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
-The dual configuration $C'$ is given by sliding all of the circles not in a boxed interval from the upper level to the lower level.
+The dual configuration $C'$ is given by sliding all of the circles not in a shaded interval from the upper level to the lower level.
 In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
 \end{example}
 
@@ -1050,16 +1051,20 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 
 \begin{lemma}
 \label{le:orig}
-  Let $q$ be a queue, $u \in \{1,2\}^n$, and $i,j\in [n]$. Suppose that $i \notin q$, $j\in q$, and for $k \in \inter(i,j)$, either $k \in q$ and $u_k=1$ or $k \notin q$ and $u_k = 2$. Then $q(u) = q(u_{i\leftrightarrow j})$.
+  Let $q$ be a queue, $u \in \{1,2\}^n$, and $i,j\in [n]$.
+  Suppose that $i \notin q$, $j\in q$, and for $k \in \inter(i,j)$, either $k \in q$ and $u_k=1$ or $k \notin q$ and $u_k = 2$.
+  Then $q(u) = q(u_{i\leftrightarrow j})$.
 \end{lemma}
 
 \begin{lemma}[BB]
 \label{le:BB}
-  Let $C$ and $u$ be as above. Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and that for $k\in\inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\bigcirc),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+  Let $C$ and $u$ be as above.
+  Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and that for $k\in\inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\bigcirc),(2,\square)\}$.
+  Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
 
 \begin{proof}
-  By Lemma~\ref{le:orig}, $q_1(u) = q_1(u_{i\leftrightarrow j})$ and thus
+  By Lemma~\ref{le:orig}, we have $q_1(u) = q_1(u_{i\leftrightarrow j})$, and thus
   \[
   C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q_1(u_{i\leftrightarrow j}) \bigr) = C(u_{i\leftrightarrow j}).
   \]
@@ -1126,11 +1131,15 @@ We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
 
 \begin{lemma}[BU]
 \label{le:BU}
-  Let $C$ and $u$ be as above. Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+  Let $C$ and $u$ be as above.
+  Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$.
+  Then we have $C(u) = C(u_{i \leftrightarrow j})$.
  \end{lemma} 
  
 \begin{proof}
-  We assume here that $r > s$, noting that the dual case $r < s$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:UB}. Thus $i \in q_1$ for unbalanced $i$. In this case Lemma~\ref{le:orig} applies again, so $q_1(u) = q_1(u_{i\leftrightarrow j})$.
+  We assume here that $r_1 > r_2$, noting that the dual case $r_1 < r_2$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:UB}.
+  Thus, $i \in q_1$ for unbalanced $i$.
+  In this case Lemma~\ref{le:orig} applies again, so $q_1(u) = q_1(u_{i\leftrightarrow j})$.
 \end{proof}
 
 \begin{example}
@@ -1198,31 +1207,46 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 
 \begin{lemma}[UB]
 \label{le:UB}
-  Let $C$ and $u$ be as above. Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\bigcirc)$. Then $C(u) = C(u_{i \leftrightarrow j})$.
+  Let $C$ and $u$ be as above.
+  Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\bigcirc)$.
+  Then we have $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
 
 \begin{proof}
-  As in the proof of Lemma~\ref{le:BU}, we assume that $r > s$, noting that the case $r < s$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:BU}.
+  As in the proof of Lemma~\ref{le:BU}, we assume that $r_1 > r_2$, noting that the case $r_1 < r_2$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:BU}.
   
-  Note that for a balanced block $B$ contained in $\inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$ and $u_{|B^c|}$. Thus we can reduce to the case when there is no such balanced block $B$ contained in $\inter(i,j)$.  
+  Note that for a balanced block $B$ contained in $\inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$ and $u_{|B^c|}$.
+  Thus we can reduce to the case when there is no such balanced block $B$ contained in $\inter(i,j)$.  
 
-  Thus suppose $i, i+1, \dotsc, i+k$ are unbalanced, and $i+k+1, i+k+2, \dotsc, j$ are balanced. We now prove that $C(u) = C(u_{i\leftrightarrow j})$ by induction on $k$. 
+  Thus suppose $i, i+1, \dotsc, i+k$ are unbalanced, and $i+k+1, i+k+2, \dotsc, j$ are balanced.
+  We now prove that $C(u) = C(u_{i\leftrightarrow j})$ by induction on $k$. 
   
   \vspace{10pt}
   \noindent \underline{The base case: $k = 0$}
 
-  If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}. We are thus left with the case $q_1(u)_j = 2$. In this case $q_1(u_{i\leftrightarrow j}) = q_1(u)_{i\leftrightarrow j}$, and we can proceed as in the induction step below to conclude that $C(u) = C(u_{i\leftrightarrow})$.
+  If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}.
+  We are thus left with the case $q_1(u)_j = 2$.
+  In this case $q_1(u_{i\leftrightarrow j}) = q_1(u)_{i\leftrightarrow j}$, and we can proceed as in the induction step below to conclude that $C(u) = C(u_{i\leftrightarrow})$.
 
   \vspace{10pt}
   \noindent \underline{The inductive step}
 
-  Suppose $k > 0$. Clearly, $q_1(u)_i = 1$. If $q_1(u)_{i+1} = 1$, it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$ so by our inductive hypothesis, $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
+  Suppose $k > 0$.
+  Clearly, we have $q_1(u)_i = 1$.
+  If $q_1(u)_{i+1} = 1$, then it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$.
+  So by our inductive hypothesis, we have $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
 
-  Now suppose $q_1(u)_{i+1} = 2$. In this case we see that the number of ones in $u$ is at most $r$ (or there wouldn't be any $k$ such that $k \in q_1$ and $q_1(u)_k=2$. This means that $k \notin q_2 \Rightarrow q_2\bigl( q_1(u) \bigr)_k = 4$. We also see that $q_1(u)_l = 2$ for $l$ in all of $\set{i+1, \dotsc, i+k}$ as well as for $l= j$.
+  Now suppose $q_1(u)_{i+1} = 2$.
+  In this case, we see that the number of ones in $u$ is at most $r_1$ as otherwise there would not be any $k$ such that $k \in q_1$ and $q_1(u)_k = 2$.
+  This means that $k \notin q_2$ implies $q_2\bigl( q_1(u) \bigr)_k = 4$.
+  We also see that $q_1(u)_h = 2$ for all $h \in \set{i+1, \dotsc, i+k}$ as well as for $h = j$.
 
-  Since the squares in the lower row of the balanced block of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2\bigl( q_1(u) \bigr)$ from $q_1(u)$, the search goes beyond $i+k+1$. Together with the previous paragraph, this means that $q_2\bigl( q_1(u) \bigr)_i = 3$.
+  Since the squares in the lower row of the balanced block of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2\bigl( q_1(u) \bigr)$ from $q_1(u)$, the search goes beyond $i+k+1$.
+  Together with the previous paragraph, this means that $q_2\bigl( q_1(u) \bigr)_i = 3$.
 
-  Now $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$. Therefore, the only difference between $C(u)$ and $C(u_{i\leftrightarrow j})$ would be in positions $i$ or $i+1$. We have established that $q_1(u)_l = 3$ for $l \in \{i,i+1\}$, and that this is true also for $q_1(u_{i\leftrightarrow i+1})$ is immediate.
+  Now $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$.
+  Therefore, the only difference between $C(u)$ and $C(u_{i\leftrightarrow j})$ would be in positions $i$ or $i+1$.
+  We have established that $q_1(u)_h = 3$ for $h \in \{i,i+1\}$, and that this is true also for $q_1(u_{i\leftrightarrow i+1})$ is immediate.
 \end{proof}
 
 \begin{example}
@@ -1288,18 +1312,22 @@ We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
 %%%%%%%%%%
 \subsection*{Part D: finishing the proof}
 
-Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$. Now let $u_0$ be a result of applying Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} until this can be done no more (such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap).
+Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$.
+Now let $u_0$ be a result of applying Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} until this can be done no more (such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap).
 
-What do we know about $u_0$? There are three cases.
-
-\begin{itemize}
+There are three cases that describe $u_0$.
+Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$.
+\begin{enumerate}
 \item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $i$ such that $T(i) = (2,\bigcirc)$.
+  Equivalently, we have $m_1(u) > r_1$.
 \item There is some balanced $i$ such that $T(i) = (2, \bigcirc)$, but there is no balanced $i$ such that $T(i) = (1,\square)$.
-\item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$
-\end{itemize}
-
-These three cases correspond to $e > r$, $s \geq e$ and $r \geq e > s$ respectively, where $e$ is the total number of ones in $u$. In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labelling procedure inside each balanced block is the same in $C$ and $C'$.
-
+  Equivalently, we have $r_2 \geq m_1(u)$.
+\item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$.
+  Equivalently, we have $r_1 \geq m_1(u) > r_2$.
+\end{enumerate}
+In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labelling procedure inside each balanced block is the same in $C$ and $C'$.
+Therefore, we have $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, and hence, Theorem~\ref{thm:permutation} following by induction on length.
+\qed
 
 \begin{example}
 \label{ex:proof_process}
