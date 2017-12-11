@@ -261,7 +261,7 @@ For statistical mechanics, it is a model for gas particles in a lattice with an 
 Despite admitting very simple descriptions of the particle dynamics, the ASEP has very rich macroscopic behaviors, such as
 \begin{itemize}
 \item boundary-induced phase transitions~\cite{Krug91},
-\item spontaneous symmetry breaking~\cite{AHR98,AHR99,CEM01,EFGM95,GLEMSS95},
+\item spontaneous symmetry breaking with possibly multiple broken symmetry phases~\cite{AHR98,AHR99,CEM01,EFGM95,EPSZ05,GLEMSS95,PK07},
 \item describing the formations of shocks~\cite{DJLS93,Ferrari92,FF94,FF94II,Liggett76}, and
 \item phase separation and condensation~\cite{EKKM98,JNHWW09,KLMST02,RSS00}
 \end{itemize}
@@ -1051,15 +1051,25 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 
 \begin{lemma}
 \label{le:orig}
-  Let $q$ be a queue, $u \in \{1,2\}^n$, and $i,j\in [n]$.
-  Suppose that $i \notin q$, $j\in q$, and for $k \in \inter(i,j)$, either $k \in q$ and $u_k=1$ or $k \notin q$ and $u_k = 2$.
+  Let $q$ be a queue and $u \in \{1,2\}^n$.
+  Let $i \notin q$ and $j \in q$.
+  Suppose that for $k \in \inter(i,j)$, one of the following hold:
+  \begin{itemize}
+    \item $k \in q$ and $u_k=1$;
+    \item $k \notin q$ and $u_k = 2$.
+  \end{itemize}
   Then $q(u) = q(u_{i\leftrightarrow j})$.
 \end{lemma}
 
 \begin{lemma}[BB]
 \label{le:BB}
   Let $C$ and $u$ be as above.
-  Suppose $i,j$ are balanced, $T(i) = (1,\square)$, $T(j) = (2,\bigcirc)$, and that for $k\in\inter(i,j)$, $k$ is balanced and $T(k) \in \{(1,\bigcirc),(2,\square)\}$.
+  Suppose
+  \begin{itemize}
+    \item $i$ is balanced with $T(i) = (1,\square)$,
+    \item $j$ is balanced with $T(j) = (2,\bigcirc)$, and
+    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k\in\inter(i,j)$.
+  \end{itemize}
   Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
 
@@ -1072,7 +1082,7 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 
 \begin{example}
 Suppose $n = 8$.
-Let $u = 12121122$, and consider the $(5,3)$-configuration $C = (\{1,2,5,6,8\}, \{5,7,8\})$.
+Let $u = 12121122$, and we consider the $(5,3)$-configuration $C = (\{1,2,5,6,8\}, \{5,7,8\})$.
 We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
 \[
 \begin{tikzpicture}[baseline=-3]
@@ -1132,7 +1142,13 @@ We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
 \begin{lemma}[BU]
 \label{le:BU}
   Let $C$ and $u$ be as above.
-  Suppose $i$ is balanced, $j$ is unbalanced, $T(i) = (1,\square)$, $u_j = 2$, $u_k = 1$ for unbalanced $k$ in $\inter (i,j)$ and for balanced $k$ in $\inter(i,j)$, we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$.
+  Suppose
+  \begin{itemize}
+    \item $i$ is balanced with $T(i) = (1,\square)$,
+    \item $j$ is unbalanced with $u_j = 2$,
+    \item $u_k = 1$ for unbalanced $k \in \inter (i,j)$, and
+    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for balanced $k \in \inter(i,j)$.
+  \end{itemize}
   Then we have $C(u) = C(u_{i \leftrightarrow j})$.
  \end{lemma} 
  
@@ -1144,7 +1160,7 @@ We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
 
 \begin{example}
 Suppose $n = 8$.
-Let $u = 21111122$, and consider the $(4,1)$-configuration $C = (\{1,2,5,6\},\{7\})$.
+Let $u = 21111122$, and we consider the $(4,1)$-configuration $C = (\{1,2,5,6\},\{7\})$.
 We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interval $\inter[4,1]$ wraps around):
 \[
 \begin{tikzpicture}[baseline=25]
@@ -1208,50 +1224,59 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 \begin{lemma}[UB]
 \label{le:UB}
   Let $C$ and $u$ be as above.
-  Suppose $i$ is unbalanced, $u_i = 1$, $u_k = 2$ for unbalanced $k$ in $\inter(i,j)$, for balanced $k$ in $\inter(i,j)$ we have $T(k) \in \{(1,\bigcirc),(2,\square)\}$, $j$ is balanced, and $T(j) = (2,\bigcirc)$.
+  Suppose
+  \begin{itemize}
+    \item $i$ is unbalanced with $u_i = 1$,
+    \item $j$ is balanced with $T(j) = (2,\bigcirc)$,
+    \item $u_k = 2$ for unbalanced $k \in \inter(i,j)$, and
+    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for balanced $k \in \inter(i,j)$.
+  \end{itemize}
   Then we have $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
 
 \begin{proof}
   As in the proof of Lemma~\ref{le:BU}, we assume that $r_1 > r_2$, noting that the case $r_1 < r_2$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:BU}.
   
-  Note that for a balanced block $B$ contained in $\inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$ and $u_{|B^c|}$.
+  Let $B$ be a balanced block, and let $B^c := [\ell] \setminus B$ denote the compliment of $B$.
+  \travis{Erik, is this correct or is this suppose to mean something different?}
+  Note that for $B \subseteq \inter(i,j)$, the labelling of $C(u)$ for $k \notin B$ \travis{Where is $k$ used here?} is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$, and $u_{\lvert B^c \rvert}$.
   Thus we can reduce to the case when there is no such balanced block $B$ contained in $\inter(i,j)$.  
 
-  Thus suppose $i, i+1, \dotsc, i+k$ are unbalanced, and $i+k+1, i+k+2, \dotsc, j$ are balanced.
-  We now prove that $C(u) = C(u_{i\leftrightarrow j})$ by induction on $k$. 
+  Thus suppose $i, i+1, \dotsc, i+k$ are unbalanced and $i+k+1, i+k+2, \dotsc, j$ are balanced.
+  We now prove that $C(u) = C(u_{i \leftrightarrow j})$ by induction on $k$. 
   
   \vspace{10pt}
-  \noindent \underline{The base case: $k = 0$}
+  \noindent \underline{The base case}:
 
-  If $q_1(u)_j = 1$ then $q_1(u) = q_1(u_{i\leftrightarrow j})$ again by Lemma~\ref{le:orig}.
+  Suppose $k = 0$.
+  If $q_1(u)_j = 1$, then $q_1(u) = q_1(u_{i \leftrightarrow j})$ by Lemma~\ref{le:orig}.
   We are thus left with the case $q_1(u)_j = 2$.
-  In this case $q_1(u_{i\leftrightarrow j}) = q_1(u)_{i\leftrightarrow j}$, and we can proceed as in the induction step below to conclude that $C(u) = C(u_{i\leftrightarrow})$.
+  In this case, we have  $q_1(u_{i \leftrightarrow j}) = q_1(u)_{i \leftrightarrow j}$, and we can proceed as in the induction step below to conclude that $C(u) = C(u_{i \leftrightarrow j})$.
 
   \vspace{10pt}
-  \noindent \underline{The inductive step}
+  \noindent \underline{The inductive step}:
 
   Suppose $k > 0$.
   Clearly, we have $q_1(u)_i = 1$.
-  If $q_1(u)_{i+1} = 1$, then it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow i+1})$.
+  If $q_1(u)_{i+1} = 1$, then it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow (i+1)})$.
   So by our inductive hypothesis, we have $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
 
   Now suppose $q_1(u)_{i+1} = 2$.
-  In this case, we see that the number of ones in $u$ is at most $r_1$ as otherwise there would not be any $k$ such that $k \in q_1$ and $q_1(u)_k = 2$.
+  In this case, we see that the number of ones in $u$ is at most $r_1$ as otherwise there would not exist a $k \in q_1$ such that $q_1(u)_k = 2$.
   This means that $k \notin q_2$ implies $q_2\bigl( q_1(u) \bigr)_k = 4$.
   We also see that $q_1(u)_h = 2$ for all $h \in \set{i+1, \dotsc, i+k}$ as well as for $h = j$.
 
   Since the squares in the lower row of the balanced block of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2\bigl( q_1(u) \bigr)$ from $q_1(u)$, the search goes beyond $i+k+1$.
   Together with the previous paragraph, this means that $q_2\bigl( q_1(u) \bigr)_i = 3$.
 
-  Now $q_1(u_{i\leftrightarrow i+1}) = q_1(u)_{i\leftrightarrow i+1}$.
+  Now, we have $q_1(u_{i\leftrightarrow (i+1)}) = q_1(u)_{i\leftrightarrow (i+1)}$.
   Therefore, the only difference between $C(u)$ and $C(u_{i\leftrightarrow j})$ would be in positions $i$ or $i+1$.
-  We have established that $q_1(u)_h = 3$ for $h \in \{i,i+1\}$, and that this is true also for $q_1(u_{i\leftrightarrow i+1})$ is immediate.
+  We have established that $q_1(u)_i = q_1(u)_{i+1} = 3$, and it is immediate that this is also holds for $q_1(u_{i\leftrightarrow (i+1)})$.
 \end{proof}
 
 \begin{example}
 Suppose $n = 8$.
-Let $u = 12221222$, and consider the $(6,2)$-configuration $C = (\{1,2,3,4,5,8\}, \{7,8\})$.
+Let $u = 12221222$, and we consider the $(6,2)$-configuration $C = (\{1,2,3,4,5,8\}, \{7,8\})$.
 We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
 \[
 \begin{tikzpicture}[baseline=25]
@@ -1312,10 +1337,11 @@ We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
 %%%%%%%%%%
 \subsection*{Part D: finishing the proof}
 
-Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$.
-Now let $u_0$ be a result of applying Lemma~\ref{le:BB}, \ref{le:BU}, \ref{le:UB} until this can be done no more (such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap).
+Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$.
+Now, let $u_0$ be a result of applying Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} until this can be done no more.
+Such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap.
 
-There are three cases that describe $u_0$.
+Note that $u_0$ falls into one of the following three cases.
 Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$.
 \begin{enumerate}
 \item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $i$ such that $T(i) = (2,\bigcirc)$.
@@ -1332,9 +1358,9 @@ Therefore, we have $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, and hence, Theorem
 \begin{example}
 \label{ex:proof_process}
 Suppose $n = 6$.
-Consider the $(5,3)$-configuration $C = (\set{1,3,4,5,6}, \set{1,2,5})$ and its dual configuration $C' = (\set{1,5,6}, \set{1,2,3,4,5})$.
+Let us consider the $(5,3)$-configuration $C = (\set{1,3,4,5,6}, \set{1,2,5})$ and its dual configuration $C' = (\set{1,5,6}, \set{1,2,3,4,5})$.
 Note that $1$, $2$, $5$, and $6$ are balanced and $3$ and $4$ are unbalanced.
-We consider the word $u = 211112$, which yields (we write $C$ on the left and $C'$ on the right):
+We take the word $u = 211112$, which yields (we write $C$ on the left and $C'$ on the right):
 \[
 \begin{tikzpicture}[scale=0.9]
   \def\sc{0.85}   % Change this to adjust the x-scaling
@@ -1431,7 +1457,7 @@ We first apply Lemma UB with $i = 4$ and $j = 6$ and obtain:
   \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
 \end{tikzpicture}
 \]
-then Lemma BU with $i=2, j=4$:
+then Lemma BU with $i=2$ and $j=4$:
 \[
 \begin{tikzpicture}[scale=0.9]
   \def\sc{0.85}   % Change this to adjust the x-scaling
@@ -1483,7 +1509,7 @@ then Lemma BU with $i=2, j=4$:
   \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
 \end{tikzpicture}
 \]
-and finally Lemma UB with $i=4, j=1$ yields:
+and finally Lemma UB with $i=4$ and $j=1$ yields:
 \[
 \begin{tikzpicture}[scale=0.9]
   \def\sc{0.85}   % Change this to adjust the x-scaling
@@ -1686,7 +1712,7 @@ We have
 \end{example}
 
 Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
-Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$ action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
+Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$ action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
 Furthermore, the $\SymGp{\ell}$ action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
 Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
 
