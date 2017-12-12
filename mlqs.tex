@@ -977,26 +977,27 @@ Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that
 The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
 We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r_1,r_2)$-configuration}, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Our proof is thus reduced to constructing the \defn{dual} $(r_2,r_1)$-configuration $C'$ to $C$ such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
+Hence, our proof is reduced to constructing the \defn{dual} $(r_2,r_1)$-configuration $C'$ to $C$ such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
 
 We first consider the case $r_1 = r_2$, in which we define $C' = C$.
 Moreover, it is clear that every $\sigma$ twisted MLQ is a $\sigma s_i$ twisted MLQ and the claim follows.
 Thus, for the remainder of this section we assume $r_1 \neq r_2$.
 
 By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
-We split the proof into four parts, as follows.
+We split the proof into four parts as follows.
 In Part~A we describe how to split any configuration into \defn{balanced} and \defn{unbalanced} blocks.
 In Part~B we define the involution promised above, mapping any configuration $C$ to its dual $C'$.
 In Part~C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
 Finally, in Part~D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
 
-For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$, and we refer to binary words simply as words.
+For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{0,1}^n$.
+Moreover, we refer to binary words simply as words.
 
 %%%%%%%%%%
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
 
 Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
-This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$, and is the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
+This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
@@ -1005,7 +1006,13 @@ For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some b
 
 For $r_1 < r_2$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r_1 > r_2$ and $j$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
-The following notation will be useful later on: for a word $u \in \mcW_n$, an element $j \in \ive{n}$ and an $(r_1, r_2)$-configuration $C = (q_1, q_2)$, we let $T(j)$ be the pair $(u_j, s_j)$ where $s_j = \bigcirc$ if $j \in q_1$ and $s_j = \square$ if $j\notin q_1$.
+The following notation will be useful later on: for a word $u \in \mcW_n$, an element $j \in \ive{n}$ and an $(r_1, r_2)$-configuration $C = (q_1, q_2)$, we define
+\[
+T(j) := \begin{cases}
+(u_j, \bigcirc) & \text{if } j \in q_1, \\
+(u_j, \square) & \text{if } j \notin q_1.
+\end{cases}
+\]
 
 \begin{figure}[t]
 \[
@@ -1051,15 +1058,23 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 
 \begin{lemma}
 \label{le:orig}
-  Let $q$ be a queue and $u \in \{1,2\}^n$.
+  Let $q$ be an $r$-queue and $u$ be as above.
   Let $i \notin q$ and $j \in q$.
-  Suppose that for $k \in \inter(i,j)$, one of the following hold:
+  Suppose that for all $k \in \inter(i,j)$, one of the following hold:
   \begin{itemize}
     \item $k \in q$ and $u_k=1$;
     \item $k \notin q$ and $u_k = 2$.
   \end{itemize}
   Then $q(u) = q(u_{i\leftrightarrow j})$.
 \end{lemma}
+
+\begin{proof}
+Note that $q(u)_k = u_k + \delta_{2u_k}$, where $\delta_{ab}$ is the Kronecker delta, for all $k \in \inter(i,j)$ by our assumptions, and similarly $q(u_{i \leftrightarrow j})_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$.
+Therefore, if $u_i = 2$ (resp.~$u_j = 1$) and the splitting class of $q$ is $1$ (resp.~$2$), then $q(u)_i = 2 = q(u_{i \leftrightarrow j})_i$ (resp.~$q(u)_j = 1 = q(u_{i \leftrightarrow j})_j$).
+Similarly, if $u_i = 1$ (resp.~$u_j = 2$) and the splitting class of $q$ is $2$ (resp.~$1$), then $q(u)_j = 1 = q(u_{i \leftrightarrow j})_j$ (resp.~$q(u)_i = 2 = q(u_{i \leftrightarrow j})_i$).
+When $u_i$ and $u_j$ are the splitting class of $q$, the result is immediate by the definition of Phase~III.
+Hence, we have $q(u) = q(u_{i \leftrightarrow j})$.
+\end{proof}
 
 \begin{lemma}[BB]
 \label{le:BB}
@@ -1154,8 +1169,7 @@ We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
  
 \begin{proof}
   We assume here that $r_1 > r_2$, noting that the dual case $r_1 < r_2$ follows from Lemma~\ref{le:dual} and Lemma~\ref{le:UB}.
-  Thus, $i \in q_1$ for unbalanced $i$.
-  In this case Lemma~\ref{le:orig} applies again, so $q_1(u) = q_1(u_{i\leftrightarrow j})$.
+  Thus, we have $k \in q_1$ for unbalanced $k$, and so $q_1(u) = q_1(u_{i\leftrightarrow j})$ by Lemma~\ref{le:orig}.
 \end{proof}
 
 \begin{example}
