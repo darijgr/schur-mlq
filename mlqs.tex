@@ -305,7 +305,7 @@ By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
 We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP)~\cite{KMO16TARZP,KMO16TARZPII}, where multiple particles can occupy the same site.
 This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
 Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
-Furthermore, one potential application of our weighting is to describe the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} and TARZP~\cite{KMO16II}.
+However, it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} and TARZP~\cite{KMO16II}.
 
 This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
@@ -317,7 +317,7 @@ In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 
 \subsection{Acknowledgements}
 
-We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII}.
+We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII} and Olya Mandelshtam for useful discussions on the inhomogeneous TASEP.
 This work benefited from computations using \textsc{SageMath}~\cite{sage,combinat}.
 
 
@@ -376,7 +376,7 @@ The output word $v = q(u)$ will have type
 (m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
 \]
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
-We think of this as splitting the class $t$ into two new classes $t$ and $t+1$, and so we call $t$ the \defn{split class} of $q(u)$.
+We think of this as splitting the class $t$ into two new classes $t$ and $t+1$, and so we call $t$ the \defn{splitting class} of $q(u)$.
 The following algorithm computes $v = q(u)$. In the start, no letter of $v \in \mcW_n$ is set.
 We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \emph{sites}.
 
@@ -488,7 +488,14 @@ There is an obvious duality in the definition of the labelling process above.
  Then $q(u)_i = \ell + 2 - q'(v)_{n+1-i}$ for all $i$.
 \end{lemma}
 
-\darij{Proof!}
+\begin{proof}
+First, note that if $q$ is an $r$-queue, then $q'$ is an $(n-r)$-queue and that $q'$ is given by reversing $[n] \setminus q$.
+For a fixed $\ell$, let $\ell + 1 - k$ be the dual letter of $k$.
+Moreover, $v$ can be described as reversing $u$ and taking the dual letters.
+Hence, the splitting class of $q'(v)$ is the dual letter of $t$.
+Therefore, Phase~I (resp.~II) of $q(u)$ corresponds to Phase~II (resp.~I) of $q'(v)$ by reversing the resulting word and taking dual letters.
+Similarly, for the Phase~III of $q(u)$ and $q'(v)$, and the claim follows.
+\end{proof}
 
 %\begin{remark} (Excision)
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
@@ -496,12 +503,29 @@ There is an obvious duality in the definition of the labelling process above.
 
 \begin{lemma}[Monotonicity]
 \label{le:mono}
-  For any $t \in \ZZ_{\geq 1}$, let $f_t \colon \{1,2, \ldots\} \to \{1,2\}$ be given by $f_t(x) = 1$ for $x \leq t$ and $f_t(x) = 2$ for $x > t$.
+  For any $k \in \ZZ_{\geq 1}$, let $f_k \colon \{1,2, \ldots\} \to \{1,2\}$ be given by
+  \[
+    f_k(x) = \begin{cases}
+    1 & \text{if } x \leq k, \\
+    2 & \text{if } x > k.
+    \end{cases}
+  \]
   Let $q$ be a queue, $u$ be any word, and $i,j \in \ive{n}$.
-  We have $q(u)_i \leq q(u)_j$ if and only if each $t$ satisfies $q\bigl(f_t(u)\bigr)_i \leq q\bigl(f_t(u)\bigr)_j$.
+  We have $q(u)_i \leq q(u)_j$ if and only if $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
 \end{lemma}
 
-\darij{Proof!}
+\begin{proof}
+%Let $x = q(u)_i$, $y = q(u)_j$, $x_k = q\bigl( f_k(u) \bigr)_i$ and $y_k = q\bigl( f_k(u) \bigr)_j$.
+Assume $q(u)_i \leq q(u)_j$.
+Let $t$ be the splitting class of $q(u)$.
+Note that that $q(\merge{i} u) = \merge{i} q(u)$ for all $i < t$ and $q(\merge{i} u) = \merge{i+1} q(u)$ for all $i \geq t$ since equal entries can be processed in any order by $q$.
+Note that we can define $f_k$ as a sequence of merges on $u$, and so we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+
+Next, assume $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+Suppose that $q(u)_i > q(u)_j$, then we can apply merges to $u$ to obtain $f_{k'}$ with $k' = q(u)_i$.
+However, the previous argument implies that $q\bigl(f_{k'}(u) \bigr)_i < q\bigl(f_{k'}(u) \bigr)_j$, which is a contradiction.
+Hence, the claim follows.
+\end{proof}
 
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
@@ -600,7 +624,7 @@ In order to prove our next result, we need the following lemma.
   
   Next, assume\darij{as the induction hypothesis?} that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes and $q_k$ is an $r$-queue\darij{why do we need this last part? we aren't working from the back of the MLQ, are we?}.
   Let $q^*$ be an $r^*$-queue. %with $r^* > r$.
-  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended MLQ $(q^*, q_1, \dotsc, q_k, X)$ is
+  Let $t$ (resp.~$t^{\vee}$) be the splitting class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended MLQ $(q^*, q_1, \dotsc, q_k, X)$ is
   \[
   \mm^* := (m_1, \dotsc, m_{t-1}, r^* - p_{t-1}, p_t - r^*, m_{t+1}, \ldots).
   \]
