@@ -488,6 +488,8 @@ There is an obvious duality in the definition of the labelling process above.
  Then $q(u)_i = \ell + 2 - q'(v)_{n+1-i}$ for all $i$.
 \end{lemma}
 
+\darij{Proof!}
+
 %\begin{remark} (Excision)
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
@@ -499,6 +501,8 @@ There is an obvious duality in the definition of the labelling process above.
   We have $q(u)_i \leq q(u)_j$ if and only if each $t$ satisfies $q\bigl(f_t(u)\bigr)_i \leq q\bigl(f_t(u)\bigr)_j$.
 \end{lemma}
 
+\darij{Proof!}
+
 Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 
@@ -508,7 +512,7 @@ Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words,
 We now give our main definition of a multiline queue and spectral weight.
 
 \begin{dfn}
-For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue (MLQ) of type $\mm$}, with $\ell$ classes, is a sequence of queues $\qq = (q_1, \dotsc, q_{\ell-1})$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue and $m_{\ell} = n - p_{\ell-1}(\mm)$.
+For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue (MLQ) of type $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$}, with $\ell$ classes, is a sequence of queues $\qq = (q_1, \dotsc, q_{\ell-1})$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue and $m_{\ell} = n - p_{\ell-1}(\mm)$ (that is, $p_\ell(\mm) = n$).
 When $\sigma$ is the identity permutation, we simply call $\qq$ an \defn{(ordinary) MLQ of type $\mm$}.
 Define the \defn{weight} by $\wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i)$.
 We also consider $\qq$ as a function on words by
@@ -528,20 +532,20 @@ For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ 
 \label{eq:amplitude}
   \swt{u}_{\sigma} := \sum_{\qq} \wt(\qq),
 \end{equation}
-where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ and $u = \qq(1 \dotsm 1)$.
-When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitute} and denote it by $\swt{u} := \swt{u}_{\id}$.
+where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1 \dotsm 1)$.
+When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
 \begin{remark}
-Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the queue $\qq$.
+Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-twisted) MLQ $\qq$.
 \end{remark}
 
 
 %%%%%%%%%%
 \subsection{Symmetric functions}
 
-We also need the \defn{elementary symmetric function} and \defn{complete homogeneous symmetric function} on the indeterminates $\xx$.
-Briefly, recall that they are defined for each $N \in \left\{0,1,\ldots,n\right\}$ by
+We also need the \defn{elementary symmetric functions} and \defn{complete homogeneous symmetric functions} on the indeterminates $\xx$.
+Recall that they are defined for each $N \in \left\{0,1,\ldots,n\right\}$ and $k \geq 0$ by
 \begin{align*}
 e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
 \\ h_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 \leq \cdots \leq i_k \leq N} x_{i_1} \dotsm x_{i_k},
@@ -562,7 +566,7 @@ For more details on symmetric functions, we refer the reader to~\cite[Ch.~7]{Sta
 \label{sec:result}
 
 
-In this section, we state our main results and prove the commutativity conjecture of~\cite{AAMP} and~\cite[Conj.~3.10]{AasLin17}.
+In this section, we state our main results and use them to prove the commutativity conjecture of~\cite{AAMP} and~\cite[Conj.~3.10]{AasLin17}.
 
 \begin{thm}
 \label{thm:permutation}
@@ -578,7 +582,7 @@ In order to prove our next result, we need the following lemma.
 
 \begin{lemma}
 \label{lemma:queue_merge}
-  Let $X$ be a $p_i(\mm)$-queue for some type $\mm$.
+  Let $X$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
   Let $\qq$ be an MLQ of type $\merge{i}\mm$.
   For the word
   $
@@ -594,9 +598,9 @@ In order to prove our next result, we need the following lemma.
   We will show this by induction on the number of queues in $\qq$.
   If $\qq$ has no queues, then the claim clearly holds.
   
-  Next, assume that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes and $q_k$ is an $r$-queue.
+  Next, assume\darij{as the induction hypothesis?} that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes and $q_k$ is an $r$-queue\darij{why do we need this last part? we aren't working from the back of the MLQ, are we?}.
   Let $q^*$ be an $r^*$-queue. %with $r^* > r$.
-  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended queue $(q^*, q_1, \dotsc, q_k, X)$ is
+  Let $t$ (resp.~$t^{\vee}$) be the split class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended MLQ $(q^*, q_1, \dotsc, q_k, X)$ is
   \[
   \mm^* := (m_1, \dotsc, m_{t-1}, r^* - p_{t-1}, p_t - r^*, m_{t+1}, \ldots).
   \]
@@ -651,7 +655,7 @@ Let $u = 3566413321$, and note that $v = \merge{3} u$ and
 \end{tikzpicture}
 \]
 where we have $2663344511 = \merge{4} 2773345611$.
-Similar,y, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
+Similarly, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
 \[
 \begin{tikzpicture}[baseline=10]
   \def\ll{0.65}   % level 2
@@ -975,12 +979,12 @@ $s_1, s_2, \ldots, s_{\ell-2}$.
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 
 The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
-We call a pair of queues $C = (q_1, q_2)$ an \defn{$(r,s)$-configuration}, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
+An \defn{$(r,s)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r$-queue and $q_2$ is an $s$-queue.
 We consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 Our proof is thus reduced to constructing the \defn{dual} $(s,r)$-configuration $C'$ to $C$, which satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$.
 
 We first consider the case $r = s$, in which we define $C' = C$.
-Moreover, it is clear that every $\sigma$ twisted MLQ is a $\sigma s_i$ twisted MLQ and the claim follows.
+Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
 Thus, for the remainder of this section we assume $r \neq s$.
 
 By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
