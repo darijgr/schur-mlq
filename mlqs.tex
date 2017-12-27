@@ -746,7 +746,7 @@ We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footno
 Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
 We choose the $k$ sources $\iota_i = (k+1-i, 1)$ for $i \in \ive{k}$ and the $k$ terminals $\tau_j = (k-j+\gamma_j,b_j)$ for $j\in \ive{k}$.
 
-Any non-intersecting path system from the sources to the terminals gives in a straightforward way \darij{elaborate} an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely \travis{To be finished?}.
+Any non-intersecting path system from the sources to the terminals gives in a straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely; see Figure \ref{fig:lattice_path_bijection}. To show that all non-intersecting path systems connects $\iota_i$ to $\tau_i$ for each $i$, we may argue by induction on $i$.
 
 Note that the weighted sum of paths from $\iota_i$ to $\tau_j$ is $h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j})$.
 The LGV Lemma now gives us the stated formula.
