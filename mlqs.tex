@@ -489,11 +489,12 @@ There is an obvious duality in the definition of the labelling process above.
 \end{lemma}
 
 \begin{proof}
-First, note that if $q$ is an $r$-queue, then $q'$ is an $(n-r)$-queue and that $q'$ is given by reversing $[n] \setminus q$.
-For a fixed $\ell$, let $\ell + 1 - k$ be the dual letter of $k$.
+First, note that if $q$ is an $r$-queue, then $q'$ is an $(n-r)$-queue and that $q'$ is given by reflecting $[n] \setminus q$ across the middle of $[n]$.
+For a fixed $k$, let $\ell + 1 - k$ be the dual letter of $k$.
 Moreover, $v$ can be described as reversing $u$ and taking the dual letters.
 Hence, the splitting class of $q'(v)$ is the dual letter of $t$.
-Therefore, Phase~I (resp.~II) of $q(u)$ corresponds to Phase~II (resp.~I) of $q'(v)$ by reversing the resulting word and taking dual letters.
+\darij{Only if $p_{t-1} < r < p_t$ as strict inequalities. Otherwise, it is the dual letter plusminus 1.}
+Therefore, Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q'(v)$ by reversing the resulting word and taking dual letters.
 Similarly, for the Phase~III of $q(u)$ and $q'(v)$, and the claim follows.
 \end{proof}
 
@@ -514,12 +515,14 @@ Similarly, for the Phase~III of $q(u)$ and $q'(v)$, and the claim follows.
   We have $q(u)_i \leq q(u)_j$ if and only if $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
 \end{lemma}
 
+\darij{todo: improve the below proof.}
+
 \begin{proof}
 %Let $x = q(u)_i$, $y = q(u)_j$, $x_k = q\bigl( f_k(u) \bigr)_i$ and $y_k = q\bigl( f_k(u) \bigr)_j$.
 Assume $q(u)_i \leq q(u)_j$.
 Let $t$ be the splitting class of $q(u)$.
-Note that that $q(\merge{i} u) = \merge{i} q(u)$ for all $i < t$ and $q(\merge{i} u) = \merge{i+1} q(u)$ for all $i \geq t$ since equal entries can be processed in any order by $q$.
-Note that we can define $f_k$ as a sequence of merges on $u$, and so we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+Note that $q(\merge{h} u) = \merge{h} q(u)$ for all $h < t$ and $q(\merge{h} u) = \merge{h+1} q(u)$ for all $h \geq t$, since equal entries can be processed in any order in the definition of the action of $q$.
+But we can define $f_k$ as a sequence of merges on $u$, and so we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
 
 Next, assume $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
 Suppose that $q(u)_i > q(u)_j$, then we can apply merges to $u$ to obtain $f_{k'}$ with $k' = q(u)_i$.
@@ -622,7 +625,7 @@ In order to prove our next result, we need the following lemma.
   We will show this by induction on the number of queues in $\qq$.
   If $\qq$ has no queues, then the claim clearly holds.
   
-  Next, assume\darij{as the induction hypothesis?} that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes and $q_k$ is an $r$-queue\darij{why do we need this last part? we aren't working from the back of the MLQ, are we?}.
+  Next, assume (as the induction hypothesis) that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes.
   Let $q^*$ be an $r^*$-queue. %with $r^* > r$.
   Let $t$ (resp.~$t^{\vee}$) be the splitting class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended MLQ $(q^*, q_1, \dotsc, q_k, X)$ is
   \[
