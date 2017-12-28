@@ -452,7 +452,7 @@ where the paths in red correspond to Phase I and those in blue are from Phase II
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$,
-and the second row has a circle labelled $v_j$ for $j \in q$ or a square labelled $v_j$ for $j \notin q$ in position $j$.
+and the second row has a circle labeled $v_j$ for $j \in q$ or a square labeled $v_j$ for $j \notin q$ in position $j$.
 Using this convention, we can write Example~\ref{ex:first_queue} as
 \[
 \begin{tikzpicture}[baseline=10]
@@ -773,10 +773,26 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 We apply the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} to show the claim.
 We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
-Define a graph with node set $\{1,\dotsc,k\} \times \{1, \dotsc, n\}$ and edges $(i,j) \to (i,j+1)$ with weight $1$ and $(i,j) \to (i-1,j)$ with weight $x_j$. 
-We choose the $k$ sources $\iota_i = (k+1-i, 1)$ for $i \in \ive{k}$ and the $k$ terminals $\tau_j = (k-j+\gamma_j,b_j)$ for $j\in \ive{k}$.
+Define a directed graph with vertices $\ive{r} \times \ive{n}$ and edges
+\[
+(r+1-i,j) \to (r+1-i,j+1)
+\]
+(for $i \in \ive{r}$ and $j \in \ive{n-1}$) with weight $1$ and
+\[
+(r+1-i,j) \to (r-i,j)
+\]
+(for $i \in \ive{r-1}$ and $j \in \ive{n}$) with weight $x_j$. 
+We choose the $r$ sources $\iota_i = (r+1-i, 1)$ and terminals $\tau_i = (r-i+\gamma_i,b_j)$ for $i \in \ive{r}$.
 
-Any non-intersecting path system from the sources to the terminals gives in a straightforward way an MLQ with the corresponding weight whose bottom row is labelled $u$, and conversely; see Figure \ref{fig:lattice_path_bijection}. To show that all non-intersecting path systems connects $\iota_i$ to $\tau_i$ for each $i$, we may argue by induction on $i$.
+First, we label an element $k \in q_i \in \qq$ by $q_i\bigl( \cdots q_1(1 \cdots 1) \cdots \bigr)_k$.
+We construct a non-intersecting lattice path recursively by taking the rightmost unused elements $(a_1, \dotsc, a_h)$ in $\qq$ labeled by $v_{r-i}$ and constructing a path
+\newcommand{\patharrow}{ \xrightarrow{\hspace{10pt}} }
+\[
+\iota_i \patharrow (\overline{\imath} + 1, a_1) \patharrow (\overline{\imath} + 2, a_1) \patharrow (\overline{\imath} + 2, a_2) \patharrow \cdots \patharrow (\overline{\imath} + \gamma_i - 1, a_{\gamma_i - 1}) = \tau_i,
+\]
+where $\overline{\imath} = r + 1 - i$.
+Conversely, given a non-intersecting lattice path, we construct the MLQ by considering the north-east corners and labelling the paths according to $v$.
+See Figure \ref{fig:lattice_path_bijection} for an example.
 
 Note that the weighted sum of paths from $\iota_i$ to $\tau_j$ is $h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j})$.
 The LGV Lemma now gives us the stated formula.
@@ -825,7 +841,10 @@ The LGV Lemma now gives us the stated formula.
   \node[circle,fill=white,draw=black,inner sep=1pt] at (9,4) {$1$};
 
   \foreach \i in {2,...,6} {
-    \node at (1,\i){\textbullet};
+    \node at (1,\i) {\textbullet};
+  }
+  \foreach \i in {1,...,6} {
+    \node[anchor=east,inner sep=7pt] at (1,7-\i) {$\iota_{\i}$};
   }
 \end{tikzpicture}
 \]
@@ -836,7 +855,7 @@ The LGV Lemma now gives us the stated formula.
 Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
 Note that the elements $\{s_i \mid i \in S\}$ all commute, so the product, and hence $\sigma_S$, is well-defined.
-In~\cite{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
+In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
 
 Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
@@ -1803,7 +1822,7 @@ where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$
 
 We conclude with a few questions.
 Note that Lemmas~\ref{le:BB},~\ref{le:BU} and~\ref{le:UB} effectively compute $C(u)$ for $u \in \{1,2\}^n$.
-Could this be done in a more transparent manner, such as by using pairs of labelled periodic Dyck paths?
+Could this be done in a more transparent manner, such as by using pairs of labeled periodic Dyck paths?
 It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
 
 
