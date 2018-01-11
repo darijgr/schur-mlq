@@ -560,6 +560,10 @@ Hence the claim follows.
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
+For the next lemma, we need a further notation:
+If $u$ is a word and $f : \set{1,2,\ldots} \to \set{1,2,\ldots}$ is any map,
+then $f \tup{u}$ shall mean the word obtained by applying $f$ to each letter of $u$.
+
 \begin{lemma}[Monotonicity]
 \label{le:mono}
   For any $k \in \ZZ_{\geq 1}$, let $f_k \colon \{1,2, \ldots\} \to \{1,2\}$ be given by
