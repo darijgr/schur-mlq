@@ -384,8 +384,7 @@ We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}
 
 \begin{description}
 \item[Phase I]
-  Go through all $i$ such that $u_i > t$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.
-  \ \footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
+  Go through all $i$ such that $u_i > t$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.\footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
   When considering a site $i$, find the first\footnote{``First'' in the sense of being the first encountered when walking from $i$ to the left along the circle.}
   $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
   Then set $v_j = u_i + 1$.
@@ -481,63 +480,12 @@ For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that
 Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
 \end{comment}
 
-Here is a slightly different way of computing $q \tup{u}$ when $q$ is a queue and $u \in \mcW_n$. It proceeds in only two phases, constructing a word $v' \in \mcW_n$:
+\begin{remark}
+\label{rem:mod_alg}
+In the algorithm above, we can consider Phase~III as part of Phase~I and Phase~II by having $t$ be added to every remaining unset $j \notin q$ and $j \in q$ respectively.
+\end{remark}
 
-\begin{description}
-\item[Phase I']
-  Go through all $i$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.
-  \ \footnote{Again, the order in which equal letters are processed does not matter.}
-  When considering a site $i$, check if there exists some site $j \notin q$ such that $v'_j$ is not set.
-  If so, then pick the first such $j$ weakly to the left (cyclically) of $i$, and set $v'_j = u_i + 1$.
-  If not, then proceed to the Phase II'.
-
-\item[Phase II']
-  Go through all $i$ in such order that if $u_p < u_q$, then $p$ is processed before $q$.
-  When considering a site $i$, check if there exists some site $j \in q$ such that $v'_j$ is not set.
-  If so, then pick the first such $j$ weakly to the right of $i$, and set $v'_j = u_i$.
-\end{description}
-
-We shall call this algorithm the \defn{modified algorithm}.
-Once again, the two phases are interchangeable, since they fill in different slots of $v'$.
-
-\begin{lemma}
-  \label{le:modalg}
-  The modified algorithm constructs the same word $q \tup{u}$ as the original algorithm.
-\end{lemma}
-
-\begin{proof}
-Let $v'$ be the word constructed by the modified algorithm,
-whereas $v$ is the word $q \tup{u}$ defined according to the original algorithm.
-We must prove that $v' = v$.
-
-Let $r = \abs{q}$. Hence, $\abs{\ive{n} \setminus q} = n-r$.
-Let $t$ be the splitting class in the original algorithm defining $q \tup{u}$.
-Thus, $p_{t-1} \leq r < p_t$,
-where $\mm = \tup{m_1, m_2, \ldots}$ is the type of $u$ and where $p_i$ are defined as in \eqref{eq:type_partial_sums}.
-Therefore, $n-p_{t-1} \geq n-r > n-p_t$.
-Thus, the $n-r$ highest letters of $u$ are $\geq t$ (since $n-p_{t-1} \geq n-r$),
-whereas the $r$ lowest letters of $u$ are $\leq t$ (since $r < p_t$).
-
-Phase~I' of the modified algorithm ends when there are no sites $j \notin q$ left whose corresponding letters $v'_j$ are not set. In other words, it ends when all letters $v'_j$ of $v'$ at sites $j \notin q$ are set. Thus, at this point, a total of $\abs{\ive{n} \setminus q} = n - r$ letters are set. Thus, a total of $n-r$ sites $i$ have been processed. Due to the way in which sites are processed in Phase~I', these $n-r$ sites are the ones holding the $n-r$ highest letters of $u$ (except that if there is a draw, then we can choose freely which letters to take among equals). Since the $n-r$ highest letters of $u$ are $\geq t$, we thus conclude that the letters of $v'$ that have been set in Phase~I' are $\geq t+1$ (because they are set by the rule $v'_j = u_i + 1$). Thus, for each $j \notin q$, we have $v'_j \geq t+1$.
-
-In Phase~II' of the modified algorithm, the sites $i$ that are traversed are the ones that have not already been traversed in Phase~I'. Thus, they are the ones holding the $r$ lowest letters of $u$ (since the sites $i$ traversed in Phase~II' hold the highest $n-r$ letters of $u$). Since the $r$ lowest letters of $u$ are $\leq t$, we thus conclude that the letters of $v'$ that are set in Phase~II' are $\leq t$ (because they are set by the rule $v'_j = u_i$). Thus, for each $j \in q$, we have $v'_j \leq t$.
-
-In order to prove $v' = v$,
-we must show that for each letter $k$,
-the positions in which $k$ appears in $v$ are precisely the positions in which $k$ appears in $v'$.
-This is clearly true when $k < t$ (because in this case, the letter $k$ is only written into $v$ in Phase~I of the original algorithm, and is only written into $v'$ during Phase~I' of the modified algorithm; but at that point, the phases are doing the same thing).
-For a similar reason, this is also true when $k > t+1$ (here, we are using the fact that the two phases are interchangeable, so we can start the original algorithm with Phase~II and the modified algorithm with Phase~II').
-It remains to prove this when $k = t$ and when $k = t+1$.
-Assume the contrary.
-Thus, some position $j$ contains the letter $t$ in $v$, but contains the letter $t+1$ in $v'$, or vice versa.
-Let us assume WLOG that it contains $t$ in $v$ (that is, $v_j = t$) and $t+1$ in $v'$ (that is, $v'_j = t+1$); the other case is similar.
-
-If we had $j \in q$, then we would get $v'_j \leq t$ (as proven a few paragraphs above), which would contradict $v'_j = t+1 > t$. Hence, $j \notin q$.
-But in the original algorithm, all letters of $v$ that equal $t$ are set in Phase~III, and they are only set in positions $i$ satisfying $i \in q$. Hence, from $v_j = t$, we obtain $j \in q$. This contradicts $j \notin q$.
-This contradiction concludes the proof.
-\end{proof}
-
-There is an obvious duality in the modified algorithm above.
+There is an natural duality in the modified algorithm above.
 
 \begin{lemma}[Duality]
   \label{le:dual}
@@ -551,7 +499,7 @@ Let $r = \abs{q}$. Thus, $q$ is an $r$-queue, so that $q'$ is the $(n-r)$-queue 
 For a fixed $k$, we call $\ell + 1 - k$ the dual letter of $k$.
 Thus, $v$ is obtained by reversing $u$ and taking the dual letters.
 
-Use the modified algorithm to compute $q \tup{u}$ and $q' \tup{v}$.
+We use the modified algorithm to compute $q \tup{u}$ and $q' \tup{v}$ from Remark~\ref{rem:mod_alg}, where we call the phases by Phase~I' and Phase~II'.
 Then, Phase~I' (resp.~II') in the construction of $q(u)$ corresponds to Phase~II' (resp.~I') in the construction of $q'(v)$ when the word is reversed and the letters are replaced by their duals.
 Hence the claim follows.
 \end{proof}
