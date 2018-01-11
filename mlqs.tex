@@ -264,11 +264,12 @@ Despite admitting very simple descriptions of the particle dynamics, the ASEP ha
 \item boundary-induced phase transitions~\cite{Krug91},
 \item spontaneous symmetry breaking with possibly multiple broken symmetry phases~\cite{AHR98,AHR99,CEM01,EFGM95,EPSZ05,GLEMSS95,PK07},
 \item describing the formations of shocks~\cite{DJLS93,Ferrari92,FF94,FF94II,Liggett76}, and
-\item phase separation and condensation~\cite{EKKM98,JNHWW09,KLMST02,RSS00}
+\item phase separation and condensation~\cite{EKKM98,JNHWW09,KLMST02,RSS00}.
 \end{itemize}
-(see also~\cite{PEM09,Schutz01,SZ95,TJHJ16} and references therein).
+We also refer the reader to~\cite{PEM09,Schutz01,SZ95,TJHJ16} and references therein.
 
-The term exclusion process was coined by Spitzer~\cite{Spitzer70}, where he was focused on an application with Brownian motion with hard-core interactions, and this work initiated the investigation of exclusion processes using probability theory.
+The term exclusion process was coined by Spitzer~\cite{Spitzer70}, where he was focused on an application with Brownian motion with hard-core interactions.
+Moreover, it was~\cite{Spitzer70} that initiated the investigation of exclusion processes using probability theory.
 However, the applications of the ASEP (and its variations) has since spread to other areas, such as
 \begin{itemize}
 \item transportation processes in capillary vessels~\cite{Levitt73} or proteins within the cells along actin filaments~\cite{KNL05},
@@ -293,7 +294,7 @@ This interpretation gives a connection with five-vertex models, corner transfer 
 In this paper, we introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
 We also interpret MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
 This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
-We also introduce the notation of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
+Furthermore, we introduce the notion of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
 Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
 This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{This operation has also previously appeared in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}) and van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.} and we show that does not change the MLQ as a function on words.
@@ -301,10 +302,10 @@ This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{
 As a consequence of this action and specializing our weight parameters to $1$, we obtain a proof of the commutativity conjecture of~\cite{AAMP}.
 However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
 Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
-By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}.
+By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}, which in turn proves a number of other conjectures in~\cite{AasLin17}.
 
-We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP)~\cite{KMO16TARZP,KMO16TARZPII}, where multiple particles can occupy the same site.
-This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation.
+We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP) on a ring, where multiple particles can occupy the same site.
+This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation~\cite{KMO16TARZP,KMO16TARZPII}.
 Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
 However, it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} and TARZP~\cite{KMO16II}.
 
@@ -342,19 +343,18 @@ Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1
 \subsection{Words and queues}
 
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ in the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
-We will consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+n} = u_k$ for all $k$).
+We consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+n} = u_k$ for all $k$).
 Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 Let $\ell = \max\{i \mid m_i \neq 0 \}$, which we say is the number of \defn{classes} in $u$ or $\mm$.
 A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if $m_i \neq 0$ for all $1 \leq i \leq \ell$.
-We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new packed word as follows:
-first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
+We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new word by replacing all occurrences of $j$ by $j-1$ in $u$ for each $j = i+1, i+2, \ldots$ in that order.
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
 Note that $\merge{i} u$ is packed whenever $u$ is packed.
 For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
-Similarly, the $i$-merge of a type $\mm$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
+Similarly, the merging of $i,i+1$ of a type $\mm$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
@@ -366,7 +366,7 @@ Define
 p_i(\mm) := m_1 + m_2 + \cdots + m_i,
 \end{equation}
 and when $\mm$ is clear, we simply write $p_i$.
-(Thus, $p_0 = 0$, and $p_i = n$ for sufficiently high $i$.)
+(Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
 If $r < n$, then there exists a unique $t \in \ive{\ell}$ such that
 $
 p_{t-1} \leq r < p_t,
@@ -378,8 +378,9 @@ The output word $v = q(u)$ will have type
 \]
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
 We think of this as splitting the class $t$ into two new classes $t$ and $t+1$, and so we call $t$ the \defn{splitting class} of $q(u)$.
-The following algorithm computes $v = q(u)$. In the start, no letter of $v \in \mcW_n$ is set.
-We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \emph{sites}.
+The following algorithm computes $v = q(u)$.
+In the beginning, no letter of $v \in \mcW_n$ is set.
+We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}.
 
 \begin{description}
 \item[Phase I]
@@ -452,7 +453,7 @@ where the paths in red correspond to Phase I and those in blue are from Phase II
 \end{example}
 
 Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
-We illustrate the situation $v = q(u)$ with a $2 \times n$ array where the first row is the word $u$,
+We illustrate the situation $v = q(u)$ with a $2 \times n$ array, where the first row is the word $u$
 and the second row has a circle labeled $v_j$ for $j \in q$ or a square labeled $v_j$ for $j \notin q$ in position $j$.
 Using this convention, we can write Example~\ref{ex:first_queue} as
 \[
@@ -700,7 +701,7 @@ In order to prove our next result, we need the following lemma.
 \begin{example}
 Consider $q = \set{1,4,5,9,10}$ and $v = 3455313321$:
 \[
-\begin{tikzpicture}[baseline=10]
+\begin{tikzpicture}[baseline=-7]
   \def\ll{0.65}   % level 2
   \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
   \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
@@ -715,11 +716,11 @@ Consider $q = \set{1,4,5,9,10}$ and $v = 3455313321$:
   \foreach \i in {6,7} { \node at (\i,0) {$4$}; }
   \foreach \i in {8} { \node at (\i,0) {$5$}; }
   \foreach \i in {2,3} { \node at (\i,0) {$6$}; }
-\end{tikzpicture}
+\end{tikzpicture}\ .
 \]
 Let $u = 3566413321$, and note that $v = \merge{3} u$ and
 \[
-\begin{tikzpicture}[baseline=10]
+\begin{tikzpicture}[baseline=-7]
   \def\ll{0.65}   % level 2
   \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
   \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
@@ -736,12 +737,12 @@ Let $u = 3566413321$, and note that $v = \merge{3} u$ and
   \foreach \i in {7} { \node[red] at (\i,0) {$5$}; }
   \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
   \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
-\end{tikzpicture}
+\end{tikzpicture}\ ,
 \]
 where we have $2663344511 = \merge{4} 2773345611$.
 Similarly, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
 \[
-\begin{tikzpicture}[baseline=10]
+\begin{tikzpicture}[baseline=-7]
   \def\ll{0.65}   % level 2
   \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
   \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
@@ -758,7 +759,7 @@ Similarly, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
   \foreach \i in {6,7} { \node[dgreencolor] at (\i,0) {$5$}; }
   \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
   \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
-\end{tikzpicture}
+\end{tikzpicture}\ ,
 \]
 where we have $2663344511 = \merge{4} 2773455611$.
 \end{example}
@@ -822,7 +823,7 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
   Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
   Then
   \[
-  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j}) \bigr)_{1\leq i,j\leq r},
+  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j}) \bigr)_{1\leq i,j\leq r}\,,
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
@@ -921,10 +922,10 @@ By Theorem~\ref{thm:permutation}, we have
   \psi(T) & = \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
   \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{1\leq i,j \leq r},
 \end{align*}
-where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is Theorem~\ref{thm:determinant_form}.
+where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is by Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
 Taken together with $x_1 = \cdots = x_n = 1$, this proves~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
-This in turn proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
+Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
 
 
 
@@ -978,7 +979,7 @@ Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in 
 \end{example}
 
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_S$, where $S \subseteq[n-1]$, as follows.
-For a state $u \in \mcW_S$, we generate a new state by picking a random $i \in [n]$ and either
+For a state $u \in \mcW_S$, we move to a new state by picking a random $i \in [n]$ and either
 \begin{itemize}
 \item if $u_i > u_{i+1}$, swap the positions $u_i$ and $u_{i+1}$, or
 \item do nothing (\textit{i.e.} stay at $u$).
@@ -1048,7 +1049,7 @@ All probabilities of the drawn transitions are $1/n$.}
 \end{figure}
 
 Building on work by Ferrari and Martin~\cite{FM06,FM07}, the paper~\cite{AAMP} introduced opposite operators $\Psi_i \colon \mcW_S \to \mcW_{S \setminus \{i\}}$ given by $\Psi_i(\epsilon_u) = \sum_{q} \epsilon_{q(u)}$, where the sum is taken over all $i$-queues $q$, and showed that $\Psi_i M_S = M_{S \setminus \{i\}} \Psi_i$.
-Furthermore they gave the \defn{commutativity conjecture}: that $\Psi_i \Psi_j = \Psi_j \Psi_i$.
+Furthermore they proposed the \defn{commutativity conjecture}: that $\Psi_i \Psi_j = \Psi_j \Psi_i$.
 By looking at the $(u,v)$ entry of both sides of this equation, the commutativity conjecture is asking whether the number of $(i,j)$-configurations $C$ such that $v = C(u)$ equals the number of $(j,i)$-configurations $C'$ such that $v = C'(u)$. 
 Thus, our proof of Theorem~\ref{thm:permutation} shows that $\widetilde{\Psi}_i \widetilde{\Psi}_j = \widetilde{\Psi}_j \widetilde{\Psi}_i$ for the weighted operators $\widetilde{\Psi}_i$ given by
 \[
