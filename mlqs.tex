@@ -383,14 +383,14 @@ We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \emph{sites}
 
 \begin{description}
 \item[Phase I]
-  Go through all $i$ such that $u_i > t$ in any order such that larger letters precede smaller ones\footnote{That is: if $u_p > u_q$, then $p$ is processed before $q$.}.%
-  \footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
+  Go through all $i$ such that $u_i > t$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.
+  (The order in which equal letters are processed does not matter, as a simple argument shows.)
   When considering a site $i$, find the first\footnote{``First'' in the sense of being the first encountered when walking from $i$ to the left along the circle.}
   $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
   Then set $v_j = u_i + 1$.
 
 \item[Phase II]
-  Go through all $i$ such that $u_i < t$ in any order such that smaller letters precede larger ones.
+  Go through all $i$ such that $u_i < t$ in such order that if $u_p < u_q$, then $p$ is processed before $q$.
   When considering a site $i$, find the first\footnote{``First'' in the sense of being the first encountered when walking from $i$ to the right along the circle.}
   $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set.
   Then set $v_j = u_i$.
@@ -484,14 +484,14 @@ Here is a slightly different way of computing $q \tup{u}$ when $q$ is a queue an
 
 \begin{description}
 \item[Phase I']
-  Go through all $i$ in any order such that larger letters $u_i$ precede smaller ones\footnote{That is: if $u_p > u_q$, then $p$ is processed before $q$.}.
-  \footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
+  Go through all $i$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.
+  (Again, the order in which equal letters are processed does not matter.)
   When considering a site $i$, check if there exists some site $j \notin q$ such that $v'_j$ is not set.
   If so, then pick the first such $j$ weakly to the left (cyclically) of $i$, and set $v'_j = u_i + 1$.
   If not, then proceed to the Phase II'.
 
 \item[Phase II']
-  Go through all $i$ in any order such that smaller letters $u_i$ precede larger ones.
+  Go through all $i$ in such order that if $u_p < u_q$, then $p$ is processed before $q$.
   When considering a site $i$, check if there exists some site $j \in q$ such that $v'_j$ is not set.
   If so, then pick the first such $j$ weakly to the right of $i$, and set $v'_j = u_i$.
 \end{description}
@@ -1832,8 +1832,8 @@ We have
 \end{example}
 
 Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
-Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$ action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
-Furthermore, the $\SymGp{\ell}$ action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
+Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$-action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
+Furthermore, the $\SymGp{\ell}$-action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
 Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
 
 Next, we describe how to interpret our action from looking at the corner transfer matrix described in~\cite{KMO15}, which can be given diagrammatically by
