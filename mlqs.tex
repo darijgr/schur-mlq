@@ -384,7 +384,7 @@ We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \emph{sites}
 \begin{description}
 \item[Phase I]
   Go through all $i$ such that $u_i > t$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.
-  (The order in which equal letters are processed does not matter, as a simple argument shows.)
+  \ \footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
   When considering a site $i$, find the first\footnote{``First'' in the sense of being the first encountered when walking from $i$ to the left along the circle.}
   $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
   Then set $v_j = u_i + 1$.
@@ -485,7 +485,7 @@ Here is a slightly different way of computing $q \tup{u}$ when $q$ is a queue an
 \begin{description}
 \item[Phase I']
   Go through all $i$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.
-  (Again, the order in which equal letters are processed does not matter.)
+  \ \footnote{Again, the order in which equal letters are processed does not matter.}
   When considering a site $i$, check if there exists some site $j \notin q$ such that $v'_j$ is not set.
   If so, then pick the first such $j$ weakly to the left (cyclically) of $i$, and set $v'_j = u_i + 1$.
   If not, then proceed to the Phase II'.
