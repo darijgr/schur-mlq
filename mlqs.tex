@@ -540,7 +540,7 @@ There is an obvious duality in the modified algorithm above.
 
 \begin{lemma}[Duality]
   \label{le:dual}
-  Let $q$ be a queue and $u$ be a packed word with $\ell$ classes.
+  Let $q$ be a queue and $u$ be a word with $\ell$ classes.
   Define a new word $v$ by letting $v_i = \ell + 1 - u_{n+1-i}$ and a new queue $q'$ by letting $i \in q'$ if and only if $n+1-i \notin q$.
  Then $q(u)_i = \ell + 2 - q'(v)_{n+1-i}$ for all $i$.
 \end{lemma}
