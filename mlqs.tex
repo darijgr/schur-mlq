@@ -622,6 +622,7 @@ For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ 
   \swt{u}_{\sigma} := \sum_{\qq} \wt(\qq),
 \end{equation}
 where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1 \dotsm 1)$.
+(Here, $1 \dotsm 1$ denotes the word in $\mcW_n$ whose all letters are $1$.)
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
@@ -771,7 +772,8 @@ where we have $2663344511 = \merge{4} 2773455611$.
 \begin{thm}
 \label{thm:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
-  For any packed word $v$ of type $\merge{i}\mm$, we have
+  Let $v$ be a packed word of type $\merge{i}\mm$.
+  Then,
 \[
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
 \]
@@ -780,25 +782,41 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 
 \begin{proof}
   First note that
-  \[
+  \begin{equation}
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_{(\qq,X)} \wt(\qq) \wt(X),
-  \]
+  \label{pf.thm:merge.1}
+  \end{equation}
   where we sum over all pairs $(\qq, X)$ such that
   \begin{itemize}
   \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
   \item $X$ is a $p_i(\mm)$-queue.
   \end{itemize}
-  Next, define a function $\theta$ by
+  Given any such pair $\tup{\qq, X}$, we define an
+  $\ell$-tuple $\theta \tup{\qq, X}$ by
   \[
-  \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}) = \widetilde{\qq}.
+  \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}).
   \]
-  Thus, we have that $\widetilde{\qq}$ is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and $\wt(\widetilde{\qq}) = \wt(\qq) \wt(X) $.
-  By Lemma~\ref{lemma:queue_merge}, we have
+  This $\theta \tup{\qq, X}$ is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and weight
+  $\wt \tup{\theta \tup{\qq, X}} = \wt(\qq) \wt(X) $.
+  By Lemma~\ref{lemma:queue_merge}, it also satisfies
   \[
-  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \widetilde{\qq}(1 \dotsm 1).
+  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \tup{\theta \tup{\qq, X}}(1 \dotsm 1).
   \]
-  By Theorem~\ref{thm:permutation}, there exists a weight preserving bijection $\omega$ between $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ and ordinary MLQs $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = u = \widetilde{\qq}'(1 \dotsm 1)$.
-  Hence, $\omega \circ \theta$ is a weight preserving bijection between pairs $(\qq, X)$ and ordinary MLQs $\widetilde{\qq}'$ of type $\mm$ such that $\widetilde{\qq}'(1 \dotsm 1) = u$, and the claim follows.
+  Thus, we have defined a weight preserving bijection $\theta$
+  from the set of all pairs $\tup{\qq, X}$ as above
+  to the set of all $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ of type $\mm$ satisfying $v = \merge{i} \widetilde{\qq} \tup{1 \dotsm 1}$.
+  This allows us to rewrite the right hand side of \eqref{pf.thm:merge.1} as
+  $\sum_{\widetilde{\qq}} \wt \tup{\widetilde{\qq}}$, with the sum ranging over all such MLQs.
+  Hence, \eqref{pf.thm:merge.1} rewrites as
+  \[
+  \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n)
+  = \sum_{\widetilde{\qq}} \wt \tup{\widetilde{\qq}}
+  = \sum_u \swt{u}_{s_{i-1} \dotsm s_1} ,
+  \]
+  where the last sum is over all words $u$ of type $\mm$ satisfying $v = \merge{i} u$.
+  Finally, Theorem~\ref{thm:permutation} shows that $\swt{u}_{s_{i-1} \dotsm s_1} = \swt{u}$ for all such $u$;
+  hence, this becomes
+  $\swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u}$.
 \end{proof}
 
 
