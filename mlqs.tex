@@ -560,6 +560,20 @@ Hence the claim follows.
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
+\begin{lemma}
+\label{le:mergeq}
+Let $q$ be a queue, and $u \in \mcW_n$.
+Let $h \in \set{1,2,\ldots}$.
+Then, we have $q \tup{\merge{h} u} = \merge{h} q \tup{u}$ if $h < t$.
+Also, $q \tup{\merge{h} u} = \merge{h+1} q\tup{u}$ if $h \geq t$.
+\end{lemma}
+
+\darij{todo: Prove this for real. The half-sentence below doesn't seem to do the $h = t-1$ and $h = t$ cases justice.}
+
+\begin{proof}
+ since equal entries can be processed in any order in the definition of the action of $q$.
+\end{proof}
+
 For the next lemma, we need a further notation:
 If $u$ is a word and $f : \set{1,2,\ldots} \to \set{1,2,\ldots}$ is any map,
 then $f \tup{u}$ shall mean the word obtained by applying $f$ to each letter of $u$.
@@ -583,8 +597,9 @@ then $f \tup{u}$ shall mean the word obtained by applying $f$ to each letter of 
 %Let $x = q(u)_i$, $y = q(u)_j$, $x_k = q\bigl( f_k(u) \bigr)_i$ and $y_k = q\bigl( f_k(u) \bigr)_j$.
 Assume $q(u)_i \leq q(u)_j$.
 Let $t$ be the splitting class of $q(u)$.
-Note that $q(\merge{h} u) = \merge{h} q(u)$ for all $h < t$ and $q(\merge{h} u) = \merge{h+1} q(u)$ for all $h \geq t$ since equal entries can be processed in any order in the definition of the action of $q$.
-Yet we can define $f_k$ as a sequence of merges on $u$, and so we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+We have $f_k \tup{u} = \merge{1} \merge{2} \cdots \merge{k-1} \merge{k+1} \cdots \merge{\ell-1} u$, where $\ell$ is the number of classes of $u$.
+Thus, we can define $f_k$ as a sequence of merges on $u$.
+Thus, Lemma~\ref{le:mergeq} yields $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
 
 Next, assume $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
 Suppose that $q(u)_i > q(u)_j$, then we can apply merges to $u$ to obtain $f_{k'}$ with $k' = q(u)_i$.
