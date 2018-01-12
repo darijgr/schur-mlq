@@ -344,7 +344,7 @@ Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1
 
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ in the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+n} = u_k$ for all $k$).
-Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
+Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be commuting indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
@@ -631,9 +631,9 @@ Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-tw
 
 
 %%%%%%%%%%
-\subsection{Symmetric functions}
+\subsection{Symmetric polynomials}
 
-We also need the \defn{elementary symmetric functions} and \defn{complete homogeneous symmetric functions} on the indeterminates $\xx$.
+We also need the \defn{elementary symmetric polynomials} and \defn{complete homogeneous symmetric polynomials}.
 Recall that they are defined for each $N \in \left\{0,1,\ldots,n\right\}$ and $k \geq 0$ by
 \begin{align*}
 e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
@@ -641,7 +641,7 @@ e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \
 \end{align*}
 respectively.
 We define $e_k(x_1, \dotsc, x_N) = 0$ and $h_k(x_1, \dotsc, x_N) = 0$ for $k < 0$.
-For more details on symmetric functions, we refer the reader to~\cite[Ch.~7]{Stanley-EC2}.
+For more details on symmetric polynomials, we refer the reader to~\cite[Ch.~7]{Stanley-EC2}.
 
 
 
@@ -792,12 +792,12 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \[
   \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}) = \widetilde{\qq}.
   \]
-  Thus, we have that $\widetilde{\qq}$ is a $(s_{\ell-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and $\wt(\widetilde{\qq}) = \wt(\qq) \wt(X) $.
+  Thus, we have that $\widetilde{\qq}$ is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and $\wt(\widetilde{\qq}) = \wt(\qq) \wt(X) $.
   By Lemma~\ref{lemma:queue_merge}, we have
   \[
   v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \widetilde{\qq}(1 \dotsm 1).
   \]
-  By Theorem~\ref{thm:permutation}, there exists a weight preserving bijection $\omega$ between $(s_{\ell-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ and ordinary MLQs $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = u = \widetilde{\qq}'(1 \dotsm 1)$.
+  By Theorem~\ref{thm:permutation}, there exists a weight preserving bijection $\omega$ between $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ and ordinary MLQs $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = u = \widetilde{\qq}'(1 \dotsm 1)$.
   Hence, $\omega \circ \theta$ is a weight preserving bijection between pairs $(\qq, X)$ and ordinary MLQs $\widetilde{\qq}'$ of type $\mm$ such that $\widetilde{\qq}'(1 \dotsm 1) = u$, and the claim follows.
 \end{proof}
 
