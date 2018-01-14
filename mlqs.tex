@@ -344,7 +344,7 @@ Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1
 
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ in the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+n} = u_k$ for all $k$).
-Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
+Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be commuting indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
@@ -508,6 +508,10 @@ Hence the claim follows.
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
+For the next lemma, we need a further notation:
+If $u$ is a word and $f : \set{1,2,\ldots} \to \set{1,2,\ldots}$ is any map,
+then $f \tup{u}$ shall mean the word obtained by applying $f$ to each letter of $u$.
+
 \begin{lemma}[Monotonicity]
 \label{le:mono}
   For any $k \in \ZZ_{\geq 1}$, let $f_k \colon \{1,2, \ldots\} \to \{1,2\}$ be given by
@@ -566,6 +570,7 @@ For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ 
   \swt{u}_{\sigma} := \sum_{\qq} \wt(\qq),
 \end{equation}
 where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1 \dotsm 1)$.
+(Here, $1 \dotsm 1$ denotes the word in $\mcW_n$ whose all letters are $1$.)
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
@@ -575,9 +580,9 @@ Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-tw
 
 
 %%%%%%%%%%
-\subsection{Symmetric functions}
+\subsection{Symmetric polynomials}
 
-We also need the \defn{elementary symmetric functions} and \defn{complete homogeneous symmetric functions} on the indeterminates $\xx$.
+We also need the \defn{elementary symmetric polynomials} and \defn{complete homogeneous symmetric polynomials}.
 Recall that they are defined for each $N \in \left\{0,1,\ldots,n\right\}$ and $k \geq 0$ by
 \begin{align*}
 e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
@@ -585,7 +590,7 @@ e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \
 \end{align*}
 respectively.
 We define $e_k(x_1, \dotsc, x_N) = 0$ and $h_k(x_1, \dotsc, x_N) = 0$ for $k < 0$.
-For more details on symmetric functions, we refer the reader to~\cite[Ch.~7]{Stanley-EC2}.
+For more details on symmetric polynomials, we refer the reader to~\cite[Ch.~7]{Stanley-EC2}.
 
 
 
@@ -715,7 +720,8 @@ where we have $2663344511 = \merge{4} 2773455611$.
 \begin{thm}
 \label{thm:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
-  For any packed word $v$ of type $\merge{i}\mm$, we have
+  Let $v$ be a packed word of type $\merge{i}\mm$.
+  Then,
 \[
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
 \]
@@ -724,25 +730,41 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 
 \begin{proof}
   First note that
-  \[
+  \begin{equation}
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_{(\qq,X)} \wt(\qq) \wt(X),
-  \]
+  \label{pf.thm:merge.1}
+  \end{equation}
   where we sum over all pairs $(\qq, X)$ such that
   \begin{itemize}
   \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
   \item $X$ is a $p_i(\mm)$-queue.
   \end{itemize}
-  Next, define a function $\theta$ by
+  Given any such pair $\tup{\qq, X}$, we define an
+  $\ell$-tuple $\theta \tup{\qq, X}$ by
   \[
-  \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}) = \widetilde{\qq}.
+  \theta(\qq, X) = (X, q_1, \dotsc, q_{\ell-1}).
   \]
-  Thus, we have that $\widetilde{\qq}$ is a $(s_{\ell-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and $\wt(\widetilde{\qq}) = \wt(\qq) \wt(X) $.
-  By Lemma~\ref{lemma:queue_merge}, we have
+  This $\theta \tup{\qq, X}$ is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and weight
+  $\wt \tup{\theta \tup{\qq, X}} = \wt(\qq) \wt(X) $.
+  By Lemma~\ref{lemma:queue_merge}, it also satisfies
   \[
-  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \widetilde{\qq}(1 \dotsm 1).
+  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \tup{\theta \tup{\qq, X}}(1 \dotsm 1).
   \]
-  By Theorem~\ref{thm:permutation}, there exists a weight preserving bijection $\omega$ between $(s_{\ell-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ and ordinary MLQs $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = u = \widetilde{\qq}'(1 \dotsm 1)$.
-  Hence, $\omega \circ \theta$ is a weight preserving bijection between pairs $(\qq, X)$ and ordinary MLQs $\widetilde{\qq}'$ of type $\mm$ such that $\widetilde{\qq}'(1 \dotsm 1) = u$, and the claim follows.
+  Thus, we have defined a weight preserving bijection $\theta$
+  from the set of all pairs $\tup{\qq, X}$ as above
+  to the set of all $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ of type $\mm$ satisfying $v = \merge{i} \widetilde{\qq} \tup{1 \dotsm 1}$.
+  This allows us to rewrite the right hand side of \eqref{pf.thm:merge.1} as
+  $\sum_{\widetilde{\qq}} \wt \tup{\widetilde{\qq}}$, with the sum ranging over all such MLQs.
+  Hence, \eqref{pf.thm:merge.1} rewrites as
+  \[
+  \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n)
+  = \sum_{\widetilde{\qq}} \wt \tup{\widetilde{\qq}}
+  = \sum_u \swt{u}_{s_{i-1} \dotsm s_1} ,
+  \]
+  where the last sum is over all words $u$ of type $\mm$ satisfying $v = \merge{i} u$.
+  Finally, Theorem~\ref{thm:permutation} shows that $\swt{u}_{s_{i-1} \dotsm s_1} = \swt{u}$ for all such $u$;
+  hence, this becomes
+  $\swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u}$.
 \end{proof}
 
 
