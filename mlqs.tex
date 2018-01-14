@@ -633,22 +633,16 @@ In order to prove our next result, we need the following lemma.
 \end{lemma}
 
 \begin{proof}
-  We will show this by induction on the number of queues in $\qq$.
-  If $\qq$ has no queues, then the claim clearly holds.
-  
-  Next, assume (as the induction hypothesis) that $v = \qq(1 \dotsm 1) = \merge{i} u$, where $\qq = (q_1, \dotsc, q_k)$ is an MLQ of type $\merge{i}\mm$ with $\ell - 1$ classes.
-  Let $q^*$ be an $r^*$-queue. %with $r^* > r$.
-  Let $t$ (resp.~$t^{\vee}$) be the splitting class of $q^*(u)$ (resp.~$q^*(v)$), and so the type of the extended MLQ $(q^*, q_1, \dotsc, q_k, X)$ is
-  \[
-  \mm^* := (m_1, \dotsc, m_{t-1}, r^* - p_{t-1}, p_t - r^*, m_{t+1}, \ldots).
-  \]
-  Note that either $t^{\vee} \leq t$ or $t^{\vee} = t - 1$.
-  If $i > t$, then $t^{\vee} = t$ and $q^*\bigl(v) = \merge{i+1} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $X$ is a $p_{i+1}(\mm^*)$-queue.
-  If $i < t - 1$, then $t^{\vee} = t - 1$ and $q^*\bigl(v) = \merge{i} q^*(u)$ from Lemma~\ref{le:mono}, and the claim follows since $p_i(\mm) = p_i(\mm^*)$.
-  We consider the case $i = t - 1$, where the $i$'s are added during Phase~I of $q^*(u)$ but are instead handled by Phase~III of $q^*(v)$.
-  Note that all positions of $q^*$ where $i$ was adding during Phase~I of $q^*(u)$ are remaining positions of $q^*$ in Phase~III of $q^*(v)$, so in both cases they are $i$'s.
-  The remaining positions during Phase~III of $q^*(u)$ precisely correspond to all other remaining positions in Phase~III of $q^*(v)$, and hence with Lemma~\ref{le:mono}, we have $q^*(u) = \merge{i} q^*(v)$.
-  The case when $i = t$ is similar except instead the $(i+1)$'s are normally handled during Phase~II.
+For a word $w$ of type $\mm$, define $\vee^{(k)} w := \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
+Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
+From the proof of Lemma~\ref{le:mono}, we have $\vee^{(k)} q(u)= q(\vee^{(k)} u)$ for any queue such that $\lvert q \rvert \neq k$.
+
+We have
+\[
+\merge{i} u = \merge{i} \qq\bigl( X (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( X (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} X (1 \dotsm 1) \bigr)
+\]
+since none of the queues in $\qq$ have size $k$.
+It is clear that $\vee^{(k)} X(1 \dotsm 1) = 1 \dotsm 1$, and so $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
 
 \begin{example}
