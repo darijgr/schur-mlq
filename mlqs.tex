@@ -384,19 +384,16 @@ We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}
 
 \begin{description}
 \item[Phase I]
-  Go through all $i$ such that $u_i > t$ in such order that if $u_p > u_q$, then $p$ is processed before $q$.\footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
+  Go through all $i$ such that exists a $j \notin q$ such that $v_j$ is not set and in such order that if $u_p > u_q$, then $p$ is processed before $q$.\footnote{The order in which equal letters are processed does not matter, as a simple argument shows.}
   When considering a site $i$, find the first\footnote{``First'' in the sense of being the first encountered when walking from $i$ to the left along the circle.}
   $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
   Then set $v_j = u_i + 1$.
 
 \item[Phase II]
-  Go through all $i$ such that $u_i < t$ in such order that if $u_p < u_q$, then $p$ is processed before $q$.
+  Go through all $i$ such that there exists a $j \in q$ such that $v_j$ is not set in such order that if $u_p < u_q$, then $p$ is processed before $q$.
   When considering a site $i$, find the first\footnote{``First'' in the sense of being the first encountered when walking from $i$ to the right along the circle.}
   $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$ is not set.
   Then set $v_j = u_i$.
-
-\item[Phase III]
-  At this point, there are $m_t$ unset values $v_i$. For such $i$, set $v_i = t$ for $i \in q$ and $v_i = t+1$ for $i\notin q$.
 \end{description}
 
 \begin{example}
@@ -431,16 +428,22 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \node[circle,draw=black] (q2) at (4,0) {};
 \node[circle,draw=black] (q3) at (8,0) {};
 \node[circle,draw=black] (q4) at (9,0) {};
-\draw[->,red,rounded corners] (i4) -- (4,0.3) .. controls (3.85,0.1) and (3.7,0) .. (3.3,0) -- (2,0) -- (t2);
+\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
 \draw[->,red] (i3) -- (t3);
 \draw[->,red] (i2) -- (2,0.1) .. controls (1.8,-0.15) and (1.6,-0.2) .. (1.3,-0.2) -- (0,-0.2);
 \draw[>->,red] (10,-0.2) -- (8,-0.2) -- (7,-0.2) -- (t7);
-\draw[->,blue] (i5) -- (5,0) -- (q3);
+\draw[->,red] (i6) -- (t6);
+\draw[->,red] (i7) -- (7,0) -- (5,0) -- (t5);
+\draw[white,line width=\passwidth] (5,0.2) -- (7,0.2) .. controls (7.5,0.2) and (7.8,0.1) .. (q3);  % To simulate underpass
+\draw[->,blue] (i5) -- (5,0.2) -- (7,0.2) .. controls (7.5,0.2) and (7.8,0.1) .. (q3);
 \draw[white,line width=\passwidth] (q3) -- (t8);  % To simulate underpass
 \draw[->,blue] (q3) -- (t8);
 \draw[->,blue] (i9) -- (q4);
 \draw[white,line width=\passwidth] (q4) -- (t9);  % To simulate underpass
 \draw[->,blue] (q4) -- (t9);
+\draw[white,line width=\passwidth] (1,0.2) -- (3.3,0.2) .. controls (3.7,0.2) and (3.85,0.1) .. (q2);  % To simulate underpass
+\draw[->,blue] (i1) -- (1,0.2) -- (3.3,0.2) .. controls (3.7,0.2) and (3.85,0.1) .. (q2);
+\draw[->,blue] (q2) -- (t4);
 \draw[white,line width=\passwidth] (i8) -- (8,0.35) .. controls (9.5,0.35) .. (10,0.1);  % To simulate underpass
 \draw[->,blue] (i8) -- (8,0.35) .. controls (9.5,0.35) .. (10,0.1);
 \draw[>->,blue] (0,0.1) -- (q1);
@@ -481,8 +484,7 @@ Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $
 \end{comment}
 
 \begin{remark}
-\label{rem:mod_alg}
-In the algorithm above, we can consider Phase~III as part of Phase~I and Phase~II by having $t$ be added to every remaining unset $j \notin q$ and $j \in q$ respectively.
+For all $i$ processed in Phase~I (resp.\ Phase~II), we have $u_i \geq t$ (resp.~$u_i \leq t$).
 \end{remark}
 
 There is an natural duality in the algorithm above.
@@ -495,12 +497,12 @@ There is an natural duality in the algorithm above.
 \end{lemma}
 
 \begin{proof}
-Let $r = \abs{q}$. Thus, $q$ is an $r$-queue, so that $q'$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
+Let $r = \abs{q}$.
+Thus, $q$ is an $r$-queue, so that $q'$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
 For a fixed $k$, we call $\ell + 1 - k$ the dual letter of $k$.
 Thus, $v$ is obtained by reversing $u$ and taking the dual letters.
 
-We use the modified algorithm to compute $q \tup{u}$ and $q' \tup{v}$ from Remark~\ref{rem:mod_alg}, where we call the phases by Phase~I' and Phase~II'.
-Then, Phase~I' (resp.~II') in the construction of $q(u)$ corresponds to Phase~II' (resp.~I') in the construction of $q'(v)$ when the word is reversed and the letters are replaced by their duals.
+Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q'(v)$ when the word is reversed and the letters are replaced by their duals.
 Hence the claim follows.
 \end{proof}
 
