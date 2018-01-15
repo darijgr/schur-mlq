@@ -754,6 +754,10 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   Therefore, we have $\swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u}$.
 \end{proof}
 
+\begin{remark}
+Our proof of Theorem~\ref{thm:permutation} is by constructing a bijection $\omega$, and hence, we can give a bijective proof of Theorem~\ref{thm:merge} by the composition $\omega \circ \theta$.
+\end{remark}
+
 
 \begin{example}
 Suppose $n = 5$.
@@ -801,7 +805,7 @@ Define a directed graph with vertices $\ive{r} \times \ive{n}$ and edges
 We choose the $r$ sources $\iota_i = (r+1-i, 1)$ and terminals $\tau_i = (r-i+\gamma_i,b_j)$ for $i \in \ive{r}$.
 
 First, we label an element $k \in q_i \in \qq$ by $q_i\bigl( \cdots q_1(1 \cdots 1) \cdots \bigr)_k$.
-We construct a non-intersecting lattice path recursively by taking the rightmost unused elements $(a_1, \dotsc, a_h)$ in $\qq$ labeled by $v_{r-i}$ and constructing a path
+We construct a non-intersecting lattice path recursively by taking the largest\footnote{We do not consider the queues as lying on a cycle here but instead as elements of the set $\ive{n}$.} unused elements $(a_1, \dotsc, a_h)$ in $\qq$ labeled by $v_{r-i}$ and constructing a path
 \newcommand{\patharrow}{ \xrightarrow{\hspace{10pt}} }
 \[
 \iota_i \patharrow (\overline{\imath} + 1, a_1) \patharrow (\overline{\imath} + 2, a_1) \patharrow (\overline{\imath} + 2, a_2) \patharrow \cdots \patharrow (\overline{\imath} + \gamma_i - 1, a_{\gamma_i - 1}) = \tau_i,
@@ -1134,11 +1138,24 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 \end{lemma}
 
 \begin{proof}
+Let $u$ be a word of type $\mm$.
 Note that $q(u)_k = u_k + \delta_{2u_k}$, where $\delta_{ab}$ is the Kronecker delta, for all $k \in \inter(i,j)$ by our assumptions, and similarly $q(u_{i \leftrightarrow j})_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$.
-Therefore, if $u_i = 2$ (resp.~$u_j = 1$) and the splitting class of $q$ is $1$ (resp.~$2$), then $q(u)_i = 2 = q(u_{i \leftrightarrow j})_i$ (resp.~$q(u)_j = 1 = q(u_{i \leftrightarrow j})_j$).
-Similarly, if $u_i = 1$ (resp.~$u_j = 2$) and the splitting class of $q$ is $2$ (resp.~$1$), then $q(u)_j = 1 = q(u_{i \leftrightarrow j})_j$ (resp.~$q(u)_i = 2 = q(u_{i \leftrightarrow j})_i$).
-When $u_i$ and $u_j$ are the splitting class of $q$, the result is immediate by the definition of Phase~III.
-Hence, we have $q(u) = q(u_{i \leftrightarrow j})$.
+Therefore, if $u_i \neq u_j$, then we have $q(u)_i = 3$ and $q(u)_j = 1$.
+If $u_i = u_j = 1$, then $q(u)_j = 1$ and
+\[
+q(u)_i = \begin{cases}
+2 & \text{if }\lvert q \rvert \leq m_1, \\
+3 & \text{otherwise.}
+\end{cases}
+\]
+If $u_i = u_j = 2$, then $q(u)_i = 3$ and
+\[
+q(u)_j = \begin{cases}
+1 & \text{if }\lvert q \rvert \leq m_2, \\
+2 & \text{otherwise.}
+\end{cases}
+\]
+Similarly for $q(u_{i \leftrightarrow j})$, and hence the claim follows.
 \end{proof}
 
 \begin{lemma}[BB]
