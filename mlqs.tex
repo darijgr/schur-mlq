@@ -432,8 +432,8 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \draw[>->,red] (10,-0.2) -- (8,-0.2) -- (7,-0.2) -- (t7);
 \draw[->,red] (i6) -- (t6);
 \draw[->,red] (i7) -- (7,0) -- (5,0) -- (t5);
-\draw[white,line width=\passwidth] (5,0.2) -- (7,0.2) .. controls (7.5,0.2) and (7.8,0.1) .. (q3);  % To simulate underpass
-\draw[->,blue] (i5) -- (5,0.2) -- (7,0.2) .. controls (7.5,0.2) and (7.8,0.1) .. (q3);
+\draw[white,line width=\passwidth] (5,0.2) -- (7.3,0.2) .. controls (7.7,0.2) and (7.85,0.1) .. (q3);  % To simulate underpass
+\draw[->,blue] (i5) -- (5,0.2) -- (7.3,0.2) .. controls (7.7,0.2) and (7.85,0.1) .. (q3);
 \draw[white,line width=\passwidth] (q3) -- (t8);  % To simulate underpass
 \draw[->,blue] (q3) -- (t8);
 \draw[->,blue] (i9) -- (q4);
@@ -442,9 +442,9 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \draw[white,line width=\passwidth] (1,0.2) -- (3.3,0.2) .. controls (3.7,0.2) and (3.85,0.1) .. (q2);  % To simulate underpass
 \draw[->,blue] (i1) -- (1,0.2) -- (3.3,0.2) .. controls (3.7,0.2) and (3.85,0.1) .. (q2);
 \draw[->,blue] (q2) -- (t4);
-\draw[white,line width=\passwidth] (i8) -- (8,0.35) .. controls (9.5,0.35) .. (10,0.1);  % To simulate underpass
-\draw[->,blue] (i8) -- (8,0.35) .. controls (9.5,0.35) .. (10,0.1);
-\draw[>->,blue] (0,0.1) -- (q1);
+\draw[white,line width=\passwidth] (i8) -- (8,0.28) -- (10,0.28);  % To simulate underpass
+\draw[->,blue] (i8) -- (8,0.28) -- (10,0.28);
+\draw[>->,blue] (0,0.28) -- (0.3,0.28) .. controls (0.7,0.28) and (0.85,0.12) .. (q1);
 \draw[white,line width=\passwidth] (q1) -- (t1);  % To simulate underpass
 \draw[->,blue] (q1) -- (t1);
 \end{tikzpicture}
