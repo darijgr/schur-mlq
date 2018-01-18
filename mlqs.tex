@@ -396,8 +396,11 @@ whereas Phase II sets $v_j$ for all $j \in q$ (for similar reasons).
 Hence, at the end of the algorithm, all letters of $v$ are set, and we never
 run out of $j$'s in either phase.
 
-Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
-Better yet, the two phases can be arbitrarily interleaved.
+Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$,
+the two phases can be arbitrarily interleaved
+(i.e., we can perform the steps of the algorithm in any order as long as
+the steps of Phase I are processed in the order of decreasing $i$ and
+the steps of Phase II are processed in the order of increasing $i$).
 
 Furthermore, if we switch two adjacent entries $i_k$ and $i_{k+1}$ of the
 permutation $\tup{i_1, i_2, \ldots, i_n}$ that satisfy $u_{i_k} = u_{i_{k+1}}$,
