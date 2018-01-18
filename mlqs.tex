@@ -543,7 +543,60 @@ since $(f_k(u))_a \leq (f_k(u))_b$ whenever $u_a \leq u_b$.
 Thus, the construction of $v' \colon= q(f_k(u))$ proceeds exactly as the
 construction of $v \colon= q(u)$, except that the letters used to build
 the word $v'$ are those of $f_k(u)$ instead of those of $u$.
-Hence, any weak inequality ... XXX
+Hence, for each $m \in \ive{n}$, we have
+\begin{equation}
+ q(f_k(u))_m
+ = \begin{cases}
+    f_k(q(u)_m), & \text{ if } m \in q ; \\
+    f_k(q(u)_m - 1) + 1, & \text{ if } m \notin q
+   \end{cases}
+ .
+ \label{pf.le:mono.correspondence}
+\end{equation}
+
+Now, assume that $q(u)_i \leq q(u)_j$.
+We want to prove that
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
+If $i \in q$ and $j \notin q$, then this is obvious.
+If $i \notin q$ and $j \in q$, then we obtain a contradiction to
+$q(u)_i \leq q(u)_j$.
+Hence, only two cases remain: the case when both $i$ and $j$ belong to $q$,
+and the case when neither $i$ nor $j$ belongs to $q$.
+Let us only consider the second case (as the first is analogous).
+So $i \notin q$, and thus \eqref{pf.le:mono.correspondence} yields
+$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$.
+Similarly,
+$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$.
+But $q(u)_i \leq q(u)_j$, so that
+$f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$
+and thus
+$q(f_k(u))_i = f_k(q(u)_i - 1) + 1 \leq f_k(q(u)_j - 1) + 1 = q(f_k(u))_j$,
+as we desired to prove.
+
+We thus have shown that if $q(u)_i \leq q(u)_j$, then
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+
+Conversely, assume that
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+We must show that $q(u)_i \leq q(u)_j$.
+%Assume the contrary.
+%Hence, $q(u)_i > q(u)_j$.
+If $i \in q$ and $j \notin q$, then this is obvious.
+If $i \notin q$ and $j \in q$, then we get a contradiction (since
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ will fail for each $k$).
+Thus, again, only two cases remain: the case when both $i$ and $j$ belong to $q$,
+and the case when neither $i$ nor $j$ belongs to $q$.
+Let us only consider the second case (as the first is analogous).
+Thus, both $q(u)_i$ and $q(u)_j$ are $\geq 2$.
+As before, we obtain
+$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$ and
+$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$ for each $k$.
+Thus, for each $k$, we have
+$f_k(q(u)_i - 1) + 1 = q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j = f_k(q(u)_j - 1) + 1$
+and therefore $f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$.
+But this implies that $q(u)_i - 1 \leq q(u)_j - 1$
+(because if two positive integers $a$ and $b$ satisfy $f_k(a) \geq f_k(b)$ for each $k \in \ZZ_{\geq 1}$, then $a = b$).
+In other words, $q(u)_i \leq q(u)_j$, and the proof is complete.
 \end{proof}
 
 
