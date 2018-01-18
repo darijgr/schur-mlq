@@ -770,7 +770,7 @@ Thus, the construction of $q(\merge{h} u)$ proceeds exactly as the
 construction of $q(u)$, except that the letters used to build
 the former word are those of $\merge{h} u$ instead of those of $u$.
 This yields an expression for each letter $(q(\merge{h} u))_i$ of
-$q(\merge{h} u)$ depending on whether XXX
+$q(\merge{h} u)$ depending on whether ...
 \begin{equation}
  q(\merge{h} u) = \begin{cases}
                    \merge{h} q(u) , & \text{ if } h < t ; \\
@@ -904,11 +904,12 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
   \item $X$ is a $p_i(\mm)$-queue.
   \end{itemize}
-  Given any such pair $\tup{\qq, X}$, we define a $(s_{i-1} \dotsm s_1)$-twisted MLQ $ \theta(\qq, X)$ of type $\mm$ and weight
-  $\wt\bigl( \theta(\qq, X) \bigr) = \wt(\qq) \wt(X)$ by
+  Given any such pair $\tup{\qq, X}$, we set
   \[
-  \theta(\qq, X) := (X, q_1, \dotsc, q_{\ell-1}).
+  \theta(\qq, X) := (X, q_1, \dotsc, q_{\ell-1});
   \]
+  this is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and weight
+  $\wt\bigl( \theta(\qq, X) \bigr) = \wt(\qq) \wt(X)$.
   By Lemma~\ref{lemma:queue_merge}, $\theta(\qq, X)$ also satisfies
   \[
   v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \bigl( \theta(\qq, X)(1 \dotsm 1) \bigr).
@@ -948,6 +949,30 @@ By examining all possible MLQs for these words, we obtain
 We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
+\begin{lemma}
+\label{lem:no_wrap}
+Let $u \in \mcW_n$ be a packed word with $\ell-1$ classes.
+Let $q$ be a queue.
+Assume that $\abs{q}$ is $\geq$ to the number of letters of $u$ that are $< \ell-1$.
+Assume furthermore that the letters of $q(u)$ that are $< \ell$ are weakly decreasing
+(from left to right).
+Then, the letters of $u$ that are $< \ell-1$ are weakly decreasing.
+(Is this true in this form? XXX)
+\end{lemma}
+
+\begin{proof}
+Consider the $t$ in Remark~\ref{rmk:t-splitting}.
+Then, $t = \ell-1$ (or, more precisely, we can pick $t = \ell-1$).
+Hence, all letters of $q(u)$ apart from $\ell$ are set in Phase II of the algorithm.
+We claim that there is no ``wrap-around'' in Phase II (i.e., every time
+that we seek the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$
+is not set,
+we find such a $j$ before having to wrap from $n$ back to $1$).
+
+XXX
+XXX
+\end{proof}
+
 
 \begin{thm}
 \label{thm:determinant_form}
@@ -962,10 +987,30 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 \end{thm}
 
 \begin{proof}
+First, let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
+Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm$ of $u$.
+In particular, $q_{\ell-1} = B$.
+Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
+Hence, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
+we shall disregard this factor in the following.
+
+For each $i \in \ive{\ell}$, we set
+$u^{(i)} := q_{i-1}\bigl( \cdots q_1(1 \cdots 1) \cdots \bigr)$.
+This is a word with $i$ classes, and exactly $\abs{q_i}$ of its letters are $< i$.
+We claim that these letters are weakly decreasing.
+
+This is proven by reverse induction over $i$:
+The case $i = r$ follows from the construction of $u^{(r)} = u$.
+To get from $i$ to $i-1$, XXX
+
 We apply the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} to show the claim.
 We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
-Define a directed graph with vertices $\ive{r} \times \ive{n}$ and edges
+Pairs of integers shall be represented as points in the plane in matrix coordinates; that is, the pair $\tup{i, j}$ moves further down as $i$ increases and further right as $j$ increases.
+
+TODO: Sure about further down as $i$ increases? May want to undo the reflection $i \mapsto r+1-i$.
+
+Define a directed graph with vertices $\tup{i, j} \in \ive{r} \times \ive{n}$ and edges
 \[
 (r+1-i,j) \to (r+1-i,j+1)
 \]
@@ -974,16 +1019,18 @@ Define a directed graph with vertices $\ive{r} \times \ive{n}$ and edges
 (r+1-i,j) \to (r-i,j)
 \]
 (for $i \in \ive{r-1}$ and $j \in \ive{n}$) with weight $x_j$. 
-We choose the $r$ sources $\iota_i = (r+1-i, 1)$ and terminals $\tau_i = (r-i+\gamma_i,b_j)$ for $i \in \ive{r}$.
+We choose the $r$ sources $\iota_i = (r+1-i, 1)$ and terminals $\tau_i = (r-i+\gamma_i,b_{r+1-i})$ for $i \in \ive{r}$.
 
 First, we label an element $k \in q_i \in \qq$ by $q_i\bigl( \cdots q_1(1 \cdots 1) \cdots \bigr)_k$.
-We construct a non-intersecting lattice path recursively by taking the largest\footnote{We do not consider the queues as lying on a cycle here but instead as elements of the set $\ive{n}$.} unused elements $(a_1, \dotsc, a_h)$ in $\qq$ labeled by $v_{r-i}$ and constructing a path
+We construct a disjoint $r$-path $\tup{p_1, \ldots, p_r}$ recursively:
+For each $i$, if $p_1, \ldots, p_{i-1}$ are defined,
+then we the largest\footnote{We do not consider the queues as lying on a cycle here but instead as elements of the set $\ive{n}$.} unused elements $(a_1, \dotsc, a_h)$ in $\qq$ labeled by $v_{r-i}$ and constructing a path
 \newcommand{\patharrow}{ \xrightarrow{\hspace{10pt}} }
 \[
-\iota_i \patharrow (\overline{\imath} + 1, a_1) \patharrow (\overline{\imath} + 2, a_1) \patharrow (\overline{\imath} + 2, a_2) \patharrow \cdots \patharrow (\overline{\imath} + \gamma_i - 1, a_{\gamma_i - 1}) = \tau_i,
+\iota_i \patharrow (\overline{\imath} + 1, a_1) \patharrow (\overline{\imath} + 2, a_1) \patharrow (\overline{\imath} + 2, a_2) \patharrow \cdots \patharrow (\overline{\imath} + \gamma_i - 1, a_h) = \tau_i,
 \]
 where $\overline{\imath} = r + 1 - i$.
-Conversely, given a non-intersecting lattice path, we construct the MLQ by considering the north-east corners and labelling the paths according to $v$.
+Conversely, given a disjoint $r$-path, we construct the MLQ by considering the north-east corners and labelling the paths according to $v$.
 See Figure \ref{fig:lattice_path_bijection} for an example.
 
 Note that the weighted sum of paths from $\iota_i$ to $\tau_j$ is $h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j})$.
@@ -1040,7 +1087,7 @@ The LGV Lemma now gives us the stated formula.
   }
 \end{tikzpicture}
 \]
-\caption{An example of the bijection with $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$ between MLQs and non-intersecting lattice paths in the proof of Theorem~\ref{thm:determinant_form}.}
+\caption{An example of the bijection with $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$ between MLQs and disjoint $r$-paths in the proof of Theorem~\ref{thm:determinant_form}.}
 \label{fig:lattice_path_bijection}
 \end{figure}
 
