@@ -953,21 +953,29 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 \label{lem:no_wrap}
 Let $u \in \mcW_n$ be a packed word with $\ell-1$ classes.
 Let $q$ be a queue.
-Assume that $\abs{q}$ is $\geq$ to the number of letters of $u$ that are $< \ell-1$.
+Assume that $\abs{q}$ is greater than the number of letters of $u$ that are $< \ell-1$.
 Assume furthermore that the letters of $q(u)$ that are $< \ell$ are weakly decreasing
 (from left to right).
 Then, the letters of $u$ that are $< \ell-1$ are weakly decreasing.
-(Is this true in this form? XXX)
 \end{lemma}
 
 \begin{proof}
-Consider the $t$ in Remark~\ref{rmk:t-splitting}.
-Then, $t = \ell-1$ (or, more precisely, we can pick $t = \ell-1$).
-Hence, all letters of $q(u)$ apart from $\ell$ are set in Phase II of the algorithm.
+%Consider the $t$ in Remark~\ref{rmk:t-splitting}.
+%Then, $t = \ell-1$ (or, more precisely, we can pick $t = \ell-1$).
+The condition on $\abs{q}$ shows that all letters of $q(u)$ that are $< \ell$
+are set in Phase II of the algorithm,
+whereas all letters that are $= \ell$ are set in Phase I.
+Furthermore, it shows that at least one letter of $q(u)$ is $= \ell - 1$.
+
 We claim that there is no ``wrap-around'' in Phase II (i.e., every time
 that we seek the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$
-is not set,
-we find such a $j$ before having to wrap from $n$ back to $1$).
+is not set, we find such a $j$ before having to wrap from $n$ back to $1$).
+(Indeed, assume the contrary.
+Consider the first step in Phase II in which wrap-around occurs.
+This step sets $v_j$ to $u_i$,
+where $i$ is some site with $u_i < \ell$, and
+where $j$ is the smallest element of $q$ for which $v_j$ has not been set before.
+???
 
 XXX
 XXX
