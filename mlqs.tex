@@ -373,20 +373,60 @@ We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}
 In the beginning, no letter of $v \in \mcW_n$ is set, and no site $i$ is frozen.
 Pick a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-(The order between sites $i$ with equal $u_i$ does not matter, as a simple
-argument shows.)
+(The order between sites $i$ with equal $u_i$ does not matter, as we will soon see.)
 
 \begin{description}
 \item[Phase I]
-  For $i = i_n, i_{n-1}, \ldots, i_{n-\abs{q}+1}$, do the following.
+  For $i = i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$, do the following.
     Find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
     Then set $v_j = u_i + 1$.
 
 \item[Phase II]
-  For $i = i_1, i_2, \ldots, i_{n-\abs{q}}$, do the following.
+  For $i = i_1, i_2, \ldots, i_{\abs{q}}$, do the following.
     Find the first $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
     Then set $v_j = u_i$.
 \end{description}
+
+\begin{remark}
+\label{rmk:order-agnostic}
+Consider the above algorithm.
+Notice that Phase I sets $v_j$ for all $j \notin q$ (because it contains
+$n - \abs{q}$ steps, and sets one such $v_j$ per step),
+whereas Phase II sets $v_j$ for all $j \in q$ (for similar reasons).
+Hence, at the end of the algorithm, all letters of $v$ are set, and we never
+run out of $j$'s in either phase.
+
+Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
+Better yet, the two phases can be arbitrarily interleaved.
+
+Furthermore, if we switch two adjacent entries $i_k$ and $i_{k+1}$ of the
+permutation $\tup{i_1, i_2, \ldots, i_n}$ that satisfy $u_{i_k} = u_{i_{k+1}}$,
+then the resulting word $v$ is unchanged.
+Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
+\begin{itemize}
+ \item If $k < \abs{q}$, then this switch interchanges two consecutive
+       steps in Phase II, causing the corresponding letters $v_j$ to
+       get set in a possibly different order; but this does not change $v$
+       because these two letters are set to the same value
+       (namely, to $h+1$).
+ \item If $k > \abs{q}$, then a similar argument works (using Phase I instead).
+ \item If $k = \abs{q}$, then we recall that the two phases can be
+       arbitrarily interleaved.
+       In particular, we can first perform all but the last step of Phase I,
+       then perform all but the last step of Phase II,
+       and finally perform the remaining two steps.
+       The switch only affects these final two steps.
+       However, the effect of these two steps is simply that the unique
+       remaining unset $v_j$ with $j \in q$ gets set to $h$,
+       and the unique remaining unset $v_j$ with $j \notin q$ gets set to $h+1$.
+       The switch clearly does not change this behavior,
+       since it does not depend on $i_k$ and $i_{k+1}$.
+\end{itemize}
+Thus, the word $v$ does not depend on the choice of the
+permutation $\tup{i_1, i_2, \ldots, i_n}$, as long as it satisfies
+$u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+This shows that $q(u)$ is well-defined.
+\end{remark}
 
 \begin{remark}
 \label{rmk:t-splitting}
@@ -466,7 +506,6 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 where the paths in red correspond to Phase I and those in blue are from Phase II. Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
-Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$, these two phases commute.
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array, where the first row is the word $u$
 and the second row has a circle labeled $v_j$ for $j \in q$ or a square labeled $v_j$ for $j \notin q$ in position $j$.
 Using this convention, we can write Example~\ref{ex:first_queue} as
