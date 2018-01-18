@@ -967,9 +967,12 @@ are set in Phase II of the algorithm,
 whereas all letters that are $= \ell$ are set in Phase I.
 Furthermore, it shows that at least one letter of $q(u)$ is $= \ell - 1$.
 
-We claim that there is no ``wrap-around'' in Phase II (i.e., every time
+We claim that there is no ``wrap-around'' in Phase II until the steps
+when we process the $i$ for which $u_i = \ell-1$
+(i.e., every time
 that we seek the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$
-is not set, we find such a $j$ before having to wrap from $n$ back to $1$).
+is not set, we find such a $j$ before having to wrap from $n$ back to $1$,
+unless $u_i = \ell-1$).
 (Indeed, assume the contrary.
 Consider the first step in Phase II in which wrap-around occurs.
 This step sets $v_j$ to $u_i$,
