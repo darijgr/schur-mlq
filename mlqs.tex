@@ -759,16 +759,62 @@ In order to prove our next result, we need the following lemma.
 \end{lemma}
 
 \begin{proof}
+\begin{comment}
+Let us first show an auxiliary observation.
+Let $q$, $u$ and $t$ be as in Remark~\ref{rmk:t-splitting},
+and let $h \in \set{1, 2, \ldots}$.
+The permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
+also works for the construction of $q(\merge{h} u)$,
+since $(\merge{h} u)_a \leq (\merge{h} u)_b$ whenever $u_a \leq u_b$.
+Thus, the construction of $q(\merge{h} u)$ proceeds exactly as the
+construction of $q(u)$, except that the letters used to build
+the former word are those of $\merge{h} u$ instead of those of $u$.
+This yields an expression for each letter $(q(\merge{h} u))_i$ of
+$q(\merge{h} u)$ depending on whether XXX
+\begin{equation}
+ q(\merge{h} u) = \begin{cases}
+                   \merge{h} q(u) , & \text{ if } h < t ; \\
+                   \merge{h+1} q(u) , & \text{ if } h \geq t
+                  \end{cases} .
+\label{pf.lemma:queue_merge.1}
+\end{equation}
+\end{comment}
+
 For a word $w$ of type $\mm$, define $\vee^{(k)} w := \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
 Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
-From the proof of Lemma~\ref{le:mono}, we have $\vee^{(k)} q(u)= q(\vee^{(k)} u)$ for any queue such that $\lvert q \rvert \neq k$.
+Indeed, $\vee^{(k)} w$ can be obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
 
-We have
-\[
-\merge{i} u = \merge{i} \qq\bigl( X (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( X (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} X (1 \dotsm 1) \bigr)
-\]
-since none of the queues in $\qq$ have size $k$.
-It is clear that $\vee^{(k)} X(1 \dotsm 1) = 1 \dotsm 1$, and so $\qq(1 \dotsm 1) = \merge{i} u$.
+If $u \in \mcW_n$ is a word of type $\mm$,
+if $k \in \set{ p_j(\mm) \mid j \geq 1 }$,
+and if $q$ is a queue such that $\lvert q \rvert \neq k$, then
+\begin{equation}
+\vee^{(k)} q(u) = q(\vee^{(k)} u)
+\label{pf.lemma:queue_merge.2}
+\end{equation}
+(and in particular, both $\vee^{(k)} q(u)$ and $\vee^{(k)} u$
+are well-defined).
+(Indeed, $\vee^{(k)} u$ is defined since $k \in \set{ p_j(\mm) \mid j \geq 1 }$;
+furthermore, $\vee^{(k)} q(u)$ is defined since the type $\nn$ of $q(u)$
+satisfies
+$k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 1 }$.
+It thus remains to prove \eqref{pf.lemma:queue_merge.2}.
+The permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
+also works for the construction of $q(\vee^{(k)} u)$,
+since $(\vee^{(k)} u)_a \leq (\vee^{(k)} u)_b$ whenever $u_a \leq u_b$.
+Hence, $q(\vee^{(k)} u)$ is obtained from $q(u)$ by decrementing (by $1$)
+all but the $k$ smallest letters of $q(u)$
+(since $\vee^{(k)} u$ is obtained in this way from $u$).
+But $\vee^{(k)} q(u)$ is obtained from $q(u)$ in exactly the same way.
+Hence, $\vee^{(k)} q(u) = q(\vee^{(k)} u)$, so that \eqref{pf.lemma:queue_merge.2} is proven.)
+
+Now, set $k = p_i(\mm)$. Then,
+\begin{equation}
+ \merge{i} u = \merge{i} \qq\bigl( X (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( X (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} X (1 \dotsm 1) \bigr)
+\label{pf.lemma:queue_merge.4}
+\end{equation}
+by repeated use of \eqref{pf.lemma:queue_merge.2}, since none of the queues in $\qq$ have size $k$.
+It is clear that $\vee^{(k)} X(1 \dotsm 1) = 1 \dotsm 1$,
+and so \eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
 
 \begin{example}
