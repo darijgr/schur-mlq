@@ -378,12 +378,12 @@ argument shows.)
 
 \begin{description}
 \item[Phase I]
-  For $i = i_1, i_2, \ldots, i_{n-\abs{q}}$, do the following.
+  For $i = i_n, i_{n-1}, \ldots, i_{n-\abs{q}+1}$, do the following.
     Find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
     Then set $v_j = u_i + 1$.
 
 \item[Phase II]
-  For $i = i_n, i_{n-1}, \ldots, i_{n-\abs{q}+1}$, do the following.
+  For $i = i_1, i_2, \ldots, i_{n-\abs{q}}$, do the following.
     Find the first $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
     Then set $v_j = u_i$.
 \end{description}
