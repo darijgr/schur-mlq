@@ -95,6 +95,7 @@
 \excludecomment{noncompile}
 \newcommand{\rev}{\operatorname{rev}}
 \newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\core}{\operatorname{core}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
 % $\powset[k]{S}$ stands for the set of all $k$-element subsets of
@@ -949,41 +950,9 @@ By examining all possible MLQs for these words, we obtain
 We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
-\begin{lemma}
-\label{lem:no_wrap}
-Let $u \in \mcW_n$ be a packed word with $\ell-1$ classes.
-Let $q$ be a queue.
-Assume that $\abs{q}$ is greater than the number of letters of $u$ that are $< \ell-1$.
-Assume furthermore that the letters of $q(u)$ that are $< \ell$ are weakly decreasing
-(from left to right).
-Then, the letters of $u$ that are $< \ell-1$ are weakly decreasing.
-\end{lemma}
+\section{A Jacobi-Trudi-like formula for special $u$}
 
-\begin{proof}
-%Consider the $t$ in Remark~\ref{rmk:t-splitting}.
-%Then, $t = \ell-1$ (or, more precisely, we can pick $t = \ell-1$).
-The condition on $\abs{q}$ shows that all letters of $q(u)$ that are $< \ell$
-are set in Phase II of the algorithm,
-whereas all letters that are $= \ell$ are set in Phase I.
-Furthermore, it shows that at least one letter of $q(u)$ is $= \ell - 1$.
-
-We claim that there is no ``wrap-around'' in Phase II until the steps
-when we process the $i$ for which $u_i = \ell-1$
-(i.e., every time
-that we seek the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$
-is not set, we find such a $j$ before having to wrap from $n$ back to $1$,
-unless $u_i = \ell-1$).
-(Indeed, assume the contrary.
-Consider the first step in Phase II in which wrap-around occurs.
-This step sets $v_j$ to $u_i$,
-where $i$ is some site with $u_i < \ell$, and
-where $j$ is the smallest element of $q$ for which $v_j$ has not been set before.
-???
-
-XXX
-XXX
-\end{proof}
-
+We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a special kind of word: a word whose letters range from $1$ to $\ell$, which has each letter from $1$ to $\ell-1$ appear at least one, and which is weakly decreasing if we disregard the letters $\ell$.
 
 \begin{thm}
 \label{thm:determinant_form}
@@ -997,7 +966,88 @@ XXX
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
 
+For the proof of this theorem, we need to lay some groundwork.
+
+If $k$ is a positive integer, then a \defn{$k$-frow} will mean a word $w \in \mcW_n$ such that:
+\begin{itemize}
+ \item all letters of $w$ are $\leq k$;
+ \item each of the letters $1,2,\ldots,k-1$ appears at least once in $w$;
+ \item removing all letters $k$ from $w$ yields a weakly decreasing word.
+\end{itemize}
+For example, $43443342242114$ is a $4$-frow; so is $3321$ (we don't require $k$ to appear in $w$).
+Note that the word $u$ in Theorem~\ref{thm:determinant_form} is an $\ell$-frow.
+
+If $w$ is a word and $k$ is a positive integer, then \defn{$w^{-1}(k)$} is defined to be the set $\set{i \in \ive{n} \mid w_i = k}$.
+
+If $q$ is a queue and $p \in \ive{\abs{q}}$, then \defn{$\max_p q$} means the $p$-th largest element of $q$.
+
+\begin{lemma}
+\label{lem:no_wrap}
+Let $k$ be a positive integer.
+Let $u \in \mcW_n$ be a word whose letters are $< k$.
+Let $v \in \mcW_n$ be a $k$-frow.
+Let $r = \ive{n} \setminus u^{-1}(k-1)$.
+Let $q$ be a queue such that $\abs{q} > \abs{r}$.
+Then, $q(u) = v$ if and only if the following statements hold:
+\begin{enumerate}
+ \item We have $q = \ive{n} \setminus v^{-1}(k)$.
+ \item We have $\abs{v^{-1}(h)} = \abs{u^{-1}(h)}$ for all $h < k$.
+ \item The word $u$ is a $(k-1)$-frow.
+ \item For each $p \in \ive{\abs{r}}$, we have
+       $\max_p (q) \geq \max_p (r)$.
+ \item If $i \in r$ and $j \in q$ satisfy $u_i > v_j$, then
+       $i > j$.
+\end{enumerate}
+\end{lemma}
+
 \begin{proof}
+Consider the algorithm for computing $q(u)$.
+The condition $\abs{q} > \abs{r}$
+shows that all letters of $q(u)$ that are $< k$
+are set in Phase II of the algorithm,
+whereas all letters that are $= k$ are set in Phase I.
+Furthermore, it shows that at least one letter of $q(u)$ is $= k-1$.
+
+$\Longrightarrow$: Assume that $q(u) = v$.
+Hence, the preceding paragraph shows that all letters of $v$ that are $< k$
+are set in Phase II of the algorithm,
+whereas all letters that are $= k$ are set in Phase I.
+Thus, $v^{-1}(k) = \ive{n} \setminus q$, so that
+$q = \ive{n} \setminus v^{-1}(k)$.
+This proves Statement (1).
+Statement (2) also follows from the fact that
+that all letters of $v$ that are $< k$
+are set in Phase II of the algorithm XXXXXXXX
+
+We claim that there is no ``wrap-around'' in Phase II of the algorithm
+until the steps when we process the $i$ for which $u_i = k-1$
+(i.e., every time
+that we seek the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$
+is not set, we find such a $j$ before having to wrap from $n$ back to $1$,
+unless $u_i = k-1$).
+(Indeed, assume the contrary.
+Consider the first step in Phase II in which wrap-around occurs.
+This step sets $v_j$ to $u_i$,
+where $i$ is some site with $u_i < k$, and
+where $j$ is the smallest element of $q$ for which $v_j$ has not been set before.
+
+
+
+XXX
+%Consider the $t$ in Remark~\ref{rmk:t-splitting}.
+%Then, $t = \ell-1$ (or, more precisely, we can pick $t = \ell-1$).
+The condition on $\abs{q}$ shows that all letters of $q(u)$ that are $< \ell$
+are set in Phase II of the algorithm,
+whereas all letters that are $= \ell$ are set in Phase I.
+Furthermore, it shows that at least one letter of $q(u)$ is $= \ell - 1$.
+
+???
+
+XXX
+XXX
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
 First, let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
 Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm$ of $u$.
 In particular, $q_{\ell-1} = B$.
