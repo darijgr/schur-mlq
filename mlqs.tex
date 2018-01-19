@@ -1289,7 +1289,7 @@ In Part~B we define the involution promised above, mapping any configuration $C$
 In Part~C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
 Finally, in Part~D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
 
-For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{0,1}^n$.
+For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{1,2}^n$.
 Moreover, we refer to binary words simply as words.
 
 %%%%%%%%%%
@@ -1368,25 +1368,16 @@ For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result 
 \end{lemma}
 
 \begin{proof}
-Let $u$ be a word of type $\mm$.
-Note that $q(u)_k = u_k + \delta_{2u_k}$, where $\delta_{ab}$ is the Kronecker delta, for all $k \in \inter(i,j)$ by our assumptions, and similarly $q(u_{i \leftrightarrow j})_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$.
+Let $\delta_{ab}$ denote the Kronecker delta.
+Note that $q(u)_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$ by our assumptions
+(since we can start each phase by going through the $k \in \inter(i, j)$),
+and similarly $q(u_{i \leftrightarrow j})_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$.
 Therefore, if $u_i \neq u_j$, then we have $q(u)_i = 3$ and $q(u)_j = 1$.
-If $u_i = u_j = 1$, then $q(u)_j = 1$ and
-\[
-q(u)_i = \begin{cases}
-2 & \text{if }\lvert q \rvert \leq m_1, \\
-3 & \text{otherwise.}
-\end{cases}
-\]
-If $u_i = u_j = 2$, then $q(u)_i = 3$ and
-\[
-q(u)_j = \begin{cases}
-1 & \text{if }\lvert q \rvert \leq m_2, \\
-2 & \text{otherwise.}
-\end{cases}
-\]
 Similarly for $q(u_{i \leftrightarrow j})$, and hence the claim follows.
+If $u_i = u_j$, then the claim is trivial (as $u = u_{i \leftrightarrow j}$).
 \end{proof}
+
+\darij{TODO: Explain.}
 
 \begin{lemma}[BB]
 \label{le:BB}
@@ -1976,7 +1967,7 @@ There is the natural cyclic symmetry on our special weights.
 Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
 Recall the combinatorial $R$-matrix acting on $B^{r,s}$ from~\cite{NY97,Shimozono02}, which is the unique crystal isomorphism
 \[
-R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_2}.
+R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_1}.
 \]
 There is a well-known (in slightly different terminology) bijection $\Xi_r$ relating $r$-queues with an element of the KR crystal $B^{r,1}$ in type $A_{n-1}^{(1)}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
 In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
