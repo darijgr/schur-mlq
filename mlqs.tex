@@ -388,6 +388,26 @@ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
     Then set $v_j = u_i$.
 \end{description}
 
+For future reference, let us introduce notations for some of the
+behavior happening in the above algorithm.
+Phase I of the algorithm consists of $n - \abs{q}$ \defn{steps};
+each of these steps corresponds to one value of $i$,
+and consists of finding the first $j \notin q$
+weakly to the left of $i$ such that $v_j$ is not set,
+and setting $v_j = u_i + 1$.
+We shall refer to these values of $i$, $j$, $u_i$ and $v_j$ as the
+\defn{in-site}, \defn{out-site}, \defn{in-letter} and
+\defn{out-letter} (respectively) of this step.
+Furthermore, we imagine that $j$ is found by a recursive
+process, in which we start at the site $i$ and keep moving
+further and further left (cyclically) until we first hit
+a site $j \notin q$ such that $v_j$ is not set;
+this process will be called the \defn{search process} (in step $i$).
+We say that there is \defn{wraparound} (in step $i$) if this
+search process involves moving from $1$ to $n$.
+Analogous notations will be used for Phase II
+(which, of course, has $\abs{q}$ steps).
+
 \begin{remark}
 \label{rmk:order-agnostic}
 Consider the above algorithm.
