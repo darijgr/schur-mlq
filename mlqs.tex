@@ -257,7 +257,7 @@ We give a determinant formula for the spectral weight of a word, which gives a p
 \section{Introduction}
 \label{sec:introduction}
 
-One of the fundamental models of particles moving in a 1-dimensional lattice is the asymmetric simple exclusion process (ASEP) and has received broad attention in many different variations.
+One of the fundamental models of particles moving in a 1-dimensional lattice is the asymmetric simple exclusion process (ASEP), and it has received broad attention in many different variations.
 The earliest known publication of the ASEP was done to model the dynamics of ribosomes along RNA~\cite{MGP68}.
 For statistical mechanics, it is a model for gas particles in a lattice with an induced current, where the exclusion mimics the short-range interactions among the particles.
 Despite admitting very simple descriptions of the particle dynamics, the ASEP has very rich macroscopic behaviors, such as
@@ -387,6 +387,9 @@ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
     Find the first $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
     Then set $v_j = u_i$.
 \end{description}
+
+\Travis{The definitions in the following paragraph are currently unused.
+Moreover, the terminology does not feel like it both naturally arose and can be used in a natural way.}
 
 For future reference, let us introduce notations for some of the
 behavior happening in the above algorithm.
@@ -581,9 +584,9 @@ Hence the claim follows.
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
-For the next lemma, we need a further notation:
-If $u$ is a word and $f : \set{1,2,\ldots} \to \set{1,2,\ldots}$ is any map,
-then $f \tup{u}$ shall mean the word obtained by applying $f$ to each letter of $u$.
+For the next lemma, we need further notation:
+For any map $f \colon \set{1,2,\ldots} \to \set{1,2,\ldots}$ and word $u$,
+we abuse notation to let $f(u)$ be the word obtained by applying $f$ to each letter of $u$.
 
 \begin{lemma}[Monotonicity]
 \label{le:mono}
@@ -763,7 +766,43 @@ In this section, we state our main results and use them to prove the commutativi
 \end{thm}
 
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
-In order to prove our next result, we need the following lemma.
+In order to prove our next result, we need the following.
+
+For a word $w$ of type $\mm$, define $\vee^{(k)} w := \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
+Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
+Indeed, the word $\vee^{(k)} w$ can be obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
+
+\Travis{I am becoming less convinced of this notation as it makes things less explicit.
+Well-definedness is equivalent to the existence of a $j$ such that $p_j(\mm) = k$, and we really want to do the $j$-merge.
+It might be a little extra verbage, but I feel like it means more details and concepts are on the surface.}
+
+\begin{lemma}
+\label{lemma:queue_merge_commute}
+Let $u \in \mcW_n$ be a word of type $\mm$, and fix some $k = p_j(\mm)$ for some $j \geq 1$.
+If $q$ is a queue such that $\lvert q \rvert \neq k$, then
+\[
+\vee^{(k)} q(u) = q(\vee^{(k)} u).
+\]
+In particular, both $\vee^{(k)} q(u)$ and $\vee^{(k)} u$ are well-defined.
+\end{lemma}
+
+\begin{proof}
+The word $\vee^{(k)} u$ is well-defined since $k = p_j(\mm)$ for some $j$;
+furthermore, $\vee^{(k)} q(u)$ is well-defined since the type $\nn$ of $q(u)$
+satisfies
+\[
+k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid \geq 1 }.
+\]
+Thus, it remains to prove $\vee^{(k)} q(u) = q(\vee^{(k)} u)$.
+The permutation $\tup{i_1, i_2, \dotsc, i_n}$ in the construction of $q(u)$
+also works for the construction of $q(\vee^{(k)} u)$,
+since $(\vee^{(k)} u)_a \leq (\vee^{(k)} u)_b$ whenever $u_a \leq u_b$.
+Hence, $q(\vee^{(k)} u)$ is obtained from $q(u)$ by decrementing (by $1$)
+all but the $k$ smallest letters of $q(u)$
+(since $\vee^{(k)} u$ is obtained in this way from $u$).
+However, the word $\vee^{(k)} q(u)$ is obtained from $q(u)$ in exactly the same way.
+Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
+\end{proof}
 
 \begin{lemma}
 \label{lemma:queue_merge}
@@ -801,41 +840,14 @@ $q(\merge{h} u)$ depending on whether ...
 \end{equation}
 \end{comment}
 
-For a word $w$ of type $\mm$, define $\vee^{(k)} w := \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
-Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
-Indeed, $\vee^{(k)} w$ can be obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
-
-If $u \in \mcW_n$ is a word of type $\mm$,
-if $k \in \set{ p_j(\mm) \mid j \geq 1 }$,
-and if $q$ is a queue such that $\lvert q \rvert \neq k$, then
+Now, set $k = p_i(\mm)$. Then, we have
 \begin{equation}
-\vee^{(k)} q(u) = q(\vee^{(k)} u)
-\label{pf.lemma:queue_merge.2}
-\end{equation}
-(and in particular, both $\vee^{(k)} q(u)$ and $\vee^{(k)} u$
-are well-defined).
-(Indeed, $\vee^{(k)} u$ is defined since $k \in \set{ p_j(\mm) \mid j \geq 1 }$;
-furthermore, $\vee^{(k)} q(u)$ is defined since the type $\nn$ of $q(u)$
-satisfies
-$k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 1 }$.
-It thus remains to prove \eqref{pf.lemma:queue_merge.2}.
-The permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
-also works for the construction of $q(\vee^{(k)} u)$,
-since $(\vee^{(k)} u)_a \leq (\vee^{(k)} u)_b$ whenever $u_a \leq u_b$.
-Hence, $q(\vee^{(k)} u)$ is obtained from $q(u)$ by decrementing (by $1$)
-all but the $k$ smallest letters of $q(u)$
-(since $\vee^{(k)} u$ is obtained in this way from $u$).
-But $\vee^{(k)} q(u)$ is obtained from $q(u)$ in exactly the same way.
-Hence, $\vee^{(k)} q(u) = q(\vee^{(k)} u)$, so that \eqref{pf.lemma:queue_merge.2} is proven.)
-
-Now, set $k = p_i(\mm)$. Then,
-\begin{equation}
- \merge{i} u = \merge{i} \qq\bigl( X (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( X (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} X (1 \dotsm 1) \bigr)
 \label{pf.lemma:queue_merge.4}
+ \merge{i} u = \merge{i} \qq\bigl( X (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( X (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} X (1 \dotsm 1) \bigr)
 \end{equation}
-by repeated use of \eqref{pf.lemma:queue_merge.2}, since none of the queues in $\qq$ have size $k$.
+by repeated use of Lemma~\ref{lemma:queue_merge_commute} since none of the queues in $\qq$ have size $k$.
 It is clear that $\vee^{(k)} X(1 \dotsm 1) = 1 \dotsm 1$,
-and so \eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
+and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
 
 \begin{example}
@@ -972,7 +984,7 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 
 \section{A Jacobi-Trudi-like formula for special $u$}
 
-We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a special kind of word: a word whose letters range from $1$ to $\ell$, which has each letter from $1$ to $\ell-1$ appear at least one, and which is weakly decreasing if we disregard the letters $\ell$.
+We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and weakly decreasing if we disregard all letters $\ell$.
 
 \begin{thm}
 \label{thm:determinant_form}
