@@ -316,6 +316,7 @@ In Section~\ref{sec:result}, we give our main results.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
 In Section~\ref{sec:thm_proof}, we give the proof of our main theorem.
 In Section~\ref{sec:remarks}, we give some additional remarks about our results.
+\travis{Update once the sections have been decided.}
 
 
 \subsection{Acknowledgements}
@@ -371,10 +372,9 @@ The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself defined as follows.
 For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
 We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}.
-In the beginning, no letter of $v \in \mcW_n$ is set, and no site $i$ is frozen.
-Pick a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
+In the beginning, no letter of $v \in \mcW_n$ is set.
+Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-(The order between sites $i$ with equal $u_i$ does not matter, as we will see in Remark~\ref{rmk:order-agnostic}.)
 
 \begin{description}
 \item[Phase I]
@@ -387,6 +387,73 @@ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
     Find the first $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
     Then set $v_j = u_i$.
 \end{description}
+
+\begin{remark}
+\label{rmk:order-agnostic}
+Consider the above algorithm.
+Notice that Phase~I sets $v_j$ for all $j \notin q$ (because it contains
+$n - \abs{q}$ steps, and sets one such $v_j$ per step),
+whereas Phase~II sets $v_j$ for all $j \in q$ (for similar reasons).
+Hence, at the end of the algorithm, all letters of $v$ are set, and we never
+run out of $j$'s in either phase.
+
+Since Phase~I only deals with $j \notin q$, and Phase~II only with $j\in q$,
+the two phases can be arbitrarily interleaved
+(\textit{i.e.}, we can perform the steps of the algorithm in any order as long as
+the steps of Phase~I (resp.\ Phase~II) are processed in the order of decreasing (resp.\ increasing) $i$).
+\end{remark}
+
+\begin{lemma}
+\label{lemma:order_indep}
+The resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1, i_2, \dotsc, i_n)$.
+\end{lemma}
+
+\begin{proof}
+If we switch two adjacent entries $i_k$ and $i_{k+1}$ of the
+permutation $\tup{i_1, i_2, \ldots, i_n}$ that satisfy $u_{i_k} = u_{i_{k+1}}$,
+then the resulting word $v$ is unchanged.
+Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
+\begin{itemize}
+ \item If $k < \abs{q}$, then this switch interchanges two consecutive
+       steps in Phase~II, causing the corresponding letters $v_j$ to
+       get set in a possibly different order; but this does not change $v$
+       because these two letters are set to the same value
+       (namely, to $h+1$).
+ \item If $k > \abs{q}$, then a similar argument works (using Phase~I instead).
+ \item If $k = \abs{q}$, then recall from Remark~\ref{rmk:order-agnostic} that
+       the two phases can be arbitrarily interleaved.
+       In particular, we can first perform all but the last step of Phase~I,
+       then perform all but the last step of Phase~II,
+       and finally perform the remaining two steps.
+       The switch only affects these final two steps.
+       However, the effect of these two steps is simply that the unique
+       remaining unset $v_j$ with $j \in q$ gets set to $h$,
+       and the unique remaining unset $v_j$ with $j \notin q$ gets set to $h+1$.
+       The switch clearly does not change this behavior,
+       since it does not depend on $i_k$ and $i_{k+1}$.
+\end{itemize}
+\end{proof}
+
+In particular, Lemma~\ref{lemma:order_indep} states that the order between sites $i$ with equal $u_i$ does not matter.
+
+\begin{remark}
+\label{rmk:t-splitting}
+Let $u$, $r$ and $q$ be as before.
+There exists a $t \in \ive{\ell}$ such that
+$
+p_{t-1} \leq r \leq p_t.
+$
+%otherwise we set $t = \ell + 1$.
+The word $v = q(u)$ then has type
+\[
+(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
+\]
+Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
+We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. % and so we call $t$ the \defn{splitting class} of $q(u)$.
+
+For all $i$ processed in Phase~I (resp.\ Phase~II) of the algorithm, we have $u_i \geq t$ (resp.~$u_i \leq t$).
+The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \ive{n}$ satisfying $v_j \leq t$.
+\end{remark}
 
 \Travis{The definitions in the following paragraph are currently unused.
 Moreover, the terminology does not feel like it both naturally arose and can be used in a natural way.}
@@ -410,69 +477,6 @@ We say that there is \defn{wraparound} (in step $i$) if this
 search process involves moving from $1$ to $n$.
 Analogous notations will be used for Phase II
 (which, of course, has $\abs{q}$ steps).
-
-\begin{remark}
-\label{rmk:order-agnostic}
-Consider the above algorithm.
-Notice that Phase I sets $v_j$ for all $j \notin q$ (because it contains
-$n - \abs{q}$ steps, and sets one such $v_j$ per step),
-whereas Phase II sets $v_j$ for all $j \in q$ (for similar reasons).
-Hence, at the end of the algorithm, all letters of $v$ are set, and we never
-run out of $j$'s in either phase.
-
-Since Phase I only deals with $j \notin q$, and Phase II only with $j\in q$,
-the two phases can be arbitrarily interleaved
-(i.e., we can perform the steps of the algorithm in any order as long as
-the steps of Phase I are processed in the order of decreasing $i$ and
-the steps of Phase II are processed in the order of increasing $i$).
-
-Furthermore, if we switch two adjacent entries $i_k$ and $i_{k+1}$ of the
-permutation $\tup{i_1, i_2, \ldots, i_n}$ that satisfy $u_{i_k} = u_{i_{k+1}}$,
-then the resulting word $v$ is unchanged.
-Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
-\begin{itemize}
- \item If $k < \abs{q}$, then this switch interchanges two consecutive
-       steps in Phase II, causing the corresponding letters $v_j$ to
-       get set in a possibly different order; but this does not change $v$
-       because these two letters are set to the same value
-       (namely, to $h+1$).
- \item If $k > \abs{q}$, then a similar argument works (using Phase I instead).
- \item If $k = \abs{q}$, then we recall that the two phases can be
-       arbitrarily interleaved.
-       In particular, we can first perform all but the last step of Phase I,
-       then perform all but the last step of Phase II,
-       and finally perform the remaining two steps.
-       The switch only affects these final two steps.
-       However, the effect of these two steps is simply that the unique
-       remaining unset $v_j$ with $j \in q$ gets set to $h$,
-       and the unique remaining unset $v_j$ with $j \notin q$ gets set to $h+1$.
-       The switch clearly does not change this behavior,
-       since it does not depend on $i_k$ and $i_{k+1}$.
-\end{itemize}
-Thus, the word $v$ does not depend on the choice of the
-permutation $\tup{i_1, i_2, \ldots, i_n}$, as long as it satisfies
-$u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-This shows that $q(u)$ is well-defined.
-\end{remark}
-
-\begin{remark}
-\label{rmk:t-splitting}
-Let $u$, $r$ and $q$ be as before.
-There exists a $t \in \ive{\ell}$ such that
-$
-p_{t-1} \leq r \leq p_t.
-$
-%otherwise we set $t = \ell + 1$.
-The word $v = q(u)$ then has type
-\[
-(m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
-\]
-Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
-We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. % and so we call $t$ the \defn{splitting class} of $q(u)$.
-
-For all $i$ processed in Phase~I (resp.\ Phase~II) of the algorithm, we have $u_i \geq t$ (resp.~$u_i \leq t$).
-The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \ive{n}$ satisfying $v_j \leq t$.
-\end{remark}
 
 \begin{example}
 \label{ex:first_queue}
@@ -603,12 +607,31 @@ we abuse notation to let $f(u)$ be the word obtained by applying $f$ to each let
 
 \begin{proof}
 Let $k \in \ZZ_{\geq 1}$ be arbitrary.
-Consider the permutation $\tup{i_1, i_2, \ldots, i_n}$ used in the construction of $q(u)$.
-This same permutation works for the construction of $q(f_k(u))$,
+Consider some fixed permutation $\tup{i_1, i_2, \ldots, i_n}$ used in the construction of $q(u)$.
+This same permutation works for the construction of $q(f_k(u))$
 since $(f_k(u))_a \leq (f_k(u))_b$ whenever $u_a \leq u_b$.
 Thus, the construction of $v' := q(f_k(u))$ proceeds exactly as the
 construction of $v := q(u)$, except that the letters used to build
 the word $v'$ are those of $f_k(u)$ instead of those of $u$.
+% commented stuff below went here.
+Suppose $q(u)_i \leq q(u)_j$.
+So either
+\begin{itemize}
+\item site $i$ and $j$ are set in the same phase or
+\item site $i$ is set in Phase~I and $j$ in Phase~II.
+\end{itemize}
+Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
+
+Instead, consider some $i,j \in \ive{n}$ such that $q(u)_i > q(u)_j$.
+Thus, either
+\begin{itemize}
+\item site $i$ and $j$ are set in the same phase or
+\item site $i$ is set in Phase~II and $j$ in Phase~I.
+\end{itemize}
+Let $k = q(u)_j$ if $q(u)_j$ is set during Phase~I and $k = q(u)_j - 1$ otherwise.
+Therefore, if $q(u)_j$ is set during Phase~I, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
+Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
+\begin{comment}
 Hence, for each $m \in \ive{n}$, we have
 \begin{equation}
  q(f_k(u))_m
@@ -629,7 +652,7 @@ $q(u)_i \leq q(u)_j$.
 Hence, only two cases remain: the case when both $i$ and $j$ belong to $q$,
 and the case when neither $i$ nor $j$ belongs to $q$.
 Let us only consider the second case (as the first is analogous).
-So $i \notin q$, and thus \eqref{pf.le:mono.correspondence} yields
+So $i \notin q$, and thus~\eqref{pf.le:mono.correspondence} yields
 $q(f_k(u))_i = f_k(q(u)_i - 1) + 1$.
 Similarly,
 $q(f_k(u))_j = f_k(q(u)_j - 1) + 1$.
@@ -663,6 +686,7 @@ and therefore $f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$.
 But this implies that $q(u)_i - 1 \leq q(u)_j - 1$
 (because if two positive integers $a$ and $b$ satisfy $f_k(a) \leq f_k(b)$ for each $k \in \ZZ_{\geq 1}$, then $a \leq b$).
 In other words, $q(u)_i \leq q(u)_j$, and the proof is complete.
+\end{comment}
 \end{proof}
 
 
@@ -1016,7 +1040,7 @@ If $q$ is a queue and $p \in \ive{\abs{q}}$, then \defn{$\max_p q$} means the $p
 \begin{lemma}
 \label{lem:no_wrap}
 Let $k$ be a positive integer.
-Let $u \in \mcW_n$ be a word whose letters are $< k$.
+Let $u \in \mcW_n$ be a word such that $u_i < k$ for all $i \in \ive{n}$.
 Let $v \in \mcW_n$ be a $k$-frow.
 Let $r = \ive{n} \setminus u^{-1}(k-1)$.
 Let $q$ be a queue such that $\abs{q} > \abs{r}$.
