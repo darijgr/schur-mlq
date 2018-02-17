@@ -618,7 +618,7 @@ Suppose $q(u)_i \leq q(u)_j$.
 So either
 \begin{itemize}
 \item site $i$ and $j$ are set in the same phase or
-\item site $i$ is set in Phase~I and $j$ in Phase~II.
+\item site $i$ is set in Phase~II and $j$ in Phase~I.
 \end{itemize}
 Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
 
@@ -626,10 +626,10 @@ Instead, consider some $i,j \in \ive{n}$ such that $q(u)_i > q(u)_j$.
 Thus, either
 \begin{itemize}
 \item site $i$ and $j$ are set in the same phase or
-\item site $i$ is set in Phase~II and $j$ in Phase~I.
+\item site $i$ is set in Phase~I and $j$ in Phase~II.
 \end{itemize}
-Let $k = q(u)_j$ if $q(u)_j$ is set during Phase~I and $k = q(u)_j - 1$ otherwise.
-Therefore, if $q(u)_j$ is set during Phase~I, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
+Let $k = q(u)_j$ if $q(u)_j$ is set during Phase~II and $k = q(u)_j - 1$ otherwise.
+Therefore, if $q(u)_j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
 Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
 \begin{comment}
 Hence, for each $m \in \ive{n}$, we have
@@ -802,7 +802,8 @@ It might be a little extra verbage, but I feel like it means more details and co
 
 \begin{lemma}
 \label{lemma:queue_merge_commute}
-Let $u \in \mcW_n$ be a word of type $\mm$, and fix some $k = p_j(\mm)$ for some $j \geq 1$.
+Let $u \in \mcW_n$ be a word of type $\mm$.
+Fix some $j \geq 1$, and let $k = p_j(\mm)$.
 If $q$ is a queue such that $\lvert q \rvert \neq k$, then
 \[
 \vee^{(k)} q(u) = q(\vee^{(k)} u).
@@ -1026,16 +1027,20 @@ For the proof of this theorem, we need to lay some groundwork.
 
 If $k$ is a positive integer, then a \defn{$k$-frow} will mean a word $w \in \mcW_n$ such that:
 \begin{itemize}
- \item all letters of $w$ are $\leq k$;
+ \item $w_i \leq k$ for all $i \in \ive{n}$;
  \item each of the letters $1,2,\ldots,k-1$ appears at least once in $w$;
  \item removing all letters $k$ from $w$ yields a weakly decreasing word.
 \end{itemize}
 For example, $43443342242114$ is a $4$-frow; so is $3321$ (we don't require $k$ to appear in $w$).
 Note that the word $u$ in Theorem~\ref{thm:determinant_form} is an $\ell$-frow.
 
-If $w$ is a word and $k$ is a positive integer, then \defn{$w^{-1}(k)$} is defined to be the set $\set{i \in \ive{n} \mid w_i = k}$.
+If $w$ is a word and $k$ is a positive integer, then
+\[
+w^{-1}(k) := \set{i \in \ive{n} \mid w_i = k}.
+\]
+\travis{Change to $w^{-1}|_k$ or $w^{-1}[k]$? Not the current as it is a little too much like an inverse function of $w$.}
 
-If $q$ is a queue and $p \in \ive{\abs{q}}$, then \defn{$\max_p q$} means the $p$-th largest element of $q$.
+If $q$ is a queue and $p \in \bigl[ \abs{q} \bigr]$, then \defn{$\max_p q$} means the $p$-th largest element of $q$.
 
 \begin{lemma}
 \label{lem:no_wrap}
@@ -1066,14 +1071,14 @@ Furthermore, it shows that at least one letter of $q(u)$ is $= k-1$.
 
 $\Longrightarrow$: Assume that $q(u) = v$.
 Hence, the preceding paragraph shows that all letters of $v$ that are $< k$
-are set in Phase II of the algorithm,
-whereas all letters that are $= k$ are set in Phase I.
+are set in Phase~II of the algorithm,
+whereas all letters that are $= k$ are set in Phase~I.
 Thus, $v^{-1}(k) = \ive{n} \setminus q$, so that
 $q = \ive{n} \setminus v^{-1}(k)$.
 This proves Statement (1).
 Statement (2) also follows from the fact that
 that all letters of $v$ that are $< k$
-are set in Phase II of the algorithm XXXXXXXX
+are set in Phase~II of the algorithm XXXXXXXX
 
 We claim that there is no ``wrap-around'' in Phase II of the algorithm
 until the steps when we process the $i$ for which $u_i = k-1$
