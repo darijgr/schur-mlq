@@ -456,7 +456,7 @@ The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \iv
 \end{remark}
 
 \Travis{The definitions in the following paragraph are currently unused.
-Moreover, the terminology does not feel like it both naturally arose and can be used in a natural way.}
+Moreover, the terminology does not feel like it both naturally arose nor can be used in a natural way.}
 
 For future reference, let us introduce notations for some of the
 behavior happening in the above algorithm.
@@ -632,8 +632,14 @@ Thus, either
 \item site $i$ and $j$ are set in the same phase or
 \item site $i$ is set in Phase~I and $j$ in Phase~II.
 \end{itemize}
-Let $k = q(u)_j$ if site $j$ is set during Phase~II and $k = q(u)_j - 1$ otherwise.
-Therefore, if site $j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
+Let
+\[
+k = \begin{cases}
+q(u)_j & \text{if $q(u)_j$ is set during Phase~II,} \\
+q(u)_j - 1 & \text{otherwise.}
+\end{cases}
+\]
+Therefore, if $q(u)_j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
 Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
 In either case, $q\bigl( f_k(u) \bigr)_i > q\bigl( f_k(u) \bigr)_j$.
 
@@ -1031,90 +1037,35 @@ We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed wo
 
 For the proof of this theorem, we need to lay some groundwork.
 
+\begin{dfn}
 If $k$ is a positive integer, then a \defn{$k$-frow} will mean a word $w \in \mcW_n$ such that:
 \begin{itemize}
  \item $w_i \leq k$ for all $i \in \ive{n}$;
  \item each of the letters $1,2,\ldots,k-1$ appears at least once in $w$;
  \item removing all letters $k$ from $w$ yields a weakly decreasing word.
 \end{itemize}
+\end{dfn}
+
 For example, $43443342242114$ is a $4$-frow; so is $3321$ (we don't require $k$ to appear in $w$).
 Note that the word $u$ in Theorem~\ref{thm:determinant_form} is an $\ell$-frow.
 
-If $w$ is a word and $k$ is a positive integer, then
+The standardization of a $k$-frow $u$ is the word $\widetilde{u} := \widetilde{u}_1 \cdots \widetilde{u}_{n}$ obtained as follows. Let $i_1 > i_2 > \cdots > i_r$, where $r = \lvert \{ i \in \ive{n} \mid u_i < k \} \rvert$, such that $u_{i_j} < k$ for all $1 \leq j \leq r$, and set
 \[
-w^{-1}(k) := \set{i \in \ive{n} \mid w_i = k}.
+\widetilde{u}_i = \begin{cases}
+j & \text{if } u_i < k \text{ and } i = i_j \\
+r + 1 & \text{otherwise,}
+\end{cases}
 \]
-\travis{Change to $w^{-1}|_k$ or $w^{-1}[k]$? Not the current as it is a little too much like an inverse function of $w$.}
+Thus, we have
+\begin{align*}
+u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
+\\ \widetilde{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
+\end{align*}
+Note that the standardization is order preserving in the sense of $u_i \geq u_{i'}$ if and only if $\widetilde{u}_i > \widetilde{u}_{i'}$ for all $u_i, u_{i'} \neq k$.
 
-If $q$ is a queue and $p \in \bigl[ \abs{q} \bigr]$, then \defn{$\max_p q$} means the $p$-th largest element of $q$.
-
-\begin{lemma}
-\label{lem:no_wrap}
-Let $k$ be a positive integer.
-Let $u \in \mcW_n$ be a word such that $u_i < k$ for all $i \in \ive{n}$.
-Let $v \in \mcW_n$ be a $k$-frow.
-Let $r = \ive{n} \setminus u^{-1}(k-1)$.
-Let $q$ be a queue such that $\abs{q} > \abs{r}$.
-Then, $q(u) = v$ if and only if the following statements hold:
-\begin{enumerate}
- \item We have $q = \ive{n} \setminus v^{-1}(k)$.
- \item We have $\abs{v^{-1}(h)} = \abs{u^{-1}(h)}$ for all $h < k$.
- \item The word $u$ is a $(k-1)$-frow.
- \item For each $p \in \ive{\abs{r}}$, we have
-       $\max_p (q) \geq \max_p (r)$.
- \item If $i \in r$ and $j \in q$ satisfy $u_i > v_j$, then
-       $i > j$.
-\end{enumerate}
-\end{lemma}
+\Travis{Standardize and apply the proof of~\cite[Prop.~3.7]{AasLin17} to give the bijection with the lattice paths via bully paths up to a final set of verticals.}
 
 \begin{proof}
-Consider the algorithm for computing $q(u)$.
-The condition $\abs{q} > \abs{r}$
-shows that all letters of $q(u)$ that are $< k$
-are set in Phase II of the algorithm,
-whereas all letters that are $= k$ are set in Phase I.
-Furthermore, it shows that at least one letter of $q(u)$ is $= k-1$.
-
-$\Longrightarrow$: Assume that $q(u) = v$.
-Hence, the preceding paragraph shows that all letters of $v$ that are $< k$
-are set in Phase~II of the algorithm,
-whereas all letters that are $= k$ are set in Phase~I.
-Thus, $v^{-1}(k) = \ive{n} \setminus q$, so that
-$q = \ive{n} \setminus v^{-1}(k)$.
-This proves Statement (1).
-Statement (2) also follows from the fact that
-that all letters of $v$ that are $< k$
-are set in Phase~II of the algorithm XXXXXXXX
-
-We claim that there is no ``wrap-around'' in Phase II of the algorithm
-until the steps when we process the $i$ for which $u_i = k-1$
-(i.e., every time
-that we seek the first $j$ weakly to the right of $i$ such that $j \in q$ and $v_j$
-is not set, we find such a $j$ before having to wrap from $n$ back to $1$,
-unless $u_i = k-1$).
-(Indeed, assume the contrary.
-Consider the first step in Phase II in which wrap-around occurs.
-This step sets $v_j$ to $u_i$,
-where $i$ is some site with $u_i < k$, and
-where $j$ is the smallest element of $q$ for which $v_j$ has not been set before.
-
-
-
-XXX
-%Consider the $t$ in Remark~\ref{rmk:t-splitting}.
-%Then, $t = \ell-1$ (or, more precisely, we can pick $t = \ell-1$).
-The condition on $\abs{q}$ shows that all letters of $q(u)$ that are $< \ell$
-are set in Phase II of the algorithm,
-whereas all letters that are $= \ell$ are set in Phase I.
-Furthermore, it shows that at least one letter of $q(u)$ is $= \ell - 1$.
-
-???
-
-XXX
-XXX
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
 First, let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
 Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm$ of $u$.
 In particular, $q_{\ell-1} = B$.
