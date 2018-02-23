@@ -613,6 +613,9 @@ since $(f_k(u))_a \leq (f_k(u))_b$ whenever $u_a \leq u_b$.
 Thus, the construction of $v' := q(f_k(u))$ proceeds exactly as the
 construction of $v := q(u)$, except that the letters used to build
 the word $v'$ are those of $f_k(u)$ instead of those of $u$.
+In particular, for a given site $k$, the letter $v_k$ is set at
+the same moment as the letter $v'_k$ is set; we just say that
+``site $k$ is set''.
 % commented stuff below went here.
 Suppose $q(u)_i \leq q(u)_j$.
 So either
@@ -622,15 +625,18 @@ So either
 \end{itemize}
 Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
 
-Instead, consider some $i,j \in \ive{n}$ such that $q(u)_i > q(u)_j$.
+For the converse direction, we shall prove the contrapositive.
+So we assume that $q(u)_i > q(u)_j$.
 Thus, either
 \begin{itemize}
 \item site $i$ and $j$ are set in the same phase or
 \item site $i$ is set in Phase~I and $j$ in Phase~II.
 \end{itemize}
-Let $k = q(u)_j$ if $q(u)_j$ is set during Phase~II and $k = q(u)_j - 1$ otherwise.
-Therefore, if $q(u)_j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
+Let $k = q(u)_j$ if site $j$ is set during Phase~II and $k = q(u)_j - 1$ otherwise.
+Therefore, if site $j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
 Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
+In either case, $q\bigl( f_k(u) \bigr)_i > q\bigl( f_k(u) \bigr)_j$.
+
 \begin{comment}
 Hence, for each $m \in \ive{n}$, we have
 \begin{equation}
