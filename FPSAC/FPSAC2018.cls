@@ -149,7 +149,7 @@
 %\renewcommand*{\bibfont}{\small}
 %\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
 %\DeclareFieldFormat{url}{\textsc{url}: \href{#1}{#1}}
-%\DeclareFieldFormat{doi}{\textsc{doi}: \href{http://dx.doi.org/#1}{#1}}
+%\DeclareFieldFormat{doi}{\textsc{doi}: \href{https://doi.org/#1}{#1}}
 %\DeclareFieldFormat{eprint:arxiv}{arXiv:\href{https://arxiv.org/abs/#1}{#1}}
 
 %%%%%%%%%%%%%%
