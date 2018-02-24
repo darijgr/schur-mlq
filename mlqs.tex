@@ -608,20 +608,20 @@ we abuse notation to let $f(u)$ be the word obtained by applying $f$ to each let
 \begin{proof}
 Let $k \in \ZZ_{\geq 1}$ be arbitrary.
 Consider some fixed permutation $\tup{i_1, i_2, \ldots, i_n}$ used in the construction of $q(u)$.
-This same permutation works for the construction of $q(f_k(u))$
-since $(f_k(u))_a \leq (f_k(u))_b$ whenever $u_a \leq u_b$.
-Thus, the construction of $v' := q(f_k(u))$ proceeds exactly as the
-construction of $v := q(u)$, except that the letters used to build
-the word $v'$ are those of $f_k(u)$ instead of those of $u$.
-In particular, for a given site $k$, the letter $v_k$ is set at
-the same moment as the letter $v'_k$ is set; we just say that
-``site $k$ is set''.
+This same permutation works for the construction of $q\bigl(f_k(u) \bigr)$
+since $\bigl( f_k(u) \bigr)_a \leq \bigl( f_k(u) \bigr)_b$ whenever $u_a \leq u_b$.
+Thus, the construction of $q\bigl( f_k(u) \bigr)$ proceeds exactly as the
+construction of $q(u)$, except that the letters used to build
+the word $q\bigl( f_k(u) \bigr)$ are those of $f_k(u)$ instead of those of $u$.
+%In particular, for a given site $k$, the letter $v_k$ is set at
+%the same moment as the letter $v'_k$ is set; we just say that
+%``site $k$ is set''.
 % commented stuff below went here.
 Suppose $q(u)_i \leq q(u)_j$.
 So either
 \begin{itemize}
-\item site $i$ and $j$ are set in the same phase or
-\item site $i$ is set in Phase~II and $j$ in Phase~I.
+\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
+\item $q(u)_i$ is set in Phase~II and $q(u)_j$ in Phase~I.
 \end{itemize}
 Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
 
@@ -629,8 +629,8 @@ For the converse direction, we shall prove the contrapositive.
 So we assume that $q(u)_i > q(u)_j$.
 Thus, either
 \begin{itemize}
-\item site $i$ and $j$ are set in the same phase or
-\item site $i$ is set in Phase~I and $j$ in Phase~II.
+\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
+\item $q(u)_i$ is set in Phase~I and $q(u)_j$ in Phase~II.
 \end{itemize}
 Let
 \[
@@ -843,11 +843,11 @@ Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
 
 \begin{lemma}
 \label{lemma:queue_merge}
-  Let $X$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
+  Let $q'$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
   Let $\qq$ be an MLQ of type $\merge{i}\mm$.
   For the word
   $
-  u = \qq\bigl( X(1 \dotsm 1) \bigr),
+  u = \qq\bigl( q'(1 \dotsm 1) \bigr),
   $
   we have
   \[
@@ -880,10 +880,10 @@ $q(\merge{h} u)$ depending on whether ...
 Now, set $k = p_i(\mm)$. Then, we have
 \begin{equation}
 \label{pf.lemma:queue_merge.4}
- \merge{i} u = \merge{i} \qq\bigl( X (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( X (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} X (1 \dotsm 1) \bigr)
+ \merge{i} u = \merge{i} \qq\bigl( q' (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( q' (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} q' (1 \dotsm 1) \bigr)
 \end{equation}
 by repeated use of Lemma~\ref{lemma:queue_merge_commute} since none of the queues in $\qq$ have size $k$.
-It is clear that $\vee^{(k)} X(1 \dotsm 1) = 1 \dotsm 1$,
+It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
 and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
 
@@ -967,28 +967,28 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \begin{proof}
   First note that
   \[
-  \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_{(\qq,X)} \wt(\qq) \wt(X),
+  \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_{(\qq,q')} \wt(\qq) \wt(q'),
   \]
-  where we sum over all pairs $(\qq, X)$ such that
+  where we sum over all pairs $(\qq, q')$ such that
   \begin{itemize}
   \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
-  \item $X$ is a $p_i(\mm)$-queue.
+  \item $q'$ is a $p_i(\mm)$-queue.
   \end{itemize}
   Given any such pair $\tup{\qq, X}$, we set
   \[
-  \theta(\qq, X) := (X, q_1, \dotsc, q_{\ell-1});
+  \theta(\qq, q') := (q', q_1, \dotsc, q_{\ell-1});
   \]
   this is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and weight
-  $\wt\bigl( \theta(\qq, X) \bigr) = \wt(\qq) \wt(X)$.
+  $\wt\bigl( \theta(\qq, q') \bigr) = \wt(\qq) \wt(q')$.
   By Lemma~\ref{lemma:queue_merge}, we have
   \[
-  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( X(1 \dotsm 1) \bigr) = \merge{i} \bigl( \theta(\qq, X)(1 \dotsm 1) \bigr).
+  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( q'(1 \dotsm 1) \bigr) = \merge{i} \bigl( \theta(\qq, q)(1 \dotsm 1) \bigr).
   \]
-  Thus, we have defined a weight preserving bijection $\theta$ from the set of all pairs $\tup{\qq, X}$ as above
+  Thus, we have defined a weight preserving bijection $\theta$ from the set of all pairs $(\qq, q')$ as above
   to the set of all $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ of type $\mm$ satisfying $v = \merge{i} \widetilde{\qq} \tup{1 \dotsm 1}$.
   Hence, we have
   \[
-  \sum_{(\qq,X)} \wt(\qq) \wt(X)
+  \sum_{(\qq,q')} \wt(\qq) \wt(q')
   = \sum_{\widetilde{\qq}} \wt(\widetilde{\qq})
   = \sum_u \swt{u}_{s_{i-1} \dotsm s_1} ,
   \]
@@ -998,6 +998,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \end{proof}
 
 \begin{remark}
+\label{rmk:bijective_proof}
 Our proof of Theorem~\ref{thm:permutation} is by constructing a bijection $\omega$, and hence, we can give a bijective proof of Theorem~\ref{thm:merge} by the composition $\omega \circ \theta$.
 \end{remark}
 
@@ -1035,85 +1036,73 @@ We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed wo
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
 
-For the proof of this theorem, we need to lay some groundwork.
+%For the proof of this theorem, we need to lay some groundwork.
+%
+%\begin{dfn}
+%If $k$ is a positive integer, then a \defn{$k$-frow} will mean a word $w \in \mcW_n$ such that:
+%\begin{itemize}
+% \item $w_i \leq k$ for all $i \in \ive{n}$;
+% \item each of the letters $1,2,\ldots,k-1$ appears at least once in $w$;
+% \item removing all letters $k$ from $w$ yields a weakly decreasing word.
+%\end{itemize}
+%\end{dfn}
+%
+%For example, $43443342242114$ is a $4$-frow; so is $3321$ (we don't require $k$ to appear in $w$).
+%Note that the word $u$ in Theorem~\ref{thm:determinant_form} is an $\ell$-frow.
 
-\begin{dfn}
-If $k$ is a positive integer, then a \defn{$k$-frow} will mean a word $w \in \mcW_n$ such that:
-\begin{itemize}
- \item $w_i \leq k$ for all $i \in \ive{n}$;
- \item each of the letters $1,2,\ldots,k-1$ appears at least once in $w$;
- \item removing all letters $k$ from $w$ yields a weakly decreasing word.
-\end{itemize}
-\end{dfn}
+\begin{proof}
+Let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
+Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm$ of $u$.
+In particular, $q_{\ell-1} = B$.
+Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
+Thus, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
+we shall disregard this factor in the following.
 
-For example, $43443342242114$ is a $4$-frow; so is $3321$ (we don't require $k$ to appear in $w$).
-Note that the word $u$ in Theorem~\ref{thm:determinant_form} is an $\ell$-frow.
-
-The standardization of a $k$-frow $u$ is the word $\widetilde{u} := \widetilde{u}_1 \cdots \widetilde{u}_{n}$ obtained as follows. Let $i_1 > i_2 > \cdots > i_r$, where $r = \lvert \{ i \in \ive{n} \mid u_i < k \} \rvert$, such that $u_{i_j} < k$ for all $1 \leq j \leq r$, and set
+Next, define the standardization of $u$ to be the word $\widetilde{u} := \widetilde{u}_1 \cdots \widetilde{u}_{n}$ obtained as follows. Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. Note that $k$ may not appear in $u$. Denote
+\[
+W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \},
+\]
+and set
 \[
 \widetilde{u}_i = \begin{cases}
-j & \text{if } u_i < k \text{ and } i = i_j \\
-r + 1 & \text{otherwise,}
+j & \text{if } u_i < k \text{ and } i = w_j \\
+r + 1 & \text{otherwise.}
 \end{cases}
 \]
-Thus, we have
+That is to say, the standardization is replacing the $i$-th letter that is not $k$ read right-to-left with $i$ and all letters $k$ with $r + 1$.
+For example, we have
 \begin{align*}
 u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
 \\ \widetilde{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
 \end{align*}
-Note that the standardization is order preserving in the sense of $u_i \geq u_{i'}$ if and only if $\widetilde{u}_i > \widetilde{u}_{i'}$ for all $u_i, u_{i'} \neq k$.
+Note that we can reconstruct $u$ given some $\widetilde{u}$ using only $v$.
+Additionally, note that the standardization is order preserving in the sense of $u_i \geq u_j$ if and only if $\widetilde{u}_i > \widetilde{u}_j$.
+Furthermore, the type $\widetilde{\mm}$ of $\widetilde{u}$ is $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_r = m_k$.
 
-\Travis{Standardize and apply the proof of~\cite[Prop.~3.7]{AasLin17} to give the bijection with the lattice paths via bully paths up to a final set of verticals.}
-
-\begin{proof}
-First, let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
-Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm$ of $u$.
-In particular, $q_{\ell-1} = B$.
-Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
-Hence, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
-we shall disregard this factor in the following.
-
-For each $i \in \ive{\ell}$, we set
-$u^{(i)} := q_{i-1}\bigl( \cdots q_1(1 \cdots 1) \cdots \bigr)$.
-This is a word with $i$ classes, and exactly $\abs{q_i}$ of its letters are $< i$.
-We claim that these letters are weakly decreasing.
-
-This is proven by reverse induction over $i$:
-The case $i = r$ follows from the construction of $u^{(r)} = u$.
-To get from $i$ to $i-1$, XXX
-
-We apply the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} to show the claim.
+There exists $T$ such that $\bigvee_T \widetilde{u} = u$.
+Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \widetilde{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \widetilde{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
+As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ corresponds to disjoint $r$-paths with initial points $\iota_i := (0,i)$ and terminal points $(b_i,0)$.
+Note that these are precisely the bully paths of~\cite{AasLin17}.
+We claim it is sufficient to show that for every MLQ $\qq$, there exists unique disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ such that $\rho_i$ passes through the point $\tau_i := (b_i, i - \gamma_i)$.
+This follows by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} and considering the initial points $\{ \iota_i \}_{i=1}^r$ and terminal points $\{ \tau_i \}_{i=1}^r$.
 We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
-Pairs of integers shall be represented as points in the plane in matrix coordinates; that is, the pair $\tup{i, j}$ moves further down as $i$ increases and further right as $j$ increases.
-
-TODO: Sure about further down as $i$ increases? May want to undo the reflection $i \mapsto r+1-i$.
-
-Define a directed graph with vertices $\tup{i, j} \in \ive{r} \times \ive{n}$ and edges
+Thus, given disjoint $r$-paths $\{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq = (q_1, \dotsc, q_{\ell-1})$ by
 \[
-(r+1-i,j) \to (r+1-i,j+1)
+j \in q_i \text{ if and only if } j \in \widetilde{q}_{i+t-\gamma_t},
 \]
-(for $i \in \ive{r}$ and $j \in \ive{n-1}$) with weight $1$ and
+where $t \in \ive{r}$ such that $b_t \leq j < b_{t+1}$ (with $b_{r+1} = \infty$).
+Moreover, this map is invertible, where to construct the inverse, we first construct sets
 \[
-(r+1-i,j) \to (r-i,j)
+A_i := \left\{ a_{i,j} = \text{$i$-th largest entry in $q_j$} %= \max\bigl\{ q_j \setminus \{ a_{k,j} \mid K(j) \leq k < j \} \bigr\}
+\mid K(i) \leq j <\ell \right\},
 \]
-(for $i \in \ive{r-1}$ and $j \in \ive{n}$) with weight $x_j$. 
-We choose the $r$ sources $\iota_i = (r+1-i, 1)$ and terminals $\tau_i = (r-i+\gamma_i,b_{r+1-i})$ for $i \in \ive{r}$.
-
-First, we label an element $k \in q_i \in \qq$ by $q_i\bigl( \cdots q_1(1 \cdots 1) \cdots \bigr)_k$.
-We construct a disjoint $r$-path $\tup{p_1, \ldots, p_r}$ recursively:
-For each $i$, if $p_1, \ldots, p_{i-1}$ are defined,
-then we the largest\footnote{We do not consider the queues as lying on a cycle here but instead as elements of the set $\ive{n}$.} unused elements $(a_1, \dotsc, a_h)$ in $\qq$ labeled by $v_{r-i}$ and constructing a path
-\newcommand{\patharrow}{ \xrightarrow{\hspace{10pt}} }
-\[
-\iota_i \patharrow (\overline{\imath} + 1, a_1) \patharrow (\overline{\imath} + 2, a_1) \patharrow (\overline{\imath} + 2, a_2) \patharrow \cdots \patharrow (\overline{\imath} + \gamma_i - 1, a_h) = \tau_i,
-\]
-where $\overline{\imath} = r + 1 - i$.
-Conversely, given a disjoint $r$-path, we construct the MLQ by considering the north-east corners and labelling the paths according to $v$.
-See Figure \ref{fig:lattice_path_bijection} for an example.
-
-Note that the weighted sum of paths from $\iota_i$ to $\tau_j$ is $h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j})$.
-The LGV Lemma now gives us the stated formula.
+where $K(i) := \min\{\kappa \mid i \leq \lvert q_{\kappa} \rvert \}$. We will use the convention that $a_{i,j} = a_{i,\ell-1}$ for all $j \geq \ell$.
+This then forms the disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ by
+\begin{align*}
+\rho_i \colon (0,i) \to (a_{i,K(i)},i) & \to (a_{i,K(i)},i+1) \to (a_{i,K(i)+1},i+1) \to
+\\ \cdots & \to (a_{i,\ell-1}, i + \ell - K(i)) = (b_i, i - \gamma_i).
+\end{align*}
 \end{proof}
 
 \begin{figure}[t]
@@ -1138,13 +1127,19 @@ The LGV Lemma now gives us the stated formula.
     \node[circle,fill=white,draw=black] at  (7, 2){$1$};
   \end{scope}
 
+  \fill[black!10] (1,1) -- (1,2) -- (4,2) -- (4,3) -- (6,3) -- (6,4) -- (9,4) -- (9,1) -- cycle;
   \draw[densely dotted] (1,1) grid (9,6);
 
-  \draw[draw=red] (1,2)--(2,2);
-  \draw[draw=red] (1,3)--(3,3)--(3,2)--(4,2);
-  \draw[draw=red] (1,4)--(4,4)--(4,3)--(6,3);
-  \draw[draw=red] (1,5)--(6,5)--(6,4)--(7,4);
-  \draw[draw=red] (1,6)--(7,6)--(7,5)--(8,5)--(8,4)--(9,4);
+  \draw[thick,draw=red] (1,2)--(2,2);
+  \draw[thick,draw=red] (1,3)--(3,3)--(3,2)--(4,2);
+  \draw[thick,draw=red] (1,4)--(4,4)--(4,3)--(6,3);
+  \draw[thick,draw=red] (1,5)--(6,5)--(6,4)--(7,4);
+  \draw[thick,draw=red] (1,6)--(7,6)--(7,5)--(8,5)--(8,4)--(9,4);
+  %\draw[thick,blue,dashed] (2,2) -- (2,1);
+  %\draw[thick,blue,dashed] (4,2) -- (4,1);
+  %\draw[thick,blue,dashed] (6,3) -- (6,1);
+  %\draw[thick,blue,dashed] (7,4) -- (7,1);
+  %\draw[thick,blue,dashed] (9,4) -- (9,1);
   
   \node[circle,fill=white,draw=black,inner sep=1pt] at (1,1) {$3$};
   \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (2,2) {$3$};
@@ -1166,9 +1161,20 @@ The LGV Lemma now gives us the stated formula.
   }
 \end{tikzpicture}
 \]
-\caption{An example of the bijection with $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$ between MLQs and disjoint $r$-paths in the proof of Theorem~\ref{thm:determinant_form}.}
+\caption{The bijection with  between MLQs and disjoint $r$-paths for Example~\ref{ex:NILP_bijection} as described in the proof of Theorem~\ref{thm:determinant_form}.}
 \label{fig:lattice_path_bijection}
 \end{figure}
+
+\begin{example}
+\label{ex:NILP_bijection}
+Consider $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$.
+Therefore, we have the word $u$ in Theorem~\ref{thm:determinant_form} and its standardization
+\begin{align*}
+u & = 33{\color{gray} 4}2{\color{gray} 4}22{\color{gray} 4}1,
+\\ \widetilde{u} & = 65{\color{gray} 7}4{\color{gray} 7}32{\color{gray} 7}1.
+\end{align*}
+See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bijection between an MLQ and disjoint $r$-paths.
+\end{example}
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
