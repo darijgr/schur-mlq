@@ -455,29 +455,6 @@ For all $i$ processed in Phase~I (resp.\ Phase~II) of the algorithm, we have $u_
 The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \ive{n}$ satisfying $v_j \leq t$.
 \end{remark}
 
-\Travis{The definitions in the following paragraph are currently unused.
-Moreover, the terminology does not feel like it both naturally arose nor can be used in a natural way.}
-
-For future reference, let us introduce notations for some of the
-behavior happening in the above algorithm.
-Phase I of the algorithm consists of $n - \abs{q}$ \defn{steps};
-each of these steps corresponds to one value of $i$,
-and consists of finding the first $j \notin q$
-weakly to the left of $i$ such that $v_j$ is not set,
-and setting $v_j = u_i + 1$.
-We shall refer to these values of $i$, $j$, $u_i$ and $v_j$ as the
-\defn{in-site}, \defn{out-site}, \defn{in-letter} and
-\defn{out-letter} (respectively) of this step.
-Furthermore, we imagine that $j$ is found by a recursive
-process, in which we start at the site $i$ and keep moving
-further and further left (cyclically) until we first hit
-a site $j \notin q$ such that $v_j$ is not set;
-this process will be called the \defn{search process} (in step $i$).
-We say that there is \defn{wraparound} (in step $i$) if this
-search process involves moving from $1$ to $n$.
-Analogous notations will be used for Phase II
-(which, of course, has $\abs{q}$ steps).
-
 \begin{example}
 \label{ex:first_queue}
 We consider the $4$-queue $q = \{1, 4, 8, 9\}$, and let $u = 346613321$.
@@ -1075,9 +1052,9 @@ For example, we have
 u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
 \\ \widetilde{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
 \end{align*}
-Note that we can reconstruct $u$ given some $\widetilde{u}$ using only $v$.
+Note that the type $\widetilde{\mm}$ of $\widetilde{u}$ is $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_r = m_k$.
+%Note that we can reconstruct $u$ given some $\widetilde{u}$ using only $v$.
 Additionally, note that the standardization is order preserving in the sense of $u_i \geq u_j$ if and only if $\widetilde{u}_i > \widetilde{u}_j$.
-Furthermore, the type $\widetilde{\mm}$ of $\widetilde{u}$ is $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_r = m_k$.
 
 There exists $T$ such that $\bigvee_T \widetilde{u} = u$.
 Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \widetilde{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \widetilde{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
@@ -1087,7 +1064,7 @@ We claim it is sufficient to show that for every MLQ $\qq$, there exists unique 
 This follows by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} and considering the initial points $\{ \iota_i \}_{i=1}^r$ and terminal points $\{ \tau_i \}_{i=1}^r$.
 We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
-Thus, given disjoint $r$-paths $\{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq = (q_1, \dotsc, q_{\ell-1})$ by
+Thus, given disjoint $r$-paths $\rho = \{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq_{\rho} = (q_1, \dotsc, q_{\ell-1})$ by
 \[
 j \in q_i \text{ if and only if } j \in \widetilde{q}_{i+t-\gamma_t},
 \]
@@ -1098,11 +1075,12 @@ A_i := \left\{ a_{i,j} = \text{$i$-th largest entry in $q_j$} %= \max\bigl\{ q_j
 \mid K(i) \leq j <\ell \right\},
 \]
 where $K(i) := \min\{\kappa \mid i \leq \lvert q_{\kappa} \rvert \}$. We will use the convention that $a_{i,j} = a_{i,\ell-1}$ for all $j \geq \ell$.
-This then forms the disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ by
+This then forms the disjoint $r$-paths $\rho' = \{\rho'_i\}_{i=1}^r$ by
 \begin{align*}
-\rho_i \colon (0,i) \to (a_{i,K(i)},i) & \to (a_{i,K(i)},i+1) \to (a_{i,K(i)+1},i+1) \to
+\rho'_i \colon (0,i) \to (a_{i,K(i)},i) & \to (a_{i,K(i)},i+1) \to (a_{i,K(i)+1},i+1) \to
 \\ \cdots & \to (a_{i,\ell-1}, i + \ell - K(i)) = (b_i, i - \gamma_i).
 \end{align*}
+The fact that $\qq = \qq_{\rho'}$ follows from (a mild generalization of) the monotonicity lemma (Lemma~\ref{le:mono}).
 \end{proof}
 
 \begin{figure}[t]
