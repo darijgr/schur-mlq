@@ -1995,6 +1995,22 @@ We have $\fraks_1 \circ \fraks_2 \circ \fraks_1
 \darij{TODO!}
 This follows either from \cite[Chapter 5, (5.6.3)]{Loth}, or
 from crystal theory.
+
+(Here is the connection to Lothaire:
+A configuration $\tup{q_1, q_2}$ can be encoded as a $2n$-letter word
+$w$ consisting of three types of letter: $-$, $($ and $)$.
+Namely, the $\tup{2i-1}$-th letter of $w$ shall be $-$ if $i \notin q_1$,
+and otherwise $($.
+Meanwhile, the $2i$-th letter of $w$ shall be $-$ if $i \notin q_2$,
+and otherwise $)$.
+The letter $-$ is neutral; it won't hinder the matching of the parentheses.
+Now, do cyclic parenthesis matching of the word $w$
+(``cyclic'' means that a $($ at the end can be matched with a $)$ at
+the beginning).
+The operation $\sigma$ from Lothaire (specifically, his $\sigma_i$,
+but we are in the 2-letter case) is just flipping all the unmatched
+parentheses (although he doesn't define it this way).
+But this corresponds to taking the dual configuration.)
 \end{proof}
 
 Next, we define two queues corresponding to a word $u \in \mcW_n$.
@@ -2042,35 +2058,71 @@ has the form $\tup{ ? , S_k \tup{q\tup{w}} }$
 defined, but $S_k \tup{q\tup{w}}$ is (and equals $q$).
 This looks like a manageable but annoying problem.
 
-% Ideally: Use ``\href{https://wiki.haskell.org/Maybe}{maybe}-queues'',
-% so that $S_k \tup{w}$ is defined to be $\mathsf{Nothing}$
-% instead of being left undefined.
-% The problem is: how to define dual configuration if there
-% are $\mathsf{Nothing}$s, in such a way that braid still holds?
-
 Good news: If $w$ has distinct letters, then
-$S_k \tup{w}$ is ALWAYS defined. So we can use
-standardization, if we have it handy.}
+$S_k \tup{w}$ is ALWAYS defined. So we need to WLOG assume
+that the letters of $w$ are distinct.
+Lemma~\ref{lemma:queue_merge_commute} helps make this
+assumption.}
 
 \begin{proof}
 \Darij{TODO. (This is where the serious work is.)}
 
 MAIN IDEA:
-When $k$ is small (i.e., the smallest $k$ letters of $w$
-all get digested in Phase II), this is basically about
-re-interpreting the Phase II movements as a way to construct
-dual configurations.
+
+First consider the case that $k$ is small; this means
+that $k < \abs{q}$. Hence, the smallest $k$ letters of $w$
+all get digested in Phase II. Then, the argument below
+is basically about re-interpreting the Phase II movements as
+a way to construct dual configurations.
 Essentially: A letter falls down and scans to the right for
 the smallest available spot in $q$; this creates balanced
-intervals (how?).
+intervals.
+Here is, I think, how this proof can be formalized:
+First, define the \defn{queueing interval} of a site $i$
+as the cyclic interval starting at this site $i$ and ending at
+the box $j$ where the ``ball from $i$ settles'' after
+falling down to the bottom (what is our language for this,
+again?).
+In the following, notations like $c^\uparrow$ and
+$c^\downarrow$ will refer to the configuration
+$\tup{ S_k\tup{w} , q }$.
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
+Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
+A set of sites will be called \defn{top-heavy} if each of its connected components (regarded as a subgraph of the cycle) is top-heavy.
+Now, we claim that the union of the queueing intervals of all
+the sites $i \in S_k \tup{w}$ is top-heavy.
+Indeed, this is just saying that at each point in Phase~II
+of the algorithm, the union of the queueing intervals used
+so far is top-heavy.
+To prove this, just observe that each element of a queue
+that falls into this union must have already been set
+(in our language: each box on the bottom row that falls
+into this union has been filled).
+Therefore, this union is top-heavy.
+But this means that this union is balanced, because the
+total number of balls at the top equals the total number
+of boxes at the bottom (namely, $k$, because as we said all
+the boxes have been filled), and therefore the
+same holds for each connected component (otherwise, there
+would be some connected component with fewer balls on top
+than boxes on the bottom).
+So all the balls in $S_k \tup{w}$ and all the boxes in
+$S_k \tup{q\tup{w}}$ are balanced.
+The unbalanced boxes are the ones where no balls have
+settled.
+The rest is clear from here.
 
-When $k$ is large, maybe something like this still works,
+When $k$ is large (that is, $k > \abs{q}$),
+maybe something like this still works,
 but what I did was showing instead that the dual configuration
 of $\tup{ \ive{n} \setminus q, L_k \tup{w} }$ has the form
 $\tup{ L_k \tup{q\tup{w}} , ? }$ (this is similar to the case
 of $k$ small, because the largest $n-k$ letters of $w$ all
 get digested in Phase I), and then apply one of the symmetries
 of dual configurations.
+
+When $k$ is middle-sized (that is, $k = \abs{q}$), the argument
+is very simple.
 \end{proof}
 
 We can now give our second proof of Theorem~\ref{thm:permutation}:
