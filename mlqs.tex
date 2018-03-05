@@ -1993,8 +1993,8 @@ We have $\fraks_1 \circ \fraks_2 \circ \fraks_1
 
 \begin{proof}
 \darij{TODO!}
-This follows either from \cite[Chapter 5, (5.6.3)]{Loth}, or
-from crystal theory.
+This follows either from \cite[Ch.~5, (5.6.3)]{Loth}, or
+from crystal theory~\cite[Rule 3.10]{NY97}\travis{I'm not sure if this is the correct reference, but it does describe the $R$-matrix action}.
 
 (Here is the connection to Lothaire:
 A configuration $\tup{q_1, q_2}$ can be encoded as a $2n$-letter word
@@ -2016,29 +2016,32 @@ But this corresponds to taking the dual configuration.)
 Next, we define two queues corresponding to a word $u \in \mcW_n$.
 Namely, if $w \in \mcW_n$ and if $k \in \set{0, 1, \ldots, n}$, then
 \begin{itemize}
-\item we let $S_k \tup{w}$ denote the set of the indices $i \in \ive{n}$
+\item we let $S_k(w)$ denote the set of the indices $i \in \ive{n}$
 	  corresponding to the $k$ smallest letters $w_i$ of $w$,
 	  if this set is uniquely determined;
-	  otherwise, we leave $S_k \tup{w}$ undefined.
-\item we let $L_k \tup{w}$ denote the set of the indices $i \in \ive{n}$
+	  otherwise, we leave $S_k(w)$ undefined.
+\item we let $L_k(w)$ denote the set of the indices $i \in \ive{n}$
 	  corresponding to the $n-k$ largest letters $w_i$ of $w$,
 	  if this set is uniquely determined;
 	  otherwise, we leave $L_k \tup{w}$ undefined.
 \end{itemize}
-Thus, the queues $S_k \tup{w}$ and $L_k \tup{w}$ are defined exactly
-when $k \in \set{ p_i \tup{\mm} \mid i \geq 0 }$ (with $\mm$
+Thus, the queues $S_k(w)$ and $L_k(w)$ are defined exactly
+when $k \in \set{ p_i(\mm) \mid i \geq 0 }$ (with $\mm$
 being the type of $w$), and otherwise are undefined.
-Also, observe that $S_k \tup{w}$ and $L_k \tup{w}$ are two
+Also, observe that $S_k(w)$ and $L_k(w)$ are two
 complementary subsets of $\ive{n}$.
+\Travis{This is bad notation as it looks like $S_k$ and $L_k$ are queues acting on the word $w$ and so $S_k(w)$ and $L_k(w)$ look like are words.}
 
 The crucial tools in our second proof of Theorem~\ref{thm:permutation}
 will be the following two facts:
 
 \begin{lemma} \label{lem:SL.reconstruct}
 A word $w \in \mcW_n$ can be uniquely reconstructed if its type and
-the family of all queues $S_k \tup{w}$ (for the $k$ for which they
+the family of all queues $S_k(w)$ (for the $k$ for which they
 are well-defined) are known.
 \end{lemma}
+
+\Travis{This statement is circular. I think you want to say given some family of queues satisfying some properties, then we can uniquely reconstruct $w$. Another way to say it is the map $w \mapsto (\mm, (S_k(w))_{k=0}^n)$ is injective.}
 
 \begin{proof}
 \Darij{TODO}
@@ -2049,8 +2052,8 @@ Let $w \in \mcW_n$ be a word, and let
 $k \in \set{0, 1, \ldots, n}$ be such that
 $S_k \tup{w}$ is well-defined.
 Let $q$ be any queue.
-Then, the dual configuration of $\tup{ S_k \tup{w} , q }$
-has the form $\tup{ ? , S_k \tup{q\tup{w}} }$
+Then, the dual configuration of $\tup{ S_k(w) , q }$
+has the form $\tup{ ? , S_k\bigl(q(w)\bigr) }$
 (where the question mark means a queue we aren't interested in).
 \end{prop}
 
@@ -2137,20 +2140,20 @@ So let us consider $C$, $u$ and $C'$.
 Write $C'$ in the form $C' = \tup{q'_1, q'_2}$.
 
 It is easy to see that the words
-$C \tup{u} = q_2 \tup{ q_1 \tup{u} }$
+$C(u) = q_2\bigl( q_1(u) \bigr)$
 and
-$C' \tup{u} = q'_2 \tup{ q'_1 \tup{u} }$
+$C' \tup{u} = q'_2\bigl( q_1'(u) \bigr)$
 have the same type;
 indeed, the action of a queue $q$ on a word $w$ modifies its
 type in a predictable way (namely, the number $\abs{q}$ is
 inserted into the type of $w$ at the place where it would
 keep the type weakly increasing).
 We shall now show that
-$S_k \tup{ C' \tup{ u } } = S_k \tup{ C \tup{ u } }$
+$S_k\bigl( C'(u) \bigr) = S_k\bigl( C(u) \bigr)$
 for all $k \in \set{0, 1, \ldots, n}$ for which these are
 well-defined.
 According to Lemma~\ref{lem:SL.reconstruct}, this will yield
-$C' \tup{u} = C \tup{u}$, and thus our proof will be complete.
+$C'(u) = C(u)$, and thus our proof will be complete.
 
 So let $k \geq 0$.
 
@@ -2161,7 +2164,7 @@ As I said, standardization would help.}
 
 Using Proposition~\ref{prop:SL.dual} to compute dual
 configurations, we can see how the triconfiguration
-$\tup{S_k \tup{u}, q_1, q_2}$ transforms under the map
+$\tup{S_k(u), q_1, q_2}$ transforms under the map
 $\fraks_1 \circ \fraks_2 \circ \fraks_1$: Namely,
 \[
 \tup{S_k \tup{u}, q_1, q_2}
@@ -2173,7 +2176,7 @@ $\fraks_1 \circ \fraks_2 \circ \fraks_1$: Namely,
 \tup{?, ?, S_k \tup{ q_2 \tup{ q_1 \tup{u} } }} .
 \]
 Likewise, the same triconfiguration
-$\tup{S_k \tup{u}, q_1, q_2}$ transforms under the map
+$\tup{S_k(u), q_1, q_2}$ transforms under the map
 $\fraks_2 \circ \fraks_1 \circ \fraks_2$ as follows:
 \[
 \tup{S_k \tup{u}, q_1, q_2}
@@ -2188,14 +2191,14 @@ But the two maps are equal (by
 Proposition~\ref{prop:braid}); thus, the resulting
 triconfigurations must be identical:
 \[
-\tup{?, ?, S_k \tup{ q'_2 \tup{ q'_1 \tup{u} } }}
+\tup{?, ?, S_k\Bigl( q'_2\bigl(q'_1(u) \bigr) \Bigr)}
 =
-\tup{?, ?, S_k \tup{ q_2 \tup{ q_1 \tup{u} } }} .
+\tup{?, ?, S_k\Bigl( q_2\bigl(q_1(u) \bigr) \Bigr)}
 \]
-Hence, $ S_k \tup{ q'_2 \tup{ q'_1 \tup{u} }
-= S_k \tup{ q_2 \tup{ q_1 \tup{u} } }}$.
+Hence, $S_k\Bigl( q'_2\bigl(q'_1(u) \bigr) \Bigr)
+= S_k\Bigl( q_2\bigl(q_1(u) \bigr) \Bigr)$.
 In other words,
-$S_k \tup{ C' \tup{ u } } = S_k \tup{ C \tup{ u } }$.
+$S_k \bigl( C'(u) \bigr) = S_k \bigl( C(u) \bigr).$
 This completes our proof, as explained above.
 \end{proof}
 
