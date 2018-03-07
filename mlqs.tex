@@ -37,6 +37,7 @@
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
 \newcommand{\merge}[1]{\vee_{#1}} % merge
 \newcommand{\SymGp}[1]{\mathfrak{S}_{#1}} % symmetric group
+\newcommand{\std}[1]{\widetilde{#1}} % standardization
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -447,9 +448,10 @@ p_{t-1} \leq r \leq p_t.
 $
 %otherwise we set $t = \ell + 1$.
 The word $v = q(u)$ then has type
-\[
+\begin{equation}
+\label{eq:queue_type_change}
 (m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
-\]
+\end{equation}
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
 We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. % and so we call $t$ the \defn{splitting class} of $q(u)$.
 
@@ -549,17 +551,17 @@ There is an natural duality in the algorithm above.
 \begin{lemma}[Duality]
   \label{le:dual}
   Let $q$ be a queue and $u$ be a word with $\ell$ classes.
-  Define a new word $v$ by letting $v_i = \ell + 1 - u_{n+1-i}$ and a new queue $q'$ by letting $i \in q'$ if and only if $n+1-i \notin q$.
- Then $q(u)_i = \ell + 2 - q'(v)_{n+1-i}$ for all $i$.
+  Define a new word $u^*$ by letting $u^*_i = \ell + 1 - u_{n+1-i}$ and a new queue $q^*$ by letting $i \in q^*$ if and only if $n+1-i \notin q$.
+ Then $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
 \end{lemma}
 
 \begin{proof}
 Let $r = \abs{q}$.
-Thus, $q$ is an $r$-queue, so that $q'$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
+Thus, $q$ is an $r$-queue, so that $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
 For a fixed $k$, we call $\ell + 1 - k$ the dual letter of $k$.
-Thus, $v$ is obtained by reversing $u$ and taking the dual letters.
+Thus, $u^*$ is obtained by reversing $u$ and taking the dual letters.
 
-Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q'(v)$ when the word is reversed and the letters are replaced by their duals.
+Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q^*(u^*)$ when the word is reversed and the letters are replaced by their duals.
 Hence the claim follows.
 \end{proof}
 
@@ -1037,29 +1039,29 @@ Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
 Thus, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
 we shall disregard this factor in the following.
 
-Next, define the standardization of $u$ to be the word $\widetilde{u} := \widetilde{u}_1 \cdots \widetilde{u}_{n}$ obtained as follows. Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. Note that $k$ may not appear in $u$. Denote
+Next, define the near standardization of $u$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows. Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. Note that $k$ may not appear in $u$. Denote
 \[
 W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \},
 \]
 and set
 \[
-\widetilde{u}_i = \begin{cases}
+\std{u}_i = \begin{cases}
 j & \text{if } u_i < k \text{ and } i = w_j \\
 r + 1 & \text{otherwise.}
 \end{cases}
 \]
-That is to say, the standardization is replacing the $i$-th letter that is not $k$ read right-to-left with $i$ and all letters $k$ with $r + 1$.
+That is to say, the near standardization is replacing the $i$-th letter that is not $k$ read right-to-left with $i$ and all letters $k$ with $r + 1$.
 For example, we have
 \begin{align*}
 u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
-\\ \widetilde{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
+\\ \std{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
 \end{align*}
-Note that the type $\widetilde{\mm}$ of $\widetilde{u}$ is $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_r = m_k$.
-%Note that we can reconstruct $u$ given some $\widetilde{u}$ using only $v$.
-Additionally, note that the standardization is order preserving in the sense of $u_i \geq u_j$ if and only if $\widetilde{u}_i > \widetilde{u}_j$.
+Note that the type $\widetilde{\mm}$ of $\std{u}$ is $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_r = m_k$.
+%Note that we can reconstruct $u$ given some $\std{u}$ using only $v$.
+Additionally, note that the near standardization is order preserving in the sense of $u_i \geq u_j$ if and only if $\std{u}_i > \std{u}_j$.
 
-There exists $T$ such that $\bigvee_T \widetilde{u} = u$.
-Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \widetilde{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \widetilde{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
+There exists $T$ such that $\bigvee_T \std{u} = u$.
+Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
 As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ corresponds to disjoint $r$-paths with initial points $\iota_i := (0,i)$ and terminal points $(b_i,0)$.
 Note that these are precisely the bully paths of~\cite{AasLin17}.
 We claim it is sufficient to show that for every MLQ $\qq$, there exists unique disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ such that $\rho_i$ passes through the point $\tau_i := (b_i, i - \gamma_i)$.
@@ -1148,10 +1150,10 @@ The fact that $\qq = \qq_{\rho'}$ follows from (a mild generalization of) the mo
 \begin{example}
 \label{ex:NILP_bijection}
 Consider $n = 9$, $r = 6$, $\ell = 4$, $v = 332221$, and $B = \set{1,2,4,6,7,9}$.
-Therefore, we have the word $u$ in Theorem~\ref{thm:determinant_form} and its standardization
+Therefore, we have the word $u$ in Theorem~\ref{thm:determinant_form} and its near standardization
 \begin{align*}
 u & = 33{\color{gray} 4}2{\color{gray} 4}22{\color{gray} 4}1,
-\\ \widetilde{u} & = 65{\color{gray} 7}4{\color{gray} 7}32{\color{gray} 7}1.
+\\ \std{u} & = 65{\color{gray} 7}4{\color{gray} 7}32{\color{gray} 7}1.
 \end{align*}
 See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bijection between an MLQ and disjoint $r$-paths.
 \end{example}
@@ -1971,24 +1973,24 @@ A \defn{configuration} shall simply mean a pair of queues (\textit{i.e.},
 an $\tup{r_1, r_2}$-configuration for some $r_1$ and $r_2$).
 Thus, any configuration $C$ has a \defn{dual configuration} $C'$.
 
-Furthermore, a \defn{trifiguration} shall mean a triple of queues.
+Consider a MLQ $\qq = \tup{q_1, q_2, \dotsc, q_k}$, then we define an action of $\SymGp{k}$ with simple transpositions $\fraks_i$ by
+\[
+\fraks_i \qq = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+1}, \dotsc, q_k},
+\]
+where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
+From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
+It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
+Thus, to show this is indeed an action, it remains to show the following.
 
-If $Q = \tup{q_1, q_2, q_3}$ is a trifiguration, then we define two
-trifigurations $\fraks_1 Q$ and $\fraks_2 Q$ as follows:
-\begin{itemize}
-\item We let $\fraks_1 Q = \tup{q'_1, q'_2, q_3}$, where
-	  $\tup{q'_1, q'_2}$ is the dual configuration of $\tup{q_1, q_2}$.
-\item We let $\fraks_2 Q = \tup{q_1, q'_2, q'_3}$, where
-	  $\tup{q'_2, q'_3}$ is the dual configuration of $\tup{q_2, q_3}$.
-\end{itemize}
-Thus, $\fraks_1$ and $\fraks_2$ are two endomorphisms of the set of
-all trifigurations.
-It turns out that these endomorphisms satisfy the
-\defn{braid relation}:
+\Travis{We might want to lift up some stuff from the final remarks into here.}
 
 \begin{prop} \label{prop:braid}
-We have $\fraks_1 \circ \fraks_2 \circ \fraks_1
-	   = \fraks_2 \circ \fraks_1 \circ \fraks_2$.
+We have
+\[
+\fraks_i \fraks_{i+1} \fraks_i \qq
+	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
+\]
+for any MLQ $\qq$.
 \end{prop}
 
 \begin{proof}
@@ -2013,119 +2015,65 @@ parentheses (although he doesn't define it this way).
 But this corresponds to taking the dual configuration.)
 \end{proof}
 
-Next, we define two queues corresponding to a word $u \in \mcW_n$.
-Namely, if $w \in \mcW_n$ and if $k \in \set{0, 1, \ldots, n}$, then
+We say a word $w$ of type $\mm = (m_1, \ldots)$ is \defn{standard} if $m_i \leq 1$ for all $i$.
+
+Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
+Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, then
 \begin{itemize}
-\item we let $S_k(w)$ denote the set of the indices $i \in \ive{n}$
-	  corresponding to the $k$ smallest letters $w_i$ of $w$,
-	  if this set is uniquely determined;
-	  otherwise, we leave $S_k(w)$ undefined.
-\item we let $L_k(w)$ denote the set of the indices $i \in \ive{n}$
-	  corresponding to the $n-k$ largest letters $w_i$ of $w$,
-	  if this set is uniquely determined;
-	  otherwise, we leave $L_k \tup{w}$ undefined.
+\item let $S_k(w)$ denote the set of the indices $i \in \ive{n}$
+	  corresponding to the $k$ smallest letters $w_i$ of $w$;
+\item let $L_k(w)$ denote the set of the indices $i \in \ive{n}$
+	  corresponding to the $n-k$ largest letters $w_i$ of $w$.\travis{This set does not seem to be used currently.}
 \end{itemize}
-Thus, the queues $S_k(w)$ and $L_k(w)$ are defined exactly
-when $k \in \set{ p_i(\mm) \mid i \geq 0 }$ (with $\mm$
-being the type of $w$), and otherwise are undefined.
-Also, observe that $S_k(w)$ and $L_k(w)$ are two
-complementary subsets of $\ive{n}$.
+Observe that $S_k(w)$ and $L_k(w)$ are two complementary subsets of $\ive{n}$.
 \Travis{This is bad notation as it looks like $S_k$ and $L_k$ are queues acting on the word $w$ and so $S_k(w)$ and $L_k(w)$ look like are words.}
 
 The crucial tools in our second proof of Theorem~\ref{thm:permutation}
 will be the following two facts:
 
 \begin{lemma} \label{lem:SL.reconstruct}
-A word $w \in \mcW_n$ can be uniquely reconstructed if its type and
-the family of all queues $S_k(w)$ (for the $k$ for which they
-are well-defined) are known.
+Let $w, w' \in \mcW_n$.
+Then $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$ if and only if $w = w'$.
 \end{lemma}
 
-\Travis{This statement is circular. I think you want to say given some family of queues satisfying some properties, then we can uniquely reconstruct $w$. Another way to say it is the map $w \mapsto (\mm, (S_k(w))_{k=0}^n)$ is injective.}
-
 \begin{proof}
-\Darij{TODO}
+Clearly $w = w'$ implies $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$.
+Next, we assume $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$.
+Note that $w$ and $w'$ have the same type $\mm$.
+Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
+Thus, we have $S_k(w) \setminus S_{k-p_j(\mm)}(w) = S_k(w') \setminus S_{k-p_j(\mm)}(w')$ defined, which we denote by $P_k$.
+\travis{This version of $k$ smallest letters is actively fighting us here.}
+By construction, we have $w_i = j = w'_i$ for all $i \in P_k$.
+Since this holds for all letters $k$, we have $w = w'$.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
-Let $w \in \mcW_n$ be a word, and let
-$k \in \set{0, 1, \ldots, n}$ be such that
-$S_k \tup{w}$ is well-defined.
-Let $q$ be any queue.
-Then, the dual configuration of $\tup{ S_k(w) , q }$
-has the form $\tup{ ? , S_k\bigl(q(w)\bigr) }$
-(where the question mark means a queue we aren't interested in).
+Let $w \in \mcW_n$ be a word of type $\mm$ such that $k = p_{\alpha}(\mm)$ for some $\alpha$.
+Let $q$ be a queue.
+The dual configuration of $\tup{ S_k(w) , q }$ has the form $\tup{q^{\dagger} , S_k\bigl(q(w)\bigr) }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
-\Darij{FUCK: If $k = \abs{q}$, then $S_k \tup{w}$ is not
-defined, but $S_k \tup{q\tup{w}}$ is (and equals $q$).
-This looks like a manageable but annoying problem.
-
-Good news: If $w$ has distinct letters, then
-$S_k \tup{w}$ is ALWAYS defined. So we need to WLOG assume
-that the letters of $w$ are distinct.
-Lemma~\ref{lemma:queue_merge_commute} helps make this
-assumption.}
-
 \begin{proof}
-\Darij{TODO. (This is where the serious work is.)}
+Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ S_k(w) , q }$.
+The notations of $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
 
-MAIN IDEA:
+Suppose $k \leq \abs{q}$.
+Therefore, for all $j \in S_k(w)$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
+Recall that in Phase~II of computing $q(w)$, a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
+We show $i_j \in q'_2 \cap \mcI_j$ by induction on $j$.
+Next, suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
+Let $\mcI_j = \inter[e,f]$.
+Since $\mcI_j$ is balanced and by our induction assumption, we have that
+\[
+c^{\uparrow}[i,j] \geq \abs{\set{ h \in \inter[j,f] \mid q(w)_h \text{ is currently set} }} + 1.
+\]
+Since we have $c^{\uparrow}\mcI_j = c^{\downarrow}\mcI_j$, there must exist a $i_j \in q'_2 \cap \mcI_j$ such that $q(w)_{i_j}$ is unset.
+Thus, we set $q(w)_{i_j} = w_j$.
+Note that a similar argument holds for $j = 1$.
+Hence, $q'_2 \subseteq S_k\bigl( q(w) \bigr)$.
+However, we clearly have $\abs{q'_2} = k = \abs{S_k\bigl( q(w) \bigr)}$, and so $q'_2 = S_k\bigl( q(w) \bigr)$.
 
-First consider the case that $k$ is small; this means
-that $k < \abs{q}$. Hence, the smallest $k$ letters of $w$
-all get digested in Phase II. Then, the argument below
-is basically about re-interpreting the Phase II movements as
-a way to construct dual configurations.
-Essentially: A letter falls down and scans to the right for
-the smallest available spot in $q$; this creates balanced
-intervals.
-Here is, I think, how this proof can be formalized:
-First, define the \defn{queueing interval} of a site $i$
-as the cyclic interval starting at this site $i$ and ending at
-the box $j$ where the ``ball from $i$ settles'' after
-falling down to the bottom (what is our language for this,
-again?).
-In the following, notations like $c^\uparrow$ and
-$c^\downarrow$ will refer to the configuration
-$\tup{ S_k\tup{w} , q }$.
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
-Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
-A set of sites will be called \defn{top-heavy} if each of its connected components (regarded as a subgraph of the cycle) is top-heavy.
-Now, we claim that the union of the queueing intervals of all
-the sites $i \in S_k \tup{w}$ is top-heavy.
-Indeed, this is just saying that at each point in Phase~II
-of the algorithm, the union of the queueing intervals used
-so far is top-heavy.
-To prove this, just observe that each element of a queue
-that falls into this union must have already been set
-(in our language: each box on the bottom row that falls
-into this union has been filled).
-Therefore, this union is top-heavy.
-But this means that this union is balanced, because the
-total number of balls at the top equals the total number
-of boxes at the bottom (namely, $k$, because as we said all
-the boxes have been filled), and therefore the
-same holds for each connected component (otherwise, there
-would be some connected component with fewer balls on top
-than boxes on the bottom).
-So all the balls in $S_k \tup{w}$ and all the boxes in
-$S_k \tup{q\tup{w}}$ are balanced.
-The unbalanced boxes are the ones where no balls have
-settled.
-The rest is clear from here.
-
-When $k$ is large (that is, $k > \abs{q}$),
-maybe something like this still works,
-but what I did was showing instead that the dual configuration
-of $\tup{ \ive{n} \setminus q, L_k \tup{w} }$ has the form
-$\tup{ L_k \tup{q\tup{w}} , ? }$ (this is similar to the case
-of $k$ small, because the largest $n-k$ letters of $w$ all
-get digested in Phase I), and then apply one of the symmetries
-of dual configurations.
-
-When $k$ is middle-sized (that is, $k = \abs{q}$), the argument
-is very simple.
+For $k > \abs{q}$, by a similar argument as above, we have that the dual configuration of $\tup{ \ive{n} \setminus S_k(w) , \ive{n} \setminus q }$ has the form $\tup{\ive{n} \setminus S_k\bigl(q(w)\bigr), q^{\dagger} }$.\travis{This isn't quite right, but I will figure it out.}
 \end{proof}
 
 We can now give our second proof of Theorem~\ref{thm:permutation}:
@@ -2134,72 +2082,93 @@ We can now give our second proof of Theorem~\ref{thm:permutation}:
 We follow the same approach as in the first proof:
 We must show that if $C = \tup{q_1, q_2}$ is any configuration
 and if $u \in \mcW_n$ is any word, then the dual configuration
-$C'$ of $C$ satisfies $C' \tup{u} = C \tup{u}$.
+$C' = (q'_1, q'_2)$ of $C$ satisfies $C'(u) = C(u)$.
 
-So let us consider $C$, $u$ and $C'$.
-Write $C'$ in the form $C' = \tup{q'_1, q'_2}$.
-
-It is easy to see that the words
+From Lemma~\ref{le:mono}, it is sufficient to consider standard words $u$.
+It is straightforward to see that the words
 $C(u) = q_2\bigl( q_1(u) \bigr)$
 and
-$C' \tup{u} = q'_2\bigl( q_1'(u) \bigr)$
-have the same type;
-indeed, the action of a queue $q$ on a word $w$ modifies its
-type in a predictable way (namely, the number $\abs{q}$ is
-inserted into the type of $w$ at the place where it would
-keep the type weakly increasing).
+$C'(u) = q'_2\bigl( q_1'(u) \bigr)$
+have the same type from Equation~\eqref{eq:queue_type_change}.
+%indeed, the action of a queue $q$ on a word $w$ modifies its
+%type in a predictable way (namely, the number $\abs{q}$ is
+%inserted into the type of $w$ at the place where it would
+%keep the type weakly increasing).
 We shall now show that
 $S_k\bigl( C'(u) \bigr) = S_k\bigl( C(u) \bigr)$
 for all $k \in \set{0, 1, \ldots, n}$ for which these are
 well-defined.
-According to Lemma~\ref{lem:SL.reconstruct}, this will yield
-$C'(u) = C(u)$, and thus our proof will be complete.
+According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
 
-So let $k \geq 0$.
-
-\Darij{see the FUCK above -- the argument below only works
-if $S_k \tup{u}$ is well-defined, so it doesn't work for
-$k = \abs{q_1}$ and for $k = \abs{q_2}$.
-As I said, standardization would help.}
-
+Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
 Using Proposition~\ref{prop:SL.dual} to compute dual
-configurations, we can see how the triconfiguration
-$\tup{S_k(u), q_1, q_2}$ transforms under the map
-$\fraks_1 \circ \fraks_2 \circ \fraks_1$: Namely,
+configurations, we can see how the MLQ
+$\qq = \tup{S_k(u), q_1, q_2}$ transforms under the action of
+$\fraks_1 \fraks_2 \fraks_1$: Namely, we have
+\begin{align*}
+\tup{S_k(u), q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, S_k\bigl(q_1(u)\bigr), q_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, S_k\bigl(q_2(q_1(u)) \bigr) }
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, S_k\bigl(q_2(q_1(u)) \bigr)},
+\end{align*}
+\Travis{Do you like it better in picture form?}
 \[
-\tup{S_k \tup{u}, q_1, q_2}
-\overset{\fraks_1}{\mapsto}
-\tup{?, S_k \tup{q_1 \tup{u}}, q_2}
-\overset{\fraks_2}{\mapsto}
-\tup{?, ?, S_k \tup{ q_2 \tup{ q_1 \tup{u} } }}
-\overset{\fraks_1}{\mapsto}
-\tup{?, ?, S_k \tup{ q_2 \tup{ q_1 \tup{u} } }} .
+\begin{tikzpicture}[xscale=3]
+\node (i1) at (0,0) {$S_k(u)$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$\ast$};
+\node (s12) at (1,-1) {$S_k\bigl(q_1(u) \bigr)$};
+\node (s13) at (1,-2) {$q_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$\ast$};
+\node (s23) at (2,-2) {$S_k\bigl(q_2(q_1(u)) \bigr)$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$S_k\bigl(q_2(q_1(u)) \bigr)$};
+\path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
+\path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
+\path[-,red] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
+\end{tikzpicture}
 \]
-Likewise, the same triconfiguration
-$\tup{S_k(u), q_1, q_2}$ transforms under the map
-$\fraks_2 \circ \fraks_1 \circ \fraks_2$ as follows:
+where $\ast$ denotes some queue.
+Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
+\begin{align*}
+\tup{S_k(u), q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{S_k(u), q'_1, q'_2}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, S_k\bigl(q'_1(u) \bigr) , q'_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, S_k\bigl(q'_2( q'_1(u)) \bigr)} .
+\end{align*}
 \[
-\tup{S_k \tup{u}, q_1, q_2}
-\overset{\fraks_2}{\mapsto}
-\tup{S_k \tup{u}, q'_1, q'_2}
-\overset{\fraks_1}{\mapsto}
-\tup{?, S_k \tup{ q'_1 \tup{u} } , q'_2}
-\overset{\fraks_2}{\mapsto}
-\tup{?, ?, S_k \tup{ q'_2 \tup{ q'_1 \tup{u} } }} .
+\begin{tikzpicture}[xscale=3]
+\node (i1) at (0,0) {$S_k(u)$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$S_k(u)$};
+\node (s12) at (1,-1) {$q'_1$};
+\node (s13) at (1,-2) {$q'_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$S_k\bigl(q'_1(u) \bigr)$};
+\node (s23) at (2,-2) {$q'_2$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$S_k\bigl(q'_1(q'_2(u)) \bigr)$};
+\path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
+\path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
+\path[-,red] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
+\end{tikzpicture}
 \]
 But the two maps are equal (by
 Proposition~\ref{prop:braid}); thus, the resulting
-triconfigurations must be identical:
+MLQs must be identical:
 \[
-\tup{?, ?, S_k\Bigl( q'_2\bigl(q'_1(u) \bigr) \Bigr)}
+\tup{\ast, \ast, S_k\Bigl( q'_2\bigl(q'_1(u) \bigr) \Bigr)}
 =
-\tup{?, ?, S_k\Bigl( q_2\bigl(q_1(u) \bigr) \Bigr)}
+\tup{\ast, \ast, S_k\Bigl( q_2\bigl(q_1(u) \bigr) \Bigr)}.
 \]
-Hence, $S_k\Bigl( q'_2\bigl(q'_1(u) \bigr) \Bigr)
-= S_k\Bigl( q_2\bigl(q_1(u) \bigr) \Bigr)$.
-In other words,
-$S_k \bigl( C'(u) \bigr) = S_k \bigl( C(u) \bigr).$
-This completes our proof, as explained above.
+Hence, we have
+\[
+S_k\bigl( q'_2(q'_1(u) ) \bigr) = S_k\bigl( q_2(q_1(u)) \bigr).
+\]
+In other words, $S_k \bigl( C'(u) \bigr) = S_k \bigl( C(u) \bigr)$.
 \end{proof}
 
 
