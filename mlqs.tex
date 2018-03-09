@@ -1346,7 +1346,6 @@ In Part~C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} wo
 Finally, in Part~D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
 
 For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{1,2}^n$.
-Moreover, we refer to binary words simply as words.
 
 %%%%%%%%%%
 \subsection*{Part A: Splitting into balanced and unbalanced intervals}
@@ -1441,12 +1440,12 @@ Let $\delta_{ab}$ denote the Kronecker delta.
 Note that $q(u)_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$ by our assumptions
 (since we can start each phase by going through the $k \in \inter(i, j)$),
 and similarly $q(u_{i \leftrightarrow j})_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$.
-Therefore, if $u_i \neq u_j$, then we have $q(u)_i = 3$ and $q(u)_j = 1$.
+Therefore, if $u_i \neq u_j$, then we have $q(u)_i = 3$ and $q(u)_j = 1$
+as $q(u)_i$ (resp.~$q(u)_j$) is the first unset letter encountered by
+the $2$ (resp.~$1$) in Phase~I (resp.\ Phase~II).
 Similarly for $q(u_{i \leftrightarrow j})$, and hence the claim follows.
 If $u_i = u_j$, then the claim is trivial (as $u = u_{i \leftrightarrow j}$).
 \end{proof}
-
-\darij{TODO: Explain.}
 
 \begin{lemma}[BB]
 \label{le:BB}
@@ -1622,41 +1621,36 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 
 \begin{proof}
   As in the proof of Lemma~\ref{le:BU}, we assume that $r_1 > r_2$, noting that the case $r_1 < r_2$ follows from Remark~\ref{rmk:balanced-dual-let} and Lemma~\ref{le:BU}.
+  Hence, we have $T(i) = (1, \bigcirc)$, which implies $q_1(u)_i = 1$. Moreover,  for all unbalanced $k \in \inter(i,j)$, we have $T(k) = (2, \bigcirc)$ and $k \notin q_2$.
   
-  Let $B$ be a balanced interval, and let $B^c := [\ell] \setminus B$ denote the complement of $B$.
-  Note that for $B \subseteq \inter(i,j)$, the value of $C(u)_k$ for $k \in B^c$ is determined entirely by $q_1\cap B^c$, $q_2\cap B^c$, and $u\rvert_{B^c}$.
-  Thus we can reduce to the case when there is no such balanced interval $B$ contained in $\inter(i,j)$.  
-
-  Thus suppose $i, i+1, \dotsc, i+k$ are unbalanced and $i+k+1, i+k+2, \dotsc, j$ are balanced.
-  We now prove that $C(u) = C(u_{i \leftrightarrow j})$ by induction on $k$. 
+  Recall from the proof of Lemma~\ref{le:orig} that we have $q_1(u)_k = u_k + \delta_{2u_k}$ for all balanced $k \in \inter(i,j)$.
+  Hence, we have $q_2\bigl( q_1(u) \bigr)_k = 4$ for all balanced $k \in \inter(i,j) \setminus q_2$.
+  Moreover, for any balanced interval $\mcI \subseteq \inter(i,j)$, we must have $q_2\bigl( q_1(u) \bigr)_k = 1$ for all $k \in \mcI \cap q_2$.
+  In particular, we can set every $q_1(u)_k$ and $q_2\bigl( q_1(u) \bigr)_k$ for $k \in \mcI$ by using $u_{k'}$ and $q_1(u)_{k'}$, respectively, with $k' \in \mcI$.
+  Therefore, we can assume there does not exist a balanced interval $\mcI \subseteq \inter(i,j)$.
   
-  \vspace{10pt}
-  \noindent \underline{The base case}:
-
-  Suppose $k = 0$ (\textit{i.e.}, $j = i + 1$).
-  If $q_1(u)_j = 1$, then $q_1(u) = q_1(u_{i \leftrightarrow j})$ since the $u_j = 2$ does not set either $q_1(u)_i$ or $q_1(u)_j$.
-  We are thus left with the case $q_1(u)_j = 2$.
-  In this case, we have  $q_1(u_{i \leftrightarrow j}) = q_1(u)_{i \leftrightarrow j}$, and we can proceed as in the induction step below to conclude that $C(u) = C(u_{i \leftrightarrow j})$.
-
-  \vspace{10pt}
-  \noindent \underline{The inductive step}:
-
-  Suppose $k > 0$.
-  Clearly, we have $q_1(u)_i = 1$.
-  If $q_1(u)_{i+1} = 1$, then it is easy to see that $q_1(u) = q_1(u_{i\leftrightarrow (i+1)})$.
-  So by our inductive hypothesis, we have $C(u) = C(u_{i\leftrightarrow j})$ in this case. 
-
-  Now suppose $q_1(u)_{i+1} = 2$.
-  In this case, we see that the number of ones in $u$ is at most $r_1$ as otherwise there would not exist a $k \in q_1$ such that $q_1(u)_k = 2$.
-  This means that $k \notin q_2$ implies $q_2\bigl( q_1(u) \bigr)_k = 4$.
-  We also see that $q_1(u)_h = 2$ for all $h \in \set{i+1, \dotsc, i+k}$ as well as for $h = j$.
-
-  Since the squares in the lower row of the balanced interval of $j$ will all be labeled $4$, we see that in finding the first site to the left of $j$ when considering $q_1(u)_j = 2$ in the computation of $q_2\bigl( q_1(u) \bigr)$ from $q_1(u)$, the search goes beyond $i+k+1$.
-  Together with the previous paragraph, this means that $q_2\bigl( q_1(u) \bigr)_i = 3$.
-
-  Now, we have $q_1(u_{i\leftrightarrow (i+1)}) = q_1(u)_{i\leftrightarrow (i+1)}$.
-  Therefore, the only difference between $C(u)$ and $C(u_{i\leftrightarrow j})$ would be in positions $i$ or $i+1$.
-  We have established that $q_1(u)_i = q_1(u)_{i+1} = 3$, and it is immediate that this is also holds for $q_1(u_{i\leftrightarrow (i+1)})$.
+  Suppose $j = i + 1$.
+  If $q(u)_j = 1$, then the $2$ from $u_j$ passes over both sites $i$ and $j$.
+  Hence, we have $q_1(u_{i \leftrightarrow j}) = q_1(u)$, which implies $C(u) = C(u_{i \leftrightarrow j})$.
+  Next, if $q(u)_j = 2$, then we can set $q(u)_j$ by using $u_j$.
+  Thus, we have $q_1(u_{i \leftrightarrow j}) = q_1(u)_{i \leftrightarrow j}$.
+  If $j \in q_2$, then $q_2\bigl( q_1(u) \bigr)_j = 1$ and can be set by $q_1(u)_i$.
+  This implies that $q_2\bigl( q_1(u_{i \leftrightarrow j}) \bigr)_j = 1$ and $C(u) = C(u_{i \leftrightarrow j})$.
+  Instead, assume $j \notin q_2$, and so $q_2\bigl( q_1(u) \bigr)_j = 4$ since $j$ is balanced.
+  Hence, $q_2\bigl( q_1(u) \bigr)_j = 4$ cannot be set by either $q_1(u)_i$ or $q_1(u)_j$, which implies $C(u) = C(u_{i \leftrightarrow j})$.
+  
+  Next, suppose $i+1$ is balanced, and so we have $T(k) = (1, \bigcirc)$ and $k \notin q_2$ as otherwise there would be a balanced interval contained in $\inter(i,j)$.
+  However, the proof that $C(u) = C(u_{i \leftrightarrow j})$ is similar to the case when $j = i+1$ as $q_1(u)_i$ and $q_1(u)_j$ cannot set $q_2\bigl( q_1(u) \bigr)_k = 4$ for all $k \in \inter(i,j)$.
+  
+  Finally, suppose that $i+1$ is unbalanced.
+  We proceed by induction on $\abs{\inter[i,j]}$.
+  Assume the claim holds for all intervals $\mcI$ such that $\abs{\mcI} < \abs{\inter[i,j]}$.
+  We have $q_1(u_{i \leftrightarrow (i+1)}) = q_1(u)_{i \leftrightarrow (i+1)}$ as above.
+  Therefore, we have
+  \[
+    C(u_{i \leftrightarrow j}) = C\biggl( \left(u_{i \leftrightarrow (i+1)}\right)_{(i+1) \leftrightarrow j} \biggr) = C(u_{i \leftrightarrow (i+1)}) = C(u)
+  \]
+  by our induction assumption.
 \end{proof}
 
 \begin{example}
@@ -1736,7 +1730,7 @@ Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$.
 \item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$.
   Equivalently, we have $r_1 \geq m_1(u) > r_2$.
 \end{enumerate}
-In each of these cases, it is easy to see that all particles in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labelling procedure inside each balanced interval is the same in $C$ and $C'$.
+In each of these cases, it is easy to see that all letters in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labeling procedure inside each balanced interval is the same in $C$ and $C'$.
 Therefore, we have $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, and hence, Theorem~\ref{thm:permutation} following by induction on length.
 \qed
 
