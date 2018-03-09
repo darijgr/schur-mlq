@@ -2018,18 +2018,11 @@ But this corresponds to taking the dual configuration.)
 We say a word $w$ of type $\mm = (m_1, \ldots)$ is \defn{standard} if $m_i \leq 1$ for all $i$.
 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
-Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, then
-\begin{itemize}
-\item let $S_k(w)$ denote the set of the indices $i \in \ive{n}$
-	  corresponding to the $k$ smallest letters $w_i$ of $w$;
-\item let $L_k(w)$ denote the set of the indices $i \in \ive{n}$
-	  corresponding to the $n-k$ largest letters $w_i$ of $w$.\travis{This set does not seem to be used currently.}
-\end{itemize}
-Observe that $S_k(w)$ and $L_k(w)$ are two complementary subsets of $\ive{n}$.
-\Travis{This is bad notation as it looks like $S_k$ and $L_k$ are queues acting on the word $w$ and so $S_k(w)$ and $L_k(w)$ look like are words.}
+Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $S_k(w)$ denote the set of the indices $i \in \ive{n}$
+corresponding to the $k$ smallest letters $w_i$ of $w$.
+\Travis{This is bad notation as it looks like $S_k$ and $L_k$ are queues acting on the word $w$ and so $S_k(w)$ looks like a word.}
 
-The crucial tools in our second proof of Theorem~\ref{thm:permutation}
-will be the following two facts:
+The crucial tools in our second proof of Theorem~\ref{thm:permutation} will be the following two facts:
 
 \begin{lemma} \label{lem:SL.reconstruct}
 Let $w, w' \in \mcW_n$.
@@ -2041,9 +2034,9 @@ Clearly $w = w'$ implies $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{
 Next, we assume $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$.
 Note that $w$ and $w'$ have the same type $\mm$.
 Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
-Thus, we have $S_k(w) \setminus S_{k-p_j(\mm)}(w) = S_k(w') \setminus S_{k-p_j(\mm)}(w')$ defined, which we denote by $P_k$.
+Thus, we have $S_k(w) \setminus S_{k-p_j(\mm)}(w) = S_k(w') \setminus S_{k-p_j(\mm)}(w')$ defined, which we denote by $P_j$.
 \travis{This version of $k$ smallest letters is actively fighting us here.}
-By construction, we have $w_i = j = w'_i$ for all $i \in P_k$.
+By construction, we have $w_i = j = w'_i$ for all $i \in P_j$.
 Since this holds for all letters $k$, we have $w = w'$.
 \end{proof}
 
@@ -2073,9 +2066,16 @@ Note that a similar argument holds for $j = 1$.
 Hence, $q'_2 \subseteq S_k\bigl( q(w) \bigr)$.
 However, we clearly have $\abs{q'_2} = k = \abs{S_k\bigl( q(w) \bigr)}$, and so $q'_2 = S_k\bigl( q(w) \bigr)$.
 
-For $k > \abs{q}$, by a similar argument as above, we have that the dual configuration of $\tup{ \ive{n} \setminus S_k(w) , \ive{n} \setminus q }$ has the form $\tup{\ive{n} \setminus S_k\bigl(q(w)\bigr), q^{\dagger} }$.\travis{This isn't quite right, but I will figure it out.}
+Note that every balanced block for $(q_1, q_2)$ corresponds to a balanced block of $(q_2^*, q_1^*)$, where $q_i^*$ is the queue from Lemma~\ref{le:dual} of $q_i$.
+Hence, we have $(q^*_2,q^*_1)' = ((q'_2)^*, (q'_1)^*)$ if and only if $(q_1,q_2)' = (q'_1, q'_2)$.
+Also from Lemma~\ref{le:dual}, we have $q(u) = (q^*(u^*))^*$ (recall that $q^*(u^*)$ has $\ell+1$ classes).
 
-Note that every balanced block for $(q_1, q_2)$ corresponds to a balanced block of $(q_2^*, q_1^*)$, where $q_i^*$ is the queue from Lemma~\ref{le:dual}. Also from Lemma~\ref{le:dual}, we have $q(u) = (q^*(u^*))^*$ (recall that $q^*(u^*)$ has $\ell+1$ classes).
+We have $S_k(w)^* = S_{n-k}(w^*)$, where $S_{n-k}(w^*)$ are the largest $n-k$ letters of $w$ but where their positions have been reversed.
+Now we have $\abs{q^*} < n-k$, and so from a similar argument as above using the largest letters and Phase~I, we have $\tup{ q^*, S_{n-k}(w^*) }' = \tup{S_{n-k}\bigl( q^*(w^*) \bigr), q^{\dagger*} }$.
+Applying the $\ast$-duality, we obtain
+\[
+\tup{ q^{\dagger}, S_{n-k}\bigl( q^*(w^*) \bigr)^* } = \tup{ q^{\dagger}, S_k\bigl( q^*(w^*)^* \bigr) } = \tup{ q^{\dagger}, S_k\bigl( q(w) \bigr) }.
+\]
 \end{proof}
 
 We can now give our second proof of Theorem~\ref{thm:permutation}:
