@@ -547,21 +547,21 @@ Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $
 \end{comment}
 
 There is an natural duality in the algorithm above.
+For each queue $q$, let $q^*$ be the \defn{contragredient dual queue} defined by $i \in q^*$ if and only if $n+1-i \notin q$.
+Similarly, for each word $u$ with $\ell$ classes, let $u^*$ be the \defn{contragredient dual word} defined by $u^*_i = \ell + 1 - u_{n+1-i}$.
+For a fixed $k$, we call $\ell + 1 - k$ the \defn{contragredient dual letter} of $k$.
+Note that for an $r$-queue $q$, and $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
+Similarly, $u^*$ is obtained by reversing $u$ and taking the contragredient dual letters.
 
-\begin{lemma}[Duality]
+\begin{lemma}[Contragredient duality]
   \label{le:dual}
   Let $q$ be a queue and $u$ be a word with $\ell$ classes.
-  Define a new word $u^*$ by letting $u^*_i = \ell + 1 - u_{n+1-i}$ and a new queue $q^*$ by letting $i \in q^*$ if and only if $n+1-i \notin q$.
- Then $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
+  Then we have $q(u) = q^*(q^*)^*$, \textit{i.e.}, we have $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
 \end{lemma}
 
 \begin{proof}
-Let $r = \abs{q}$.
-Thus, $q$ is an $r$-queue, so that $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
-For a fixed $k$, we call $\ell + 1 - k$ the dual letter of $k$.
-Thus, $u^*$ is obtained by reversing $u$ and taking the dual letters.
 
-Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q^*(u^*)$ when the word is reversed and the letters are replaced by their duals.
+Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q^*(u^*)$ when the word is reversed and the letters are replaced by their contragredient duals.
 Hence the claim follows.
 \end{proof}
 
@@ -1332,7 +1332,7 @@ Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that
 The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
 An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Hence, our proof is reduced to constructing the \defn{dual} $(r_2,r_1)$-configuration $C'$ to $C$ such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
+Hence, our proof is reduced to constructing the \defn{dual}\footnote{This is unrelated to the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
 
 We first consider the case $r_1 = r_2$, in which we define $C' = C$.
 Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
@@ -1391,12 +1391,10 @@ The maximal balanced intervals are boxed.}
 
 \begin{remark}
 \label{rmk:balanced-dual-let}
-For each queue $q$, let $q^*$ be the \defn{contragredient dual queue} of $q$; this is the queue defined by $i \in q^* \Longleftrightarrow n+1-i \notin q$.
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
 Then, the balanced and the unbalanced intervals of $C$ are exactly the balanced and unbalanced intervals of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$, reflected around the middle of $\ive{n}$.
-Furthermore, for a word $u \in \mcW_n$ with $\ell-1$ classes, let $u^*$ be obtained by replacing $k \leftrightarrow \ell - k$.
-Then for $u \in \set{1,2}^n$, we have $C(u)_i = C^*(u^*)^*_{n+1-i}$, where $u^*$ is the word obtained from $u$ by switching $1$'s and $2$'s, where we treat $C^*(u^*)$ as a word with $4$ classes.
-(This follows from applying Lemma~\ref{le:dual} twice.)
+Then for $u \in \set{1,2}^n$, we have $C(u)_i = C^*(u^*)^*_{n+1-i}$, where we treat $C^*(u^*)$ as a word with $4$ classes.
+This follows from applying Lemma~\ref{le:dual} twice.
 \end{remark}
 
 
@@ -2018,23 +2016,22 @@ But this corresponds to taking the dual configuration.)
 We say a word $w$ of type $\mm = (m_1, \ldots)$ is \defn{standard} if $m_i \leq 1$ for all $i$.
 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
-Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $S_k(w)$ denote the set of the indices $i \in \ive{n}$
+Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
-\Travis{This is bad notation as it looks like $S_k$ and $L_k$ are queues acting on the word $w$ and so $S_k(w)$ looks like a word.}
 
 The crucial tools in our second proof of Theorem~\ref{thm:permutation} will be the following two facts:
 
 \begin{lemma} \label{lem:SL.reconstruct}
 Let $w, w' \in \mcW_n$.
-Then $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$ if and only if $w = w'$.
+Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if $w = w'$.
 \end{lemma}
 
 \begin{proof}
-Clearly $w = w'$ implies $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$.
-Next, we assume $\bigl( S_k(w) \bigr)_{k=0}^n = \bigl( S_k(w') \bigr)_{k=0}^n$.
+Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
+Next, we assume $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
 Note that $w$ and $w'$ have the same type $\mm$.
 Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
-Thus, we have $S_k(w) \setminus S_{k-p_j(\mm)}(w) = S_k(w') \setminus S_{k-p_j(\mm)}(w')$ defined, which we denote by $P_j$.
+Thus, we have $[w]_k \setminus [w]_{k-p_j(\mm)} = [w']_k \setminus [w']_{k-p_j(\mm)}$ defined, which we denote by $P_j$.
 \travis{This version of $k$ smallest letters is actively fighting us here.}
 By construction, we have $w_i = j = w'_i$ for all $i \in P_j$.
 Since this holds for all letters $k$, we have $w = w'$.
@@ -2043,15 +2040,15 @@ Since this holds for all letters $k$, we have $w = w'$.
 \begin{prop} \label{prop:SL.dual}
 Let $w \in \mcW_n$ be a word of type $\mm$ such that $k = p_{\alpha}(\mm)$ for some $\alpha$.
 Let $q$ be a queue.
-The dual configuration of $\tup{ S_k(w) , q }$ has the form $\tup{q^{\dagger} , S_k\bigl(q(w)\bigr) }$, where $q^{\dagger}$ is some queue.
+The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [q(w)]_k }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
 \begin{proof}
-Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ S_k(w) , q }$.
+Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
 The notations of $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
 
 Suppose $k \leq \abs{q}$.
-Therefore, for all $j \in S_k(w)$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
+Therefore, for all $j \in [w]_k$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
 Recall that in Phase~II of computing $q(w)$, a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
 We show $i_j \in q'_2 \cap \mcI_j$ by induction on $j$.
 Next, suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
@@ -2063,19 +2060,20 @@ c^{\uparrow}[i,j] \geq \abs{\set{ h \in \inter[j,f] \mid q(w)_h \text{ is curren
 Since we have $c^{\uparrow}\mcI_j = c^{\downarrow}\mcI_j$, there must exist a $i_j \in q'_2 \cap \mcI_j$ such that $q(w)_{i_j}$ is unset.
 Thus, we set $q(w)_{i_j} = w_j$.
 Note that a similar argument holds for $j = 1$.
-Hence, $q'_2 \subseteq S_k\bigl( q(w) \bigr)$.
-However, we clearly have $\abs{q'_2} = k = \abs{S_k\bigl( q(w) \bigr)}$, and so $q'_2 = S_k\bigl( q(w) \bigr)$.
+Hence, $q'_2 \subseteq [q(w)]_k$.
+However, we clearly have $\abs{q'_2} = k = \abs{[q(w)]_k}$, and so $q'_2 = [q(w)]_k$.
 
-Note that every balanced block for $(q_1, q_2)$ corresponds to a balanced block of $(q_2^*, q_1^*)$, where $q_i^*$ is the queue from Lemma~\ref{le:dual} of $q_i$.
-Hence, we have $(q^*_2,q^*_1)' = ((q'_2)^*, (q'_1)^*)$ if and only if $(q_1,q_2)' = (q'_1, q'_2)$.
-Also from Lemma~\ref{le:dual}, we have $q(u) = (q^*(u^*))^*$ (recall that $q^*(u^*)$ has $\ell+1$ classes).
+Note that every balanced interval $\mcI$ for $(q_1, q_2)$ corresponds to a balanced interval $\mcI^* = \set{ n+1-i \mid i \in \mcI }$ of $(q_2^*, q_1^*)$, where we recall that $q_i^*$ is the contragredient dual queue of $q_i$.
+Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(q^*_2,q^*_1)' = \bigl( (q'_2)^*, (q'_1)^* \bigr)$\travis{Rectify this with Remark~\ref{rmk:balanced-dual-let}.}.
+Also from Lemma~\ref{le:dual}, we have $q(u) = \bigl( q^*(u^*) \bigr)^*$ (recall that $q^*(u^*)$ has $\ell+1$ classes).
 
-We have $S_k(w)^* = S_{n-k}(w^*)$, where $S_{n-k}(w^*)$ are the largest $n-k$ letters of $w$ but where their positions have been reversed.
-Now we have $\abs{q^*} < n-k$, and so from a similar argument as above using the largest letters and Phase~I, we have $\tup{ q^*, S_{n-k}(w^*) }' = \tup{S_{n-k}\bigl( q^*(w^*) \bigr), q^{\dagger*} }$.
-Applying the $\ast$-duality, we obtain
+We have $[w]_k^* = [w^*]_{n-k}$, and note that $[w^*]_{n-k}$ are the reversed indices\travis{This part is awkward. Might need a term or more detail.} of the largest $n-k$ letters of $w$.
+Now we have $\abs{q^*} = n - \abs{q} < n-k$, and so from a similar argument using Phase~I, we have $\tup{ q^*, [w^*]_{n-k} }' = \tup{ [q^*(w^*)]_{n-k}, q^{\dagger*} }$.
+Applying contragredient duality, we obtain
 \[
-\tup{ q^{\dagger}, S_{n-k}\bigl( q^*(w^*) \bigr)^* } = \tup{ q^{\dagger}, S_k\bigl( q^*(w^*)^* \bigr) } = \tup{ q^{\dagger}, S_k\bigl( q(w) \bigr) }.
+\tup{ q^{\dagger}, [q^*(w^*)]_{n-k}^* } = \tup{ q^{\dagger}, [q^*(w^*)^*]_k } = \tup{ q^{\dagger}, [q(w)]_k }
 \]
+as desired.
 \end{proof}
 
 We can now give our second proof of Theorem~\ref{thm:permutation}:
@@ -2097,7 +2095,7 @@ have the same type from Equation~\eqref{eq:queue_type_change}.
 %inserted into the type of $w$ at the place where it would
 %keep the type weakly increasing).
 We shall now show that
-$S_k\bigl( C'(u) \bigr) = S_k\bigl( C(u) \bigr)$
+$[C'(u)]_k = [C(u)]_k$
 for all $k \in \set{0, 1, \ldots, n}$ for which these are
 well-defined.
 According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
@@ -2105,74 +2103,76 @@ According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and
 Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
 Using Proposition~\ref{prop:SL.dual} to compute dual
 configurations, we can see how the MLQ
-$\qq = \tup{S_k(u), q_1, q_2}$ transforms under the action of
+$\qq = \tup{[u]_k, q_1, q_2}$ transforms under the action of
 $\fraks_1 \fraks_2 \fraks_1$: Namely, we have
 \begin{align*}
-\tup{S_k(u), q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, S_k\bigl(q_1(u)\bigr), q_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, S_k\bigl(q_2(q_1(u)) \bigr) }
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, S_k\bigl(q_2(q_1(u)) \bigr)},
+\tup{[u]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(u)]_k, q_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k},
 \end{align*}
-\Travis{Do you like it better in picture form?}
+where $\ast$ denotes some queue.
+Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
+\begin{align*}
+\tup{[u]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[u]_k, q'_1, q'_2}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(u)]_k , q'_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k}.
+\end{align*}
+(See Figure~\ref{fig:crossing_diagrams} for the actions depicted using crossing diagrams.)
+Yet, the two maps are equal by Proposition~\ref{prop:braid}.
+Thus, the resulting MLQs must be identical:
 \[
-\begin{tikzpicture}[xscale=3]
+\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(u) \bigr) \bigr]_k}
+=
+\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(u) \bigr) \bigr]_k}.
+\]
+Hence, we have
+\[
+\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k.
+\]
+In other words, $[C'(u)]_k = [C(u)]_k$.
+\end{proof}
+
+\begin{figure}
+\begin{gather*}
+\begin{tikzpicture}[xscale=3.5]
 \node (i1) at (0,0) {$S_k(u)$};
 \node (i2) at (0,-1) {$q_1$};
 \node (i3) at (0,-2) {$q_2$};
 \node (s11) at (1,0) {$\ast$};
-\node (s12) at (1,-1) {$S_k\bigl(q_1(u) \bigr)$};
+\node (s12) at (1,-1) {$[q_1(u)]_k$};
 \node (s13) at (1,-2) {$q_2$};
 \node (s21) at (2,0) {$\ast$};
 \node (s22) at (2,-1) {$\ast$};
-\node (s23) at (2,-2) {$S_k\bigl(q_2(q_1(u)) \bigr)$};
+\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
 \node (t1) at (3,0) {$\ast$};
 \node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$S_k\bigl(q_2(q_1(u)) \bigr)$};
+\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
 \path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
 \path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
 \path[-,red] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
 \end{tikzpicture}
-\]
-where $\ast$ denotes some queue.
-Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
-\begin{align*}
-\tup{S_k(u), q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{S_k(u), q'_1, q'_2}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, S_k\bigl(q'_1(u) \bigr) , q'_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, S_k\bigl(q'_2( q'_1(u)) \bigr)} .
-\end{align*}
-\[
-\begin{tikzpicture}[xscale=3]
-\node (i1) at (0,0) {$S_k(u)$};
+\\
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$[u]_k$};
 \node (i2) at (0,-1) {$q_1$};
 \node (i3) at (0,-2) {$q_2$};
-\node (s11) at (1,0) {$S_k(u)$};
+\node (s11) at (1,0) {$[u]_k$};
 \node (s12) at (1,-1) {$q'_1$};
 \node (s13) at (1,-2) {$q'_2$};
 \node (s21) at (2,0) {$\ast$};
-\node (s22) at (2,-1) {$S_k\bigl(q'_1(u) \bigr)$};
+\node (s22) at (2,-1) {$[q'_1(u)]_k$};
 \node (s23) at (2,-2) {$q'_2$};
 \node (t1) at (3,0) {$\ast$};
 \node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$S_k\bigl(q'_1(q'_2(u)) \bigr)$};
+\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k$};
 \path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
 \path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
 \path[-,red] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
 \end{tikzpicture}
-\]
-But the two maps are equal (by
-Proposition~\ref{prop:braid}); thus, the resulting
-MLQs must be identical:
-\[
-\tup{\ast, \ast, S_k\Bigl( q'_2\bigl(q'_1(u) \bigr) \Bigr)}
-=
-\tup{\ast, \ast, S_k\Bigl( q_2\bigl(q_1(u) \bigr) \Bigr)}.
-\]
-Hence, we have
-\[
-S_k\bigl( q'_2(q'_1(u) ) \bigr) = S_k\bigl( q_2(q_1(u)) \bigr).
-\]
-In other words, $S_k \bigl( C'(u) \bigr) = S_k \bigl( C(u) \bigr)$.
-\end{proof}
-
+\end{gather*}
+\caption{Crossing diagrams representing the action of $\fraks_1 \fraks_2 \fraks_1$ (top) and $\fraks_2 \fraks_1 \fraks_2$ (bottom).}
+\label{fig:crossing_diagrams}
+\end{figure}
 
 
 
