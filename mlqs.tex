@@ -1332,7 +1332,7 @@ Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that
 The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
 An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Hence, our proof is reduced to constructing the \defn{dual}\footnote{This is unrelated to the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
+Hence, our proof is reduced to constructing the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
 
 We first consider the case $r_1 = r_2$, in which we define $C' = C$.
 Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
@@ -1392,9 +1392,14 @@ The maximal balanced intervals are boxed.}
 \begin{remark}
 \label{rmk:balanced-dual-let}
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
-Then, the balanced and the unbalanced intervals of $C$ are exactly the balanced and unbalanced intervals of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$, reflected around the middle of $\ive{n}$.
-Then for $u \in \set{1,2}^n$, we have $C(u)_i = C^*(u^*)^*_{n+1-i}$, where we treat $C^*(u^*)$ as a word with $4$ classes.
-This follows from applying Lemma~\ref{le:dual} twice.
+Then, the interval $\mcI$ of $C$ is balanced if and only if $\mcI^* = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
+In other words, every balanced interval of $C$ are exactly the balanced intervals of $C^*$ but have been reflected around the middle of $\ive{n}$.
+In addition, we have
+\[
+C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q^*_1(u^*)^* \bigr) = q_2^*\bigl( q_1^*(u^*) \bigr)^* = C^*(u^*)^*
+\]
+from applying Lemma~\ref{le:dual} twice.
+In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 6 - C^*(u^*)_{n+1-i}$ where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
 \end{remark}
 
 
@@ -1961,9 +1966,6 @@ In this section, we shall give a different proof of
 Theorem~\ref{thm:permutation}, which relies on the braid relation for dual
 configurations. We need some definitions first.
 
-\Darij{The following definitions are clumsy, but they're the best
-I can do.}
-
 As in Section \ref{sec:thm_proof}, we define the concept of an
 $\tup{r_1, r_2}$-configuration $C$, and that of the
 corresponding dual $\tup{r_2, r_1}$-configuration $C'$.
@@ -2063,17 +2065,16 @@ Note that a similar argument holds for $j = 1$.
 Hence, $q'_2 \subseteq [q(w)]_k$.
 However, we clearly have $\abs{q'_2} = k = \abs{[q(w)]_k}$, and so $q'_2 = [q(w)]_k$.
 
-Note that every balanced interval $\mcI$ for $(q_1, q_2)$ corresponds to a balanced interval $\mcI^* = \set{ n+1-i \mid i \in \mcI }$ of $(q_2^*, q_1^*)$, where we recall that $q_i^*$ is the contragredient dual queue of $q_i$.
-Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(q^*_2,q^*_1)' = \bigl( (q'_2)^*, (q'_1)^* \bigr)$\travis{Rectify this with Remark~\ref{rmk:balanced-dual-let}.}.
-Also from Lemma~\ref{le:dual}, we have $q(u) = \bigl( q^*(u^*) \bigr)^*$ (recall that $q^*(u^*)$ has $\ell+1$ classes).
-
-We have $[w]_k^* = [w^*]_{n-k}$, and note that $[w^*]_{n-k}$ are the reversed indices\travis{This part is awkward. Might need a term or more detail.} of the largest $n-k$ letters of $w$.
-Now we have $\abs{q^*} = n - \abs{q} < n-k$, and so from a similar argument using Phase~I, we have $\tup{ q^*, [w^*]_{n-k} }' = \tup{ [q^*(w^*)]_{n-k}, q^{\dagger*} }$.
-Applying contragredient duality, we obtain
-\[
-\tup{ q^{\dagger}, [q^*(w^*)]_{n-k}^* } = \tup{ q^{\dagger}, [q^*(w^*)^*]_k } = \tup{ q^{\dagger}, [q(w)]_k }
-\]
-as desired.
+Now suppose $k > \abs{q}$.
+Note that $\ive{n} \setminus [w]_k$ are the indices of the largest $n-k$ letters of $w$ and $n - \abs{q} < n-k$.
+So from a similar argument as above but instead using Phase~I, we have
+\begin{equation}
+\label{eq:dual_claim}
+\tup{ \ive{n} \setminus q, \ive{n} \setminus [w]_k }' = \tup{ \ive{n} \setminus [q(w)]_k, \ive{n} \setminus q^{\dagger} }.
+\end{equation}
+Next, it is straightforward to see that an interval $\mcI$ is balanced for $(q_1, q_2)$ if and only if $\mcI$ is balanced for $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)$.
+Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)' = ( \ive{n} \setminus  q'_2, \ive{n} \setminus q'_1)$.
+Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{\dagger} , [q(w)]_k }$.
 \end{proof}
 
 We can now give our second proof of Theorem~\ref{thm:permutation}:
