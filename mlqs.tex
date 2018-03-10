@@ -1727,12 +1727,12 @@ Now, let $u_0$ be a result of applying Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref
 Such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap.
 
 Note that $u_0$ falls into one of the following three cases.
-Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$ (and $u_0$).
+Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$ (and $u_0$).\travis{I believe you assuming $r_1 > r_2$ here. What about when $r_1 \leq r_2$?}
 \begin{enumerate}
 \item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $j$ such that $T(j) = (2,\bigcirc)$.
-  This occurs when $m_1(u) > r_1$.
+  This occurs when $m_1(u) > r_1$. \travis{This is only one direction of implication outright. Consider $C = \set{ \{1,3\},\{1\} }$ with $u = 112$. Granted, with Lemma~\ref{le:BU}, this would get a reduction, but this indicates more details are needed to say ``equivalently.''}
 \item There is some balanced $i$ such that $T(i) = (2, \bigcirc)$, but there is no balanced $j$ such that $T(j) = (1,\square)$.
-  This occurs when $r_2 \geq m_1(u)$.
+  This occurs when $r_2 \geq m_1(u)$.\travis{Actually, this implication is not obvious. I had to apply~\ref{le:UB} and do a little induction.}
 \item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$.
   This occurs when $r_1 \geq m_1(u) > r_2$.
 \end{enumerate}
