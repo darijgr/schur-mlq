@@ -301,7 +301,9 @@ This allows us to define the spectral weight or amplitude of a word $u$ to be th
 Furthermore, we introduce the notion of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
 Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
-This action is given by applying a combinatorial $R$-matrix to an MLQ,\footnote{This operation has also previously appeared in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}) and van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.} and we show that does not change the MLQ as a function on words.
+We show that does not change the MLQ as a function on words.
+This action has previously appeared in a number of different guises, such as in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}), van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}, and Lothaire~\cite[Ch.~5, (5.6.3)]{Loth}.
+In the context of Kirillov--Reshetikhin crystals, it can be described as applying a combinatorial $R$-matrix to an MLQ, where the weight remaining invariant is a condition of being a crystal isomorphism.
 
 As a consequence of this action and specializing our weight parameters to $1$, we obtain a proof of the commutativity conjecture of~\cite{AAMP}.
 However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
@@ -311,13 +313,13 @@ By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}, wh
 We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP) on a ring, where multiple particles can occupy the same site.
 This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation~\cite{KMO16TARZP,KMO16TARZPII}.
 Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
-However, it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} and TARZP~\cite{KMO16II}.
+However, it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} or TARZP~\cite{KMO16II}.
 
 This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
 In Section~\ref{sec:result}, we give our main results.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
-In Sections~\ref{sec:thm_proof} and~\ref{sec:altproof}, we give two proofs of our main theorem.
+In Sections~\ref{sec:thm_proof} and~\ref{sec:altproof}, we give two different proofs of our main theorem.
 In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 \travis{Update once the sections have been decided.}
 
@@ -355,6 +357,8 @@ The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 Let $\ell = \max\{i \mid m_i \neq 0 \}$, which we say is the number of \defn{classes} in $u$ or $\mm$.
 A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if $m_i \neq 0$ for all $1 \leq i \leq \ell$.
+A word $w$ of type $\mm$ is \defn{standard} if $m_i \leq 1$ for all $i$.
+
 We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new word by replacing all occurrences of $j$ by $j-1$ in $u$ for each $j = i+1, i+2, \ldots$ in that order.
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
 Note that $\merge{i} u$ is packed whenever $u$ is packed.
@@ -412,8 +416,9 @@ The resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1
 \end{lemma}
 
 \begin{proof}
+Consider some $k$ such that $u_{i_k} = u_{i_{k+1}}$.
 If we switch two adjacent entries $i_k$ and $i_{k+1}$ of the
-permutation $\tup{i_1, i_2, \ldots, i_n}$ that satisfy $u_{i_k} = u_{i_{k+1}}$,
+permutation $\tup{i_1, i_2, \ldots, i_n}$,
 then the resulting word $v$ is unchanged.
 Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
 \begin{itemize}
@@ -959,7 +964,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \[
   \theta(\qq, q') := (q', q_1, \dotsc, q_{\ell-1});
   \]
-  this is a $(s_{i-1} \dotsm s_1)$-twisted MLQ of type $\mm$ and weight
+  the result is a $(s_{i-1} \dotsm s_2 s_1)$-twisted MLQ of type $\mm$ with weight
   $\wt\bigl( \theta(\qq, q') \bigr) = \wt(\qq) \wt(q')$.
   By Lemma~\ref{lemma:queue_merge}, we have
   \[
@@ -1039,7 +1044,7 @@ Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
 Thus, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
 we shall disregard this factor in the following.
 
-Next, define the near standardization of $u$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows. Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. Note that $k$ may not appear in $u$. Denote
+Next, define the \defn{near standardization} of $u$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows. Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. Note that $k$ may not appear in $u$. Denote
 \[
 W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \},
 \]
@@ -1068,7 +1073,7 @@ We claim it is sufficient to show that for every MLQ $\qq$, there exists unique 
 This follows by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} and considering the initial points $\{ \iota_i \}_{i=1}^r$ and terminal points $\{ \tau_i \}_{i=1}^r$.
 We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
 
-Thus, given disjoint $r$-paths $\rho = \{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq_{\rho} = (q_1, \dotsc, q_{\ell-1})$ by
+Therefore, given disjoint $r$-paths $\rho = \{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq_{\rho} = (q_1, \dotsc, q_{\ell-1})$ by
 \[
 j \in q_i \text{ if and only if } j \in \widetilde{q}_{i+t-\gamma_t},
 \]
@@ -1454,7 +1459,7 @@ If $u_i = u_j$, then the claim is trivial (as $u = u_{i \leftrightarrow j}$).
   \begin{itemize}
     \item $i$ is balanced with $T(i) = (1,\square)$,
     \item $j$ is balanced with $T(j) = (2,\bigcirc)$, and
-    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k\in\inter(i,j)$.
+    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k\in\inter(i,j)$ \travis{Do you really want balanced here? If so, then the proof does not work as there are no conditions on the unbalanced letters.}.
   \end{itemize}
   Then $C(u) = C(u_{i \leftrightarrow j})$.
 \end{lemma}
@@ -1462,8 +1467,9 @@ If $u_i = u_j$, then the claim is trivial (as $u = u_{i \leftrightarrow j}$).
 \begin{proof}
   By Lemma~\ref{le:orig}, we have $q_1(u) = q_1(u_{i\leftrightarrow j})$, and thus
   \[
-  C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q_1(u_{i\leftrightarrow j}) \bigr) = C(u_{i\leftrightarrow j}).
+  C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q_1(u_{i\leftrightarrow j}) \bigr) = C(u_{i\leftrightarrow j})
   \]
+  as desired.
 \end{proof}
 
 \begin{example}
@@ -1620,7 +1626,7 @@ We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interva
 \end{lemma}
 
 \begin{proof}
-  As in the proof of Lemma~\ref{le:BU}, we assume that $r_1 > r_2$, noting that the case $r_1 < r_2$ follows from Remark~\ref{rmk:balanced-dual-let} and Lemma~\ref{le:BU}.
+  We assume that $r_1 > r_2$, noting that the case $r_1 < r_2$ follows from Remark~\ref{rmk:balanced-dual-let} and Lemma~\ref{le:BU}.
   Hence, we have $T(i) = (1, \bigcirc)$, which implies $q_1(u)_i = 1$. Moreover,  for all unbalanced $k \in \inter(i,j)$, we have $T(k) = (2, \bigcirc)$ and $k \notin q_2$.
   
   Recall from the proof of Lemma~\ref{le:orig} that we have $q_1(u)_k = u_k + \delta_{2u_k}$ for all balanced $k \in \inter(i,j)$.
@@ -1721,16 +1727,17 @@ Now, let $u_0$ be a result of applying Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref
 Such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap.
 
 Note that $u_0$ falls into one of the following three cases.
-Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$.
+Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$ (and $u_0$).
 \begin{enumerate}
-\item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $i$ such that $T(i) = (2,\bigcirc)$.
-  Equivalently, we have $m_1(u) > r_1$.
-\item There is some balanced $i$ such that $T(i) = (2, \bigcirc)$, but there is no balanced $i$ such that $T(i) = (1,\square)$.
-  Equivalently, we have $r_2 \geq m_1(u)$.
+\item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $j$ such that $T(j) = (2,\bigcirc)$.
+  This occurs when $m_1(u) > r_1$.
+\item There is some balanced $i$ such that $T(i) = (2, \bigcirc)$, but there is no balanced $j$ such that $T(j) = (1,\square)$.
+  This occurs when $r_2 \geq m_1(u)$.
 \item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$.
-  Equivalently, we have $r_1 \geq m_1(u) > r_2$.
+  This occurs when $r_1 \geq m_1(u) > r_2$.
 \end{enumerate}
-In each of these cases, it is easy to see that all letters in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down, and that the labeling procedure inside each balanced interval is the same in $C$ and $C'$.
+In each of these cases, it is easy to see that the labeling procedure inside each balanced interval is the same in $C$ and $C'$.
+Moreover, all letters in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down.
 Therefore, we have $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, and hence, Theorem~\ref{thm:permutation} following by induction on length.
 \qed
 
@@ -1976,8 +1983,6 @@ From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i
 It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
 Thus, to show this is indeed an action, it remains to show the following.
 
-\Travis{We might want to lift up some stuff from the final remarks into here.}
-
 \begin{prop} \label{prop:braid}
 We have
 \[
@@ -1989,8 +1994,7 @@ for any MLQ $\qq$.
 
 \begin{proof}
 \darij{TODO!}
-This follows either from \cite[Ch.~5, (5.6.3)]{Loth}, or
-from crystal theory~\cite[Rule 3.10]{NY97}\travis{I'm not sure if this is the correct reference, but it does describe the $R$-matrix action}.
+Our proof will use~\cite[Ch.~5, (5.6.3)]{Loth}.
 
 (Here is the connection to Lothaire:
 A configuration $\tup{q_1, q_2}$ can be encoded as a $2n$-letter word
@@ -2009,8 +2013,6 @@ parentheses (although he doesn't define it this way).
 But this corresponds to taking the dual configuration.)
 \end{proof}
 
-We say a word $w$ of type $\mm = (m_1, \ldots)$ is \defn{standard} if $m_i \leq 1$ for all $i$.
-
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
@@ -2024,7 +2026,7 @@ Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if
 
 \begin{proof}
 Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
-Next, we assume $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
+Next, we assume that $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
 Note that $w$ and $w'$ have the same type $\mm$.
 Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
 Thus, we have $[w]_k \setminus [w]_{k-p_j(\mm)} = [w']_k \setminus [w']_{k-p_j(\mm)}$ defined, which we denote by $P_j$.
@@ -2241,7 +2243,7 @@ There is the natural cyclic symmetry on our special weights.
 \end{proof}
 
 Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
-Recall the combinatorial $R$-matrix acting on $B^{r,s}$ from~\cite{NY97,Shimozono02}, which is the unique crystal isomorphism
+Recall from~\cite{NY97,Shimozono02} that the combinatorial $R$-matrix is the unique crystal isomorphism
 \[
 R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_1}.
 \]
@@ -2253,12 +2255,15 @@ In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues
 Thus, by comparing the description of the combinatorial $R$-matrix for $B^{r_1,1}$ and $B^{r_2,1}$ from~\cite{NY97}, we obtain that taking the dual configuration is equivalent to applying the combinatorial $R$-matrix under $\Xi$.
 
 \begin{prop}
+\label{prop:dual_is_R}
 Let $C$ be an $(r_1, r_2)$-configuration. Then
 \[
 \Xi(C') = R\bigl( \Xi(C) \bigr),
 \]
 where $C'$ is the dual configuration of $C$.
 \end{prop}
+
+Note that Proposition~\ref{prop:dual_is_R} gives another proof of Proposition~\ref{prop:braid} since the combinatorial $R$-matrix is well-known to satisfy the Yang-Baxter equation.
 
 \begin{example}
 Suppose $n = 9$.
@@ -2351,7 +2356,7 @@ where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$
 
 We conclude with a few questions.
 Note that Lemmas~\ref{le:BB},~\ref{le:BU} and~\ref{le:UB} effectively compute $C(u)$ for $u \in \{1,2\}^n$.
-Could this be done in a more transparent manner, such as by using pairs of labeled periodic Dyck paths?
+Could this be done in a more transparent manner, such as by using pairs of labeled periodic Dyck or Motzkin paths?
 It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
 
 
