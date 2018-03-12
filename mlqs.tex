@@ -99,6 +99,9 @@
 \newcommand{\rev}{\operatorname{rev}}
 \newcommand{\conncomp}{\operatorname{conncomp}}
 \newcommand{\core}{\operatorname{core}}
+\newcommand{\col}{\operatorname{col}}
+\newcommand{\colw}{\operatorname{colw}}
+\newcommand{\word}{\operatorname{word}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
 % $\powset[k]{S}$ stands for the set of all $k$-element subsets of
@@ -1397,7 +1400,7 @@ The maximal balanced intervals are boxed.}
 \label{rmk:balanced-dual-let}
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
 Then, the interval $\mcI$ of $C$ is balanced if and only if $\mcI^* = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
-In other words, every balanced interval of $C$ are exactly the balanced intervals of $C^*$ but have been reflected around the middle of $\ive{n}$.
+In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but have been reflected around the middle of $\ive{n}$.
 In addition, we have
 \[
 C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q^*_1(u^*)^* \bigr) = q_2^*\bigl( q_1^*(u^*) \bigr)^* = C^*(u^*)^*
@@ -1974,9 +1977,13 @@ A \defn{configuration} shall simply mean a pair of queues (\textit{i.e.},
 an $\tup{r_1, r_2}$-configuration for some $r_1$ and $r_2$).
 Thus, any configuration $C$ has a \defn{dual configuration} $C'$.
 
-Consider a MLQ $\qq = \tup{q_1, q_2, \dotsc, q_k}$, then we define an action of $\SymGp{k}$ with simple transpositions $\fraks_i$ by
+Fix $k \geq 1$.
+In the following, an \defn{MLQ} will just mean a $k$-tuple of queues
+(without any restriction on their sizes).
+We want to define an action of $\SymGp{k}$ on MLQs
+with simple transpositions $\fraks_i$ acting by
 \[
-\fraks_i \qq = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+1}, \dotsc, q_k},
+\fraks_i \tup{q_1, q_2, \dotsc, q_k} = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k},
 \]
 where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
 From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
@@ -1989,28 +1996,183 @@ We have
 \fraks_i \fraks_{i+1} \fraks_i \qq
 	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
 \]
-for any MLQ $\qq$.
+for any MLQ $\qq$ and any $i \in \set{1, 2, \ldots k-1}$.
 \end{prop}
 
 \begin{proof}
-\darij{TODO!}
-Our proof will use~\cite[Ch.~5, (5.6.3)]{Loth}.
+We shall deduce the claim from~\cite[Ch.~5, (5.6.3)]{Loth}.
 
-(Here is the connection to Lothaire:
-A configuration $\tup{q_1, q_2}$ can be encoded as a $2n$-letter word
-$w$ consisting of three types of letter: $-$, $($ and $)$.
-Namely, the $\tup{2i-1}$-th letter of $w$ shall be $-$ if $i \notin q_1$,
-and otherwise $($.
-Meanwhile, the $2i$-th letter of $w$ shall be $-$ if $i \notin q_2$,
-and otherwise $)$.
-The letter $-$ is neutral; it won't hinder the matching of the parentheses.
-Now, do cyclic parenthesis matching of the word $w$
-(``cyclic'' means that a $($ at the end can be matched with a $)$ at
-the beginning).
-The operation $\sigma$ from Lothaire (specifically, his $\sigma_i$,
-but we are in the 2-letter case) is just flipping all the unmatched
-parentheses (although he doesn't define it this way).
-But this corresponds to taking the dual configuration.)
+Let $A$ be the $\tup{k+1}$-element set $\set{\circ, 1, 2, \ldots, k}$.
+Let $A^*$ denote the set of all words on the alphabet $A$
+(of any finite length).
+
+To any MLQ $\qq = \tup{q_1, q_2, \ldots, q_k}$, we assign the
+$k \times n$-matrix $M_{\qq} \in A^{k \times n}$, whose $\tup{i, j}$-th
+entry is $i$ if $j \in q_i$ and $\circ$ otherwise.
+
+If $M \in A^{k \times n}$ is any $k \times n$-matrix, and if
+$j \in \set{1, 2, \ldots, n}$, then $\col_j M$ will denote
+the $j$-th column of $M$ read from top to bottom (and
+regarded as a $k$-letter word in $A^*$).
+Furthermore, $\colw M \in A^*$ will denote the concatenation
+$\tup{\col_1 M} \tup{\col_2 M} \cdots \tup{\col_n M}$.
+For example, if $n = 5$, $k = 3$ and $\qq = \tup{\set{1, 3}, \set{2},
+\set{2, 5}}$, then
+\[
+ M_{\qq}
+ =
+ \begin{array}{ccccc}
+  1 & \circ & 1 & \circ & \circ \\
+  \circ & 2 & \circ  & \circ & \circ \\
+  \circ & 3  & \circ & \circ & 3
+ \end{array}
+ \qquad \text{ and } \qquad
+ \colw \tup{M_{\qq}} = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
+\]
+
+Given an MLQ $\qq$, we denote the word
+$\colw \tup{M_{\qq}}$ by $\word \qq$.
+Clearly, an MLQ $\qq$ is uniquely determined by
+$\word \qq$.
+In other words, the map $\word : \set{\text{MLQs}} \to A^*$
+is injective.
+
+Now, for each $i \in \set{1, 2, \ldots, k-1}$, we define an
+operator $\sigma_i : A^* \to A^*$.
+This operator $\sigma_i$ acts on a word
+$p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
+as follows:
+\begin{itemize}
+ \item Treat all letters $i$ in $p$ as opening parentheses,
+       and all letters $i+1$ as closing parentheses,
+       while all other letters are considered frozen.
+       Now, match as many parentheses as possible
+       according to the standard parenthesis-matching
+       algorithm (i.e.: every time you find an opening
+       parenthesis to the left of a closing one, with only
+       frozen letters between them, you match these two
+       parentheses and declare them frozen).
+       Notice that this algorithm is non-deterministic, but
+       the outcome is independent of the steps chosen;
+       the result is always a word whose non-frozen
+       part (i.e., the word obtained by removing all frozen
+       letters) is
+       $\underbrace{))\cdots)}_{a\text{ parentheses}}
+       \underbrace{((\cdots(}_{b\text{ parentheses}}$
+       for some integers $a, b \geq 0$.
+ \item Now, replace this non-frozen part by
+       $\underbrace{))\cdots)}_{b\text{ parentheses}}
+       \underbrace{((\cdots(}_{a\text{ parentheses}}$,
+       while keeping all frozen letters in their places.
+       The resulting word is $\sigma_i p$.
+\end{itemize}
+According to~\cite[Ch.~5, (5.6.3)]{Loth}, these operators
+$\sigma_i$ satisfy
+\begin{equation}
+ \sigma_i \circ \sigma_{i+1} \circ \sigma_i
+ = \sigma_{i+1} \circ \sigma_i \circ \sigma_{i+1}
+ \label{pf.prop:braid.loth-eq}
+\end{equation}
+for all $i \in \set{1, 2, \ldots, k-2}$.
+(Note that our letter $i$ corresponds to the $a_{k+1-i}$
+in \cite{Loth}, since \cite{Loth}'s definition of $\sigma_i$
+involves $a_i$ rather than $i+1$ as closing parenthesis
+and $a_{i+1}$ rather than $i$ as opening one. Also,
+\cite{Loth} does not include the letter $\circ$
+in the alphabet, but this makes no difference to the proof,
+since all letters $\circ$ are always frozen.)
+
+Now, we claim that
+\begin{equation}
+ \word \tup{\fraks_i \qq} = \sigma_i \tup{\word \qq}
+ \qquad \text{ for each MLQ } \qq \text{ and each } i .
+ \label{pf.prop:braid.inter}
+\end{equation}
+
+[\textit{Proof of \eqref{pf.prop:braid.inter}:}
+Idea: Fix an MLQ $\qq = \tup{q_1, q_2, \ldots, q_k}$
+and an $i \in \set{1, 2, \ldots, k-1}$.
+The word $\word \qq$ consists of $n$ blocks, each corresponding
+to some column of the matrix $M_{\qq}$; by abuse of notation,
+we shall refer to these blocks as the \textit{columns}
+of $\word \qq$.
+Consider the parenthesis-matching algorithm applied
+to the word $\word \qq$;
+simultaneously, consider the construction of the dual
+configuration $\tup{q'_i, q'_{i+1}}$ of the configuration
+$\tup{q_i, q_{i+1}}$.
+We shall relate the frozen and unmatched letters in the
+former algorithm to the balanced and unbalanced column in
+the latter construction.
+Note that when we say ``column $i$ is balanced'' (resp.
+``unbalanced''), what we mean is that $i \in \ive{n}$ is
+balanced (resp. unbalanced).
+
+Each time the former algorithm matches an opening parenthesis
+in column $u$ with a closing parenthesis in column $v$
+(notice that $u \leq v$, because the algorithm does not
+``wrap around'' the circle), the interval $\int[u, v]$
+is is revealed to be a balanced interval for the latter
+construction
+(because all parentheses inbetween them are already
+matched, and clearly are matched to each other because
+otherwise the two parentheses in columns $u$ and $v$
+would have prevented them from matching).
+The same, of course, holds for the intervals $\int[u, v]$
+for which there is no parenthesis-matching activity at all
+between columns $u$ and $v$ of $\word q$.
+Thus, if $u \in \ive{n}$ is such that the $u$-th column
+of $\word \qq$ is frozen (i.e., all letters in this
+column are frozen), then $u$ is a balanced letter.
+As for the letters (necessarily $i$'s and $i+1$'s) that
+do not get frozen at the end of the parentheses-matching
+algorithm, we know that they form the word
+$\underbrace{))\cdots)}_{a\text{ parentheses}}
+\underbrace{((\cdots(}_{b\text{ parentheses}}$
+for some $a$ and $b$.
+They correspond to $a$ elements of $q_{i+1}$ and to
+$b$ elements of $q_i$, with all the former lying to
+the left of all the letter.
+Let us assume $a \geq b$ (leaving the opposite case
+to the reader).
+Then, all the $b$ non-frozen opening parentheses,
+as well as the first $b$ non-frozen closing parentheses,
+will together form a balanced interval that ``wraps
+around the circle'' (or, more precisely: the columns in
+which they lie, as well as all the columns inbetween,
+will do so).
+The remaining $a-b$ non-frozen closing parentheses (or, more
+precisely, the columns in which they lie) are unbalanced
+(indeed, there must be at least $\abs{q_i} - \abs{q_{i+1}} = a-b$
+unbalanced columns, and since we have ruled out all the other
+columns, it is clear that the $a-b$ columns containing
+non-frozen closing parentheses must be the ones).
+Now, the construction of the dual configuration $\tup{q'_i, q'_{i+1}}$
+from $\tup{q_i, q_{i+1}}$ involves moving these
+$a-b$ unbalanced columns from $q_i$ to $q_{i+1}$.
+Meanwhile, the definition of $\sigma_i \tup{\word q}$ from
+$\word q$ involves replacing the corresponding $a-b$
+closing parentheses by opening parentheses.
+This is clearly the same thing.
+Thus, \eqref{pf.prop:braid.inter} follows.]
+
+\darij{TODO! Flesh this out.}
+
+The equality \eqref{pf.prop:braid.inter} can be rewritten as a
+commutative diagram:
+\[
+\xymatrix{
+ \set{\text{MLQs}} \ar[r]^{\fraks_i} \ar[d]_{\word} & \set{\text{MLQs}} \ar[d]^{\word} \\
+ A^* \ar[r]_{\sigma_i} & A^* .
+}
+\qquad \text{ for all } i .
+\]
+In view of the injectivity of the map $\word : \set{\text{MLQs}} \to A^*$,
+this diagram allows us to translate the equality
+\eqref{pf.prop:braid.loth-eq} into
+$\fraks_i \circ \fraks_{i+1} \circ \fraks_i
+= \fraks_{i+1} \circ \fraks_i \circ \fraks_{i+1}$.
+But this proves Proposition~\ref{prop:braid}.
 \end{proof}
 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
