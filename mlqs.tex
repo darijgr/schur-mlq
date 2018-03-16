@@ -302,7 +302,7 @@ In this paper, we introduce a new weighting of MLQs, which is the weight of the 
 We also interpret MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
 This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
 Furthermore, we introduce the notion of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
-Our main result is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
+Our main result (Theorem~\ref{thm:permutation}) is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
 We show that does not change the MLQ as a function on words.
 This action has previously appeared in a number of different guises, such as in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}), van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}, and Lothaire~\cite[Ch.~5, (5.6.3)]{Loth}.
@@ -316,15 +316,15 @@ By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}, wh
 We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP) on a ring, where multiple particles can occupy the same site.
 This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation~\cite{KMO16TARZP,KMO16TARZPII}.
 Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
-However, it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} or TARZP~\cite{KMO16II}.
+Yet it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} or TARZP~\cite{KMO16II}.
 
 This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
 In Section~\ref{sec:result}, we give our main results.
+In Section~\ref{sec:JT_formula}, we show a Jacobi-Trudy like formula for special words $u$, which we use to prove some of the conjectures in~\cite{AasLin17}.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
-In Sections~\ref{sec:thm_proof} and~\ref{sec:altproof}, we give two different proofs of our main theorem.
+In Sections~\ref{sec:thm_proof}, we give a proof of our main theorem (Theorem~\ref{thm:permutation}).
 In Section~\ref{sec:remarks}, we give some additional remarks about our results.
-\travis{Update once the sections have been decided.}
 
 
 \subsection{Acknowledgements}
@@ -1009,7 +1009,16 @@ By examining all possible MLQs for these words, we obtain
 We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
+
+
+
+
+
+
+
+%=====================================================================
 \section{A Jacobi-Trudi-like formula for special $u$}
+\label{sec:JT_formula}
 
 We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and weakly decreasing if we disregard all letters $\ell$.
 
@@ -1333,48 +1342,34 @@ Note however that queues give us \emph{a} random process with this property: for
 \section{Proof of Theorem~\ref{thm:permutation}}
 \label{sec:thm_proof}
 
-Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions
-$s_1, s_2, \ldots, s_{\ell-2}$.
-Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+In this section, we shall prove Theorem~\ref{thm:permutation} by relying on the
+braid relation for dual configurations. We need some definitions first.
 
-The proof thus reduces down to defining an action of a simple transposition $s_i$ on a pair of queues.
 An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-Hence, our proof is reduced to constructing the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, such that $C'$ satisfies $C(u) = C'(u)$, $\wt(C) = \wt(C')$, and $C'' = C$ (\textit{i.e.} the dual of $C'$ equals $C$).
+We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
-We first consider the case $r_1 = r_2$, in which we define $C' = C$.
-Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
-Thus, for the remainder of this section we assume $r_1 \neq r_2$.
-
-By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
-We split the proof into four parts as follows.
-In Part~A we describe how to split any configuration into \defn{balanced} and \defn{unbalanced} intervals.
-In Part~B we define the involution promised above, mapping any configuration $C$ to its dual $C'$.
-In Part~C we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
-Finally, in Part~D we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
-
-For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{1,2}^n$.
-
-%%%%%%%%%%
-\subsection*{Part A: Splitting into balanced and unbalanced intervals}
-
-Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
+We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
+Next, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
-
-For $r_1 < r_2$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
+Note for $r_1 < r_2$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
 Conversely, for $r_1 > r_2$ and $j$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
-The following notation will be useful later on: for a word $u \in \mcW_n$, an element $j \in \ive{n}$ and an $(r_1, r_2)$-configuration $C = (q_1, q_2)$, we define
-\[
-T(j) := \begin{cases}
-(u_j, \bigcirc) & \text{if } j \in q_1, \\
-(u_j, \square) & \text{if } j \notin q_1.
-\end{cases}
-\]
+
+We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ in $C$.
+For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
+Note that $C$ and $C'$ have the same balanced intervals.
+It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
+
+\begin{example}
+Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
+The dual configuration $C'$ is given by sliding all of the circles not boxed from the upper level to the lower level.
+In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
+\end{example}
 
 \begin{figure}[t]
 \[
@@ -1409,25 +1404,547 @@ from applying Lemma~\ref{le:dual} twice.
 In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 6 - C^*(u^*)_{n+1-i}$ where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
 \end{remark}
 
+Fix $k \geq 1$.
+In the following, an \defn{MLQ} will just mean a $k$-tuple of queues
+(without any restriction on their sizes).
+We want to define an action of $\SymGp{k}$ on MLQs
+with simple transpositions $\fraks_i$ acting by
+\[
+\fraks_i \tup{q_1, q_2, \dotsc, q_k} = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k},
+\]
+where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
+From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
+It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
+Thus, to show this is indeed an action, it remains to show the following.
 
-%%%%%%%%%%
-\subsection*{Part B: Defining the dual configuration}
+\begin{prop} \label{prop:braid}
+We have
+\[
+\fraks_i \fraks_{i+1} \fraks_i \qq
+	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
+\]
+for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots k-1}$.
+\end{prop}
 
-We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ in $C$.
-For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
-Note that $C$ and $C'$ have the same balanced intervals.
-It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
+\begin{proof}
+We shall deduce the claim from~\cite[Ch.~5, (5.6.3)]{Loth}.
+
+Let $A$ be the $\tup{k+1}$-element set $\set{\circ, 1, 2, \ldots, k}$.
+Let $A^*$ denote the set of all words on the alphabet $A$
+(of any finite length).
+
+We construct a $k \times n$-matrix $M_{\qq} \in A^{k \times n}$ from $\qq$ by setting the $\tup{i, j}$-th
+entry to $i$ if $j \in q_i$ and $\circ$ otherwise.
+We then construct $\word(\qq)$ by reading $M_{\qq}$ from top-to-bottom, left-to-right.
+For example, if $n = 5$, $k = 3$, then
+\begin{align*}
+\qq = \tup{\set{1, 3}, \set{2},
+\set{2, 5}}
+& \longleftrightarrow
+ M_{\qq}
+ =
+ \begin{array}{ccccc}
+  1 & \circ & 1 & \circ & \circ \\
+  \circ & 2 & \circ  & \circ & \circ \\
+  \circ & 3  & \circ & \circ & 3
+ \end{array}
+ \\ & \longrightarrow
+ \colw \tup{M_{\qq}} = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
+\end{align*}
+Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$.
+In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
+is injective.
+
+Now, for each $i \in \set{1, 2, \ldots, k-1}$, we recall the operator
+$\sigma_i \colon A^* \to A^*$ from~\cite[\S5.5]{Loth}.
+This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
+as follows:
+\begin{enumerate}
+ \item Treat all letters $i$ in $p$ as opening parentheses `(',
+       all letters $i+1$ as closing parentheses `)',
+       and all other letters are considered frozen.
+       Now, match as many parentheses as possible
+       according to the standard parenthesis-matching
+       algorithm (\textit{i.e.}, every time you find an opening
+       parenthesis to the left of a closing one, with only
+       frozen letters between them, you match these two
+       parentheses and declare them frozen).
+       Notice that this algorithm is non-deterministic, but
+       the outcome is independent of the steps chosen;
+       the result is always a word whose non-frozen
+       part (\textit{i.e.}, the word obtained by removing
+       all frozen letters) is
+       $\underbrace{))\cdots)}_{a\text{ parentheses}}
+       \underbrace{((\cdots(}_{b\text{ parentheses}}$
+       for some integers $a, b \geq 0$.
+       We call this the \defn{reduced signature} of $p$.
+ \item Now, replace this non-frozen part by
+       $\underbrace{))\cdots)}_{b\text{ parentheses}}
+       \underbrace{((\cdots(}_{a\text{ parentheses}}$
+       while keeping all frozen letters in their places.
+       The resulting word is $\sigma_i p$.
+\end{enumerate}
+From~\cite[Eq.~(5.6.3)]{Loth}, these operators
+$\sigma_i$ satisfy
+\begin{equation}
+ \sigma_i \circ \sigma_{i+1} \circ \sigma_i
+ = \sigma_{i+1} \circ \sigma_i \circ \sigma_{i+1}
+ \label{pf.prop:braid.loth-eq}
+\end{equation}
+for all $i \in \set{1, 2, \ldots, k-2}$.
+
+Now, we claim that
+\begin{equation}
+ \word(\fraks_i \qq) = \sigma_i\bigl( \word(\qq) \bigr)
+ \qquad \text{ for each MLQ } \qq \text{ and each } i .
+ \label{pf.prop:braid.inter}
+\end{equation}
+Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$ for $\qq = (q_1, q_2)$.
+
+Thus, we write a sequence of parentheses for $\qq$ by for each $j = 1, 2, \dotsc, n$ (in that order), we write
+\begin{itemize}
+\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$,
+\item an opening parenthesis `)' if $j \notin q_1$ and $j \in q_2$,
+\item an canceling pair of parenthesis `()' if $j \in q_1$ and $j \in q_2$,
+\item nothing otherwise.
+\end{itemize}
+Note that this yields exactly the same parentheses sequence as for $\word(\qq)$ (removing all $\circ$ letters).
+Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$ respectively.
+Additionally, every canceling pair of parentheses from positions $j < j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$.
+Since paired parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no canceling parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
+
+Let $w = \word(\qq) = w_0 w_1 \cdots w_{n-1}$ with $a$ opening parentheses and $b$ closing parentheses in its reduced signature.
+By~\cite[Prop.~5.6.1]{Loth}, we can cyclically shift $w$ such that either there  are only opening parentheses `(' or closing parentheses `)`, but not both and this does not change the result.
+In other words, we have $s_1 \zeta^a w = \zeta^a s_1 w$, where $\zeta$ is the cyclic shift $w_j \mapsto w_{j+1}$, where indices are taken modulo $n$.
+We slightly abuse of notation and denote the cyclic shift of an MLQ by $\zeta^a \qq = (\zeta^a q_1, \zeta^a q_2)$, where $\zeta^a q_k = \set{ j + a \mod{n} \mid j \in q_k}$ for $k = 1,2$.
+However, we are justified in doing this since $\zeta^k \qq = \zeta^k w$ if and only if $\qq = w$ for any $k \in \ZZ$.
+By the definition of balanced intervals being cyclic, we have $\zeta^a \fraks_1 \qq = \fraks_1 \zeta^a \qq$.
+However, it is clear that $\zeta^a \qq = \zeta^a w$ if and only if $\fraks_1 \zeta^a \qq = \sigma_1 \zeta^a w$.
+Hence, we obtain~\eqref{pf.prop:braid.inter}.
+
+The equality \eqref{pf.prop:braid.inter} can be rewritten as a
+commutative diagram:
+\[
+\xymatrix{
+ \set{\text{MLQs}} \ar[r]^{\fraks_i} \ar[d]_{\word} & \set{\text{MLQs}} \ar[d]^{\word} \\
+ A^* \ar[r]_{\sigma_i} & A^* .
+}
+\qquad \text{ for all } i .
+\]
+In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
+this diagram allows us to translate~\eqref{pf.prop:braid.loth-eq} into
+$\fraks_i \circ \fraks_{i+1} \circ \fraks_i = \fraks_{i+1} \circ \fraks_i \circ \fraks_{i+1}$.
+\end{proof}
+
+\begin{remark}
+Our letter $i$ corresponds to the $a_{k+1-i}$ in~\cite{Loth}
+since~\cite{Loth}'s definition of $\sigma_i$ involves $a_i$ rather
+than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
+Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
+but this makes no difference to the proof, since all letters $\circ$ are always frozen.
+Note that we have arbitrarily chosen to break our cycle at $n$,
+however by~\cite[Prop.~5.6.1]{Loth}, the result does not depend on this choice.
+\end{remark}
+
+\begin{remark}
+The operator $\sigma_i$ is essentially a combination of co-plactic operators.
+Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
+Note that the bracketing rule given above is precisely the usual signature rule for computing tensor products.
+\end{remark}
+
+Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
+Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
+corresponding to the $k$ smallest letters $w_i$ of $w$.
+
+The crucial tools in our second proof of Theorem~\ref{thm:permutation} will be the following two facts:
+
+\begin{lemma} \label{lem:SL.reconstruct}
+Let $w, w' \in \mcW_n$.
+Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if $w = w'$.
+\end{lemma}
+
+\begin{proof}
+Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
+Next, we assume that $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
+Note that $w$ and $w'$ have the same type $\mm$.
+Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
+Thus, we have $[w]_k \setminus [w]_{k-p_j(\mm)} = [w']_k \setminus [w']_{k-p_j(\mm)}$ defined, which we denote by $P_j$.
+\travis{This version of $k$ smallest letters is actively fighting us here.}
+By construction, we have $w_i = j = w'_i$ for all $i \in P_j$.
+Since this holds for all letters $k$, we have $w = w'$.
+\end{proof}
+
+\begin{prop} \label{prop:SL.dual}
+Let $w \in \mcW_n$ be a word of type $\mm$ such that $k = p_{\alpha}(\mm)$ for some $\alpha$.
+Let $q$ be a queue.
+The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [q(w)]_k }$, where $q^{\dagger}$ is some queue.
+\end{prop}
+
+\begin{proof}
+Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
+The notations of $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
+
+Suppose $k \leq \abs{q}$.
+Therefore, for all $j \in [w]_k$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
+Recall that in Phase~II of computing $q(w)$, a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
+We show $i_j \in q'_2 \cap \mcI_j$ by induction on $j$.
+Next, suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
+Let $\mcI_j = \inter[e,f]$.
+Since $\mcI_j$ is balanced and by our induction assumption, we have that
+\[
+c^{\uparrow}[i,j] \geq \abs{\set{ h \in \inter[j,f] \mid q(w)_h \text{ is currently set} }} + 1.
+\]
+Since we have $c^{\uparrow}\mcI_j = c^{\downarrow}\mcI_j$, there must exist a $i_j \in q'_2 \cap \mcI_j$ such that $q(w)_{i_j}$ is unset.
+Thus, we set $q(w)_{i_j} = w_j$.
+Note that a similar argument holds for $j = 1$.
+Hence, $q'_2 \subseteq [q(w)]_k$.
+However, we clearly have $\abs{q'_2} = k = \abs{[q(w)]_k}$, and so $q'_2 = [q(w)]_k$.
+
+Now suppose $k > \abs{q}$.
+Note that $\ive{n} \setminus [w]_k$ are the indices of the largest $n-k$ letters of $w$ and $n - \abs{q} < n-k$.
+So from a similar argument as above but instead using Phase~I, we have
+\begin{equation}
+\label{eq:dual_claim}
+\tup{ \ive{n} \setminus q, \ive{n} \setminus [w]_k }' = \tup{ \ive{n} \setminus [q(w)]_k, \ive{n} \setminus q^{\dagger} }.
+\end{equation}
+Next, it is straightforward to see that an interval $\mcI$ is balanced for $(q_1, q_2)$ if and only if $\mcI$ is balanced for $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)$.
+Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)' = ( \ive{n} \setminus  q'_2, \ive{n} \setminus q'_1)$.
+Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{\dagger} , [q(w)]_k }$.
+\end{proof}
+
+We can now give our second proof of Theorem~\ref{thm:permutation}:
+
+\begin{proof}[Second proof of Theorem~\ref{thm:permutation}.]
+We follow the same approach as in the first proof:
+We must show that if $C = \tup{q_1, q_2}$ is any configuration
+and if $u \in \mcW_n$ is any word, then the dual configuration
+$C' = (q'_1, q'_2)$ of $C$ satisfies $C'(u) = C(u)$.
+
+From Lemma~\ref{le:mono}, it is sufficient to consider standard words $u$.
+It is straightforward to see that the words
+$C(u) = q_2\bigl( q_1(u) \bigr)$
+and
+$C'(u) = q'_2\bigl( q_1'(u) \bigr)$
+have the same type from Equation~\eqref{eq:queue_type_change}.
+%indeed, the action of a queue $q$ on a word $w$ modifies its
+%type in a predictable way (namely, the number $\abs{q}$ is
+%inserted into the type of $w$ at the place where it would
+%keep the type weakly increasing).
+We shall now show that
+$[C'(u)]_k = [C(u)]_k$
+for all $k \in \set{0, 1, \ldots, n}$ for which these are
+well-defined.
+According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
+
+Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
+Using Proposition~\ref{prop:SL.dual} to compute dual
+configurations, we can see how the MLQ
+$\qq = \tup{[u]_k, q_1, q_2}$ transforms under the action of
+$\fraks_1 \fraks_2 \fraks_1$: Namely, we have
+\begin{align*}
+\tup{[u]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(u)]_k, q_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k},
+\end{align*}
+where $\ast$ denotes some queue.
+Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
+\begin{align*}
+\tup{[u]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[u]_k, q'_1, q'_2}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(u)]_k , q'_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k}.
+\end{align*}
+(See Figure~\ref{fig:crossing_diagrams} for the actions depicted using crossing diagrams.)
+Yet, the two maps are equal by Proposition~\ref{prop:braid}.
+Thus, the resulting MLQs must be identical:
+\[
+\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(u) \bigr) \bigr]_k}
+=
+\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(u) \bigr) \bigr]_k}.
+\]
+Hence, we have
+\[
+\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k.
+\]
+In other words, $[C'(u)]_k = [C(u)]_k$.
+\end{proof}
+
+\begin{figure}
+\begin{gather*}
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$S_k(u)$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$\ast$};
+\node (s12) at (1,-1) {$[q_1(u)]_k$};
+\node (s13) at (1,-2) {$q_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$\ast$};
+\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
+\path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
+\path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
+\path[-,red] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
+\end{tikzpicture}
+\\
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$[u]_k$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$[u]_k$};
+\node (s12) at (1,-1) {$q'_1$};
+\node (s13) at (1,-2) {$q'_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$[q'_1(u)]_k$};
+\node (s23) at (2,-2) {$q'_2$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k$};
+\path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
+\path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
+\path[-,red] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
+\end{tikzpicture}
+\end{gather*}
+\caption{Crossing diagrams representing the action of $\fraks_1 \fraks_2 \fraks_1$ (top) and $\fraks_2 \fraks_1 \fraks_2$ (bottom).}
+\label{fig:crossing_diagrams}
+\end{figure}
+
+
+
+
+
+
+
+%=====================================================================
+\section{Final remarks}
+\label{sec:remarks}
+
+We conclude by giving some additional examples, remarks, and comments about our results.
+We begin with an example to illustrate the proof of Theorem~\ref{thm:merge} in more detail.
 
 \begin{example}
-Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
-The dual configuration $C'$ is given by sliding all of the circles not in a shaded interval from the upper level to the lower level.
-In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
+In order to compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
+We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
+\[
+\qq = \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
+\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; \xrightarrow{\hspace{30pt}} \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; = \widetilde{\qq}.
+\]
+Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
+Furthermore, note that $135452 = \merge{5} 135462$.
+Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
+In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
+By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
+\begin{align*}
+\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; \xrightarrow[\hspace{15pt}]{R_2} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\\[1.3em] &
+\; \xrightarrow[\hspace{15pt}]{R_3} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+\; \xrightarrow[\hspace{15pt}]{R_4} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; = \widetilde{\qq}',
+\end{align*}
+which contributes to $\swt{135462}$.
 \end{example}
+
+There is the natural cyclic symmetry on our special weights.
+
+\begin{prop}
+  Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
+  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions, and similarly on monomials in $\xx$.
+\end{prop}
+
+\begin{proof}
+  For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
+  It is clear from the definition of a queue that $q(u \sigma) = \bigl( (\sigma q)(u) \bigr) \sigma$.
+  Hence, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
+  $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
+  where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
+  Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
+  $\qq (1 \cdots 1) = \bigl( (\sigma \qq)(1 \cdots 1) \bigr) \sigma$.
+  From here, the claim follows by an obvious bijection
+  (given by the action of $\sigma$) between the sums defining
+  $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
+\end{proof}
+
+Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
+Recall from~\cite{NY97,Shimozono02} that the combinatorial $R$-matrix is the unique crystal isomorphism
+\[
+R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_1}.
+\]
+There is a well-known (in slightly different terminology) bijection $\Xi_r$ relating $r$-queues with an element of the KR crystal $B^{r,1}$ in type $A_{n-1}^{(1)}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
+In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
+\[
+\Xi(\qq) = \Xi_{p_1}(q_1) \otimes \Xi_{p_2}(q_2) \otimes \dotsm \otimes \Xi_{p_{\ell}}(q_{\ell}).
+\]
+Thus, by comparing the description of the combinatorial $R$-matrix for $B^{r_1,1}$ and $B^{r_2,1}$ from~\cite{NY97}, we obtain that taking the dual configuration is equivalent to applying the combinatorial $R$-matrix under $\Xi$.
+
+\begin{prop}
+\label{prop:dual_is_R}
+Let $C$ be an $(r_1, r_2)$-configuration. Then
+\[
+\Xi(C') = R\bigl( \Xi(C) \bigr),
+\]
+where $C'$ is the dual configuration of $C$.
+\end{prop}
+
+Note that Proposition~\ref{prop:dual_is_R} gives another proof of Proposition~\ref{prop:braid} since the combinatorial $R$-matrix is well-known to satisfy the Yang-Baxter equation.
+
+\begin{example}
+Suppose $n = 9$.
+Consider the $(4,6)$-configuration and dual $(6,4)$-configuration
+\[
+C = (\set{1,4,5,6}, \set{2,3,4,6,7,8}),
+\qquad\quad
+C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7}).
+\]
+We have
+\[
+\begin{tikzpicture}[xscale=6,yscale=4,>=stealth]
+\node (C) at (0,0) { %{$(\set{1,4,5,6}, \set{2,3,4,6,7,8})$};
+\begin{tikzpicture}[scale=0.7]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \foreach \i in {1,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,7,8,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,3,4,6,7,8} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,5,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+};
+\node (Cp) at (0,-1) { %{$(\set{1,3,4,5,6,8}, \set{2,4,6,7})$};
+\begin{tikzpicture}[scale=0.7]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \foreach \i in {1,3,4,5,6,8} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,7,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,4,6,7} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,3,5,8,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+};
+\node (KR) at (1,0) {$\young(1,4,5,6) \otimes \young(2,3,4,6,7,8)$};
+\node (KRp) at (1,-1) {$\young(1,3,4,5,6,8) \otimes \young(2,4,6,7)$};
+\draw[<->] (C) -- (Cp) node[midway,anchor=east] {dual};
+\draw[<->] (C) -- (KR) node[midway,anchor=south] {$\Xi$};
+\draw[<->] (KR) -- (KRp) node[midway,anchor=west] {$R$};
+\draw[<->] (Cp) -- (KRp) node[midway,anchor=north] {$\Xi$};
+\end{tikzpicture}
+\]
+\end{example}
+
+Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
+Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$-action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
+Furthermore, the $\SymGp{\ell}$-action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
+Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
+
+Next, we describe how to interpret our action from looking at the corner transfer matrix described in~\cite{KMO15}, which can be given diagrammatically by
+\[
+\begin{tikzpicture}[>=latex,scale=0.5]
+\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,8);
+\foreach \x in {1,2} {
+  \draw[->] (0,\x+1) node[anchor=east] {$\mathbf{b}_{\ell-\x}$} -- (\x+1,\x+1) -- (\x+1,8);
+}
+\foreach \x in {1,2,3} {
+  \draw[->] (0,8-\x) node[anchor=east] {$\mathbf{b}_{\x}$} -- (8-\x,8-\x) -- (8-\x,8);
+}
+\node at (4,7.5) {$\cdots$};
+\node at (0.5,4) {$\vdots$};
+\end{tikzpicture}
+\]
+where every crossing is a combinatorial $R$-matrix and $\mathbf{b}_i \in B^{p_i,1}$.
+Our action effectively does the following on the corner transfer matrix:
+\[
+\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
+\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
+\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
+\draw[->] (-1,3) node[anchor=east] {$\mathbf{b}_i$} -- (0,4) -- (4,4) -- (4,7) -- (3,8);
+\draw[->] (-1,4) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (0,3) -- (3,3) -- (3,7) -- (4,8);
+\node at (2,6.5) {$\cdots$};
+\node at (0.5,2) {$\vdots$};
+\node at (5,6.5) {$\cdots$};
+\node at (0.5,5) {$\vdots$};
+\end{tikzpicture}
+\qquad = \qquad
+\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
+\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
+\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
+\draw[->] (0,4) node[anchor=east] {$\mathbf{b}_i$} -- (4,4) -- (4,7);
+\draw[->] (0,3) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (3,3) -- (3,7);
+\node at (2,6.5) {$\cdots$};
+\node at (0.5,2) {$\vdots$};
+\node at (5,6.5) {$\cdots$};
+\node at (0.5,5) {$\vdots$};
+\end{tikzpicture}
+\]
+where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
+
+We conclude with a few questions.
+Note that Lemmas~\ref{le:BB},~\ref{le:BU} and~\ref{le:UB} effectively compute $C(u)$ for $u \in \{1,2\}^n$.
+Could this be done in a more transparent manner, such as by using pairs of labeled periodic Dyck or Motzkin paths?
+It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
+
+
+
+
+
+
+
+
+
+\appendix
+
+%=====================================================================
+\section{Alternative proof of Theorem~\ref{thm:permutation}}
+\label{sec:altproof}
+
+We will now sketch an alternative proof of Theorem~\ref{thm:permutation} by directly showing that $(\fraks_i \qq)(u) = \qq(u)$, where the action $\fraks_i \qq$ is as given in Section~\ref{sec:thm_proof}.
+
+Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
+Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+The proof thus reduces down to showing for a configuration $C$ and word $u$, we have $C(u) = C'(u)$.
+
+We first consider the case $r_1 = r_2$, in which case $C' = C$ by definition and the claim is trivial.
+Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
+Thus, for the remainder of this section we assume $r_1 \neq r_2$.
+
+By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
+We split the proof into four parts as follows.
+In Part~A, we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
+In Part~B, we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
+
+For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{1,2}^n$.
+We will also use the notation
+\[
+T(j) := \begin{cases}
+(u_j, \bigcirc) & \text{if } j \in q_1, \\
+(u_j, \square) & \text{if } j \notin q_1,
+\end{cases}
+\]
+for an element $j \in \ive{n}$.
+
 
 
 %balanced intervals in C and C' are the same (because #unbalanced columns is same in both)
 %%%%%%%%%%
-\subsection*{Part C: Reduction to special words}
+\subsection*{Part A: Reduction to special words}
 
 For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result of swapping positions $i$ and $j$ in $u$.
 
@@ -1723,7 +2240,7 @@ We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
 
 
 %%%%%%%%%%
-\subsection*{Part D: finishing the proof}
+\subsection*{Part B: finishing the proof}
 
 Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$.
 Now, let $u_0$ be a result of applying Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} until this can be done no more.
@@ -1959,569 +2476,6 @@ C(211112) & = C(211211) = C(221111) = C(121211)
 \begin{remark}
 Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
 \end{remark}
-
-
-
-%=====================================================================
-\section{Alternative proof of Theorem~\ref{thm:permutation}}
-\label{sec:altproof}
-
-In this section, we shall give a different proof of
-Theorem~\ref{thm:permutation}, which relies on the braid relation for dual
-configurations. We need some definitions first.
-
-As in Section \ref{sec:thm_proof}, we define the concept of an
-$\tup{r_1, r_2}$-configuration $C$, and that of the
-corresponding dual $\tup{r_2, r_1}$-configuration $C'$.
-A \defn{configuration} shall simply mean a pair of queues (\textit{i.e.},
-an $\tup{r_1, r_2}$-configuration for some $r_1$ and $r_2$).
-Thus, any configuration $C$ has a \defn{dual configuration} $C'$.
-
-Fix $k \geq 1$.
-In the following, an \defn{MLQ} will just mean a $k$-tuple of queues
-(without any restriction on their sizes).
-We want to define an action of $\SymGp{k}$ on MLQs
-with simple transpositions $\fraks_i$ acting by
-\[
-\fraks_i \tup{q_1, q_2, \dotsc, q_k} = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k},
-\]
-where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
-From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
-It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
-Thus, to show this is indeed an action, it remains to show the following.
-
-\begin{prop} \label{prop:braid}
-We have
-\[
-\fraks_i \fraks_{i+1} \fraks_i \qq
-	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
-\]
-for any MLQ $\qq$ and any $i \in \set{1, 2, \ldots k-1}$.
-\end{prop}
-
-\begin{proof}
-We shall deduce the claim from~\cite[Ch.~5, (5.6.3)]{Loth}.
-
-Let $A$ be the $\tup{k+1}$-element set $\set{\circ, 1, 2, \ldots, k}$.
-Let $A^*$ denote the set of all words on the alphabet $A$
-(of any finite length).
-
-To any MLQ $\qq = \tup{q_1, q_2, \ldots, q_k}$, we assign the
-$k \times n$-matrix $M_{\qq} \in A^{k \times n}$, whose $\tup{i, j}$-th
-entry is $i$ if $j \in q_i$ and $\circ$ otherwise.
-
-If $M \in A^{k \times n}$ is any $k \times n$-matrix, and if
-$j \in \set{1, 2, \ldots, n}$, then $\col_j M$ will denote
-the $j$-th column of $M$ read from top to bottom (and
-regarded as a $k$-letter word in $A^*$).
-Furthermore, $\colw M \in A^*$ will denote the concatenation
-$\tup{\col_1 M} \tup{\col_2 M} \cdots \tup{\col_n M}$.
-For example, if $n = 5$, $k = 3$ and $\qq = \tup{\set{1, 3}, \set{2},
-\set{2, 5}}$, then
-\[
- M_{\qq}
- =
- \begin{array}{ccccc}
-  1 & \circ & 1 & \circ & \circ \\
-  \circ & 2 & \circ  & \circ & \circ \\
-  \circ & 3  & \circ & \circ & 3
- \end{array}
- \qquad \text{ and } \qquad
- \colw \tup{M_{\qq}} = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
-\]
-
-Given an MLQ $\qq$, we denote the word
-$\colw \tup{M_{\qq}}$ by $\word \qq$.
-Clearly, an MLQ $\qq$ is uniquely determined by
-$\word \qq$.
-In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
-is injective.
-
-Now, for each $i \in \set{1, 2, \ldots, k-1}$, we define an
-operator $\sigma_i \colon A^* \to A^*$.
-This operator $\sigma_i$ acts on a word
-$p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
-as follows:
-\begin{itemize}
- \item Treat all letters $i$ in $p$ as opening parentheses,
-       and all letters $i+1$ as closing parentheses,
-       while all other letters are considered frozen.
-       Now, match as many parentheses as possible
-       according to the standard parenthesis-matching
-       algorithm (\textit{i.e.}, every time you find an opening
-       parenthesis to the left of a closing one, with only
-       frozen letters between them, you match these two
-       parentheses and declare them frozen).
-       Notice that this algorithm is non-deterministic, but
-       the outcome is independent of the steps chosen;
-       the result is always a word whose non-frozen
-       part (\textit{i.e.}, the word obtained by removing
-       all frozen letters) is
-       $\underbrace{))\cdots)}_{a\text{ parentheses}}
-       \underbrace{((\cdots(}_{b\text{ parentheses}}$
-       for some integers $a, b \geq 0$.
- \item Now, replace this non-frozen part by
-       $\underbrace{))\cdots)}_{b\text{ parentheses}}
-       \underbrace{((\cdots(}_{a\text{ parentheses}}$
-       while keeping all frozen letters in their places.
-       The resulting word is $\sigma_i p$.
-\end{itemize}
-According to~\cite[Ch.~5, (5.6.3)]{Loth}, these operators
-$\sigma_i$ satisfy
-\begin{equation}
- \sigma_i \circ \sigma_{i+1} \circ \sigma_i
- = \sigma_{i+1} \circ \sigma_i \circ \sigma_{i+1}
- \label{pf.prop:braid.loth-eq}
-\end{equation}
-for all $i \in \set{1, 2, \ldots, k-2}$.
-(Note that our letter $i$ corresponds to the $a_{k+1-i}$
-in \cite{Loth}, since \cite{Loth}'s definition of $\sigma_i$
-involves $a_i$ rather than $i+1$ as closing parenthesis
-and $a_{i+1}$ rather than $i$ as opening one. Also,
-\cite{Loth} does not include the letter $\circ$
-in the alphabet, but this makes no difference to the proof,
-since all letters $\circ$ are always frozen.)
-
-Now, we claim that
-\begin{equation}
- \word \tup{\fraks_i \qq} = \sigma_i \tup{\word \qq}
- \qquad \text{ for each MLQ } \qq \text{ and each } i .
- \label{pf.prop:braid.inter}
-\end{equation}
-
-[\textit{Proof of \eqref{pf.prop:braid.inter}:}
-Idea: Fix an MLQ $\qq = \tup{q_1, q_2, \ldots, q_k}$
-and an $i \in \set{1, 2, \ldots, k-1}$.
-The word $\word \qq$ consists of $n$ blocks, each corresponding
-to some column of the matrix $M_{\qq}$; by abuse of notation,
-we shall refer to these blocks as the \textit{columns}
-of $\word \qq$.
-Consider the parenthesis-matching algorithm applied
-to the word $\word \qq$;
-simultaneously, consider the construction of the dual
-configuration $\tup{q'_i, q'_{i+1}}$ of the configuration
-$\tup{q_i, q_{i+1}}$.
-We shall relate the frozen and unmatched letters in the
-former algorithm to the balanced and unbalanced column in
-the latter construction.
-Note that when we say ``column $i$ is balanced'' (resp.
-``unbalanced''), what we mean is that $i \in \ive{n}$ is
-balanced (resp. unbalanced).
-
-Each time the former algorithm matches an opening parenthesis
-in column $u$ with a closing parenthesis in column $v$
-(notice that $u \leq v$, because the algorithm does not
-``wrap around'' the circle), the interval $\inter[u, v]$
-is is revealed to be a balanced interval for the latter
-construction
-(because all parentheses inbetween them are already
-matched, and clearly are matched to each other because
-otherwise the two parentheses in columns $u$ and $v$
-would have prevented them from matching).
-The same, of course, holds for the intervals $\inter[u, v]$
-for which there is no parenthesis-matching activity at all
-between columns $u$ and $v$ of $\word q$.
-Thus, if $u \in \ive{n}$ is such that the $u$-th column
-of $\word \qq$ is frozen (i.e., all letters in this
-column are frozen), then $u$ is a balanced letter.
-As for the letters (necessarily $i$'s and $i+1$'s) that
-do not get frozen at the end of the parentheses-matching
-algorithm, we know that they form the word
-$\underbrace{))\cdots)}_{a\text{ parentheses}}
-\underbrace{((\cdots(}_{b\text{ parentheses}}$
-for some $a$ and $b$.
-They correspond to $a$ elements of $q_{i+1}$ and to
-$b$ elements of $q_i$, with all the former lying to
-the left of all the letter.
-Let us assume $a \geq b$ (leaving the opposite case
-to the reader).
-Then, all the $b$ non-frozen opening parentheses,
-as well as the first $b$ non-frozen closing parentheses,
-will together form a balanced interval that ``wraps
-around the circle'' (or, more precisely: the columns in
-which they lie, as well as all the columns inbetween,
-will do so).
-The remaining $a-b$ non-frozen closing parentheses (or, more
-precisely, the columns in which they lie) are unbalanced
-(indeed, there must be at least $\abs{q_i} - \abs{q_{i+1}} = a-b$
-unbalanced columns, and since we have ruled out all the other
-columns, it is clear that the $a-b$ columns containing
-non-frozen closing parentheses must be the ones).
-Now, the construction of the dual configuration $\tup{q'_i, q'_{i+1}}$
-from $\tup{q_i, q_{i+1}}$ involves moving these
-$a-b$ unbalanced columns from $q_i$ to $q_{i+1}$.
-Meanwhile, the definition of $\sigma_i \tup{\word q}$ from
-$\word q$ involves replacing the corresponding $a-b$
-closing parentheses by opening parentheses.
-This is clearly the same thing.
-Thus, \eqref{pf.prop:braid.inter} follows.]
-
-\darij{TODO! Flesh this out.}
-
-The equality \eqref{pf.prop:braid.inter} can be rewritten as a
-commutative diagram:
-\[
-\xymatrix{
- \set{\text{MLQs}} \ar[r]^{\fraks_i} \ar[d]_{\word} & \set{\text{MLQs}} \ar[d]^{\word} \\
- A^* \ar[r]_{\sigma_i} & A^* .
-}
-\qquad \text{ for all } i .
-\]
-In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
-this diagram allows us to translate the equality
-\eqref{pf.prop:braid.loth-eq} into
-$\fraks_i \circ \fraks_{i+1} \circ \fraks_i
-= \fraks_{i+1} \circ \fraks_i \circ \fraks_{i+1}$.
-But this proves Proposition~\ref{prop:braid}.
-\end{proof}
-
-\Travis{Just a comment for us for now. This bracketing rule is just the usual signature rule on crystals and the $s_i$ action is the corresponding Weyl group action.}
-
-Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
-Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
-corresponding to the $k$ smallest letters $w_i$ of $w$.
-
-The crucial tools in our second proof of Theorem~\ref{thm:permutation} will be the following two facts:
-
-\begin{lemma} \label{lem:SL.reconstruct}
-Let $w, w' \in \mcW_n$.
-Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if $w = w'$.
-\end{lemma}
-
-\begin{proof}
-Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
-Next, we assume that $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
-Note that $w$ and $w'$ have the same type $\mm$.
-Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
-Thus, we have $[w]_k \setminus [w]_{k-p_j(\mm)} = [w']_k \setminus [w']_{k-p_j(\mm)}$ defined, which we denote by $P_j$.
-\travis{This version of $k$ smallest letters is actively fighting us here.}
-By construction, we have $w_i = j = w'_i$ for all $i \in P_j$.
-Since this holds for all letters $k$, we have $w = w'$.
-\end{proof}
-
-\begin{prop} \label{prop:SL.dual}
-Let $w \in \mcW_n$ be a word of type $\mm$ such that $k = p_{\alpha}(\mm)$ for some $\alpha$.
-Let $q$ be a queue.
-The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [q(w)]_k }$, where $q^{\dagger}$ is some queue.
-\end{prop}
-
-\begin{proof}
-Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
-The notations of $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
-
-Suppose $k \leq \abs{q}$.
-Therefore, for all $j \in [w]_k$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
-Recall that in Phase~II of computing $q(w)$, a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
-We show $i_j \in q'_2 \cap \mcI_j$ by induction on $j$.
-Next, suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
-Let $\mcI_j = \inter[e,f]$.
-Since $\mcI_j$ is balanced and by our induction assumption, we have that
-\[
-c^{\uparrow}[i,j] \geq \abs{\set{ h \in \inter[j,f] \mid q(w)_h \text{ is currently set} }} + 1.
-\]
-Since we have $c^{\uparrow}\mcI_j = c^{\downarrow}\mcI_j$, there must exist a $i_j \in q'_2 \cap \mcI_j$ such that $q(w)_{i_j}$ is unset.
-Thus, we set $q(w)_{i_j} = w_j$.
-Note that a similar argument holds for $j = 1$.
-Hence, $q'_2 \subseteq [q(w)]_k$.
-However, we clearly have $\abs{q'_2} = k = \abs{[q(w)]_k}$, and so $q'_2 = [q(w)]_k$.
-
-Now suppose $k > \abs{q}$.
-Note that $\ive{n} \setminus [w]_k$ are the indices of the largest $n-k$ letters of $w$ and $n - \abs{q} < n-k$.
-So from a similar argument as above but instead using Phase~I, we have
-\begin{equation}
-\label{eq:dual_claim}
-\tup{ \ive{n} \setminus q, \ive{n} \setminus [w]_k }' = \tup{ \ive{n} \setminus [q(w)]_k, \ive{n} \setminus q^{\dagger} }.
-\end{equation}
-Next, it is straightforward to see that an interval $\mcI$ is balanced for $(q_1, q_2)$ if and only if $\mcI$ is balanced for $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)$.
-Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)' = ( \ive{n} \setminus  q'_2, \ive{n} \setminus q'_1)$.
-Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{\dagger} , [q(w)]_k }$.
-\end{proof}
-
-We can now give our second proof of Theorem~\ref{thm:permutation}:
-
-\begin{proof}[Second proof of Theorem~\ref{thm:permutation}.]
-We follow the same approach as in the first proof:
-We must show that if $C = \tup{q_1, q_2}$ is any configuration
-and if $u \in \mcW_n$ is any word, then the dual configuration
-$C' = (q'_1, q'_2)$ of $C$ satisfies $C'(u) = C(u)$.
-
-From Lemma~\ref{le:mono}, it is sufficient to consider standard words $u$.
-It is straightforward to see that the words
-$C(u) = q_2\bigl( q_1(u) \bigr)$
-and
-$C'(u) = q'_2\bigl( q_1'(u) \bigr)$
-have the same type from Equation~\eqref{eq:queue_type_change}.
-%indeed, the action of a queue $q$ on a word $w$ modifies its
-%type in a predictable way (namely, the number $\abs{q}$ is
-%inserted into the type of $w$ at the place where it would
-%keep the type weakly increasing).
-We shall now show that
-$[C'(u)]_k = [C(u)]_k$
-for all $k \in \set{0, 1, \ldots, n}$ for which these are
-well-defined.
-According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
-
-Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
-Using Proposition~\ref{prop:SL.dual} to compute dual
-configurations, we can see how the MLQ
-$\qq = \tup{[u]_k, q_1, q_2}$ transforms under the action of
-$\fraks_1 \fraks_2 \fraks_1$: Namely, we have
-\begin{align*}
-\tup{[u]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(u)]_k, q_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k},
-\end{align*}
-where $\ast$ denotes some queue.
-Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
-\begin{align*}
-\tup{[u]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[u]_k, q'_1, q'_2}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(u)]_k , q'_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k}.
-\end{align*}
-(See Figure~\ref{fig:crossing_diagrams} for the actions depicted using crossing diagrams.)
-Yet, the two maps are equal by Proposition~\ref{prop:braid}.
-Thus, the resulting MLQs must be identical:
-\[
-\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(u) \bigr) \bigr]_k}
-=
-\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(u) \bigr) \bigr]_k}.
-\]
-Hence, we have
-\[
-\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k.
-\]
-In other words, $[C'(u)]_k = [C(u)]_k$.
-\end{proof}
-
-\begin{figure}
-\begin{gather*}
-\begin{tikzpicture}[xscale=3.5]
-\node (i1) at (0,0) {$S_k(u)$};
-\node (i2) at (0,-1) {$q_1$};
-\node (i3) at (0,-2) {$q_2$};
-\node (s11) at (1,0) {$\ast$};
-\node (s12) at (1,-1) {$[q_1(u)]_k$};
-\node (s13) at (1,-2) {$q_2$};
-\node (s21) at (2,0) {$\ast$};
-\node (s22) at (2,-1) {$\ast$};
-\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
-\node (t1) at (3,0) {$\ast$};
-\node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
-\path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
-\path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
-\path[-,red] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
-\end{tikzpicture}
-\\
-\begin{tikzpicture}[xscale=3.5]
-\node (i1) at (0,0) {$[u]_k$};
-\node (i2) at (0,-1) {$q_1$};
-\node (i3) at (0,-2) {$q_2$};
-\node (s11) at (1,0) {$[u]_k$};
-\node (s12) at (1,-1) {$q'_1$};
-\node (s13) at (1,-2) {$q'_2$};
-\node (s21) at (2,0) {$\ast$};
-\node (s22) at (2,-1) {$[q'_1(u)]_k$};
-\node (s23) at (2,-2) {$q'_2$};
-\node (t1) at (3,0) {$\ast$};
-\node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k$};
-\path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
-\path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
-\path[-,red] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
-\end{tikzpicture}
-\end{gather*}
-\caption{Crossing diagrams representing the action of $\fraks_1 \fraks_2 \fraks_1$ (top) and $\fraks_2 \fraks_1 \fraks_2$ (bottom).}
-\label{fig:crossing_diagrams}
-\end{figure}
-
-
-
-
-%=====================================================================
-\section{Final remarks}
-\label{sec:remarks}
-
-We conclude by giving some additional examples, remarks, and comments about our results.
-We begin with an example to illustrate the proof of Theorem~\ref{thm:merge} in more detail.
-
-\begin{example}
-In order to compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
-We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
-\[
-\qq = \;
-\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
-\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; \xrightarrow{\hspace{30pt}} \;
-\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; = \widetilde{\qq}.
-\]
-Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
-Furthermore, note that $135452 = \merge{5} 135462$.
-Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
-In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
-By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
-\begin{align*}
-\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; \xrightarrow[\hspace{15pt}]{R_2} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\\[1.3em] &
-\; \xrightarrow[\hspace{15pt}]{R_3} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\; \xrightarrow[\hspace{15pt}]{R_4} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; = \widetilde{\qq}',
-\end{align*}
-which contributes to $\swt{135462}$.
-\end{example}
-
-There is the natural cyclic symmetry on our special weights.
-
-\begin{prop}
-  Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
-  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions, and similarly on monomials in $\xx$.
-\end{prop}
-
-\begin{proof}
-  For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
-  It is clear from the definition of a queue that $q(u \sigma) = \bigl( (\sigma q)(u) \bigr) \sigma$.
-  Hence, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
-  where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
-  Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (1 \cdots 1) = \bigl( (\sigma \qq)(1 \cdots 1) \bigr) \sigma$.
-  From here, the claim follows by an obvious bijection
-  (given by the action of $\sigma$) between the sums defining
-  $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
-\end{proof}
-
-Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
-Recall from~\cite{NY97,Shimozono02} that the combinatorial $R$-matrix is the unique crystal isomorphism
-\[
-R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_1}.
-\]
-There is a well-known (in slightly different terminology) bijection $\Xi_r$ relating $r$-queues with an element of the KR crystal $B^{r,1}$ in type $A_{n-1}^{(1)}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
-In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
-\[
-\Xi(\qq) = \Xi_{p_1}(q_1) \otimes \Xi_{p_2}(q_2) \otimes \dotsm \otimes \Xi_{p_{\ell}}(q_{\ell}).
-\]
-Thus, by comparing the description of the combinatorial $R$-matrix for $B^{r_1,1}$ and $B^{r_2,1}$ from~\cite{NY97}, we obtain that taking the dual configuration is equivalent to applying the combinatorial $R$-matrix under $\Xi$.
-
-\begin{prop}
-\label{prop:dual_is_R}
-Let $C$ be an $(r_1, r_2)$-configuration. Then
-\[
-\Xi(C') = R\bigl( \Xi(C) \bigr),
-\]
-where $C'$ is the dual configuration of $C$.
-\end{prop}
-
-Note that Proposition~\ref{prop:dual_is_R} gives another proof of Proposition~\ref{prop:braid} since the combinatorial $R$-matrix is well-known to satisfy the Yang-Baxter equation.
-
-\begin{example}
-Suppose $n = 9$.
-Consider the $(4,6)$-configuration and dual $(6,4)$-configuration
-\[
-C = (\set{1,4,5,6}, \set{2,3,4,6,7,8}),
-\qquad\quad
-C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7}).
-\]
-We have
-\[
-\begin{tikzpicture}[xscale=6,yscale=4,>=stealth]
-\node (C) at (0,0) { %{$(\set{1,4,5,6}, \set{2,3,4,6,7,8})$};
-\begin{tikzpicture}[scale=0.7]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \foreach \i in {1,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,3,7,8,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,3,4,6,7,8} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,5,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-\end{tikzpicture}
-};
-\node (Cp) at (0,-1) { %{$(\set{1,3,4,5,6,8}, \set{2,4,6,7})$};
-\begin{tikzpicture}[scale=0.7]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \foreach \i in {1,3,4,5,6,8} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,7,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,4,6,7} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,3,5,8,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-\end{tikzpicture}
-};
-\node (KR) at (1,0) {$\young(1,4,5,6) \otimes \young(2,3,4,6,7,8)$};
-\node (KRp) at (1,-1) {$\young(1,3,4,5,6,8) \otimes \young(2,4,6,7)$};
-\draw[<->] (C) -- (Cp) node[midway,anchor=east] {dual};
-\draw[<->] (C) -- (KR) node[midway,anchor=south] {$\Xi$};
-\draw[<->] (KR) -- (KRp) node[midway,anchor=west] {$R$};
-\draw[<->] (Cp) -- (KRp) node[midway,anchor=north] {$\Xi$};
-\end{tikzpicture}
-\]
-\end{example}
-
-Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
-Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$-action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
-Furthermore, the $\SymGp{\ell}$-action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
-Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
-
-Next, we describe how to interpret our action from looking at the corner transfer matrix described in~\cite{KMO15}, which can be given diagrammatically by
-\[
-\begin{tikzpicture}[>=latex,scale=0.5]
-\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,8);
-\foreach \x in {1,2} {
-  \draw[->] (0,\x+1) node[anchor=east] {$\mathbf{b}_{\ell-\x}$} -- (\x+1,\x+1) -- (\x+1,8);
-}
-\foreach \x in {1,2,3} {
-  \draw[->] (0,8-\x) node[anchor=east] {$\mathbf{b}_{\x}$} -- (8-\x,8-\x) -- (8-\x,8);
-}
-\node at (4,7.5) {$\cdots$};
-\node at (0.5,4) {$\vdots$};
-\end{tikzpicture}
-\]
-where every crossing is a combinatorial $R$-matrix and $\mathbf{b}_i \in B^{p_i,1}$.
-Our action effectively does the following on the corner transfer matrix:
-\[
-\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
-\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
-\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
-\draw[->] (-1,3) node[anchor=east] {$\mathbf{b}_i$} -- (0,4) -- (4,4) -- (4,7) -- (3,8);
-\draw[->] (-1,4) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (0,3) -- (3,3) -- (3,7) -- (4,8);
-\node at (2,6.5) {$\cdots$};
-\node at (0.5,2) {$\vdots$};
-\node at (5,6.5) {$\cdots$};
-\node at (0.5,5) {$\vdots$};
-\end{tikzpicture}
-\qquad = \qquad
-\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
-\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
-\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
-\draw[->] (0,4) node[anchor=east] {$\mathbf{b}_i$} -- (4,4) -- (4,7);
-\draw[->] (0,3) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (3,3) -- (3,7);
-\node at (2,6.5) {$\cdots$};
-\node at (0.5,2) {$\vdots$};
-\node at (5,6.5) {$\cdots$};
-\node at (0.5,5) {$\vdots$};
-\end{tikzpicture}
-\]
-where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
-
-We conclude with a few questions.
-Note that Lemmas~\ref{le:BB},~\ref{le:BU} and~\ref{le:UB} effectively compute $C(u)$ for $u \in \{1,2\}^n$.
-Could this be done in a more transparent manner, such as by using pairs of labeled periodic Dyck or Motzkin paths?
-It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
 
 
 \bibliographystyle{alpha}
