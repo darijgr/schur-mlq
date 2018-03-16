@@ -2034,11 +2034,11 @@ Given an MLQ $\qq$, we denote the word
 $\colw \tup{M_{\qq}}$ by $\word \qq$.
 Clearly, an MLQ $\qq$ is uniquely determined by
 $\word \qq$.
-In other words, the map $\word : \set{\text{MLQs}} \to A^*$
+In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
 is injective.
 
 Now, for each $i \in \set{1, 2, \ldots, k-1}$, we define an
-operator $\sigma_i : A^* \to A^*$.
+operator $\sigma_i \colon A^* \to A^*$.
 This operator $\sigma_i$ acts on a word
 $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
 as follows:
@@ -2048,21 +2048,21 @@ as follows:
        while all other letters are considered frozen.
        Now, match as many parentheses as possible
        according to the standard parenthesis-matching
-       algorithm (i.e.: every time you find an opening
+       algorithm (\textit{i.e.}, every time you find an opening
        parenthesis to the left of a closing one, with only
        frozen letters between them, you match these two
        parentheses and declare them frozen).
        Notice that this algorithm is non-deterministic, but
        the outcome is independent of the steps chosen;
        the result is always a word whose non-frozen
-       part (i.e., the word obtained by removing all frozen
-       letters) is
+       part (\textit{i.e.}, the word obtained by removing
+       all frozen letters) is
        $\underbrace{))\cdots)}_{a\text{ parentheses}}
        \underbrace{((\cdots(}_{b\text{ parentheses}}$
        for some integers $a, b \geq 0$.
  \item Now, replace this non-frozen part by
        $\underbrace{))\cdots)}_{b\text{ parentheses}}
-       \underbrace{((\cdots(}_{a\text{ parentheses}}$,
+       \underbrace{((\cdots(}_{a\text{ parentheses}}$
        while keeping all frozen letters in their places.
        The resulting word is $\sigma_i p$.
 \end{itemize}
@@ -2111,14 +2111,14 @@ balanced (resp. unbalanced).
 Each time the former algorithm matches an opening parenthesis
 in column $u$ with a closing parenthesis in column $v$
 (notice that $u \leq v$, because the algorithm does not
-``wrap around'' the circle), the interval $\int[u, v]$
+``wrap around'' the circle), the interval $\inter[u, v]$
 is is revealed to be a balanced interval for the latter
 construction
 (because all parentheses inbetween them are already
 matched, and clearly are matched to each other because
 otherwise the two parentheses in columns $u$ and $v$
 would have prevented them from matching).
-The same, of course, holds for the intervals $\int[u, v]$
+The same, of course, holds for the intervals $\inter[u, v]$
 for which there is no parenthesis-matching activity at all
 between columns $u$ and $v$ of $\word q$.
 Thus, if $u \in \ive{n}$ is such that the $u$-th column
@@ -2167,13 +2167,15 @@ commutative diagram:
 }
 \qquad \text{ for all } i .
 \]
-In view of the injectivity of the map $\word : \set{\text{MLQs}} \to A^*$,
+In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
 this diagram allows us to translate the equality
 \eqref{pf.prop:braid.loth-eq} into
 $\fraks_i \circ \fraks_{i+1} \circ \fraks_i
 = \fraks_{i+1} \circ \fraks_i \circ \fraks_{i+1}$.
 But this proves Proposition~\ref{prop:braid}.
 \end{proof}
+
+\Travis{Just a comment for us for now. This bracketing rule is just the usual signature rule on crystals and the $s_i$ action is the corresponding Weyl group action.}
 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
