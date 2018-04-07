@@ -347,7 +347,10 @@ This work benefited from computations using \textsc{SageMath}~\cite{sage,combina
 Fix a positive integer $n$.
 For a nonnegative integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$, and so $[0] = \emptyset$.
 Let $\SymGp{k}$ denote the symmetric group on $\ive{k}$, and let $s_i \in \SymGp{k}$ be the simple transposition of $i$ and $i+1$.
-Let $w_0 \in \SymGp{k}$ be the longest element: the reversed permutation $k (k-1) \dotsm 321$ (written in one line notation).
+Let $w_0 \in \SymGp{k}$ be the longest element: the permutation $k (k-1) \dotsm 321$ (written in one line notation) that reverses the order of all elements.
+
+We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}.
+We visualize them as points on a line which ``wraps around'' cyclically; thus, for examples, the sites weakly to the right of a site $i$ are $i, i+1, \ldots, n-1, n, 1, 2, 3, \ldots$ (in this order).
 
 %%%%%%%%%%
 \subsection{Words and queues}
@@ -366,22 +369,23 @@ We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new word 
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
 Note that $\merge{i} u$ is packed whenever $u$ is packed.
 For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
-Similarly, the merging of $i,i+1$ of a type $\mm$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
+Similarly, the merging of $i,i+1$ in a type $\mm = (m_1, m_2, \ldots)$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
+These operations interact as one would hope:
+If the type of a word $u$ is $\mm$, then the type of $\merge{i} u$ is $\merge{i}(\mm)$.
 
 Fix a word $u \in \mcW_n$, and let $\mm = (m_1, m_2, \ldots)$ be the type of $u$.
-Define
+For each $i \geq 0$, set
 \begin{equation}
 \label{eq:type_partial_sums}
-p_i(\mm) := m_1 + m_2 + \cdots + m_i,
+p_i(\mm) := m_1 + m_2 + \cdots + m_i.
 \end{equation}
-and when $\mm$ is clear, we simply write $p_i$.
+When $\mm$ is clear, we simply write $p_i$ for this.
 (Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself defined as follows.
 For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
-We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}.
 In the beginning, no letter of $v \in \mcW_n$ is set.
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
@@ -389,12 +393,12 @@ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
 \begin{description}
 \item[Phase I]
   For $i = i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$, do the following.
-    Find the first $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
+    Find the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
     Then set $v_j = u_i + 1$.
 
 \item[Phase II]
   For $i = i_1, i_2, \ldots, i_{\abs{q}}$, do the following.
-    Find the first $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
     Then set $v_j = u_i$.
 \end{description}
 
@@ -410,7 +414,8 @@ run out of $j$'s in either phase.
 Since Phase~I only deals with $j \notin q$, and Phase~II only with $j\in q$,
 the two phases can be arbitrarily interleaved
 (\textit{i.e.}, we can perform the steps of the algorithm in any order as long as
-the steps of Phase~I (resp.\ Phase~II) are processed in the order of decreasing (resp.\ increasing) $i$).
+the steps of Phase~I (resp.\ Phase~II) are processed in the order $i = i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$
+(resp.\ $i = i_1, i_2, \ldots, i_{\abs{q}}$).
 \end{remark}
 
 \begin{lemma}
@@ -420,7 +425,7 @@ The resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1
 
 \begin{proof}
 Consider some $k$ such that $u_{i_k} = u_{i_{k+1}}$.
-If we switch two adjacent entries $i_k$ and $i_{k+1}$ of the
+If we switch the two (equal) adjacent entries $i_k$ and $i_{k+1}$ of the
 permutation $\tup{i_1, i_2, \ldots, i_n}$,
 then the resulting word $v$ is unchanged.
 Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
@@ -445,16 +450,15 @@ Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
 \end{itemize}
 \end{proof}
 
-In particular, Lemma~\ref{lemma:order_indep} states that the order between sites $i$ with equal $u_i$ does not matter.
+Lemma~\ref{lemma:order_indep} states that the order between sites $i$ with equal $u_i$ does not matter.
 
 \begin{remark}
 \label{rmk:t-splitting}
-Let $u$, $r$ and $q$ be as before.
+Let $u$ and $q$ be as before. Let $r = \abs{q}$.
 There exists a $t \in \ive{\ell}$ such that
 $
 p_{t-1} \leq r \leq p_t.
 $
-%otherwise we set $t = \ell + 1$.
 The word $v = q(u)$ then has type
 \begin{equation}
 \label{eq:queue_type_change}
@@ -554,21 +558,22 @@ For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that
 Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
 \end{comment}
 
-There is an natural duality in the algorithm above.
-For each queue $q$, let $q^*$ be the \defn{contragredient dual queue} defined by $i \in q^*$ if and only if $n+1-i \notin q$.
+There is a natural duality in the algorithm above.
+For each queue $q$, let $q^*$ be the \defn{contragredient dual queue}, defined by $\tup{i \in q^*} \Longleftrightarrow \tup{n+1-i \notin q}$.
 Similarly, for each word $u$ with $\ell$ classes, let $u^*$ be the \defn{contragredient dual word} defined by $u^*_i = \ell + 1 - u_{n+1-i}$.
-For a fixed $k$, we call $\ell + 1 - k$ the \defn{contragredient dual letter} of $k$.
-Note that for an $r$-queue $q$, and $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
-Similarly, $u^*$ is obtained by reversing $u$ and taking the contragredient dual letters.
+For a fixed $k \in \ive{\ell}$, we call $\ell + 1 - k$ the \defn{contragredient dual letter} of $k$.
+Note that if $q$ is an $r$-queue, then $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
+Similarly, $u^*$ is obtained by reversing the word $u$ and taking the contragredient dual letters.
 
 \begin{lemma}[Contragredient duality]
   \label{le:dual}
   Let $q$ be a queue and $u$ be a word with $\ell$ classes.
-  Then we have $q(u) = q^*(q^*)^*$, \textit{i.e.}, we have $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
+  Then we have $q(u) = (q^*(u^*))^*$, \textit{i.e.}, we have $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
 \end{lemma}
 
-\begin{proof}
+Here, we treat $q(u)$ as a word with $\ell+1$ classes, even if it may have only $\ell$ classes (in the degenerate case when $q = \ive{n}$).
 
+\begin{proof}[Proof of Lemma~\ref{le:dual}.]
 Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q^*(u^*)$ when the word is reversed and the letters are replaced by their contragredient duals.
 Hence the claim follows.
 \end{proof}
@@ -817,7 +822,7 @@ The word $\vee^{(k)} u$ is well-defined since $k = p_j(\mm)$ for some $j$;
 furthermore, $\vee^{(k)} q(u)$ is well-defined since the type $\nn$ of $q(u)$
 satisfies
 \[
-k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid \geq 1 }.
+k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 1 }.
 \]
 Thus, it remains to prove $\vee^{(k)} q(u) = q(\vee^{(k)} u)$.
 The permutation $\tup{i_1, i_2, \dotsc, i_n}$ in the construction of $q(u)$
