@@ -1556,7 +1556,7 @@ Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
 
-The crucial tools in our second proof of Theorem~\ref{thm:permutation} will be the following two facts.
+The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the following two facts.
 
 \begin{lemma} \label{lem:SL.reconstruct}
 Let $w, w' \in \mcW_n$.
@@ -1612,9 +1612,7 @@ Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(\ive{n} \setminus q_
 Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{\dagger} , [q(w)]_k }$.
 \end{proof}
 
-We can now give our second proof of Theorem~\ref{thm:permutation}:
-
-\begin{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
 Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 Thus the proof is reduced to showing that for any configuration $C = \tup{q_1, q_2}$
@@ -1711,6 +1709,9 @@ In other words, $[C'(u)]_k = [C(u)]_k$.
 \label{fig:crossing_diagrams}
 \end{figure}
 
+\begin{remark}
+Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
+\end{remark}
 
 
 
@@ -2472,9 +2473,6 @@ C(211112) & = C(211211) = C(221111) = C(121211)
 \end{align*}
 \end{example}
 
-\begin{remark}
-Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
-\end{remark}
 
 
 \bibliographystyle{alpha}
