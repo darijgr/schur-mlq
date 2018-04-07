@@ -283,7 +283,7 @@ This extended abstract is organized as follows.
 In Section~\ref{sec:background}, we provide the necessary background.
 In Section~\ref{sec:result}, we state our results.
 In Section~\ref{sec:proof_sketch}, we sketch the proof of our main result.
-In Section~\ref{sec:tasep}, describe the connection between our work and the TASEP.
+In Section~\ref{sec:tasep}, we describe the connection between our work and the TASEP.
 
 
 
@@ -304,7 +304,7 @@ Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be indeterminates.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
 We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
-A word $u$ or type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$.
+A word $u$ of type $\mm$ is \defn{packed} if there exists an $\ell$ such that $m_i \neq 0$ for $1 \leq i \leq \ell$ and $m_i = 0$ for $i > \ell$. We will also call the type $\mm$ itself packed in this case.
 We call $\ell$ the number of \defn{classes} in $u$.
 We \defn{merge} two adjacent classes $i,i+1$ in a packed word $u$ to obtain a new packed word as follows: first replace all occurrences of $i+1$ in $u$ by $i$, then replace all occurrences of $j$ in $u$ by $j-1$, for each $j > i$.
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$, and for $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
@@ -677,7 +677,7 @@ For the remainder of this section, we fix an $(r,s)$-configuration $C = (q_1, q_
 Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$, which wraps around the ``circle'' if $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
-Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+Let $c^{\uparrow}(i,k)$ (resp.~$c^{\downarrow}(i,k)$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}(i,j) = c^{\downarrow}(i,j)$ and for each $k \in \inter[i,j]$, we have $c^\uparrow(i,k) \geq c^\downarrow(i,k)$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
