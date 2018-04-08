@@ -756,8 +756,11 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \end{dfn}
 
 \begin{remark}
+\label{rmk:mlq-type}
 Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-twisted) MLQ $\qq$.
 \end{remark}
+\Darij{Why? I know why, but it takes me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with the p-sequence of $\mm$ and therefore with the same type.}
+
 
 
 %%%%%%%%%%
@@ -799,19 +802,22 @@ In this section, we state our main results and use them to prove the commutativi
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
 In order to prove our next result, we need the following.
 
-For a word $w$ of type $\mm$, define $\vee^{(k)} w := \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
-Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
-Indeed, the word $\vee^{(k)} w$ can be obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
+If $w$ is a word of type $\mm$, and if $j \geq 0$, then $p_j(\mm)$ is the number of letters $\leq j$ in $w$.
 
-\Travis{I am becoming less convinced of this notation as it makes things less explicit.
-Well-definedness is equivalent to the existence of a $j$ such that $p_j(\mm) = k$, and we really want to do the $j$-merge.
-It might be a little extra verbage, but I feel like it means more details and concepts are on the surface.}
+For a word $w$ and a nonnegative integer $k$, we let \defn{$\vee^{(k)} w$} be the word obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
+This is only well-defined if these $k$ smallest letters are determined uniquely, \textit{i.e.}, if $k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of $w$.
+Note that $\vee^{(k)} w = \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
+% Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
+
+% \Travis{I am becoming less convinced of this notation as it makes things less explicit.
+% Well-definedness is equivalent to the existence of a $j$ such that $p_j(\mm) = k$, and we really want to do the $j$-merge.
+% It might be a little extra verbage, but I feel like it means more details and concepts are on the surface.}
 
 \begin{lemma}
 \label{lemma:queue_merge_commute}
 Let $u \in \mcW_n$ be a word of type $\mm$.
-Fix some $j \geq 1$, and let $k = p_j(\mm)$.
-If $q$ is a queue such that $\lvert q \rvert \neq k$, then
+Let $k \in \set{ p_j(\mm) \mid j \geq 0 }$.
+If $q$ is a queue, then
 \[
 \vee^{(k)} q(u) = q(\vee^{(k)} u).
 \]
@@ -823,7 +829,7 @@ The word $\vee^{(k)} u$ is well-defined since $k = p_j(\mm)$ for some $j$;
 furthermore, $\vee^{(k)} q(u)$ is well-defined since the type $\nn$ of $q(u)$
 satisfies
 \[
-k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 1 }.
+k \in \set{ p_j(\mm) \mid j \geq 0 } \subseteq \set{ p_j(\mm) \mid j \geq 0 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 0 }.
 \]
 Thus, it remains to prove $\vee^{(k)} q(u) = q(\vee^{(k)} u)$.
 The permutation $\tup{i_1, i_2, \dotsc, i_n}$ in the construction of $q(u)$
@@ -839,14 +845,14 @@ Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
 \begin{lemma}
 \label{lemma:queue_merge}
   Let $q'$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
-  Let $\qq$ be an MLQ of type $\merge{i}\mm$.
+  Let $\qq$ be a $\sigma$-twisted MLQ of type $\merge{i}\mm$ for some $\sigma$.
   For the word
   $
   u = \qq\bigl( q'(1 \dotsm 1) \bigr),
   $
   we have
   \[
-  v := \qq(1 \dotsm 1) = \merge{i} u.
+  \qq(1 \dotsm 1) = \merge{i} u.
   \]
 \end{lemma}
 
@@ -871,13 +877,24 @@ $q(\merge{h} u)$ depending on whether ...
 \label{pf.lemma:queue_merge.1}
 \end{equation}
 \end{comment}
+The type of $u$ is $\mm$ (by Remark~\ref{rmk:mlq-type}, applied to the twisted MLQ formed by both $q'$ and $\qq$).
+\Darij{Needs explanatory work: What is this twisted MLQ? Why is its type $\mm$ ?}
 
-Now, set $k = p_i(\mm)$. Then, we have
+Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
+$\nn$ of the word $q(1 \dots 1)$ satisfies $p_1(\nn) = k$.
+Hence, any word obtained by actions of queues on $q'(1 \dots 1)$
+will have its type $\nn$ satisfy
+$k \in \set{ p_j(\nn) \mid j \geq 0 } $.
+
+Since the type of $u$ is $\mm$, and since $k = p_i(\mm)$, we have
 \begin{equation}
 \label{pf.lemma:queue_merge.4}
- \merge{i} u = \merge{i} \qq\bigl( q' (1 \dotsm 1) \bigr) = \vee^{(k)} \qq\bigl( q' (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} q' (1 \dotsm 1) \bigr)
+ \merge{i} u = \vee^{(k)} (u) = \vee^{(k)} \qq\bigl( q' (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} q' (1 \dotsm 1) \bigr)
 \end{equation}
-by repeated use of Lemma~\ref{lemma:queue_merge_commute} since none of the queues in $\qq$ have size $k$.
+by repeated use of Lemma~\ref{lemma:queue_merge_commute}
+(since any word obtained by actions of queues on $q'(1 \dots 1)$
+will have its type $\nn$ satisfy
+$k \in \set{ p_j(\nn) \mid j \geq 0 } $).
 It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
 and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
@@ -953,9 +970,9 @@ where we have $2663344511 = \merge{4} 2773455611$.
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
   Let $v$ be a packed word of type $\merge{i}\mm$.
   Then,
-\[
+  \[
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
-\]
+  \]
 where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \end{thm}
 
