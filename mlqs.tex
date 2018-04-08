@@ -977,6 +977,10 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
 \end{thm}
 
 \begin{proof}
+  The type $\mm$ is packed (since $m_i \neq 0$ and $m_{i+1} \neq 0$,
+  and since $\merge{i}\mm$ is packed).
+  Let $\mm$ have $\ell$ classes; then, $\merge{i}\mm$ has $\ell-1$
+  classes.
   First note that
   \[
   \swt{v} e_{p_i(\mm)}(x_1, \dotsc, x_n) = \sum_{(\qq,q')} \wt(\qq) \wt(q'),
@@ -986,7 +990,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
   \item $q'$ is a $p_i(\mm)$-queue.
   \end{itemize}
-  Given any such pair $\tup{\qq, X}$, we set
+  Given any such pair $\tup{\qq, q'}$, we set
   \[
   \theta(\qq, q') := (q', q_1, \dotsc, q_{\ell-1});
   \]
@@ -1585,6 +1589,9 @@ The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the foll
 Let $w, w' \in \mcW_n$.
 Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if $w = w'$.
 \end{lemma}
+
+\Darij{Does $\bigl( [w]_k \bigr)_{k=0}^n$ even make sense
+if we don't assume $w$ to be near standard?}
 
 \begin{proof}
 Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
