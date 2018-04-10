@@ -1127,7 +1127,11 @@ Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
 Thus, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
 we shall disregard this factor in the following.
 
-Next, define the \defn{near standardization} of $u$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows. Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. Note that $k$ may not appear in $u$. Denote
+Next, define the \defn{near standardization} of $u$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows.
+Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. (In our case, $k = \ell$, but the definition allows for more general words $u$.)
+Note that $k$ may not appear in $u$.
+% Let $W$ denote the set of all $i$ satisfying $u_i < k$
+Denote
 \[
 W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \},
 \]
@@ -1494,7 +1498,7 @@ We have
 \fraks_i \fraks_{i+1} \fraks_i \qq
 	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
 \]
-for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots k-1}$.
+for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots, k-1}$.
 \end{prop}
 
 \begin{proof}
@@ -1626,21 +1630,19 @@ Note that the bracketing rule given above is precisely the usual signature rule 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
+For $k \in \set{p_i(\mm) \mid i \geq 0}$, we set $[w]_k = 0$.
 
 The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the following two facts.
 
 \begin{lemma} \label{lem:SL.reconstruct}
-Let $w, w' \in \mcW_n$.
+Let $w, w' \in \mcW_n$ be two words of the same type.
 Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if $w = w'$.
 \end{lemma}
-
-\Darij{Does $\bigl( [w]_k \bigr)_{k=0}^n$ even make sense
-if we don't assume $w$ to be near standard?}
 
 \begin{proof}
 Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
 Next, we assume that $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
-Note that $w$ and $w'$ have the same type $\mm$.
+Let the words $w$ and $w'$ have the type $\mm$.
 Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
 Thus, we have $[w]_k \setminus [w]_{k-p_j(\mm)} = [w']_k \setminus [w']_{k-p_j(\mm)}$ defined, which we denote by $P_j$.
 \travis{This version of $k$ smallest letters is actively fighting us here.}
@@ -1649,20 +1651,20 @@ Since this holds for all letters $k$, we have $w = w'$.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
-Let $w \in \mcW_n$ be a word of type $\mm$ such that $k = p_{\alpha}(\mm)$ for some $\alpha$.
+Let $w \in \mcW_n$ be a word of type $\mm$. Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
 Let $q$ be a queue.
 The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [q(w)]_k }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
 \begin{proof}
 Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
-The notations of $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
+The notations $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
 
 Suppose $k \leq \abs{q}$.
 Therefore, for all $j \in [w]_k$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
 Recall that in Phase~II of computing $q(w)$, a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
-We show $i_j \in q'_2 \cap \mcI_j$ by induction on $j$.
-Next, suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
+We show $i_j \in q'_2 \cap \mcI_j$ by strong induction on $j$.
+Suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
 Let $\mcI_j = \inter[e,f]$.
 Since $\mcI_j$ is balanced and by our induction assumption, we have that
 \[
