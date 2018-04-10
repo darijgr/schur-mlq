@@ -852,6 +852,72 @@ However, the word $\vee^{(k)} q(u)$ is obtained from $q(u)$ in exactly the same 
 Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
 \end{proof}
 
+\begin{example}
+Consider $q = \set{1,4,5,9,10}$ and $v = 3455313321$:
+\[
+\begin{tikzpicture}[baseline=-7]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {1,5,7,8} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$5$}; }
+  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4,5} { \node at (\i,0) {$3$}; }
+  \foreach \i in {6,7} { \node at (\i,0) {$4$}; }
+  \foreach \i in {8} { \node at (\i,0) {$5$}; }
+  \foreach \i in {2,3} { \node at (\i,0) {$6$}; }
+\end{tikzpicture}\ .
+\]
+Let $u = 3566413321$, and note that $v = \merge{3} u = \vee^{(6)} u$ and
+\[
+\begin{tikzpicture}[baseline=-7]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {1,7,8} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {5} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
+  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4,5} { \node at (\i,0) {$3$}; }
+  \foreach \i in {6} { \node at (\i,0) {$4$}; }
+  \foreach \i in {7} { \node[red] at (\i,0) {$5$}; }
+  \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
+  \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
+\end{tikzpicture}\ ,
+\]
+where we have $2663344511 = \merge{4} 2773345611 = \vee^{(6)} 2773345611$.
+Similarly, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
+\[
+\begin{tikzpicture}[baseline=-7]
+  \def\ll{0.65}   % level 2
+  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
+  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
+  \foreach \i in {7} { \node at (\i,\ll) {$3$}; }
+  \foreach \i in {1,5,8} { \node at (\i,\ll) {$4$}; }
+  \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
+  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
+  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
+  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
+  \foreach \i in {1} { \node at (\i,0) {$2$}; }
+  \foreach \i in {4} { \node[blue] at (\i,0) {$3$}; }
+  \foreach \i in {5} { \node[dgreencolor] at (\i,0) {$4$}; }
+  \foreach \i in {6,7} { \node[dgreencolor] at (\i,0) {$5$}; }
+  \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
+  \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
+\end{tikzpicture}\ ,
+\]
+where we have $2663344511 = \merge{4} 2773455611$.
+\end{example}
+
 \begin{lemma}
 \label{lemma:queue_merge}
   Let $q'$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
@@ -936,74 +1002,6 @@ $k \in \set{ p_j(\nn) \mid j \geq 0 } $).
 It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
 and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
-
-\begin{example}
-Consider $q = \set{1,4,5,9,10}$ and $v = 3455313321$:
-\[
-\begin{tikzpicture}[baseline=-7]
-  \def\ll{0.65}   % level 2
-  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
-  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
-  \foreach \i in {1,5,7,8} { \node at (\i,\ll) {$3$}; }
-  \foreach \i in {2} { \node at (\i,\ll) {$4$}; }
-  \foreach \i in {3,4} { \node at (\i,\ll) {$5$}; }
-  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
-  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
-  \foreach \i in {1} { \node at (\i,0) {$2$}; }
-  \foreach \i in {4,5} { \node at (\i,0) {$3$}; }
-  \foreach \i in {6,7} { \node at (\i,0) {$4$}; }
-  \foreach \i in {8} { \node at (\i,0) {$5$}; }
-  \foreach \i in {2,3} { \node at (\i,0) {$6$}; }
-\end{tikzpicture}\ .
-\]
-Let $u = 3566413321$, and note that $v = \merge{3} u$ and
-\[
-\begin{tikzpicture}[baseline=-7]
-  \def\ll{0.65}   % level 2
-  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
-  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
-  \foreach \i in {1,7,8} { \node at (\i,\ll) {$3$}; }
-  \foreach \i in {5} { \node at (\i,\ll) {$4$}; }
-  \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
-  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
-  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
-  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
-  \foreach \i in {1} { \node at (\i,0) {$2$}; }
-  \foreach \i in {4,5} { \node at (\i,0) {$3$}; }
-  \foreach \i in {6} { \node at (\i,0) {$4$}; }
-  \foreach \i in {7} { \node[red] at (\i,0) {$5$}; }
-  \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
-  \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
-\end{tikzpicture}\ ,
-\]
-where we have $2663344511 = \merge{4} 2773345611$.
-Similarly, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
-\[
-\begin{tikzpicture}[baseline=-7]
-  \def\ll{0.65}   % level 2
-  \foreach \i in {6,10} { \node at (\i,\ll) {$1$}; }
-  \foreach \i in {9} { \node at (\i,\ll) {$2$}; }
-  \foreach \i in {7} { \node at (\i,\ll) {$3$}; }
-  \foreach \i in {1,5,8} { \node at (\i,\ll) {$4$}; }
-  \foreach \i in {2} { \node at (\i,\ll) {$5$}; }
-  \foreach \i in {3,4} { \node at (\i,\ll) {$6$}; }
-  \foreach \i in {1,4,5,9,10} { \draw (\i,0) circle (0.3); }
-  \foreach \i in {2,3,6,7,8} { \draw (\i-.3,0-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {9,10} { \node at (\i,0) {$1$}; }
-  \foreach \i in {1} { \node at (\i,0) {$2$}; }
-  \foreach \i in {4} { \node[blue] at (\i,0) {$3$}; }
-  \foreach \i in {5} { \node[dgreencolor] at (\i,0) {$4$}; }
-  \foreach \i in {6,7} { \node[dgreencolor] at (\i,0) {$5$}; }
-  \foreach \i in {8} { \node[dgreencolor] at (\i,0) {$6$}; }
-  \foreach \i in {2,3} { \node[dgreencolor] at (\i,0) {$7$}; }
-\end{tikzpicture}\ ,
-\]
-where we have $2663344511 = \merge{4} 2773455611$.
-\end{example}
-
-\Darij{Should the above example really be here, and not one lemma earlier?}
 
 \begin{thm}
 \label{thm:merge}
