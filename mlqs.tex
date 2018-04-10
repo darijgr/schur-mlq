@@ -759,7 +759,17 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \label{rmk:mlq-type}
 Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-twisted) MLQ $\qq$.
 \end{remark}
-\Darij{Why? I know why, but it takes me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with the p-sequence of $\mm$ and therefore with the same type.}
+\begin{proof}
+Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
+Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
+Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
+Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
+(since $n = m_1 + m_2 + \cdots + m_\ell$).
+Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
+Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
+In other words, the type of the word $\qq(1 \dotsm 1) = \mm$.
+\end{proof}
+\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with the p-sequence of $\mm$ and therefore with the same type.}
 
 
 
@@ -845,7 +855,13 @@ Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
 \begin{lemma}
 \label{lemma:queue_merge}
   Let $q'$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
-  Let $\qq$ be a $\sigma$-twisted MLQ of type $\merge{i}\mm$ for some $\sigma$.
+  Let the type $\mm$ have $\ell$ classes, and let $\sigma \in \SymGp{\ell-1}$.
+  % be such that $\sigma(j) = j$ for all $j \geq i$.
+  Let $\qq$ be a $\sigma$-twisted MLQ of type $\merge{i}\mm$.
+  % Darij: Yes, we need $\sigma$-twisted here, due to how we apply this
+  % lemma repeatedly in the proof of Theorem \ref{thm:determinant_form}.
+  % (To apply it repeatedly, we need $\sigma$-twisted MLQs, since an
+  % MLQ might become $\sigma$-twisted after the first application.)
   For the word
   $
   u = \qq\bigl( q'(1 \dotsm 1) \bigr),
@@ -877,8 +893,30 @@ $q(\merge{h} u)$ depending on whether ...
 \label{pf.lemma:queue_merge.1}
 \end{equation}
 \end{comment}
-The type of $u$ is $\mm$ (by Remark~\ref{rmk:mlq-type}, applied to the twisted MLQ formed by both $q'$ and $\qq$).
-\Darij{Needs explanatory work: What is this twisted MLQ? Why is its type $\mm$ ?}
+Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
+It has type $\merge{i} \mm$.
+
+% Thus, the queue $q_j$ has size
+% $p_{\sigma(j)}(\merge{i} \mm) = p_{\sigma(j)}(\mm)$
+% for each $j < i$
+% (here, we have used the fact that $j < i$ entails
+% $\sigma(j) < i$;
+% this is a consequence of our assumption on $\sigma$),
+% and size
+% $p_{\sigma(j)}(\merge{i} \mm) = p_j(\merge{i} \mm) = p_{j+1}(\mm)$
+% for each $j \geq i$.
+
+% The permutation
+% $\zeta := s_{i-1} \cdots s_2 s_1 \in \SymGp{\ell-1}$ is the
+% $i$-cycle sending $1, 2, \ldots, i$ to $i, 1, 2, \ldots, i-1$.
+Set $\qq' := \tup{q', q_1, \ldots, q_{\ell-1}}$; this is easily
+seen to be a $\zeta$-twisted MLQ of type $\mm$, for some
+$\zeta \in \SymGp{\ell}$
+(since the multiset of the $p_k(\merge{i}\mm)$ for $k \geq 1$
+is precisely the multiset of the $p_k(\mm)$ for $k \geq 1$
+with one copy of $p_i(\mm) = \abs{q'}$ removed).
+Furthermore, the definition of $u$ becomes $u = \qq' (1 \dotsm 1)$.
+Hence, the type of $u$ is $\mm$ (by Remark~\ref{rmk:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
 $\nn$ of the word $q(1 \dots 1)$ satisfies $p_1(\nn) = k$.
@@ -964,6 +1002,8 @@ Similarly, let $u' = 4566413421$, and note that $v = \merge{3} u'$ and
 \]
 where we have $2663344511 = \merge{4} 2773455611$.
 \end{example}
+
+\Darij{Should the above example really be here, and not one lemma earlier?}
 
 \begin{thm}
 \label{thm:merge}
