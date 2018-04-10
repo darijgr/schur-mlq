@@ -1568,6 +1568,11 @@ $\sigma_i$ satisfy
 \end{equation}
 for all $i \in \set{1, 2, \ldots, k-2}$.
 
+We let $\zeta$ be the operator that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
+We also let $\zeta$ act on queues by the rule $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites);
+hence, $\zeta$ acts on MLQs entrywise (since an MLQ is a tuple of queues).
+Clearly, $\word(\zeta \qq) = \zeta^k \word(\qq)$ for any MLQ $\qq = (q_1, \ldots, q_k)$.
+
 Now, we claim that
 \begin{equation}
  \word(\fraks_i \qq) = \sigma_i\bigl( \word(\qq) \bigr)
@@ -1589,12 +1594,13 @@ Additionally, every canceling pair of parentheses from positions $j < j'$ under 
 Since paired parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no canceling parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
 
 Let $w = \word(\qq) = w_0 w_1 \cdots w_{n-1}$ with $a$ opening parentheses and $b$ closing parentheses in its reduced signature.
-By~\cite[Prop.~5.6.1]{Loth}, we can cyclically shift $w$ such that either there  are only opening parentheses `(' or closing parentheses `)`, but not both and this does not change the result.
-In other words, we have $s_1 \zeta^a w = \zeta^a s_1 w$, where $\zeta$ is the cyclic shift $w_j \mapsto w_{j+1}$, where indices are taken modulo $n$.
-We slightly abuse of notation and denote the cyclic shift of an MLQ by $\zeta^a \qq = (\zeta^a q_1, \zeta^a q_2)$, where $\zeta^a q_k = \set{ j + a \mod{n} \mid j \in q_k}$ for $k = 1,2$.
-However, we are justified in doing this since $\zeta^k \qq = \zeta^k w$ if and only if $\qq = w$ for any $k \in \ZZ$.
+By~\cite[Prop.~5.6.1]{Loth}, we can cyclically shift $w$ (that is, apply some power of $\zeta$ to $w$)
+such that either only opening parentheses `(' or only closing parentheses `)` remain, but not both; this cyclic shift commutes with $\sigma_1$.
+In other words, we have $\sigma_1 \zeta^a w = \zeta^a \sigma_1 w$.
 By the definition of balanced intervals being cyclic, we have $\zeta^a \fraks_1 \qq = \fraks_1 \zeta^a \qq$.
-However, it is clear that $\zeta^a \qq = \zeta^a w$ if and only if $\fraks_1 \zeta^a \qq = \sigma_1 \zeta^a w$.
+\darij{From here, blah blah. This might be a dead end.}
+Hence, $\word(\zeta^a \fraks_1 \qq) = \word(\fraks_1 \zeta^a \qq)$.
+However, it is clear that $\word(\zeta^a \qq) = \zeta^a w$ if and only if $\fraks_1 \zeta^a \qq = \sigma_1 \zeta^a w$.
 Hence, we obtain~\eqref{pf.prop:braid.inter}.
 
 The equality \eqref{pf.prop:braid.inter} can be rewritten as the
