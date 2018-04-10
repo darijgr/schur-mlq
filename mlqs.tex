@@ -1115,7 +1115,7 @@ We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed wo
 
 \begin{proof}
 Let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
-Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm$ of $u$.
+Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm = (m_1, m_2, \ldots, m_\ell, 0, 0, \ldots)$ of $u$.
 In particular,
 $\abs{q_{\ell-1}} = p_{\ell-1}(\mm) = r = \abs{B}$.
 Since the positions of the smallest $\abs{B}$ entries of $u$
@@ -1128,27 +1128,34 @@ we shall disregard this factor in the following.
 Next, define the \defn{near standardization} of $u$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows.
 Let $k$ be minimal such that $\lvert \{ i \in \ive{n} \mid u_i < k \} \rvert = r$. (In our case, $k = \ell$, but the definition allows for more general words $u$.)
 Note that $k$ may not appear in $u$.
+Let $w_1, w_2, \ldots, w_r$ be the elements of $B$ in decreasing order;
+thus, $B = \set{w_1 > w_2 > \cdots > w_r}$ and $w_j = b_{r+1-j}$ for each $j$.
 % Let $W$ denote the set of all $i$ satisfying $u_i < k$
-Denote
-\[
-W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \},
-\]
-and set
+% Denote
+% \[
+% W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \},
+% \]
+% and set
+Set
 \[
 \std{u}_i = \begin{cases}
 j & \text{if } u_i < k \text{ and } i = w_j \\
 r + 1 & \text{otherwise.}
 \end{cases}
 \]
-That is to say, the near standardization is replacing the $i$-th letter that is not $k$ read right-to-left with $i$ and all letters $k$ with $r + 1$.
-For example, we have
+That is to say, the near standardization $\std{u}$ is obtained from $u$ by
+replacing the $j$-th letter that is not $k$ read right-to-left with $j$ and all letters $k$ with $r + 1$.
+For example,
 \begin{align*}
-u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
-\\ \std{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
+\text{if }\ell = 4 \text{ and} \quad u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
+\\ \text{then} \quad \std{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
 \end{align*}
-Note that the type $\widetilde{\mm}$ of $\std{u}$ is $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_r = m_k$.
+Note that the type $\widetilde{\mm} = (\widetilde{m}_1, \widetilde{m}_2, \ldots, \widetilde{m}_{r+1}, 0, 0, \ldots)$
+of $\std{u}$ is given by $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_{r+1} = m_k$.
 %Note that we can reconstruct $u$ given some $\std{u}$ using only $v$.
-Additionally, note that the near standardization is order preserving in the sense of $u_i \geq u_j$ if and only if $\std{u}_i > \std{u}_j$.
+Additionally, note that the near standardization is order preserving in the sense
+that $1 \leq i < j \leq n$ satisfy $u_i \geq u_j$ if and only if
+either $\std{u}_i > \std{u}_j$ or $\std{u}_i = \std{u}_j = r+1$.
 
 There exists $T$ such that $\bigvee_T \std{u} = u$.
 Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
