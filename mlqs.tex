@@ -350,7 +350,7 @@ Let $\SymGp{k}$ denote the symmetric group on $\ive{k}$, and let $s_i \in \SymGp
 Let $w_0 \in \SymGp{k}$ be the longest element: the permutation $k (k-1) \dotsm 321$ (written in one line notation) that reverses the order of all elements.
 
 We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}.
-We visualize them as points on a line which ``wraps around'' cyclically; thus, for examples, the sites weakly to the right of a site $i$ are $i, i+1, \ldots, n-1, n, 1, 2, 3, \ldots$ (in this order).
+We visualize them as points on a line which ``wraps around'' cyclically; thus, for example, the sites weakly to the right of a site $i$ are $i, i+1, \ldots, n-1, n, 1, 2, 3, \ldots$ (in this order).
 
 %%%%%%%%%%
 \subsection{Words and queues}
@@ -767,9 +767,9 @@ Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \c
 (since $n = m_1 + m_2 + \cdots + m_\ell$).
 Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
 Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
-In other words, the type of the word $\qq(1 \dotsm 1) = \mm$.
+In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 \end{proof}
-\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with the p-sequence of $\mm$ and therefore with the same type.}
+\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
 
 
 
