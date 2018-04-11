@@ -1430,15 +1430,30 @@ As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\big
 We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
 We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
-Next, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
+Thus, assume $r_1 \neq r_2$.
+Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
 Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
-Note for $r_1 < r_2$ and $j$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
-Conversely, for $r_1 > r_2$ and $j$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
+
+\begin{remark}
+The following facts are easy to see (\textit{cf.} the theory of Dyck paths):
+\begin{enumerate}
+ \item The empty interval is balanced, whereas the set $\ive{n}$ of all sites is not.
+ \item If $A$ and $B$ are two balanced intervals, then the three intervals
+       $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced,
+       and $A \cup B \neq \ive{n}$; moreover, the union $A \cup B$ is also
+       balanced if it is an interval.
+ \item Thus, the union of all balanced intervals (i.e., the set of all balanced
+       $i \in \ive{n}$) is also the disjoint union of
+       all inclusion-maximal balanced intervals.
+ \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
+ \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
+\end{enumerate}
+\end{remark}
 
 We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ in $C$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
