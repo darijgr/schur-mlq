@@ -232,7 +232,7 @@
 
 \author[D.~Grinberg]{Darij Grinberg}
 \address[D. Grinberg]{School of Mathematics, University of Minnesota, 206 Church St. SE, Minneapolis, MN 55455}
-\email{darij.grinberg@gmail.com}
+\email{darijgrinberg@gmail.com}
 \urladdr{http://www.cip.ifi.lmu.de/~grinberg/}
 
 \author[T.~Scrimshaw]{Travis Scrimshaw}
@@ -321,9 +321,9 @@ Yet it seems unlikely that our weighting is related to the steady state distribu
 This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
 In Section~\ref{sec:result}, we give our main results.
-In Section~\ref{sec:JT_formula}, we show a Jacobi-Trudy like formula for special words $u$, which we use to prove some of the conjectures in~\cite{AasLin17}.
+In Section~\ref{sec:JT_formula}, we show a Jacobi-Trudi like formula for special words $u$, which we use to prove some of the conjectures in~\cite{AasLin17}.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
-In Sections~\ref{sec:thm_proof}, we give a proof of our main theorem (Theorem~\ref{thm:permutation}).
+In Section~\ref{sec:thm_proof}, we give a proof of our main theorem (Theorem~\ref{thm:permutation}).
 In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 
 
@@ -562,7 +562,7 @@ There is a natural duality in the algorithm above.
 For each queue $q$, let $q^*$ be the \defn{contragredient dual queue}, defined by $\tup{i \in q^*} \Longleftrightarrow \tup{n+1-i \notin q}$.
 Similarly, for each word $u$ with $\ell$ classes, let $u^*$ be the \defn{contragredient dual word} defined by $u^*_i = \ell + 1 - u_{n+1-i}$.
 For a fixed $k \in \ive{\ell}$, we call $\ell + 1 - k$ the \defn{contragredient dual letter} of $k$.
-Note that if $q$ is an $r$-queue, then $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ across the middle of $[n]$.
+Note that if $q$ is an $r$-queue, then $q^*$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$ through the middle of $[n]$.
 Similarly, $u^*$ is obtained by reversing the word $u$ and taking the contragredient dual letters.
 
 \begin{lemma}[Contragredient duality]
@@ -996,7 +996,7 @@ Since the type of $u$ is $\mm$, and since $k = p_i(\mm)$, we have
  \merge{i} u = \vee^{(k)} (u) = \vee^{(k)} \qq\bigl( q' (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} q' (1 \dotsm 1) \bigr)
 \end{equation}
 by repeated use of Lemma~\ref{lemma:queue_merge_commute}
-(since any word obtained by actions of queues on $q'(1 \dots 1)$
+(since any word obtained by actions of queues on $q'(1 \dotsm 1)$
 will have its type $\nn$ satisfy
 $k \in \set{ p_j(\nn) \mid j \geq 0 } $).
 It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
@@ -1431,17 +1431,21 @@ We construct the \defn{dual}\footnote{This is a different duality than the contr
 
 We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
 Thus, assume $r_1 \neq r_2$.
-Let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
+
+For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
-Note that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
+Equivalently, $\inter[i,j]$ is balanced if and only if $c^{\downarrow}[i,j] = c^{\uparrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\downarrow[k,j] \geq c^\uparrow[k,j]$.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 
 \begin{remark}
 The following facts are easy to see (\textit{cf.} the theory of Dyck paths):
 \begin{enumerate}
+ \item For any balanced interval $\mcI$, we have
+       $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
  \item The empty interval is balanced, whereas the set $\ive{n}$ of all sites is not.
  \item If $A$ and $B$ are two balanced intervals, then the three intervals
        $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced,
@@ -1452,6 +1456,7 @@ The following facts are easy to see (\textit{cf.} the theory of Dyck paths):
        all inclusion-maximal balanced intervals.
  \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
  \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
+ \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
 \end{enumerate}
 \end{remark}
 
@@ -1486,18 +1491,21 @@ The maximal balanced intervals are boxed.}
 \label{fig:balanced}
 \end{figure}
 
+Recall the notations introduced just before Lemma~\ref{le:dual}.
+
 \begin{remark}
 \label{rmk:balanced-dual-let}
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
-Then, the interval $\mcI$ of $C$ is balanced if and only if $\mcI^* = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
-In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but have been reflected around the middle of $\ive{n}$.
-In addition, we have
+Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^* = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
+In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but reflected through the middle of $\ive{n}$.
+In addition, applying Lemma~\ref{le:dual} twice, we obtain
 \[
-C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q^*_1(u^*)^* \bigr) = q_2^*\bigl( q_1^*(u^*) \bigr)^* = C^*(u^*)^*
+C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( (q^*_1(u^*))^* \bigr) = \bigl( q_2^*\bigl( q_1^*(u^*) \bigr) \bigr) ^* = \bigl( C^*(u^*) \bigr)^* .
 \]
-from applying Lemma~\ref{le:dual} twice.
 In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 6 - C^*(u^*)_{n+1-i}$ where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
 \end{remark}
+\Darij{I haven't checked the last sentence of the above remark; I wouldn't be surprised if the $6$ should be a $5$. Can't be bothered to do the computation, though.
+Do we actually need this remark here, or is it only used in Erik's old proof?}
 
 Fix $k \geq 1$.
 In the following, we simplify our terminology and say that an MLQ
@@ -1657,7 +1665,7 @@ Note that the bracketing rule given above is precisely the usual signature rule 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
-For $k \in \set{p_i(\mm) \mid i \geq 0}$, we set $[w]_k = 0$.
+For $k \notin \set{p_i(\mm) \mid i \geq 0}$, we set $[w]_k = 0$.
 
 The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the following two facts.
 
@@ -1717,12 +1725,18 @@ Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{
 
 \begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
 Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
-Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $i \in \ive{\ell-2}$
+(since Theorem~\ref{thm:permutation} then follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$).
 Thus the proof is reduced to showing that for any configuration $C = \tup{q_1, q_2}$
 and any word $u \in \mcW_n$ the dual configuration
 $C' = (q'_1, q'_2)$ of $C$ satisfies $C'(u) = C(u)$.
 
-From Lemma~\ref{le:mono}, it is sufficient to consider standard words $u$.
+Each word $u$ can be obtained from a standard word by a sequence of
+merges (each of which sends a word $w$ to $\vee^{(k)} w$ for some
+$k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of
+$w$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
+commute with the action of a queue (and thus of an MLQ).
+Hence, it is sufficient to consider standard words $u$.
 It is straightforward to see that the words
 $C(u) = q_2\bigl( q_1(u) \bigr)$
 and
