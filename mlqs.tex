@@ -1510,15 +1510,18 @@ Do we actually need this remark here, or is it only used in Erik's old proof?}
 Fix $k \geq 1$.
 In the following, we simplify our terminology and say that an MLQ
 is a $k$-tuple of queues (without any restriction on their sizes).
-We want to define an action of $\SymGp{k}$ on MLQs
-with simple transpositions $\fraks_i$ acting by
+We want to define an action of $\SymGp{k}$ on MLQs.
+%by letting each simple transposition $s_i$ act as the map
+For each $i \in \ive{k-1}$, we define a map $\fraks_i : \set{\text{MLQs}} \to \set{\text{MLQs}}$ by
 \[
 \fraks_i \tup{q_1, q_2, \dotsc, q_k} = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k},
 \]
 where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
 From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
 It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
-Thus, to show this is indeed an action, it remains to show the following.
+Thus, we can define an action of $\SymGp{k}$ on the set of all MLQs
+by letting each simple transposition $s_i$ as $\fraks_i$,
+once we have proven the following:
 
 \begin{prop} \label{prop:braid}
 We have
@@ -1526,7 +1529,7 @@ We have
 \fraks_i \fraks_{i+1} \fraks_i \qq
 	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
 \]
-for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots, k-1}$.
+for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots, k-2}$.
 \end{prop}
 
 \begin{proof}
@@ -1554,7 +1557,8 @@ For example, if $n = 5$, $k = 3$, then
  \\ & \longrightarrow
  \word(\qq) = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
 \end{align*}
-Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$.
+Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$
+(since $n$ is fixed).
 In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
 is injective.
 
