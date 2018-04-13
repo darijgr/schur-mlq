@@ -1430,23 +1430,29 @@ We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
 Thus, assume $r_1 \neq r_2$.
 
 For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
-This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $i = j$, we have $\inter[i,j] = \ive{n}$.}
-\darij{No, I don't think we should have $\inter[i,j] = \ive{n}$ for $i = j$. The case when $r_1 = r_2$ fucks up too much other stuff to keep it in; in particular, it breaks the cycling argument in the proof because we can't cycle to an unbalanced site anymore. Also, we need $\inter[i,j]$ to be $\set{i}$ when $i = j$, because how else could we get $\set{i}$ ?}
+This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $j = i-1$, then $\inter[i,j] = \ive{n}$.}
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
 Equivalently, $\inter[i,j]$ is balanced if and only if $c^{\downarrow}[i,j] = c^{\uparrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\downarrow[k,j] \geq c^\uparrow[k,j]$.
+A set $S$ of sites is \defn{balanced} if it is a disjoint union of balanced intervals.
 For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
 
 The following facts are straightforward:
 \begin{enumerate}
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
- \item The empty interval is balanced, whereas the set $\ive{n}$ of all sites is not.
- % The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
- \item If $A$ and $B$ are two balanced intervals, then the three intervals
-       $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced, and $A \cup B \neq \ive{n}$;
-       moreover, the union $A \cup B$ is also balanced if it is an interval.
+ \item The empty interval is balanced. %, whereas the set $\ive{n}$ of all sites is not.
+ \item The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
+ \item If $A$ and $B$ are two balanced sets, then the four sets
+       $A \cap B$, $A \cup B$, $A \setminus B$ and $B \setminus A$ are
+       balanced.\footnote{This can be proven as follows: First argue
+       that $A \cap B$ is balanced when $A$ and $B$ are balanced intervals,
+       hence also when $A$ and $B$ are balanced sets.
+       Then, use $A \setminus B = A \setminus \tup{A \cap B}$ to
+       prove the same for $A \setminus B$, thus also for
+       $B \setminus A$. Finally, prove it for $A \cup B$
+       using $A \cup B = \tup{A \cap B} \sqcup \tup{A \setminus B} \sqcup \tup{B \setminus A}$.}
  \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
        $i \in \ive{n}$) is also the disjoint union of all inclusion-maximal balanced intervals.
  \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
@@ -1592,8 +1598,8 @@ $\sigma_i$ satisfy
 \end{equation}
 for all $i \in \set{1, 2, \ldots, k-2}$.
 
-Let $\zeta : \mcW_n \to \mcW_n$ be the ``cyclic shift'' map that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
-We also use the notation $\zeta$ for the map that sends each queue $q$ to the queue $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites).
+Let $\zeta \colon \mcW_n \to \mcW_n$ be the cyclic shift map that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
+We also abuse the notation $\zeta$ for the map that sends each queue $q$ to the queue $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites).
 This map $\zeta$ shall act on MLQs entrywise (since an MLQ is a tuple of queues).
 Clearly,
 \begin{equation}
@@ -1626,7 +1632,7 @@ We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n
 \end{itemize}
 Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
 Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
-Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely extends it to both sides.)
+Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
 % [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
 Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced intervals ``wrap around the circle''.
 Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
