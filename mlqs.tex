@@ -575,7 +575,7 @@ Similarly, $u^*$ is obtained by reversing the word $u$ and taking the contragred
 
 Here, we treat $q(u)$ as a word with $\ell+1$ classes, even if it may have only $\ell$ classes (in the degenerate case when $q = \ive{n}$).
 
-\begin{proof}[Proof of Lemma~\ref{le:dual}.]
+\begin{proof}
 Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q^*(u^*)$ when the word is reversed and the letters are replaced by their contragredient duals.
 Hence the claim follows.
 \end{proof}
@@ -583,148 +583,6 @@ Hence the claim follows.
 %\begin{remark} (Excision)
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
-
-For the next lemma, we need further notation:
-For any map $f \colon \set{1,2,\ldots} \to \set{1,2,\ldots}$ and word $u$,
-we abuse notation to let $f(u)$ be the word obtained by applying $f$ to each letter of $u$.
-
-\begin{lemma}[Monotonicity]
-\label{le:mono}
-  For any $k \in \ZZ_{\geq 1}$, let $f_k \colon \{1,2, \ldots\} \to \{1,2\}$ be given by
-  \[
-    f_k(x) = \begin{cases}
-    1 & \text{if } x \leq k, \\
-    2 & \text{if } x > k.
-    \end{cases}
-  \]
-  Let $q$ be a queue, $u$ be any word, and $i,j \in \ive{n}$.
-  We have $q(u)_i \leq q(u)_j$ if and only if $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-\end{lemma}
-
-\begin{proof}
-Let $k \in \ZZ_{\geq 1}$ be arbitrary.
-Consider some fixed permutation $\tup{i_1, i_2, \ldots, i_n}$ used in the construction of $q(u)$.
-This same permutation works for the construction of $q\bigl(f_k(u) \bigr)$
-since $\bigl( f_k(u) \bigr)_a \leq \bigl( f_k(u) \bigr)_b$ whenever $u_a \leq u_b$.
-Thus, the construction of $q\bigl( f_k(u) \bigr)$ proceeds exactly as the
-construction of $q(u)$, except that the letters used to build
-the word $q\bigl( f_k(u) \bigr)$ are those of $f_k(u)$ instead of those of $u$.
-%In particular, for a given site $k$, the letter $v_k$ is set at
-%the same moment as the letter $v'_k$ is set; we just say that
-%``site $k$ is set''.
-% commented stuff below went here.
-Suppose $q(u)_i \leq q(u)_j$.
-So either
-\begin{itemize}
-\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
-\item $q(u)_i$ is set in Phase~II and $q(u)_j$ in Phase~I.
-\end{itemize}
-Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
-
-For the converse direction, we shall prove the contrapositive.
-So we assume that $q(u)_i > q(u)_j$.
-Thus, either
-\begin{itemize}
-\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
-\item $q(u)_i$ is set in Phase~I and $q(u)_j$ in Phase~II.
-\end{itemize}
-Let
-\[
-k = \begin{cases}
-q(u)_j & \text{if $q(u)_j$ is set during Phase~II,} \\
-q(u)_j - 1 & \text{otherwise.}
-\end{cases}
-\]
-Therefore, if $q(u)_j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
-Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
-In either case, $q\bigl( f_k(u) \bigr)_i > q\bigl( f_k(u) \bigr)_j$.
-\Darij{I don't understand these last 3 lines.}
-\Travis{Just work through the cases.}
-
-\begin{comment}
-Hence, for each $m \in \ive{n}$, we have
-\begin{equation}
- q(f_k(u))_m
- = \begin{cases}
-    f_k(q(u)_m), & \text{ if } m \in q ; \\
-    f_k(q(u)_m - 1) + 1, & \text{ if } m \notin q
-   \end{cases}
- .
- \label{pf.le:mono.correspondence}
-\end{equation}
-
-Now, assume that $q(u)_i \leq q(u)_j$.
-We want to prove that
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
-If $i \in q$ and $j \notin q$, then this is obvious.
-If $i \notin q$ and $j \in q$, then we obtain a contradiction to
-$q(u)_i \leq q(u)_j$.
-Hence, only two cases remain: the case when both $i$ and $j$ belong to $q$,
-and the case when neither $i$ nor $j$ belongs to $q$.
-Let us only consider the second case (as the first is analogous).
-So $i \notin q$, and thus~\eqref{pf.le:mono.correspondence} yields
-$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$.
-Similarly,
-$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$.
-But $q(u)_i \leq q(u)_j$, so that
-$f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$
-and thus
-$q(f_k(u))_i = f_k(q(u)_i - 1) + 1 \leq f_k(q(u)_j - 1) + 1 = q(f_k(u))_j$,
-as we desired to prove.
-
-We thus have shown that if $q(u)_i \leq q(u)_j$, then
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-
-Conversely, assume that
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-We must show that $q(u)_i \leq q(u)_j$.
-%Assume the contrary.
-%Hence, $q(u)_i > q(u)_j$.
-If $i \in q$ and $j \notin q$, then this is obvious.
-If $i \notin q$ and $j \in q$, then we get a contradiction (since
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ will fail for each $k$).
-Thus, again, only two cases remain: the case when both $i$ and $j$ belong to $q$,
-and the case when neither $i$ nor $j$ belongs to $q$.
-Let us only consider the second case (as the first is analogous).
-Thus, both $q(u)_i$ and $q(u)_j$ are $\geq 2$.
-As before, we obtain
-$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$ and
-$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$ for each $k$.
-Thus, for each $k$, we have
-$f_k(q(u)_i - 1) + 1 = q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j = f_k(q(u)_j - 1) + 1$
-and therefore $f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$.
-But this implies that $q(u)_i - 1 \leq q(u)_j - 1$
-(because if two positive integers $a$ and $b$ satisfy $f_k(a) \leq f_k(b)$ for each $k \in \ZZ_{\geq 1}$, then $a \leq b$).
-In other words, $q(u)_i \leq q(u)_j$, and the proof is complete.
-\end{comment}
-\end{proof}
-
-
-\begin{comment}
-\begin{proof}
-%Let $x = q(u)_i$, $y = q(u)_j$, $x_k = q\bigl( f_k(u) \bigr)_i$ and $y_k = q\bigl( f_k(u) \bigr)_j$.
-Let $t$ be as in Remark~\ref{rmk:t-splitting}.
-Note that the permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
-also works for the construction of $q(\merge{h} u)$;
-thus,
-$q(\merge{h} u) = \merge{h} q(u)$ for all $h < t$ and $q(\merge{h} u) = \merge{h+1} q(u)$ for all $h \geq t$. 
-%since equal entries can be processed in any order in the definition of the action of $q$.
-
-Assume $q(u)_i \leq q(u)_j$.
-Then, $f_k(u) = \merge{1} \merge{2} \cdots \merge{k-1} \merge{k+1} \cdots \merge{\ell-1} u$
-(where $\ell$ is the number of classes in $u$),
-and so (by the preceding observation) $q(f_k(u)) = \merge{r_1} \merge{r_2} \cdots \merge{r_{\ell-2}} q(u)$
-for some $r_1, \ldots, r_{\ell-2}$.
-Hence, $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-
-Conversely, assume $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-Suppose that $q(u)_i > q(u)_j$, then we can apply merges to $u$ to obtain $f_{k'}$ with $k' = q(u)_j$.
-However, the previous argument implies that $q\bigl(f_{k'}(u) \bigr)_i > q\bigl(f_{k'}(u) \bigr)_j$, which is a contradiction.
-Hence, the claim follows.
-\end{proof}
-\end{comment}
-
-Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
 
 
 %%%%%%%%%%
@@ -1185,7 +1043,7 @@ This then forms the disjoint $r$-paths $\rho' = \{\rho'_i\}_{i=1}^r$ by
 \rho'_i \colon (0,i) \to (a_{i,K(i)},i) & \to (a_{i,K(i)},i+1) \to (a_{i,K(i)+1},i+1) \to
 \\ \cdots & \to (a_{i,\ell-1}, i + \ell - K(i)) = (b_i, i - \gamma_i).
 \end{align*}
-The fact that $\qq = \qq_{\rho'}$ follows from (a mild generalization of) the monotonicity lemma (Lemma~\ref{le:mono}).
+The fact that $\qq = \qq_{\rho'}$ follows from Lemma~\ref{lemma:queue_merge_commute}.
 \end{proof}
 
 \begin{figure}[t]
@@ -2064,6 +1922,146 @@ We first consider the case $r_1 = r_2$, in which case $C' = C$ by definition and
 Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
 Thus, for the remainder of this section we assume $r_1 \neq r_2$.
 
+We require a preparatory lemma, for which we need further notation.
+For any map $f \colon \set{1,2,\ldots} \to \set{1,2,\ldots}$ and word $u$,
+we abuse notation to let $f(u)$ be the word obtained by applying $f$ to each letter of $u$.
+
+\begin{lemma}[Monotonicity]
+\label{le:mono}
+  For any $k \in \ZZ_{\geq 1}$, let $f_k \colon \{1,2, \ldots\} \to \{1,2\}$ be given by
+  \[
+    f_k(x) = \begin{cases}
+    1 & \text{if } x \leq k, \\
+    2 & \text{if } x > k.
+    \end{cases}
+  \]
+  Let $q$ be a queue, $u$ be any word, and $i,j \in \ive{n}$.
+  We have $q(u)_i \leq q(u)_j$ if and only if $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+\end{lemma}
+
+\begin{proof}
+Let $k \in \ZZ_{\geq 1}$ be arbitrary.
+Consider some fixed permutation $\tup{i_1, i_2, \ldots, i_n}$ used in the construction of $q(u)$.
+This same permutation works for the construction of $q\bigl(f_k(u) \bigr)$
+since $\bigl( f_k(u) \bigr)_a \leq \bigl( f_k(u) \bigr)_b$ whenever $u_a \leq u_b$.
+Thus, the construction of $q\bigl( f_k(u) \bigr)$ proceeds exactly as the
+construction of $q(u)$, except that the letters used to build
+the word $q\bigl( f_k(u) \bigr)$ are those of $f_k(u)$ instead of those of $u$.
+%In particular, for a given site $k$, the letter $v_k$ is set at
+%the same moment as the letter $v'_k$ is set; we just say that
+%``site $k$ is set''.
+% commented stuff below went here.
+Suppose $q(u)_i \leq q(u)_j$.
+So either
+\begin{itemize}
+\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
+\item $q(u)_i$ is set in Phase~II and $q(u)_j$ in Phase~I.
+\end{itemize}
+Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
+
+For the converse direction, we shall prove the contrapositive.
+So we assume that $q(u)_i > q(u)_j$.
+Thus, either
+\begin{itemize}
+\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
+\item $q(u)_i$ is set in Phase~I and $q(u)_j$ in Phase~II.
+\end{itemize}
+Let
+\[
+k = \begin{cases}
+q(u)_j & \text{if $q(u)_j$ is set during Phase~II,} \\
+q(u)_j - 1 & \text{otherwise.}
+\end{cases}
+\]
+Therefore, if $q(u)_j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
+Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
+In either case, $q\bigl( f_k(u) \bigr)_i > q\bigl( f_k(u) \bigr)_j$.
+
+\begin{comment}
+Hence, for each $m \in \ive{n}$, we have
+\begin{equation}
+ q(f_k(u))_m
+ = \begin{cases}
+    f_k(q(u)_m), & \text{ if } m \in q ; \\
+    f_k(q(u)_m - 1) + 1, & \text{ if } m \notin q
+   \end{cases}
+ .
+ \label{pf.le:mono.correspondence}
+\end{equation}
+
+Now, assume that $q(u)_i \leq q(u)_j$.
+We want to prove that
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
+If $i \in q$ and $j \notin q$, then this is obvious.
+If $i \notin q$ and $j \in q$, then we obtain a contradiction to
+$q(u)_i \leq q(u)_j$.
+Hence, only two cases remain: the case when both $i$ and $j$ belong to $q$,
+and the case when neither $i$ nor $j$ belongs to $q$.
+Let us only consider the second case (as the first is analogous).
+So $i \notin q$, and thus~\eqref{pf.le:mono.correspondence} yields
+$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$.
+Similarly,
+$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$.
+But $q(u)_i \leq q(u)_j$, so that
+$f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$
+and thus
+$q(f_k(u))_i = f_k(q(u)_i - 1) + 1 \leq f_k(q(u)_j - 1) + 1 = q(f_k(u))_j$,
+as we desired to prove.
+
+We thus have shown that if $q(u)_i \leq q(u)_j$, then
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+
+Conversely, assume that
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+We must show that $q(u)_i \leq q(u)_j$.
+%Assume the contrary.
+%Hence, $q(u)_i > q(u)_j$.
+If $i \in q$ and $j \notin q$, then this is obvious.
+If $i \notin q$ and $j \in q$, then we get a contradiction (since
+$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ will fail for each $k$).
+Thus, again, only two cases remain: the case when both $i$ and $j$ belong to $q$,
+and the case when neither $i$ nor $j$ belongs to $q$.
+Let us only consider the second case (as the first is analogous).
+Thus, both $q(u)_i$ and $q(u)_j$ are $\geq 2$.
+As before, we obtain
+$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$ and
+$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$ for each $k$.
+Thus, for each $k$, we have
+$f_k(q(u)_i - 1) + 1 = q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j = f_k(q(u)_j - 1) + 1$
+and therefore $f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$.
+But this implies that $q(u)_i - 1 \leq q(u)_j - 1$
+(because if two positive integers $a$ and $b$ satisfy $f_k(a) \leq f_k(b)$ for each $k \in \ZZ_{\geq 1}$, then $a \leq b$).
+In other words, $q(u)_i \leq q(u)_j$, and the proof is complete.
+\end{comment}
+\end{proof}
+
+
+\begin{comment}
+\begin{proof}
+%Let $x = q(u)_i$, $y = q(u)_j$, $x_k = q\bigl( f_k(u) \bigr)_i$ and $y_k = q\bigl( f_k(u) \bigr)_j$.
+Let $t$ be as in Remark~\ref{rmk:t-splitting}.
+Note that the permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
+also works for the construction of $q(\merge{h} u)$;
+thus,
+$q(\merge{h} u) = \merge{h} q(u)$ for all $h < t$ and $q(\merge{h} u) = \merge{h+1} q(u)$ for all $h \geq t$. 
+%since equal entries can be processed in any order in the definition of the action of $q$.
+
+Assume $q(u)_i \leq q(u)_j$.
+Then, $f_k(u) = \merge{1} \merge{2} \cdots \merge{k-1} \merge{k+1} \cdots \merge{\ell-1} u$
+(where $\ell$ is the number of classes in $u$),
+and so (by the preceding observation) $q(f_k(u)) = \merge{r_1} \merge{r_2} \cdots \merge{r_{\ell-2}} q(u)$
+for some $r_1, \ldots, r_{\ell-2}$.
+Hence, $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+
+Conversely, assume $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
+Suppose that $q(u)_i > q(u)_j$, then we can apply merges to $u$ to obtain $f_{k'}$ with $k' = q(u)_j$.
+However, the previous argument implies that $q\bigl(f_{k'}(u) \bigr)_i > q\bigl(f_{k'}(u) \bigr)_j$, which is a contradiction.
+Hence, the claim follows.
+\end{proof}
+\end{comment}
+
+Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
+
 By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
 We split the proof into four parts as follows.
 In Part~A, we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
@@ -2083,7 +2081,7 @@ for an element $j \in \ive{n}$.
 
 %balanced intervals in C and C' are the same (because #unbalanced columns is same in both)
 %%%%%%%%%%
-\subsection*{Part A: Reduction to special words}
+\subsection*{Part I: Reduction to special words}
 
 For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result of swapping positions $i$ and $j$ in $u$.
 
@@ -2379,7 +2377,7 @@ We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
 
 
 %%%%%%%%%%
-\subsection*{Part B: finishing the proof}
+\subsection*{Part II: finishing the proof}
 
 Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$.
 Now, let $u_0$ be a result of applying Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} until this can be done no more.
