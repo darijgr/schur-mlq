@@ -329,7 +329,9 @@ In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 
 \subsection{Acknowledgements}
 
-We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII} and Olya Mandelshtam for useful discussions on the inhomogeneous TASEP.
+We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII}.
+We thank Olya Mandelshtam for useful discussions on the inhomogeneous TASEP.
+We thank Jae-Hoon Kwon for pointing out that the $\SymGp{n}$-action on MLQs comes from an $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
 This work benefited from computations using \textsc{SageMath}~\cite{sage,combinat}.
 
 
@@ -1090,6 +1092,36 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 
 We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and weakly decreasing if we disregard all letters $\ell$.
 
+\begin{dfn}
+\label{def:near_std}
+Define the \defn{$k$-near standardization} of a word $u \in \mcW_n$ of type $\mm$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows.
+Define
+\[
+W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \}
+\]
+such that $u_j \geq k$ for all $j \in \ive{n} \setminus W$.
+Let $r = \abs{W}$ and set
+\[
+\std{u}_i = \begin{cases}
+j & \text{if } u_i < k \text{ and } i = w_j \\
+r + 1 & \text{otherwise.}
+\end{cases}
+\]
+That is to say, the $k$-near standardization $\std{u}$ is obtained by replacing the $j$-th letter that is not $k$ read right-to-left with $j$ and all letters $k$ with $r + 1$.
+We say the \defn{near standardization} of a word with $\ell$ classes to be the $\ell$-near standardization.
+\end{dfn}
+
+Note that the $k$-near standardization is order preserving in the sense that $1 \leq i < j \leq n$ satisfy $u_i \geq u_j$ if and only if either $\std{u}_i > \std{u}_j$ or $\std{u}_i = \std{u}_j = r+1$.
+Additionally, note that the type of the near standardization of a word $u$ with $\ell$ classes is $\widetilde{\mm} = (\widetilde{m}_1, \widetilde{m}_2, \ldots, \widetilde{m}_{r+1}, 0, 0, \ldots)$ with $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_{r+1} = m_k$.
+
+\begin{example}
+For $k = 4$, we have
+\begin{align*}
+u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
+\\ \std{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
+\end{align*}
+\end{example}
+
 \begin{thm}
 \label{thm:determinant_form}
   Let $B = \set{b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
@@ -1128,32 +1160,7 @@ Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
 Thus, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
 we shall disregard this factor in the following.
 
-Next, define the \defn{$k$-near standardization} of a word $u \in \mcW_n$ of type $\mm$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_{n}$ obtained as follows.
-Define
-\[
-W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \}
-\]
-such that $u_j \geq k$ for all $j \in \ive{n} \setminus W$.
-Let $r = \abs{W}$ and set
-\[
-\std{u}_i = \begin{cases}
-j & \text{if } u_i < k \text{ and } i = w_j \\
-r + 1 & \text{otherwise.}
-\end{cases}
-\]
-That is to say, the $k$-near standardization $\std{u}$ is obtained by replacing the $j$-th letter that is not $k$ read right-to-left with $j$ and all letters $k$ with $r + 1$.
-For example, for $k = 4$, we have
-\begin{align*}
-u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
-\\ \std{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
-\end{align*}
-Note that the near standardization is order preserving in the sense
-that $1 \leq i < j \leq n$ satisfy $u_i \geq u_j$ if and only if
-either $\std{u}_i > \std{u}_j$ or $\std{u}_i = \std{u}_j = r+1$.
-Additionally, note that if $u$ is a word with $\ell$ classes, for $k = \ell - 1$ the type $\widetilde{\mm} = (\widetilde{m}_1, \widetilde{m}_2, \ldots, \widetilde{m}_{r+1}, 0, 0, \ldots)$
-of $\std{u}$ is given by $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_{r+1} = m_k$.
-For our case, we will only consider $k = \ell$ and simply say near standardization, and we have $W = B$ (but in the reverse order).
-
+Let $\std{u}$ be the near standardization of $u$, and note that $W = B$ from Definition~\ref{def:near_std} (but in the reverse order).
 There exists $T$ such that $\bigvee_T \std{u} = u$.
 Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
 As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ corresponds to disjoint $r$-paths with initial points $\iota_i := (0,i)$ and terminal points $(b_i,0)$.
