@@ -1195,8 +1195,9 @@ For a state $u \in \mcW_S$, we move to a new state by picking a random $i \in [n
 \end{itemize}
 Let $M_S \colon V_S \to V_S$ be the transition matrix of this Markov chain.
 Note that these moves preserve the type of the words; thus we could consider this as a Markov chain on $\mcW_n$, where $\mcW_S$ becomes an irreducible component.
-For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ given by $\Phi_i(\epsilon_u) = \epsilon_{\merge{t}u}$, where $t = \min\set{k \mid p_k(\mm_S) \geq i}$.
-\Darij{I think $\Phi_i(\epsilon_u)$ is simply $\epsilon_{\vee^{(i)} u}$. Why do you say $t = \min\set{k \mid p_k(\mm_S) \geq i}$ and not just $t = \min\set{k \mid p_k(\mm_S) = i}$?}
+For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ given by
+$\Phi_i(\epsilon_u) = \epsilon_{\vee^{(i)} u}$.
+%$\Phi_i(\epsilon_u) = \epsilon_{\merge{t}u}$, where $t = \min\set{k \mid p_k(\mm_S) \geq i}$.
 It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
 
 \begin{figure}
