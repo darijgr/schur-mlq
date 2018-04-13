@@ -1579,14 +1579,38 @@ intervals) refer to $C$.
 
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $w_{i_1} \leq w_{i_2} \leq \cdots \leq w_{i_n}$.
-Use this permutation to construct $q(w)$.
+Use this permutation to construct $q(w)$ (as in the definition of $q(w)$).
 For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
 \Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
 Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
 
-Suppose $k \leq \abs{q}$.
+Suppose first that $k \leq \abs{q}$.
 Thus, each site in $[w]_k$ is balanced.
 But $[w]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
+
+If $S$ is a set of sites, then the \defn{connected components} of $S$ are the maximal intervals contained in $S$.
+
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
+Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
+A set of sites will be called \defn{top-heavy} if each of its connected components is top-heavy.
+
+For each $p \in \set{0, 1, \ldots, k}$, we define a set $\mathcal{G}_p$ of sites
+by
+$\mathcal{G}_p = \inter[i_1, j_1] \cup \inter[i_2, j_2] \cup \cdots \inter[i_p, j_p]$.
+We first claim that $\mathcal{G}_p \cap q = \set{j_1, j_2, \ldots, j_p}$
+for each $p \in \set{0, 1, \ldots, k}$.
+Indeed, we prove this by induction on $p$, the base case ($p=0)$ being obvious.
+For the induction step (from $p-1$ to $p$), we recall that the site $j_p$ is found
+(in Phase~II of the algorithm computing $q(w)$) by starting at $i_p$ and
+moving weakly to the right in search of the first site $j \in q$ such that $q(w)_j$ is
+not set yet.
+The sites $j \in q$ such that $q(w)_j$ have already been set are $j_1, j_2, \ldots, j_{p-1}$,
+and thus belong to the set
+$\inter[i_1, j_1] \cup \inter[i_2, j_2] \cup \cdots \inter[i_{p-1}, j_{p-1}]$,
+which (by the induction hypothesis) is top-heavy.
+
+
+XXX
 Hence, for each $p \in \ive{k}$, the site $i_p$ is balanced, so there is a
 maximal balanced interval $\mcI_p$ such that $i_p \in \mcI_p$.
 Now, we claim that $j_p \in \mcI_p$ for each $p \in \ive{k}$.
