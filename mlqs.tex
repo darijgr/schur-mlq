@@ -1313,17 +1313,16 @@ The following facts are straightforward:
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
  \item The empty interval is balanced. %, whereas the set $\ive{n}$ of all sites is not.
  \item The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
- \item If $A$ and $B$ are two balanced sets, then the four sets
-       $A \cap B$, $A \cup B$, $A \setminus B$ and $B \setminus A$ are
-       balanced.\footnote{This can be proven as follows: First argue
-       that $A \cap B$ is balanced when $A$ and $B$ are balanced intervals,
-       hence also when $A$ and $B$ are balanced sets.
-       Then, use $A \setminus B = A \setminus \tup{A \cap B}$ to
-       prove the same for $A \setminus B$, thus also for
-       $B \setminus A$. Finally, prove it for $A \cup B$
-       using $A \cup B = \tup{A \cap B} \sqcup \tup{A \setminus B} \sqcup \tup{B \setminus A}$.}
+ \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
+       is balanced.\footnote{To prove this, first check it when $A$ and $B$
+       are balanced intervals.}
+ \item If $A$ and $B$ are balanced intervals, and if $A \cup B$ is an
+       interval, then $A \cup B$ is balanced.\footnote{This is obvious
+       when one of $A$ and $B$ contains the other. Otherwise, argue
+       that $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced.}
  \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
-       $i \in \ive{n}$) is also the disjoint union of all inclusion-maximal balanced intervals.
+       $i \in \ive{n}$) is also the disjoint union of all maximal balanced intervals
+       (where ``maximal'' means ``maximal under inclusion'').
  \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
  \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
  \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
