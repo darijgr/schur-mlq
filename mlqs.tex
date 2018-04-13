@@ -1561,7 +1561,7 @@ as follows:
 \begin{enumerate}
  \item Treat all letters $i$ in $p$ as opening parentheses `(',
        all letters $i+1$ as closing parentheses `)',
-       and all other letters are considered frozen.
+       and consider all other letters to be frozen.
        Now, match as many parentheses as possible
        according to the standard parenthesis-matching
        algorithm (\textit{i.e.}, every time you find an opening
@@ -1758,6 +1758,10 @@ for all $k \in \set{0, 1, \ldots, n}$ for which these are
 well-defined.
 According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
 
+Let $k \in \set{0, 1, \ldots, n}$.
+Since $u$ is standard, we have $k \in \set{ p_i(\mm) \mid i \geq 0 }$,
+where $\mm$ is the type of $u$.
+Hence, $[u]_k$ is well-defined.
 Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
 Using Proposition~\ref{prop:SL.dual} to compute dual
 configurations, we can see how the MLQ
