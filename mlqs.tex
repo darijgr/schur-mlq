@@ -708,9 +708,12 @@ Thus, it remains to prove $\vee^{(k)} q(u) = q(\vee^{(k)} u)$.
 The permutation $\tup{i_1, i_2, \dotsc, i_n}$ in the construction of $q(u)$
 also works for the construction of $q(\vee^{(k)} u)$,
 since $(\vee^{(k)} u)_a \leq (\vee^{(k)} u)_b$ whenever $u_a \leq u_b$.
+Consequently, the construction of $q(\vee^{(k)} u)$ proceeds exactly like
+the construction of $q(u)$ (with the same entries being set in the same
+order), except that all but the $k$ smallest letters are now smaller by $1$.
 Hence, $q(\vee^{(k)} u)$ is obtained from $q(u)$ by decrementing (by $1$)
-all but the $k$ smallest letters of $q(u)$
-(since $\vee^{(k)} u$ is obtained in this way from $u$).
+all but the $k$ smallest letters of $q(u)$.
+% (since $\vee^{(k)} u$ is obtained in this way from $u$).
 However, the word $\vee^{(k)} q(u)$ is obtained from $q(u)$ in exactly the same way.
 Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
 \end{proof}
@@ -1148,10 +1151,10 @@ Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization 
 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture of~\cite{AAMP}.
 
-There are $2^{n-1}$ packed types for words of length $n$ as they are compositions of $n$.
+There are $2^{n-1}$ packed types for words of length $n$, as they are the compositions of $n$.
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
-Note that $\set{p_1(\mm_S), \dotsc, p_{\ell-1}(\mm_S)} = [n-1] \setminus S$, where $\mm_S$ has $\ell$ classes, which is the complement of the usual bijection between subsets of $\ive{n-1}$ and compositions of $n$.
+Note that $\set{p_1(\mm_S), \dotsc, p_{\ell-1}(\mm_S)} = [n-1] \setminus S$, where $\mm_S$ has $\ell$ classes; this is the complement of the usual bijection between subsets of $\ive{n-1}$ and compositions of $n$.
 Let $\mcW_S$ denote the set of words of type $\mm_S$.
 Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in \mcW_S}$.
 
@@ -1181,7 +1184,7 @@ Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in 
   \draw[->,dgreencolor] (12) -- (123);
   \end{tikzpicture}
   \]
-  where we have an arrow $m_S \to m_{S \cup \set{i}}$ for some $i \in [n-1] \setminus S$ (this is the Hasse diagram of the corresponding Boolean lattice).
+  where we have drawn an arrow $\mm_S \to \mm_{S \cup \set{i}}$ for each $S \subseteq [n-1]$ and each $i \in [n-1] \setminus S$ (this is the Hasse diagram of the Boolean lattice of subsets of $[n-1]$).
 \end{example}
 
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_S$, where $S \subseteq[n-1]$, as follows.
@@ -1191,8 +1194,9 @@ For a state $u \in \mcW_S$, we move to a new state by picking a random $i \in [n
 \item do nothing (\textit{i.e.} stay at $u$).
 \end{itemize}
 Let $M_S \colon V_S \to V_S$ be the transition matrix of this Markov chain.
-Note that these moves preserve the type of the words, thus we could consider this as a Markov chain on $\mcW_n$, where $M_S$ becomes an irreducible component.
+Note that these moves preserve the type of the words; thus we could consider this as a Markov chain on $\mcW_n$, where $\mcW_S$ becomes an irreducible component.
 For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ given by $\Phi_i(\epsilon_u) = \epsilon_{\merge{t}u}$, where $t = \min\set{k \mid p_k(\mm_S) \geq i}$.
+\Darij{I think $\Phi_i(\epsilon_u)$ is simply $\epsilon_{\vee^{(i)} u}$. Why do you say $t = \min\set{k \mid p_k(\mm_S) \geq i}$ and not just $t = \min\set{k \mid p_k(\mm_S) = i}$?}
 It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
 
 \begin{figure}
@@ -1296,7 +1300,6 @@ Thus, assume $r_1 \neq r_2$.
 
 For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $j = i-1$, then $\inter[i,j] = \ive{n}$.}
-Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
@@ -1380,7 +1383,7 @@ We want to define an action of $\SymGp{k}$ on MLQs.
 %by letting each simple transposition $s_i$ act as the map
 For each $i \in \ive{k-1}$, we define a map $\fraks_i \colon \set{\text{MLQs}} \to \set{\text{MLQs}}$ by
 \[
-\fraks_i \tup{q_1, q_2, \dotsc, q_k} = \tup{q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k},
+\fraks_i(q_1, q_2, \dotsc, q_k) = (q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k),
 \]
 where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
 From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
@@ -1535,30 +1538,31 @@ but this makes no difference to the proof, since all letters $\circ$ are always 
 The operator $\sigma_i$ is essentially a combination of co-plactic operators.
 Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
 Note that the bracketing rule given above is precisely the usual signature rule for computing tensor products.
-This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $\mathfrak{sl}_m \oplus \mathfrak{sl}_n$ action.
+This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
 \end{remark}
 
 Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
-For $k \notin \set{p_i(\mm) \mid i \geq 0}$, we set $[w]_k = 0$.
 
 The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the following two facts.
 
 \begin{lemma} \label{lem:SL.reconstruct}
-Let $w, w' \in \mcW_n$ be two words of the same type.
-Then $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$ if and only if $w = w'$.
+Let $w, w' \in \mcW_n$ be two words of the same type $\mm$.
+Assume that $[w]_k = [w']_k$ for each $k \in \set{p_i(\mm) \mid i \geq 0}$.
+Then, $w = w'$.
 \end{lemma}
 
 \begin{proof}
-Clearly $w = w'$ implies $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
-Next, we assume that $\bigl( [w]_k \bigr)_{k=0}^n = \bigl( [w']_k \bigr)_{k=0}^n$.
-Let the words $w$ and $w'$ have the type $\mm$.
-Fix some $k$, and let $j$ be such that $k = p_j(\mm)$.
-Thus, we have $[w]_k \setminus [w]_{k-p_j(\mm)} = [w']_k \setminus [w']_{k-p_j(\mm)}$ defined, which we denote by $P_j$.
-\travis{This version of $k$ smallest letters is actively fighting us here.}
-By construction, we have $w_i = j = w'_i$ for all $i \in P_j$.
-Since this holds for all letters $k$, we have $w = w'$.
+Fix some $i \geq 1$.
+The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}$
+(since $w$ has type $\mm$).
+Likewise,
+the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
+Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
+= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$,
+we conclude that these are the same sites.
+Since this holds for all letters $i$, we have $w = w'$.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
@@ -1614,6 +1618,7 @@ $k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of
 $w$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
 commute with the action of a queue (and thus of an MLQ).
 Hence, it is sufficient to consider standard words $u$.
+Thus, assume that $u$ is standard of type $\mm$.
 It is straightforward to see that the words
 $C(u) = q_2\bigl( q_1(u) \bigr)$
 and
@@ -1623,15 +1628,14 @@ have the same type from Equation~\eqref{eq:queue_type_change}.
 %type in a predictable way (namely, the number $\abs{q}$ is
 %inserted into the type of $w$ at the place where it would
 %keep the type weakly increasing).
+Let $\nn$ be this type.
 We shall now show that
 $[C'(u)]_k = [C(u)]_k$
-for all $k \in \set{0, 1, \ldots, n}$ for which these are
-well-defined.
+for all $k \in \set{ p_i(\nn) \mid i \geq 0}$.
 According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
 
-Let $k \in \set{0, 1, \ldots, n}$.
-Since $u$ is standard, we have $k \in \set{ p_i(\mm) \mid i \geq 0 }$,
-where $\mm$ is the type of $u$.
+Let $k \in \set{ p_i(\nn) \mid i \geq 0}$.
+Thus, $k \in \set{0, 1, \ldots, n} = \set{ p_i(\mm) \mid i \geq 0 }$ (since $u$ is standard).
 Hence, $[u]_k$ is well-defined.
 Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
 Using Proposition~\ref{prop:SL.dual} to compute dual
@@ -2084,6 +2088,8 @@ for an element $j \in \ive{n}$.
 \subsection*{Part I: Reduction to special words}
 
 For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result of swapping positions $i$ and $j$ in $u$.
+
+If $i$ and $j$ are two sites, then we let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 
 \begin{lemma}
 \label{le:orig}
