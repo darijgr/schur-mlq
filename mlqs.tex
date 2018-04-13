@@ -1574,11 +1574,37 @@ The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [
 
 \begin{proof}
 Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
-The notations $c^{\uparrow}$ and $c^{\downarrow}$ refer to $C$.
+The notations $c^{\uparrow}$ and $c^{\downarrow}$ (and the concept of balanced
+intervals) refer to $C$.
+
+Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
+such that $w_{i_1} \leq w_{i_2} \leq \cdots \leq w_{i_n}$.
+Use this permutation to construct $q(w)$.
+For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
+\Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
+Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
 
 Suppose $k \leq \abs{q}$.
-Therefore, for all $j \in [w]_k$, there exists a maximal balanced interval $\mcI_j$ such that $j \in \mcI_j$.
-Recall that in Phase~II of computing $q(w)$, a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
+Thus, each site in $[w]_k$ is balanced.
+But $[w]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
+Hence, for each $p \in \ive{k}$, the site $i_p$ is balanced, so there is a
+maximal balanced interval $\mcI_p$ such that $i_p \in \mcI_p$.
+Now, we claim that $j_p \in \mcI_p$ for each $p \in \ive{k}$.
+We prove this claim by strong induction on $p$:
+Assume that $j_a \in \mcI_a$ has already been shown for all $a < p$.
+We must show that $j_p \in \mcI_p$.
+Assume the contrary. Thus, in particular, $j_p \neq i_p$.
+Recall that in Phase~II of computing $q(w)$, the site $j_p$ is computed (by
+moving weakly to the right of $i_p$ in search of the first site $j$ such that
+$q(w)_j$ is not set yet), and $q(w)_{j_p}$ is set to $w_{i_p}$.
+The definition of $j_p$ shows that every site $j \in \inter[i_p, j_p-1] \cap q$
+must be one of the $j_a$ with $a < p$ (since otherwise, its value $q(w)_j$
+would not be set yet, and $j_p$ would not be first).
+
+For each $a < p$, 
+XXXX
+
+a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
 We show $i_j \in q'_2 \cap \mcI_j$ by strong induction on $j$.
 Suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
 Let $\mcI_j = \inter[e,f]$.
