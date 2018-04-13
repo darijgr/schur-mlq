@@ -767,8 +767,7 @@ Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
 Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
 Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
 (since $n = m_1 + m_2 + \cdots + m_\ell$).
-Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: NameNote that for a balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
-ly, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
+Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
 Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
 In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 \end{proof}
@@ -1432,6 +1431,7 @@ Thus, assume $r_1 \neq r_2$.
 
 For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $i = j$, we have $\inter[i,j] = \ive{n}$.}
+\darij{No, I don't think we should have $\inter[i,j] = \ive{n}$ for $i = j$. The case when $r_1 = r_2$ fucks up too much other stuff to keep it in; in particular, it breaks the cycling argument in the proof because we can't cycle to an unbalanced site anymore. Also, we need $\inter[i,j]$ to be $\set{i}$ when $i = j$, because how else could we get $\set{i}$ ?}
 Let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
 Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 
@@ -1442,9 +1442,10 @@ For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some b
 The following facts are straightforward:
 \begin{enumerate}
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
- \item The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
+ \item The empty interval is balanced, whereas the set $\ive{n}$ of all sites is not.
+ % The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
  \item If $A$ and $B$ are two balanced intervals, then the three intervals
-       $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced;
+       $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced, and $A \cup B \neq \ive{n}$;
        moreover, the union $A \cup B$ is also balanced if it is an interval.
  \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
        $i \in \ive{n}$) is also the disjoint union of all inclusion-maximal balanced intervals.
@@ -1591,9 +1592,15 @@ $\sigma_i$ satisfy
 \end{equation}
 for all $i \in \set{1, 2, \ldots, k-2}$.
 
-We recall following~\cite{Loth} the operator $\zeta$ that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
-We extend the action of $\zeta$ to queues by the rule $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites) and to MLQs entrywise since an MLQ is a sequence of queues.
-Clearly, we have $\word(\zeta \qq) = \zeta^k \word(\qq)$ for any MLQ $\qq = (q_1, \ldots, q_k)$.
+Let $\zeta : \mcW_n \to \mcW_n$ be the ``cyclic shift'' map that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
+We also use the notation $\zeta$ for the map that sends each queue $q$ to the queue $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites).
+This map $\zeta$ shall act on MLQs entrywise (since an MLQ is a tuple of queues).
+Clearly,
+\begin{equation}
+ \word(\zeta \qq) = \zeta^k \word(\qq)
+ \label{pf.prop:braid.word-zeta}
+\end{equation}
+for any MLQ $\qq = (q_1, \ldots, q_k)$.
 
 Now, we claim that
 \begin{equation}
@@ -1601,33 +1608,32 @@ Now, we claim that
  \qquad \text{ for each MLQ } \qq \text{ and each } i .
  \label{pf.prop:braid.inter}
 \end{equation}
-Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$ for $\qq = (q_1, q_2)$.
-This follows because $\sigma_i$ only relies on the letters $i$ and $i+1$ while all other letters stay in their places and have no effect.
+Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$ for $\qq = (q_1, q_2)$
+(because the definition of $\sigma_i$ only relies on the letters $i$ and $i+1$, while all other letters stay in their places and have no effect).
 
-Thus, let $\qq = (q_1, q_2)$.
-We construct a sequence of parentheses as follows:
-For each $j = 1, 2, \dotsc, n$ (in that order), we write
+Thus, let $\qq = (q_1, q_2)$. We want to prove $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
+If $\abs{q_1} = \abs{q_2}$, then $\fraks_1 \qq = \qq$ (by the definition of $\fraks_1$) and $\sigma_1\bigl( \word(\qq) \bigr) = \word(\qq)$ (since the word $\word(\qq)$ has as many letters $1$ as it has letters $2$, but the map $\sigma_1$ leaves such words unchanged), so this claim is true.
+Thus, we WLOG assume that $\abs{q_1} \neq \abs{q_2}$. Hence, in the construction of the dual configuration of $\qq = (q_1, q_2)$, at least one unbalanced site exists.
+
+But the operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs (because $\zeta$ merely shifts the balanced intervals), and the operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ (this is~\cite[Prop.~5.6.1]{Loth}). Hence (and because of \eqref{pf.prop:braid.word-zeta}), we can apply $\zeta$ to $\qq$ any number of times without changing our goal. We thus WLOG assume that the site $1$ is unbalanced in the construction of the dual configuration of $\qq = (q_1, q_2)$ (since at least one unbalanced site exists, and we can force it to be $1$ by cyclic shifting). Thus, no balanced intervals ``wrap around the circle'' (\textit{i.e.}, each balanced interval has the form $\inter[i,j]$ with $i \leq j$).
+
+We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
 \begin{itemize}
 \item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$,
 \item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$,
-\item a canceling pair of parentheses `()' if $j \in q_1$ and $j \in q_2$,
+\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$,
 \item nothing otherwise.
 \end{itemize}
-Note that this yields exactly the same parentheses sequence as for $\word(\qq)$ (removing all $\circ$ letters).
-Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$ respectively.
-Additionally, every canceling pair of parentheses from positions $j < j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$.
-Since paired parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no canceling parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
+Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
+Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
+Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely extends it to both sides.)
+% [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
+Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced intervals ``wrap around the circle''.
+Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
+The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
+Consequently, the sites of the unmatched parentheses are precisely the unbalanced sites.
 
-Let $w = \word(\qq) = w_0 w_1 \cdots w_{n-1}$ with $a$ opening parentheses and $b$ closing parentheses in its reduced signature.
-By~\cite[Prop.~5.6.1]{Loth}, we can cyclically shift $w$ by applying some power of $\zeta$ to $w$
-such that either only opening parentheses `(' or only closing parentheses `)` remain, but not both.
-This cyclic shift commutes with $\sigma_1$; in other words, we have $\sigma_1 \zeta^a w = \zeta^a \sigma_1 w$.
-By the definition of balanced intervals being cyclic, we have $\zeta^a \fraks_1 \qq = \fraks_1 \zeta^a \qq$.
-\darij{From here, blah blah. This might be a dead end.}
-\travis{Huh?}
-Hence, $\word(\zeta^a \fraks_1 \qq) = \word(\fraks_1 \zeta^a \qq)$.
-However, it is clear that $\word(\zeta^a \qq) = \zeta^a w$ if and only if $\fraks_1 \zeta^a \qq = \sigma_1 \zeta^a w$.
-Hence, we obtain~\eqref{pf.prop:braid.inter}.
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter}.
 
 The equality \eqref{pf.prop:braid.inter} can be rewritten as the
 commutative diagram
@@ -1644,13 +1650,14 @@ $\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
 \end{proof}
 
 \begin{remark}
-Our letter $i$ corresponds to the $a_{k+1-i}$ in~\cite{Loth}
-since definition of $\sigma_i$ in~\cite{Loth} involves $a_i$ rather
+Our letters $1, 2, \ldots, k$ correspond to the letters
+$a_k, a_{k-1}, \ldots, a_1$ in~\cite{Loth},
+since~\cite{Loth}'s definition of $\sigma_i$ involves $a_i$ rather
 than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
 Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
 but this makes no difference to the proof, since all letters $\circ$ are always frozen.
-Note that we have arbitrarily chosen to break our cycle at $n$,
-however by~\cite[Prop.~5.6.1]{Loth}, the result does not depend on this choice.
+% Note that we have arbitrarily chosen to break our cycle at $n$,
+% however by~\cite[Prop.~5.6.1]{Loth}, the result does not depend on this choice.
 \end{remark}
 
 \begin{remark}
