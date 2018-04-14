@@ -1567,31 +1567,31 @@ Since this holds for all letters $i$, we have $w = w'$.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
-Let $w \in \mcW_n$ be a word of type $\mm$.
+Let $u \in \mcW_n$ be a word of type $\mm$.
 Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
 Let $q$ be a queue.
-The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [q(w)]_k }$, where $q^{\dagger}$ is some queue.
+The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [q(u)]_k }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
 \begin{proof} %[Proof of Proposition~\ref{prop:SL.dual}.]
-Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
+Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [u]_k , q }$.
 The notations $c^{\uparrow}$ and $c^{\downarrow}$ as well as the concept of balanced
 intervals shall refer to $C$.
 
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
-such that $w_{i_1} \leq w_{i_2} \leq \cdots \leq w_{i_n}$.
-Use this permutation to construct $q(w)$ (as in the definition of $q(w)$).
+such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Use this permutation to construct $q(u)$ (as in the definition of $q(u)$).
 For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
 \Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
 Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
 
-We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(w)]_k }$.
-In other words, we want to prove that $q'_2 = [q(w)]_k$.
-If $k = \abs{q}$, then this is obvious (because in this case, the two queues in the configuration $C$ have the same size, so that its dual configuration $C'$ equals $C$, and thus $q'_2 = q$; but the assumption $k = \abs{q}$ also yields $[q(w)]_k = q$ because of the construction of $q(w)$, and therefore we obtain $q'_2 = q = [q(w)]_k$).
+We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(u)]_k }$.
+In other words, we want to prove that $q'_2 = [q(u)]_k$.
+If $k = \abs{q}$, then this is obvious (because in this case, the two queues in the configuration $C$ have the same size, so that its dual configuration $C'$ equals $C$, and thus $q'_2 = q$; but the assumption $k = \abs{q}$ also yields $[q(u)]_k = q$ because of the construction of $q(u)$, and therefore we obtain $q'_2 = q = [q(u)]_k$).
 
 Suppose next that $k < \abs{q}$.
-Thus, each site in $[w]_k$ is balanced.
-But $[w]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
+Thus, each site in $[u]_k$ is balanced.
+But $[u]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
 
 If $S$ is a set of sites, then the \defn{connected components} of $S$ are the maximal intervals contained in $S$.
 
@@ -1605,9 +1605,9 @@ We first observe that $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$
 for each $p \in \ive{k}$.
 [\textit{Proof.} Let $p \in \ive{k}$.
 Recall that the site $j_p$ is found
-(in Phase~II of the algorithm computing $q(w)$) as the first site $j \in q$ weakly to the right of $i_p$ such that $q(w)_j$ is not set yet.
+(in Phase~II of the algorithm computing $q(u)$) as the first site $j \in q$ weakly to the right of $i_p$ such that $q(u)_j$ is not set yet.
 In other words, $j_p$ is the first site $j \in q$ weakly to the right of $i_p$ that is not one of $j_1, j_2, \ldots, j_{p-1}$
-(since the sites $j \in q$ such that $q(w)_j$ has already been set are $j_1, j_2, \ldots, j_{p-1}$).
+(since the sites $j \in q$ such that $q(u)_j$ has already been set are $j_1, j_2, \ldots, j_{p-1}$).
 In other words, all sites in $I_p = \inter[i_p, j_p]$ that belong to $q$ must be among $j_1, j_2, \ldots, j_{p-1}, j_p$.
 In other words, $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$, qed.]
 
@@ -1624,36 +1624,36 @@ Each connected component of the set $U$ is top-heavy.
 Indeed, since $U$ is the union of the connected intervals $I_1, I_2, \ldots, I_k$, its connected component $\inter[a,b]$ must have the form $\inter[a,b] = \bigcup_{p \in R} I_p$ for some nonempty subset $R$ of $\ive{k}$, and be disjoint from all the $I_p$ with $p \notin R$. Consider this $R$.
 Thus, $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R}$ (indeed, $\inter[a,b] = \bigcup_{p \in R} I_p$ shows that all of the $i_p$ with $p \in R$ must lie in $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k}$; on the other hand, none of the remaining elements of $\set{i_1, i_2, \ldots, i_k}$ can belong to $\inter[a,b]$, since $\inter[a,b]$ is disjoint from all the $I_p$ with $p \notin R$).
 Likewise, $\inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R}$.
-From $[w]_k = \set{i_1, i_2, \ldots, i_k}$, we obtain
+From $[u]_k = \set{i_1, i_2, \ldots, i_k}$, we obtain
 \[
-\inter[a,b] \cap [w]_k = \inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R} .
+\inter[a,b] \cap [u]_k = \inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R} .
 \]
 From $\inter[a,b] \subseteq U$, we obtain
 \[
 \inter[a,b] \cap q = \inter[a,b] \cap \underbrace{U \cap q}_{= \set{j_1, j_2, \ldots, j_k}}
 = \inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R} .
 \]
-Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [w]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
+Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [u]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
 Hence, the former number is at least as large as the latter number (because if $p \in R$ is such that $j_p$ falls into $\inter[a,\ell]$, then $i_p$ must also fall into $\inter[a,\ell]$, since $\inter[i_p, j_p] = I_p$ is a subinterval of $\inter[a,b]$).\footnote{Here we are tacitly using the fact that $\inter[a,b] \neq \ive{n}$, which follows from $U \neq \ive{n}$.}
 We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
 
-Now, consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[w]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[w]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
-But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[w]_k$ (since $[w]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
+Consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[u]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[u]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
+But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[u]_k$ (since $[u]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
 Thus, each connected component of $U$ is balanced. In other words, $U$ is balanced.
-Hence, each element of $[q(w)]_k$ is balanced (since the construction of $q(w)$ yields $[q(w)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
-Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(w)]_k$ is in $q'_2$. In other words, $[q(w)]_k \subseteq q'_2$.
-Combining this with $\abs{q'_2} = \abs{[w]_k} = k = \abs{[q(w)]_k}$, we obtain $q'_2 = [q(w)]_k$. Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
+Hence, each element of $[q(u)]_k$ is balanced (since the construction of $q(u)$ yields $[q(u)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
+Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(u)]_k$ is in $q'_2$. In other words, $[q(u)]_k \subseteq q'_2$.
+Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$. Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
 
 Now suppose $k > \abs{q}$.
-Note that $\ive{n} \setminus [w]_k$ are the indices of the largest $n-k$ letters of $w$ and $n - \abs{q} > n-k$.
+Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
 So from a similar argument as above but instead using Phase~I, we have
 \begin{equation}
 \label{eq:dual_claim}
-\tup{ \ive{n} \setminus q, \ive{n} \setminus [w]_k }' = \tup{ \ive{n} \setminus [q(w)]_k, \ive{n} \setminus q^{\dagger} }.
+\tup{ \ive{n} \setminus q, \ive{n} \setminus [u]_k }' = \tup{ \ive{n} \setminus [q(u)]_k, \ive{n} \setminus q^{\dagger} }.
 \end{equation}
 Next, it is straightforward to see that an interval $\mcI$ is balanced for $(q_1, q_2)$ if and only if $\mcI$ is balanced for $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)$.
 Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)' = ( \ive{n} \setminus  q'_2, \ive{n} \setminus q'_1)$.
-Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{\dagger} , [q(w)]_k }$.
+Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [u]_k , q }' = \tup{q^{\dagger} , [q(u)]_k }$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
@@ -1661,20 +1661,20 @@ Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transposi
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $i \in \ive{\ell-2}$.
 Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 Thus, the proof is reduced to showing that for any configuration $C = \tup{q_1, q_2}$
-and any word $u \in \mcW_n$ the dual configuration
-$C' = (q'_1, q'_2)$ of $C$ satisfies $C'(u) = C(u)$.
+and any word $w \in \mcW_n$ the dual configuration
+$C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
 
-Each word $u$ can be obtained from a standard word by a sequence of
-merges (each of which sends a word $w$ to $\vee^{(k)} w$ for some
+Each word $w$ can be obtained from a standard word by a sequence of
+merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
 $k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of
-$w$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
+$u$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
 commute with the action of a queue (and thus of an MLQ).
 Hence, it is sufficient to consider standard words $u$.
-Thus, assume that $u$ is standard of type $\mm$.
+Thus, assume that $w$ is standard of type $\mm$.
 It is straightforward to see that the words
-$C(u) = q_2\bigl( q_1(u) \bigr)$
+$C(w) = q_2\bigl( q_1(w) \bigr)$
 and
-$C'(u) = q'_2\bigl( q_1'(u) \bigr)$
+$C'(w) = q'_2\bigl( q_1'(w) \bigr)$
 have the same type from Equation~\eqref{eq:queue_type_change}.
 %indeed, the action of a queue $q$ on a word $w$ modifies its
 %type in a predictable way (namely, the number $\abs{q}$ is
@@ -1682,78 +1682,78 @@ have the same type from Equation~\eqref{eq:queue_type_change}.
 %keep the type weakly increasing).
 Let $\nn$ be this type.
 We shall now show that
-$[C'(u)]_k = [C(u)]_k$
+$[C'(w)]_k = [C(w)]_k$
 for all $k \in \set{ p_i(\nn) \mid i \geq 0}$.
-According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(u) = C(u)$, and thus our proof will be complete.
+According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(w) = C(w)$, and thus our proof will be complete.
 
 Let $k \in \set{ p_i(\nn) \mid i \geq 0}$.
-Thus, $k \in \set{0, 1, \ldots, n} = \set{ p_i(\mm) \mid i \geq 0 }$ (since $u$ is standard).
-Hence, $[u]_k$ is well-defined.
-Note that $q_i(u)$ and $q'_i(u)$ are also standard words.
+Thus, $k \in \set{0, 1, \ldots, n} = \set{ p_i(\mm) \mid i \geq 0 }$ (since $w$ is standard).
+Hence, $[w]_k$ is well-defined.
+Note that $q_i(w)$ and $q'_i(w)$ are also standard words.
 Using Proposition~\ref{prop:SL.dual} to compute dual
 configurations, we can see how the MLQ
-$\qq = \tup{[u]_k, q_1, q_2}$ transforms under the action of
+$\qq = \tup{[w]_k, q_1, q_2}$ transforms under the action of
 $\fraks_1 \fraks_2 \fraks_1$: Namely, we have
 \begin{align*}
-\tup{[u]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(u)]_k, q_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k},
+\tup{[w]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(w)]_k, q_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k},
 \end{align*}
 where $\ast$ denotes some queue.
 Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
 \begin{align*}
-\tup{[u]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[u]_k, q'_1, q'_2}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(u)]_k , q'_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k}.
+\tup{[w]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[w]_k, q'_1, q'_2}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(w)]_k , q'_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k}.
 \end{align*}
 (See Figure~\ref{fig:crossing_diagrams} for the actions depicted using crossing diagrams.)
 Yet, the two maps are equal by Proposition~\ref{prop:braid}.
 Thus, the resulting MLQs must be identical:
 \[
-\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(u) \bigr) \bigr]_k}
+\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(w) \bigr) \bigr]_k}
 =
-\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(u) \bigr) \bigr]_k}.
+\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(w) \bigr) \bigr]_k}.
 \]
 Hence, we have
 \[
-\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k.
+\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k.
 \]
-In other words, $[C'(u)]_k = [C(u)]_k$.
+In other words, $[C'(w)]_k = [C(w)]_k$.
 \end{proof}
 
 \begin{figure}
 \begin{gather*}
 \begin{tikzpicture}[xscale=3.5]
-\node (i1) at (0,0) {$S_k(u)$};
+\node (i1) at (0,0) {$[w]_k$};
 \node (i2) at (0,-1) {$q_1$};
 \node (i3) at (0,-2) {$q_2$};
 \node (s11) at (1,0) {$\ast$};
-\node (s12) at (1,-1) {$[q_1(u)]_k$};
+\node (s12) at (1,-1) {$[q_1(w)]_k$};
 \node (s13) at (1,-2) {$q_2$};
 \node (s21) at (2,0) {$\ast$};
 \node (s22) at (2,-1) {$\ast$};
-\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
+\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
 \node (t1) at (3,0) {$\ast$};
 \node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(u) \bigr) \bigr]_k$};
+\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
 \path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
 \path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
 \path[-,red] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
 \end{tikzpicture}
 \\
 \begin{tikzpicture}[xscale=3.5]
-\node (i1) at (0,0) {$[u]_k$};
+\node (i1) at (0,0) {$[w]_k$};
 \node (i2) at (0,-1) {$q_1$};
 \node (i3) at (0,-2) {$q_2$};
-\node (s11) at (1,0) {$[u]_k$};
+\node (s11) at (1,0) {$[w]_k$};
 \node (s12) at (1,-1) {$q'_1$};
 \node (s13) at (1,-2) {$q'_2$};
 \node (s21) at (2,0) {$\ast$};
-\node (s22) at (2,-1) {$[q'_1(u)]_k$};
+\node (s22) at (2,-1) {$[q'_1(w)]_k$};
 \node (s23) at (2,-2) {$q'_2$};
 \node (t1) at (3,0) {$\ast$};
 \node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(u) \bigr) \bigr]_k$};
+\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k$};
 \path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
 \path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
 \path[-,red] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
