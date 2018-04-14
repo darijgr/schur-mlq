@@ -1313,6 +1313,7 @@ The following facts are straightforward:
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
  \item The empty interval is balanced. %, whereas the set $\ive{n}$ of all sites is not.
  \item The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
+ \Darij{It is not clear what it means for $\ive{n}$ to be balanced. The definition depends on the choices of starting and ending points.}
  \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
        is balanced.\footnote{To prove this, first check it when $A$ and $B$
        are balanced intervals.}
@@ -1572,10 +1573,10 @@ Let $q$ be a queue.
 The dual configuration of $\tup{ [w]_k , q }$ has the form $\tup{q^{\dagger} , [q(w)]_k }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
-\begin{proof}
+\begin{proof} %[Proof of Proposition~\ref{prop:SL.dual}.]
 Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [w]_k , q }$.
-The notations $c^{\uparrow}$ and $c^{\downarrow}$ (and the concept of balanced
-intervals) refer to $C$.
+The notations $c^{\uparrow}$ and $c^{\downarrow}$ as well as the concept of balanced
+intervals shall refer to $C$.
 
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $w_{i_1} \leq w_{i_2} \leq \cdots \leq w_{i_n}$.
@@ -1584,66 +1585,67 @@ For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this constr
 \Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
 Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
 
-Suppose first that $k \leq \abs{q}$.
+We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(w)]_k }$.
+In other words, we want to prove that $q'_2 = [q(w)]_k$.
+If $k = \abs{q}$, then this is obvious (because in this case, the two queues in the configuration $C$ have the same size, so that its dual configuration $C'$ equals $C$, and thus $q'_2 = q$; but the assumption $k = \abs{q}$ also yields $[q(w)]_k = q$ because of the construction of $q(w)$, and therefore we obtain $q'_2 = q = [q(w)]_k$).
+
+Suppose next that $k < \abs{q}$.
 Thus, each site in $[w]_k$ is balanced.
 But $[w]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
 
 If $S$ is a set of sites, then the \defn{connected components} of $S$ are the maximal intervals contained in $S$.
 
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $\ell \in \inter[i,j]$, we have $c^\uparrow[i,\ell] \geq c^\downarrow[i,\ell]$.
 Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
-A set of sites will be called \defn{top-heavy} if each of its connected components is top-heavy.
+% A set of sites will be called \defn{top-heavy} if each of its connected components is top-heavy.
 
-For each $p \in \set{0, 1, \ldots, k}$, we define a set $\mathcal{G}_p$ of sites
-by
-$\mathcal{G}_p = \inter[i_1, j_1] \cup \inter[i_2, j_2] \cup \cdots \inter[i_p, j_p]$.
-We first claim that $\mathcal{G}_p \cap q = \set{j_1, j_2, \ldots, j_p}$
-for each $p \in \set{0, 1, \ldots, k}$.
-Indeed, we prove this by induction on $p$, the base case ($p=0)$ being obvious.
-For the induction step (from $p-1$ to $p$), we recall that the site $j_p$ is found
-(in Phase~II of the algorithm computing $q(w)$) by starting at $i_p$ and
-moving weakly to the right in search of the first site $j \in q$ such that $q(w)_j$ is
-not set yet.
-The sites $j \in q$ such that $q(w)_j$ have already been set are $j_1, j_2, \ldots, j_{p-1}$,
-and thus belong to the set
-$\inter[i_1, j_1] \cup \inter[i_2, j_2] \cup \cdots \inter[i_{p-1}, j_{p-1}]$,
-which (by the induction hypothesis) is top-heavy.
+For each $p \in \ive{k}$, we define an interval $I_p$ by $I_p = \inter[i_p, j_p]$.
 
+We first observe that $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$
+for each $p \in \ive{k}$.
+[\textit{Proof.} Let $p \in \ive{k}$.
+Recall that the site $j_p$ is found
+(in Phase~II of the algorithm computing $q(w)$) as the first site $j \in q$ weakly to the right of $i_p$ such that $q(w)_j$ is not set yet.
+In other words, $j_p$ is the first site $j \in q$ weakly to the right of $i_p$ that is not one of $j_1, j_2, \ldots, j_{p-1}$
+(since the sites $j \in q$ such that $q(w)_j$ has already been set are $j_1, j_2, \ldots, j_{p-1}$).
+In other words, all sites in $I_p = \inter[i_p, j_p]$ that belong to $q$ must be among $j_1, j_2, \ldots, j_{p-1}, j_p$.
+In other words, $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$, qed.]
 
-XXX
-Hence, for each $p \in \ive{k}$, the site $i_p$ is balanced, so there is a
-maximal balanced interval $\mcI_p$ such that $i_p \in \mcI_p$.
-Now, we claim that $j_p \in \mcI_p$ for each $p \in \ive{k}$.
-We prove this claim by strong induction on $p$:
-Assume that $j_a \in \mcI_a$ has already been shown for all $a < p$.
-We must show that $j_p \in \mcI_p$.
-Assume the contrary. Thus, in particular, $j_p \neq i_p$.
-Recall that in Phase~II of computing $q(w)$, the site $j_p$ is computed (by
-moving weakly to the right of $i_p$ in search of the first site $j$ such that
-$q(w)_j$ is not set yet), and $q(w)_{j_p}$ is set to $w_{i_p}$.
-The definition of $j_p$ shows that every site $j \in \inter[i_p, j_p-1] \cap q$
-must be one of the $j_a$ with $a < p$ (since otherwise, its value $q(w)_j$
-would not be set yet, and $j_p$ would not be first).
+Let $U = I_1 \cup I_2 \cup \cdots \cup I_k$.
+Then, $U \cap q \subseteq \set{j_1, j_2, \ldots, j_k}$ (since $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$ for each $p \in \ive{k}$).
+Combining this with $\set{j_1, j_2, \ldots, j_k} \subseteq U \cap q$ (since each $j_p$ satisfies $j_p \in I_p \subseteq U$ and $j_p \in \set{j_1, j_2, \ldots, j_{\abs{q}}} = q$),
+we obtain $U \cap q = \set{j_1, j_2, \ldots, j_k}$.
 
-For each $a < p$, 
-XXXX
+If we had $U = \ive{n}$, then this would rewrite as $q = \set{j_1, j_2, \ldots, j_k}$, which would entail $\abs{q} = k$; this would contradict $k < \abs{q}$.
+Hence, $U \neq \ive{n}$.
 
-a letter $w_j$ moves weakly to the right until it finds the first unset $q(w)_{i_j}$ with $i_j \in q$.
-We show $i_j \in q'_2 \cap \mcI_j$ by strong induction on $j$.
-Suppose $i_a \in q'_2 \cap \mcI_a$ for all $a < j$ and we have set all $q(w)_{i_a}$ during Phase~II in computing $q(w)$.
-Let $\mcI_j = \inter[e,f]$.
-Since $\mcI_j$ is balanced and by our induction assumption, we have that
+Each connected component of the set $U$ is top-heavy.
+[\textit{Proof.} Let $\inter[a,b]$ be a connected component of $U$. Then, we must prove that $\inter[a,b]$ is top-heavy.
+Indeed, since $U$ is the union of the connected intervals $I_1, I_2, \ldots, I_k$, its connected component $\inter[a,b]$ must have the form $\inter[a,b] = \bigcup_{p \in R} I_p$ for some nonempty subset $R$ of $\ive{k}$, and be disjoint from all the $I_p$ with $p \notin R$. Consider this $R$.
+Thus, $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R}$ (indeed, $\inter[a,b] = \bigcup_{p \in R} I_p$ shows that all of the $i_p$ with $p \in R$ must lie in $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k}$; on the other hand, none of the remaining elements of $\set{i_1, i_2, \ldots, i_k}$ can belong to $\inter[a,b]$, since $\inter[a,b]$ is disjoint from all the $I_p$ with $p \notin R$).
+Likewise, $\inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R}$.
+From $[w]_k = \set{i_1, i_2, \ldots, i_k}$, we obtain
 \[
-c^{\uparrow}[i,j] \geq \abs{\set{ h \in \inter[j,f] \mid q(w)_h \text{ is currently set} }} + 1.
+\inter[a,b] \cap [w]_k = \inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R} .
 \]
-Since we have $c^{\uparrow}\mcI_j = c^{\downarrow}\mcI_j$, there must exist a $i_j \in q'_2 \cap \mcI_j$ such that $q(w)_{i_j}$ is unset.
-Thus, we set $q(w)_{i_j} = w_j$.
-Note that a similar argument holds for $j = 1$.
-Hence, $q'_2 \subseteq [q(w)]_k$.
-However, we clearly have $\abs{q'_2} = k = \abs{[q(w)]_k}$, and so $q'_2 = [q(w)]_k$.
+From $\inter[a,b] \subseteq U$, we obtain
+\[
+\inter[a,b] \cap q = \inter[a,b] \cap \underbrace{U \cap q}_{= \set{j_1, j_2, \ldots, j_k}}
+= \inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R} .
+\]
+Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [w]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
+Hence, the former number is at least as large as the latter number (because if $p \in R$ is such that $j_p$ falls into $\inter[a,\ell]$, then $i_p$ must also fall into $\inter[a,\ell]$, since $\inter[i_p, j_p] = I_p$ is a subinterval of $\inter[a,b]$).\footnote{Here we are tacitly using the fact that $\inter[a,b] \neq \ive{n}$, which follows from $U \neq \ive{n}$.}
+We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
+
+Now, consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[w]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[w]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
+But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[w]_k$ (since $[w]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
+Thus, each connected component of $U$ is balanced. In other words, $U$ is balanced.
+Hence, each element of $[q(w)]_k$ is balanced (since the construction of $q(w)$ yields $[q(w)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
+Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(w)]_k$ is in $q'_2$. In other words, $[q(w)]_k \subseteq q'_2$.
+Combining this with $\abs{q'_2} = \abs{[w]_k} = k = \abs{[q(w)]_k}$, we obtain $q'_2 = [q(w)]_k$. Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
 
 Now suppose $k > \abs{q}$.
-Note that $\ive{n} \setminus [w]_k$ are the indices of the largest $n-k$ letters of $w$ and $n - \abs{q} < n-k$.
+Note that $\ive{n} \setminus [w]_k$ are the indices of the largest $n-k$ letters of $w$ and $n - \abs{q} > n-k$.
 So from a similar argument as above but instead using Phase~I, we have
 \begin{equation}
 \label{eq:dual_claim}
@@ -1657,7 +1659,7 @@ Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [w]_k , q }' = \tup{q^{
 \begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
 Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $i \in \ive{\ell-2}$.
-Indeed, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 Thus, the proof is reduced to showing that for any configuration $C = \tup{q_1, q_2}$
 and any word $u \in \mcW_n$ the dual configuration
 $C' = (q'_1, q'_2)$ of $C$ satisfies $C'(u) = C(u)$.
