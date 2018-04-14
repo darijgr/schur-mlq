@@ -1301,7 +1301,7 @@ Thus, assume $r_1 \neq r_2$.
 
 For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
 This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $j = i-1$, then $\inter[i,j] = \ive{n}$.}
-Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+Let $c^{\uparrow}[i,j]$ (resp.~$c^{\downarrow}[i,j]$) denote the number of $\ell \in \inter[i,j]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
 
 We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
 Equivalently, $\inter[i,j]$ is balanced if and only if $c^{\downarrow}[i,j] = c^{\uparrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\downarrow[k,j] \geq c^\uparrow[k,j]$.
@@ -1683,21 +1683,6 @@ where
 \end{itemize}
 Therefore, $(q'_2)^* = [(q(u))^*]_{n-k} = ([q(u)]_k)^*$, so that
 $q'_2 = [q(u)]_k$.
-\begin{comment}
-Hence, we can apply the $k < \abs{q}$ case (proven above)
-% of Proposition~\ref{prop:SL.dual}
-to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$; we obtain
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$ for some queue $q^\dagger$.
-In view of $q^*(u^*) = (q(u))^*$ (which follows from Lemma~\ref{le:dual}), this rewrites as 
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [(q(u))^*]_{n-k} }$.
-Since $[u^*]_{n-k} = ([u]_k)^*$ and $[(q(u))^*]_{n-k} = ([q(u)]_k)^*$, this simplifies as
-$\tup{ ([u]_k)^* , q^* }' = \tup{ q^\dagger , ([q(u)]_k)^* }$.
-Comparing this with
-$\tup{ ([u]_k)^* , q^* }' = \bigl( (q'_1)^*, (q'_2)^* \bigr)$
-(a consequence of~\eqref{eq.rmk:balanced-dual-let.dual}),
-we obtain $\bigl( (q'_1)^*, (q'_2)^* \bigr) = \tup{ q^\dagger , ([q(u)]_k)^* }$,
-so that $(q'_2)^* = ([q(u)]_k)^*$ and therefore $q'_2 = [q(u)]_k$.
-\end{comment}
 Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
 \end{proof}
 
