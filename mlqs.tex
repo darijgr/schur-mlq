@@ -570,7 +570,7 @@ Similarly, $u^*$ is obtained by reversing the word $u$ and taking the contragred
 \begin{lemma}[Contragredient duality]
   \label{le:dual}
   Let $q$ be a queue and $u$ be a word with $\ell$ classes.
-  Then we have $q(u) = (q^*(u^*))^*$, \textit{i.e.}, we have $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
+  Then we have $\bigl(q(u) \bigr)^* = q^*(u^*)$, \textit{i.e.}, we have $q(u)_i = \ell + 2 - q^*(u^*)_{n+1-i}$ for all $i$.
 \end{lemma}
 
 Here, we treat $q(u)$ as a word with $\ell+1$ classes, even if it may have only $\ell$ classes (in the degenerate case when $q = \ive{n}$).
@@ -1658,20 +1658,46 @@ Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude t
 Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$. Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
 
 Now suppose $k > \abs{q}$.
-Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
+% Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
 Thus, $n-k < n - \abs{q} = \abs{q^*}$.
-Hence, we can apply the $k < \abs{q}$ case of Proposition~\ref{prop:SL.dual} to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$; we obtain
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ * , [q^*(u^*)]_{n-k} }$, where $*$ denotes some queue we don't need.
+Applying the $k < \abs{q}$ case (proven above)
+to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$,
+we see that
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
+for some queue $q^\dagger$.
+Now,
+\begin{align*}
+ %\label{eq:dual_config_equalities}
+ \bigl( (q'_1)^*, (q'_2)^* \bigr)
+ &= \tup{ ([u]_k)^* , q^* }'
+ = \tup{ [u^*]_{n-k} , q^* }' \\
+ & = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }
+ = \tup{ q^\dagger , [(q(u))^*]_{n-k} } ,
+\end{align*}
+where
+\begin{itemize}
+ \item the first equality follows from~\eqref{eq.rmk:balanced-dual-let.dual};
+ \item the second equality is because $([u]_k)^* = [u^*]_{n-k}$; and
+ \item the fourth equality follows from Lemma~\ref{le:dual}.
+\end{itemize}
+Therefore, $(q'_2)^* = [(q(u))^*]_{n-k} = ([q(u)]_k)^*$, so that
+$q'_2 = [q(u)]_k$.
+\begin{comment}
+Hence, we can apply the $k < \abs{q}$ case (proven above)
+% of Proposition~\ref{prop:SL.dual}
+to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$; we obtain
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$ for some queue $q^\dagger$.
 In view of $q^*(u^*) = (q(u))^*$ (which follows from Lemma~\ref{le:dual}), this rewrites as 
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ * , [(q(u))^*]_{n-k} }$.
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [(q(u))^*]_{n-k} }$.
 Since $[u^*]_{n-k} = ([u]_k)^*$ and $[(q(u))^*]_{n-k} = ([q(u)]_k)^*$, this simplifies as
-$\tup{ ([u]_k)^* , q^* }' = \tup{ * , ([q(u)]_k)^* }$.
+$\tup{ ([u]_k)^* , q^* }' = \tup{ q^\dagger , ([q(u)]_k)^* }$.
 Comparing this with
 $\tup{ ([u]_k)^* , q^* }' = \bigl( (q'_1)^*, (q'_2)^* \bigr)$
 (a consequence of~\eqref{eq.rmk:balanced-dual-let.dual}),
-we obtain $\bigl( (q'_1)^*, (q'_2)^* \bigr) = \tup{ * , ([q(u)]_k)^* }$,
+we obtain $\bigl( (q'_1)^*, (q'_2)^* \bigr) = \tup{ q^\dagger , ([q(u)]_k)^* }$,
 so that $(q'_2)^* = ([q(u)]_k)^*$ and therefore $q'_2 = [q(u)]_k$.
+\end{comment}
 Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
 \end{proof}
 
