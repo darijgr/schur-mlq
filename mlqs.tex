@@ -1368,6 +1368,11 @@ Recall the notations introduced just before Lemma~\ref{le:dual}.
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
 Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^{\operatorname{refl}} = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
 In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but reflected through the middle of $\ive{n}$.
+Thus, the dual configuration of $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
+\begin{equation}
+ (C^*)' = \bigl( (q_1')^*, (q_2')^* \bigr) .
+ \label{eq.rmk:balanced-dual-let.dual}
+\end{equation}
 In addition, applying Lemma~\ref{le:dual} twice, we obtain
 \[
 C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( (q^*_1(u^*))^* \bigr) = \bigl( q_2^*\bigl( q_1^*(u^*) \bigr) \bigr)^* = \bigl( C^*(u^*) \bigr)^* .
@@ -1654,15 +1659,20 @@ Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $
 
 Now suppose $k > \abs{q}$.
 Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
-So from a similar argument as above but instead using Phase~I, we have
-\begin{equation}
-\label{eq:dual_claim}
-\tup{ \ive{n} \setminus q, \ive{n} \setminus [u]_k }' = \tup{ \ive{n} \setminus [q(u)]_k, \ive{n} \setminus q^{\dagger} }.
-\end{equation}
-\Darij{This is perhaps a bit too much to ask of the reader. I suggest we instead apply the $k < \abs{q}$ case to the contragredient duals $u^*$, $q^*$ and $n-k$ instead of $u$, $q$ and $k$, and then use Lemma~\ref{le:dual} to transform this, after realizing that $(q_1^*, q_2^*)' = (q_1'*, q_2'*)$ for any configuration $(q_1, q_2)$ (this is worth pointing out beforehand). This also avoids the paragraph below.}
-Next, it is straightforward to see that an interval $\mcI$ is balanced for $(q_1, q_2)$ if and only if $\mcI$ is balanced for $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)$.
-Hence, we have $(q_1,q_2)' = (q'_1, q'_2)$ if and only if $(\ive{n} \setminus q_2, \ive{n} \setminus q_1)' = ( \ive{n} \setminus  q'_2, \ive{n} \setminus q'_1)$.
-Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [u]_k , q }' = \tup{q^{\dagger} , [q(u)]_k }$.
+Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
+Thus, $n-k < n - \abs{q} = \abs{q^*}$.
+Hence, we can apply the $k < \abs{q}$ case of Proposition~\ref{prop:SL.dual} to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$; we obtain
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ * , [q^*(u^*)]_{n-k} }$, where $*$ denotes some queue we don't need.
+In view of $q^*(u^*) = (q(u))^*$ (which follows from Lemma~\ref{le:dual}), this rewrites as 
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ * , [(q(u))^*]_{n-k} }$.
+Since $[u^*]_{n-k} = ([u]_k)^*$ and $[(q(u))^*]_{n-k} = ([q(u)]_k)^*$, this simplifies as
+$\tup{ ([u]_k)^* , q^* }' = \tup{ * , ([q(u)]_k)^* }$.
+Comparing this with
+$\tup{ ([u]_k)^* , q^* }' = \bigl( (q'_1)^*, (q'_2)^* \bigr)$
+(a consequence of~\eqref{eq.rmk:balanced-dual-let.dual}),
+we obtain $\bigl( (q'_1)^*, (q'_2)^* \bigr) = \tup{ * , ([q(u)]_k)^* }$,
+so that $(q'_2)^* = ([q(u)]_k)^*$ and therefore $q'_2 = [q(u)]_k$.
+Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
