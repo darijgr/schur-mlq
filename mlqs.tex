@@ -1661,8 +1661,11 @@ Applying this to~\eqref{eq:dual_claim}, we obtain $\tup{ [u]_k , q }' = \tup{q^{
 
 \begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
 Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
-Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $i \in \ive{\ell-2}$.
+Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
 Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+
+In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to find a weight preserving bijection between the $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$ and the $\sigma s_i$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$.
+The bijection we will use is a restriction of $\fraks_i$. To show that it is well-defined, we need to prove that $\fraks_i$ sends the former MLQs to the latter; the only nontrivial part of this is that the image $\fraks_i\qq$ of an MLQ $\qq$ satisfying $u = \qq (1 \dotsm 1)$ will still satisfy $u = (\fraks_i\qq) (1 \dotsm 1$).
 Thus, the proof is reduced to showing that for any configuration $C = \tup{q_1, q_2}$
 and any word $w \in \mcW_n$ the dual configuration
 $C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
