@@ -1311,10 +1311,8 @@ For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some b
 The following facts are straightforward:
 \begin{enumerate}
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
- \item The empty interval is balanced. %, whereas the set $\ive{n}$ of all sites is not.
- \item The set $\ive{n}$ of all sites is balanced if and only if $r_1 = r_2$.
- \Darij{It is not clear what it means for $\ive{n}$ to be balanced. The definition depends on the choices of starting and ending points.}
- \Travis{It should be stated that every $i \in \ive{n}$ is balanced.}
+ \item The empty interval is balanced.
+ \item The set $\ive{n}$ of all sites is not balanced, since $r_1 \neq r_2$.
  \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
        is balanced.\footnote{To prove this, first check it when $A$ and $B$
        are balanced intervals.}
@@ -1334,6 +1332,8 @@ We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced intervals.
 It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
+
+(We could adapt this construction to the case $r_1 = r_2$, but we would need to be more precise about defining intervals, since the set of all sites can be written as $\inter[i, i-1]$ for any value of $i$. If done correctly, this results in every $i \in \ive{n}$ being balanced when $r_1 = r_2$, and thus the construction yields $C' = C$ as we defined.)
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -1490,16 +1490,16 @@ Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \w
 Thus, let $\qq = (q_1, q_2)$.
 We want to show $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
 If $\abs{q_1} = \abs{q_2}$, then $\fraks_1 \qq = \qq$ by the definition of $\fraks_1$.
-Moreover, we have $\sigma_1\bigl( \word(\qq) \bigr) = \word(\qq)$ since the word $\word(\qq)$ has as many letters $1$ as it has letters $2$, but the map $\sigma_1$ leaves such words unchanged.
-Hence, the claim is holds when $\abs{q_1} = \abs{q_2}$.
+Moreover, we have $\sigma_1\bigl( \word(\qq) \bigr) = \word(\qq)$ in this case, since the word $\word(\qq)$ has as many letters $1$ as it has letters $2$, but the map $\sigma_1$ leaves such words unchanged.
+Hence, the claim holds when $\abs{q_1} = \abs{q_2}$.
 Thus, we assume that $\abs{q_1} \neq \abs{q_2}$.
-Therefore, there exists at least one unbalanced site in $\qq = (q_1, q_2)$.
+Therefore, there exists at least one unbalanced site for the configuration $\qq = (q_1, q_2)$.
 
 The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because $\zeta$ merely shifts the balanced intervals.
 The operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ by~\cite[Prop.~5.6.1]{Loth}.
-Hence, along with~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $\qq$ any number of times without changing our goal\travis{This diction needs to be tweaked.}.
-Thus, without loss of generality, we assume that the site $1$ is unbalanced in the construction of the dual configuration of $\qq = (q_1, q_2)$ since at least one unbalanced site $j$ exists and we can cyclic shift until it is $1$.
-Therefore, no minimal balanced interval has the form $\inter[i,j]$ with $i > j$).
+Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $\qq$ any number of times without loss of generality.
+Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
+Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
 
 We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
 \begin{itemize}
@@ -1512,7 +1512,7 @@ Note that this is exactly the sequence of parentheses constructed when applying 
 Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
 Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
 % [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
-Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced intervals ``wrap around the circle''.
+Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
 Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
 The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
 Consequently, the sites of the unmatched parentheses are precisely the unbalanced sites.
@@ -1534,8 +1534,8 @@ $\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
 \end{proof}
 
 \begin{remark}
-Our letters $1, 2, \ldots, k$ correspond to the letters
-$a_k, a_{k-1}, \ldots, a_1$ in~\cite{Loth},
+Our letters $1, \ldots, k$ correspond to the letters
+$a_k, \ldots, a_1$ in~\cite{Loth},
 since~\cite{Loth}'s definition of $\sigma_i$ involves $a_i$ rather
 than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
 Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
@@ -1570,7 +1570,7 @@ The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \
 Likewise,
 the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
 Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
-= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$\travis{FYI: still fighting us.},
+= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$, %\travis{FYI: still fighting us.},
 we conclude that these are the same sites.
 Since this holds for all letters $i$, we have $w = w'$.
 \end{proof}
@@ -1673,10 +1673,10 @@ Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transposi
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
 Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 
-In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show for a $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$ and $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQs of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$.
+In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
 The only nontrivial part is showing $u = (\fraks_i\qq) (1 \dotsm 1)$.
-The proof of this claim is reduced to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
 More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
+The proof of this claim reduces to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
 
 Each word $w$ can be obtained from a standard word by a sequence of
 merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
