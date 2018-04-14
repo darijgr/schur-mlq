@@ -1365,7 +1365,7 @@ Recall the notations introduced just before Lemma~\ref{le:dual}.
 \begin{remark}
 \label{rmk:balanced-dual-let}
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
-Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^* = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
+Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^{\operatorname{refl}} = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
 In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but reflected through the middle of $\ive{n}$.
 In addition, applying Lemma~\ref{le:dual} twice, we obtain
 \[
@@ -1584,6 +1584,8 @@ Use this permutation to construct $q(u)$ (as in the definition of $q(u)$).
 For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
 \Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
 Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
+Also, $q(u)_{j_1} \leq q(u)_{j_2} \leq \cdots \leq q(u)_{j_n}$, so that
+$[q(u)]_k = \set{j_1, j_2, \ldots, j_k}$ for each $k$ for which $[q(u)]_k$ is well-defined.
 
 We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(u)]_k }$.
 In other words, we want to prove that $q'_2 = [q(u)]_k$.
@@ -1640,7 +1642,7 @@ We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,
 Consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[u]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[u]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
 But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[u]_k$ (since $[u]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
 Thus, each connected component of $U$ is balanced. In other words, $U$ is balanced.
-Hence, each element of $[q(u)]_k$ is balanced (since the construction of $q(u)$ yields $[q(u)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
+Hence, each element of $[q(u)]_k$ is balanced (since $[q(u)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
 Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(u)]_k$ is in $q'_2$. In other words, $[q(u)]_k \subseteq q'_2$.
 Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$. Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
 
