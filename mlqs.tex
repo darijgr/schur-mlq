@@ -1666,8 +1666,9 @@ Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.
 
 In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to find a weight preserving bijection between the $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$ and the $\sigma s_i$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$.
 The bijection we will use is a restriction of $\fraks_i$. To show that it is well-defined, we need to prove that $\fraks_i$ sends the former MLQs to the latter; the only nontrivial part of this is that the image $\fraks_i\qq$ of an MLQ $\qq$ satisfying $u = \qq (1 \dotsm 1)$ will still satisfy $u = (\fraks_i\qq) (1 \dotsm 1$).
+More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
 Thus, the proof is reduced to showing that for any configuration $C = \tup{q_1, q_2}$
-and any word $w \in \mcW_n$ the dual configuration
+and any word $w \in \mcW_n$, the dual configuration
 $C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
 
 Each word $w$ can be obtained from a standard word by a sequence of
@@ -1675,7 +1676,7 @@ merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
 $k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of
 $u$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
 commute with the action of a queue (and thus of an MLQ).
-Hence, it is sufficient to consider standard words $u$.
+Hence, it is sufficient to consider standard words $w$.
 Thus, assume that $w$ is standard of type $\mm$.
 It is straightforward to see that the words
 $C(w) = q_2\bigl( q_1(w) \bigr)$
