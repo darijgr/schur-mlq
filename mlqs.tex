@@ -1596,82 +1596,21 @@ Let $q$ be a queue.
 The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [q(u)]_k }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
-\begin{proof} %[Proof of Proposition~\ref{prop:SL.dual}.]
-Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [u]_k , q }$.
-The notations $c^{\uparrow}$ and $c^{\downarrow}$ as well as the concept of balanced
-intervals shall refer to $C$.
-
-Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
-such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-Use this permutation to construct $q(u)$ (as in the definition of $q(u)$).
-For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
-\Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
-Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
-Also, $q(u)_{j_1} \leq q(u)_{j_2} \leq \cdots \leq q(u)_{j_n}$, so that
-$[q(u)]_k = \set{j_1, j_2, \ldots, j_k}$ for each $k$ for which $[q(u)]_k$ is well-defined.
-
-We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(u)]_k }$.
-In other words, we want to prove that $q'_2 = [q(u)]_k$.
-If $k = \abs{q}$, then this is obvious (because in this case, the two queues in the configuration $C$ have the same size, so that its dual configuration $C'$ equals $C$, and thus $q'_2 = q$; but the assumption $k = \abs{q}$ also yields $[q(u)]_k = q$ because of the construction of $q(u)$, and therefore we obtain $q'_2 = q = [q(u)]_k$).
-
-Suppose next that $k < \abs{q}$.
-Thus, each site in $[u]_k$ is balanced.
-But $[u]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
-
-If $S$ is a set of sites, then the \defn{connected components} of $S$ are the maximal intervals contained in $S$.
-
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $\ell \in \inter[i,j]$, we have $c^\uparrow[i,\ell] \geq c^\downarrow[i,\ell]$.
-Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
-% A set of sites will be called \defn{top-heavy} if each of its connected components is top-heavy.
-
-For each $p \in \ive{k}$, we define an interval $I_p$ by $I_p = \inter[i_p, j_p]$.
-
-We first observe that $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$
-for each $p \in \ive{k}$.
-[\textit{Proof.} Let $p \in \ive{k}$.
-Recall that the site $j_p$ is found
-(in Phase~II of the algorithm computing $q(u)$) as the first site $j \in q$ weakly to the right of $i_p$ such that $q(u)_j$ is not set yet.
-In other words, $j_p$ is the first site $j \in q$ weakly to the right of $i_p$ that is not one of $j_1, j_2, \ldots, j_{p-1}$
-(since the sites $j \in q$ such that $q(u)_j$ has already been set are $j_1, j_2, \ldots, j_{p-1}$).
-In other words, all sites in $I_p = \inter[i_p, j_p]$ that belong to $q$ must be among $j_1, j_2, \ldots, j_{p-1}, j_p$.
-In other words, $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$, qed.]
-
-Let $U = I_1 \cup I_2 \cup \cdots \cup I_k$.
-Then, $U \cap q \subseteq \set{j_1, j_2, \ldots, j_k}$ (since $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$ for each $p \in \ive{k}$).
-Combining this with $\set{j_1, j_2, \ldots, j_k} \subseteq U \cap q$ (since each $j_p$ satisfies $j_p \in I_p \subseteq U$ and $j_p \in \set{j_1, j_2, \ldots, j_{\abs{q}}} = q$),
-we obtain $U \cap q = \set{j_1, j_2, \ldots, j_k}$.
-
-If we had $U = \ive{n}$, then this would rewrite as $q = \set{j_1, j_2, \ldots, j_k}$, which would entail $\abs{q} = k$; this would contradict $k < \abs{q}$.
-Hence, $U \neq \ive{n}$.
-
-Each connected component of the set $U$ is top-heavy.
-[\textit{Proof.} Let $\inter[a,b]$ be a connected component of $U$. Then, we must prove that $\inter[a,b]$ is top-heavy.
-Indeed, since $U$ is the union of the connected intervals $I_1, I_2, \ldots, I_k$, its connected component $\inter[a,b]$ must have the form $\inter[a,b] = \bigcup_{p \in R} I_p$ for some nonempty subset $R$ of $\ive{k}$, and be disjoint from all the $I_p$ with $p \notin R$. Consider this $R$.
-Thus, $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R}$ (indeed, $\inter[a,b] = \bigcup_{p \in R} I_p$ shows that all of the $i_p$ with $p \in R$ must lie in $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k}$; on the other hand, none of the remaining elements of $\set{i_1, i_2, \ldots, i_k}$ can belong to $\inter[a,b]$, since $\inter[a,b]$ is disjoint from all the $I_p$ with $p \notin R$).
-Likewise, $\inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R}$.
-From $[u]_k = \set{i_1, i_2, \ldots, i_k}$, we obtain
+\begin{proof}
+Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $\ive{n}$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Use this permutation to construct $q(u)$ as per the definition.
+For each $p \in \ive{n}$, let $j_p$ denote the site that is set by $i_p$.
+Note that we can always rematch
 \[
-\inter[a,b] \cap [u]_k = \inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R} .
+(_1\ (_2\ )_2\ )_1 \longrightarrow (_1\ (_2\ )_1\ )_2,
 \]
-From $\inter[a,b] \subseteq U$, we obtain
-\[
-\inter[a,b] \cap q = \inter[a,b] \cap \underbrace{U \cap q}_{= \set{j_1, j_2, \ldots, j_k}}
-= \inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R} .
-\]
-Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [u]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
-Hence, the former number is at least as large as the latter number (because if $p \in R$ is such that $j_p$ falls into $\inter[a,\ell]$, then $i_p$ must also fall into $\inter[a,\ell]$\footnote{In fact, let $p \in R$ be such that $j_p \in \inter[a,\ell]$. But $\inter[i_p,j_p] = I_p$ is a subinterval of $\inter[a,b]$, due to $\inter[a,b] = \bigcup_{p \in R} I_p$. The interval $\inter[a,\ell]$ is a ``prefix'' of $\inter[a,b]$; thus, every subinterval of $\inter[a,\ell]$ that ends inside $\inter[a,\ell]$ must also begin inside $\inter[a,\ell]$. Applying this to the subinterval $\inter[i_p, j_p]$, we conclude that $i_p \in \inter[a,\ell]$, as we wanted to show. Here, we have tacitly used the fact that $\inter[a,b] \neq \ive{n}$, which follows from $\inter[a,b] \subseteq U \neq \ive{n}$.}).
-We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
-
-Consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[u]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[u]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
-But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[u]_k$ (since $[u]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
-Thus, each connected component of $U$ is balanced. In other words, $U$ is balanced.
-Hence, each element of $[q(u)]_k$ is balanced (since $[q(u)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
-Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(u)]_k$ is in $q'_2$. In other words, $[q(u)]_k \subseteq q'_2$.
-Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$.
-Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
+where there can be any number of frozen letters in between.
+Thus, we start with the natural bracketing.
+By a straightforward induction argument, we can apply the rematching moves above so that matching agrees with the construction of $q(u)$ with the permutation $(i_1, i_2, \dotsc, i_n)$.
+\Travis{This needs more work, but it is the general idea.}
+This proves Proposition~\ref{prop:SL.dual} in the case when $k < \abs{q}$.
 
 Now suppose $k > \abs{q}$.
-% Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
 Thus, $n-k < n - \abs{q} = \abs{q^*}$.
 Applying the $k < \abs{q}$ case (proven above)
@@ -1696,21 +1635,6 @@ where
 \end{itemize}
 Therefore, $(q'_2)^* = [(q(u))^*]_{n-k} = ([q(u)]_k)^*$, so that
 $q'_2 = [q(u)]_k$.
-\begin{comment}
-Hence, we can apply the $k < \abs{q}$ case (proven above)
-% of Proposition~\ref{prop:SL.dual}
-to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$; we obtain
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$ for some queue $q^\dagger$.
-In view of $q^*(u^*) = (q(u))^*$ (which follows from Lemma~\ref{le:dual}), this rewrites as 
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [(q(u))^*]_{n-k} }$.
-Since $[u^*]_{n-k} = ([u]_k)^*$ and $[(q(u))^*]_{n-k} = ([q(u)]_k)^*$, this simplifies as
-$\tup{ ([u]_k)^* , q^* }' = \tup{ q^\dagger , ([q(u)]_k)^* }$.
-Comparing this with
-$\tup{ ([u]_k)^* , q^* }' = \bigl( (q'_1)^*, (q'_2)^* \bigr)$
-(a consequence of~\eqref{eq.rmk:balanced-dual-let.dual}),
-we obtain $\bigl( (q'_1)^*, (q'_2)^* \bigr) = \tup{ q^\dagger , ([q(u)]_k)^* }$,
-so that $(q'_2)^* = ([q(u)]_k)^*$ and therefore $q'_2 = [q(u)]_k$.
-\end{comment}
 Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
 \end{proof}
 
