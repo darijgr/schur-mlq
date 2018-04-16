@@ -1296,23 +1296,35 @@ An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
-We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
-Thus, assume $r_1 \neq r_2$.
+We begin by constructing a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
+\begin{itemize}
+\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$;
+\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$;
+\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$;
+\item nothing otherwise.
+\end{itemize}
+Next, we match as many parentheses as possible following the \defn{standard parenthesis-matching algorithm}:
+every time you find an opening parenthesis to the left(cyclically) of a closing one, with only frozen letters between them, you match these two parentheses and declare them frozen.
 
-For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
-This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $j = i-1$, then $\inter[i,j] = \ive{n}$.}
-Let $c^{\uparrow}[i,k]$ (resp.~$c^{\downarrow}[i,k]$) denote the number of $\ell \in \inter[i,k]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+Note that we do this cyclically, there will be $\abs{r_1 - r_2}$ unmatched `(' (resp.~`)') if and only if $r_1 > r_2$ (resp.~$r_1 < r_2$), and the unmatched parentheses will not depend on the order in which we perform the matching.
+This can be easily seen by considering the parentheses as Motzkin paths, where a skipped letter corresponds to a flat step.
+The unmatched positions correspond to up steps in the Motzkin path such that the path never returns to the same level.
 
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
-Equivalently, $\inter[i,j]$ is balanced if and only if $c^{\downarrow}[i,j] = c^{\uparrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\downarrow[k,j] \geq c^\uparrow[k,j]$.
-A set $S$ of sites is \defn{balanced} if it is a disjoint union of balanced intervals.
-For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
+If a site $j \in \ive{n}$ contributes a matched parenthesis, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
+We say $\mcI \subseteq \ive{n}$ is a \defn{balanced set} if all $i \in \mcI$ is balanced.
+If $\mcI$ is connected, we call $\mcI$ a \defn{balanced interval}.
+
+We construct $C' = (q'_1, q'_2)$ as follows.
+For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
+For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
+Note that $C$ and $C'$ have the same balanced intervals.
+It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
 
 The following facts are straightforward:
 \begin{enumerate}
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
  \item The empty interval is balanced.
- \item The set $\ive{n}$ of all sites is not balanced, since $r_1 \neq r_2$.
+ \item The set $\ive{n}$ is a balanced set if and only if $r_1 = r_2$.
  \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
        is balanced.\footnote{To prove this, first check it when $A$ and $B$
        are balanced intervals.}
@@ -1327,13 +1339,6 @@ The following facts are straightforward:
  \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
  \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
 \end{enumerate}
-
-We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ of $C$.
-For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
-Note that $C$ and $C'$ have the same balanced intervals.
-It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
-
-(We could adapt this construction to the case $r_1 = r_2$, but we would need to be more precise about defining intervals, since the set of all sites can be written as $\inter[i, i-1]$ for any value of $i$. If done correctly, this results in every $i \in \ive{n}$ being balanced when $r_1 = r_2$, and thus the construction yields $C' = C$ as we defined.)
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -1359,6 +1364,31 @@ In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \
 \caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
 The maximal balanced intervals are boxed.}
 \label{fig:balanced}
+\end{figure}
+
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}[scale=0.45]
+\draw[-,thin,red!50] (0,0) -- (24,0);
+\draw[-,thin,red!50] (1,1) -- (24,1);
+\draw[-,thin,red!50] (8,2) -- (24,2);
+\draw[-,thin,red!50] (9,3) -- (24,3);
+\draw[-,thin,red!50] (11,4) -- (24,4);
+\draw[-,thin,red!50] (14,5) -- (16,5);
+\draw[-,thin,red!50] (18,5) -- (22,5);
+\draw[-,thick,dashed] (-1,1) -- (0,0);
+\draw[-,thick] (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,1) -- (5,1) -- (6,2) -- (7,2) -- (8,2) -- (9,3) -- (10,4) -- (11,4) -- (12,5) -- (13,4) -- (14,5) -- (15,6) -- (16,5) -- (17,4) -- (18,5) -- (19,6) -- (20,5) -- (21,6) -- (22,5) -- (23,4);
+\draw[-,thick,dashed] (23,4) -- (24,5);
+\fill[blue] (0,0) circle (4pt);
+\fill[blue] (5,1) circle (4pt);
+\fill[blue] (8,2) circle (4pt);
+\fill[blue] (9,3) circle (4pt);
+\end{tikzpicture}
+\]
+\caption{The Motzkin path corresponding to the configuration in Figure~\ref{fig:balanced}.
+The corresponding unbalanced up steps are marked by dots.}
+\label{fig:balanced_motzkin}
 \end{figure}
 
 Recall the notations introduced just before Lemma~\ref{le:dual}.
@@ -1441,14 +1471,8 @@ as follows:
        all letters $i+1$ as closing parentheses `)',
        and consider all other letters to be frozen.
        Now, match as many parentheses as possible
-       according to the standard parenthesis-matching
-       algorithm (\textit{i.e.}, every time you find an opening
-       parenthesis to the left of a closing one, with only
-       frozen letters between them, you match these two
-       parentheses and declare them frozen).
-       Notice that this algorithm is non-deterministic, but
-       the outcome is independent of the steps chosen;
-       the result is always a word whose non-frozen
+       according to the standard parenthesis-matching algorithm.
+       Notice that the result is always a word whose non-frozen
        part (\textit{i.e.}, the word obtained by removing
        all frozen letters) is
        $\underbrace{))\cdots)}_{a\text{ parentheses}}
@@ -1503,23 +1527,11 @@ Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $
 Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
 Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
 
-We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
-\begin{itemize}
-\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$,
-\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$,
-\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$,
-\item nothing otherwise.
-\end{itemize}
-Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
-Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
-Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
-% [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
-Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
-Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
-The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
-Consequently, the sites of the unmatched parentheses are precisely the unbalanced sites.
 
-Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter}.
+Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$).
+Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
+This proves~\eqref{pf.prop:braid.inter}.
 
 The equality \eqref{pf.prop:braid.inter} can be rewritten as the
 commutative diagram
