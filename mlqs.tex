@@ -1307,8 +1307,9 @@ Next, we match as many parentheses as possible following the \defn{standard pare
 every time you find an opening parenthesis to the left(cyclically) of a closing one, with only frozen letters between them, you match these two parentheses and declare them frozen.
 
 Note that we do this cyclically, there will be $\abs{r_1 - r_2}$ unmatched `(' (resp.~`)') if and only if $r_1 > r_2$ (resp.~$r_1 < r_2$), and the unmatched parentheses will not depend on the order in which we perform the matching.
-This can be easily seen by considering the parentheses as Motzkin paths, where a skipped letter corresponds to a flat step.
-The unmatched positions correspond to up steps in the Motzkin path such that the path never returns to the same level.
+This can be easily seen by considering the parentheses as an infinite shifted-$n$-periodic Motzkin path, where a skipped letter corresponds to a flat step.
+If $r_1 > r_2$, then the unmatched positions correspond to up steps in the Motzkin path such that the path never returns to the same height.
+When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
 
 If a site $j \in \ive{n}$ contributes a matched parenthesis, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
 We say $\mcI \subseteq \ive{n}$ is a \defn{balanced set} if all $i \in \mcI$ is balanced.
@@ -1378,12 +1379,33 @@ The maximal balanced intervals are boxed.}
 \draw[-,thin,red!50] (14,5) -- (16,5);
 \draw[-,thin,red!50] (18,5) -- (22,5);
 \draw[-,thick,dashed] (-1,1) -- (0,0);
+\draw[-,dotted] (1,0) -- (1,1);
+\draw[-,dotted] (3,0) -- (3,1);
+\draw[-,dotted] (4,0) -- (4,1);
+\draw[-,dotted] (5,0) -- (5,1);
+\draw[-,dotted] (6,0) -- (6,2);
+\draw[-,dotted] (7,0) -- (7,2);
+\draw[-,dotted] (8,0) -- (8,2);
+\draw[-,dotted] (9,0) -- (9,3);
+\draw[-,dotted] (10,0) -- (10,4);
+\draw[-,dotted] (11,0) -- (11,4);
+\draw[-,dotted] (12,0) -- (12,5);
+\draw[-,dotted] (13,0) -- (13,4);
+\draw[-,dotted] (14,0) -- (14,5);
+\draw[-,dotted] (15,0) -- (15,6);
+\draw[-,dotted] (16,0) -- (16,5);
+\draw[-,dotted] (17,0) -- (17,4);
+\draw[-,dotted] (18,0) -- (18,5);
+\draw[-,dotted] (20,0) -- (20,5);
+\draw[-,dotted] (22,0) -- (22,5);
+\draw[-,dotted] (23,0) -- (23,4);
 \draw[-,thick] (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,1) -- (5,1) -- (6,2) -- (7,2) -- (8,2) -- (9,3) -- (10,4) -- (11,4) -- (12,5) -- (13,4) -- (14,5) -- (15,6) -- (16,5) -- (17,4) -- (18,5) -- (19,6) -- (20,5) -- (21,6) -- (22,5) -- (23,4);
 \draw[-,thick,dashed] (23,4) -- (24,5);
 \fill[blue] (0,0) circle (4pt);
 \fill[blue] (5,1) circle (4pt);
 \fill[blue] (8,2) circle (4pt);
 \fill[blue] (9,3) circle (4pt);
+\fill[blue] (23,4) circle (4pt);
 \end{tikzpicture}
 \]
 \caption{The Motzkin path corresponding to the configuration in Figure~\ref{fig:balanced}.
@@ -1599,15 +1621,20 @@ The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [
 \begin{proof}
 Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $\ive{n}$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
 Use this permutation to construct $q(u)$ as per the definition.
-For each $p \in \ive{n}$, let $j_p$ denote the site that is set by $i_p$.
-Note that we can always rematch
-\[
-(_1\ (_2\ )_2\ )_1 \longrightarrow (_1\ (_2\ )_1\ )_2,
-\]
-where there can be any number of frozen letters in between.
-Thus, we start with the natural bracketing.
-By a straightforward induction argument, we can apply the rematching moves above so that matching agrees with the construction of $q(u)$ with the permutation $(i_1, i_2, \dotsc, i_n)$.
-\Travis{This needs more work, but it is the general idea.}
+For each $p \in \ive{n}$, let $j_p$ denote the site that is set by $i_p$ when constructing $q(u)$.
+
+Suppose $k < \abs{q}$.
+It is sufficient to show that for every $p \in \ive{n}$, there exists a balanced interval $\mcI$ such that both $i_p, j_p \in \mcI$.
+We proceed by induction on $p$, and we consider any matched $(_{i_a}$ with $)_{i_a}$ for $a < p$ to be frozen.
+For the base case $p=1$, we start with the natural bracketing.
+Note that we can rematch parentheses by
+\begin{equation}
+\label{eq:rematching}
+(_a\ (_b\ )_b\ )_a \longrightarrow (_a\ (_b\ )_a\ )_b,
+\end{equation}
+where there can be any number of (frozen) parentheses in between.
+Moreover, if we then freeze the $(_a\ )_a$ match, then we obtain the same matching as before rematching.
+Thus, we apply the rematching~\eqref{eq:rematching} to move $)_{i_p}$ to the unmatched bracket from position $j_p$.
 This proves Proposition~\ref{prop:SL.dual} in the case when $k < \abs{q}$.
 
 Now suppose $k > \abs{q}$.
