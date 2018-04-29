@@ -1297,23 +1297,36 @@ An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
-We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
-Thus, assume $r_1 \neq r_2$.
+We begin by constructing a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
+\begin{itemize}
+\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$;
+\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$;
+\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$;
+\item nothing otherwise.
+\end{itemize}
+Next, we match as many parentheses as possible following the \defn{standard parenthesis-matching algorithm}:
+every time you find an opening parenthesis to the left(cyclically) of a closing one, with only frozen letters between them, you match these two parentheses and declare them frozen.
 
-For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
-This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $j = i-1$, then $\inter[i,j] = \ive{n}$.}
-Let $c^{\uparrow}[i,j]$ (resp.~$c^{\downarrow}[i,j]$) denote the number of $\ell \in \inter[i,j]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+Note that we do this cyclically, there will be $\abs{r_1 - r_2}$ unmatched `(' (resp.~`)') if and only if $r_1 > r_2$ (resp.~$r_1 < r_2$), and the unmatched parentheses will not depend on the order in which we perform the matching.
+This can be easily seen by considering the parentheses as an infinite shifted-$n$-periodic Motzkin path, where a skipped letter corresponds to a flat step.
+If $r_1 > r_2$, then the unmatched positions correspond to up steps in the Motzkin path such that the path never returns to the same height.
+When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
 
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
-Equivalently, $\inter[i,j]$ is balanced if and only if $c^{\downarrow}[i,j] = c^{\uparrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\downarrow[k,j] \geq c^\uparrow[k,j]$.
-A set $S$ of sites is \defn{balanced} if it is a disjoint union of balanced intervals.
-For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
+If a site $j \in \ive{n}$ contributes a matched parenthesis, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
+We say $\mcI \subseteq \ive{n}$ is a \defn{balanced set} if all $i \in \mcI$ is balanced.
+If $\mcI$ is connected, we call $\mcI$ a \defn{balanced interval}.
+
+We construct $C' = (q'_1, q'_2)$ as follows.
+For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
+For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
+Note that $C$ and $C'$ have the same balanced intervals.
+It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
 
 The following facts are straightforward:
 \begin{enumerate}
  \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
  \item The empty interval is balanced.
- \item The set $\ive{n}$ of all sites is not balanced, since $r_1 \neq r_2$.
+ \item The set $\ive{n}$ is a balanced set if and only if $r_1 = r_2$.
  \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
        is balanced.\footnote{To prove this, first check it when $A$ and $B$
        are balanced intervals.}
@@ -1328,13 +1341,6 @@ The following facts are straightforward:
  \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
  \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
 \end{enumerate}
-
-We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ of $C$.
-For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
-Note that $C$ and $C'$ have the same balanced intervals.
-It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
-
-(We could adapt this construction to the case $r_1 = r_2$, but we would need to be more precise about defining intervals, since the set of all sites can be written as $\inter[i, i-1]$ for any value of $i$. If done correctly, this results in every $i \in \ive{n}$ being balanced when $r_1 = r_2$, and thus the construction yields $C' = C$ as we defined.)
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -1360,6 +1366,52 @@ In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \
 \caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
 The maximal balanced intervals are boxed.}
 \label{fig:balanced}
+\end{figure}
+
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}[scale=0.45]
+\draw[-,thin,red!50] (0,0) -- (24,0);
+\draw[-,thin,red!50] (1,1) -- (24,1);
+\draw[-,thin,red!50] (8,2) -- (24,2);
+\draw[-,thin,red!50] (9,3) -- (24,3);
+\draw[-,thin,red!50] (11,4) -- (24,4);
+\draw[-,thin,red!50] (14,5) -- (16,5);
+\draw[-,thin,red!50] (18,5) -- (22,5);
+\draw[-,thick,dashed] (-1,1) -- (0,0);
+\draw[-,dotted] (1,0) -- (1,1);
+\draw[-,dotted] (3,0) -- (3,1);
+\draw[-,dotted] (4,0) -- (4,1);
+\draw[-,dotted] (5,0) -- (5,1);
+\draw[-,dotted] (6,0) -- (6,2);
+\draw[-,dotted] (7,0) -- (7,2);
+\draw[-,dotted] (8,0) -- (8,2);
+\draw[-,dotted] (9,0) -- (9,3);
+\draw[-,dotted] (10,0) -- (10,4);
+\draw[-,dotted] (11,0) -- (11,4);
+\draw[-,dotted] (12,0) -- (12,5);
+\draw[-,dotted] (13,0) -- (13,4);
+\draw[-,dotted] (14,0) -- (14,5);
+\draw[-,dotted] (15,0) -- (15,6);
+\draw[-,dotted] (16,0) -- (16,5);
+\draw[-,dotted] (17,0) -- (17,4);
+\draw[-,dotted] (18,0) -- (18,5);
+\draw[-,dotted] (20,0) -- (20,5);
+\draw[-,dotted] (22,0) -- (22,5);
+\draw[-,dotted] (23,0) -- (23,4);
+\draw[-,thick] (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,1) -- (5,1) -- (6,2) -- (7,2) -- (8,2) -- (9,3) -- (10,4) -- (11,4) -- (12,5) -- (13,4) -- (14,5) -- (15,6) -- (16,5) -- (17,4) -- (18,5) -- (19,6) -- (20,5) -- (21,6) -- (22,5) -- (23,4);
+\draw[-,thick,dashed] (23,4) -- (24,5);
+\fill[blue] (0,0) circle (4pt);
+\fill[blue] (5,1) circle (4pt);
+\fill[blue] (8,2) circle (4pt);
+\fill[blue] (9,3) circle (4pt);
+\fill[blue] (23,4) circle (4pt);
+\end{tikzpicture}
+\]
+\caption{The Motzkin path corresponding to the configuration in Figure~\ref{fig:balanced}.
+The corresponding unbalanced up steps are marked by dots.}
+\label{fig:balanced_motzkin}
 \end{figure}
 
 Recall the notations introduced just before Lemma~\ref{le:dual}.
@@ -1442,14 +1494,8 @@ as follows:
        all letters $i+1$ as closing parentheses `)',
        and consider all other letters to be frozen.
        Now, match as many parentheses as possible
-       according to the standard parenthesis-matching
-       algorithm (\textit{i.e.}, every time you find an opening
-       parenthesis to the left of a closing one, with only
-       frozen letters between them, you match these two
-       parentheses and declare them frozen).
-       Notice that this algorithm is non-deterministic, but
-       the outcome is independent of the steps chosen;
-       the result is always a word whose non-frozen
+       according to the standard parenthesis-matching algorithm.
+       Notice that the result is always a word whose non-frozen
        part (\textit{i.e.}, the word obtained by removing
        all frozen letters) is
        $\underbrace{))\cdots)}_{a\text{ parentheses}}
@@ -1504,23 +1550,11 @@ Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $
 Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
 Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
 
-We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
-\begin{itemize}
-\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$,
-\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$,
-\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$,
-\item nothing otherwise.
-\end{itemize}
-Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
-Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
-Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
-% [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
-Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
-Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
-The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
-Consequently, the sites of the unmatched parentheses are precisely the unbalanced sites.
 
-Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter}.
+Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$).
+Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
+This proves~\eqref{pf.prop:braid.inter}.
 
 The equality \eqref{pf.prop:braid.inter} can be rewritten as the
 commutative diagram
@@ -1585,81 +1619,26 @@ Let $q$ be a queue.
 The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [q(u)]_k }$, where $q^{\dagger}$ is some queue.
 \end{prop}
 
-\begin{proof} %[Proof of Proposition~\ref{prop:SL.dual}.]
-Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [u]_k , q }$.
-The notations $c^{\uparrow}$ and $c^{\downarrow}$ as well as the concept of balanced
-intervals shall refer to $C$.
+\begin{proof}
+Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $\ive{n}$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Use this permutation to construct $q(u)$ as per the definition.
+For each $p \in \ive{n}$, let $j_p$ denote the site that is set by $i_p$ when constructing $q(u)$.
 
-Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
-such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-Use this permutation to construct $q(u)$ (as in the definition of $q(u)$).
-For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
-\Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
-Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
-Also, $q(u)_{j_1} \leq q(u)_{j_2} \leq \cdots \leq q(u)_{j_n}$, so that
-$[q(u)]_k = \set{j_1, j_2, \ldots, j_k}$ for each $k$ for which $[q(u)]_k$ is well-defined.
-
-We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(u)]_k }$.
-In other words, we want to prove that $q'_2 = [q(u)]_k$.
-If $k = \abs{q}$, then this is obvious (because in this case, the two queues in the configuration $C$ have the same size, so that its dual configuration $C'$ equals $C$, and thus $q'_2 = q$; but the assumption $k = \abs{q}$ also yields $[q(u)]_k = q$ because of the construction of $q(u)$, and therefore we obtain $q'_2 = q = [q(u)]_k$).
-
-Suppose next that $k < \abs{q}$.
-Thus, each site in $[u]_k$ is balanced.
-But $[u]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
-
-If $S$ is a set of sites, then the \defn{connected components} of $S$ are the maximal intervals contained in $S$.
-
-We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $\ell \in \inter[i,j]$, we have $c^\uparrow[i,\ell] \geq c^\downarrow[i,\ell]$.
-Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
-% A set of sites will be called \defn{top-heavy} if each of its connected components is top-heavy.
-
-For each $p \in \ive{k}$, we define an interval $I_p$ by $I_p = \inter[i_p, j_p]$.
-
-We first observe that $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$
-for each $p \in \ive{k}$.
-[\textit{Proof.} Let $p \in \ive{k}$.
-Recall that the site $j_p$ is found
-(in Phase~II of the algorithm computing $q(u)$) as the first site $j \in q$ weakly to the right of $i_p$ such that $q(u)_j$ is not set yet.
-In other words, $j_p$ is the first site $j \in q$ weakly to the right of $i_p$ that is not one of $j_1, j_2, \ldots, j_{p-1}$
-(since the sites $j \in q$ such that $q(u)_j$ has already been set are $j_1, j_2, \ldots, j_{p-1}$).
-In other words, all sites in $I_p = \inter[i_p, j_p]$ that belong to $q$ must be among $j_1, j_2, \ldots, j_{p-1}, j_p$.
-In other words, $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$, qed.]
-
-Let $U = I_1 \cup I_2 \cup \cdots \cup I_k$.
-Then, $U \cap q \subseteq \set{j_1, j_2, \ldots, j_k}$ (since $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$ for each $p \in \ive{k}$).
-Combining this with $\set{j_1, j_2, \ldots, j_k} \subseteq U \cap q$ (since each $j_p$ satisfies $j_p \in I_p \subseteq U$ and $j_p \in \set{j_1, j_2, \ldots, j_{\abs{q}}} = q$),
-we obtain $U \cap q = \set{j_1, j_2, \ldots, j_k}$.
-
-If we had $U = \ive{n}$, then this would rewrite as $q = \set{j_1, j_2, \ldots, j_k}$, which would entail $\abs{q} = k$; this would contradict $k < \abs{q}$.
-Hence, $U \neq \ive{n}$.
-
-Each connected component of the set $U$ is top-heavy.
-[\textit{Proof.} Let $\inter[a,b]$ be a connected component of $U$. Then, we must prove that $\inter[a,b]$ is top-heavy.
-Indeed, since $U$ is the union of the connected intervals $I_1, I_2, \ldots, I_k$, its connected component $\inter[a,b]$ must have the form $\inter[a,b] = \bigcup_{p \in R} I_p$ for some nonempty subset $R$ of $\ive{k}$, and be disjoint from all the $I_p$ with $p \notin R$. Consider this $R$.
-Thus, $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R}$ (indeed, $\inter[a,b] = \bigcup_{p \in R} I_p$ shows that all of the $i_p$ with $p \in R$ must lie in $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k}$; on the other hand, none of the remaining elements of $\set{i_1, i_2, \ldots, i_k}$ can belong to $\inter[a,b]$, since $\inter[a,b]$ is disjoint from all the $I_p$ with $p \notin R$).
-Likewise, $\inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R}$.
-From $[u]_k = \set{i_1, i_2, \ldots, i_k}$, we obtain
-\[
-\inter[a,b] \cap [u]_k = \inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R} .
-\]
-From $\inter[a,b] \subseteq U$, we obtain
-\[
-\inter[a,b] \cap q = \inter[a,b] \cap \underbrace{U \cap q}_{= \set{j_1, j_2, \ldots, j_k}}
-= \inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R} .
-\]
-Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [u]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
-Hence, the former number is at least as large as the latter number (because if $p \in R$ is such that $j_p$ falls into $\inter[a,\ell]$, then $i_p$ must also fall into $\inter[a,\ell]$\footnote{In fact, let $p \in R$ be such that $j_p \in \inter[a,\ell]$. But $\inter[i_p,j_p] = I_p$ is a subinterval of $\inter[a,b]$, due to $\inter[a,b] = \bigcup_{p \in R} I_p$. The interval $\inter[a,\ell]$ is a ``prefix'' of $\inter[a,b]$; thus, every subinterval of $\inter[a,\ell]$ that ends inside $\inter[a,\ell]$ must also begin inside $\inter[a,\ell]$. Applying this to the subinterval $\inter[i_p, j_p]$, we conclude that $i_p \in \inter[a,\ell]$, as we wanted to show. Here, we have tacitly used the fact that $\inter[a,b] \neq \ive{n}$, which follows from $\inter[a,b] \subseteq U \neq \ive{n}$.}).
-We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
-
-Consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[u]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[u]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
-But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[u]_k$ (since $[u]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
-Thus, each connected component of $U$ is balanced. In other words, $U$ is balanced.
-Hence, each element of $[q(u)]_k$ is balanced (since $[q(u)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
-Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(u)]_k$ is in $q'_2$. In other words, $[q(u)]_k \subseteq q'_2$.
-Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$. Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
+Suppose $k < \abs{q}$.
+It is sufficient to show that for every $p \in \ive{n}$, there exists a balanced interval $\mcI$ such that both $i_p, j_p \in \mcI$.
+We proceed by induction on $p$, and we consider any matched $(_{i_a}$ with $)_{i_a}$ for $a < p$ to be frozen.
+For the base case $p=1$, we start with the natural bracketing.
+Note that we can rematch parentheses by
+\begin{equation}
+\label{eq:rematching}
+(_a\ (_b\ )_b\ )_a \longrightarrow (_a\ (_b\ )_a\ )_b,
+\end{equation}
+where there can be any number of (frozen) parentheses in between.
+Moreover, if we then freeze the $(_a\ )_a$ match, then we obtain the same matching as before rematching.
+Thus, we apply the rematching~\eqref{eq:rematching} to move $)_{i_p}$ to the unmatched bracket from position $j_p$.
+This proves Proposition~\ref{prop:SL.dual} in the case when $k < \abs{q}$.
 
 Now suppose $k > \abs{q}$.
-% Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
 Thus, $n-k < n - \abs{q} = \abs{q^*}$.
 Applying the $k < \abs{q}$ case (proven above)
@@ -1800,6 +1779,7 @@ In other words, $[C'(w)]_k = [C(w)]_k$.
 
 \begin{remark}
 Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
+We also sketch an alternative direct approach in the FPSAC extended abstract version of this work~\cite{AGS18}.
 \end{remark}
 
 
@@ -1988,722 +1968,12 @@ Our action effectively does the following on the corner transfer matrix:
 \]
 where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
 
-We conclude with a few questions.
-Note that Lemmas~\ref{le:BB},~\ref{le:BU} and~\ref{le:UB} effectively compute $C(u)$ for $u \in \{1,2\}^n$.
-Could this be done in a more transparent manner, such as by using pairs of labeled periodic Dyck or Motzkin paths?
 It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
 
 
 
 
 
-
-
-
-
-\appendix
-
-%=====================================================================
-\section{Alternative proof sketch of Theorem~\ref{thm:permutation}}
-\label{sec:altproof}
-
-We will now sketch an alternative proof of Theorem~\ref{thm:permutation} by directly showing that $(\fraks_i \qq)(u) = \qq(u)$, where the action $\fraks_i \qq$ is as given in Section~\ref{sec:thm_proof}.
-As before, the proof thus reduces down to showing for a configuration $C$ and word $u$, we have $C(u) = C'(u)$.
-
-We first consider the case $r_1 = r_2$, in which case $C' = C$ by definition and the claim is trivial.
-Moreover, it is clear that every $\sigma$-twisted MLQ is a $\sigma s_i$-twisted MLQ and the claim follows.
-Thus, for the remainder of this section we assume $r_1 \neq r_2$.
-
-We require a preparatory lemma, for which we need further notation.
-For any map $f \colon \set{1,2,\ldots} \to \set{1,2,\ldots}$ and word $u$,
-we abuse notation to let $f(u)$ be the word obtained by applying $f$ to each letter of $u$.
-
-\begin{lemma}[Monotonicity]
-\label{le:mono}
-  For any $k \in \ZZ_{\geq 1}$, let $f_k \colon \{1,2, \ldots\} \to \{1,2\}$ be given by
-  \[
-    f_k(x) = \begin{cases}
-    1 & \text{if } x \leq k, \\
-    2 & \text{if } x > k.
-    \end{cases}
-  \]
-  Let $q$ be a queue, $u$ be any word, and $i,j \in \ive{n}$.
-  We have $q(u)_i \leq q(u)_j$ if and only if $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-\end{lemma}
-
-\begin{proof}
-Let $k \in \ZZ_{\geq 1}$ be arbitrary.
-Consider some fixed permutation $\tup{i_1, i_2, \ldots, i_n}$ used in the construction of $q(u)$.
-This same permutation works for the construction of $q\bigl(f_k(u) \bigr)$
-since $\bigl( f_k(u) \bigr)_a \leq \bigl( f_k(u) \bigr)_b$ whenever $u_a \leq u_b$.
-Thus, the construction of $q\bigl( f_k(u) \bigr)$ proceeds exactly as the
-construction of $q(u)$, except that the letters used to build
-the word $q\bigl( f_k(u) \bigr)$ are those of $f_k(u)$ instead of those of $u$.
-%In particular, for a given site $k$, the letter $v_k$ is set at
-%the same moment as the letter $v'_k$ is set; we just say that
-%``site $k$ is set''.
-% commented stuff below went here.
-Suppose $q(u)_i \leq q(u)_j$.
-So either
-\begin{itemize}
-\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
-\item $q(u)_i$ is set in Phase~II and $q(u)_j$ in Phase~I.
-\end{itemize}
-Therefore, we have $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
-
-For the converse direction, we shall prove the contrapositive.
-So we assume that $q(u)_i > q(u)_j$.
-Thus, either
-\begin{itemize}
-\item $q(u)_i$ and $q(u)_j$ are set in the same phase or
-\item $q(u)_i$ is set in Phase~I and $q(u)_j$ in Phase~II.
-\end{itemize}
-Let
-\[
-k = \begin{cases}
-q(u)_j & \text{if $q(u)_j$ is set during Phase~II,} \\
-q(u)_j - 1 & \text{otherwise.}
-\end{cases}
-\]
-Therefore, if $q(u)_j$ is set during Phase~II, we have $q\bigl( f_k(u) \bigr)_i \geq 2$ and $q\bigl( f_k(u) \bigr)_j = 1$.
-Otherwise, we have $q\bigl( f_k(u) \bigr)_i = 3$ and $q\bigl( f_k(u) \bigr)_j \leq 2$.
-In either case, $q\bigl( f_k(u) \bigr)_i > q\bigl( f_k(u) \bigr)_j$.
-
-\begin{comment}
-Hence, for each $m \in \ive{n}$, we have
-\begin{equation}
- q(f_k(u))_m
- = \begin{cases}
-    f_k(q(u)_m), & \text{ if } m \in q ; \\
-    f_k(q(u)_m - 1) + 1, & \text{ if } m \notin q
-   \end{cases}
- .
- \label{pf.le:mono.correspondence}
-\end{equation}
-
-Now, assume that $q(u)_i \leq q(u)_j$.
-We want to prove that
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$.
-If $i \in q$ and $j \notin q$, then this is obvious.
-If $i \notin q$ and $j \in q$, then we obtain a contradiction to
-$q(u)_i \leq q(u)_j$.
-Hence, only two cases remain: the case when both $i$ and $j$ belong to $q$,
-and the case when neither $i$ nor $j$ belongs to $q$.
-Let us only consider the second case (as the first is analogous).
-So $i \notin q$, and thus~\eqref{pf.le:mono.correspondence} yields
-$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$.
-Similarly,
-$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$.
-But $q(u)_i \leq q(u)_j$, so that
-$f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$
-and thus
-$q(f_k(u))_i = f_k(q(u)_i - 1) + 1 \leq f_k(q(u)_j - 1) + 1 = q(f_k(u))_j$,
-as we desired to prove.
-
-We thus have shown that if $q(u)_i \leq q(u)_j$, then
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-
-Conversely, assume that
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-We must show that $q(u)_i \leq q(u)_j$.
-%Assume the contrary.
-%Hence, $q(u)_i > q(u)_j$.
-If $i \in q$ and $j \notin q$, then this is obvious.
-If $i \notin q$ and $j \in q$, then we get a contradiction (since
-$q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ will fail for each $k$).
-Thus, again, only two cases remain: the case when both $i$ and $j$ belong to $q$,
-and the case when neither $i$ nor $j$ belongs to $q$.
-Let us only consider the second case (as the first is analogous).
-Thus, both $q(u)_i$ and $q(u)_j$ are $\geq 2$.
-As before, we obtain
-$q(f_k(u))_i = f_k(q(u)_i - 1) + 1$ and
-$q(f_k(u))_j = f_k(q(u)_j - 1) + 1$ for each $k$.
-Thus, for each $k$, we have
-$f_k(q(u)_i - 1) + 1 = q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j = f_k(q(u)_j - 1) + 1$
-and therefore $f_k(q(u)_i - 1) \leq f_k(q(u)_j - 1)$.
-But this implies that $q(u)_i - 1 \leq q(u)_j - 1$
-(because if two positive integers $a$ and $b$ satisfy $f_k(a) \leq f_k(b)$ for each $k \in \ZZ_{\geq 1}$, then $a \leq b$).
-In other words, $q(u)_i \leq q(u)_j$, and the proof is complete.
-\end{comment}
-\end{proof}
-
-
-\begin{comment}
-\begin{proof}
-%Let $x = q(u)_i$, $y = q(u)_j$, $x_k = q\bigl( f_k(u) \bigr)_i$ and $y_k = q\bigl( f_k(u) \bigr)_j$.
-Let $t$ be as in Remark~\ref{rmk:t-splitting}.
-Note that the permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
-also works for the construction of $q(\merge{h} u)$;
-thus,
-$q(\merge{h} u) = \merge{h} q(u)$ for all $h < t$ and $q(\merge{h} u) = \merge{h+1} q(u)$ for all $h \geq t$. 
-%since equal entries can be processed in any order in the definition of the action of $q$.
-
-Assume $q(u)_i \leq q(u)_j$.
-Then, $f_k(u) = \merge{1} \merge{2} \cdots \merge{k-1} \merge{k+1} \cdots \merge{\ell-1} u$
-(where $\ell$ is the number of classes in $u$),
-and so (by the preceding observation) $q(f_k(u)) = \merge{r_1} \merge{r_2} \cdots \merge{r_{\ell-2}} q(u)$
-for some $r_1, \ldots, r_{\ell-2}$.
-Hence, $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-
-Conversely, assume $q\bigl( f_k(u) \bigr)_i \leq q\bigl( f_k(u) \bigr)_j$ for all $k \in \ZZ_{\geq 1}$.
-Suppose that $q(u)_i > q(u)_j$, then we can apply merges to $u$ to obtain $f_{k'}$ with $k' = q(u)_j$.
-However, the previous argument implies that $q\bigl(f_{k'}(u) \bigr)_i > q\bigl(f_{k'}(u) \bigr)_j$, which is a contradiction.
-Hence, the claim follows.
-\end{proof}
-\end{comment}
-
-Lemma~\ref{le:mono} tells us that when $q$ is considered as a function on words, it is completely determined by its values $q(u)$ on words $u \in \{1,2\}^n$.
-
-By using Lemma~\ref{le:mono}, we may assume $u \in \{1,2\}^n$.
-We split the proof into four parts as follows.
-In Part~A, we reduce the problem of showing that $C(u) = C'(u)$ for \emph{all} words $u$ to the showing it for a very restricted set of words $u$.
-In Part~B, we show that for this restricted set of words $u$, we indeed have $C(u) = C'(u)$.
-
-For the remainder of this section, we fix an $(r_1,r_2)$-configuration $C = (q_1, q_2)$ and binary word $u \in \set{1,2}^n$.
-We will also use the notation
-\[
-T(j) := \begin{cases}
-(u_j, \bigcirc) & \text{if } j \in q_1, \\
-(u_j, \square) & \text{if } j \notin q_1,
-\end{cases}
-\]
-for an element $j \in \ive{n}$.
-
-
-
-%balanced intervals in C and C' are the same (because #unbalanced columns is same in both)
-%%%%%%%%%%
-\subsection*{Part I: Reduction to special words}
-
-For a word $u$ and indices $i,j$, we let $u_{i\leftrightarrow j}$ be the result of swapping positions $i$ and $j$ in $u$.
-
-If $i$ and $j$ are two sites, then we let $\inter(i,j) := \inter[i,j] \setminus \set{i,j}$ denote the open (cyclic) interval.
-
-\begin{lemma}
-\label{le:orig}
-  Let $q$ be an $r$-queue and $u$ be as above.
-  Let $i \notin q$ and $j \in q$.
-  Suppose that for all $k \in \inter(i,j)$, one of the following hold:
-  \begin{itemize}
-    \item $k \in q$ and $u_k=1$;
-    \item $k \notin q$ and $u_k = 2$.
-  \end{itemize}
-  Then $q(u) = q(u_{i\leftrightarrow j})$.
-\end{lemma}
-
-\begin{proof}
-Let $\delta_{ab}$ denote the Kronecker delta.
-Note that $q(u)_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$ by our assumptions
-(since we can start each phase by going through the $k \in \inter(i, j)$),
-and similarly $q(u_{i \leftrightarrow j})_k = u_k + \delta_{2u_k}$ for all $k \in \inter(i,j)$.
-Therefore, if $u_i \neq u_j$, then we have $q(u)_i = 3$ and $q(u)_j = 1$
-as $q(u)_i$ (resp.~$q(u)_j$) is the first unset letter encountered by
-the $2$ (resp.~$1$) in Phase~I (resp.\ Phase~II).
-Similarly for $q(u_{i \leftrightarrow j})$, and hence the claim follows.
-If $u_i = u_j$, then the claim is trivial (as $u = u_{i \leftrightarrow j}$).
-\end{proof}
-
-\begin{lemma}[BB]
-\label{le:BB}
-  Let $C$ and $u$ be as above.
-  Suppose
-  \begin{itemize}
-    \item $i$ is balanced with $T(i) = (1,\square)$,
-    \item $j$ is balanced with $T(j) = (2,\bigcirc)$, and
-    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k\in\inter(i,j)$ \travis{Do you really want balanced here? If so, then the proof does not work as there are no conditions on the unbalanced letters.}.
-  \end{itemize}
-  Then $C(u) = C(u_{i \leftrightarrow j})$.
-\end{lemma}
-
-\begin{proof}
-  By Lemma~\ref{le:orig}, we have $q_1(u) = q_1(u_{i\leftrightarrow j})$, and thus
-  \[
-  C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( q_1(u_{i\leftrightarrow j}) \bigr) = C(u_{i\leftrightarrow j})
-  \]
-  as desired.
-\end{proof}
-
-\begin{example}
-Suppose $n = 8$.
-Let $u = 12121122$, and we consider the $(5,3)$-configuration $C = (\{1,2,5,6,8\}, \{5,7,8\})$.
-We apply $C$ to $u$ on the left and to $u_{3 \leftrightarrow 8}$ on the right:
-\[
-\begin{tikzpicture}[baseline=-3]
-  \def\sc{0.75}   % Change this to adjust the x-scaling
-  \def\lll{1.7}   % level 3
-  \def\ll{1}   % level 2
-  \def\l{0}   % level 1
-  \node[color=blue] at (3*\sc,\lll) {$1$};
-  \node[color=blue] at (8*\sc,\lll) {$2$};
-  \foreach \i in {1,5,6} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {2,4,7} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {1,2,5,6,8} { \draw (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {3,4,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,5,6,8} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {3,4,7} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {5,7,8} { \draw (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,2,3,4,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {3,4,6} { \node at (\i*\sc,\l) {$4$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {5,7,8} { \node at (\i*\sc,\l) {$1$}; }
-  \draw (2.5*\sc,2) -- (2.5*\sc,2.1) -- (8.5*\sc,2.1) -- (8.5*\sc,2);
-  \node at (5.5*\sc,2.5) {balanced};
-\end{tikzpicture}
-% t = 2 for q_1
-% t = 1 for q_2
-\hspace{3pt} = \hspace{4pt}
-\begin{tikzpicture}[baseline=-3]
-  \def\sc{0.75}   % Change this to adjust the x-scaling
-  \def\lll{1.7}   % level 3
-  \def\ll{1}   % level 2
-  \def\l{0}   % level 1
-  \node[color=blue] at (8*\sc,\lll) {$1$};
-  \node[color=blue] at (3*\sc,\lll) {$2$};
-  \foreach \i in {1,5,6} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {2,4,7} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {1,2,5,6,8} { \draw (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {3,4,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,5,6,8} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {3,4,7} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {5,7,8} { \draw (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,2,3,4,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {3,4,6} { \node at (\i*\sc,\l) {$4$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {5,7,8} { \node at (\i*\sc,\l) {$1$}; }
-  \draw (2.5*\sc,2) -- (2.5*\sc,2.1) -- (8.5*\sc,2.1) -- (8.5*\sc,2);
-  \node at (5.5*\sc,2.5) {balanced};
-\end{tikzpicture}
-\]
-\end{example}
-
-%.......................................
-
-\begin{lemma}[BU]
-\label{le:BU}
-  Let $C$ and $u$ be as above.
-  Suppose
-  \begin{itemize}
-    \item $i$ is balanced with $T(i) = (1,\square)$,
-    \item $j$ is unbalanced with $u_j = 2$,
-    \item $u_k = 1$ for all unbalanced $k \in \inter (i,j)$, and
-    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k \in \inter(i,j)$.
-  \end{itemize}
-  Then we have $C(u) = C(u_{i \leftrightarrow j})$.
- \end{lemma} 
- 
-\begin{proof}
-  We assume here that $r_1 > r_2$, noting that the dual case $r_1 < r_2$ follows from Remark~\ref{rmk:balanced-dual-let} and Lemma~\ref{le:UB}.
-  Thus, we have $k \in q_1$ for all unbalanced $k$, and so $q_1(u) = q_1(u_{i\leftrightarrow j})$ by Lemma~\ref{le:orig}.
-\end{proof}
-
-\begin{example}
-Suppose $n = 8$.
-Let $u = 21111122$, and we consider the $(4,1)$-configuration $C = (\{1,2,5,6\},\{7\})$.
-We apply $C$ to $u$ on the left and to $u_{4\leftrightarrow1}$ (note the interval $\inter[4,1]$ wraps around):
-\[
-\begin{tikzpicture}[baseline=25]
-  \def\sc{0.75}   % Change this to adjust the x-scaling
-  \def\lll{2.7}   % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \node[color=blue] at (1*\sc,\lll) {$2$};
-  \node[color=blue] at (4*\sc,\lll) {$1$};
-  \foreach \i in {2,3,5,6} { \node at (\i*\sc,\lll){$1$}; }
-  \foreach \i in {7,8} { \node at (\i*\sc,\lll){$2$}; }
-  \foreach \i in {1,2,5,6} { \draw (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {3,4,7,8} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {4,7,8} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {8} { \draw (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,2,3,4,5,6,7} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {4,6,7} { \node at (\i*\sc,\l) {$4$}; }
-  \foreach \i in {8} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$2$}; }
-  \draw (2.5*\sc,3) -- (2.5*\sc,3.1) -- (4.5*\sc,3.1) -- (4.5*\sc,3);
-  \node at (3.5*\sc,3.5) {balanced};
-  \draw (5.5*\sc,3) -- (5.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
-  \node at (7.0*\sc,3.5) {balanced};
-\end{tikzpicture}
-% t = 1 for q_1
-% t = 1 for q_2
-\hspace{3pt} = \hspace{4pt}
-\begin{tikzpicture}[baseline=25]
-  \def\sc{0.75}   % Change this to adjust the x-scaling
-  \def\lll{2.7}   % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \node[color=blue] at (4*\sc,\lll) {$2$};
-  \node[color=blue] at (1*\sc,\lll) {$1$};
-  \foreach \i in {2,3,5,6} { \node at (\i*\sc,\lll){$1$}; }
-  \foreach \i in {7,8} { \node at (\i*\sc,\lll){$2$}; }
-  \foreach \i in {1,2,5,6} { \draw (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {3,4,7,8} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {4,7,8} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {8} { \draw (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,2,3,4,5,6,7} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {4,6,7} { \node at (\i*\sc,\l) {$4$}; }
-  \foreach \i in {8} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$2$}; }
-  \draw (2.5*\sc,3) -- (2.5*\sc,3.1) -- (4.5*\sc,3.1) -- (4.5*\sc,3);
-  \node at (3.5*\sc,3.5) {balanced};
-  \draw (5.5*\sc,3) -- (5.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
-  \node at (7.0*\sc,3.5) {balanced};
-\end{tikzpicture}
-\]
-\end{example}
-
-%.......................................
-
-\begin{lemma}[UB]
-\label{le:UB}
-  Let $C$ and $u$ be as above.
-  Suppose
-  \begin{itemize}
-    \item $i$ is unbalanced with $u_i = 1$,
-    \item $j$ is balanced with $T(j) = (2,\bigcirc)$,
-    \item $u_k = 2$ for all unbalanced $k \in \inter(i,j)$, and
-    \item $T(k) \in \{(1,\bigcirc),(2,\square)\}$ for all balanced $k \in \inter(i,j)$.
-  \end{itemize}
-  Then we have $C(u) = C(u_{i \leftrightarrow j})$.
-\end{lemma}
-
-\begin{proof}
-  We assume that $r_1 > r_2$, noting that the case $r_1 < r_2$ follows from Remark~\ref{rmk:balanced-dual-let} and Lemma~\ref{le:BU}.
-  Hence, we have $T(i) = (1, \bigcirc)$, which implies $q_1(u)_i = 1$. Moreover,  for all unbalanced $k \in \inter(i,j)$, we have $T(k) = (2, \bigcirc)$ and $k \notin q_2$.
-  
-  Recall from the proof of Lemma~\ref{le:orig} that we have $q_1(u)_k = u_k + \delta_{2u_k}$ for all balanced $k \in \inter(i,j)$.
-  Hence, we have $q_2\bigl( q_1(u) \bigr)_k = 4$ for all balanced $k \in \inter(i,j) \setminus q_2$.
-  Moreover, for any balanced interval $\mcI \subseteq \inter(i,j)$, we must have $q_2\bigl( q_1(u) \bigr)_k = 1$ for all $k \in \mcI \cap q_2$.
-  In particular, we can set every $q_1(u)_k$ and $q_2\bigl( q_1(u) \bigr)_k$ for $k \in \mcI$ by using $u_{k'}$ and $q_1(u)_{k'}$, respectively, with $k' \in \mcI$.
-  Therefore, we can assume there does not exist a balanced interval $\mcI \subseteq \inter(i,j)$.
-  
-  Suppose $j = i + 1$.
-  If $q(u)_j = 1$, then the $2$ from $u_j$ passes over both sites $i$ and $j$.
-  Hence, we have $q_1(u_{i \leftrightarrow j}) = q_1(u)$, which implies $C(u) = C(u_{i \leftrightarrow j})$.
-  Next, if $q(u)_j = 2$, then we can set $q(u)_j$ by using $u_j$.
-  Thus, we have $q_1(u_{i \leftrightarrow j}) = q_1(u)_{i \leftrightarrow j}$.
-  If $j \in q_2$, then $q_2\bigl( q_1(u) \bigr)_j = 1$ and can be set by $q_1(u)_i$.
-  This implies that $q_2\bigl( q_1(u_{i \leftrightarrow j}) \bigr)_j = 1$ and $C(u) = C(u_{i \leftrightarrow j})$.
-  Instead, assume $j \notin q_2$, and so $q_2\bigl( q_1(u) \bigr)_j = 4$ since $j$ is balanced.
-  Hence, $q_2\bigl( q_1(u) \bigr)_j = 4$ cannot be set by either $q_1(u)_i$ or $q_1(u)_j$, which implies $C(u) = C(u_{i \leftrightarrow j})$.
-  
-  Next, suppose $i+1$ is balanced, and so we have $T(k) = (1, \bigcirc)$ and $k \notin q_2$ as otherwise there would be a balanced interval contained in $\inter(i,j)$.
-  However, the proof that $C(u) = C(u_{i \leftrightarrow j})$ is similar to the case when $j = i+1$ as $q_1(u)_i$ and $q_1(u)_j$ cannot set $q_2\bigl( q_1(u) \bigr)_k = 4$ for all $k \in \inter(i,j)$.
-  
-  Finally, suppose that $i+1$ is unbalanced.
-  We proceed by induction on $\abs{\inter[i,j]}$.
-  Assume the claim holds for all intervals $\mcI$ such that $\abs{\mcI} < \abs{\inter[i,j]}$.
-  We have $q_1(u_{i \leftrightarrow (i+1)}) = q_1(u)_{i \leftrightarrow (i+1)}$ as above.
-  Therefore, we have
-  \[
-    C(u_{i \leftrightarrow j}) = C\biggl( \left(u_{i \leftrightarrow (i+1)}\right)_{(i+1) \leftrightarrow j} \biggr) = C(u_{i \leftrightarrow (i+1)}) = C(u)
-  \]
-  by our induction assumption.
-\end{proof}
-
-\begin{example}
-Suppose $n = 8$.
-Let $u = 12221222$, and we consider the $(6,2)$-configuration $C = (\{1,2,3,4,5,8\}, \{7,8\})$.
-We apply $C$ to $u$ on the left and to $u_{1 \leftrightarrow 8}$ on the right:
-\[
-\begin{tikzpicture}[baseline=25]
-  \def\sc{0.75}   % Change this to adjust the x-scaling
-  \def\lll{2.7}   % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \node[color=blue] at (1*\sc,\lll) {$1$};
-  \node[color=blue] at (8*\sc,\lll) {$2$};
-  \foreach \i in {5} { \node at (\i*\sc,\lll){$1$}; }
-  \foreach \i in {2,3,4,6,7} { \node at (\i*\sc,\lll){$2$}; }
-  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {6,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \node[color=blue] at (1*\sc,\ll) {$1$};
-  \node[color=blue] at (8*\sc,\ll) {$2$};
-  \foreach \i in {5} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {2,3,4} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {6,7} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {7,8} { \draw (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {5,6} { \node at (\i*\sc,\l) {$4$}; }
-  \foreach \i in {7,8} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {1,2,3,4} { \node at (\i*\sc,\l) {$3$}; }
-  \draw (4.5*\sc,3) -- (4.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
-  \node at (6.5*\sc,3.5) {balanced};
-\end{tikzpicture}
-% t = 2 for q_1 = {1,2,3,4,5,8}
-% t = 2 for q_2 = {7,8}
-\hspace{3pt} = \hspace{4pt}
-\begin{tikzpicture}[baseline=25]
-  \def\sc{0.75}   % Change this to adjust the x-scaling
-  \def\lll{2.7}   % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \node[color=blue] at (8*\sc,\lll) {$1$};
-  \node[color=blue] at (1*\sc,\lll) {$2$};
-  \foreach \i in {5} { \node at (\i*\sc,\lll){$1$}; }
-  \foreach \i in {2,3,4,6,7} { \node at (\i*\sc,\lll){$2$}; }
-  \foreach \i in {1,2,3,4,5,8} { \draw (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {6,7} { \draw (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \node[color=blue] at (8*\sc,\ll) {$1$};
-  \node[color=blue] at (1*\sc,\ll) {$2$};
-  \foreach \i in {5} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {2,3,4} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {6,7} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {7,8} { \draw (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,2,3,4,5,6} { \draw (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {5,6} { \node at (\i*\sc,\l) {$4$}; }
-  \foreach \i in {7,8} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {1,2,3,4} { \node at (\i*\sc,\l) {$3$}; }
-  \draw (4.5*\sc,3) -- (4.5*\sc,3.1) -- (8.5*\sc,3.1) -- (8.5*\sc,3);
-  \node at (6.5*\sc,3.5) {balanced};
-\end{tikzpicture}
-\]
-\end{example}
-
-
-%%%%%%%%%%
-\subsection*{Part II: finishing the proof}
-
-Note that if one of Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} applies to $C,u,i,j$ then it also applies to $C',u,i,j$.
-Now, let $u_0$ be a result of applying Lemmas~\ref{le:BB}, \ref{le:BU}, and \ref{le:UB} until this can be done no more.
-Such a $u_0$ exists since the number of balanced $k$ with $T(k) \in \{(1,\bigcirc), (2,\square)\}$ increases with each swap.
-
-We assume $r_1 > r_2$ as $r_1 < r_2$ follows by Lemma~\ref{le:dual}.
-Note that $u_0$ falls into one of the following three cases.
-Recall that $m_1(u)$ denotes the number of occurrences of $1$ in $u$ (and $u_0$).
-\begin{enumerate}
-\item There is some balanced $i$ such that $T(i) = (1, \square)$, but there is no balanced $j$ such that $T(j) = (2,\bigcirc)$.
-  This occurs when $m_1(u) > r_1$. \travis{This is only one direction of implication outright. Consider $C = \set{ \{1,3\},\{1\} }$ with $u = 112$. Granted, with Lemma~\ref{le:BU}, this would get a reduction, but this indicates more details are needed to say ``equivalently.''}
-\item There is some balanced $i$ such that $T(i) = (2, \bigcirc)$, but there is no balanced $j$ such that $T(j) = (1,\square)$.
-  This occurs when $r_2 \geq m_1(u)$.\travis{Actually, this implication is not obvious. I had to apply~\ref{le:UB} and do a little induction.}
-\item For all balanced $i$, we have $T(i) \in \{(1,\bigcirc),(2,\square)\}$.
-  This occurs when $r_1 \geq m_1(u) > r_2$.
-\end{enumerate}
-In each of these cases, it is easy to see that the labeling procedure inside each balanced interval is the same in $C$ and $C'$.
-Moreover, all letters in $u$ starting in unbalanced positions in $C$ or $C'$ simply are assigned to the same column two rows down.
-Therefore, we have $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, and hence, Theorem~\ref{thm:permutation} by induction on length.
-\qed
-
-\begin{example}
-\label{ex:proof_process}
-Suppose $n = 6$.
-Let us consider the $(5,3)$-configuration $C = (\set{1,3,4,5,6}, \set{1,2,5})$ and its dual configuration $C' = (\set{1,5,6}, \set{1,2,3,4,5})$.
-Note that $1$, $2$, $5$, and $6$ are balanced and $3$ and $4$ are unbalanced.
-We take the word $u = 211112$, which yields (we write $C$ on the left and $C'$ on the right):
-\[
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,3,4,5} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {1,6} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\hspace{40pt}
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,3,4,5} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {1,6} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {3,4} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\]
-We will do the reductions given in Part~C.
-We first apply Lemma UB with $i = 4$ and $j = 6$ and obtain:
-\[
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \node[blue] at (4*\sc,\lll) {$2$};
-  \node[blue] at (6*\sc,\lll) {$1$};
-  \foreach \i in {2,3,5} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\hspace{40pt}
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \node[blue] at (4*\sc,\lll) {$2$};
-  \node[blue] at (6*\sc,\lll) {$1$};
-  \foreach \i in {2,3,5} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {3,4} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\]
-then Lemma BU with $i=2$ and $j=4$:
-\[
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \node[blue] at (2*\sc,\lll) {$2$};
-  \node[blue] at (4*\sc,\lll) {$1$};
-  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\hspace{40pt}
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \node[blue] at (2*\sc,\lll) {$2$};
-  \node[blue] at (4*\sc,\lll) {$1$};
-  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\lll) {$2$}; }
-  \node[blue] at (2*\sc,\ll) {$3$};
-  \node[blue] at (3*\sc,\ll) {$2$};
-  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  %\foreach \i in {3} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\]
-and finally Lemma UB with $i=4$ and $j=1$ yields:
-\[
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,3,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {3,4,6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \node[blue] at (4*\sc,\lll) {$2$};
-  \node[blue] at (1*\sc,\lll) {$1$};
-  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {3,4,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {1} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\hspace{40pt}
-\begin{tikzpicture}[scale=0.9]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\lll{3}  % level 3
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (0.5*\sc,\l-.5) rectangle(2.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (4.5*\sc,\l-.5) rectangle(6.5*\sc,\ll+.5);
-  \foreach \i in {1,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,3,4} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {1,2,3,4,5} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {6} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-  \node[blue] at (4*\sc,\lll) {$2$};
-  \node[blue] at (1*\sc,\lll) {$1$};
-  \foreach \i in {3,5,6} { \node at (\i*\sc,\lll) {$1$}; }
-  \foreach \i in {2} { \node at (\i*\sc,\lll) {$2$}; }
-  \foreach \i in {1,5,6} { \node at (\i*\sc,\ll) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\ll) {$2$}; }
-  \foreach \i in {2,4} { \node at (\i*\sc,\ll) {$3$}; }
-  \foreach \i in {1,2,5} { \node at (\i*\sc,\l) {$1$}; }
-  \foreach \i in {3} { \node at (\i*\sc,\l) {$2$}; }
-  \foreach \i in {4} { \node at (\i*\sc,\l) {$3$}; }
-  \foreach \i in {6} { \node at (\i*\sc,\l) {$4$}; }
-\end{tikzpicture}
-\]
-at which point we cannot apply any of the reductions.
-Furthermore, we have
-\begin{align*}
-C(211112) & = C(211211) = C(221111) = C(121211)
-\\ & = C'(121211) = C'(221111) = C'(211211) = C'(211112).
-\end{align*}
-\end{example}
 
 
 
