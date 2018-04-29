@@ -678,7 +678,8 @@ In order to prove our next result, we need the following.
 If $w$ is a word of type $\mm$, and if $j \geq 0$, then $p_j(\mm)$ is the number of letters $\leq j$ in $w$.
 
 For a word $w$ and a nonnegative integer $k$, we let \defn{$\vee^{(k)} w$} be the word obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
-This is only well-defined if these $k$ smallest letters are determined uniquely, \textit{i.e.}, if $k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of $w$.
+This is only well-defined if these $k$ smallest letters are determined uniquely and the remaining $n-k$ letters are $> 1$.
+In other words, this is only well-defined if $k \in \set{ p_j(\mm) \mid j \geq 1 }$, where $\mm$ is the type of $w$.
 Note that $\vee^{(k)} w = \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
 % Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
 
@@ -689,7 +690,7 @@ Note that $\vee^{(k)} w = \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
 \begin{lemma}
 \label{lemma:queue_merge_commute}
 Let $u \in \mcW_n$ be a word of type $\mm$.
-Let $k \in \set{ p_j(\mm) \mid j \geq 0 }$.
+Let $k \in \set{ p_j(\mm) \mid j \geq 1 }$.
 If $q$ is a queue, then
 \[
 \vee^{(k)} q(u) = q(\vee^{(k)} u).
@@ -698,11 +699,11 @@ In particular, both $\vee^{(k)} q(u)$ and $\vee^{(k)} u$ are well-defined.
 \end{lemma}
 
 \begin{proof}
-The word $\vee^{(k)} u$ is well-defined since $k = p_j(\mm)$ for some $j$;
+The word $\vee^{(k)} u$ is well-defined since $k = p_j(\mm)$ for some $j \geq 1$;
 furthermore, $\vee^{(k)} q(u)$ is well-defined since the type $\nn$ of $q(u)$
 satisfies
 \[
-k \in \set{ p_j(\mm) \mid j \geq 0 } \subseteq \set{ p_j(\mm) \mid j \geq 0 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 0 }.
+k \in \set{ p_j(\mm) \mid j \geq 1 } \subseteq \set{ p_j(\mm) \mid j \geq 1 } \cup \set{\abs{q}} = \set{ p_j(\nn) \mid j \geq 1 }.
 \]
 Thus, it remains to prove $\vee^{(k)} q(u) = q(\vee^{(k)} u)$.
 The permutation $\tup{i_1, i_2, \dotsc, i_n}$ in the construction of $q(u)$
@@ -864,7 +865,7 @@ Since the type of $u$ is $\mm$, and since $k = p_i(\mm)$, we have
 by repeated use of Lemma~\ref{lemma:queue_merge_commute}
 (since any word obtained by actions of queues on $q'(1 \dotsm 1)$
 will have its type $\nn$ satisfy
-$k \in \set{ p_j(\nn) \mid j \geq 0 } $).
+$k \in \set{ p_j(\nn) \mid j \geq 1 } $).
 It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
 and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
@@ -1698,7 +1699,7 @@ The proof of this claim reduces to showing that for any configuration $C = \tup{
 
 Each word $w$ can be obtained from a standard word by a sequence of
 merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
-$k \in \set{ p_j(\mm) \mid j \geq 0 }$, where $\mm$ is the type of
+$k \in \set{ p_j(\mm) \mid j \geq 1 }$, where $\mm$ is the type of
 $u$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
 commute with the action of a queue (and thus of an MLQ).
 Hence, it is sufficient to consider standard words $w$.
