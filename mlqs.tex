@@ -1504,14 +1504,17 @@ as follows:
        all letters $i+1$ as closing parentheses `)',
        and consider all other letters to be frozen.
        Now, match as many parentheses as possible
-       according to the standard parenthesis-matching algorithm.
-       Notice that the result is always a word whose non-frozen
+       according to the standard parenthesis-matching algorithm,
+       but treating the word as a word in the usual sense
+       (i.e., not written on a circle, but having a beginning
+       and an end).
+       The result is independent of the choices in the algorithm,
+       and is always a word whose non-frozen
        part (\textit{i.e.}, the word obtained by removing
        all frozen letters) is
        $\underbrace{))\cdots)}_{a\text{ parentheses}}
        \underbrace{((\cdots(}_{b\text{ parentheses}}$
        for some integers $a, b \geq 0$.
-       We call this the \defn{reduced signature} of $p$.
  \item Now, replace this non-frozen part by
        $\underbrace{))\cdots)}_{b\text{ parentheses}}
        \underbrace{((\cdots(}_{a\text{ parentheses}}$
@@ -1554,15 +1557,17 @@ Hence, the claim holds when $\abs{q_1} = \abs{q_2}$.
 Thus, we assume that $\abs{q_1} \neq \abs{q_2}$.
 Therefore, there exists at least one unbalanced site for the configuration $\qq = (q_1, q_2)$.
 
-The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because $\zeta$ merely shifts the balanced intervals.
+The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because the standard parenthesis-matching algorithm used in the definition of dual configurations is clearly invariant under cyclic shift.
 The operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ by~\cite[Prop.~5.6.1]{Loth}.
 Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $\qq$ any number of times without loss of generality.
 Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
-Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
-
-
-Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
-Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$).
+Thus, in the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$, the site $1$ induces a parenthesis that stays unmatched throughout the algorithm.
+Hence, no two parentheses that get matched to each other during this algorithm have this parenthesis lying between them.
+Therefore, it does not matter whether we regard the sequence of parentheses as written on a cycle or on a straight line (as the wrapping-around is not used in the matching process).
+% Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
+Hence, the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$ proceeds exactly the same way as the standard parenthesis-matching algorithm used when applying $\sigma_1$ to $\word(\qq)$ (ignoring the letters that are neither $i$ nor $i+1$). That is, the parentheses that get matched in the former are the same as those that get matched in the latter.
+% Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of these numbers is $0$).
 Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
 This proves~\eqref{pf.prop:braid.inter}.
 
@@ -1630,9 +1635,9 @@ The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [
 \end{prop}
 
 \begin{proof}
-Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $\ive{n}$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $(1, 2, \dotsc, n)$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
 Use this permutation to construct $q(u)$ as per the definition.
-For each $p \in \ive{n}$, let $j_p$ denote the site that is set by $i_p$ when constructing $q(u)$.
+For each $p \in \ive{n}$, let $j_p$ denote the site that is set while processing $i = i_p$ when constructing $q(u)$.
 
 Suppose $k < \abs{q}$.
 It is sufficient to show that for every $p \in \ive{n}$, there exists a balanced interval $\mcI$ such that both $i_p, j_p \in \mcI$.
@@ -1647,6 +1652,8 @@ where there can be any number of (frozen) parentheses in between.
 Moreover, if we then freeze the $(_a\ )_a$ match, then we obtain the same matching as before rematching.
 Thus, we apply the rematching~\eqref{eq:rematching} to move $)_{i_p}$ to the unmatched bracket from position $j_p$.
 This proves Proposition~\ref{prop:SL.dual} in the case when $k < \abs{q}$.
+
+\Darij{I don't understand the above.}
 
 Now suppose $k > \abs{q}$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
