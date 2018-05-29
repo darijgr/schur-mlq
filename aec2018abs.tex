@@ -1,0 +1,494 @@
+\documentclass[reqno]{amsart}
+\usepackage{setspace,tikz,xcolor,mathrsfs,listings,multicol}
+\usepackage{amssymb}
+\usepackage{rotating}
+\usepackage[vcentermath]{youngtab}
+\usepackage{enumerate}
+\usepackage[all,cmtip]{xy}
+\usetikzlibrary{arrows,matrix}
+\usepackage{comment}
+\usepackage{color}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
+%\usepackage{subcaption}
+%\usepackage{fullpage}
+%\usepackage[margin=1.25in]{geometry}
+%\onehalfspacing
+
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+% use these commands for typesetting doi and arXiv references in the bibliography
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{doi:#1}}}
+\newcommand{\arxiv}[1]{\href{http://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+
+\newcommand{\iso}{\cong}
+%\newcommand{\qedbox}{\rule{2mm}{2mm}}
+%\renewcommand{\qedsymbol}{\qedbox}
+\newcommand{\qbinom}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
+\newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
+\newcommand{\fs}{\mathcal{S}} % flagged Schur function
+\newcommand{\mbf}{\mathbf}
+\newcommand{\0}{\phantom{c}}
+\newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
+\newcommand{\merge}[1]{\vee_{#1}} % merge
+\newcommand{\SymGp}[1]{\mathfrak{S}_{#1}} % symmetric group
+\newcommand{\std}[1]{\widetilde{#1}} % standardization
+
+\DeclareMathOperator{\supp}{supp} % Support
+\DeclareMathOperator{\inter}{int} % queuing interval
+\DeclareMathOperator{\wt}{wt} % weight
+\DeclareMathOperator{\pr}{pr} % promotion
+\DeclareMathOperator{\id}{id} % identity
+\DeclareMathOperator{\ch}{ch} % character
+\DeclareMathOperator{\gr}{gr} % grading
+
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\mm}{\mathbf{m}}
+\newcommand{\nn}{\mathbf{n}}
+\newcommand{\qq}{\mathbf{q}}
+\newcommand{\MLQ}{\mathbf{S}}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcF}{\mathcal{F}}
+\newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcW}{\mathcal{W}}
+\newcommand{\mcI}{\mathcal{I}}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\bze}{\overline{0}}
+\newcommand{\bon}{\overline{1}}
+\newcommand{\btw}{\overline{2}}
+\newcommand{\bth}{\overline{3}}
+\newcommand{\bfo}{\overline{4}}
+\newcommand{\bfive}{\overline{5}}
+\newcommand{\bsix}{\overline{6}}
+\newcommand{\bseven}{\overline{7}}
+\newcommand{\beight}{\overline{8}}
+\newcommand{\bi}{\overline\imath}
+\newcommand{\bk}{\overline{k}}
+\newcommand{\brr}{\overline{r}}
+\newcommand{\bn}{\overline{n}}
+\newcommand{\ellbar}{\overline{\ell}}
+
+\newcommand{\fraks}{\mathfrak{s}}
+
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\col}{\operatorname{col}}
+\newcommand{\colw}{\operatorname{colw}}
+\newcommand{\word}{\operatorname{word}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\newcommand{\mlnode}[1]{\node[circle, draw=black] at (#1){\phantom{c}};}
+
+% Dark red emphasis
+\definecolor{darkred}{rgb}{0.7,0,0} % darkred color
+\newcommand{\defn}[1]{{\color{darkred}\emph{#1}}} % emphasis of a definition
+
+%% For typesetting code listings                                                
+\usepackage{listings}
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={False,sage,True},sensitive=true}
+\lstset{
+  frame=single,
+  showtabs=False,
+  showspaces=False,
+  showstringspaces=False,
+  commentstyle={\ttfamily\color{dgreencolor}},
+  keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+  stringstyle={\ttfamily\color{dgraycolor}\bfseries},
+  language=Sage,
+  basicstyle={\footnotesize\ttfamily},
+  aboveskip=0.75em,
+  belowskip=0.75em,
+  xleftmargin=.15in,
+}
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
+\definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblue}{\color{dbluecolor}\bf}
+\newcommand{\dred}{\color{dredcolor}\bf}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
+
+\usepackage{xparse}
+
+\makeatletter
+% \specialmergetwolists{<coupler>}{<list1>}{<list2>}{<return macro>}
+% \specialmergetwolists*{<coupler>}{<listcmd1>}{<listcmd2>}{<return macro>}
+\protected\def\specialmergetwolists{%
+  \begingroup
+  \@ifstar{\def\cnta{1}\@specialmergetwolists}
+    {\def\cnta{0}\@specialmergetwolists}%
+}
+\def\@specialmergetwolists#1#2#3#4{%
+  \def\tempa##1##2{%
+    \edef##2{%
+      \ifnum\cnta=\@ne\else\expandafter\@firstoftwo\fi
+      \unexpanded\expandafter{##1}%
+    }%
+  }%
+  \tempa{#2}\tempb\tempa{#3}\tempa
+  \def\cnta{0}\def#4{}%
+  \foreach \x in \tempb{%
+    \xdef\cnta{\the\numexpr\cnta+1}%
+    \gdef\cntb{0}%
+    \foreach \y in \tempa{%
+      \xdef\cntb{\the\numexpr\cntb+1}%
+      \ifnum\cntb=\cnta\relax
+        \xdef#4{#4\ifx#4\empty\else,\fi\x#1\y}%
+        \breakforeach
+      \fi
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\newtheorem{remark}[thm]{Remark}
+\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+%\setcounter{section}{-1}
+
+% For breaking equations across multiple pages
+% \allowdisplaybreaks[1]
+
+\usepackage[colorinlistoftodos]{todonotes}
+\newcommand{\erik}[1]{\todo[size=\tiny,color=green!30]{#1 \\ \hfill --- Erik}}
+\newcommand{\Erik}[1]{\todo[size=\tiny,inline,color=green!30]{#1
+      \\ \hfill --- Erik}}
+\newcommand{\darij}[1]{\todo[size=\tiny,color=red!30]{#1 \\ \hfill --- Darij}}
+\newcommand{\Darij}[1]{\todo[size=\tiny,inline,color=red!30]{#1
+      \\ \hfill --- Darij}}
+\newcommand{\travis}[1]{\todo[size=\tiny,color=blue!30]{#1 \\ \hfill --- Travis}}
+\newcommand{\Travis}[1]{\todo[size=\tiny,inline,color=blue!30]{#1
+      \\ \hfill --- Travis}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title[MLQs]{Multiline queues with spectral parameters \\ %
+(abstract for AEC 2018)}
+
+\author{\href{http://www.cip.ifi.lmu.de/~grinberg/}{Darij Grinberg}\\
+joint work with Erik Aas and \href{https://sites.google.com/view/tscrim/home}{Travis Scrimshaw}}
+
+\date{\today}
+
+% \keywords{multiline queue, TASEP, R-matrix, symmetric function}
+% \subjclass[2010]{
+% 60C05,  % Combinatorial probability
+% 05A19,  % Combinatorial identities, bijective combinatorics
+% 16T25,  % Yang--Baxter equations
+% 05E05}  % Symmetric functions
+
+% \thanks{TS was partially supported by the Australian Research Council DP170102648 and the National Science Foundation RTG grant DMS-1148634.}
+
+% \begin{abstract}
+% Using the description of multiline queues as functions on words, we introduce the notion of a spectral weight of a word by defining a new weighting on multiline queues.
+% We show that the spectral weight of a word is invariant under a natural action of the symmetric group, giving a proof of the commutativity conjecture of Arita, Ayyer, Mallick, and Prolhac.
+% We give a determinant formula for the spectral weight of a word, which gives a proof of a conjecture of the first author and Linusson.
+% \end{abstract}
+
+\maketitle
+
+% %=====================================================================
+% \section{Introduction}
+% \label{sec:introduction}
+
+% One of the fundamental models of particles moving in a 1-dimensional lattice is the asymmetric simple exclusion process (ASEP), and it has received broad attention in many different variations.
+% The earliest known publication of the ASEP was done to model the dynamics of ribosomes along RNA~\cite{MGP68}.
+% For statistical mechanics, it is a model for gas particles in a lattice with an induced current, where the exclusion mimics the short-range interactions among the particles.
+% Despite admitting very simple descriptions of the particle dynamics, the ASEP has very rich macroscopic behaviors, such as
+% \begin{itemize}
+% \item boundary-induced phase transitions~\cite{Krug91},
+% \item spontaneous symmetry breaking with possibly multiple broken symmetry phases~\cite{AHR98,AHR99,CEM01,EFGM95,EPSZ05,GLEMSS95,PK07},
+% \item describing the formations of shocks~\cite{DJLS93,Ferrari92,FF94,FF94II,Liggett76}, and
+% \item phase separation and condensation~\cite{EKKM98,JNHWW09,KLMST02,RSS00}.
+% \end{itemize}
+% We also refer the reader to~\cite{PEM09,Schutz01,SZ95,TJHJ16} and references therein.
+
+% The term exclusion process was coined by Spitzer~\cite{Spitzer70}, where he was focused on an application with Brownian motion with hard-core interactions.
+% Moreover, it was~\cite{Spitzer70} that initiated the investigation of exclusion processes using probability theory.
+% However, the applications of the ASEP (and its variations) has since spread to other areas, such as
+% \begin{itemize}
+% \item transportation processes in capillary vessels~\cite{Levitt73} or proteins within the cells along actin filaments~\cite{KNL05},
+% \item anistropic conductors known as solid electrolytes~\cite{CL99},
+% \item discrete models of traffic flow~\cite{Schad01},
+% \item partition growth processes~\cite{Lam15},
+% \item random matrix theory~\cite{Johansson00,TW09}, and
+% \item moments of Askey--Wilson polynomials~\cite{CW11}.
+% \end{itemize}
+
+% If we prohibit the particles from moving backwards, we obtain the totally asymmetric exclusion process (TASEP), a non-equilibrium stochastic process that has its own vast literature.
+% For example, we refer the reader to~\cite{AasLin17,AAMP,BE07,BP14,DEHP93,KMO15,KMO16,Liggett99} and references therein.
+% In this paper, we consider the TASEP on a ring with $n$ sites and $\ell$ species of particles.
+% Thus, we will consider the states to be words $u$ in the alphabet $\{1, \dotsc, \ell\}$ of length $n$, where we take the indices to be $\ZZ / n \ZZ$.
+% We will also consider our process to be discrete in time, where our transition map interchanges a pair $u_i u_{i+1}$ with $u_i > u_{i+1}$ to $u_{i+1} u_i$ and is done at a uniform rate.
+
+% The steady state of the TASEP on a ring is known in terms of another process using ordinary multiline queues (MLQs) and applying the Ferrari--Martin (FM) algorithm~\cite{FM06,FM07}.
+% This is a generalization of 2-line queues used by Angel~\cite{Angel06} and the work of Ferrari, Fontes, and Kohayakawa~\cite{FFK94}.
+% In~\cite{KMO15,KMO16}, the FM algorithm was reformulated in terms of the combinatorial $R$-matrix~\cite{NY97,Shimozono02} and using type $A_{n-1}^{(1)}$ Kirillov--Reshetikhin crystals~\cite{KKMMNN92}.
+% This interpretation gives a connection with five-vertex models, corner transfer matrices~\cite{Baxter89}, 3D integrable lattice models, and the tetrahedron equation~\cite{Zam80}, yielding a matrix product formula for the steady state distribution different than~\cite{CdGW15,EFM09,PEM09}.
+
+% In this paper, we introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
+% We also interpret MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
+% This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
+% Furthermore, we introduce the notion of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
+% Our main result (Theorem~\ref{thm:permutation}) is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
+% To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
+% We show that does not change the MLQ as a function on words.
+% This action has previously appeared in a number of different guises, such as in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}), van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}, and Lothaire~\cite[Ch.~5, (5.6.3)]{Loth}.
+% In the context of Kirillov--Reshetikhin crystals, it can be described as applying a combinatorial $R$-matrix to an MLQ, where the weight remaining invariant is a condition of being a crystal isomorphism.
+
+% As a consequence of this action and specializing our weight parameters to $1$, we obtain a proof of the commutativity conjecture of~\cite{AAMP}.
+% However, we note that the interlacing property of~\cite{AAMP} does not generalize to our weighting of MLQs.
+% Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
+% By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}, which in turn proves a number of other conjectures in~\cite{AasLin17}.
+
+% We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP) on a ring, where multiple particles can occupy the same site.
+% This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation~\cite{KMO16TARZP,KMO16TARZPII}.
+% Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
+% Yet it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} or TARZP~\cite{KMO16II}.
+
+% This paper is organized as follows.
+% In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
+% In Section~\ref{sec:result}, we give our main results.
+% In Section~\ref{sec:JT_formula}, we show a Jacobi-Trudi like formula for special words $u$, which we use to prove some of the conjectures in~\cite{AasLin17}.
+% In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
+% In Section~\ref{sec:thm_proof}, we give a proof of our main theorem (Theorem~\ref{thm:permutation}).
+% In Section~\ref{sec:remarks}, we give some additional remarks about our results.
+
+
+% \subsection{Acknowledgements}
+
+% We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII}.
+% We thank Olya Mandelshtam for useful discussions on the inhomogeneous TASEP.
+% We thank Jae-Hoon Kwon for pointing out that the $\SymGp{n}$-action on MLQs comes from an $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
+% This work benefited from computations using \textsc{SageMath}~\cite{sage,combinat}.
+
+
+
+
+
+
+
+This talk is about the preprint
+\href{http://www.cip.ifi.lmu.de/~grinberg/algebra/mlqs.pdf}{\textit{Multiline queues with spectral parameters}}
+by Erik Aas, Travis Scrimshaw and myself.
+
+% %=====================================================================
+% \section{Background and definitions}
+% \label{sec:background}
+
+Fix a positive integer $n$.
+For a nonnegative integer $k$, let $\ive{k}$ denote the set $\set{1, 2, \ldots, k}$.
+% Let $\SymGp{k}$ denote the symmetric group on $\ive{k}$, and let $s_i \in \SymGp{k}$ be the transposition swapping $i$ with $i+1$.
+% Let $w_0 \in \SymGp{k}$ be the longest element: the permutation $k (k-1) \dotsm 321$ (written in one line notation) that reverses the order of all elements.
+
+We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}.
+We visualize them as points on a line that ``wraps around'' cyclically; thus, for example, the sites weakly to the right of a site $i$ are $i, i+1, \ldots, n-1, n, 1, 2, 3, \ldots$ (in this order).
+
+% %%%%%%%%%%
+% \subsection{Words and queues}
+
+Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ in the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
+If $u$ is a word and $k$ is a site, then $u_k$ shall mean $u_g$, where $g$ is the element of $\ive{n}$ having remainder class $k$ in $\ZZ / n \ZZ$.
+% Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be commuting indeterminates.
+
+% The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
+% We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
+% Let $\ell = \max\{i \mid m_i \neq 0 \}$, which we say is the number of \defn{classes} in $u$ or $\mm$.
+% A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if $m_i \neq 0$ for all $1 \leq i \leq \ell$.
+% A word $w$ of type $\mm$ is \defn{standard} if $m_i \leq 1$ for all $i$.
+
+% We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new word by replacing all occurrences of $j$ by $j-1$ in $u$ for each $j = i+1, i+2, \ldots$ in that order.
+% We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
+% Note that $\merge{i} u$ is packed whenever $u$ is packed.
+% For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
+% Similarly, the merging of $i,i+1$ in a type $\mm = (m_1, m_2, \ldots)$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
+% These operations interact as one would hope:
+% If the type of a word $u$ is $\mm$, then the type of $\merge{i} u$ is $\merge{i}(\mm)$.
+
+% Fix a word $u \in \mcW_n$, and let $\mm = (m_1, m_2, \ldots)$ be the type of $u$.
+% For each $i \geq 0$, set
+% \begin{equation}
+% \label{eq:type_partial_sums}
+% p_i(\mm) := m_1 + m_2 + \cdots + m_i.
+% \end{equation}
+% When $\mm$ is clear, we simply write $p_i$ for this.
+% (Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
+
+A \defn{queue} shall mean a subset of $\ive{n}$.
+% The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
+
+If $q$ is a queue and $u \in \mcW_n$ is a word, then a new word $v = q(u) \in \mcW_n$ is defined as follows:
+In the beginning, no letter of $v \in \mcW_n$ is set.
+Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
+such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+
+\begin{description}
+\item[Phase I]
+  For $i = i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$, do the following.
+    Find the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
+    Then set $v_j = u_i + 1$.
+
+\item[Phase II]
+  For $i = i_1, i_2, \ldots, i_{\abs{q}}$, do the following.
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
+    Then set $v_j = u_i$.
+\end{description}
+
+It is not hard to check that the resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1, i_2, \dotsc, i_n)$,
+and that the two phases of the algorithm can be arbitrarily interleaved instead of doing the second after the first.
+
+% \begin{remark}
+% \label{rmk:t-splitting}
+% Let $u$ and $q$ be as before. Let $r = \abs{q}$.
+% There exists a $t \in \ive{\ell}$ such that
+% $
+% p_{t-1} \leq r \leq p_t.
+% $
+% The word $v = q(u)$ then has type
+% \begin{equation}
+% \label{eq:queue_type_change}
+% (m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
+% \end{equation}
+% Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
+% We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. % and so we call $t$ the \defn{splitting class} of $q(u)$.
+
+% For all $i$ processed in Phase~I (resp.\ Phase~II) of the algorithm, we have $u_i \geq t$ (resp.~$u_i \leq t$).
+% The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \ive{n}$ satisfying $v_j \leq t$.
+% \end{remark}
+
+\begin{example}
+\label{ex:first_queue}
+We consider the $4$-queue $q = \{1, 4, 8, 9\}$, and let $u = 346613321$.
+% Thus, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$.
+% Thus, the $t$ in Remark~\ref{rmk:t-splitting} equals $3$.
+To compute $q(u)$, draw the following diagram
+(whose upper row shows $u$, whose lower row shows $q(u)$,
+and whose middle row represents the set $q$ by balls in the positions of its elements):
+\[
+\begin{tikzpicture}[>=latex,rounded corners,yscale=1.5,xscale=1.2,baseline=0]
+\def\passwidth{3pt};
+\node (i1) at (1,1) {$3$};
+\node (i2) at (2,1) {$4$};
+\node (i3) at (3,1) {$6$};
+\node (i4) at (4,1) {$6$};
+\node (i5) at (5,1) {$1$};
+\node (i6) at (6,1) {$3$};
+\node (i7) at (7,1) {$3$};
+\node (i8) at (8,1) {$2$};
+\node (i9) at (9,1) {$1$};
+\node (t1) at (1,-1) {$2$};
+\node (t2) at (2,-1) {$7$};
+\node (t3) at (3,-1) {$7$};
+\node (t4) at (4,-1) {$3$};
+\node (t5) at (5,-1) {$4$};
+\node (t6) at (6,-1) {$4$};
+\node (t7) at (7,-1) {$5$};
+\node (t8) at (8,-1) {$1$};
+\node (t9) at (9,-1) {$1$};
+\node[circle,draw=black] (q1) at (1,0) {};
+\node[circle,draw=black] (q2) at (4,0) {};
+\node[circle,draw=black] (q3) at (8,0) {};
+\node[circle,draw=black] (q4) at (9,0) {};
+\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
+\draw[->,red] (i3) -- (t3);
+\draw[->,red] (i2) -- (2,0.15) .. controls (1.8,-0.2) and (1.6,-0.25) .. (1.3,-0.25) -- (0,-0.25);
+\draw[>->,red] (10,-0.25) -- (8,-0.25) -- (7,-0.25) -- (t7);
+\draw[->,red] (i6) -- (t6);
+\draw[->,red] (i7) -- (7,0) -- (5,0) -- (t5);
+\draw[white,line width=\passwidth] (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);  % To simulate underpass
+\draw[->,blue] (i5) -- (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);
+\draw[white,line width=\passwidth] (q3) -- (t8);  % To simulate underpass
+\draw[->,blue] (q3) -- (t8);
+\draw[->,blue] (i9) -- (q4);
+\draw[white,line width=\passwidth] (q4) -- (t9);  % To simulate underpass
+\draw[->,blue] (q4) -- (t9);
+\draw[white,line width=\passwidth] (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);  % To simulate underpass
+\draw[->,blue] (i1) -- (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);
+\draw[->,blue] (q2) -- (t4);
+\draw[white,line width=\passwidth] (i8) -- (8,0.28) -- (10,0.28);  % To simulate underpass
+\draw[->,blue] (i8) -- (8,0.28) -- (10,0.28);
+\draw[>->,blue] (0,0.28) -- (0.3,0.28) .. controls (0.7,0.28) and (0.85,0.12) .. (q1);
+\draw[white,line width=\passwidth] (q1) -- (t1);  % To simulate underpass
+\draw[->,blue] (q1) -- (t1);
+\end{tikzpicture}
+\]
+where the paths in red correspond to Phase I and those in blue are from Phase II. Hence, $q(346613321) = 277344511$.
+\end{example}
+
+In this talk I will present properties of this action of queues on words, and discuss a generating function obtained from it.
+
+Consider any positive integer $\ell$, any word $u \in \mcW_n$ and any permutation $\sigma$ of $\ive{\ell-1}$. Let $1 \cdots 1 \in \mcW_n$ be the word whose all letters equal $1$. The generating function we are interested in is the polynomial \defn{$\swt{u}_\sigma$} in $n$ variables $x_1, x_2, \ldots, x_n$ defined by
+\[
+\swt{u}_\sigma = \sum_{\tup{q_1, q_2, \ldots, q_{\ell-1}}} \prod_{i=1}^{\ell-1} \prod_{k \in q_i} x_k ,
+\]
+where the sum is over all $\tup{\ell-1}$-tuples $\tup{q_1, q_2, \ldots, q_{\ell-1}}$ of queues satisfying $u =  q_{\ell-1}\bigl( \cdots q_2\bigl( q_1(1 \cdots 1) \bigr) \cdots \bigr)$ and $\abs{q_i} = \tup{\# \text{ of letters } \leq \sigma\tup{i} \text{ in }u }$ for each $i\in\ive{\ell-1}$.
+
+Our main result is that this polynomial $\swt{u}_\sigma$ does not depend on $\sigma$, whence it can be denoted by \defn{$\swt{u}$}. The proof of this relies on an action of the symmetric group on tuples of queues, which is closely related to the Lascoux-Sch\"utzenberger action of the symmetric group on words (a.k.a., the Weyl group action on the type-A crystal of words). This can be used to verify a recent conjecture by Arita, Ayyer, Mallick and Prolhac on the totally asymmetric exclusion process (TASEP).
+
+We further give a Jacobi-Trudi-like formula for $\swt{u}$ for a certain class of words $u$; this yields some recent conjectures by Aas and Linusson.
+
+% \bibliographystyle{alpha}
+% \bibliography{queue}{}
+\end{document}
