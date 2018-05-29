@@ -359,10 +359,10 @@ We visualize them as points on a line that ``wraps around'' cyclically; thus, fo
 
 Let $\mcW_n$ be the set of words $u = u_1 \dotsm u_n$ in the ordered alphabet $\mcA := \{1 < 2 < 3 < \cdots \}$.
 We consider the indices of letters in a word to be taken modulo $n$ (that is, $u_{k+n} = u_k$ for all $k$).
-Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be commuting indeterminates.
+Thus, if $u$ is a word and $i \in \ZZ / n \ZZ$ is a site, then the $i$-th letter $u_i$ of $u$ is well-defined.
+We sometimes refer to a letter $u_i = t$ as a \defn{particle at site $i$ of class $t$}.
 
 The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m_i$ is the number of occurrences of $i$ in $u$.
-We sometimes refer to $u_i = t$ as a \defn{particle at $i$ of class $t$}.
 Let $\ell = \max\{i \mid m_i \neq 0 \}$, which we say is the number of \defn{classes} in $u$ or $\mm$.
 A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if $m_i \neq 0$ for all $1 \leq i \leq \ell$.
 A word $w$ of type $\mm$ is \defn{standard} if $m_i \leq 1$ for all $i$.
@@ -385,7 +385,6 @@ When $\mm$ is clear, we simply write $p_i$ for this.
 (Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
 
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
-The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 We equate $q$ with a function from $\mcW_n$ to itself defined as follows.
 For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
 In the beginning, no letter of $v \in \mcW_n$ is set.
@@ -593,7 +592,6 @@ We now give our main definition of a multiline queue and spectral weight.
 \begin{dfn}
 For $\sigma \in \SymGp{\ell-1}$, a \defn{$\sigma$-twisted multiline queue (MLQ) of type $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$}, with $\ell$ classes, is a sequence of queues $\qq = (q_1, \dotsc, q_{\ell-1})$ such that $q_i$ is a $p_{\sigma(i)}(\mm)$-queue and $m_{\ell} = n - p_{\ell-1}(\mm)$ (that is, $p_\ell(\mm) = n$).
 When $\sigma$ is the identity permutation, we simply call $\qq$ an \defn{(ordinary) MLQ of type $\mm$}.
-Define the \defn{weight} by $\wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i)$.
 We also consider $\qq$ as a function on words by
 \[
 \qq(u) := q_{\ell-1}\bigl( \cdots q_2\bigl( q_1(u) \bigr) \cdots \bigr).
@@ -604,6 +602,16 @@ We also consider $\qq$ as a function on words by
 Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we recover the labelling of level $k$ by $q_k( \cdots q_1(1 \dotsm 1) \cdots )$.
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
+
+We shall now introduce generating functions for queues.
+
+\begin{dfn}
+Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be commuting indeterminates.
+
+The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
+
+The \defn{weight} of a $\sigma$-twisted MLQ $\qq = (q_1, \dotsc, q_{\ell-1})$ is $\wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i)$.
+\end{dfn}
 
 \begin{dfn}
 For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{$\sigma$-spectral weight} or \defn{$\sigma$-amplitude} as
