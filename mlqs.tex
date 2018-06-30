@@ -384,9 +384,12 @@ p_i(\mm) := m_1 + m_2 + \cdots + m_i.
 When $\mm$ is clear, we simply write $p_i$ for this.
 (Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
 
-We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
-We equate $q$ with a function from $\mcW_n$ to itself defined as follows.
-For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
+We define a \defn{queue} to be any set of sites.
+A queue of size $r$ will be called an \defn{$r$-queue}.
+
+We shall now define an action of queues on words.
+Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
+then a new word $v = q(u) \in \mcW_n$ is defined as follows:
 In the beginning, no letter of $v \in \mcW_n$ is set.
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
@@ -505,8 +508,8 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \node[circle,draw=black] (q2) at (4,0) {};
 \node[circle,draw=black] (q3) at (8,0) {};
 \node[circle,draw=black] (q4) at (9,0) {};
-\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
 \draw[->,red] (i3) -- (t3);
+\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
 \draw[->,red] (i2) -- (2,0.15) .. controls (1.8,-0.2) and (1.6,-0.25) .. (1.3,-0.25) -- (0,-0.25);
 \draw[>->,red] (10,-0.25) -- (8,-0.25) -- (7,-0.25) -- (t7);
 \draw[->,red] (i6) -- (t6);
@@ -528,7 +531,10 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \draw[->,blue] (q1) -- (t1);
 \end{tikzpicture}
 \]
-where the paths in red correspond to Phase I and those in blue are from Phase II. Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
+where the paths in red correspond to Phase I and those in blue are from Phase II
+(and where we have picked the permutation $\tup{i_1, i_2, \ldots, i_n}
+= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$).
+Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array, where the first row is the word $u$
@@ -626,7 +632,8 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 
 \begin{remark}
 \label{rmk:mlq-type}
-Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-twisted) MLQ $\qq$.
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$. Let $\qq$ be a $\sigma$-twisted MLQ.
+Then, the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
 \end{remark}
 
 \begin{proof}
@@ -642,6 +649,16 @@ In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 \Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
 \Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues.}
 
+\begin{remark}
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$. Let $u$ be a packed word with $\ell$ classes and type $\mm$.
+Then, there exists at least once MLQ $\qq$ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
+In other words, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
+\end{remark}
+
+\begin{proof}
+For each $k \in \ive{\ell-1}$, let $q_k$ be the set of all sites $i$ such that $u_i \leq k$.
+It is then easy to check that $\qq := \tup{q_1, q_2, \ldots, q_{\ell-1}}$ is an MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
+\end{proof}
 
 
 %%%%%%%%%%
