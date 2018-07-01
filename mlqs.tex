@@ -626,21 +626,30 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 
 \begin{remark}
 \label{rmk:mlq-type}
-Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-twisted) MLQ $\qq$.
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
+Let $\qq$ be a $\sigma$-twisted MLQ.
+Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$ from Remark~\ref{rmk:t-splitting}.
 \end{remark}
 
-\begin{proof}
-Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
-Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
-Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
-Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
-(since $n = m_1 + m_2 + \cdots + m_\ell$).
-Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
-Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
-In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
-\end{proof}
-\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
-\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues.}
+%\begin{proof}
+%Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
+%Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
+%Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
+%Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
+%(since $n = m_1 + m_2 + \cdots + m_\ell$).
+%Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
+%Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
+%In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
+%\end{proof}
+%\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
+%\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues. I really think this is completely obvious from how queues act on types. If you really need to ``prove'' a remark, which you do not here, it should not be a remark.}
+
+\begin{remark}
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
+Let $u$ be a packed word with $\ell$ classes and type $\mm$.
+Then, there exists at least once MLQ $\qq$ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
+In other words, $\swt{u}_{\sigma} \neq 0$ (as a polynomial over $\ZZ$).
+\end{remark}
 
 
 
@@ -1317,10 +1326,10 @@ every time you find an opening parenthesis to the left of a closing one, with on
 Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (i.e., to the right of the former and to the left of the latter) are frozen.
 
 At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parentheses left unmatched; these unmatched parentheses will be opening if $r_1 > r_2$ and closing if $r_1 < r_2$. The unmatched parentheses will not depend on the order in which we perform the matching.
-This can be easily seen by considering the parentheses as an infinite shifted-$n$-periodic Motzkin path, where a ``nothing'' corresponds to a flat step.
+This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path, where a ``nothing'' corresponds to a flat step.
 If $r_1 > r_2$, then the unmatched positions correspond to up steps in the Motzkin path such that the path never returns to the same height.
 When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-\Darij{The Motzkin stuff isn't really a justification to me, much that I like the picture. I prefer to use Newman's diamond lemma to see that the final result does not depend on the order of matching. Also, the Motzkin path is not $n$-periodic in general, because a site $j \in q_1 \cap q_2$ contributes two letters.}
+\Travis{I am okay with getting rid of the relation to Motzkin paths, but then we should say absolutely nothing. I really think this is clear to the reader after half a second of thought.}
 
 Note that each site $j$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `()`, which can be immediately matched (to each other) at the beginning of the algorithm.
 Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
@@ -1435,9 +1444,6 @@ Recall the notations introduced just before Lemma~\ref{le:dual}.
 \label{rmk:balanced-dual-let}
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
 Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^{\operatorname{refl}} = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
-\Darij{We aren't studying balanced intervals anymore.
-Instead, argue symmetry for the parenthesis-matching algorithm on the reduced parenthesis sequence.
-Note that we need ``reduced''.}
 In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but reflected through the middle of $\ive{n}$.
 Thus, the dual configuration of $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
 \begin{equation}
@@ -1503,8 +1509,8 @@ Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$ since $n$ is fixed.
 In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
 is injective.
 
-Now, for each $i \in \set{1, 2, \ldots, k-1}$, we recall the operator
-$\sigma_i \colon A^* \to A^*$ from~\cite[\S5.5]{Loth}.
+Following~\cite[\S5.5]{Loth}, for each $i \in \set{1, 2, \ldots, k-1}$, we give an operator
+$\sigma_i \colon A^* \to A^*$.
 This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
 as follows:
 \begin{enumerate}
@@ -1651,6 +1657,7 @@ Suppose $k < \abs{q}$.
 It is sufficient to show that for every $p \in \ive{n}$, there exists a balanced interval $\mcI$ such that both $i_p, j_p \in \mcI$.
 We proceed by induction on $p$, and we consider any matched $(_{i_a}$ with $)_{i_a}$ for $a < p$ to be frozen.
 For the base case $p=1$, we start with the natural bracketing.
+Thus we assume the claim holds for $p-1$.
 Note that we can rematch parentheses by
 \begin{equation}
 \label{eq:rematching}
@@ -1659,9 +1666,8 @@ Note that we can rematch parentheses by
 where there can be any number of (frozen) parentheses in between.
 Moreover, if we then freeze the $(_a\ )_a$ match, then we obtain the same matching as before rematching.
 Thus, we apply the rematching~\eqref{eq:rematching} to move $)_{i_p}$ to the unmatched bracket from position $j_p$.
+Hence, $\mcI$ remains a balanced interval after freezing $(_{i_p}$ and $)_{i_p}$.
 This proves Proposition~\ref{prop:SL.dual} in the case when $k < \abs{q}$.
-
-\Darij{I don't understand the above.}
 
 Now suppose $k > \abs{q}$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
