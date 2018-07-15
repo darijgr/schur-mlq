@@ -385,8 +385,8 @@ p_i(\mm) := m_1 + m_2 + \cdots + m_i.
 When $\mm$ is clear, we simply write $p_i$ for this.
 (Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
 
-We define a \defn{queue} to be any set of sites.
-A queue of size $r$ will be called an \defn{$r$-queue}.
+We define a \defn{queue} to be any set of sites.\travis{As I said on Skype, I do not like this extra level of indirection for the reader. You also loose some of the explicitness of the $n$ dependence.}
+A queue of size $r$ will be called an \defn{$r$-queue}.\travis{I think it is much better to have the general definition as an $r$-queue. This otherwise is a useless definition as everywhere we should be saying ``Let $q$ be a queue of size $r$'' or ``Let $q$ be a queue such that $|q| = r$''.}
 
 We shall now define an action of queues on words.
 Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
@@ -534,7 +534,7 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \]
 where the paths in red correspond to Phase I and those in blue are from Phase II
 (and where we have picked the permutation $\tup{i_1, i_2, \ldots, i_n}
-= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$).
+= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$).\travis{I do not like this because we just got done explaining the permutation does not matter. Also, the example is explicitly done so that you do not need to care about the permutation. The permutation is mostly an extra tool to make things simple for you to write the proofs, but it makes how you should do the algorithm more complicated than it needs to be.}
 Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
@@ -653,13 +653,15 @@ In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 \begin{remark}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$. Let $u$ be a packed word with $\ell$ classes and type $\mm$.
 Then, there exists at least once MLQ $\qq$ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
-In other words, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
+In other words, $\swt{u}_{\sigma} \neq 0$ (as a polynomial over $\ZZ$).
 \end{remark}
 
 \begin{proof}
 For each $k \in \ive{\ell-1}$, let $q_k$ be the set of all sites $i$ such that $u_i \leq k$.
 It is then easy to check that $\qq := \tup{q_1, q_2, \ldots, q_{\ell-1}}$ is an MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
 \end{proof}
+
+\Travis{A remark should \emph{never} have a proof. Since this is tangential to the paper and easy to prove, we can leave it as a remark and something for the reader.}
 
 
 %%%%%%%%%%
@@ -1684,6 +1686,8 @@ Hence, each element of $[q(u)]_k$ is balanced (since $[q(u)]_k = \set{j_1, j_2, 
 Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(u)]_k$ is in $q'_2$. In other words, $[q(u)]_k \subseteq q'_2$.
 Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$.
 Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
+
+\Travis{This proof is 2 pages more complicated than it needs to be. If it helps you believe it, then great. But it really is a very simple idea and proof.}
 
 Now suppose $k > \abs{q}$.
 % Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
