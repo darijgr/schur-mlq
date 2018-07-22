@@ -1435,21 +1435,18 @@ Recall the notations introduced just before Lemma~\ref{le:dual}.
 \begin{remark}
 \label{rmk:balanced-dual-let}
 Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
-Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^{\operatorname{refl}} = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
-\Darij{We aren't studying balanced intervals anymore.
-Instead, argue symmetry for the parenthesis-matching algorithm on the reduced parenthesis sequence.
-Note that we need ``reduced''.}
-In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but reflected through the middle of $\ive{n}$.
-Thus, the dual configuration of $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
+Thus, the dual configuration of the $(n-r_1, n-r_2)$-configuration $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
 \begin{equation}
  (C^*)' = \bigl( (q_1')^*, (q_2')^* \bigr) .
  \label{eq.rmk:balanced-dual-let.dual}
 \end{equation}
+To see this, we compute the dual configurations of both $C$ and $C^*$ using the reduced parenthesis sequences. The sequence for $C^*$ is obtained from that for $C$ by reflecting both the parentheses (i.e., opening become closing and vice versa) and the sequence itself. Thus, the parenthesis matching algorithm proceeds in the same way.
+
 In addition, applying Lemma~\ref{le:dual} twice, we obtain
 \[
 C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( (q^*_1(u^*))^* \bigr) = \bigl( q_2^*\bigl( q_1^*(u^*) \bigr) \bigr)^* = \bigl( C^*(u^*) \bigr)^* .
 \]
-In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 5 - C^*(u^*)_{n+1-i}$, where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
+%In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 5 - C^*(u^*)_{n+1-i}$, where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
 \end{remark}
 
 Fix $k \geq 1$.
