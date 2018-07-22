@@ -631,11 +631,11 @@ where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
-\begin{remark}
+\begin{lemma}
 \label{rmk:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$. Let $\qq$ be a $\sigma$-twisted MLQ.
 Then, the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
-\end{remark}
+\end{lemma}
 
 \begin{proof}
 Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
@@ -877,7 +877,7 @@ $\zeta \in \SymGp{\ell}$
 is precisely the multiset of the $p_k(\mm)$ for $k \geq 1$
 with one copy of $p_i(\mm) = \abs{q'}$ removed).
 Furthermore, the definition of $u$ becomes $u = \qq' (1 \dotsm 1)$.
-Hence, the type of $u$ is $\mm$ (by Remark~\ref{rmk:mlq-type}).
+Hence, the type of $u$ is $\mm$ (by Lemma~\ref{rmk:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
 $\nn$ of the word $q(1 \dots 1)$ satisfies $p_1(\nn) = k$.
