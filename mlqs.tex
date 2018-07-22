@@ -1320,9 +1320,9 @@ We construct the \defn{dual}\footnote{This is a different duality than the contr
 
 We begin by constructing a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
 \begin{itemize}
-\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$;
-\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$;
-\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$;
+\item an opening parenthesis `$($' if $j \in q_1$ and $j \notin q_2$;
+\item a closing parenthesis `$)$' if $j \notin q_1$ and $j \in q_2$;
+\item a matched pair of parentheses `$()$' if $j \in q_1$ and $j \in q_2$;
 \item nothing otherwise.
 \end{itemize}
 We say that these parentheses are \defn{contributed} by the site $j$.
@@ -1334,9 +1334,9 @@ At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parenthese
 This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
 If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
 When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-We define \defn{$\SP\tup{q_1, q_2}$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
+We define \defn{$\SP(q_1, q_2)$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
 
-Note that each site $j$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `()`, which can be immediately matched (to each other) at the beginning of the algorithm.
+Note that each $j \in \ZZ/n\ZZ$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `$()$`, which can be immediately matched (to each other) at the beginning of the algorithm.
 Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
 Hence, if we skip the sites $j$ that belong to both $q_1$ and $q_2$ in the definition of our sequence of parentheses, then the outcome of the algorithm (specifically, the set of unmatched parentheses) will be the same.
 The sequence of parentheses obtained as above, but skipping these sites $j$, will be called the \defn{reduced parenthesis sequence}.
@@ -1519,8 +1519,8 @@ $\sigma_i \colon A^* \to A^*$.
 This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
 as follows:
 \begin{enumerate}
- \item Treat all letters $i$ in $p$ as opening parentheses `(',
-       all letters $i+1$ as closing parentheses `)',
+ \item Treat all letters $i$ in $p$ as opening parentheses `$($',
+       all letters $i+1$ as closing parentheses `$)$',
        and consider all other letters to be frozen.
        Now, match as many parentheses as possible
        according to the standard parenthesis-matching algorithm,
@@ -1586,7 +1586,7 @@ Therefore, it does not matter whether we regard the sequence of parentheses as w
 % Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
 Hence, the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$ proceeds exactly the same way as the standard parenthesis-matching algorithm used when applying $\sigma_1$ to $\word(\qq)$ (ignoring the letters that are neither $i$ nor $i+1$). That is, the parentheses that get matched in the former are the same as those that get matched in the latter.
 % Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
-Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of these numbers is $0$).
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `$)$'s with the number of unmatched `$($'s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `$)$' into a `$($' or vice versa, because one of these numbers is $0$).
 Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
 This proves~\eqref{pf.prop:braid.inter}.
 
@@ -1605,9 +1605,8 @@ $\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
 \end{proof}
 
 \begin{remark}
-Our letters $1, \ldots, k$ correspond to the letters
-$a_k, \ldots, a_1$ in~\cite{Loth},
-since~\cite{Loth}'s definition of $\sigma_i$ involves $a_i$ rather
+Our letters $1, \ldots, k$ correspond to the letters $a_k, \ldots, a_1$ in~\cite{Loth},
+since the definition of $\sigma_i$ in~\cite{Loth} involves $a_i$ rather
 than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
 Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
 but this makes no difference to the proof, since all letters $\circ$ are always frozen.
@@ -1618,7 +1617,7 @@ but this makes no difference to the proof, since all letters $\circ$ are always 
 \begin{remark}
 The operator $\sigma_i$ is essentially a combination of co-plactic operators.
 Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
-Note that the bracketing rule given above is precisely the usual signature rule for computing tensor products.
+Note that the bracketing rule given above is precisely the usual signature rule (see, \textit{e.g.},~\cite[Sec.~2.4]{BS17} for a description) for computing tensor products.
 This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
 \end{remark}
 
@@ -1651,18 +1650,18 @@ Since this holds for all letters $i$, we have $w = w'$.
 Let $\tup{q_1, q_2}$ be a configuration with $\abs{q_1} \leq \abs{q_2}$.
 Let $i \in q_1$.
 Let $j$ be the first site weakly to the right of $i$ that belongs to $q_2$.
-Then, $\SP\tup{q_1 \setminus \set{i}, q_2 \setminus \set{j}}$ is obtained from $\SP\tup{q_1, q_2}$ by removing a pair of matched parentheses\footnote{The matching of all other parentheses remains the same, and so does the correspondence between sites and closing parentheses (except for the one we removed).}.
+Then, $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing a pair of matched parentheses.\footnote{The matching of all other parentheses remains the same, and so does the correspondence between sites and closing parentheses (except for the one we removed).}
 Moreover, the closing parenthesis of that pair is contributed by $j \in q_2$.
 \end{lemma}
 
 \begin{proof}
-The assumption $\abs{q_1} \leq \abs{q_2}$ shows that all closing parentheses in $\SP\tup{q_1, q_2}$ are matched.
+The assumption $\abs{q_1} \leq \abs{q_2}$ implies that all closing parentheses in $\SP(q_1, q_2)$ are matched.
 In particular, the closing parenthesis contributed by $j \in q_2$ is matched.
 Let $\gamma$ be this closing parenthesis.
 Let $\alpha$ be the opening parenthesis contributed by $i \in q_1$.
 All parentheses between $\alpha$ and $\gamma$ are opening (by the minimality of $j$).
 We know that $\gamma$ is matched; let $\beta$ be the opening parenthesis that is matched to $\gamma$.
-Hence, the parenthesis sequence $\SP\tup{q_1, q_2}$ between $\alpha$ and $\gamma$ (inclusive) looks like this:
+Hence, the parenthesis sequence $\SP(q_1, q_2)$ between $\alpha$ and $\gamma$ (inclusive) looks like this:
 \[
 \begin{array}{cccccc}
 ( & ( & ( & \cdots & ( & ) \\
@@ -1670,15 +1669,15 @@ Hence, the parenthesis sequence $\SP\tup{q_1, q_2}$ between $\alpha$ and $\gamma
 \end{array}
 \]
 where $\alpha$ and $\beta$ may be the same parenthesis.
-The parenthesis sequence $\SP\tup{q_1 \setminus \set{i}, q_2 \setminus \set{j}}$ is obtained from $\SP\tup{q_1, q_2}$ by removing $\alpha$ and $\gamma$.
-But this is tantamount to removing $\beta$ and $\gamma$ from $\SP \tup{q_1, q_2}$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
+Therefore $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing $\alpha$ and $\gamma$.
+Yet this is tantamount to removing $\beta$ and $\gamma$ from $\SP \tup{q_1, q_2}$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
 \end{proof}
 
 \begin{lemma} \label{lem:SL.dual.3}
 Let $u \in \mcW_n$ be a word of type $\mm$.
 Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
 Let $q$ be a queue such that $k \leq \abs{q}$.
-Each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$.
+Each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
 \end{lemma}
 
 \begin{proof}
@@ -1688,21 +1687,30 @@ For each $p \in \ive{n}$, let $j_p$ denote the site that is set while processing
 Thus, $(q(u))_{j_p} = u_{i_p}$ whenever $p \leq \abs{q}$ (since these entries of $q(u)$ are set in Phase~II),
 and $(q(u))_{j_p} = u_{i_p} + 1$ otherwise (Phase~I).
 Therefore, $\ive{q(u)}_k = \set{j_1, j_2, \ldots, j_k}$ (since $k \leq \abs{q}$).
-Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$.
+Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
+Denote $q_1^{(p)} := q_i \setminus \{i_1, i_2, \dotsc, i_p\}$ and $q_1^{(p)} := q_i \setminus \{j_1, j_2, \dotsc, j_p\}$.
 
-We will show a bit more:
 \begin{statement}
-\textit{Claim 1:} Let $p \in \set{0, 1, \ldots, k}$. Then, $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{p}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{p}}}$ is obtained from $\SP\tup{q_1 , q_2 }$ by removing $p$ pairs of matched parentheses. The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots, j_p$.
+\textbf{Claim:}
+Let $p \in \set{0, 1, \ldots, k}$.
+Then, the parenthesis sequence $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1 , q_2)$ by removing $p$ pairs of matched parentheses.
+The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots, j_p$.
 \end{statement}
-[\textit{Proof of Claim 1:} We shall prove this by induction on $p$.
-The induction base ($p = 0$) is obvious.
-For the induction step, we assume (as induction hypothesis) that Claim 1 holds for $p-1$.
-The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and thus $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$.
-Hence, Lemma~\ref{lem:SL.dual.1} (applied to $q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}$, $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$) shows that $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{p}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{p}}}$ is obtained from $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}}$ by removing a pair of matched parentheses,
-and moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$.
-Thus, Claim 1 follows from the induction hypothesis. This completes the induction step.]
 
-Claim 1 (applied to $p = k$) shows that $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{k}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{k}}}$ is obtained from $\SP\tup{q_1 , q_2}$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$. Hence, each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$. This completes the proof.
+We shall prove the claim by induction on $p$.
+The induction base ($p = 0$) is obvious.
+For the induction step, we assume that the claim holds for $p-1$.
+The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and therefore $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$.
+Hence, Lemma~\ref{lem:SL.dual.1}
+%(applied to $q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}$, $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$)
+implies that $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1^{(p-1)}, q_2^{(p-1)})$ by removing a pair of matched parentheses.
+Moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2^{(p-1)}$.
+Thus,  the claim follows from the induction hypothesis.
+This completes the induction step.
+
+The claim applied to $p = k$ shows that $\SP(q_1^{(k)}, q_2^{(k)})$ is obtained from $\SP(q_1 , q_2)$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$.
+Hence, each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
+This completes the proof.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
@@ -1718,7 +1726,7 @@ We must then prove that $q'_2 = \ive{q(u)}_k$.
 Note that $\abs{q'_2} = \abs{\ive{u}_k} = k = \abs{\ive{q(u)}_k}$.
 
 Suppose $k \leq \abs{q}$.
-Then, Lemma~\ref{lem:SL.dual.3} shows that each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$.
+Then, Lemma~\ref{lem:SL.dual.3} shows that each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
 Therefore, all of these sites are balanced, and hence belong to $q'_2$.
 Thus, $q'_2 \supseteq \ive{q(u)}_k$, whence $q'_2 = \ive{q(u)}_k$
 (since $\abs{q'_2} = \abs{\ive{q(u)}_k}$).
