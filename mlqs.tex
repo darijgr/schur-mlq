@@ -1328,13 +1328,13 @@ We begin by constructing a sequence of parentheses as follows: For each $j = 1, 
 We say that these parentheses are \defn{contributed} by the site $j$.
 Next, we match as many parentheses as possible following the \defn{standard parenthesis-matching algorithm}:
 every time you find an opening parenthesis to the left of a closing one, with only frozen parentheses between them, you match these two parentheses and declare them frozen.
-Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (i.e., to the right of the former and to the left of the latter) are frozen.
+Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (\textit{i.e.}, to the right of the former and to the left of the latter) are frozen.
 
 At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parentheses left unmatched; these unmatched parentheses will be opening if $r_1 > r_2$ and closing if $r_1 < r_2$. The unmatched parentheses will not depend on the order in which we perform the matching.
 This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
 If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
 When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-We define \defn{$\SP\tup{q_1, q_2}$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \textbf{closing} parentheses (i.e., which site contributes which closing parenthesis).
+We define \defn{$\SP\tup{q_1, q_2}$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
 
 Note that each site $j$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `()`, which can be immediately matched (to each other) at the beginning of the algorithm.
 Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
@@ -1453,7 +1453,7 @@ Thus, the dual configuration of the $(n-r_1, n-r_2)$-configuration $C^* = \tup{q
  (C^*)' = \bigl( (q_1')^*, (q_2')^* \bigr) .
  \label{eq.rmk:balanced-dual-let.dual}
 \end{equation}
-To see this, we compute the dual configurations of both $C$ and $C^*$ using the reduced parenthesis sequences. The sequence for $C^*$ is obtained from that for $C$ by reflecting both the parentheses (i.e., opening become closing and vice versa) and the sequence itself. Thus, the parenthesis matching algorithm proceeds in the same way.
+To see this, we compute the dual configurations of both $C$ and $C^*$ using the reduced parenthesis sequences. The sequence for $C^*$ is obtained from that for $C$ by reflecting both the parentheses (\textit{i.e.}, opening become closing and vice versa) and the sequence itself. Thus, the parenthesis matching algorithm proceeds in the same way.
 
 In addition, applying Lemma~\ref{le:dual} twice, we obtain
 \[
@@ -1525,7 +1525,7 @@ as follows:
        Now, match as many parentheses as possible
        according to the standard parenthesis-matching algorithm,
        but treating the word as a word in the usual sense
-       (i.e., not written on a circle, but having a beginning
+       (\textit{i.e.}, not written on a circle, but having a beginning
        and an end).
        The result is independent of the choices in the algorithm,
        and is always a word whose non-frozen
