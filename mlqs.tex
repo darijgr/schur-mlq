@@ -99,6 +99,7 @@
 \newcommand{\rev}{\operatorname{rev}}
 \newcommand{\conncomp}{\operatorname{conncomp}}
 \newcommand{\core}{\operatorname{core}}
+\newcommand{\SP}{\operatorname{SP}}
 \newcommand{\col}{\operatorname{col}}
 \newcommand{\colw}{\operatorname{colw}}
 \newcommand{\word}{\operatorname{word}}
@@ -1317,30 +1318,30 @@ every time you find an opening parenthesis to the left of a closing one, with on
 Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (i.e., to the right of the former and to the left of the latter) are frozen.
 
 At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parentheses left unmatched; these unmatched parentheses will be opening if $r_1 > r_2$ and closing if $r_1 < r_2$. The unmatched parentheses will not depend on the order in which we perform the matching.
-This can be easily seen by considering the parentheses as an infinite shifted-$n$-periodic Motzkin path, where a ``nothing'' corresponds to a flat step.
-If $r_1 > r_2$, then the unmatched positions correspond to up steps in the Motzkin path such that the path never returns to the same height.
+This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
+If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
 When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-\Darij{The Motzkin stuff isn't really a justification to me, much that I like the picture. I prefer to use Newman's diamond lemma to see that the final result does not depend on the order of matching. Also, the Motzkin path is not $n$-periodic in general, because a site $j \in q_1 \cap q_2$ contributes two letters.}
+The result of this algorithm (i.e., the matching of parentheses) will be called \defn{$\SP\tup{q_1, q_2}$}.
 
 Note that each site $j$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `()`, which can be immediately matched (to each other) at the beginning of the algorithm.
 Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
 Hence, if we skip the sites $j$ that belong to both $q_1$ and $q_2$ in the definition of our sequence of parentheses, then the outcome of the algorithm (specifically, the set of unmatched parentheses) will be the same.
 The sequence of parentheses obtained as above, but skipping these sites $j$, will be called the \defn{reduced parenthesis sequence}.
 
-If a site $j \in \ive{n}$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
-We say $\mcI \subseteq \ive{n}$ is a \defn{balanced set} if each $i \in \mcI$ is balanced.
-If $\mcI$ is connected, we call $\mcI$ a \defn{balanced interval}.
+If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
+We say $\mcI \subseteq \ZZ / n \ZZ$ is a \defn{balanced set} if each $i \in \mcI$ is balanced.
+If $\mcI$ is connected (as a subset of the cycle graph), we call $\mcI$ a \defn{balanced interval}.
 
 We construct $C' = (q'_1, q'_2)$ as follows.
 For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
-Note that $C$ and $C'$ have the same balanced intervals.
-It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
+Note that $C$ and $C'$ have the same balanced intervals, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
+Hence, $C'' = C$. Also, $\wt(C) = \wt(C')$.
 
 The following facts are straightforward:
 \begin{enumerate}
- \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
- \item The empty interval is balanced.
+ \item For any inclusion-maximal balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
+ \item The empty set is balanced.
  \item The set $\ive{n}$ is a balanced set if and only if $r_1 = r_2$.
  \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
        is balanced.\footnote{To prove this, first check it when $A$ and $B$
