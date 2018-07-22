@@ -1,0 +1,1182 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,backgrounds,shapes.misc,shapes.geometric,fit}
+\usepackage{etex}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{wasysym}
+\usepackage[all]{xy}
+\usepackage{textpos}
+\usepackage{ytableau}
+\usepackage{stmaryrd}
+%\usetikzlibrary{calc,through,backgrounds}
+%\CompileMatrices
+
+\definecolor{grau}{rgb}{.5 , .5 , .5}
+\definecolor{dunkelgrau}{rgb}{.35 , .35 , .35}
+\definecolor{schwarz}{rgb}{0 , 0 , 0}
+\definecolor{violet}{RGB}{143,0,255}
+\definecolor{forestgreen}{RGB}{34, 100, 34}
+
+\newcommand{\red}{\color{red}}
+\newcommand{\grey}{\color{grau}}
+\newcommand{\green}{\color{forestgreen}}
+\newcommand{\violet}{\color{violet}}
+\newcommand{\blue}{\color{blue}}
+
+\newcommand{\bIf}{\textbf{If} }
+\newcommand{\bif}{\textbf{if} }
+\newcommand{\bthen}{\textbf{then} }
+
+\newcommand{\EE}{{\mathbf{E}}}
+\newcommand{\ZZ}{{\mathbb Z}}
+\newcommand{\NN}{{\mathbb N}}
+\newcommand{\QQ}{{\mathbb Q}}
+\newcommand{\kk}{{\mathbf k}}
+\newcommand{\OO}{\operatorname {O}}
+\newcommand{\Nm}{\operatorname {N}}
+\newcommand{\Par}{\operatorname{Par}}
+\newcommand{\Comp}{\operatorname{Comp}}
+\newcommand{\Stab}{\operatorname {Stab}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Lpk}{\operatorname{Lpk}}
+\newcommand{\lpk}{\operatorname{lpk}}
+\newcommand{\Rpk}{\operatorname{Rpk}}
+\newcommand{\rpk}{\operatorname{rpk}}
+\newcommand{\Pk}{\operatorname{Pk}}
+\newcommand{\Epk}{\operatorname{Epk}}
+\newcommand{\epk}{\operatorname{epk}}
+\newcommand{\Des}{\operatorname{Des}}
+\newcommand{\des}{\operatorname{des}}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\maj}{\operatorname{maj}}
+\newcommand{\Val}{\operatorname{Val}}
+\newcommand{\pk}{\operatorname{pk}}
+\newcommand{\st}{\operatorname{st}}
+\newcommand{\QSym}{\operatorname{QSym}}
+\newcommand{\NSym}{\operatorname{NSym}}
+\newcommand{\Mat}{\operatorname{M}}
+\newcommand{\bk}{\mathbf{k}}
+\newcommand{\Nplus}{\mathbb{N}_{+}}
+\newcommand\arxiv[1]{\href{http://www.arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\newcommand{\Orb}{{\mathcal O}}
+\newcommand{\GL}{\operatorname {GL}}
+\newcommand{\SL}{\operatorname {SL}}
+\newcommand{\Or}{\operatorname {O}}
+\newcommand{\im}{\operatorname {Im}}
+\newcommand{\Iso}{\operatorname {Iso}}
+\newcommand{\Adm}{\operatorname{Adm}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Powser}{\QQ\left[\left[x_1,x_2,x_3,\ldots\right]\right]}
+\newcommand{\rad}{\operatorname {rad}}
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\ord}{\operatorname*{ord}}
+\newcommand{\bbK}{{\mathbb{K}}}
+\newcommand{\whP}{{\widehat{P}}}
+%\newcommand{\Trop}{\operatorname*{Trop}}
+%\newcommand{\TropZ}{{\operatorname*{Trop}\mathbb{Z}}}
+\newcommand{\rato}{\dashrightarrow}
+\newcommand{\lcm}{\operatorname*{lcm}}
+\newcommand{\lm}{\lambda / \mu}
+
+\newcommand{\fti}[1]{\frametitle{\ \ \ \ \ #1}}
+\newenvironment{iframe}[1][]{\begin{frame} \fti{[#1]} \begin{itemize}}{\end{frame}\end{itemize}}
+
+\newcommand{\are}{\ar@{-}}
+\newcommand{\arinj}{\ar@{_{(}->}}
+\newcommand{\arsurj}{\ar@{->>}}
+
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+
+\setbeamertemplate{itemize/enumerate body begin}{\large}
+\setbeamertemplate{itemize/enumerate subbody begin}{\large}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\large}
+
+\usepackage{url}%this line and the next are related to hyperlinks
+%\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, citecolor=blue, urlcolor=blur]{hyperref}
+
+\usepackage{color}
+
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{itemize/enumerate body begin}{}
+\setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
+%\setbeamertemplate{section in head/foot shaded}[default][60]
+%\setbeamertemplate{subsection in head/foot shaded}[default][60]
+\beamersetuncovermixins{\opaqueness<1>{0}}{\opaqueness<2->{15}}
+
+%\usepackage{beamerthemesplit}
+\usepackage{epsfig,amsfonts,bbm,mathrsfs}
+\usepackage{verbatim} 
+
+% Dark red emphasis
+\definecolor{darkred}{rgb}{0.7,0,0} % darkred color
+\newcommand{\defn}[1]{{\color{darkred}\emph{#1}}} % emphasis of a definition
+
+
+
+\newcommand{\STRUT}{\vrule width 0pt depth 8pt height 0pt}
+\newcommand{\ASTRUT}{\vrule width 0pt depth 0pt height 11pt}
+
+
+\theoremstyle{plain}
+\newtheorem{conj}[theorem]{Conjecture}
+
+
+\setbeamertemplate{headline}{}
+%This removes a black stripe from the top of the slides.
+
+\newcommand{\iso}{\cong}
+%\newcommand{\qedbox}{\rule{2mm}{2mm}}
+%\renewcommand{\qedsymbol}{\qedbox}
+\newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
+\newcommand{\fs}{\mathcal{S}} % flagged Schur function
+\newcommand{\mbf}{\mathbf}
+\newcommand{\0}{\phantom{c}}
+\newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
+\renewcommand{\merge}[1]{\vee_{#1}} % merge
+\newcommand{\SymGp}[1]{\mathfrak{S}_{#1}} % symmetric group
+
+\DeclareMathOperator{\wt}{wt} % weight
+\newcommand{\wtg}{\widetilde{g}}
+\newcommand{\sep}{\operatorname{sep}}
+\newcommand{\seplist}{\operatorname{seplist}}
+\newcommand{\cont}{\operatorname{cont}}
+\newcommand{\ircont}{\operatorname{ircont}}
+\newcommand{\ceq}{\operatorname{ceq}}
+\newcommand{\ttt}{{\mathbf{t}}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\mm}{\mathbf{m}}
+\newcommand{\nn}{\mathbf{n}}
+\newcommand{\qq}{\mathbf{q}}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcF}{\mathcal{F}}
+\newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcW}{\mathcal{W}}
+\newcommand{\mcI}{\mathcal{I}}
+
+\newcommand{\bze}{\overline{0}}
+\newcommand{\bon}{\overline{1}}
+\newcommand{\btw}{\overline{2}}
+\newcommand{\bth}{\overline{3}}
+\newcommand{\bfo}{\overline{4}}
+\newcommand{\bfive}{\overline{5}}
+\newcommand{\bsix}{\overline{6}}
+\newcommand{\bseven}{\overline{7}}
+\newcommand{\beight}{\overline{8}}
+\newcommand{\bi}{\overline\imath}
+\newcommand{\brr}{\overline{r}}
+\newcommand{\bn}{\overline{n}}
+\newcommand{\ellbar}{\overline{\ell}}
+
+\newcommand{\fraks}{\mathfrak{s}}
+
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+
+\newcommand{\mlnode}[1]{\node[circle, draw=black] at (#1){\phantom{c}};}
+
+\usepackage{xparse}
+
+\makeatletter
+% \specialmergetwolists{<coupler>}{<list1>}{<list2>}{<return macro>}
+% \specialmergetwolists*{<coupler>}{<listcmd1>}{<listcmd2>}{<return macro>}
+\protected\def\specialmergetwolists{%
+  \begingroup
+  \@ifstar{\def\cnta{1}\@specialmergetwolists}
+    {\def\cnta{0}\@specialmergetwolists}%
+}
+\def\@specialmergetwolists#1#2#3#4{%
+  \def\tempa##1##2{%
+    \edef##2{%
+      \ifnum\cnta=\@ne\else\expandafter\@firstoftwo\fi
+      \unexpanded\expandafter{##1}%
+    }%
+  }%
+  \tempa{#2}\tempb\tempa{#3}\tempa
+  \def\cnta{0}\def#4{}%
+  \foreach \x in \tempb{%
+    \xdef\cnta{\the\numexpr\cnta+1}%
+    \gdef\cntb{0}%
+    \foreach \y in \tempa{%
+      \xdef\cntb{\the\numexpr\cntb+1}%
+      \ifnum\cntb=\cnta\relax
+        \xdef#4{#4\ifx#4\empty\else,\fi\x#1\y}%
+        \breakforeach
+      \fi
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+
+% \theoremstyle{plain}
+% \newtheorem{thm}{Theorem}[section]
+% \newtheorem{lemma}[thm]{Lemma}
+% \newtheorem{conj}[thm]{Conjecture}
+% \newtheorem{prop}[thm]{Proposition}
+% \newtheorem{cor}[thm]{Corollary}
+% \theoremstyle{definition}
+% \newtheorem{dfn}[thm]{Definition}
+% \newtheorem{example}[thm]{Example}
+% \newtheorem{remark}[thm]{Remark}
+% \numberwithin{equation}{section}
+% %\numberwithin{figure}{section}
+% %\numberwithin{table}{section}
+% %\setcounter{section}{-1}
+
+% % For breaking equations across multiple pages
+% % \allowdisplaybreaks[1]
+
+% \usepackage[colorinlistoftodos]{todonotes}
+% \newcommand{\erik}[1]{\todo[size=\tiny,color=green!30]{#1 \\ \hfill --- Erik}}
+% \newcommand{\Erik}[1]{\todo[size=\tiny,inline,color=green!30]{#1
+      % \\ \hfill --- Erik}}
+% \newcommand{\darij}[1]{\todo[size=\tiny,color=red!30]{#1 \\ \hfill --- Darij}}
+% \newcommand{\Darij}[1]{\todo[size=\tiny,inline,color=red!30]{#1
+      % \\ \hfill --- Darij}}
+% \newcommand{\travis}[1]{\todo[size=\tiny,color=blue!30]{#1 \\ \hfill --- Travis}}
+% \newcommand{\Travis}[1]{\todo[size=\tiny,inline,color=blue!30]{#1
+      % \\ \hfill --- Travis}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title[MLQs]{Multiline queues with spectral parameters}
+
+\author{\href{http://www.cip.ifi.lmu.de/~grinberg/}{Darij Grinberg}\\
+joint work with Erik Aas and \href{https://sites.google.com/view/tscrim/home}{Travis Scrimshaw}}
+
+\date{28 June 2018 \\ Leibniz Universität Hannover}
+
+% \keywords{multiline queue, TASEP, R-matrix, symmetric function}
+% \subjclass[2010]{
+% 60C05,  % Combinatorial probability
+% 05A19,  % Combinatorial identities, bijective combinatorics
+% 16T25,  % Yang--Baxter equations
+% 05E05}  % Symmetric functions
+
+\frame{\titlepage
+\textbf{slides: \red \url{http://www.cip.ifi.lmu.de/~grinberg/algebra/hannover2018.pdf}} \\
+\textbf{paper: \red \url{http://www.cip.ifi.lmu.de/~grinberg/algebra/mlqs.pdf}} \\
+%\textbf{project: \red \url{https://github.com/darijgr/schur-mlq}}
+}
+
+\begin{frame}
+\fti{Sites and words}
+
+\begin{itemize}
+
+\item We study a combinatorial algorithm: the action of \defn{queues}
+      on \defn{words}.
+
+\item Fix a positive integer $n$. \pause
+
+\item For a nonnegative integer $k$, let $\ive{k}$ be the set $\set{1, 2, \ldots, k}$. \pause
+
+\item We shall refer to the elements $1, 2, \ldots, n \in \ZZ / n \ZZ$ as \defn{sites}. \\
+Regard them as points on a line that ``wraps around'' cyclically:
+\[
+{\grey \cdots} \quad {\grey n-1} \quad {\grey n} \quad 1 \quad 2 \quad \cdots \quad n-1 \quad n \quad {\grey 1} \quad {\grey 2} \quad {\grey \cdots}
+\]
+
+\pause \item A \defn{word} means a map $\set{\text{sites}} \to \set{\text{positive integers}}$. \\
+If $u$ is a word and $i$ is a site, then $u_i := u\tup{i}$.
+
+\pause \item Write $u_1 u_2 \cdots u_n$ for a word $u$ (``one-line notation'').
+\pause \\ Example: The word $3 3 1 2 2$ (for $n = 5$) is the map
+\[
+\begin{array}{cccccccccccccc}
+& i & = & {\grey \cdots} & {\grey 4} & {\grey 5} & 1 & 2 & 3 & 4 & 5 & {\grey 1} & {\grey 2} & {\grey \cdots} \\
+\mapsto & u_i & = & {\grey \cdots} & {\grey 2} & {\grey 2} & 3 & 3 & 1 & 2 & 2 & {\grey 3} & {\grey 3} & {\grey \cdots}
+\end{array}
+\]
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fti{Queues}
+\begin{itemize}
+
+\item A \defn{queue} means a set of sites.
+
+\pause \item Draw a queue $q$ by putting circles on all the sites $i \in q$. 
+\pause \\ Example: The queue $\set{2, 5}$ (for $n = 7$) is represented by
+\only<3-4>{
+\[
+{\grey \cdots} \quad {\grey 6} \quad {\grey 7} \quad 1 \quad \circled{2} \quad 3 \quad 4 \quad \circled{5} \quad 6 \quad 7 \quad {\grey 1} \quad {\grey \circled{2}} \quad {\grey \cdots}
+\]%
+}%
+\only<5>{
+\[
+{\phantom \cdots} \quad {\phantom 6} \quad {\phantom 7} \quad 1 \quad \circled{2} \quad 3 \quad 4 \quad \circled{5} \quad 6 \quad 7 \quad {\phantom 1} \quad {\phantom{\circled{2}}} \quad {\phantom \cdots}
+\]
+}%
+
+\pause \item We shall omit all the grey parts in the future (i.e., we will draw only one copy of each site).
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fti{Action of queues on words, 1: example}
+\begin{itemize}
+
+\item Let $q$ be a queue, and $u$ a word. We shall define a word $q(u)$. \pause
+
+\item \textbf{Idea:}
+\begin{itemize}
+\item Draw $u$ on top.
+\item Draw $q$ as circles in the middle.
+\item Build $q(u)$ letter by letter, as follows...
+\end{itemize}
+
+% To compute $q(u)$, draw the following diagram
+% (whose upper row shows $u$, whose lower row shows $q(u)$,
+% and whose middle row represents the set $q$ by balls in the positions of its elements):
+Example: $n = 9$ and $u = 346613321$ and $q = \set{1, 4, 8, 9}$:
+\[
+\begin{tikzpicture}[>=latex,rounded corners,yscale=1.2,xscale=1,baseline=0]
+\def\passwidth{3pt};
+\node (i1) at (1,1) {$3$};
+\node (i2) at (2,1) {$4$};
+\node (i3) at (3,1) {$6$};
+\node (i4) at (4,1) {$6$};
+\node (i5) at (5,1) {$1$};
+\node (i6) at (6,1) {$3$};
+\node (i7) at (7,1) {$3$};
+\node (i8) at (8,1) {$2$};
+\node (i9) at (9,1) {$1$};
+\node (tphan) at (10, -1) {\phantom{x}};
+\node (tphan2) at (0, -1) {\phantom{x}};
+\only<10->{\node (t1) at (1,-1) {$2$};}
+\only<4->{\node (t2) at (2,-1) {$7$};}
+\only<3->{\node (t3) at (3,-1) {$7$};}
+\only<11->{\node (t4) at (4,-1) {$3$};}
+\only<7->{\node (t5) at (5,-1) {$4$};}
+\only<6->{\node (t6) at (6,-1) {$4$};}
+\only<5->{\node (t7) at (7,-1) {$5$};}
+\only<8->{\node (t8) at (8,-1) {$1$};}
+\only<9->{\node (t9) at (9,-1) {$1$};}
+\node[circle,draw=black] (q1) at (1,0) {};
+\node[circle,draw=black] (q2) at (4,0) {};
+\node[circle,draw=black] (q3) at (8,0) {};
+\node[circle,draw=black] (q4) at (9,0) {};
+\only<4->{\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);}
+\only<3->{\draw[->,red] (i3) -- (t3);}
+\only<5->{\draw[->,red] (i2) -- (2,0.15) .. controls (1.8,-0.2) and (1.6,-0.25) .. (1.3,-0.25) -- (0,-0.25);
+\draw[>->,red] (10,-0.25) -- (8,-0.25) -- (7,-0.25) -- (t7);}
+\only<6->{\draw[->,red] (i6) -- (t6);}
+\only<7->{\draw[->,red] (i7) -- (7,0) -- (5,0) -- (t5);}
+\only<8->{\draw[white,line width=\passwidth] (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);  % To simulate underpass
+\draw[->,blue] (i5) -- (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);
+\draw[white,line width=\passwidth] (q3) -- (t8);  % To simulate underpass
+\draw[->,blue] (q3) -- (t8);}
+\only<9->{\draw[->,blue] (i9) -- (q4);
+\draw[white,line width=\passwidth] (q4) -- (t9);  % To simulate underpass
+\draw[->,blue] (q4) -- (t9);}
+\only<11->{\draw[white,line width=\passwidth] (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);  % To simulate underpass
+\draw[->,blue] (i1) -- (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);
+\draw[->,blue] (q2) -- (t4);}
+\only<10->{\draw[white,line width=\passwidth] (i8) -- (8,0.28) -- (10,0.28);  % To simulate underpass
+\draw[->,blue] (i8) -- (8,0.28) -- (10,0.28);
+\draw[>->,blue] (0,0.28) -- (0.3,0.28) .. controls (0.7,0.28) and (0.85,0.12) .. (q1);
+\draw[white,line width=\passwidth] (q1) -- (t1);  % To simulate underpass
+\draw[->,blue] (q1) -- (t1);}
+\end{tikzpicture}
+\]
+\only<3-7>{%
+\textbf{Phase I:}
+For each of the largest $n - \abs{q}$ letters of $u$ (in decreasing order),
+\begin{itemize}
+\item \textbf{drop} this letter \textbf{down} and \textbf{add} $1$ to it;
+\item \textbf{move} it left until hitting some unoccupied site $i \notin q$;
+\item \textbf{place} it there.
+\end{itemize}
+}%
+\only<8-11>{%
+\textbf{Phase II:}
+For each of the smallest $\abs{q}$ letters of $u$ (in increasing order),
+\begin{itemize}
+\item \textbf{drop} this letter down;
+\item \textbf{move} it \textbf{right} until hitting some unoccupied site $i \in q$;
+\item \textbf{place} it there.
+\end{itemize}
+}%
+\only<12->{%
+The letters on the bottom now form $q(u)$.
+}
+\only<13->{\\ %
+\textbf{Proposition.} Equal letters can be processed in any order.
+}
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Action of queues on words, 2: formal definition}
+\begin{itemize}
+
+\item Let $q$ be a queue, and $u$ a word. Define a word $q(u)$ as follows:
+
+In the beginning, $v = q(u)$ is a word whose letters are unset. \\
+Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
+such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+
+\begin{description}
+\item[Phase I.]
+  For $i = i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$, do the following: \\
+    Find the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ is not set.
+    Then set $v_j = u_i + 1$.
+
+\item[Phase II.]
+  For $i = i_1, i_2, \ldots, i_{\abs{q}}$, do the following: \\
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ is not set.
+    Then set $v_j = u_i$.
+\end{description}
+\pause
+
+\item \textbf{Proposition.}
+\begin{itemize}
+\item The resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1, i_2, \dotsc, i_n)$.
+\item Phase I and Phase II can be done in parallel. % (as long as in-phase order is preserved).
+\end{itemize}
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Remark on TASEP connection}
+\begin{itemize}
+
+\item This action of queues on words is inspired by the ``discrete MLQs''
+      of Aas and Linusson ({\red \arxiv{1501.04417}}). \\
+      Main difference: They have no Phase I, but their words have
+      empty positions. \pause
+      \\ (Our picture subsumes theirs -- fill the empty positions
+      with high letters.) \pause
+
+\item Their motivation: compute stationary distribution of
+      TASEP (totally asymmetric exclusion process) on a circle. \\
+      Our work proves two of their conjectures.
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Types of words}
+\begin{itemize}
+
+\item The \defn{type} of a word $u$ is the sequence $\mm = (m_1, m_2, \ldots)$,
+      where $m_k = \tup{ \# \text{ of all sites } i \text{ such that } u_i = k }$.
+      \pause \\
+      Example: The word $1255135$ has type
+      \only<1-3>{$\tup{2, 1, 1, 0, 3, 0, 0, 0, \ldots}$.}%
+      \only<4->{$\tup{2, 1, 1, 0, 3}$.}
+
+\pause
+\item We omit trailing zeroes from infinite sequences. \\
+      That is, we abbreviate $\tup{m_1, m_2, \ldots, m_k, 0, 0, 0, \ldots}$
+      as $\tup{m_1, m_2, \ldots, m_k}$.
+
+\pause\pause
+\item A word $u$ is \defn{packed with $\ell$ classes} if
+      its type $\mm$ has $m_1, m_2, \ldots, m_\ell > 0$ and
+      $m_{\ell+1} = m_{\ell+2} = \cdots = 0$.
+      \pause \\
+      Example: The word $1255135$ is not packed.
+      \\ The word $1244134$ is packed with $4$ classes.
+
+% \pause
+% \item If $u$ is a word of type $\mm = (m_1, m_2, \ldots)$, then we set
+      % $p_i(\mm) := m_1 + m_2 + \cdots + m_i$ for each $i$.
+
+% \pause
+% \item Instead of the type $\mm$ of a word $u$, we can also store the
+      % \textbf{multiset}
+      % $P(u) := \set{p_1(\mm), p_2(\mm), p_3(\mm), \ldots}$
+      % (which contains $n$ infinitely often, but is otherwise finite).
+      % \\ \pause
+      % Example:
+      % $P(1255135) = \set{2, 3, 4, 4, 7, 7, 7, \ldots}$.
+
+% \pause
+% \item If $q$ is a queue of size $k$, and if $u$ is a word, then
+      % $P(q(u))$ is obtained by inserting a $k$ into $P(u)$.
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{MLQs}
+\begin{itemize}
+
+\item A \defn{MLQ} (short for ``multiline queue'') is a tuple of queues. \pause
+
+\item If $\qq = \tup{q_1, q_2, \ldots, q_k}$ is an MLQ, and $u$ is a word,
+      then
+      \[
+      \qq(u) := q_k \tup{ q_{k-1} \tup{ \cdots \tup{ q_1(u) } } } .
+      \]
+
+\pause
+\item Let $\ell > 0$, and let $\sigma$ be a permutation of $\ive{\ell-1}$. \\
+      Let $\mm = (m_1, m_2, \ldots, m_{\ell})$ be a sequence of positive integers. \\
+      A \defn{$\sigma$-twisted MLQ of type $\mm$}
+      means an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$
+      such that
+      \begin{align*}
+      \abs{q_i} &= m_1 + m_2 + \cdots + m_{\sigma(i)} \text{ for all }i ,
+      \qquad \text{ and } \\
+      n &= m_1 + m_2 + \cdots .
+      \end{align*}
+      \only<4-8>{Example:
+      $n = 6$ and $\mm = \tup{2, 3, 1}$ and $\ell = 3$ and $\sigma = \tup{2,1}$
+      (one-line notation). Then, a $\sigma$-twisted MLQ of type $\mm$ is
+      an MLQ $\qq = \tup{q_1, q_2}$ with $\abs{q_1} = m_1 + m_2 = 2+3 = 5$
+      and $\abs{q_2} = m_1 = 2$.
+      }
+      \only<5-6>{
+      For example, $\qq = \tup{\set{1, 3, 4, 5, 6}, \set{2, 3}}$
+      }%
+      \only<6>{ and
+      $\qq(1 1 1 1 1 1) = 3 1 1 2 2 2$.
+      }%
+      \only<7-8>{
+      For example, $\qq = \tup{\set{1, 3, 4, 5, 6}, \set{4, 5}}$
+      }
+      \only<8>{ and
+      $\qq(1 1 1 1 1 1) = 2 3 2 1 1 2$.
+      }
+
+\only<9>{
+\item Equivalently: A \defn{$\sigma$-twisted MLQ of type $\mm$}
+      can be defined as an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$ such that
+      \begin{itemize}
+      \item the word $\qq(1\dotsm 1)$ has type $\mm$
+      (where $1\dotsm 1$ is the word whose values all equal $1$);
+      \item we have
+      $0 < \abs{q_{\sigma^{-1}(1)}} < \abs{q_{\sigma^{-1}(2)}} < \cdots < \abs{q_{\sigma^{-1}(\ell-1)}}$.
+      \end{itemize}
+}
+
+% \only<10>{
+% \item When $\sigma$ is the identity permutation,
+      % a $\sigma$-twisted MLQ of type $\mm$ is just called
+      % an \defn{(ordinary) MLQ of type $\mm$}.}
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Generating functions, 1: definition}
+
+\begin{itemize}
+\item Now, let $x_1, x_2, \ldots, x_n$
+be commuting variables. \pause
+
+\item For any $\ell\geq1$, any permutation $\sigma$ of $\left[  \ell-1\right]
+$, and any packed word $u$ of type $\mathbf{m}$ with $\ell$ classes, we
+define the \defn{$\sigma$-spectral weight $\left\langle u\right\rangle
+_{\sigma}$} by
+\[
+\left\langle u\right\rangle _{\sigma}:=\sum_{\substack{\mathbf{q}\text{ is a
+}\sigma\text{-twisted}\\\text{MLQ of type }\mathbf{m}\\\text{satisfying
+}u=\mathbf{q}\left(  1\cdots1\right)  }}\operatorname*{wt}\mathbf{q}.
+\]
+Here:
+
+\begin{itemize}
+\item $1\cdots1$ denotes the word whose all values are $1$.
+
+\item $\operatorname*{wt}\mathbf{q}:=\prod_{p=1}^{k}\prod_{i\in q_{p}}x_{i}$
+for any MLQ $\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{k}\right)  $.
+\end{itemize}
+\pause
+
+\only<3>{
+Example: Recall that $\left(  \left\{  1,3,4,5,6\right\}  ,\left\{
+4,5\right\}  \right)  $ is a $\sigma$-twisted MLQ of type $\mathbf{m}$ for
+{$n=6$ and $\mathbf{m}=\left(  2,3,1\right)  $ and $\ell=3$ and $\sigma
+=\left(  2,1\right)  $ (one-line notation) satisfying $\mathbf{q}%
+(111111)= 2 3 2 1 1 2$. It contributes a monomial}%
+\[
+\left(  x_{1}x_{3}x_{4}x_{5}x_{6}\right)  \left(  x_{4}x_{5}\right)
+=x_{1}x_{3}x_{4}^{2}x_{5}^{2}x_{6}
+\quad \text{to }
+\left\langle {2 3 2 1 1 2}\right\rangle _{\sigma} .
+\]
+}
+
+\only<4->{
+\item Set $\swt{u} := \swt{u}_{\id}$
+for the permutation $\id$ of $\ive{\ell-1}$.
+}
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Generating functions, 2: more examples}
+
+\begin{itemize}
+
+\item Example: For $n = 5$, $\ell = 5$ and $\mm = \tup{1,1,2,1}$, we have
+\begin{align*}
+\swt{13234} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1 x_4 + x_1 x_5 + x_4 x_5 + x_5^2).
+\end{align*}
+
+\pause
+\item Examples: For $n = 5$, $\ell = 5$ and $\mm = \tup{1,1,1,1,1}$, we have
+\begin{align*}
+\swt{13245} & = x_1 x_2 x_3^2 x_4 (x_1^2 + x_1x_4 + x_1x_5 + x_4^2 + x_4x_5 + x_5^2)
+\\ & \hspace{20pt} \cdot (x_1x_2x_3 + x_1x_2x_5+x_1x_3x_5+x_2x_3x_5),
+\\ \swt{14235} & = x_1x_2x_3^2x_4^2 (x_1^3x_2 + x_1^3x_3 + x_1^3x_5 + x_1^2x_2x_3 + x_1^2x_2x_4
+\\ & \hspace{60pt} + 2x_1^2x_2x_5 + x_1^2x_3x_4 + 2x_1^2x_3x_5 + x_1^2x_4x_5
+\\ & \hspace{60pt}  + x_1^2x_5^2 + x_1x_2x_3x_5+ x_1x_2x_4x_5 + 2x_1x_2x_5^2
+\\ & \hspace{60pt}  + x_1x_3x_4x_5 + 2x_1x_3x_5^2 + x_1x_4x_5^2 + x_1x_5^3 
+\\ & \hspace{60pt} + x_2x_3x_5^2 + x_2x_4x_5^2 + x_2x_5^3 + x_3x_4x_5^2 + x_3x_5^3).
+\end{align*}
+
+\end{itemize}
+
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{The symmetry theorem, 1: statement}
+
+\begin{itemize}
+\item \textbf{Theorem.} For any $\ell\geq1$, any permutation $\sigma$ of
+$\left[  \ell-1\right]  $, and any packed word $u$ of type $\mathbf{m}$ with
+$\ell$ classes, we have
+\[
+\left\langle u\right\rangle _{\sigma}=\left\langle u\right\rangle .
+\]
+
+\pause
+\item This yields a recent conjecture by Arita, Ayyer, Mallick
+and Prolhac on the TASEP.
+
+\pause
+\item This is proven bijectively, using a \textquotedblleft duality
+transformation\textquotedblright\ on MLQs that leaves their action on words unchanged.
+
+\item \textbf{Main lemma.} If $q_{1}$ and $q_{2}$ are two queues, then there
+are two queues $q_{1}^{\prime}$ and $q_{2}^{\prime}$ satisfying
+\begin{align*}
+&\left\vert q_{1}^{\prime}\right\vert =\left\vert q_{2}\right\vert
+\qquad\text{and}\qquad\left\vert q_{2}^{\prime}\right\vert =\left\vert
+q_{1}\right\vert \qquad \text{and} \\
+& \tup{\prod_{i \in q'_1} x_i} \tup{\prod_{i \in q'_2} x_i}
+  = \tup{\prod_{i \in q_1} x_i} \tup{\prod_{i \in q_2} x_i}
+\end{align*}
+such that every word $u$ satisfies%
+\[
+q_{1}^{\prime}\left(  q_{2}^{\prime}\left(  u\right)  \right)  =q_{1}\left(
+q_{2}\left(  u\right)  \right)  .
+\]
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{The symmetry theorem, 2: idea of proof}
+
+\begin{itemize}
+\item The construction of $q_{1}^{\prime}$ and $q_{2}^{\prime}$ is combinatorial:
+
+\begin{itemize}
+\item Encode the pair $\left(  q_{1},q_{2}\right)  $ as a $2n$-letter word
+$b = \tup{b_1, b_2, \ldots, b_{2n}}$
+over the $3$-letter alphabet $\set{{\blue )}, {\blue (}, {\blue \circ}}$. Namely, for each $i$,
+
+\begin{itemize}
+\item let $b_{2i-1}$ be an opening parenthesis
+\textquotedblleft${\blue (}$\textquotedblright\ if $i\in q_{1}$, otherwise a neutral
+symbol \textquotedblleft${\blue \circ}$\textquotedblright;
+
+\item let $b_{2i}$ be a closing parenthesis \textquotedblleft%
+${\blue )}$\textquotedblright\ if $i\in q_{2}$, otherwise a neutral symbol
+\textquotedblleft${\blue \circ}$\textquotedblright.
+\end{itemize}
+
+\only<2-5>{Convenient example:
+\begin{align*}
+n &= 10; \\
+q_1 &= \set{2, 6, 7, 9}; \\
+q_2 &= \set{1, 3, 5, 7, 8}.
+\end{align*}
+}
+\only<3>{
+Then,
+\[
+\hspace{-1cm}\begin{tabular}{cc|c|c|c|c|c|c|c|c|c|c|}
+$ b $ & $ = $ & $ {\blue \circ)} $ & $ {\blue (\circ} $ & $ {\blue \circ)} $ & $ {\blue \circ\circ} $ & $ {\blue \circ)} $ & $ {\blue (\circ} $ & $ {\blue ()} $ & $ {\blue \circ)} $ & $ {\blue (\circ} $ & $ {\blue \circ\circ} $ \\
+$i$ & = & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10
+\end{tabular}
+\]
+}
+\only<4>{
+Then,
+\[
+\hspace{-1cm}\begin{tabular}{cccccccccccc}
+$ b $ & $ = $ & $ {\blue \circ)} $ & $ {\blue (\circ} $ & $ {\blue \circ)} $ & $ {\blue \circ\circ} $ & $ {\blue \circ)} $ & $ {\blue (\circ} $ & $ {\blue ()} $ & $ {\blue \circ)} $ & $ {\blue (\circ} $ & $ {\blue \circ\circ} $
+\end{tabular}
+\]
+}
+\only<5>{
+Then,
+\[
+ b    =    {\blue \circ)}    {\blue (\circ}    {\blue \circ)}    {\blue \circ\circ}    {\blue \circ)}    {\blue (\circ}    {\blue ()}    {\blue \circ)}    {\blue (\circ}    {\blue \circ\circ} 
+\]
+}
+
+\pause\pause\pause\pause\pause
+\item Match parentheses in $b$
+\textquotedblleft the usual way\textquotedblright\ but
+keeping in mind that the word wraps around cyclically.
+\only<6-10>{%
+In our above example:
+}
+\only<6>{
+\[
+ b    =    {\blue \circ)}    {\blue (\circ}    {\blue \circ)}    {\blue \circ\circ}    {\blue \circ)}    {\blue (\circ}    {\blue ()}    {\blue \circ)}    {\blue (\circ}    {\blue \circ\circ} 
+\]
+}
+\only<7>{
+\[
+ b    =    {\blue \circ)}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ)}    {\blue (\circ}    {\blue ()}    {\blue \circ)}    {\blue (\circ}    {\blue \circ\circ} 
+\]
+}
+\only<8>{
+\[
+ b    =    {\blue \circ)}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ)}    {\blue (\circ}    {\blue (_2)_2}    {\blue \circ)}    {\blue (\circ}    {\blue \circ\circ} 
+\]
+}
+\only<9>{
+\[
+ b    =    {\blue \circ)}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ)}    {\blue (_3\circ}    {\blue (_2)_2}    {\blue \circ)_3}    {\blue (\circ}    {\blue \circ\circ} 
+\]
+}
+\only<10>{
+\[
+ b    =    {\blue \circ)_4}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ)}    {\blue (_3\circ}    {\blue (_2)_2}    {\blue \circ)_3}    {\blue (_4\circ}    {\blue \circ\circ} 
+\]
+}
+
+\pause\pause\pause\pause\pause
+\item Replace the unmatched parentheses by their duals -- e.g., if they
+were ${\blue )}$'s, make them ${\blue (}$'s.
+\only<12-14>{\\
+In our above example:}
+\only<12>{
+\[
+ b\phantom{'}    =    {\blue \circ)_4}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ)}    {\blue (_3\circ}    {\blue (_2)_2}    {\blue \circ)_3}    {\blue (_4\circ}    {\blue \circ\circ} 
+\]
+}
+\only<13>{
+\[
+ b\phantom{'}   =    {\blue \circ)_4}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ} {\red)}   {\blue (_3\circ}    {\blue (_2)_2}    {\blue \circ)_3}    {\blue (_4\circ}    {\blue \circ\circ} 
+\]
+}
+\only<14>{
+\[
+ b'   =    {\blue \circ)_4}    {\blue (_1\circ}    {\blue \circ)_1}    {\blue \circ\circ}    {\blue \circ} {\red(}    {\blue (_3\circ}    {\blue (_2)_2}    {\blue \circ)_3}    {\blue (_4\circ}    {\blue \circ\circ} 
+\]
+}
+
+\pause\pause\pause\pause
+\item Turn the resulting word $b'$ into two sets $q_{1}^{\prime}$ and
+$q_{2}^{\prime}$ as follows:
+
+\begin{itemize}
+\item $q_{1}^{\prime}=\left\{  i\in\left[  n\right]  \ \mid\ \text{either }
+b'_{2i-1} \text{ or } b'_{2i} \text{ is a
+\textquotedblleft}{\blue (}\text{\textquotedblright}\right\}  $;
+
+\item $q_{2}^{\prime}=\left\{  i\in\left[  n\right]  \ \mid\ \text{either }
+b'_{2i-1} \text{ or } b'_{2i} \text{ is a
+\textquotedblleft}{\blue )}\text{\textquotedblright}\right\}  $.
+\end{itemize}
+
+\end{itemize}
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{The symmetry theorem, 3: comments}
+
+\begin{itemize}
+
+\item Note that
+      \begin{itemize}
+      \item if $\abs{q_1} < \abs{q_2}$, then $q'_1$ is obtained from $q_1$
+            by adding some elements from $q_2$, whereas $q'_2$ is obtained
+            from $q_2$ by removing these elements;
+      \item if $\abs{q_1} = \abs{q_2}$, then $q'_1 = q_1$ and $q'_2 = q_2$;
+      \item if $\abs{q_1} > \abs{q_2}$, then $q'_1$ is obtained from $q_1$
+            by removing some elements, whereas $q'_2$ is obtained
+            from $q_2$ by adding these elements.
+      \end{itemize}
+
+\pause
+\item This is closely connected to the Lascoux-Sch\"{u}tzenberger action of the
+symmetric group on words
+(a.k.a. the Weyl group action on the word crystal of type A).
+
+\item Note: the map $\left(  q_{1},q_{2}\right)  \mapsto\left(  q_{1}^{\prime
+},q_{2}^{\prime}\right)  $ is an involution.
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{A Jacobi-Trudi-like formula}
+
+\begin{itemize}
+
+\only<1-2>{
+\item But can we compute $\swt{u}$ without enumerating all MLQs?}
+
+\only<2>{
+\item We have a partial answer (which subsumes two conjectures by
+Aas and Linusson).
+}
+
+\pause\pause
+\item \textbf{Theorem.}
+  Let $B = \set{b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$. \\
+  Let $v_1v_2 \dotsm v_r$ be a weakly decreasing (non-cyclic) packed word of length $r$ with $\ell-1$ classes. \\
+  Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$. \\
+  Then
+  \[
+  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\ell-v_j}(x_1, x_2, \dotsc, x_{b_j}) \bigr)_{1\leq i,j\leq r} .
+  \]
+  \pause
+  Example: $n = 8$ and $r = 4$ and $B = \set{1 < 3 < 4 < 7}$ and $\ell=4$
+  and $v_1 v_2 \dotsm v_r = 3321$. Then,
+  \begin{align*}
+  \swt{{\blue 3} {\red 4} {\blue 3 2} {\red 4} {\red 4} {\blue 1}}
+  &=
+  \tup{x_1 x_3 x_4 x_7} \\
+  &\qquad
+  \scalebox{0.8}{$
+  \abs{
+  \begin{matrix}
+  h_0(x_1) & h_{-1}(x_1, x_2, x_3) & h_{-1}(x_1, x_2, x_3, x_4) & h_{-1}(x_1, x_2, \ldots, x_7) \\
+  h_1(x_1) & h_{0}(x_1, x_2, x_3) & h_{0}(x_1, x_2, x_3, x_4) & h_{0}(x_1, x_2, \ldots, x_7) \\
+  h_2(x_1) & h_{1}(x_1, x_2, x_3) & h_{1}(x_1, x_2, x_3, x_4) & h_{1}(x_1, x_2, \ldots, x_7) \\
+  h_3(x_1) & h_{2}(x_1, x_2, x_3) & h_{2}(x_1, x_2, x_3, x_4) & h_{2}(x_1, x_2, \ldots, x_7)
+  \end{matrix}
+  }
+  $}
+  \end{align*}
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Bonus problem}
+\begin{center}
+{\LARGE \bf Bonus problem} \\
+\noindent\rule[0.5ex]{\linewidth}{1pt}
+{\Large \bf Dual stable Grothendieck polynomials}
+\end{center}
+\vspace{1cm}
+\end{frame}
+
+\begin{frame}
+\fti{Reminder on Schur functions}
+
+\begin{itemize}
+
+\item The following is not related to MLQs (or is it?), but a conjecture
+      I'm very curious to hear ideas about. \\
+      (And it's a Jacobi-Trudi type formula, too.)
+
+\pause \item Fix a commutative ring $\kk$. \\
+      Recall that for any skew partition $\lm$, the
+      \defn{(skew) Schur function $s_{\lm}$} is defined as the power series
+      \[
+      \sum_{T \text{ is an SST of shape } \lambda / \mu} \xx^{\cont T} \in \kk\left[\left[x_1, x_2, x_3, \ldots\right]\right] ,
+      \]
+      where ``SST'' is short for ``semistandard Young tableau'', and where
+        \[
+        \xx^{\cont T}
+        = \prod_{k \geq 1} x_k^{\text{number of times } T \text{ contains entry } k} .
+        \]
+
+\pause \item Let us generalize this by extending the sum and introducing extra parameters.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fti{Dual stable Grothendieck polynomials, 1: RPPs}
+
+\begin{itemize}
+
+\item A \defn{reverse plane partition (RPP)} is defined like an SST
+      (semistandard Young tableau),
+      but entries increase \textbf{weakly} both along rows and down columns. For example,
+        \begin{ytableau}
+        \none & 1 & 2 & 2 \\
+        \none & 2 & 2 \\
+        2 & 4
+        \end{ytableau}
+        is an RPP.
+        \pause \\
+        (In detail: An RPP is a map $T$ from a skew Young diagram to
+        $\set{\text{positive integers}}$ such that
+        $T\tup{i, j} \leq T\tup{i, j+1}$ and
+        $T\tup{i, j} \leq T\tup{i+1, j}$ whenever
+        these are defined.)
+
+\pause
+\item Let $\kk$ be a commutative ring, and fix any elements
+      $t_1, t_2, t_3, \ldots \in \kk$.
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Dual stable Grothendieck polynomials, 2: definition}
+
+\begin{itemize}
+
+\item Given a skew partition $\lambda / \mu$, we define the \defn{refined dual stable Grothendieck polynomial $\wtg_{\lambda / \mu}$} to be the formal power series
+\[
+\sum_{T \text{ is an RPP of shape } \lambda / \mu} \xx^{\ircont T} \ttt^{\ceq T} \in \kk\left[\left[x_1, x_2, x_3, \ldots\right]\right] ,
+\]
+where
+\[
+\xx^{\ircont T}
+= \prod_{k \geq 1} x_k^{\text{number of columns of } T \text{ containing entry } k}
+\]
+and
+\[
+\ttt^{\ceq T}
+= \prod_{i \geq 1} t_i^{\text{number of } j \text{ such that } T\left(i, j\right) = T\left(i+1, j\right)}
+\]
+(where $T\left(i, j\right) = T\left(i+1, j\right)$ implies, in particular, that both $\left(i, j\right)$ and $\left(i+1, j\right)$ are cells of $T$).
+\newline
+This is a formal power series in $x_1, x_2, x_3, \ldots$ (despite the name ``polynomial'').
+
+\end{itemize}
+\vspace{10cm}
+\end{frame}
+
+\begin{frame}
+\fti{Dual stable Grothendieck polynomials, 3: examples on $\xx^{\ircont T}$}
+
+%\textbf{Examples on $\xx^{\ircont T}$:}
+
+\begin{itemize}
+
+\item Recall:
+\[
+\xx^{\ircont T}
+= \prod_{k \geq 1} x_k^{\text{number of columns of } T \text{ containing entry } k} .
+\]
+
+\item If $T = \begin{ytableau}
+\none & 1 & 2 & 2 \\
+\none & 2 & 2 \\
+2 & 3
+\end{ytableau}$, then $\xx^{\ircont T} = x_1 x_2^4 x_3$.
+The $x_2$ has exponent $4$, not $5$, because the two $2$'s in column $3$ count only once.
+
+\pause
+\item If $T$ is an SST, then $\xx^{\ircont T} = \xx^{\cont T}$.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fti{Dual stable Grothendieck polynomials, 3: examples on $\ttt^{\ceq T}$}
+
+%\textbf{Examples on $\ttt^{\ceq T}$:}
+
+\begin{itemize}
+
+\item Recall that
+\[
+\ttt^{\ceq T}
+= \prod_{i \geq 1} t_i^{\text{number of } j \text{ such that } T\left(i, j\right) = T\left(i+1, j\right)}
+\]
+
+\item If $T = \begin{ytableau}
+\none & 1 & 2 & 2 \\
+\none & 2 & 2 \\
+2 & 3
+\end{ytableau}$, then $\ttt^{\ceq T} = t_1$, due to $T\left(1, 3\right) = T\left(2, 3\right)$.
+
+\pause
+\item If $T$ is an SST, then $\ttt^{\ceq T} = 1$.
+
+\item In general, $\ttt^{\ceq T}$ measures ``how often'' $T$ breaks the SST condition.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fti{Dual stable Grothendieck polynomials, 5}
+
+\begin{itemize}
+
+\item If we set $t_1 = t_2 = t_3 = \cdots = 0$, then $\wtg_{\lm} = s_{\lm}$.
+
+\pause
+\item If we set $t_1 = t_2 = t_3 = \cdots = 1$, then $\wtg_{\lm} = g_{\lm}$, the \defn{dual stable Grothendieck polynomial} of Lam and Pylyavskyy ({\red \arxiv{0705.2189}}).
+
+\item The general case, to our knowledge, is new.
+
+\pause
+\item \textbf{Theorem (Galashin, G., Liu, {\red \arxiv{1509.03803}}):} The power series $\wtg_{\lm}$ is symmetric in the $x_i$ (not in the $t_i$).
+
+\pause
+\item \textbf{Example 1:} If $\lambda = \left(n\right)$ and $\mu = \left(\right)$, then $\wtg_{\lm} = h_n$, the $n$-th complete homogeneous symmetric function.
+
+\pause
+\item \textbf{Example 2:} If $\lambda = \left(\underbrace{1, 1, \ldots, 1}_{n \text{ ones}}\right)$ and $\mu = \left(\right)$, then $\wtg_{\lm} = e_n\left(t_1, t_2, \ldots, t_{n-1}, x_1, x_2, x_3, \ldots\right)$, where $e_n$ is the $n$-th elementary symmetric function.
+
+\pause
+\item \textbf{Example 3:} If $\lambda = \left(2,1\right)$ and $\mu = \left(\right)$, then $\wtg_{\lm} = \sum\limits_{a\leq b; \ a < c} x_a x_b x_c + t_1 \sum\limits_{a \leq b} x_a x_b = s_{(2,1)} + t_1 s_{(2)}$.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fti{Jacobi-Trudi identity?}
+
+\begin{itemize}
+
+\item \textbf{Conjecture:}
+Let the conjugate partitions of $\lambda$ and
+$\mu$ be $\lambda^{t}=\left(  \left(  \lambda^{t}\right)  _{1},\left(
+\lambda^{t}\right)  _{2},\ldots,\left(  \lambda^{t}\right)  _{N}\right)  $ and
+$\mu^{t}=\left(  \left(  \mu^{t}\right)  _{1},\left(  \mu^{t}\right)
+_{2},\ldots,\left(  \mu^{t}\right)  _{N}\right)  $. Then,%
+\begin{align*}
+&  \widetilde{g}_{\lambda/\mu}\\
+&  =\det\left(  \left(  e_{\left(  \lambda^{t}\right)  _{i}-i-\left(  \mu
+^{t}\right)  _{j}+j}\left(  \mathbf{x},\mathbf{t}\left[  \left(  \mu
+^{t}\right)  _{j}+1:\left(  \lambda^{t}\right)  _{i}\right]  \right)  \right)
+_{1\leq i\leq N,\ 1\leq j\leq N}\right)  .
+\end{align*}
+Here, $\left(  \mathbf{x},\mathbf{t}\left[  k:\ell\right]  \right)  $ denotes
+the alphabet $\left(  x_{1},x_{2},x_{3},\ldots,t_{k},t_{k+1},\ldots,t_{\ell
+-1}\right)  $.
+
+\textbf{Warning:} If $\ell\leq k$, then $t_{k},t_{k+1},\ldots,t_{\ell-1}$
+means nothing. No \textquotedblleft antimatter\textquotedblright\ variables!
+
+\pause
+\item This would generalize the Jacobi-Trudi identity for Schur
+      functions in terms of $e_i$'s.
+
+\pause
+\item I have some even stronger conjectures, with less evidence...
+
+\pause
+\item The case $\mu = \varnothing$ has been proven by Damir Yeliussizov
+      in {\red \arxiv{1601.01581}}.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\fti{Thank you}
+
+\begin{itemize}
+
+\item Christine Bessenrodt for the invitation.
+
+\item Erik Aas and Travis Scrimshaw for collaboration.
+
+\item you for attending.
+
+\end{itemize}
+
+\end{frame}
+
+\end{document}
+

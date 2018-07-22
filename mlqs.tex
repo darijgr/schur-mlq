@@ -610,7 +610,7 @@ We omit the word ``discrete'' as these are the only MLQs in this note.
 We shall now introduce generating functions for queues.
 
 \begin{dfn}
-Let $\xx := \{x_1, x_2, x_3, \ldots\}$ be commuting indeterminates.
+Let $\xx := \{x_1, x_2, \ldots, x_n\}$ be commuting indeterminates indexed by elements of $\ZZ / n \ZZ$. (Thus, $x_{n+k} = x_k$ for all $k \in \ZZ$.)
 
 The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
 
@@ -628,14 +628,15 @@ where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
-\begin{remark}
+\begin{lemma}
 \label{rmk:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
 Let $\qq$ be a $\sigma$-twisted MLQ.
-Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$ from Remark~\ref{rmk:t-splitting}.
-\end{remark}
+Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
+\end{lemma}
 
-%\begin{proof}
+\begin{proof}
+Repeatedly apply~\eqref{eq:queue_type_change}.
 %Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
 %Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
 %Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
@@ -644,16 +645,19 @@ Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$ from Remark~\re
 %Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
 %Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
 %In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
-%\end{proof}
+\end{proof}
 %\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
 %\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues. I really think this is completely obvious from how queues act on types. If you really need to ``prove'' a remark, which you do not here, it should not be a remark.}
 
-\begin{remark}
-Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
+\begin{example}
+Let $\ell \geq 1$.
 Let $u$ be a packed word with $\ell$ classes and type $\mm$.
-Then, there exists at least once MLQ $\qq$ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
-In other words, $\swt{u}_{\sigma} \neq 0$ (as a polynomial over $\ZZ$).
-\end{remark}
+For each $k \in \ive{\ell-1}$, let $q_k$ be the set of all sites $i$ such that $u_i \leq k$.
+It is then easy to check that $\qq := \tup{q_1, q_2, \ldots, q_{\ell-1}}$ is an
+MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$ and has weight
+$\wt(\qq) = \prod_{j \in \ZZ / n \ZZ} x_j^{\ell - u_j}$.
+Hence, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
+\end{example}
 
 
 
@@ -870,7 +874,7 @@ $\zeta \in \SymGp{\ell}$
 is precisely the multiset of the $p_k(\mm)$ for $k \geq 1$
 with one copy of $p_i(\mm) = \abs{q'}$ removed).
 Furthermore, the definition of $u$ becomes $u = \qq' (1 \dotsm 1)$.
-Hence, the type of $u$ is $\mm$ (by Remark~\ref{rmk:mlq-type}).
+Hence, the type of $u$ is $\mm$ (by Lemma~\ref{rmk:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
 $\nn$ of the word $q(1 \dots 1)$ satisfies $p_1(\nn) = k$.
