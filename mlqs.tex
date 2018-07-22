@@ -96,6 +96,9 @@
 \excludecomment{verlong}
 \includecomment{vershort}
 \excludecomment{noncompile}
+
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+
 \newcommand{\rev}{\operatorname{rev}}
 \newcommand{\conncomp}{\operatorname{conncomp}}
 \newcommand{\core}{\operatorname{core}}
@@ -1313,6 +1316,7 @@ We begin by constructing a sequence of parentheses as follows: For each $j = 1, 
 \item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$;
 \item nothing otherwise.
 \end{itemize}
+We say that these parentheses are \defn{contributed} by the site $j$.
 Next, we match as many parentheses as possible following the \defn{standard parenthesis-matching algorithm}:
 every time you find an opening parenthesis to the left of a closing one, with only frozen parentheses between them, you match these two parentheses and declare them frozen.
 Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (i.e., to the right of the former and to the left of the latter) are frozen.
@@ -1321,7 +1325,7 @@ At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parenthese
 This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
 If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
 When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-We define \defn{$\SP\tup{q_1, q_2}$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \textbf{closing} parenthesis (i.e., which site contributes which closing parentheses).
+We define \defn{$\SP\tup{q_1, q_2}$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \textbf{closing} parentheses (i.e., which site contributes which closing parenthesis).
 
 Note that each site $j$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `()`, which can be immediately matched (to each other) at the beginning of the algorithm.
 Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
@@ -1329,34 +1333,35 @@ Hence, if we skip the sites $j$ that belong to both $q_1$ and $q_2$ in the defin
 The sequence of parentheses obtained as above, but skipping these sites $j$, will be called the \defn{reduced parenthesis sequence}.
 
 If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
-We say $\mcI \subseteq \ZZ / n \ZZ$ is a \defn{balanced set} if each $i \in \mcI$ is balanced.
-If $\mcI$ is connected (as a subset of the cycle graph), we call $\mcI$ a \defn{balanced interval}.
+There are exactly $\abs{r_1 - r_2}$ unbalanced sites.
+% We say $\mcI \subseteq \ZZ / n \ZZ$ is a \defn{balanced set} if each $i \in \mcI$ is balanced.
+% If $\mcI$ is connected (as a subset of the cycle graph), we call $\mcI$ a \defn{balanced interval}.
 
 We construct $C' = (q'_1, q'_2)$ as follows.
 For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
-Note that $C$ and $C'$ have the same balanced intervals, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
+Note that $C$ and $C'$ have the same balanced sites, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
 Hence, $C'' = C$. Also, $\wt(C) = \wt(C')$.
 
-The following facts are straightforward:
-\begin{enumerate}
- \item For any inclusion-maximal balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
- \item The empty set is balanced.
- \item The set $\ive{n}$ is a balanced set if and only if $r_1 = r_2$.
- \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
-       is balanced.\footnote{To prove this, first check it when $A$ and $B$
-       are balanced intervals.}
- \item If $A$ and $B$ are balanced intervals, and if $A \cup B$ is an
-       interval, then $A \cup B$ is balanced.\footnote{This is obvious
-       when one of $A$ and $B$ contains the other. Otherwise, argue
-       that $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced.}
- \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
-       $i \in \ive{n}$) is also the disjoint union of all maximal balanced intervals
-       (where ``maximal'' means ``maximal under inclusion'').
- \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
- \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
- \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
-\end{enumerate}
+% The following facts are straightforward:
+% \begin{enumerate}
+ % \item For any inclusion-maximal balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
+ % \item The empty set is balanced.
+ % \item The set $\ive{n}$ is a balanced set if and only if $r_1 = r_2$.
+ % \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
+       % is balanced.\footnote{To prove this, first check it when $A$ and $B$
+       % are balanced intervals.}
+ % \item If $A$ and $B$ are balanced intervals, and if $A \cup B$ is an
+       % interval, then $A \cup B$ is balanced.\footnote{This is obvious
+       % when one of $A$ and $B$ contains the other. Otherwise, argue
+       % that $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced.}
+ % \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
+       % $i \in \ive{n}$) is also the disjoint union of all maximal balanced intervals
+       % (where ``maximal'' means ``maximal under inclusion'').
+ % \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
+ % \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
+ % \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
+% \end{enumerate}
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -1380,10 +1385,9 @@ In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \
 \end{tikzpicture}
 \]
 \caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
-The maximal balanced intervals are boxed.}
+The purple boxes mark the balanced sites.}
 \label{fig:balanced}
 \end{figure}
-
 
 \begin{figure}[t]
 \[
@@ -1426,7 +1430,7 @@ The maximal balanced intervals are boxed.}
 \end{tikzpicture}
 \]
 \caption{The Motzkin path corresponding to the configuration in Figure~\ref{fig:balanced}.
-The corresponding unbalanced up steps are marked by dots.}
+The corresponding unbalanced up-steps are marked by dots.}
 \label{fig:balanced_motzkin}
 \end{figure}
 
@@ -1613,7 +1617,8 @@ Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
 Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
 corresponding to the $k$ smallest letters $w_i$ of $w$.
 
-The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the following two facts.
+Our proof of Theorem~\ref{thm:permutation} will rely on a connection between dual configurations and the action of queues on words.
+We begin with a string of lemmas.
 
 \begin{lemma} \label{lem:SL.reconstruct}
 Let $w, w' \in \mcW_n$ be two words of the same type $\mm$.
@@ -1637,7 +1642,7 @@ Since this holds for all letters $i$, we have $w = w'$.
 Let $\tup{q_1, q_2}$ be a configuration with $\abs{q_1} \leq \abs{q_2}$.
 Let $i \in q_1$.
 Let $j$ be the first site weakly to the right of $i$ that belongs to $q_2$.
-Then, $\SP\tup{q_1 \setminus \set{i}, q_2 \setminus \set{j}}$ is obtained from $\SP\tup{q_1, q_2}$ by removing a pair of matched parentheses.
+Then, $\SP\tup{q_1 \setminus \set{i}, q_2 \setminus \set{j}}$ is obtained from $\SP\tup{q_1, q_2}$ by removing a pair of matched parentheses\footnote{The matching of all other parentheses remains the same, and so does the correspondence between sites and closing parentheses (except for the one we removed).}.
 Moreover, the closing parenthesis of that pair is contributed by $j \in q_2$.
 \end{lemma}
 
@@ -1656,7 +1661,7 @@ Hence, the parenthesis sequence $\SP\tup{q_1, q_2}$ between $\alpha$ and $\gamma
 \end{array}
 \]
 where $\alpha$ and $\beta$ may be the same parenthesis.
-The parenthesis sequence $\SP\tup{q_1 \setminus \set{i}, q_2 \setminus \set{j}}$ looks exactly the same, except that $\alpha$ and $\gamma$ are missing.
+The parenthesis sequence $\SP\tup{q_1 \setminus \set{i}, q_2 \setminus \set{j}}$ is obtained from $\SP\tup{q_1, q_2}$ by removing $\alpha$ and $\gamma$.
 But this is tantamount to removing $\beta$ and $\gamma$ from $\SP \tup{q_1, q_2}$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
 \end{proof}
 
@@ -1668,7 +1673,27 @@ Each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP
 \end{lemma}
 
 \begin{proof}
-XXX
+Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $(1, 2, \dotsc, n)$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Use this permutation to construct $q(u)$ as per the definition.
+For each $p \in \ive{n}$, let $j_p$ denote the site that is set while processing $i = i_p$ when constructing $q(u)$.
+Thus, $(q(u))_{j_p} = u_{i_p}$ whenever $p \leq \abs{q}$ (since these entries of $q(u)$ are set in Phase~II),
+and $(q(u))_{j_p} = u_{i_p} + 1$ otherwise (Phase~I).
+Therefore, $\ive{q(u)}_k = \set{j_1, j_2, \ldots, j_k}$ (since $k \leq \abs{q}$).
+Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$.
+
+We will show a bit more:
+\begin{statement}
+\textit{Claim 1:} Let $p \in \set{0, 1, \ldots, k}$. Then, $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{p}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{p}}}$ is obtained from $\SP\tup{q_1 , q_2 }$ by removing $p$ pairs of matched parentheses. The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots, j_p$.
+\end{statement}
+[\textit{Proof of Claim 1:} We shall prove this by induction on $p$.
+The induction base ($p = 0$) is obvious.
+For the induction step, we assume (as induction hypothesis) that Claim 1 holds for $p-1$.
+The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and thus $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$.
+Hence, Lemma~\ref{lem:SL.dual.1} (applied to $q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}$, $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$) shows that $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{p}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{p}}}$ is obtained from $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}}$ by removing a pair of matched parentheses,
+and moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$.
+Thus, Claim 1 follows from the induction hypothesis. This completes the induction step.]
+
+Claim 1 (applied to $p = k$) shows that $\SP\tup{q_1 \setminus \set{i_1, i_2, \ldots, i_{k}}, q_2 \setminus \set{j_1, j_2, \ldots, j_{k}}}$ is obtained from $\SP\tup{q_1 , q_2}$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$. Hence, each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$. This completes the proof.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
@@ -1679,30 +1704,20 @@ The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [
 \end{prop}
 
 \begin{proof}
-Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $(1, 2, \dotsc, n)$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-Use this permutation to construct $q(u)$ as per the definition.
-For each $p \in \ive{n}$, let $j_p$ denote the site that is set while processing $i = i_p$ when constructing $q(u)$.
+Let $\tup{q'_1, q'_2}$ be the dual configuration of $\tup{ [u]_k , q }$.
+We must then prove that $q'_2 = \ive{q(u)}_k$.
+Note that $\abs{q'_2} = \abs{\ive{u}_k} = k = \abs{\ive{q(u)}_k}$.
 
-Suppose $k < \abs{q}$.
-It is sufficient to show that for every $p \in \ive{n}$, there exists a balanced interval $\mcI$ such that both $i_p, j_p \in \mcI$.
-We proceed by induction on $p$, and we consider any matched $(_{i_a}$ with $)_{i_a}$ for $a < p$ to be frozen.
-For the base case $p=1$, we start with the natural bracketing.
-Note that we can rematch parentheses by
-\begin{equation}
-\label{eq:rematching}
-(_a\ (_b\ )_b\ )_a \longrightarrow (_a\ (_b\ )_a\ )_b,
-\end{equation}
-where there can be any number of (frozen) parentheses in between.
-Moreover, if we then freeze the $(_a\ )_a$ match, then we obtain the same matching as before rematching.
-Thus, we apply the rematching~\eqref{eq:rematching} to move $)_{i_p}$ to the unmatched bracket from position $j_p$.
-This proves Proposition~\ref{prop:SL.dual} in the case when $k < \abs{q}$.
-
-\Darij{I don't understand the above.}
+Suppose $k \leq \abs{q}$.
+Then, Lemma~\ref{lem:SL.dual.3} shows that each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP\tup{\ive{u}_k, q}$.
+Therefore, all of these sites are balanced, and hence belong to $q'_2$.
+Thus, $q'_2 \supseteq \ive{q(u)}_k$, whence $q'_2 = \ive{q(u)}_k$
+(since $\abs{q'_2} = \abs{\ive{q(u)}_k}$).
 
 Now suppose $k > \abs{q}$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
 Thus, $n-k < n - \abs{q} = \abs{q^*}$.
-Applying the $k < \abs{q}$ case (proven above)
+Hence, applying the $k \leq \abs{q}$ case (proven above)
 to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$,
 we see that
 $\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
