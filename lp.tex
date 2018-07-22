@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, July 16, 2018 22:23:26}
+%TCIDATA{LastRevised=Sunday, July 22, 2018 17:09:19}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -1099,16 +1099,16 @@ vertices are all pairs of integers (that is, its vertex set is $\mathbb{Z}%
 }\left(  i,j\right)  \in\mathbb{Z}\text{.}%
 \end{align*}
 The arcs of the first kind are called \defn{north-steps}, whereas the arcs of
-the second kind are called \defn{east-steps}. The vertices of $\mathbb{Z}^{2}$
-will just be called \defn{vertices}. We draw $\mathbb{Z}^{2}$ as the usual
-integer lattice in the Cartesian plane.
+the second kind are called \defn{east-steps}. The vertices of the lattice will
+just be called \defn{vertices}. We draw the lattice as the usual integer
+lattice in the Cartesian plane.
 
-For each vertex $v=\left(  i,j\right)  $ of the lattice, we set
-$\operatorname*{x}\left(  v\right)  =i$ and $\operatorname*{y}\left(
-v\right)  =j$. We refer to $\operatorname*{x}\left(  v\right)  $ as the
-\defn{x-coordinate} of $v$, and to $\operatorname*{y}\left(  v\right)  $ as
-the \defn{y-coordinate} of $v$. The \defn{y-coordinate} of an east-step
-$\left(  i,j\right)  \rightarrow\left(  i+1,j\right)  $ is defined to be $j$.
+For each vertex $v=\left(  i,j\right)  $, we set $\operatorname*{x}\left(
+v\right)  =i$ and $\operatorname*{y}\left(  v\right)  =j$. We refer to
+$\operatorname*{x}\left(  v\right)  $ as the \defn{x-coordinate} of $v$, and
+to $\operatorname*{y}\left(  v\right)  $ as the \defn{y-coordinate} of $v$.
+The \defn{y-coordinate} of an east-step $\left(  i,j\right)  \rightarrow
+\left(  i+1,j\right)  $ is defined to be $j$.
 
 For each arc $a$ of the lattice, we define the
 \defn{weight $\operatorname{wt}a$} of $a$ as the following monomial:%
@@ -1134,7 +1134,7 @@ A_{\sigma\left(  1\right)  },A_{\sigma\left(  2\right)  },\ldots
 A \defn{path} will simply mean a (directed) path in the lattice. The
 \defn{weight $\operatorname{wt}p$} of a path $p$ is defined as the product of
 the weights of all arcs of this path; this weight is a monomial. If $A$ and
-$B$ are two vertices, then \defn{$N\left(  A,B\right)  $} shall denote the set
+$B$ are two vertices, then \defn{$N\left(  A,B\right)$} shall denote the set
 of all paths from $A$ to $B$.
 
 If $\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ and $\left(  B_{1},B_{2}%
@@ -1161,9 +1161,7 @@ TODO: Picture of a NILP with weight. Don't align the sources or targets on a lin
 
 If $\mathbf{u}$ and $\mathbf{v}$ are two $k$-vertices, then
 \defn{$N\left( \mathbf{u},\mathbf{v}\right)  $} denotes the set of all NILPs
-from $\mathbf{u}$ to $\mathbf{v}$. If $A$ and $B$ are two vertices of this
-lattice, then \defn{$N\left( A, B \right)  $} denotes the set of all paths
-from $A$ to $B$.
+from $\mathbf{u}$ to $\mathbf{v}$.
 
 A pair $\left(  \mathbf{u},\mathbf{v}\right)  $ of two $k$-vertices
 $\mathbf{u}$ and $\mathbf{v}$ is said to be \defn{nonpermutable} if and only
@@ -1193,7 +1191,11 @@ $B=\left(  c,d\right)  $ satisfy%
 \sum_{p\in N\left(  A,B\right)  }\operatorname*{wt}p=h_{c-a}\left(
 x_{b},x_{b+1},\ldots,x_{d}\right)  . \label{eq.LGV.single-paths}%
 \end{equation}
-
+(Here, $h_{\ell}\left(  x_{b},x_{b+1},\ldots,x_{d}\right)  $ is defined as
+$\sum_{\substack{\left(  k_{1},k_{2},\ldots,k_{\ell}\right)  \in\left\{
+b,b+1,\ldots,d\right\}  ^{\ell};\\k_{1}\leq k_{2}\leq\cdots\leq k_{\ell}%
+}}x_{k_{1}}x_{k_{2}}\cdots x_{k_{\ell}}$ for all $\ell\in\mathbb{N}$, and is
+$0$ otherwise.)
 
 \begin{proof}
 [Proof of \eqref{eq.LGV.single-paths}.]Let $A=\left(  a,b\right)  $ and
@@ -1244,16 +1246,249 @@ $A^{\prime}$ to $B$. Then, $p$ and $p^{\prime}$ have a vertex in common.
 TODO: Example picture.
 
 \begin{proof}
-[Proof of Lemma \ref{lem.LGV.hex}.]Recall that each arc of the lattice is
-either an east-step or a north-step. Thus, the x-coordinates of the vertices
-of a path are always weakly increasing, and so are the y-coordinates. Hence,
-the existence of a path $p$ from $A$ to $B^{\prime}$ shows that
-$\operatorname*{x}\left(  A\right)  \leq\operatorname*{x}\left(  B^{\prime
-}\right)  $ and $\operatorname*{y}\left(  A\right)  \leq\operatorname*{y}%
-\left(  B^{\prime}\right)  $. Similarly, the existence of $p^{\prime}$ yields
+[First proof of Lemma \ref{lem.LGV.hex}.]If $q$ is any path, then the
+\defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
+of $q$.
+
+We shall now prove Lemma \ref{lem.LGV.hex} by strong induction on $\ell\left(
+p\right)  +\ell\left(  p^{\prime}\right)  $:
+
+\textit{Induction step:} Fix $N\in\mathbb{N}$. Assume (as the induction
+hypothesis) that Lemma \ref{lem.LGV.hex} holds whenever $\ell\left(  p\right)
++\ell\left(  p^{\prime}\right)  <N$. We must now prove that Lemma
+\ref{lem.LGV.hex} holds when $\ell\left(  p\right)  +\ell\left(  p^{\prime
+}\right)  =N$.
+
+So let $A$, $B$, $A^{\prime}$, $B^{\prime}$, $p$ and $p^{\prime}$ be as in
+Lemma \ref{lem.LGV.hex}, and let us assume that $\ell\left(  p\right)
++\ell\left(  p^{\prime}\right)  =N$. We must prove that $p$ and $p^{\prime}$
+have a vertex in common.
+
+Assume the contrary. Thus, $p$ and $p^{\prime}$ have no vertex in common.
+
+The vertex $A$ belongs to the path $p$, and thus must not belong to the path
+$p^{\prime}$ (since $p$ and $p^{\prime}$ have no vertex in common). But the
+vertex $A^{\prime}$ belongs to the path $p^{\prime}$. Hence, $A\neq A^{\prime
+}$ (since $A$ must not belong to $p^{\prime}$, whereas $A^{\prime}$ belongs to
+$p^{\prime}$). Similarly, $B^{\prime}\neq B$.
+
+Recall that the vertex $A$ does not belong to the path $p^{\prime}$.
+Similarly, the vertex $A^{\prime}$ does not belong to the path $p$.
+
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, the x-coordinates of the vertices of a path are always weakly
+increasing, and so are the y-coordinates. Hence, the existence of a path $p$
+from $A$ to $B^{\prime}$ shows that $\operatorname*{x}\left(  A\right)
+\leq\operatorname*{x}\left(  B^{\prime}\right)  $ and $\operatorname*{y}%
+\left(  A\right)  \leq\operatorname*{y}\left(  B^{\prime}\right)  $.
+Similarly, the existence of a path $p^{\prime}$ from $A^{\prime}$ to $B$
+yields $\operatorname*{x}\left(  A^{\prime}\right)  \leq\operatorname*{x}%
+\left(  B\right)  $ and $\operatorname*{y}\left(  A^{\prime}\right)
+\leq\operatorname*{y}\left(  B\right)  $.
+
+Next, we claim that $\ell\left(  p\right)  \neq0$.
+
+[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p\right)  =0$. Hence,
+the path $p$ has no steps. Therefore, $A=B^{\prime}$ (since $p$ is a path from
+$A$ to $B^{\prime}$). Hence, $\operatorname*{y}\left(  A\right)
+=\operatorname*{y}\left(  B^{\prime}\right)  \geq\operatorname*{y}\left(
+B\right)  $, so that $\operatorname*{y}\left(  A^{\prime}\right)
+\geq\operatorname*{y}\left(  A\right)  \geq\operatorname*{y}\left(  B\right)
+$. Combining this with $\operatorname*{y}\left(  A^{\prime}\right)
+\leq\operatorname*{y}\left(  B\right)  $, we obtain $\operatorname*{y}\left(
+A^{\prime}\right)  =\operatorname*{y}\left(  B\right)  $. Combining
+$\operatorname*{y}\left(  A^{\prime}\right)  \geq\operatorname*{y}\left(
+A\right)  $ with $\operatorname*{y}\left(  A^{\prime}\right)
+=\operatorname*{y}\left(  B\right)  \leq\operatorname*{y}\left(  A\right)  $,
+we obtain $\operatorname*{y}\left(  A^{\prime}\right)  =\operatorname*{y}%
+\left(  A\right)  $. Thus, $\operatorname*{y}\left(  A^{\prime}\right)
+=\operatorname*{y}\left(  A\right)  =\operatorname*{y}\left(  B\right)  $.
+Therefore, the vertex $A$ lies on the horizontal line that contains
+$A^{\prime}$ and $B$. Furthermore, this vertex $A$ must lie on the line
+segment between $A^{\prime}$ and $B$ (since $\operatorname*{x}\left(
+A^{\prime}\right)  \leq\operatorname*{x}\left(  \underbrace{A}_{=B^{\prime}%
+}\right)  =\operatorname*{x}\left(  B^{\prime}\right)  \leq\operatorname*{x}%
+\left(  B\right)  $).
+
+Recall again that the y-coordinates of the vertices a path are always weakly
+increasing. Moreover, they increase strictly whenever the path makes a
+north-step. Hence, if the path $p^{\prime}$ would have any north-step, then we
+would have $\operatorname*{y}\left(  A^{\prime}\right)  <\operatorname*{y}%
+\left(  B\right)  $ (since $p^{\prime}$ is a path from $A^{\prime}$ to $B$).
+But this would contradict $\operatorname*{y}\left(  A^{\prime}\right)
+\geq\operatorname*{y}\left(  B\right)  $. Hence, the path $p^{\prime}$ has no
+north-step. Thus, $p^{\prime}$ consists entirely of east-steps. Hence,
+$p^{\prime}$ contains every vertex on the line segment between $A^{\prime}$
+and $B$. Therefore, $p^{\prime}$ contains the vertex $A$ (since the vertex $A$
+lies on the line segment between $A^{\prime}$ and $B$). This contradicts the
+fact that $A$ does not belong to the path $p^{\prime}$. This contradiction
+shows that our assumption was false; hence, $\ell\left(  p\right)  \neq0$ is proven.]
+
+Furthermore, we claim that $\ell\left(  p^{\prime}\right)  \neq0$.
+
+[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p^{\prime}\right)
+=0$. Hence, the path $p^{\prime}$ has no steps. Therefore, $A^{\prime}=B$
+(since $p^{\prime}$ is a path from $A^{\prime}$ to $B$). Hence,
+$\operatorname*{x}\left(  A^{\prime}\right)  =\operatorname*{x}\left(
+B\right)  \geq\operatorname*{x}\left(  B^{\prime}\right)  $, so that
+$\operatorname*{x}\left(  A\right)  \geq\operatorname*{x}\left(  A^{\prime
+}\right)  \geq\operatorname*{x}\left(  B^{\prime}\right)  $. Combining this
+with $\operatorname*{x}\left(  A\right)  \leq\operatorname*{x}\left(
+B^{\prime}\right)  $, we obtain $\operatorname*{x}\left(  A\right)
+=\operatorname*{x}\left(  B^{\prime}\right)  $. Combining $\operatorname*{x}%
+\left(  A\right)  \geq\operatorname*{x}\left(  A^{\prime}\right)  $ with
+$\operatorname*{x}\left(  A^{\prime}\right)  \geq\operatorname*{x}\left(
+B^{\prime}\right)  =\operatorname*{x}\left(  A\right)  $, we obtain
+$\operatorname*{x}\left(  A\right)  =\operatorname*{x}\left(  A^{\prime
+}\right)  $. Thus, $\operatorname*{x}\left(  A^{\prime}\right)
+=\operatorname*{x}\left(  A\right)  =\operatorname*{x}\left(  B^{\prime
+}\right)  $. Therefore, the vertex $A^{\prime}$ lies on the vertical line that
+contains $A$ and $B^{\prime}$. Furthermore, this vertex $A^{\prime}$ must lie
+on the line segment between $A$ and $B^{\prime}$ (since $\operatorname*{y}%
+\left(  A^{\prime}\right)  \geq\operatorname*{y}\left(  A\right)  $ and
+$\operatorname*{y}\left(  \underbrace{A^{\prime}}_{=B}\right)
+=\operatorname*{y}\left(  B\right)  \leq\operatorname*{y}\left(  B^{\prime
+}\right)  $).
+
+Recall again that the x-coordinates of the vertices a path are always weakly
+increasing. Moreover, they increase strictly whenever the path makes an
+east-step. Hence, if the path $p$ would have any east-step, then we would have
+$\operatorname*{x}\left(  A\right)  <\operatorname*{x}\left(  B^{\prime
+}\right)  $ (since $p$ is a path from $A$ to $B^{\prime}$). But this would
+contradict $\operatorname*{x}\left(  A\right)  =\operatorname*{x}\left(
+B^{\prime}\right)  $. Hence, the path $p$ has no east-step. Thus, $p$ consists
+entirely of north-steps. Hence, $p$ contains every vertex on the line segment
+between $A$ and $B^{\prime}$. Therefore, $p$ contains the vertex $A^{\prime}$
+(since the vertex $A^{\prime}$ lies on the line segment between $A$ and
+$B^{\prime}$). This contradicts the fact that $A^{\prime}$ does not belong to
+the path $p$. This contradiction shows that our assumption was false; hence,
+$\ell\left(  p^{\prime}\right)  \neq0$ is proven.]
+
+Let $P$ be the second vertex of the path $p$. (This is well-defined, since
+$\ell\left(  p\right)  \neq0$.) Hence, $P$ lies on a path from $A$ to
+$B^{\prime}$ (namely, on the path $p$). Therefore, $\operatorname*{x}\left(
+A\right)  \leq\operatorname*{x}\left(  P\right)  \leq\operatorname*{x}\left(
+B^{\prime}\right)  $ (since the x-coordinates of the vertices a path are
+always weakly increasing) and $\operatorname*{y}\left(  A\right)
+\leq\operatorname*{y}\left(  P\right)  \leq\operatorname*{y}\left(  B^{\prime
+}\right)  $ (since the y-coordinates of the vertices a path are always weakly
+increasing). Let $r$ be the path from $P$ to $B^{\prime}$ obtained by removing
+the first arc from $p$. Thus, $r$ is a subpath of $p$. Hence, the paths $r$
+and $p^{\prime}$ have no vertex in common (since $p$ and $p^{\prime}$ have no
+vertex in common). Also, $\ell\left(  r\right)  =\ell\left(  p\right)
+-1<\ell\left(  p\right)  $ and thus $\underbrace{\ell\left(  r\right)
+}_{<\ell\left(  p\right)  }+\ell\left(  p^{\prime}\right)  <\ell\left(
+p\right)  +\ell\left(  p^{\prime}\right)  =N$.
+
+Moreover, $\operatorname*{x}\left(  A^{\prime}\right)  \leq\operatorname*{x}%
+\left(  A\right)  \leq\operatorname*{x}\left(  P\right)  $. If we had
+$\operatorname*{y}\left(  A^{\prime}\right)  \geq\operatorname*{y}\left(
+P\right)  $, then we could apply Lemma \ref{lem.LGV.hex} to $P$ and $r$
+instead of $A$ and $p$ (by the induction hypothesis, since $\ell\left(
+r\right)  +\ell\left(  p^{\prime}\right)  <N$). We thus would conclude that
+the paths $r$ and $p^{\prime}$ have a vertex in common; this would contradict
+the fact that the paths $r$ and $p^{\prime}$ have no vertex in common. Hence,
+we cannot have $\operatorname*{y}\left(  A^{\prime}\right)  \geq
+\operatorname*{y}\left(  P\right)  $. Thus, $\operatorname*{y}\left(
+A^{\prime}\right)  <\operatorname*{y}\left(  P\right)  $. Hence,
+$\operatorname*{y}\left(  A^{\prime}\right)  \leq\operatorname*{y}\left(
+P\right)  -1$ (since $\operatorname*{y}\left(  A^{\prime}\right)  $ and
+$\operatorname*{y}\left(  P\right)  $ are integers).
+
+But $P$ is the next vertex after $A$ on the path $p$. Hence, there is an arc
+from $A$ to $P$. If this arc was an east-step, then we would have
+$\operatorname*{y}\left(  P\right)  =\operatorname*{y}\left(  A\right)  $,
+which would contradict $\operatorname*{y}\left(  A\right)  \leq
+\operatorname*{y}\left(  A^{\prime}\right)  <\operatorname*{y}\left(
+P\right)  $. Hence, this arc cannot be an east-step. Thus, this arc must be a
+north-step. Therefore, $\operatorname*{y}\left(  P\right)  =\operatorname*{y}%
+\left(  A\right)  +1$ and $\operatorname*{x}\left(  P\right)
+=\operatorname*{x}\left(  A\right)  $. Combining $\operatorname*{y}\left(
+A^{\prime}\right)  \leq\operatorname*{y}\left(  P\right)  -1=\operatorname*{y}%
+\left(  A\right)  $ (since $\operatorname*{y}\left(  P\right)
+=\operatorname*{y}\left(  A\right)  +1$) with $\operatorname*{y}\left(
+A^{\prime}\right)  \geq\operatorname*{y}\left(  A\right)  $, we obtain
+$\operatorname*{y}\left(  A^{\prime}\right)  =\operatorname*{y}\left(
+A\right)  $.
+
+Let $P^{\prime}$ be the second vertex on the path $p^{\prime}$. (This is
+well-defined, since $\ell\left(  p^{\prime}\right)  \neq0$.) Hence,
+$P^{\prime}$ lies on a path from $A^{\prime}$ to $B$ (namely, on the path
+$p^{\prime}$). Therefore, $\operatorname*{x}\left(  A^{\prime}\right)
+\leq\operatorname*{x}\left(  P^{\prime}\right)  \leq\operatorname*{x}\left(
+B\right)  $ (since the x-coordinates of the vertices a path are always weakly
+increasing) and $\operatorname*{y}\left(  A^{\prime}\right)  \leq
+\operatorname*{y}\left(  P^{\prime}\right)  \leq\operatorname*{y}\left(
+B\right)  $ (since the y-coordinates of the vertices a path are always weakly
+increasing). Let $r^{\prime}$ be the path from $P^{\prime}$ to $B$ obtained by
+removing the first arc from $p^{\prime}$. Thus, $r^{\prime}$ is a subpath of
+$p^{\prime}$. Hence, the paths $p$ and $r^{\prime}$ have no vertex in common
+(since $p$ and $p^{\prime}$ have no vertex in common). Also, $\ell\left(
+r^{\prime}\right)  =\ell\left(  p^{\prime}\right)  -1<\ell\left(  p^{\prime
+}\right)  $ and thus $\ell\left(  p\right)  +\underbrace{\ell\left(
+r^{\prime}\right)  }_{<\ell\left(  p^{\prime}\right)  }<\ell\left(  p\right)
++\ell\left(  p^{\prime}\right)  =N$.
+
+Moreover, $\operatorname*{y}\left(  P^{\prime}\right)  \geq\operatorname*{y}%
+\left(  A^{\prime}\right)  \geq\operatorname*{y}\left(  A\right)  $. If we had
+$\operatorname*{x}\left(  P^{\prime}\right)  \leq\operatorname*{x}\left(
+A\right)  $, then we could apply Lemma \ref{lem.LGV.hex} to $P^{\prime}$ and
+$r^{\prime}$ instead of $A^{\prime}$ and $p^{\prime}$ (by the induction
+hypothesis, since $\ell\left(  p\right)  +\ell\left(  r^{\prime}\right)  <N$).
+We thus would conclude that the paths $p$ and $r^{\prime}$ have a vertex in
+common; this would contradict the fact that the paths $p$ and $r^{\prime}$
+have no vertex in common. Hence, we cannot have $\operatorname*{x}\left(
+P^{\prime}\right)  \leq\operatorname*{x}\left(  A\right)  $. Thus,
+$\operatorname*{x}\left(  P^{\prime}\right)  >\operatorname*{x}\left(
+A\right)  $. Hence, $\operatorname*{x}\left(  P^{\prime}\right)
+\geq\operatorname*{x}\left(  A\right)  +1$ (since $\operatorname*{x}\left(
+P^{\prime}\right)  $ and $\operatorname*{x}\left(  A\right)  $ are integers).
+
+But $P^{\prime}$ is the next vertex after $A^{\prime}$ on the path $p^{\prime
+}$. Hence, there is an arc from $A^{\prime}$ to $P^{\prime}$. If this arc was
+a north-step, then we would have $\operatorname*{x}\left(  P^{\prime}\right)
+=\operatorname*{x}\left(  A^{\prime}\right)  $, which would contradict
 $\operatorname*{x}\left(  A^{\prime}\right)  \leq\operatorname*{x}\left(
-B\right)  $ and $\operatorname*{y}\left(  A^{\prime}\right)  \leq
-\operatorname*{y}\left(  B\right)  $.
+A\right)  <\operatorname*{x}\left(  P^{\prime}\right)  $. Hence, this arc
+cannot be a north-step. Thus, this arc must be an east-step. Therefore,
+$\operatorname*{y}\left(  P^{\prime}\right)  =\operatorname*{y}\left(
+A^{\prime}\right)  $ and $\operatorname*{x}\left(  P^{\prime}\right)
+=\operatorname*{x}\left(  A^{\prime}\right)  +1$. Hence, $\operatorname*{x}%
+\left(  A^{\prime}\right)  +1=\operatorname*{x}\left(  P^{\prime}\right)
+\geq\operatorname*{x}\left(  A\right)  +1$, so that $\operatorname*{x}\left(
+A^{\prime}\right)  \geq\operatorname*{x}\left(  A\right)  $. Combining this
+with $\operatorname*{x}\left(  A^{\prime}\right)  \leq\operatorname*{x}\left(
+A\right)  $, we obtain $\operatorname*{x}\left(  A^{\prime}\right)
+=\operatorname*{x}\left(  A\right)  $.
+
+Now, the vertices $A$ and $A^{\prime}$ have the same x-coordinate (since
+$\operatorname*{x}\left(  A^{\prime}\right)  =\operatorname*{x}\left(
+A\right)  $) and the same y-coordinate (since $\operatorname*{y}\left(
+A^{\prime}\right)  =\operatorname*{y}\left(  A\right)  $). Hence, these two
+vertices are equal. In other words, $A=A^{\prime}$. This contradicts $A\neq
+A^{\prime}$. This contradiction shows that our assumption was false. Hence, we
+have shown that $p$ and $p^{\prime}$ have a vertex in common.
+
+Now, forget that we fixed $A$, $B$, $A^{\prime}$, $B^{\prime}$, $p$ and
+$p^{\prime}$. We thus have proven that if $A$, $B$, $A^{\prime}$, $B^{\prime}%
+$, $p$ and $p^{\prime}$ are as in Lemma \ref{lem.LGV.hex}, and if $\ell\left(
+p\right)  +\ell\left(  p^{\prime}\right)  =N$, then $p$ and $p^{\prime}$ have
+a vertex in common. In other words, Lemma \ref{lem.LGV.hex} holds when
+$\ell\left(  p\right)  +\ell\left(  p^{\prime}\right)  =N$. This completes the
+induction step. Hence, Lemma \ref{lem.LGV.hex} is proven.
+\end{proof}
+
+\begin{proof}
+[Second proof of Lemma \ref{lem.LGV.hex} (sketched).]Recall that each arc of
+the lattice is either an east-step or a north-step. Thus, the x-coordinates of
+the vertices of a path are always weakly increasing, and so are the
+y-coordinates. Hence, the existence of a path $p$ from $A$ to $B^{\prime}$
+shows that $\operatorname*{x}\left(  A\right)  \leq\operatorname*{x}\left(
+B^{\prime}\right)  $ and $\operatorname*{y}\left(  A\right)  \leq
+\operatorname*{y}\left(  B^{\prime}\right)  $. Similarly, the existence of
+$p^{\prime}$ yields $\operatorname*{x}\left(  A^{\prime}\right)
+\leq\operatorname*{x}\left(  B\right)  $ and $\operatorname*{y}\left(
+A^{\prime}\right)  \leq\operatorname*{y}\left(  B\right)  $.
 
 Thus,%
 \begin{align}
@@ -1585,7 +1820,7 @@ $A_{i}=\left(  k-i,1\right)  $ to $B_{i}=\left(  \lambda_{i}+k-i-1,s_{i}%
 first to last). Also, set $p_{i,\lambda_{i}}=s_{i}$. Thus,
 \begin{equation}
 1\leq p_{i,1}\leq p_{i,2}\leq\cdots\leq p_{i,\lambda_{i}-1}\leq p_{i,\lambda
-_{i}}=s_{i}\label{pf.thm.tableau.jt.row-weak}%
+_{i}}=s_{i} \label{pf.thm.tableau.jt.row-weak}%
 \end{equation}
 for each $i\in\left[  k\right]  $. Note that for each $i\in\left[  k\right]
 $,%
@@ -1594,7 +1829,7 @@ $,%
 \right)  \text{ for all }j\in\left[  \lambda_{i}\right]   &
 \label{pf.thm.tableau.jt.pi-vert-1}\\
 \text{and the vertices }\left(  k-i+j,p_{i,j}\right)  \text{ for all }%
-j\in\left[  \lambda_{i}-1\right]   &  .\label{pf.thm.tableau.jt.pi-vert-2}%
+j\in\left[  \lambda_{i}-1\right]   &  . \label{pf.thm.tableau.jt.pi-vert-2}%
 \end{align}
 
 
@@ -1719,25 +1954,38 @@ TODO: Example.
 \subsection{Spectral weights of \textquotedblleft
 almost-decreasing\textquotedblright\ words}
 
-XXX
+We now state the main result of this section -- a Jacobi-Trudi-like formula
+for $\left\langle u\right\rangle $ in certain cases.
 
 \begin{thm}
-\label{thm:determinant_form} Let $B = \left\{  b_{1} < b_{2} < \cdots< b_{r}
-\right\}  \subseteq\left[  n \right]  $. Let $v_{1}v_{2} \dotsm v_{r}$ be a
-weakly decreasing (non-cyclic) packed word of length $r$ with $\ell-1$
-classes. Define a word $u$ of length $n$ by $u_{i} = v_{j}$ if $i = b_{j}$ for
-some $j$, otherwise $u_{i} = \ell$. Then
+\label{thm:determinant_form} Let $B=\left\{  b_{1}<b_{2}<\cdots<b_{r}\right\}
+\subseteq\left[  n\right]  $. Let $v_{1}v_{2}\dotsm v_{r}$ be a weakly
+decreasing (non-cyclic) packed word of length $r$ with $\ell-1$ classes.
+Define a word $u$ of length $n$ by $u_{i}=v_{j}$ if $i=b_{j}$ for some $j$,
+otherwise $u_{i}=\ell$. Then
 \[
-\left\langle u \right\rangle = \left(  \prod_{i\in B} x_{i} \right)
-\det\bigl( h_{i-j-1+\gamma_{j}}(x_{1}, \dotsc, x_{b_{j}}) \bigr)_{1\leq
-i,j\leq r}\,,
+\left\langle u\right\rangle =\left(  \prod_{i\in B}x_{i}\right)
+\det\bigl(h_{i-j-1+\gamma_{j}}(x_{1},\dotsc,x_{b_{j}})\bigr)_{1\leq i,j\leq
+r}\,,
 \]
-where $\gamma_{j}$ is the number of distinct letters in $v_{1} \dotsm v_{j}$.
+where $\gamma_{j}=\ell-v_{j}$.
 \end{thm}
+
+Note that the $\gamma_{j}$ in Theorem \ref{thm:determinant_form} can also be
+described as the number of distinct letters in $v_{1}\dotsm v_{j}$.
+
+Our proof of Theorem \ref{thm:determinant_form} will rely on several lemmas.
+
+\begin{lemma}
+\label{lem:determinant_form.1}Let $r$, $B$, $b_{i}$, $v_{i}$ and $u$ be as in
+Theorem \ref{thm:determinant_form}. 
+\end{lemma}
 
 XXX
 
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
+
+
 \end{document}
