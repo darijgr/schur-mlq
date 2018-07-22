@@ -630,21 +630,30 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 
 \begin{remark}
 \label{rmk:mlq-type}
-Note that the type of the word $\qq(1 \dotsm 1)$ is the type of the ($\sigma$-twisted) MLQ $\qq$.
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
+Let $\qq$ be a $\sigma$-twisted MLQ.
+Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$ from Remark~\ref{rmk:t-splitting}.
 \end{remark}
 
-\begin{proof}
-Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
-Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
-Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
-Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
-(since $n = m_1 + m_2 + \cdots + m_\ell$).
-Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
-Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
-In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
-\end{proof}
-\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
-\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues.}
+%\begin{proof}
+%Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
+%Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
+%Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
+%Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
+%(since $n = m_1 + m_2 + \cdots + m_\ell$).
+%Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
+%Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
+%In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
+%\end{proof}
+%\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
+%\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues. I really think this is completely obvious from how queues act on types. If you really need to ``prove'' a remark, which you do not here, it should not be a remark.}
+
+\begin{remark}
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
+Let $u$ be a packed word with $\ell$ classes and type $\mm$.
+Then, there exists at least once MLQ $\qq$ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
+In other words, $\swt{u}_{\sigma} \neq 0$ (as a polynomial over $\ZZ$).
+\end{remark}
 
 
 
@@ -1505,8 +1514,8 @@ Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$ since $n$ is fixed.
 In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
 is injective.
 
-Now, for each $i \in \set{1, 2, \ldots, k-1}$, we recall the operator
-$\sigma_i \colon A^* \to A^*$ from~\cite[\S5.5]{Loth}.
+Following~\cite[\S5.5]{Loth}, for each $i \in \set{1, 2, \ldots, k-1}$, we give an operator
+$\sigma_i \colon A^* \to A^*$.
 This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
 as follows:
 \begin{enumerate}
