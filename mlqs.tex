@@ -633,7 +633,8 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 
 \begin{lemma}
 \label{rmk:mlq-type}
-Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$. Let $\qq$ be a $\sigma$-twisted MLQ.
+Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
+Let $\qq$ be a $\sigma$-twisted MLQ.
 Then, the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
 \end{lemma}
 
@@ -650,18 +651,15 @@ In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 \Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
 \Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues.}
 
-\begin{remark}
-Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$. Let $u$ be a packed word with $\ell$ classes and type $\mm$.
-Then, there exists at least once MLQ $\qq$ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
-In other words, $\swt{u}_{\sigma} \neq 0$ (as a polynomial over $\ZZ$).
-\end{remark}
-
-\begin{proof}
+\begin{example}
+Let $\ell \geq 1$.
+Let $u$ be a packed word with $\ell$ classes and type $\mm$.
 For each $k \in \ive{\ell-1}$, let $q_k$ be the set of all sites $i$ such that $u_i \leq k$.
-It is then easy to check that $\qq := \tup{q_1, q_2, \ldots, q_{\ell-1}}$ is an MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$.
-\end{proof}
-
-\Travis{A remark should \emph{never} have a proof. Since this is tangential to the paper and easy to prove, we can leave it as a remark and something for the reader.}
+It is then easy to check that $\qq := \tup{q_1, q_2, \ldots, q_{\ell-1}}$ is an
+MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$ and has weight
+$\wt(\qq) = \prod_{j \in \ZZ / n \ZZ} x_j^{\ell - u_j}$.
+Hence, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
+\end{example}
 
 
 %%%%%%%%%%
