@@ -1692,7 +1692,7 @@ Thus, $(q(u))_{j_p} = u_{i_p}$ whenever $p \leq \abs{q}$ (since these entries of
 and $(q(u))_{j_p} = u_{i_p} + 1$ otherwise (Phase~I).
 Therefore, $\ive{q(u)}_k = \set{j_1, j_2, \ldots, j_k}$ (since $k \leq \abs{q}$).
 Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
-Denote $q_1^{(p)} := q_i \setminus \{i_1, i_2, \dotsc, i_p\}$ and $q_1^{(p)} := q_i \setminus \{j_1, j_2, \dotsc, j_p\}$.
+Denote $q_1^{(p)} := q_1 \setminus \{i_1, i_2, \dotsc, i_p\}$ and $q_2^{(p)} := q_2 \setminus \{j_1, j_2, \dotsc, j_p\}$.
 
 \begin{statement}
 \textbf{Claim:}
@@ -1704,7 +1704,7 @@ The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots,
 We shall prove the claim by induction on $p$.
 The induction base ($p = 0$) is obvious.
 For the induction step, we assume that the claim holds for $p-1$.
-The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and therefore $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$.
+The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and therefore $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2^{(p-1)}$.
 Hence, Lemma~\ref{lem:SL.dual.1}
 %(applied to $q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}$, $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$)
 implies that $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1^{(p-1)}, q_2^{(p-1)})$ by removing a pair of matched parentheses.
