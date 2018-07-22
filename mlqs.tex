@@ -1702,14 +1702,14 @@ The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots,
 \end{statement}
 
 We shall prove the claim by induction on $p$.
-The induction base ($p = 0$) is obvious.
+The base case ($p = 0$) is obvious.
 For the induction step, we assume that the claim holds for $p-1$.
 The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and therefore $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2^{(p-1)}$.
 Hence, Lemma~\ref{lem:SL.dual.1}
-%(applied to $q_1 \setminus \set{i_1, i_2, \ldots, i_{p-1}}$, $q_2 \setminus \set{j_1, j_2, \ldots, j_{p-1}}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$)
+(applied to $q_1^{(p-1)}$, $q_2^{(p-1)}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$)
 implies that $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1^{(p-1)}, q_2^{(p-1)})$ by removing a pair of matched parentheses.
 Moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2^{(p-1)}$.
-Thus,  the claim follows from the induction hypothesis.
+Thus, the claim follows from the induction hypothesis.
 This completes the induction step.
 
 The claim applied to $p = k$ shows that $\SP(q_1^{(k)}, q_2^{(k)})$ is obtained from $\SP(q_1 , q_2)$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$.
