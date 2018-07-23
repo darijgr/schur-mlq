@@ -1340,14 +1340,21 @@ At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parenthese
 This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
 If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
 When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-We define \defn{$\SP(q_1, q_2)$} to be the following data: the sequence of parentheses obtained from $q_1$ and $q_2$; the matching obtained by the algorithm; and the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
+
+We define \defn{$\SP(q_1, q_2)$} to be the following data:
+\begin{itemize}
+\item the sequence of parentheses obtained from $q_1$ and $q_2$;
+\item the matching obtained by the algorithm; and
+\item the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
+\end{itemize}
 
 Note that each $j \in \ZZ/n\ZZ$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `$()$`, which can be immediately matched (to each other) at the beginning of the algorithm.
 Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
-Hence, if we skip the sites $j$ that belong to both $q_1$ and $q_2$ in the definition of our sequence of parentheses, then the outcome of the algorithm (specifically, the set of unmatched parentheses) will be the same.
+Hence, if we skip the sites $j \in q_1 \cap q_2$ in the definition of our sequence of parentheses, then the outcome of the algorithm (specifically, the set of unmatched parentheses) will be the same.
 The sequence of parentheses obtained as above, but skipping these sites $j$, will be called the \defn{reduced parenthesis sequence}.
 
-If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
+%If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
+A site $j \in \ZZ/n\ZZ$ is \defn{unbalanced} if it contributes an unmatched parenthesis; otherwise we say $j$ is \defn{balanced}.
 There are exactly $\abs{r_1 - r_2}$ unbalanced sites.
 % We say $\mcI \subseteq \ZZ / n \ZZ$ is a \defn{balanced set} if each $i \in \mcI$ is balanced.
 % If $\mcI$ is connected (as a subset of the cycle graph), we call $\mcI$ a \defn{balanced interval}.
@@ -1356,7 +1363,7 @@ We construct $C' = (q'_1, q'_2)$ as follows.
 For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced sites, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
-Hence, $C'' = C$. Also, $\wt(C) = \wt(C')$.
+Hence, we have $C'' = C$. Also, we have $\wt(C) = \wt(C')$.
 
 % The following facts are straightforward:
 % \begin{enumerate}
@@ -1662,16 +1669,15 @@ Moreover, the closing parenthesis of that pair is contributed by $j \in q_2$.
 
 \begin{proof}
 The assumption $\abs{q_1} \leq \abs{q_2}$ implies that all closing parentheses in $\SP(q_1, q_2)$ are matched.
-In particular, the closing parenthesis contributed by $j \in q_2$ is matched.
-Let $\gamma$ be this closing parenthesis.
+In particular, the closing parenthesis $\gamma$ contributed by $j \in q_2$ is matched.
 Let $\alpha$ be the opening parenthesis contributed by $i \in q_1$.
 All parentheses between $\alpha$ and $\gamma$ are opening (by the minimality of $j$).
-We know that $\gamma$ is matched; let $\beta$ be the opening parenthesis that is matched to $\gamma$.
-Hence, the parenthesis sequence $\SP(q_1, q_2)$ between $\alpha$ and $\gamma$ (inclusive) looks like this:
+We know that $\gamma$ is matched to an opening parenthesis $\beta$.
+Hence, the parenthesis sequence $\SP(q_1, q_2)$ between $\alpha$ and $\gamma$ (inclusive) is
 \[
 \begin{array}{cccccc}
 ( & ( & ( & \cdots & ( & ) \\
-\alpha & & & & \beta & \gamma ,
+\alpha & & & & \beta & \gamma,
 \end{array}
 \]
 where $\alpha$ and $\beta$ may be the same parenthesis.
@@ -1696,12 +1702,16 @@ Therefore, $\ive{q(u)}_k = \set{j_1, j_2, \ldots, j_k}$ (since $k \leq \abs{q}$)
 Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
 Denote $q_1^{(p)} := q_1 \setminus \{i_1, i_2, \dotsc, i_p\}$ and $q_2^{(p)} := q_2 \setminus \{j_1, j_2, \dotsc, j_p\}$.
 
+\medskip
+
 \begin{statement}
 \textbf{Claim:}
 Let $p \in \set{0, 1, \ldots, k}$.
-Then, the parenthesis sequence $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1 , q_2)$ by removing $p$ pairs of matched parentheses.
+Then, $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1 , q_2)$ by removing $p$ pairs of matched parentheses.
 The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots, j_p$.
 \end{statement}
+
+\medskip
 
 We shall prove the claim by induction on $p$.
 The base case ($p = 0$) is obvious.
@@ -1714,9 +1724,10 @@ Moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2^{(
 Thus, the claim follows from the induction hypothesis.
 This completes the induction step.
 
-The claim applied to $p = k$ shows that $\SP(q_1^{(k)}, q_2^{(k)})$ is obtained from $\SP(q_1 , q_2)$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$.
+\medskip
+
+The above claim applied to $p = k$ shows that $\SP(q_1^{(k)}, q_2^{(k)})$ is obtained from $\SP(q_1 , q_2)$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$.
 Hence, each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
-This completes the proof.
 \end{proof}
 
 \begin{prop} \label{prop:SL.dual}
