@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Sunday, July 22, 2018 17:09:19}
+%TCIDATA{LastRevised=Tuesday, July 24, 2018 01:58:54}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -326,7 +326,7 @@ TARZP~\cite{KMO16II}.
 This paper is organized as follows. In Section~\ref{sec:background}, we give
 the necessary background and definitions of MLQs and spectral weight. In
 Section~\ref{sec:result}, we give our main results. In
-Section~\ref{sec:JT_formula}, we show a Jacobi-Trudi like formula for special
+Section~\ref{sec:JT_formula}, we show a Jacobi--Trudi like formula for special
 words $u$, which we use to prove some of the conjectures in~\cite{AasLin17}.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the
 TASEP. In Section~\ref{sec:thm_proof}, we give a proof of our main theorem
@@ -1089,9 +1089,9 @@ as well as from the standard proof of the Jacobi--Trudi identities for Schur
 functions~\cite[First proof of Theorem 7.16.1]{Stanley-EC2}. We begin with
 basic definitions.
 
-The lattice \defn{lattice} shall mean the (infinite) directed graph whose
-vertices are all pairs of integers (that is, its vertex set is $\mathbb{Z}%
-^{2}$), and whose arcs are
+The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
+all pairs of integers (that is, its vertex set is $\mathbb{Z}^{2}$), and whose
+arcs are
 \begin{align*}
 \left(  i,j\right)   &  \rightarrow\left(  i,j+1\right)  \qquad\text{for all
 }\left(  i,j\right)  \in\mathbb{Z}\text{,}\qquad\text{and}\\
@@ -1266,14 +1266,9 @@ have a vertex in common.
 
 Assume the contrary. Thus, $p$ and $p^{\prime}$ have no vertex in common.
 
-The vertex $A$ belongs to the path $p$, and thus must not belong to the path
-$p^{\prime}$ (since $p$ and $p^{\prime}$ have no vertex in common). But the
-vertex $A^{\prime}$ belongs to the path $p^{\prime}$. Hence, $A\neq A^{\prime
-}$ (since $A$ must not belong to $p^{\prime}$, whereas $A^{\prime}$ belongs to
-$p^{\prime}$). Similarly, $B^{\prime}\neq B$.
-
-Recall that the vertex $A$ does not belong to the path $p^{\prime}$.
-Similarly, the vertex $A^{\prime}$ does not belong to the path $p$.
+The vertex $A$ belongs to the path $p$, and thus does not belong to the path
+$p^{\prime}$ (since $p$ and $p^{\prime}$ have no vertex in common). Similarly,
+the vertex $A^{\prime}$ does not belong to the path $p$.
 
 Recall that each arc of the lattice is either an east-step or a north-step.
 Thus, the x-coordinates of the vertices of a path are always weakly
@@ -1465,9 +1460,11 @@ Now, the vertices $A$ and $A^{\prime}$ have the same x-coordinate (since
 $\operatorname*{x}\left(  A^{\prime}\right)  =\operatorname*{x}\left(
 A\right)  $) and the same y-coordinate (since $\operatorname*{y}\left(
 A^{\prime}\right)  =\operatorname*{y}\left(  A\right)  $). Hence, these two
-vertices are equal. In other words, $A=A^{\prime}$. This contradicts $A\neq
-A^{\prime}$. This contradiction shows that our assumption was false. Hence, we
-have shown that $p$ and $p^{\prime}$ have a vertex in common.
+vertices are equal. In other words, $A=A^{\prime}$. Hence, the vertex $A$
+belongs to the path $p^{\prime}$ (since the vertex $A^{\prime}$ belongs to the
+path $p^{\prime}$). This contradicts the fact that the vertex $A$ does not
+belong to the path $p^{\prime}$. This contradiction shows that our assumption
+was false. Hence, we have shown that $p$ and $p^{\prime}$ have a vertex in common.
 
 Now, forget that we fixed $A$, $B$, $A^{\prime}$, $B^{\prime}$, $p$ and
 $p^{\prime}$. We thus have proven that if $A$, $B$, $A^{\prime}$, $B^{\prime}%
@@ -1553,7 +1550,7 @@ set has a maximum. Let $M$ be this maximum. Thus, $M\in\mathbb{Z}$ satisfies
 $\operatorname*{x}\left(  h_{M}\left(  \widetilde{p^{\prime}}\right)  \right)
 <\operatorname*{x}\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
 $\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p^{\prime}}\right)
-\right)  >\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}\right)
+\right)  \geq\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}\right)
 \right)  $.
 
 But the point $h_{M+1}\left(  \widetilde{p^{\prime}}\right)  $ is either the
@@ -1576,11 +1573,23 @@ h_{M}\left(  \widetilde{p}\right)  \right)  }+1<\underbrace{\operatorname*{x}%
 \]
 Therefore, $\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p^{\prime}%
 }\right)  \right)  \leq\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  $ (since both sides are integers). This contradicts
+\right)  \right)  $ (since both sides are integers). Combining this with
 $\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p^{\prime}}\right)
-\right)  >\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}\right)
-\right)  $. This contradiction shows that our assumption was false. Hence, the
-paths $p$ and $p^{\prime}$ have a vertex in common.]
+\right)  \geq\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}\right)
+\right)  $, we obtain $\operatorname*{x}\left(  h_{M+1}\left(
+\widetilde{p^{\prime}}\right)  \right)  =\operatorname*{x}\left(
+h_{M+1}\left(  \widetilde{p}\right)  \right)  $. Hence, $h_{M+1}\left(
+\widetilde{p^{\prime}}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $ (since
+$\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p^{\prime}}\right)
+\right)  -\operatorname*{y}\left(  h_{M+1}\left(  \widetilde{p^{\prime}%
+}\right)  \right)  =M+1=\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}%
+\right)  \right)  -\operatorname*{y}\left(  h_{M+1}\left(  \widetilde{p}%
+\right)  \right)  $ as well). Thus, the paths $\widetilde{p}$ and
+$\widetilde{p^{\prime}}$ have a vertex in common (namely, $h_{M+1}\left(
+\widetilde{p^{\prime}}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $). This
+contradicts the fact that they don't.\textsl{ }This contradiction shows that
+our assumption was false. Hence, the paths $p$ and $p^{\prime}$ have a vertex
+in common.]
 \end{proof}
 
 We can now specialize Proposition \ref{prop.LGV.nonper} to a form that is most
@@ -1655,7 +1664,7 @@ vertex in common.
 
 Thus we have found a contradiction for each $\mathbf{p}\in N\left(
 \mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)  $. Hence, $N\left(
-\mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)  \neq\varnothing$, as we desired.
+\mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)  =\varnothing$, as we desired.
 \end{proof}
 
 \subsection{Pseudo-partitions and tableaux}
@@ -1684,7 +1693,7 @@ The \defn{diagram $\ive{\lambda}$} of a $k$-pseudo-partition $\lambda=\left(
 \lambda_{1},\lambda_{2},\ldots,\lambda_{k}\right)  $ is defined as the set
 $\left\{  \left(  i,j\right)  \in\left[  k\right]  \times\left\{
 1,2,3,\ldots\right\}  \ \mid\ j\leq\lambda_{i}\right\}  $. This diagram is
-drawn in the place like usual Young diagrams, in English notation. For
+drawn in the plane like usual Young diagrams, in English notation. For
 example, the diagram of the $4$-pseudo-partition $\left(  3,2,3,1\right)  $ is
 drawn as%
 \[
@@ -1698,12 +1707,12 @@ $T:\left[  \lambda\right]  \rightarrow\left\{  1,2,3,\ldots\right\}  $. For
 each such tableau $T$ and each $\left(  i,j\right)  \in\left[  \lambda\right]
 $, we refer to the value $T\left(  i,j\right)  $ as the
 \defn{entry of $T$ in cell $\left(i,j\right)$}. As usual, we represent a
-tableau $T$ of shape $\lambda$ by placing the value $T\left(  i,j\right)  $
-(called the \defn{entry} of $T$ in cell $\left(  i,j\right)  $) into the box
-corresponding to $\left(  i,j\right)  \in\left[  \lambda\right]  $. For
-example, the following are two tableaux of shape $\left(  3,2,3,1\right)  $:%
+tableau $T$ of shape $\lambda$ by placing the entry $T\left(  i,j\right)  $
+into the box corresponding to $\left(  i,j\right)  \in\left[  \lambda\right]
+$. For example, the following are two tableaux of shape $\left(
+3,2,3,1\right)  $:%
 \begin{equation}
-\begin{ytableau} 2 & 5 & 1 & 3 \\ 1 & 1 \\ 2 & 4 & 1 \\ 7 \end{ytableau}\qquad
+\begin{ytableau} 2 & 5 & 3 \\ 1 & 1 \\ 2 & 4 & 1 \\ 7 \end{ytableau}\qquad
 \text{and}\qquad
 \begin{ytableau} 1 & 1 & 3 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}.
 \label{eq.tableau.exas}%
@@ -1744,7 +1753,7 @@ the monomial%
 (that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
 
 For example, the two tableaux in \eqref{eq.tableau.exas} have weights
-$x_{1}^{4}x_{2}^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_{1}^{2}x_{2}x_{3}^{2}%
+$x_{1}^{3}x_{2}^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_{1}^{2}x_{2}x_{3}^{2}%
 x_{4}x_{5}^{3}$, respectively (assuming that $n\geq7$).
 
 We now state the main result of this subsection:
@@ -1752,14 +1761,15 @@ We now state the main result of this subsection:
 \begin{thm}
 \label{thm.tableau.jt}Let $k\in\mathbb{N}$. Let $\lambda=\left(  \lambda
 _{1},\lambda_{2},\ldots,\lambda_{k}\right)  $ be a $k$-pseudo-partition. Let
-$s=\left(  s_{1},s_{2},\ldots,s_{k}\right)  $ be a weakly increasing sequence
-of elements of $\left[  n\right]  $. Then,%
-\[
-\sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
-\lambda\text{ and surface }s}}\operatorname*{wt}T=\left(  \prod_{i=1}%
-^{k}x_{s_{i}}\right)  \det\left(  h_{\lambda_{j}-j+i-1}\left(  x_{1}%
-,x_{2},\ldots,x_{s_{j}}\right)  \right)  .
-\]
+$s=\left(  s_{1},s_{2},\ldots,s_{k}\right)  $ be a strictly increasing
+sequence of elements of $\left[  n\right]  $. Then,%
+\begin{align*}
+&  \sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
+\lambda\text{ and surface }s}}\operatorname*{wt}T\\
+&  =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(
+h_{\lambda_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)
+_{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
+\end{align*}
 
 \end{thm}
 
@@ -1857,25 +1867,29 @@ Thus, the minimality of $j$ forces $p_{i,j-1}<p_{i+1,j-1}$. Finally,
 \eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1}\leq p_{i+1,j}$. Hence,
 $p_{i,j-1}<p_{i+1,j-1}\leq p_{i+1,j}\leq p_{i,j}$.
 
-No two of the paths $p_{1},p_{2},\ldots,p_{k}$ have a vertex in common (since
-$\left(  p_{1},p_{2},\ldots,p_{k}\right)  \in N\left(  \mathbf{u}%
-,\mathbf{v}\right)  $). Hence, $p_{i}$ and $p_{i+1}$ have no vertex in common.
-But \eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_{i}$ contains the
-vertex $\left(  k-i+j-1,p_{i,j}\right)  $. Also,
-\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $j-1$ instead of $j$) yields
-that $p_{i}$ contains the vertex $\left(  k-i+j-1,p_{i,j-1}\right)  $. But the
-vertex $\left(  k-i+j-1,p_{i+1,j}\right)  $ lies on the vertical line segment
-connecting the two vertices $\left(  k-i+j-1,p_{i,j}\right)  $ and $\left(
-k-i+j-1,p_{i,j-1}\right)  $ (since $p_{i,j-1}\leq p_{i+1,j}\leq p_{i,j}$).
-Hence, $p_{i}$ must contain the former vertex (since $p_{i}$ contains the
-latter two vertices).
+No two of the paths $p_{1},p_{2},\ldots,p_{k}$ have a vertex in common. Hence,
+$p_{i}$ and $p_{i+1}$ have no vertex in common. But
+\eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_{i}$ contains the vertex
+$\left(  k-i+j-1,p_{i,j}\right)  $. Also, \eqref{pf.thm.tableau.jt.pi-vert-2}
+(applied to $j-1$ instead of $j$) yields that $p_{i}$ contains the vertex
+$\left(  k-i+j-1,p_{i,j-1}\right)  $. But the vertex $\left(
+k-i+j-1,p_{i+1,j}\right)  $ lies on the vertical line segment connecting the
+two vertices $\left(  k-i+j-1,p_{i,j}\right)  $ and $\left(  k-i+j-1,p_{i,j-1}%
+\right)  $ (since $p_{i,j-1}\leq p_{i+1,j}\leq p_{i,j}$). Hence, $p_{i}$ must
+contain the former vertex (since $p_{i}$ contains the latter two vertices).
 
-On the other hand, \eqref{pf.thm.tableau.jt.pi-vert-1} (applied to $i+1$
-instead of $i$) shows that $p_{i+1}$ contains the vertex $\left(  k-\left(
-i+1\right)  +j,p_{i+1,j}\right)  =\left(  k-i+j-1,p_{i+1,j}\right)  $. So we
-have shown that both $p_{i}$ and $p_{i+1}$ contain the vertex $\left(
-k-i+j-1,p_{i+1,j}\right)  $. This contradicts the fact that $p_{i}$ and
-$p_{i+1}$ have no vertex in common.
+From \eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j}\leq s_{i}<s_{i+1}$
+(since $s$ is strictly increasing). If we had $j=\lambda_{i+1}$, then we would
+have $p_{i+1,j}=p_{i+1,\lambda_{i+1}}=s_{i+1}$ (by the definition of
+$p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j}\leq p_{i,j}%
+<s_{i+1}$. Hence, $j\neq\lambda_{i+1}$. Thus, $j\in\left[  \lambda
+_{i+1}-1\right]  $ (since $j\in\left[  \lambda_{i+1}\right]  $). Therefore,
+\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows
+that $p_{i+1}$ contains the vertex $\left(  k-\left(  i+1\right)
++j,p_{i+1,j}\right)  =\left(  k-i+j-1,p_{i+1,j}\right)  $. So we have shown
+that both $p_{i}$ and $p_{i+1}$ contain the vertex $\left(  k-i+j-1,p_{i+1,j}%
+\right)  $. This contradicts the fact that $p_{i}$ and $p_{i+1}$ have no
+vertex in common.
 
 We have assumed that $j>1$; but the same argument works for $j=1$ with minor
 changes (we now need to use $\left(  k-i+j-1,1\right)  $ instead of $\left(
@@ -1915,8 +1929,8 @@ whence $s_{q}=p_{q,\lambda_{q}}\leq p_{q,j}$ (by
 $p_{i_{1},j}\leq s_{q}\leq p_{q,j}<p_{i_{2},j}$. This proves our claim.]
 
 Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$
-and surface $s$ (since $p_{i,\lambda_{i}}=s_{i}$ for all $i\in\left[
-k\right]  $). So let us set%
+and surface $s$ (since $T\left(  i,\lambda_{i}\right)  =p_{i,\lambda_{i}%
+}=s_{i}$ for all $i\in\left[  k\right]  $). So let us set%
 \[
 \Phi\left(  p_{1},p_{2},\ldots,p_{k}\right)  =T.
 \]
@@ -1937,14 +1951,15 @@ Thus, $\Phi$ is a bijection. Moreover, it is easy to see that
 \]
 for each $\mathbf{p}\in N\left(  \mathbf{u},\mathbf{v}\right)  $. Hence,%
 \begin{align*}
-\sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
-\lambda\text{ and surface }s}}\operatorname*{wt}T  &  =\sum_{\mathbf{p}\in
-N\left(  \mathbf{u},\mathbf{v}\right)  }\left(  \prod_{i=1}^{k}x_{s_{i}%
-}\right)  \operatorname*{wt}\mathbf{p}=\left(  \prod_{i=1}^{k}x_{s_{i}%
-}\right)  \sum_{\mathbf{p}\in N\left(  \mathbf{u},\mathbf{v}\right)
-}\operatorname*{wt}\mathbf{p}\\
-&  =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  h_{\lambda_{j}%
--j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)  .
+&  \sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
+\lambda\text{ and surface }s}}\operatorname*{wt}T\\
+&  =\sum_{\mathbf{p}\in N\left(  \mathbf{u},\mathbf{v}\right)  }\left(
+\prod_{i=1}^{k}x_{s_{i}}\right)  \operatorname*{wt}\mathbf{p}=\left(
+\prod_{i=1}^{k}x_{s_{i}}\right)  \sum_{\mathbf{p}\in N\left(  \mathbf{u}%
+,\mathbf{v}\right)  }\operatorname*{wt}\mathbf{p}\\
+&  =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(
+h_{\lambda_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)
+_{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
 \end{align*}
 
 \end{proof}
@@ -1954,7 +1969,7 @@ TODO: Example.
 \subsection{Spectral weights of \textquotedblleft
 almost-decreasing\textquotedblright\ words}
 
-We now state the main result of this section -- a Jacobi-Trudi-like formula
+We now state the main result of this section -- a Jacobi--Trudi-like formula
 for $\left\langle u\right\rangle $ in certain cases.
 
 \begin{thm}
@@ -1975,10 +1990,13 @@ Note that the $\gamma_{j}$ in Theorem \ref{thm:determinant_form} can also be
 described as the number of distinct letters in $v_{1}\dotsm v_{j}$.
 
 Our proof of Theorem \ref{thm:determinant_form} will rely on several lemmas.
+Our first concerns words and queues.
+
+We say that a word $u\in\mathcal{W}_{n}$ is
 
 \begin{lemma}
 \label{lem:determinant_form.1}Let $r$, $B$, $b_{i}$, $v_{i}$ and $u$ be as in
-Theorem \ref{thm:determinant_form}. 
+Theorem \ref{thm:determinant_form}.
 \end{lemma}
 
 XXX
@@ -1986,6 +2004,4 @@ XXX
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
-
-
 \end{document}

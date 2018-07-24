@@ -97,9 +97,13 @@
 \excludecomment{verlong}
 \includecomment{vershort}
 \excludecomment{noncompile}
+
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+
 \newcommand{\rev}{\operatorname{rev}}
 \newcommand{\conncomp}{\operatorname{conncomp}}
 \newcommand{\core}{\operatorname{core}}
+\newcommand{\SP}{\operatorname{SP}}
 \newcommand{\col}{\operatorname{col}}
 \newcommand{\colw}{\operatorname{colw}}
 \newcommand{\word}{\operatorname{word}}
@@ -509,8 +513,8 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \node[circle,draw=black] (q2) at (4,0) {};
 \node[circle,draw=black] (q3) at (8,0) {};
 \node[circle,draw=black] (q4) at (9,0) {};
-\draw[->,red] (i3) -- (t3);
 \draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
+\draw[->,red] (i3) -- (t3);
 \draw[->,red] (i2) -- (2,0.15) .. controls (1.8,-0.2) and (1.6,-0.25) .. (1.3,-0.25) -- (0,-0.25);
 \draw[>->,red] (10,-0.25) -- (8,-0.25) -- (7,-0.25) -- (t7);
 \draw[->,red] (i6) -- (t6);
@@ -534,7 +538,7 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \]
 where the paths in red correspond to Phase I and those in blue are from Phase II
 (and where we have picked the permutation $\tup{i_1, i_2, \ldots, i_n}
-= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$).\travis{I do not like this because we just got done explaining the permutation does not matter. Also, the example is explicitly done so that you do not need to care about the permutation. The permutation is mostly an extra tool to make things simple for you to write the proofs, but it makes how you should do the algorithm more complicated than it needs to be.}
+= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$).\travis{I do not like this because we just got done explaining the permutation does not matter. Also, the example is explicitly done so that you do not need to care about the permutation. The permutation is mostly an extra tool to make things simple for you to write the proofs, but it makes how you should do the algorithm more complicated than it needs to be.}\ %
 Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
@@ -1321,7 +1325,7 @@ braid relation for dual configurations. We need some definitions first.
 
 An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
 As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of a queue given by Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
+We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
 We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
 Thus, assume $r_1 \neq r_2$.
@@ -1565,7 +1569,7 @@ $\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
 \begin{remark}
 Our letters $1, \ldots, k$ correspond to the letters
 $a_k, \ldots, a_1$ in~\cite{Loth},
-since~\cite{Loth}'s definition of $\sigma_i$ involves $a_i$ rather
+since the definition of $\sigma_i$ in~\cite{Loth} involves $a_i$ rather
 than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
 Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
 but this makes no difference to the proof, since all letters $\circ$ are always frozen.
@@ -1576,7 +1580,7 @@ but this makes no difference to the proof, since all letters $\circ$ are always 
 \begin{remark}
 The operator $\sigma_i$ is essentially a combination of co-plactic operators.
 Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
-Note that the bracketing rule given above is precisely the usual signature rule for computing tensor products.
+Note that the bracketing rule given above is precisely the usual signature rule (see, \textit{e.g.},~\cite[Sec.~2.4]{BS17} for a description) for computing tensor products.
 This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
 \end{remark}
 
@@ -1685,13 +1689,11 @@ Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude t
 Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$.
 Thus, Proposition~\ref{prop:SL.dual} is proven in the case when $k < \abs{q}$.
 
-\Travis{This proof is 2 pages more complicated than it needs to be. If it helps you believe it, then great. But it really is a very simple idea and proof.}
-
 Now suppose $k > \abs{q}$.
 % Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
 Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
 Thus, $n-k < n - \abs{q} = \abs{q^*}$.
-Applying the $k < \abs{q}$ case (proven above)
+Hence, applying the $k < \abs{q}$ case (proven above)
 to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$,
 we see that
 $\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
