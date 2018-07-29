@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Tuesday, July 24, 2018 01:58:54}
+%TCIDATA{LastRevised=Monday, July 30, 2018 00:45:50}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -1966,6 +1966,258 @@ _{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
 
 TODO: Example.
 
+\subsection{Interlacing MLQs}
+
+Let us introduce some further notations now.
+
+If $A$ is a finite set of integers, and if $k\in\left[  \left\vert
+A\right\vert \right]  $, then \defn{$\max_k A$} denotes the $k$-th largest
+element of $A$. For example, $\max\nolimits_{2}\left\{  4,5,6,8\right\}  =6$.
+
+Next, we define two binary relations $\succeq$ and $\gg$ on the powerset of
+$\left[  n \right]  $:
+
+\begin{itemize}
+\item Given two subsets $A$ and $B$ of $\left[  n \right]  $, we say that
+\defn{$A\succeq B$} if and only if $\left\vert I\right\vert =\left\vert
+J\right\vert $ and every $k\in\left[  \left\vert I\right\vert \right]  $
+satisfies $\max\nolimits_{k}A\geq\max\nolimits_{k}B$.
+
+\item Given two subsets $A$ and $B$ of $\left[  n \right]  $, we say that
+\defn{$A \gg B$} if and only if both sets $A$ and $B$ are nonempty and satisfy
+$\min A \geq\max B$.
+\end{itemize}
+
+For example, $\left\{  10,8\right\}  \gg\left\{  4,6,7\right\}  \succeq
+\left\{  4,5,7\right\}  \succeq\left\{  2,5,6\right\}  \gg\left\{  1\right\}
+$.
+
+Fix some $\ell\in\mathbb{N}$ and a packed type $\mathbf{m}=\left(  m_{1}%
+,m_{2},\ldots,m_{\ell},0,0,\ldots\right)  $ with $\ell$ classes (that is,
+$m_{i}>0$ for all $i\in\left[  \ell\right]  $).
+
+Our next few definitions concern MLQs. Consider an (ordinary) MLQ
+$\mathbf{q}=\left(  q_{1},\ldots,q_{\ell-1}\right)  $ of type $\mathbf{m}$.
+Thus, for each $i\in\left[  \ell-1\right]  $, we have $\left\vert
+q_{i}\right\vert =p_{i}\left(  \mathbf{m}\right)  =m_{1}+m_{2}+\cdots+m_{i}$.
+Hence, for each $i\in\left[  \ell-1\right]  $, we can subdivide the set
+$q_{i}$ into $i$ blocks: the block containing the largest $m_{1}$ elements;
+the block containing the next-largest $m_{2}$ elements; and so on, until the
+block containing the smallest $m_{i}$ elements. Denote these $i$ blocks by
+$q_{i}^{\left(  1\right)  },q_{i}^{\left(  2\right)  },\ldots,q_{i}^{\left(
+i\right)  }$, respectively. Thus, $q_{i}^{\left(  1\right)  },q_{i}^{\left(
+2\right)  },\ldots,q_{i}^{\left(  i\right)  }$ are disjoint nonempty subsets
+of $\left[  n\right]  $ satisfying
+\begin{align}
+q_{i}  &  =q_{i}^{\left(  1\right)  }\cup q_{i}^{\left(  2\right)  }\cup
+\cdots\cup q_{i}^{\left(  i\right)  }\text{ (disjoint union)}\qquad
+\text{and}\label{eq.determinant_form.qij.1}\\
+q_{i}^{\left(  1\right)  }  &  \gg q_{i}^{\left(  2\right)  }\gg\cdots\gg
+q_{i}^{\left(  i\right)  }\qquad\text{and}\label{eq.determinant_form.qij.2}\\
+\left\vert q_{i}^{\left(  j\right)  }\right\vert  &  =m_{j}\text{ for all
+}j\in\left[  i\right]  . \label{eq.determinant_form.qij.3}%
+\end{align}
+Thus, we have defined nonempty queues
+\defn{$q_{i}^{\left(j\right)}$}$\ \subseteq\left[  n\right]  $ for all
+$i\in\left[  \ell-1\right]  $ and $j\in\left[  i\right]  $ whenever
+$\mathbf{q}=\left(  q_{1},\ldots,q_{\ell-1}\right)  $ is an MLQ of type
+$\mathbf{m}$.
+
+TODO:\ Example.
+
+We say that the MLQ $\mathbf{q}=\left(  q_{1},\ldots,q_{\ell-1}\right)  $ is
+\defn{interlacing} if each $i\in\left\{  2,3,\ldots,\ell-1\right\}  $
+satisfies%
+\begin{equation}
+q_{i}^{\left(  1\right)  }\succeq q_{i-1}^{\left(  1\right)  }\gg
+q_{i}^{\left(  2\right)  }\succeq q_{i-1}^{\left(  2\right)  }\gg
+q_{i}^{\left(  3\right)  }\succeq q_{i-1}^{\left(  3\right)  }\gg\cdots\gg
+q_{i}^{\left(  i\right)  } \label{eq.determinant_form.interlacing.def}%
+\end{equation}
+(that is, $q_{i}^{\left(  j\right)  }\succeq q_{i-1}^{\left(  j\right)  }\gg
+q_{i}^{\left(  j+1\right)  }$ for all $j\in\left[  i-1\right]  $).
+
+TODO:\ Example.
+
+Let $k=p_{\ell-1}\left(  \mathbf{m}\right)  =m_{1}+m_{2}+\cdots+m_{\ell
+-1}=n-m_{\ell}\in\mathbb{N}$. Define a $k$-pseudo-partition $\lambda=\left(
+\lambda_{1},\lambda_{2},\ldots,\lambda_{k}\right)  $ by%
+\[
+\lambda=\left(  \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}%
+},\underbrace{2,2,\ldots,2}_{m_{\ell-2}\text{ times}},\ldots,\underbrace{\ell
+-1,\ell-1,\ldots,\ell-1}_{m_{1}\text{ times}}\right)  .
+\]
+Thus, the columns of the diagram $\left[  \lambda\right]  $ are aligned to the
+bottom, and have lengths $p_{\ell-1}\left(  \mathbf{m}\right)  ,p_{\ell
+-2}\left(  \mathbf{m}\right)  ,\ldots,p_{1}\left(  \mathbf{m}\right)  $ (from
+left to right).
+
+\begin{lemma}
+\label{lem:determinant_form.bij1}Let $\mathbf{m}=\left(  m_{1},m_{2}%
+,\ldots,m_{\ell},0,0,\ldots\right)  $ be a packed type with $\ell$ classes.
+Define $\lambda$ and $\lambda_{i}$ as above. Then, there is an injection%
+\[
+P:\left\{  \text{MLQs of type }\mathbf{m}\right\}  \rightarrow\left\{
+\text{tableaux of shape }\lambda\right\}
+\]
+with the following properties:
+
+\begin{enumerate}
+\item[(a)] We have $\operatorname*{wt}\left(  P\left(  \mathbf{q}\right)
+\right)  =\operatorname*{wt}\mathbf{q}$ for each MLQ $\mathbf{q}$ of type
+$\mathbf{m}$.
+
+\item[(b)] If $\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)  $ is
+an MLQ of type $\mathbf{m}$, then the surface of $P\left(  \mathbf{q}\right)
+$ is the list of all elements of $q_{\ell-1}$ in increasing order.
+
+\item[(c)] If $\mathbf{q}$ is an interlacing MLQ of type $\mathbf{m}$, then
+$P\left(  \mathbf{q}\right)  $ is a semistandard tableau of shape $\lambda$.
+
+\item[(d)] Any semistandard tableau $T$ of shape $\lambda$ has the form
+$P\left(  \mathbf{q}\right)  $ for some interlacing MLQ $\mathbf{q}$ of type
+$\mathbf{m}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem:determinant_form.bij1}.]If $r\subseteq\left[
+n\right]  $ is any queue, then $\widetilde{r}$ shall denote the entries of $r$
+written vertically in a column, strictly increasing from top to bottom. For
+example, if $r=\left\{  2,5,6\right\}  $, then $\widetilde{r}$ is the column
+$\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
+
+Now, we define the map $P$ as follows: If $\mathbf{q}=\left(  q_{1}%
+,q_{2},\ldots,q_{\ell-1}\right)  $ is any MLQ of type $\mathbf{m}$, then we
+let $P\left(  \mathbf{q}\right)  $ be the tableau of shape $\lambda$ that
+looks as follows:
+
+TODO: insert visual something.%
+\begin{equation}
+\text{visual something} \label{pf.lem:determinant_form.bij1.visual}%
+\end{equation}
+
+
+Formally speaking, this is the tableau of shape $\lambda$ whose $\ell-1$
+columns are given as follows: For each $j\in\left[  \ell-1\right]  $, the
+$j$-th column consists of the columns $\widetilde{q_{\ell-1}^{\left(
+\ell-j\right)  }},\widetilde{q_{\ell-2}^{\left(  \ell-j-1\right)  }}%
+,\ldots,\widetilde{q_{j}^{\left(  1\right)  }}$ stacked atop each other (with
+$\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top,
+$\widetilde{q_{\ell-2}^{\left(  \ell-j-1\right)  }}$ coming next under it, and
+so on).
+
+Thus, the map $P:\left\{  \text{MLQs of type }\mathbf{m}\right\}
+\rightarrow\left\{  \text{tableaux of shape }\lambda\right\}  $ is defined.
+This map $P$ is an injection, because the MLQ $\mathbf{q}$ can be recovered
+from the tableau $P\left(  \mathbf{q}\right)  $ (indeed, each of the elements
+of each of the queues of $\mathbf{q}$ lands in some predictable cell of
+$P\left(  \mathbf{q}\right)  $).
+
+We shall now prove the four properties we claimed about this injection $P$.
+
+Clearly, the entries of the $\ell-1$ queues of an MLQ $\mathbf{q}$ of type
+$\mathbf{m}$ are in 1-to-1 correspondence with the entries of the tableau
+$P\left(  \mathbf{q}\right)  $. This yields property (a).
+
+Furthermore, the surface of $P\left(  \mathbf{q}\right)  $ is the
+concatenation of the sequences $\widetilde{q_{\ell-1}^{\left(  \ell-1\right)
+}},\widetilde{q_{\ell-1}^{\left(  \ell-2\right)  }},\ldots,\widetilde{q_{\ell
+-1}^{\left(  1\right)  }}$ (regarded as lists); but this concatenation is
+simply the sequence $\widetilde{q_{\ell-1}}$ (regarded as a list) (because of
+\eqref{eq.determinant_form.qij.1} and \eqref{eq.determinant_form.qij.2}). In
+other words, the surface of $P\left(  \mathbf{q}\right)  $ is the list of all
+elements of $q_{\ell-1}$ in increasing order. This proves property (b).
+
+Let $\mathbf{q}$ be an MLQ of type $\mathbf{m}$. Then, the tableau $P\left(
+\mathbf{q}\right)  $ is semistandard if and only if the sets $q_{i}^{\left(
+j\right)  }$ satisfy \eqref{eq.determinant_form.interlacing.def} (this is
+easily seen from \eqref{pf.lem:determinant_form.bij1.visual} and from the fact
+that the columns $\widetilde{q_{i}^{\left(  j\right)  }}$ are strictly
+increasing); in other words, the tableau $P\left(  \mathbf{q}\right)  $ is
+semistandard if and only if $\mathbf{q}$ is interlacing. This proves property (c).
+
+Finally, if $T$ is a semistandard tableau of shape $\lambda$, then $T$ has the
+form $P\left(  \mathbf{q}\right)  $ for some interlacing MLQ $\mathbf{q}$ of
+type $\mathbf{m}$. (Namely, we can construct this $\mathbf{q}$ by recovering
+the sets $q_{i}^{\left(  j\right)  }$ from the appropriate cells of $T$ in
+\eqref{pf.lem:determinant_form.bij1.visual}, and combine them to obtain queues
+$q_{i}$ and an MLQ $\mathbf{q}$; this latter MLQ $\mathbf{q}$ then satisfies
+$T=P\left(  \mathbf{q}\right)  $ because the interlacing conditions
+\eqref{eq.determinant_form.interlacing.def} imply $q_{i}^{\left(  1\right)
+}\gg q_{i}^{\left(  2\right)  }\gg\cdots\gg q_{i}^{\left(  i\right)  }$.) This
+proves property (d). Hence, we have proven all four properties (a), (b), (c)
+and (d).
+\end{proof}
+
+\begin{cor}
+\label{cor:determinant_form.bij1c} Let $\ell$, $\mathbf{m}$, $m_{i}$, $k$,
+$\lambda$ and $\lambda_{i}$ be as above. Let $S=\left\{  s_{1}<s_{2}%
+<\cdots<s_{k}\right\}  $ be a $k$-queue. Then,%
+\begin{align*}
+& \sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
+q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}\\
+& =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(  h_{\lambda
+_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)  _{1\leq i\leq
+k,\ 1\leq j\leq k}\right)  .
+\end{align*}
+
+\end{cor}
+
+\begin{proof}
+[Proof of Corollary \ref{cor:determinant_form.bij1c}.] Let $s$ be the strictly
+increasing sequence $\left(  s_{1},s_{2},\ldots,s_{k}\right)  $ of elements of
+$\left[  n\right]  $.
+
+Consider the injection $P$ from Lemma \ref{lem:determinant_form.bij1}. Now
+recall the four properties (a)--(d) in Lemma \ref{lem:determinant_form.bij1}.
+Property (c) shows that this injection $P$ restricts to an injection%
+\[
+\left\{  \text{interlacing MLQs of type }\mathbf{m}\right\}  \rightarrow
+\left\{  \text{semistandard tableaux of shape }\lambda\right\}  .
+\]
+Property (d) shows that this restricted injection is also surjective, and thus
+a bijection. Hence, we can substitute $P\left(  \mathbf{q}\right)  $ for $T$
+in the sum on the left hand side of Theorem \ref{thm.tableau.jt}. We thus
+obtain%
+\begin{align*}
+\sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
+\lambda\text{ and surface }s}}\operatorname*{wt}T  & =\underbrace{\sum
+_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)  \text{ is
+an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such that}\\\text{the
+surface of }P\left(  \mathbf{q}\right)  \text{ is }s}}}_{\substack{=\sum
+_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)  \text{ is
+an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such that}\\\text{the
+list of all elements of }q_{\ell-1}\text{ in}\\\text{increasing order is }%
+s}}\\\text{(by property (b))}}}\underbrace{\operatorname*{wt}\left(  P\left(
+\mathbf{q}\right)  \right)  }_{\substack{=\operatorname*{wt}\mathbf{q}%
+\\\text{(by property (a))}}}\\
+& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such
+that}\\\text{the list of all elements of }q_{\ell-1}\text{ in}%
+\\\text{increasing order is }s}}\operatorname*{wt}\mathbf{q}\\
+& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
+q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}%
+\end{align*}
+(since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if
+and only if $q_{\ell-1}=S$). Therefore, the claim of Corollary
+\ref{cor:determinant_form.bij1c} follows from Theorem \ref{thm.tableau.jt}.
+\end{proof}
+
+Next, we shall connect the interlacingness of an MLQ with its action on the
+word $1\cdots1$.
+
+XXX Our first concerns words and queues.
+
+We say that a word $u\in\mathcal{W}_{n}$ is
+
+\begin{lemma}
+\label{lem:determinant_form.1}Let $r$, $B$, $b_{i}$, $v_{i}$ and $u$ be as in
+Theorem \ref{thm:determinant_form}.
+\end{lemma}
+
 \subsection{Spectral weights of \textquotedblleft
 almost-decreasing\textquotedblright\ words}
 
@@ -1989,19 +2241,13 @@ where $\gamma_{j}=\ell-v_{j}$.
 Note that the $\gamma_{j}$ in Theorem \ref{thm:determinant_form} can also be
 described as the number of distinct letters in $v_{1}\dotsm v_{j}$.
 
-Our proof of Theorem \ref{thm:determinant_form} will rely on several lemmas.
-Our first concerns words and queues.
-
-We say that a word $u\in\mathcal{W}_{n}$ is
-
-\begin{lemma}
-\label{lem:determinant_form.1}Let $r$, $B$, $b_{i}$, $v_{i}$ and $u$ be as in
-Theorem \ref{thm:determinant_form}.
-\end{lemma}
+Before we can prove Theorem \ref{thm:determinant_form}, we introduce further notations.
 
 XXX
 
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
+
+
 \end{document}
