@@ -643,7 +643,7 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \label{rmk:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
 Let $\qq$ be a $\sigma$-twisted MLQ.
-Then, the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
+Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
 \end{lemma}
 
 \begin{proof}
@@ -652,12 +652,14 @@ Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
 Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
 Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
 (since $n = m_1 + m_2 + \cdots + m_\ell$).
-Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
+Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way (because of~\eqref{eq:queue_type_change}): Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
 Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
 In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
+This proves Lemma~\ref{rmk:mlq-type}.
+
+[The above proof is a bit informal. To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$. Thus, $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$.
+Now, define the \defn{p-sequence} of a type $\nn$ to be the weakly increasing infinite sequence $\tup{p_0(\nn), p_1(\nn), p_2(\nn), \ldots}$ of integers (which uniquely determines $\nn$). Furthermore, if $u$ is a word of type $\nn$, then we define the p-sequence of $u$ to be the p-sequence of $\nn$. Then, \eqref{eq:queue_type_change} shows the following: If $q$ is a queue and $u$ is a word, then the p-sequence of $q(u)$ is obtained from the p-sequence of $u$ by inserting $\abs{q}$ into the p-sequence at the appropriate position (appropriate in the sense that the resulting sequence is still weakly increasing). Hence, the p-sequence of the word $\qq (1 \dotsm 1)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1 \dotsm 1$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions. In other words, the p-sequence of the word $\qq (1 \dotsm 1)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$). In other words, this p-sequence is $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$. Hence, the type of the word $\qq (1 \dotsm 1)$ is $\mm$.]
 \end{proof}
-\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
-\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues.}
 
 \begin{example}
 Let $\ell \geq 1$.

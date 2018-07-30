@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, July 30, 2018 03:04:51}
+%TCIDATA{LastRevised=Monday, July 30, 2018 04:49:11}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -1992,9 +1992,9 @@ For example, $\left\{  10,8\right\}  \gg\left\{  4,6,7\right\}  \succeq
 \left\{  4,5,7\right\}  \succeq\left\{  2,5,6\right\}  \gg\left\{  1\right\}
 $.
 
-Fix some $\ell\in\mathbb{N}$ and a packed type $\mathbf{m}=\left(  m_{1}%
-,m_{2},\ldots,m_{\ell},0,0,\ldots\right)  $ with $\ell$ classes (that is,
-$m_{i}>0$ for all $i\in\left[  \ell\right]  $).
+Fix some $\ell\in\mathbb{N}$ and a type $\mathbf{m}=\left(  m_{1},m_{2}%
+,\ldots,m_{\ell},0,0,\ldots\right)  $ with $\ell$ classes. Assume that
+$m_{i}>0$ for all $i\in\left[  \ell-1\right]  $ (but $m_{\ell}$ may be $0$).
 
 Our next few definitions concern MLQs. Consider an (ordinary) MLQ
 $\mathbf{q}=\left(  q_{1},\ldots,q_{\ell-1}\right)  $ of type $\mathbf{m}$.
@@ -2039,23 +2039,25 @@ q_{i}^{\left(  j+1\right)  }$ for all $j\in\left[  i-1\right]  $).
 
 TODO:\ Example.
 
+Forget that we fixed $\mathbf{q}$.
+
 Let $k=p_{\ell-1}\left(  \mathbf{m}\right)  =m_{1}+m_{2}+\cdots+m_{\ell
 -1}=n-m_{\ell}\in\mathbb{N}$. Define a $k$-pseudo-partition $\lambda=\left(
 \lambda_{1},\lambda_{2},\ldots,\lambda_{k}\right)  $ by%
-\[
+\begin{equation}
 \lambda=\left(  \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}%
 },\underbrace{2,2,\ldots,2}_{m_{\ell-2}\text{ times}},\ldots,\underbrace{\ell
 -1,\ell-1,\ldots,\ell-1}_{m_{1}\text{ times}}\right)  .
-\]
+\label{eq.determinant_form.interlacing.lam}%
+\end{equation}
 Thus, the columns of the diagram $\left[  \lambda\right]  $ are aligned to the
 bottom, and have lengths $p_{\ell-1}\left(  \mathbf{m}\right)  ,p_{\ell
 -2}\left(  \mathbf{m}\right)  ,\ldots,p_{1}\left(  \mathbf{m}\right)  $ (from
 left to right).
 
 \begin{lemma}
-\label{lem:determinant_form.bij1}Let $\mathbf{m}=\left(  m_{1},m_{2}%
-,\ldots,m_{\ell},0,0,\ldots\right)  $ be a packed type with $\ell$ classes.
-Define $\lambda$ and $\lambda_{i}$ as above. Then, there is an injection%
+\label{lem:determinant_form.bij1}Let $\ell$, $\mathbf{m}$, $m_{i}$, $k$,
+$\lambda$ and $\lambda_{i}$ be as above. Then, there is an injection%
 \[
 P:\left\{  \text{MLQs of type }\mathbf{m}\right\}  \rightarrow\left\{
 \text{tableaux of shape }\lambda\right\}
@@ -2090,14 +2092,39 @@ $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
 Now, we define the map $P$ as follows: If $\mathbf{q}=\left(  q_{1}%
 ,q_{2},\ldots,q_{\ell-1}\right)  $ is any MLQ of type $\mathbf{m}$, then we
 let $P\left(  \mathbf{q}\right)  $ be the tableau of shape $\lambda$ that
-looks as follows:
-
-TODO: insert visual something.%
+looks as follows:%
 \begin{equation}
-\text{visual something} \label{pf.lem:determinant_form.bij1.visual}%
+\text{%
+\begin{tabular}
+[c]{r|c|ccccc}\cline{2-2}%
+$m_{\ell-1}$ rows $\left\{
+\vphantom{\dfrac{\dfrac{2}{2}}{\dfrac{2}{2}}}\right.  $ & $\widetilde{q_{\ell
+-1}^{\left(  \ell-1\right)  }}$ &  &  &  &  & \\\cline{2-3}%
+$m_{\ell-2}$ rows $\left\{
+\vphantom{\dfrac{\dfrac{2}{\dfrac{2}{2}}}{\dfrac{2}{\dfrac{2}{2}}}}\right.  $
+& $\widetilde{q_{\ell-2}^{\left(  \ell-2\right)  }}$ & $\widetilde{q_{\ell
+-1}^{\left(  \ell-2\right)  }}$ & \multicolumn{1}{|c}{} &  &  & \\\cline{2-4}%
+$m_{\ell-3}$ rows $\left\{  \vphantom{\dfrac{2^2}{2^2}}\right.  $ &
+$\widetilde{q_{\ell-3}^{\left(  \ell-3\right)  }}$ & $\widetilde{q_{\ell
+-2}^{\left(  \ell-3\right)  }}$ & \multicolumn{1}{|c}{$\widetilde{q_{\ell
+-1}^{\left(  \ell-3\right)  }}$} & \multicolumn{1}{|c}{} &  & \\\cline{2-4}%
+$\vdots$ & $\mathbf{\vdots}$ & $\mathbf{\vdots}$ & \multicolumn{1}{|c}{$\vdots
+$} & \multicolumn{1}{|c}{$\ddots$} &  & \\\cline{2-4}\cline{6-6}%
+$m_{2}$ rows $\left\{  \vphantom{\dfrac{\dfrac{2}{2}}{\dfrac{2}{2}}}\right.  $
+& $\widetilde{q_{2}^{\left(  2\right)  }}$ & $\widetilde{q_{3}^{\left(
+2\right)  }}$ & \multicolumn{1}{|c}{$\widetilde{q_{4}^{\left(  2\right)  }}$}
+& \multicolumn{1}{|c}{$\cdots$} & \multicolumn{1}{|c}{$\widetilde{q_{\ell
+-1}^{\left(  2\right)  }}$} & \multicolumn{1}{|c}{}\\\cline{2-4}\cline{6-7}%
+$m_{1}$ rows $\left\{
+\vphantom{\dfrac{\dfrac{2}{\dfrac{2}{2}}}{\dfrac{2}{\dfrac{2}{2}}}}\right.  $
+& $\widetilde{q_{1}^{\left(  1\right)  }}$ & $\widetilde{q_{2}^{\left(
+1\right)  }}$ & \multicolumn{1}{|c}{$\widetilde{q_{3}^{\left(  1\right)  }}$}
+& \multicolumn{1}{|c}{$\cdots$} & \multicolumn{1}{|c}{$\widetilde{q_{\ell
+-2}^{\left(  1\right)  }}$} & \multicolumn{1}{|c|}{$\widetilde{q_{\ell
+-1}^{\left(  1\right)  }}$}\\\cline{2-4}\cline{6-7}%
+\end{tabular}
+.} \label{pf.lem:determinant_form.bij1.visual}%
 \end{equation}
-
-
 Formally speaking, this is the tableau of shape $\lambda$ whose $\ell-1$
 columns are given as follows: For each $j\in\left[  \ell-1\right]  $, the
 $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{\left(
@@ -2105,7 +2132,12 @@ $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{\left(
 ,\ldots,\widetilde{q_{j}^{\left(  1\right)  }}$ stacked atop each other (with
 $\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top,
 $\widetilde{q_{\ell-2}^{\left(  \ell-j-1\right)  }}$ coming next under it, and
-so on).
+so on). Note that for each $i\in\left[  \ell-1\right]  $, the parts
+$\widetilde{q_{i}^{\left(  i\right)  }},\widetilde{q_{i+1}^{\left(  i\right)
+}},\ldots,\widetilde{q_{\ell-1}^{\left(  i\right)  }}$ of columns
+$1,2,\ldots,\ell-i$ align with each other horizontally (and together form the
+topmost $m_{i}$ among the bottommost $m_{1}+m_{2}+\cdots+m_{i}$ rows of
+$P\left(  \mathbf{q}\right)  $).
 
 Thus, the map $P:\left\{  \text{MLQs of type }\mathbf{m}\right\}
 \rightarrow\left\{  \text{tableaux of shape }\lambda\right\}  $ is defined.
@@ -2116,9 +2148,9 @@ $P\left(  \mathbf{q}\right)  $).
 
 We shall now prove the four properties we claimed about this injection $P$.
 
-Clearly, the entries of the $\ell-1$ queues of an MLQ $\mathbf{q}$ of type
-$\mathbf{m}$ are in 1-to-1 correspondence with the entries of the tableau
-$P\left(  \mathbf{q}\right)  $. This yields property (a).
+Property (a) is clear, since the entries of $q_{1},q_{2},\ldots,q_{\ell-1}$
+are in 1-to-1 correspondence with the entries of the tableau $P\left(
+\mathbf{q}\right)  $.
 
 Furthermore, the surface of $P\left(  \mathbf{q}\right)  $ is the
 concatenation of the sequences $\widetilde{q_{\ell-1}^{\left(  \ell-1\right)
@@ -2210,13 +2242,14 @@ Next, we shall connect the interlacingness of an MLQ with its action on the
 word $1\cdots1$:
 
 \begin{lemma}
-\label{lem:determinant_form.interl-act}Let $B=\left\{  b_{1}<b_{2}%
-<\cdots<b_{r}\right\}  \subseteq\left[  n\right]  $. Let $v_{1}v_{2}\dotsm
-v_{r}$ be a weakly decreasing (non-cyclic) packed word of length $r$ with
-$\ell-1$ classes. Define a word $u$ of length $n$ by $u_{i}=v_{j}$ if
-$i=b_{j}$ for some $j$, otherwise $u_{i}=\ell$.
+\label{lem:determinant_form.interl-act}Let $\ell$ be a positive integer. Let
+$B=\left\{  b_{1}<b_{2}<\cdots<b_{r}\right\}  \subseteq\left[  n\right]  $.
+Let $\left(  v_{1}\geq v_{2}\geq\dotsm\geq v_{r}\right)  $ be a weakly
+decreasing $r$-tuple of integers such that $\left\{  v_{1},v_{2},\ldots
+,v_{r}\right\}  =\left[  \ell-1\right]  $. Define a word $u\in\mathcal{W}_{n}$
+by $u_{i}=v_{j}$ if $i=b_{j}$ for some $j$, otherwise $u_{i}=\ell$.
 
-Let $\mathbf{m}$ be the type of $v$. Let $\mathbf{q}=\left(  q_{1}%
+Let $\mathbf{m}$ be the type of $u$. Let $\mathbf{q}=\left(  q_{1}%
 ,q_{2},\ldots,q_{\ell-1}\right)  $ be an MLQ of type $\mathbf{m}$.
 
 Then, $u=\mathbf{q}\left(  1\cdots1\right)  $ if and only if the MLQ
@@ -2226,9 +2259,21 @@ $\mathbf{q}$ is interlacing and satisfies $q_{\ell-1}=B$.
 TODO: Example.
 
 \begin{proof}
-[Proof of Lemma \ref{lem:determinant_form.interl-act}.] $\Longrightarrow:$
-Assume that $u=\mathbf{q}\left(  1\cdots1\right)  $. We must prove that the
-MLQ $\mathbf{q}$ is interlacing and satisfies $q_{\ell-1}=B$.
+[Proof of Lemma \ref{lem:determinant_form.interl-act}.]Consider the queues
+$q_{i}^{\left(  j\right)  }$ defined as above.
+
+For each $i\in\left\{  0,1,\ldots,\ell-1\right\}  $, let $u^{\left[  i\right]
+}\in\mathcal{W}_{n}$ be the word $\left(  q_{1},q_{2},\ldots,q_{i}\right)
+\left(  1\cdots1\right)  =q_{i}\left(  q_{i-1}\left(  \cdots\left(
+q_{1}\left(  1\cdots1\right)  \right)  \right)  \right)  $. This word
+$u^{\left[  i\right]  }$ has type $\left(  m_{1},m_{2},\ldots,m_{i}%
+,n-p_{i}\left(  \mathbf{m}\right)  ,0,0,\ldots\right)  $. (This is proven
+similarly to Lemma \ref{rmk:mlq-type}, using $\left\vert q_{i}\right\vert
+=m_{i}$.)
+
+$\Longrightarrow:$ Assume that $u=\mathbf{q}\left(  1\cdots1\right)  $. We
+must prove that the MLQ $\mathbf{q}$ is interlacing and satisfies $q_{\ell
+-1}=B$.
 
 XXX
 \end{proof}
@@ -2248,18 +2293,19 @@ We now state the main result of this section -- a Jacobi--Trudi-like formula
 for $\left\langle u\right\rangle $ in certain cases.
 
 \begin{thm}
-\label{thm:determinant_form} Let $B=\left\{  b_{1}<b_{2}<\cdots<b_{r}\right\}
-\subseteq\left[  n\right]  $. Let $v_{1}\geq v_{2}\geq\dotsm\geq v_{r}$ be a
-weakly decreasing $r$-tuple of integers such that $\left\{  v_{1},v_{2}%
-,\ldots,v_{r}\right\}  =\left\{  1,2,\ldots,\ell-1\right\}  $. Define a word
-$u$ of length $n$ by $u_{i}=v_{j}$ if $i=b_{j}$ for some $j$, otherwise
-$u_{i}=\ell$. Then
+\label{thm:determinant_form} Let $\ell$ be a positive integer. Let $B=\left\{
+b_{1}<b_{2}<\cdots<b_{r}\right\}  \subseteq\left[  n\right]  $. Let $\left(
+v_{1}\geq v_{2}\geq\dotsm\geq v_{r}\right)  $ be a weakly decreasing $r$-tuple
+of integers such that $\left\{  v_{1},v_{2},\ldots,v_{r}\right\}  =\left[
+\ell-1\right]  $. Define a word $u\in\mathcal{W}_{n}$ by $u_{i}=v_{j}$ if
+$i=b_{j}$ for some $j$, otherwise $u_{i}=\ell$. For each $j\in\left[
+r\right]  $, set $\gamma_{j}=\ell-v_{j}$. Then
 \[
 \left\langle u\right\rangle =\left(  \prod_{i\in B}x_{i}\right)  \det\left(
-\left(  h_{i-j-1+\gamma_{j}}(x_{1},\dotsc,x_{b_{j}})\right)  _{1\leq i\leq
-r,\ 1\leq j\leq r}\right)  ,
+\left(  h_{\gamma_{j}+i-j-1}(x_{1},\dotsc,x_{b_{j}})\right)  _{1\leq i\leq
+r,\ 1\leq j\leq r}\right)  .
 \]
-where $\gamma_{j}=\ell-v_{j}$.
+
 \end{thm}
 
 Note that the $\gamma_{j}$ in Theorem \ref{thm:determinant_form} can also be
@@ -2267,45 +2313,86 @@ described as the number of distinct letters in the (non-cyclic) word
 $v_{1}\dotsm v_{j}$.
 
 \begin{proof}
-[Proof of Theorem \ref{thm:determinant_form}.] XXX define $\ell$, $\mathbf{m}%
-$, $m_{i}$, $k$, $\lambda$ and $\lambda_{i}$.
+[Proof of Theorem \ref{thm:determinant_form}.]Define a type $\mathbf{m}%
+=\left(  m_{1},m_{2},\ldots,m_{\ell},0,0,\ldots\right)  $ by
+\[
+m_{i}=%
+\begin{cases}
+\left(  \text{the number of }j\in\left[  r\right]  \text{ satisfying }%
+v_{j}=i\right)  , & \text{if }i>\ell;\\
+n-r, & \text{if }i=\ell.
+\end{cases}
+\]
+Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\left(
+v_{1}\geq v_{2}\geq\dotsm\geq v_{r}\right)  $ equal $1$; the next $m_{\ell-2}$
+of its entries equal $2$; the next $m_{\ell-3}$ of its entries equal $3$; and
+so on. This has the consequence that%
+\begin{align}
+&  \left(  v_{1},v_{2},\ldots,v_{r}\right) \nonumber\\
+&  =\left(  \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_{\ell-1}\text{ times}%
+},\underbrace{\ell-2,\ell-2,\ldots,\ell-2}_{m_{\ell-2}\text{ times}}%
+,\ldots,\underbrace{1,1,\ldots,1}_{m_{1}\text{ times}}\right)  .
+\label{pf.thm:determinant_form.v=}%
+\end{align}
+Moreover, it shows that the word $u$ has type $\mathbf{m}$ (since the entries
+of $u$ are precisely $v_{1},v_{2},\ldots,v_{r}$ and also $n-r$ entries equal
+to $\ell$). Also, $m_{i}>0$ for all $i\in\left[  \ell-1\right]  $ (by
+\eqref{pf.thm:determinant_form.v=} and because of $\left\{  v_{1},v_{2}%
+,\ldots,v_{r}\right\}  =\left[  \ell-1\right]  $). Hence, the word $u$ is packed.
+
+Moreover, the definition of $\mathbf{m}$ shows that $r=m_{1}+m_{2}%
++\cdots+m_{\ell-1}=p_{r-1}\left(  \mathbf{m}\right)  $.
+
+Let $k=p_{\ell-1}\left(  \mathbf{m}\right)  \in\mathbb{N}$. Thus, $k=r$. Thus,
+$B=\left\{  b_{1}<b_{2}<\cdots<b_{r}\right\}  $ rewrites as $B=\left\{
+b_{1}<b_{2}<\cdots<b_{k}\right\}  $.
+
+Define a $k$-pseudo-partition $\lambda=\left(  \lambda_{1},\lambda_{2}%
+,\ldots,\lambda_{k}\right)  $ by \eqref{eq.determinant_form.interlacing.lam}.
+Then, comparing \eqref{eq.determinant_form.interlacing.lam} with
+\eqref{pf.thm:determinant_form.v=}, we obtain $\lambda=\left(  \ell-v_{1}%
+,\ell-v_{2},\ldots,\ell-v_{r}\right)  $. Hence, each $j\in\left[  r\right]  $
+satisfies $\lambda_{j}=\ell-v_{j}=\gamma_{j}$.
 
 The definition of $\left\langle u\right\rangle $ yields%
 \begin{align*}
-\left\langle u\right\rangle  & =\sum_{\substack{\mathbf{q}\text{ is an MLQ of
+\left\langle u\right\rangle  &  =\sum_{\substack{\mathbf{q}\text{ is an MLQ of
 type }\mathbf{m};\\u=\mathbf{q}\left(  1\cdots1\right)  }}\operatorname*{wt}%
 \mathbf{q}\\
-& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+&  =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
 \text{ is an MLQ of type }\mathbf{m};\\\mathbf{q}\text{ is interlacing and
 satisfies }q_{\ell-1}=B}}\operatorname*{wt}\mathbf{q}\qquad\left(  \text{by
-Lemma \ref{lem:determinant_form.interl-act}}\right)  \\
-& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+Lemma \ref{lem:determinant_form.interl-act}}\right) \\
+&  =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
 \text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
-q_{\ell-1}=B}}\operatorname*{wt}\mathbf{q}%
+q_{\ell-1}=B}}\operatorname*{wt}\mathbf{q}\\
+&  =\underbrace{\left(  \prod_{i=1}^{k}x_{b_{i}}\right)  }_{=\prod_{i\in
+B}x_{i}}\det\left(  \left(  \underbrace{h_{\lambda_{j}-j+i-1}\left(
+x_{1},x_{2},\ldots,x_{b_{j}}\right)  }_{\substack{=h_{\gamma_{j}+i-j-1}%
+(x_{1},\dotsc,x_{b_{j}})\\\text{(since }\lambda_{j}=\gamma_{j}\text{)}%
+}}\right)  _{1\leq i\leq k,\ 1\leq j\leq k}\right) \\
+&  \qquad\left(
+\begin{array}
+[c]{c}%
+\text{by Corollary \ref{cor:determinant_form.bij1c}, applied to }B\text{ and
+}b_{i}\\
+\text{instead of }S\text{ and }s_{i}%
+\end{array}
+\right) \\
+&  =\left(  \prod_{i\in B}x_{i}\right)  \det\left(  \left(  h_{\gamma
+_{j}+i-j-1}(x_{1},\dotsc,x_{b_{j}})\right)  _{1\leq i\leq r,\ 1\leq j\leq
+r}\right)  .
 \end{align*}
-XXX
+
 \end{proof}
+
+\subsection{Conclusions for Aas--Linusson MLQs}
 
 XXX
 
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
-
-\begin{cor}
-\label{cor:determinant_form.bij1c} Let $\ell$, $\mathbf{m}$, $m_{i}$, $k$,
-$\lambda$ and $\lambda_{i}$ be as above. Let $S=\left\{  s_{1}<s_{2}%
-<\cdots<s_{k}\right\}  $ be a $k$-queue. Then,%
-\begin{align*}
-&  \sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
-\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
-q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}\\
-&  =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(
-h_{\lambda_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)
-_{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
-\end{align*}
-
-\end{cor}
 
 
 \end{document}
