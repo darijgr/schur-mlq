@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, July 30, 2018 00:45:50}
+%TCIDATA{LastRevised=Monday, July 30, 2018 03:04:51}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -2155,18 +2155,18 @@ and (d).
 $\lambda$ and $\lambda_{i}$ be as above. Let $S=\left\{  s_{1}<s_{2}%
 <\cdots<s_{k}\right\}  $ be a $k$-queue. Then,%
 \begin{align*}
-& \sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+&  \sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
 \text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
 q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}\\
-& =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(  h_{\lambda
-_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)  _{1\leq i\leq
-k,\ 1\leq j\leq k}\right)  .
+&  =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(
+h_{\lambda_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)
+_{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
 \end{align*}
 
 \end{cor}
 
 \begin{proof}
-[Proof of Corollary \ref{cor:determinant_form.bij1c}.] Let $s$ be the strictly
+[Proof of Corollary \ref{cor:determinant_form.bij1c}.]Let $s$ be the strictly
 increasing sequence $\left(  s_{1},s_{2},\ldots,s_{k}\right)  $ of elements of
 $\left[  n\right]  $.
 
@@ -2183,7 +2183,7 @@ in the sum on the left hand side of Theorem \ref{thm.tableau.jt}. We thus
 obtain%
 \begin{align*}
 \sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
-\lambda\text{ and surface }s}}\operatorname*{wt}T  & =\underbrace{\sum
+\lambda\text{ and surface }s}}\operatorname*{wt}T  &  =\underbrace{\sum
 _{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)  \text{ is
 an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such that}\\\text{the
 surface of }P\left(  \mathbf{q}\right)  \text{ is }s}}}_{\substack{=\sum
@@ -2193,11 +2193,11 @@ list of all elements of }q_{\ell-1}\text{ in}\\\text{increasing order is }%
 s}}\\\text{(by property (b))}}}\underbrace{\operatorname*{wt}\left(  P\left(
 \mathbf{q}\right)  \right)  }_{\substack{=\operatorname*{wt}\mathbf{q}%
 \\\text{(by property (a))}}}\\
-& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+&  =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
 \text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such
 that}\\\text{the list of all elements of }q_{\ell-1}\text{ in}%
 \\\text{increasing order is }s}}\operatorname*{wt}\mathbf{q}\\
-& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+&  =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
 \text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
 q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}%
 \end{align*}
@@ -2207,15 +2207,38 @@ and only if $q_{\ell-1}=S$). Therefore, the claim of Corollary
 \end{proof}
 
 Next, we shall connect the interlacingness of an MLQ with its action on the
-word $1\cdots1$.
+word $1\cdots1$:
+
+\begin{lemma}
+\label{lem:determinant_form.interl-act}Let $B=\left\{  b_{1}<b_{2}%
+<\cdots<b_{r}\right\}  \subseteq\left[  n\right]  $. Let $v_{1}v_{2}\dotsm
+v_{r}$ be a weakly decreasing (non-cyclic) packed word of length $r$ with
+$\ell-1$ classes. Define a word $u$ of length $n$ by $u_{i}=v_{j}$ if
+$i=b_{j}$ for some $j$, otherwise $u_{i}=\ell$.
+
+Let $\mathbf{m}$ be the type of $v$. Let $\mathbf{q}=\left(  q_{1}%
+,q_{2},\ldots,q_{\ell-1}\right)  $ be an MLQ of type $\mathbf{m}$.
+
+Then, $u=\mathbf{q}\left(  1\cdots1\right)  $ if and only if the MLQ
+$\mathbf{q}$ is interlacing and satisfies $q_{\ell-1}=B$.
+\end{lemma}
+
+TODO: Example.
+
+\begin{proof}
+[Proof of Lemma \ref{lem:determinant_form.interl-act}.] $\Longrightarrow:$
+Assume that $u=\mathbf{q}\left(  1\cdots1\right)  $. We must prove that the
+MLQ $\mathbf{q}$ is interlacing and satisfies $q_{\ell-1}=B$.
+
+XXX
+\end{proof}
 
 XXX Our first concerns words and queues.
 
 We say that a word $u\in\mathcal{W}_{n}$ is
 
 \begin{lemma}
-\label{lem:determinant_form.1}Let $r$, $B$, $b_{i}$, $v_{i}$ and $u$ be as in
-Theorem \ref{thm:determinant_form}.
+\label{lem:determinant_form.1}XXX
 \end{lemma}
 
 \subsection{Spectral weights of \textquotedblleft
@@ -2226,28 +2249,63 @@ for $\left\langle u\right\rangle $ in certain cases.
 
 \begin{thm}
 \label{thm:determinant_form} Let $B=\left\{  b_{1}<b_{2}<\cdots<b_{r}\right\}
-\subseteq\left[  n\right]  $. Let $v_{1}v_{2}\dotsm v_{r}$ be a weakly
-decreasing (non-cyclic) packed word of length $r$ with $\ell-1$ classes.
-Define a word $u$ of length $n$ by $u_{i}=v_{j}$ if $i=b_{j}$ for some $j$,
-otherwise $u_{i}=\ell$. Then
+\subseteq\left[  n\right]  $. Let $v_{1}\geq v_{2}\geq\dotsm\geq v_{r}$ be a
+weakly decreasing $r$-tuple of integers such that $\left\{  v_{1},v_{2}%
+,\ldots,v_{r}\right\}  =\left\{  1,2,\ldots,\ell-1\right\}  $. Define a word
+$u$ of length $n$ by $u_{i}=v_{j}$ if $i=b_{j}$ for some $j$, otherwise
+$u_{i}=\ell$. Then
 \[
-\left\langle u\right\rangle =\left(  \prod_{i\in B}x_{i}\right)
-\det\bigl(h_{i-j-1+\gamma_{j}}(x_{1},\dotsc,x_{b_{j}})\bigr)_{1\leq i,j\leq
-r}\,,
+\left\langle u\right\rangle =\left(  \prod_{i\in B}x_{i}\right)  \det\left(
+\left(  h_{i-j-1+\gamma_{j}}(x_{1},\dotsc,x_{b_{j}})\right)  _{1\leq i\leq
+r,\ 1\leq j\leq r}\right)  ,
 \]
 where $\gamma_{j}=\ell-v_{j}$.
 \end{thm}
 
 Note that the $\gamma_{j}$ in Theorem \ref{thm:determinant_form} can also be
-described as the number of distinct letters in $v_{1}\dotsm v_{j}$.
+described as the number of distinct letters in the (non-cyclic) word
+$v_{1}\dotsm v_{j}$.
 
-Before we can prove Theorem \ref{thm:determinant_form}, we introduce further notations.
+\begin{proof}
+[Proof of Theorem \ref{thm:determinant_form}.] XXX define $\ell$, $\mathbf{m}%
+$, $m_{i}$, $k$, $\lambda$ and $\lambda_{i}$.
+
+The definition of $\left\langle u\right\rangle $ yields%
+\begin{align*}
+\left\langle u\right\rangle  & =\sum_{\substack{\mathbf{q}\text{ is an MLQ of
+type }\mathbf{m};\\u=\mathbf{q}\left(  1\cdots1\right)  }}\operatorname*{wt}%
+\mathbf{q}\\
+& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+\text{ is an MLQ of type }\mathbf{m};\\\mathbf{q}\text{ is interlacing and
+satisfies }q_{\ell-1}=B}}\operatorname*{wt}\mathbf{q}\qquad\left(  \text{by
+Lemma \ref{lem:determinant_form.interl-act}}\right)  \\
+& =\sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
+q_{\ell-1}=B}}\operatorname*{wt}\mathbf{q}%
+\end{align*}
+XXX
+\end{proof}
 
 XXX
 
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
+
+\begin{cor}
+\label{cor:determinant_form.bij1c} Let $\ell$, $\mathbf{m}$, $m_{i}$, $k$,
+$\lambda$ and $\lambda_{i}$ be as above. Let $S=\left\{  s_{1}<s_{2}%
+<\cdots<s_{k}\right\}  $ be a $k$-queue. Then,%
+\begin{align*}
+&  \sum_{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)
+\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
+q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}\\
+&  =\left(  \prod_{i=1}^{k}x_{s_{i}}\right)  \det\left(  \left(
+h_{\lambda_{j}-j+i-1}\left(  x_{1},x_{2},\ldots,x_{s_{j}}\right)  \right)
+_{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
+\end{align*}
+
+\end{cor}
 
 
 \end{document}
