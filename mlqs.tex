@@ -389,9 +389,21 @@ p_i(\mm) := m_1 + m_2 + \cdots + m_i.
 When $\mm$ is clear, we simply write $p_i$ for this.
 (Thus, $p_0 = 0$ and $p_i = n$ for sufficiently large $i$.)
 
+\begin{vershort}
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 We equate $q$ with a function from $\mcW_n$ to itself defined as follows.
 For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
+\end{vershort}
+\begin{verlong}
+We define a \defn{queue} to be any set of sites.
+%\travis{As I said on Skype, I do not like this extra level of indirection for the reader. You also loose some of the explicitness of the $n$ dependence.}
+A queue of size $r$ will be called an \defn{$r$-queue}.
+%\travis{I think it is much better to have the general definition as an $r$-queue. This otherwise is a useless definition as everywhere we should be saying ``Let $q$ be a queue of size $r$'' or ``Let $q$ be a queue such that $|q| = r$''.}
+
+We shall now define an action of queues on words.
+Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
+then a new word $v = q(u) \in \mcW_n$ is defined by the following algorithm:
+\end{verlong}
 In the beginning, no letter of $v \in \mcW_n$ is set.
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
@@ -533,7 +545,16 @@ and whose middle row represents the set $q$ by balls in the positions of its ele
 \draw[->,blue] (q1) -- (t1);
 \end{tikzpicture}
 \]
+\begin{vershort}
 where the paths in red correspond to Phase I and those in blue are from Phase II.
+\end{vershort}
+\begin{verlong}
+where the paths in red correspond to Phase I and those in blue are from Phase II
+(and where we have picked the permutation $\tup{i_1, i_2, \ldots, i_n}
+= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$ out of a total of $2! \cdot 3! \cdot 2! = 24$ permutations
+satisfying $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$;
+but any other among them would lead to the same result).
+\end{verlong}
 Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
@@ -637,19 +658,28 @@ Let $\qq$ be a $\sigma$-twisted MLQ.
 Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
 \end{lemma}
 
+\begin{vershort}
 \begin{proof}
 Repeatedly apply~\eqref{eq:queue_type_change}.
-%Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
-%Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
-%Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
-%Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
-%(since $n = m_1 + m_2 + \cdots + m_\ell$).
-%Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way: Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
-%Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
-%In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 \end{proof}
-%\Darij{The above proof -- which I don't find obvious -- is a bit informal. To make it more rigorous would take me another definition -- the ``p-sequence'' of a type $\mm$, which is defined to be $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$ (and which uniquely determines $\mm$). Using this p-sequence, we observe that the action of a queue on a word merely inserts the size of the queue into the p-sequence at the appropriate position (``insort''), so by applying $\qq$ to $11\cdots 1$ we will end up with a word that has the same p-sequence as $\mm$ and therefore the type $\mm$.}
-%\Travis{This is really just repeated applications of~\eqref{eq:queue_type_change} and induction on the number of queues. I really think this is completely obvious from how queues act on types. If you really need to ``prove'' a remark, which you do not here, it should not be a remark.}
+\end{vershort}
+
+\begin{verlong}
+\begin{proof}
+Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
+Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
+Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
+Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
+(since $n = m_1 + m_2 + \cdots + m_\ell$).
+Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way (because of~\eqref{eq:queue_type_change}): Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
+Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
+In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
+This proves Lemma~\ref{rmk:mlq-type}.
+
+[The above proof is a bit informal. To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$. Thus, $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$.
+Now, define the \defn{p-sequence} of a type $\nn$ to be the weakly increasing infinite sequence $\tup{p_0(\nn), p_1(\nn), p_2(\nn), \ldots}$ of integers (which uniquely determines $\nn$). Furthermore, if $u$ is a word of type $\nn$, then we define the p-sequence of $u$ to be the p-sequence of $\nn$. Then, \eqref{eq:queue_type_change} shows the following: If $q$ is a queue and $u$ is a word, then the p-sequence of $q(u)$ is obtained from the p-sequence of $u$ by inserting $\abs{q}$ into the p-sequence at the appropriate position (appropriate in the sense that the resulting sequence is still weakly increasing). Hence, the p-sequence of the word $\qq (1 \dotsm 1)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1 \dotsm 1$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions. In other words, the p-sequence of the word $\qq (1 \dotsm 1)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$). In other words, this p-sequence is $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$. Hence, the type of the word $\qq (1 \dotsm 1)$ is $\mm$.]
+\end{proof}
+\end{verlong}
 
 \begin{example}
 Let $\ell \geq 1$.
@@ -979,6 +1009,8 @@ We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1
 \section{A Jacobi-Trudi-like formula for special $u$}
 \label{sec:JT_formula}
 
+\Darij{XBEGIN}
+
 We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and weakly decreasing if we disregard all letters $\ell$.
 
 \begin{dfn}
@@ -1147,6 +1179,8 @@ u & = 33{\color{gray} 4}2{\color{gray} 4}22{\color{gray} 4}1,
 \end{align*}
 See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bijection between an MLQ and disjoint $r$-paths.
 \end{example}
+
+\Darij{XEND}
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S = \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
@@ -2083,7 +2117,524 @@ It could be interesting to see if our proof has any implications for the work of
 
 
 
+\begin{verlong}
+%=====================================================================
+\section{Appendix: Old proof of Theorem~\ref{thm:permutation}}
+\label{sec:thm_proof-old6}
 
+This section contains a previous proof of Theorem~\ref{thm:permutation}.
+This proof uses similar ideas to the proof given in Section~\ref{sec:thm_proof} above,
+but differs in its details (in particular, it defines the dual configuration
+in a different way, although the two definitions can be shown to be equivalent).
+
+We need some definitions first.
+
+An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
+As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
+
+We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
+Thus, assume $r_1 \neq r_2$.
+
+For any two sites $i$ and $j$, let $\inter[i,j]$ denote a closed (cyclic) interval from $i$ to $j$.
+This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$.\footnote{We trivially consider an empty interval to be balanced, and note that if $j = i-1$, then $\inter[i,j] = \ive{n}$.}
+Let $c^{\uparrow}[i,j]$ (resp.~$c^{\downarrow}[i,j]$) denote the number of $\ell \in \inter[i,j]$ such that $\ell \in q_1$ (resp.~$\ell \in q_2$).
+
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{balanced} if $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\uparrow[i,k] \geq c^\downarrow[i,k]$.
+Equivalently, $\inter[i,j]$ is balanced if and only if $c^{\downarrow}[i,j] = c^{\uparrow}[i,j]$ and for each $k \in \inter[i,j]$, we have $c^\downarrow[k,j] \geq c^\uparrow[k,j]$.
+A set $S$ of sites is \defn{balanced} if it is a disjoint union of balanced intervals.
+For $i \in \ive{n}$, we say that $i$ is \defn{balanced} if $i$ belongs to some balanced interval, and \defn{unbalanced} otherwise.
+
+The following facts are straightforward:
+\begin{enumerate}
+ \item For any balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
+ \item The empty interval is balanced.
+ \item The set $\ive{n}$ of all sites is not balanced, since $r_1 \neq r_2$.
+ \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
+       is balanced.\footnote{To prove this, first check it when $A$ and $B$
+       are balanced intervals.}
+ \item If $A$ and $B$ are balanced intervals, and if $A \cup B$ is an
+       interval, then $A \cup B$ is balanced.\footnote{This is obvious
+       when one of $A$ and $B$ contains the other. Otherwise, argue
+       that $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced.}
+ \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
+       $i \in \ive{n}$) is also the disjoint union of all maximal balanced intervals
+       (where ``maximal'' means ``maximal under inclusion'').
+ \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
+ \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
+ \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
+\end{enumerate}
+
+We construct $C' = (q'_1, q'_2)$ by letting $q'_i \cap \mcI = q_i \cap \mcI$ for $i=1,2$ and each balanced interval $\mcI$ of $C$.
+For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
+Note that $C$ and $C'$ have the same balanced intervals.
+It is clear that $C'' = C$ and $\wt(C) = \wt(C')$.
+
+(We could adapt this construction to the case $r_1 = r_2$, but we would need to be more precise about defining intervals, since the set of all sites can be written as $\inter[i, i-1]$ for any value of $i$. If done correctly, this results in every $i \in \ive{n}$ being balanced when $r_1 = r_2$, and thus the construction yields $C' = C$ as we defined.)
+
+\begin{example}
+Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
+The dual configuration $C'$ is given by sliding all of the circles not boxed from the upper level to the lower level.
+In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
+\end{example}
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}[scale=0.75]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (1.5*\sc,\l-.5) rectangle(4.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (6.5*\sc,\l-.5) rectangle(7.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (8.5*\sc,\l-.5) rectangle(20.5*\sc,\ll+.5);
+  \foreach \i in {1,2,5,6,8,11,13,14,17,18,19} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {3,4,7,9,10,12,15,16,20} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,12,15,16,18,19,20} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,3,4,5,6,7,8,9,10,11,13,14,17} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+\]
+\caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
+The maximal balanced intervals are boxed.}
+\label{fig:balanced-old6}
+\end{figure}
+
+Recall the notations introduced just before Lemma~\ref{le:dual}.
+
+\begin{remark}
+\label{rmk:balanced-dual-let-old6}
+Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
+Then, the interval $\mcI$ of $C$ is balanced if and only if the interval $\mcI^{\operatorname{refl}} = \set{ n + 1 - i \mid i \in \mcI }$ of the $(n-r_1, n-r_2)$-configuration $C^* = (q_1^*, q_2^*)$ is balanced.
+In other words, the balanced intervals of $C$ are exactly the balanced intervals of $C^*$ but reflected through the middle of $\ive{n}$.
+Thus, the dual configuration of $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
+\begin{equation}
+ (C^*)' = \bigl( (q_1')^*, (q_2')^* \bigr) .
+ \label{eq.rmk:balanced-dual-let.dual-old6}
+\end{equation}
+In addition, applying Lemma~\ref{le:dual} twice, we obtain
+\[
+C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( (q^*_1(u^*))^* \bigr) = \bigl( q_2^*\bigl( q_1^*(u^*) \bigr) \bigr)^* = \bigl( C^*(u^*) \bigr)^* .
+\]
+In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 5 - C^*(u^*)_{n+1-i}$, where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
+\end{remark}
+
+Fix $k \geq 1$.
+In the following, we simplify our terminology and say that an MLQ
+is a $k$-tuple of queues (without any restriction on their sizes).
+We want to define an action of $\SymGp{k}$ on MLQs.
+%by letting each simple transposition $s_i$ act as the map
+For each $i \in \ive{k-1}$, we define a map $\fraks_i \colon \set{\text{MLQs}} \to \set{\text{MLQs}}$ by
+\[
+\fraks_i(q_1, q_2, \dotsc, q_k) = (q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k),
+\]
+where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
+From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
+It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
+Thus, the following proposition shows that $\fraks_i$ defines an action of $\SymGp{k}$ on the set of all MLQs.
+
+\begin{prop} \label{prop:braid-old6}
+We have
+\[
+\fraks_i \fraks_{i+1} \fraks_i \qq
+	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
+\]
+for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots, k-2}$.
+\end{prop}
+
+\begin{proof}
+We shall deduce the claim from~\cite[Ch.~5, (5.6.3)]{Loth}.
+
+Let $A$ be the $\tup{k+1}$-element set $\set{\circ, 1, 2, \ldots, k}$.
+Let $A^*$ denote the set of all words on the alphabet $A$
+(of any finite length).
+
+We construct a $k \times n$-matrix $M_{\qq} \in A^{k \times n}$ from $\qq$ by setting the $\tup{i, j}$-th
+entry to $i$ if $j \in q_i$ and $\circ$ otherwise.
+We then construct a word $\word(\qq) \in A^*$ by reading $M_{\qq}$ from top-to-bottom, left-to-right (\textit{i.e.}, column by column).
+For example, if $n = 5$, $k = 3$, then
+\begin{align*}
+\qq = \tup{\set{1, 3}, \set{2},
+\set{2, 5}}
+& \longleftrightarrow
+ M_{\qq}
+ =
+ \begin{array}{ccccc}
+  1 & \circ & 1 & \circ & \circ \\
+  \circ & 2 & \circ  & \circ & \circ \\
+  \circ & 3  & \circ & \circ & 3
+ \end{array}
+ \\ & \longrightarrow
+ \word(\qq) = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
+\end{align*}
+Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$ since $n$ is fixed.
+In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
+is injective.
+
+Now, for each $i \in \set{1, 2, \ldots, k-1}$, we recall the operator
+$\sigma_i \colon A^* \to A^*$ from~\cite[\S5.5]{Loth}.
+This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
+as follows:
+\begin{enumerate}
+ \item Treat all letters $i$ in $p$ as opening parentheses `(',
+       all letters $i+1$ as closing parentheses `)',
+       and consider all other letters to be frozen.
+       Now, match as many parentheses as possible
+       according to the standard parenthesis-matching
+       algorithm (\textit{i.e.}, every time you find an opening
+       parenthesis to the left of a closing one, with only
+       frozen letters between them, you match these two
+       parentheses and declare them frozen).
+       Notice that this algorithm is non-deterministic, but
+       the outcome is independent of the steps chosen;
+       the result is always a word whose non-frozen
+       part (\textit{i.e.}, the word obtained by removing
+       all frozen letters) is
+       $\underbrace{))\cdots)}_{a\text{ parentheses}}
+       \underbrace{((\cdots(}_{b\text{ parentheses}}$
+       for some integers $a, b \geq 0$.
+       We call this the \defn{reduced signature} of $p$.
+ \item Now, replace this non-frozen part by
+       $\underbrace{))\cdots)}_{b\text{ parentheses}}
+       \underbrace{((\cdots(}_{a\text{ parentheses}}$
+       while keeping all frozen letters in their places.
+       The resulting word is $\sigma_i p$.
+\end{enumerate}
+From~\cite[Eq.~(5.6.3)]{Loth}, these operators
+$\sigma_i$ satisfy
+\begin{equation}
+ \sigma_i \sigma_{i+1} \sigma_i
+ = \sigma_{i+1} \sigma_i \sigma_{i+1}
+ \label{pf.prop:braid.loth-eq-old6}
+\end{equation}
+for all $i \in \set{1, 2, \ldots, k-2}$.
+
+Let $\zeta \colon \mcW_n \to \mcW_n$ be the cyclic shift map that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
+We also abuse the notation $\zeta$ for the map that sends each queue $q$ to the queue $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites).
+This map $\zeta$ shall act on MLQs entrywise (since an MLQ is a tuple of queues).
+Clearly,
+\begin{equation}
+ \word(\zeta \qq) = \zeta^k \word(\qq)
+ \label{pf.prop:braid.word-zeta-old6}
+\end{equation}
+for any MLQ $\qq = (q_1, \ldots, q_k)$.
+
+Now, we claim that
+\begin{equation}
+ \word(\fraks_i \qq) = \sigma_i\bigl( \word(\qq) \bigr)
+ \qquad \text{ for each MLQ } \qq \text{ and each } i .
+ \label{pf.prop:braid.inter-old6}
+\end{equation}
+Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$ for $\qq = (q_1, q_2)$
+(because the definition of $\sigma_i$ only relies on the letters $i$ and $i+1$, while all other letters stay in their places and have no effect).
+
+Thus, let $\qq = (q_1, q_2)$.
+We want to show $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
+If $\abs{q_1} = \abs{q_2}$, then $\fraks_1 \qq = \qq$ by the definition of $\fraks_1$.
+Moreover, we have $\sigma_1\bigl( \word(\qq) \bigr) = \word(\qq)$ in this case, since the word $\word(\qq)$ has as many letters $1$ as it has letters $2$, but the map $\sigma_1$ leaves such words unchanged.
+Hence, the claim holds when $\abs{q_1} = \abs{q_2}$.
+Thus, we assume that $\abs{q_1} \neq \abs{q_2}$.
+Therefore, there exists at least one unbalanced site for the configuration $\qq = (q_1, q_2)$.
+
+The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because $\zeta$ merely shifts the balanced intervals.
+The operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ by~\cite[Prop.~5.6.1]{Loth}.
+Hence, and because of~\eqref{pf.prop:braid.word-zeta-old6}, we can apply $\zeta$ to $\qq$ any number of times without loss of generality.
+Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
+Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
+
+We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
+\begin{itemize}
+\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$,
+\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$,
+\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$,
+\item nothing otherwise.
+\end{itemize}
+Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
+Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
+Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
+% [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
+Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
+Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
+The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
+Consequently, the sites of the unmatched parentheses are precisely the unbalanced sites.
+
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter-old6}.
+
+The equality \eqref{pf.prop:braid.inter-old6} can be rewritten as the
+commutative diagram
+\[
+\xymatrix{
+ \set{\text{MLQs}} \ar[r]^{\fraks_i} \ar[d]_{\word} & \set{\text{MLQs}} \ar[d]^{\word} \\
+ A^* \ar[r]_{\sigma_i} & A^*
+}
+\]
+for all $i \in \set{1, 2, \dotsc, k-1}$.
+In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
+this diagram allows us to translate~\eqref{pf.prop:braid.loth-eq-old6} into
+$\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
+\end{proof}
+
+\begin{remark}
+Our letters $1, \ldots, k$ correspond to the letters
+$a_k, \ldots, a_1$ in~\cite{Loth},
+since the definition of $\sigma_i$ in~\cite{Loth} involves $a_i$ rather
+than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
+Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
+but this makes no difference to the proof, since all letters $\circ$ are always frozen.
+% Note that we have arbitrarily chosen to break our cycle at $n$,
+% however by~\cite[Prop.~5.6.1]{Loth}, the result does not depend on this choice.
+\end{remark}
+
+\begin{remark}
+The operator $\sigma_i$ is essentially a combination of co-plactic operators.
+Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
+Note that the bracketing rule given above is precisely the usual signature rule (see, \textit{e.g.},~\cite[Sec.~2.4]{BS17} for a description) for computing tensor products.
+This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
+\end{remark}
+
+Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
+Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
+corresponding to the $k$ smallest letters $w_i$ of $w$.
+
+The crucial tools in our proof of Theorem~\ref{thm:permutation} will be the following two facts.
+
+\begin{lemma} \label{lem:SL.reconstruct-old6}
+Let $w, w' \in \mcW_n$ be two words of the same type $\mm$.
+Assume that $[w]_k = [w']_k$ for each $k \in \set{p_i(\mm) \mid i \geq 0}$.
+Then, $w = w'$.
+\end{lemma}
+
+\begin{proof}
+Fix some $i \geq 1$.
+The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}$
+(since $w$ has type $\mm$).
+Likewise,
+the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
+Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
+= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$, %\travis{FYI: still fighting us.},
+we conclude that these are the same sites.
+Since this holds for all letters $i$, we have $w = w'$.
+\end{proof}
+
+\begin{prop} \label{prop:SL.dual-old6}
+Let $u \in \mcW_n$ be a word of type $\mm$.
+Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
+Let $q$ be a queue.
+The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [q(u)]_k }$, where $q^{\dagger}$ is some queue.
+\end{prop}
+
+\begin{proof} %[Proof of Proposition~\ref{prop:SL.dual-old6}.]
+Let $C' = (q'_1, q'_2)$ denote the dual configuration of $C = \tup{ [u]_k , q }$.
+The notations $c^{\uparrow}$ and $c^{\downarrow}$ as well as the concept of balanced
+intervals shall refer to $C$.
+
+Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
+such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Use this permutation to construct $q(u)$ (as in the definition of $q(u)$).
+For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
+%\Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
+Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
+Also, $q(u)_{j_1} \leq q(u)_{j_2} \leq \cdots \leq q(u)_{j_n}$, so that
+$[q(u)]_k = \set{j_1, j_2, \ldots, j_k}$ for each $k$ for which $[q(u)]_k$ is well-defined.
+
+We want to prove that $(q'_1, q'_2)$ has the form $\tup{q^{\dagger} , [q(u)]_k }$.
+In other words, we want to prove that $q'_2 = [q(u)]_k$.
+If $k = \abs{q}$, then this is obvious (because in this case, the two queues in the configuration $C$ have the same size, so that its dual configuration $C'$ equals $C$, and thus $q'_2 = q$; but the assumption $k = \abs{q}$ also yields $[q(u)]_k = q$ because of the construction of $q(u)$, and therefore we obtain $q'_2 = q = [q(u)]_k$).
+
+Suppose next that $k < \abs{q}$.
+Thus, each site in $[u]_k$ is balanced.
+But $[u]_k = \set{i_1, i_2, \ldots, i_k}$ by the definition of the permutation.
+
+If $S$ is a set of sites, then the \defn{connected components} of $S$ are the maximal intervals contained in $S$.
+
+We say that a closed cyclic interval $\inter[i,j]$ is \defn{top-heavy} if for each $\ell \in \inter[i,j]$, we have $c^\uparrow[i,\ell] \geq c^\downarrow[i,\ell]$.
+Thus, a balanced cyclic interval is just a top-heavy cyclic interval $\inter[i,j]$ satisfying $c^{\uparrow}[i,j] = c^{\downarrow}[i,j]$.
+% A set of sites will be called \defn{top-heavy} if each of its connected components is top-heavy.
+
+For each $p \in \ive{k}$, we define an interval $I_p$ by $I_p = \inter[i_p, j_p]$.
+
+We first observe that $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$
+for each $p \in \ive{k}$.
+[\textit{Proof.} Let $p \in \ive{k}$.
+Recall that the site $j_p$ is found
+(in Phase~II of the algorithm computing $q(u)$) as the first site $j \in q$ weakly to the right of $i_p$ such that $q(u)_j$ is not set yet.
+In other words, $j_p$ is the first site $j \in q$ weakly to the right of $i_p$ that is not one of $j_1, j_2, \ldots, j_{p-1}$
+(since the sites $j \in q$ such that $q(u)_j$ has already been set are $j_1, j_2, \ldots, j_{p-1}$).
+In other words, all sites in $I_p = \inter[i_p, j_p]$ that belong to $q$ must be among $j_1, j_2, \ldots, j_{p-1}, j_p$.
+In other words, $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$, qed.]
+
+Let $U = I_1 \cup I_2 \cup \cdots \cup I_k$.
+Then, $U \cap q \subseteq \set{j_1, j_2, \ldots, j_k}$ (since $I_p \cap q \subseteq \set{j_1, j_2, \ldots, j_p}$ for each $p \in \ive{k}$).
+Combining this with $\set{j_1, j_2, \ldots, j_k} \subseteq U \cap q$ (since each $j_p$ satisfies $j_p \in I_p \subseteq U$ and $j_p \in \set{j_1, j_2, \ldots, j_{\abs{q}}} = q$),
+we obtain $U \cap q = \set{j_1, j_2, \ldots, j_k}$.
+
+If we had $U = \ive{n}$, then this would rewrite as $q = \set{j_1, j_2, \ldots, j_k}$, which would entail $\abs{q} = k$; this would contradict $k < \abs{q}$.
+Hence, $U \neq \ive{n}$.
+
+Each connected component of the set $U$ is top-heavy.
+[\textit{Proof.} Let $\inter[a,b]$ be a connected component of $U$. Then, we must prove that $\inter[a,b]$ is top-heavy.
+Indeed, since $U$ is the union of the connected intervals $I_1, I_2, \ldots, I_k$, its connected component $\inter[a,b]$ must have the form $\inter[a,b] = \bigcup_{p \in R} I_p$ for some nonempty subset $R$ of $\ive{k}$, and be disjoint from all the $I_p$ with $p \notin R$. Consider this $R$.
+Thus, $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R}$ (indeed, $\inter[a,b] = \bigcup_{p \in R} I_p$ shows that all of the $i_p$ with $p \in R$ must lie in $\inter[a,b] \cap \set{i_1, i_2, \ldots, i_k}$; on the other hand, none of the remaining elements of $\set{i_1, i_2, \ldots, i_k}$ can belong to $\inter[a,b]$, since $\inter[a,b]$ is disjoint from all the $I_p$ with $p \notin R$).
+Likewise, $\inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R}$.
+From $[u]_k = \set{i_1, i_2, \ldots, i_k}$, we obtain
+\[
+\inter[a,b] \cap [u]_k = \inter[a,b] \cap \set{i_1, i_2, \ldots, i_k} = \set{i_p \mid p \in R} .
+\]
+From $\inter[a,b] \subseteq U$, we obtain
+\[
+\inter[a,b] \cap q = \inter[a,b] \cap \underbrace{U \cap q}_{= \set{j_1, j_2, \ldots, j_k}}
+= \inter[a,b] \cap \set{j_1, j_2, \ldots, j_k} = \set{j_p \mid p \in R} .
+\]
+Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [u]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
+Hence, the former number is at least as large as the latter number (because if $p \in R$ is such that $j_p$ falls into $\inter[a,\ell]$, then $i_p$ must also fall into $\inter[a,\ell]$\footnote{In fact, let $p \in R$ be such that $j_p \in \inter[a,\ell]$. But $\inter[i_p,j_p] = I_p$ is a subinterval of $\inter[a,b]$, due to $\inter[a,b] = \bigcup_{p \in R} I_p$. The interval $\inter[a,\ell]$ is a ``prefix'' of $\inter[a,b]$; thus, every subinterval of $\inter[a,\ell]$ that ends inside $\inter[a,\ell]$ must also begin inside $\inter[a,\ell]$. Applying this to the subinterval $\inter[i_p, j_p]$, we conclude that $i_p \in \inter[a,\ell]$, as we wanted to show. Here, we have tacitly used the fact that $\inter[a,b] \neq \ive{n}$, which follows from $\inter[a,b] \subseteq U \neq \ive{n}$.}).
+We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
+
+Consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[u]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[u]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
+But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[u]_k$ (since $[u]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).
+Thus, each connected component of $U$ is balanced. In other words, $U$ is balanced.
+Hence, each element of $[q(u)]_k$ is balanced (since $[q(u)]_k = \set{j_1, j_2, \ldots, j_k} = U \cap q \subseteq U$).
+Due to how the dual configuration $(q'_1, q'_2)$ was defined, we thus conclude that each element of $[q(u)]_k$ is in $q'_2$. In other words, $[q(u)]_k \subseteq q'_2$.
+Combining this with $\abs{q'_2} = \abs{[u]_k} = k = \abs{[q(u)]_k}$, we obtain $q'_2 = [q(u)]_k$.
+Thus, Proposition~\ref{prop:SL.dual-old6} is proven in the case when $k < \abs{q}$.
+
+Now suppose $k > \abs{q}$.
+% Note that $\ive{n} \setminus [u]_k$ are the indices of the largest $n-k$ letters of $u$ and $n - \abs{q} > n-k$.
+Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
+Thus, $n-k < n - \abs{q} = \abs{q^*}$.
+Hence, applying the $k < \abs{q}$ case (proven above)
+to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$,
+we see that
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
+for some queue $q^\dagger$.
+Now,
+\begin{align*}
+ \bigl( (q'_1)^*, (q'_2)^* \bigr)
+ &= \tup{ ([u]_k)^* , q^* }'
+ = \tup{ [u^*]_{n-k} , q^* }' \\
+ & = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }
+ = \tup{ q^\dagger , [(q(u))^*]_{n-k} } ,
+\end{align*}
+where
+\begin{itemize}
+ \item the first equality follows from~\eqref{eq.rmk:balanced-dual-let.dual-old6};
+ \item the second equality is because $([u]_k)^* = [u^*]_{n-k}$; and
+ \item the fourth equality follows from Lemma~\ref{le:dual}.
+\end{itemize}
+Therefore, $(q'_2)^* = [(q(u))^*]_{n-k} = ([q(u)]_k)^*$, so that
+$q'_2 = [q(u)]_k$.
+Hence, Proposition~\ref{prop:SL.dual-old6} is proven in the case when $k > \abs{q}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
+Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
+Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
+Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+
+In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
+The only nontrivial part is showing $u = (\fraks_i\qq) (1 \dotsm 1)$.
+More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
+The proof of this claim reduces to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
+
+Each word $w$ can be obtained from a standard word by a sequence of
+merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
+$k \in \set{ p_j(\mm) \mid j \geq 1 }$, where $\mm$ is the type of
+$u$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
+commute with the action of a queue (and thus of an MLQ).
+Hence, it is sufficient to consider standard words $w$.
+Thus, assume that $w$ is standard of type $\mm$.
+It is straightforward to see
+(using Equation~\eqref{eq:queue_type_change} and $\abs{q'_2} = \abs{q_1}$ and $\abs{q'_1} = \abs{q_2}$)
+that the words
+$C(w) = q_2\bigl( q_1(w) \bigr)$
+and
+$C'(w) = q'_2\bigl( q_1'(w) \bigr)$
+have the same type.
+%indeed, the action of a queue $q$ on a word $w$ modifies its
+%type in a predictable way (namely, the number $\abs{q}$ is
+%inserted into the type of $w$ at the place where it would
+%keep the type weakly increasing).
+Let $\nn$ be this type.
+We shall now show that
+$[C'(w)]_k = [C(w)]_k$
+for all $k \in \set{ p_i(\nn) \mid i \geq 0}$.
+According to Lemma~\ref{lem:SL.reconstruct-old6}, this will yield $C'(w) = C(w)$, and thus our proof will be complete.
+
+Let $k \in \set{ p_i(\nn) \mid i \geq 0}$.
+Thus, $k \in \set{0, 1, \ldots, n} = \set{ p_i(\mm) \mid i \geq 0 }$ (since $w$ is standard).
+Hence, $[w]_k$ is well-defined.
+Note that $q_i(w)$ and $q'_i(w)$ are also standard words.
+Using Proposition~\ref{prop:SL.dual-old6} to compute dual
+configurations, we can see how the MLQ
+$\qq = \tup{[w]_k, q_1, q_2}$ transforms under the action of
+$\fraks_1 \fraks_2 \fraks_1$: Namely, we have
+\begin{align*}
+\tup{[w]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(w)]_k, q_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k},
+\end{align*}
+where $\ast$ denotes some queue.
+Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
+\begin{align*}
+\tup{[w]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[w]_k, q'_1, q'_2}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(w)]_k , q'_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k}.
+\end{align*}
+(See Figure~\ref{fig:crossing_diagrams-old6} for the actions depicted using crossing diagrams.)
+Yet, the two maps are equal by Proposition~\ref{prop:braid-old6}.
+Thus, the resulting MLQs must be identical:
+\[
+\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(w) \bigr) \bigr]_k}
+=
+\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(w) \bigr) \bigr]_k}.
+\]
+Hence, we have
+\[
+\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k.
+\]
+In other words, $[C'(w)]_k = [C(w)]_k$.
+\end{proof}
+
+\begin{figure}
+\begin{gather*}
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$[w]_k$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$\ast$};
+\node (s12) at (1,-1) {$[q_1(w)]_k$};
+\node (s13) at (1,-2) {$q_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$\ast$};
+\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
+\path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
+\path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
+\path[-,red] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
+\end{tikzpicture}
+\\
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$[w]_k$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$[w]_k$};
+\node (s12) at (1,-1) {$q'_1$};
+\node (s13) at (1,-2) {$q'_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$[q'_1(w)]_k$};
+\node (s23) at (2,-2) {$q'_2$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k$};
+\path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
+\path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
+\path[-,red] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
+\end{tikzpicture}
+\end{gather*}
+\caption{Crossing diagrams representing the action of $\fraks_1 \fraks_2 \fraks_1$ (top) and $\fraks_2 \fraks_1 \fraks_2$ (bottom).}
+\label{fig:crossing_diagrams-old6}
+\end{figure}
+
+\end{verlong}
 
 
 
