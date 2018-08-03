@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, July 30, 2018 05:52:20}
+%TCIDATA{LastRevised=Friday, August 03, 2018 14:02:54}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -347,9 +347,9 @@ benefited from computations using \textsc{SageMath}~\cite{sage,combinat}.
 \label{sec:background}
 
 Fix a positive integer $n$. For a nonnegative integer $k$, let $\left[  k
-\right] $ denote the set $\left\{  1, 2, \ldots, k \right\} $, and so $[0] =
+\right]  $ denote the set $\left\{  1, 2, \ldots, k \right\}  $, and so $[0] =
 \emptyset$. Let $\mathfrak{S}_{k}$ denote the symmetric group on $\left[  k
-\right] $, and let $s_{i} \in\mathfrak{S}_{k}$ be the simple transposition of
+\right]  $, and let $s_{i} \in\mathfrak{S}_{k}$ be the simple transposition of
 $i$ and $i+1$. Let $w_{0} \in\mathfrak{S}_{k}$ be the longest element: the
 permutation $k (k-1) \dotsm321$ (written in one line notation) that reverses
 the order of all elements.
@@ -382,7 +382,7 @@ We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new
 word by replacing all occurrences of $j$ by $j-1$ in $u$ for each $j = i+1,
 i+2, \ldots$ in that order. We denote the merging of $i$ and $i+1$ in $u$ by
 $\vee_{i} u$. Note that $\vee_{i} u$ is packed whenever $u$ is packed. For $T
-= \left\{  t_{1} < \cdots< t_{k} \right\}  \subseteq\left[  \ell-1 \right] $,
+= \left\{  t_{1} < \cdots< t_{k} \right\}  \subseteq\left[  \ell-1 \right]  $,
 we set $\bigvee_{T} u := \vee_{t_{1}} \cdots\vee_{t_{k}} u$. Similarly, the
 merging of $i,i+1$ in a type $\mathbf{m} = (m_{1}, m_{2}, \ldots)$ is
 $\vee_{i}(\mathbf{m}) = (m_{1}, \dotsc, m_{i-1}, m_{i} + m_{i+1}, m_{i+2},
@@ -399,7 +399,7 @@ When $\mathbf{m}$ is clear, we simply write $p_{i}$ for this. (Thus, $p_{0} =
 0$ and $p_{i} = n$ for sufficiently large $i$.)
 
 \begin{vershort}
-We define an \defn{$r$-queue} $q$ to be any subset of $\left[  n \right] $ of
+We define an \defn{$r$-queue} $q$ to be any subset of $\left[  n \right]  $ of
 size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}. We equate
 $q$ with a function from $\mathcal{W}_{n}$ to itself defined as follows. For
 any $u \in\mathcal{W}_{n}$, the following algorithm computes $v = q(u)$.
@@ -418,18 +418,18 @@ and $u \in\mathcal{W}_{n}$ is a word, then a new word $v = q(u) \in
 \end{verlong}
 
 In the beginning, no letter of $v \in\mathcal{W}_{n}$ is set. Choose a
-permutation $\left(  i_{1}, i_{2}, \ldots, i_{n} \right) $ of $\left(  1, 2,
-\ldots, n \right) $ such that $u_{i_{1}} \leq u_{i_{2}} \leq\cdots\leq
+permutation $\left(  i_{1}, i_{2}, \ldots, i_{n} \right)  $ of $\left(  1, 2,
+\ldots, n \right)  $ such that $u_{i_{1}} \leq u_{i_{2}} \leq\cdots\leq
 u_{i_{n}}$.
 
 \begin{description}
-\item[Phase I]  For $i = i_{n}, i_{n-1}, \ldots, i_{\left|  q \right| +1}$, do
-the following.  Find the first site $j$ weakly to the left (cyclically) of $i$
-such that $j \notin q$ and $v_{j}$ is not set.  Then set $v_{j} = u_{i} + 1$.
+\item[Phase I] For $i = i_{n}, i_{n-1}, \ldots, i_{\left|  q \right|  +1}$, do
+the following. Find the first site $j$ weakly to the left (cyclically) of $i$
+such that $j \notin q$ and $v_{j}$ is not set. Then set $v_{j} = u_{i} + 1$.
 
-\item[Phase II]  For $i = i_{1}, i_{2}, \ldots, i_{\left|  q \right| }$, do
-the following.  Find the first site $j$ weakly to the right (cyclically) of
-$i$ such that $j \in q$ and $v_{j}$ is not set.  Then set $v_{j} = u_{i}$.
+\item[Phase II] For $i = i_{1}, i_{2}, \ldots, i_{\left|  q \right|  }$, do
+the following. Find the first site $j$ weakly to the right (cyclically) of $i$
+such that $j \in q$ and $v_{j}$ is not set. Then set $v_{j} = u_{i}$.
 \end{description}
 
 \begin{remark}
@@ -443,8 +443,8 @@ Since Phase~I only deals with $j \notin q$, and Phase~II only with $j\in q$,
 the two phases can be arbitrarily interleaved (\textit{i.e.}, we can perform
 the steps of the algorithm in any order as long as the steps of Phase~I
 (resp.\ Phase~II) are processed in the order $i = i_{n}, i_{n-1}, \ldots,
-i_{\left|  q \right| +1}$ (resp.\ $i = i_{1}, i_{2}, \ldots, i_{\left|  q
-\right| }$).
+i_{\left|  q \right|  +1}$ (resp.\ $i = i_{1}, i_{2}, \ldots, i_{\left|  q
+\right|  }$).
 \end{remark}
 
 \begin{lemma}
@@ -455,29 +455,27 @@ choice of permutation $(i_{1}, i_{2}, \dotsc, i_{n})$.
 \begin{proof}
 Consider some $k$ such that $u_{i_{k}} = u_{i_{k+1}}$. If we switch the two
 (equal) adjacent entries $i_{k}$ and $i_{k+1}$ of the permutation $\left(
-i_{1}, i_{2}, \ldots, i_{n} \right) $, then the resulting word $v$ is
+i_{1}, i_{2}, \ldots, i_{n} \right)  $, then the resulting word $v$ is
 unchanged. Indeed, if we set $h = u_{i_{k}} = u_{i_{k+1}}$, then:
 
 \begin{itemize}
+\item If $k < \left|  q \right|  $, then this switch interchanges two
+consecutive steps in Phase~II, causing the corresponding letters $v_{j}$ to
+get set in a possibly different order; but this does not change $v$ because
+these two letters are set to the same value (namely, to $h+1$).
 
+\item If $k > \left|  q \right|  $, then a similar argument works (using
+Phase~I instead).
 
-\item If $k < \left|  q \right| $, then this switch interchanges two
-consecutive  steps in Phase~II, causing the corresponding letters $v_{j}$ to
-get set in a possibly different order; but this does not change $v$  because
-these two letters are set to the same value  (namely, to $h+1$). 
-
-\item If $k > \left|  q \right| $, then a similar argument works (using
-Phase~I instead). 
-
-\item If $k = \left|  q \right| $, then recall from
-Remark~\ref{rmk:order-agnostic} that  the two phases can be arbitrarily
-interleaved.  In particular, we can first perform all but the last step of
-Phase~I,  then perform all but the last step of Phase~II,  and finally perform
-the remaining two steps.  The switch only affects these final two steps.
-However, the effect of these two steps is simply that the unique  remaining
-unset $v_{j}$ with $j \in q$ gets set to $h$,  and the unique remaining unset
-$v_{j}$ with $j \notin q$ gets set to $h+1$.  The switch clearly does not
-change this behavior,  since it does not depend on $i_{k}$ and $i_{k+1}$.
+\item If $k = \left|  q \right|  $, then recall from
+Remark~\ref{rmk:order-agnostic} that the two phases can be arbitrarily
+interleaved. In particular, we can first perform all but the last step of
+Phase~I, then perform all but the last step of Phase~II, and finally perform
+the remaining two steps. The switch only affects these final two steps.
+However, the effect of these two steps is simply that the unique remaining
+unset $v_{j}$ with $j \in q$ gets set to $h$, and the unique remaining unset
+$v_{j}$ with $j \notin q$ gets set to $h+1$. The switch clearly does not
+change this behavior, since it does not depend on $i_{k}$ and $i_{k+1}$.
 \end{itemize}
 \end{proof}
 
@@ -486,8 +484,8 @@ equal $u_{i}$ does not matter.
 
 \begin{remark}
 \label{rmk:t-splitting} Let $u$ and $q$ be as before. Let $r = \left|  q
-\right| $. There exists a $t \in\left[  \ell\right] $ such that $p_{t-1} \leq
-r \leq p_{t}. $ The word $v = q(u)$ then has type
+\right|  $. There exists a $t \in\left[  \ell\right]  $ such that $p_{t-1}
+\leq r \leq p_{t}. $ The word $v = q(u)$ then has type
 \begin{equation}
 \label{eq:queue_type_change}(m_{1}, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r,
 m_{t+1}, m_{t+2}, \ldots).
@@ -499,8 +497,8 @@ the class $t$ into two new classes $t$ and $t+1$.
 
 For all $i$ processed in Phase~I (resp.\ Phase~II) of the algorithm, we have
 $u_{i} \geq t$ (resp.~$u_{i} \leq t$). The queue $q$ can be reconstructed from
-$v$ and $t$ as the set of all $j \in\left[  n \right] $ satisfying $v_{j} \leq
-t$.
+$v$ and $t$ as the set of all $j \in\left[  n \right]  $ satisfying $v_{j}
+\leq t$.
 \end{remark}
 
 \begin{example}
@@ -567,8 +565,8 @@ where the paths in red correspond to Phase I and those in blue are from Phase II
 \begin{verlong}
 where the paths in red correspond to Phase I and those in blue are from Phase
 II (and where we have picked the permutation $\left(  i_{1}, i_{2}, \ldots,
-i_{n} \right)  = \left(  5, 9, 8, 1, 7, 6, 2, 4, 3 \right) $ out of a total of
-$2! \cdot3! \cdot2! = 24$ permutations satisfying $u_{i_{1}} \leq u_{i_{2}}
+i_{n} \right)  = \left(  5, 9, 8, 1, 7, 6, 2, 4, 3 \right)  $ out of a total
+of $2! \cdot3! \cdot2! = 24$ permutations satisfying $u_{i_{1}} \leq u_{i_{2}}
 \leq\cdots\leq u_{i_{n}}$; but any other among them would lead to the same result).
 \end{verlong}
 
@@ -609,23 +607,23 @@ Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $
 
 There is a natural duality in the algorithm above. For each queue $q$, let
 $q^{*}$ be the \defn{contragredient dual queue}, defined by $\left(  i \in
-q^{*} \right)  \Longleftrightarrow\left(  n+1-i \notin q \right) $. Similarly,
-for each word $u$ with $\ell$ classes, let $u^{*}$ be the
+q^{*} \right)  \Longleftrightarrow\left(  n+1-i \notin q \right)  $.
+Similarly, for each word $u$ with $\ell$ classes, let $u^{*}$ be the
 \defn{contragredient dual word} defined by $u^{*}_{i} = \ell+ 1 - u_{n+1-i}$.
-For a fixed $k \in\left[  \ell\right] $, we call $\ell+ 1 - k$ the
+For a fixed $k \in\left[  \ell\right]  $, we call $\ell+ 1 - k$ the
 \defn{contragredient dual letter} of $k$. Note that if $q$ is an $r$-queue,
 then $q^{*}$ is the $(n-r)$-queue obtained by reflecting $[n] \setminus q$
 through the middle of $[n]$. Similarly, $u^{*}$ is obtained by reversing the
 word $u$ and taking the contragredient dual letters.
 
 \begin{lemma}
-[Contragredient duality] \label{le:dual}  Let $q$ be a queue and $u$ be a word
-with $\ell$ classes.  Then we have $\bigl(q(u) \bigr)^{*} = q^{*}(u^{*})$,
+[Contragredient duality]\label{le:dual} Let $q$ be a queue and $u$ be a word
+with $\ell$ classes. Then we have $\bigl(q(u) \bigr)^{*} = q^{*}(u^{*})$,
 \textit{i.e.}, we have $q(u)_{i} = \ell+ 2 - q^{*}(u^{*})_{n+1-i}$ for all $i$.
 \end{lemma}
 
 Here, we treat $q(u)$ as a word with $\ell+1$ classes, even if it may have
-only $\ell$ classes (in the degenerate case when $q = \left[  n \right] $).
+only $\ell$ classes (in the degenerate case when $q = \left[  n \right]  $).
 
 \begin{proof}
 Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II
@@ -712,61 +710,62 @@ Repeatedly apply~\eqref{eq:queue_type_change}.
 \begin{verlong}
 \begin{proof}
 Write the $\sigma$-twisted MLQ $\mathbf{q}$ as $\left(  q_{1}, \ldots,
-q_{\ell-1} \right) $. Let $\mathbf{m} = \left(  m_{1}, m_{2}, \ldots, m_{\ell
-}, 0, 0, \ldots\right) $ be the type of $\mathbf{q}$. Thus, $m_{1} + m_{2} +
-\cdots+ m_{\ell}= p_{\ell}(\mathbf{m}) = n$. Now, the word $1 \dotsm1$ has
-type $\left(  n, 0, 0, \ldots\right)  = \left(  m_{1} + m_{2} + \cdots+
-m_{\ell}, 0, 0, \ldots\right) $ (since $n = m_{1} + m_{2} + \cdots+ m_{\ell}%
+q_{\ell-1} \right)  $. Let $\mathbf{m} = \left(  m_{1}, m_{2}, \ldots,
+m_{\ell}, 0, 0, \ldots\right)  $ be the type of $\mathbf{q}$. Thus, $m_{1} +
+m_{2} + \cdots+ m_{\ell}= p_{\ell}(\mathbf{m}) = n$. Now, the word $1 \dotsm1$
+has type $\left(  n, 0, 0, \ldots\right)  = \left(  m_{1} + m_{2} + \cdots+
+m_{\ell}, 0, 0, \ldots\right)  $ (since $n = m_{1} + m_{2} + \cdots+ m_{\ell}%
 $). Every time we apply one of the queues $q_{i}$ to this word, the type
 changes in a simple way (because of~\eqref{eq:queue_type_change}): Namely, the
 plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma
 (so, for example, the application of $q_{1}$ transforms it into $\left(  m_{1}
 + m_{2} + \cdots+ m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots+
-m_{\ell}, 0, 0, \ldots\right) $). Hence, the action of $\mathbf{q}$ transforms
-$1 \dotsm1$ into a word whose type has all the plus signs replaced by commas
--- \textit{i.e.}, whose type is $\left(  m_{1}, m_{2}, \ldots, m_{\ell}, 0, 0,
-\ldots\right)  = \mathbf{m}$. In other words, the type of the word
-$\mathbf{q}(1 \dotsm1)$ is $\mathbf{m}$. This proves Lemma~\ref{rmk:mlq-type}.
+m_{\ell}, 0, 0, \ldots\right)  $). Hence, the action of $\mathbf{q}$
+transforms $1 \dotsm1$ into a word whose type has all the plus signs replaced
+by commas -- \textit{i.e.}, whose type is $\left(  m_{1}, m_{2}, \ldots,
+m_{\ell}, 0, 0, \ldots\right)  = \mathbf{m}$. In other words, the type of the
+word $\mathbf{q}(1 \dotsm1)$ is $\mathbf{m}$. This proves
+Lemma~\ref{rmk:mlq-type}.
 
 [The above proof is a bit informal. To make it more rigorous, we can proceed
 as follows: Since $\left(  q_{1}, \ldots, q_{\ell-1} \right)  = \mathbf{q}$ is
 a $\sigma$-twisted MLQ of type $\mathbf{m}$, we know that the sizes $\left|
-q_{1} \right| , \left|  q_{2} \right| , \ldots, \left|  q_{\ell-1} \right| $
-of its queues are a permutation of $p_{1}(\mathbf{m}), p_{2}(\mathbf{m}),
+q_{1} \right|  , \left|  q_{2} \right|  , \ldots, \left|  q_{\ell-1} \right|
+$ of its queues are a permutation of $p_{1}(\mathbf{m}), p_{2}(\mathbf{m}),
 \ldots, p_{\ell-1}(\mathbf{m})$. Thus, $p_{1}(\mathbf{m}), p_{2}(\mathbf{m}),
 \ldots, p_{\ell-1}(\mathbf{m})$ is the weakly increasing permutation of the
-sequence $\left|  q_{1} \right| , \left|  q_{2} \right| , \ldots, \left|
-q_{\ell-1} \right| $. Now, define the \defn{p-sequence} of a type $\mathbf{n}$
-to be the weakly increasing infinite sequence $\left(  p_{0}(\mathbf{n}),
-p_{1}(\mathbf{n}), p_{2}(\mathbf{n}), \ldots\right) $ of integers (which
-uniquely determines $\mathbf{n}$). Furthermore, if $u$ is a word of type
-$\mathbf{n}$, then we define the p-sequence of $u$ to be the p-sequence of
-$\mathbf{n}$. Then, \eqref{eq:queue_type_change} shows the following: If $q$
-is a queue and $u$ is a word, then the p-sequence of $q(u)$ is obtained from
-the p-sequence of $u$ by inserting $\left|  q \right| $ into the p-sequence at
-the appropriate position (appropriate in the sense that the resulting sequence
-is still weakly increasing). Hence, the p-sequence of the word $\mathbf{q} (1
-\dotsm1)$ is obtained from the p-sequence $\left(  0, n, n, n, \ldots\right) $
-of the word $1 \dotsm1$ by inserting $\left|  q_{1} \right| , \left|  q_{2}
-\right| , \ldots, \left|  q_{\ell-1} \right| $ at the appropriate positions.
-In other words, the p-sequence of the word $\mathbf{q} (1 \dotsm1)$ is
-$\left(  0, p_{1}(\mathbf{m}), p_{2}(\mathbf{m}), \ldots, p_{\ell
--1}(\mathbf{m}), n, n, \ldots, n \right) $ (since $p_{1}(\mathbf{m}),
-p_{2}(\mathbf{m}), \ldots, p_{\ell-1}(\mathbf{m})$ is the weakly increasing
-permutation of the sequence $\left|  q_{1} \right| , \left|  q_{2} \right| ,
-\ldots, \left|  q_{\ell-1} \right| $). In other words, this p-sequence is
-$\left(  p_{0}(\mathbf{m}), p_{1}(\mathbf{m}), p_{2}(\mathbf{m}),
-\ldots\right) $. Hence, the type of the word $\mathbf{q} (1 \dotsm1)$ is
-$\mathbf{m}$.]
+sequence $\left|  q_{1} \right|  , \left|  q_{2} \right|  , \ldots, \left|
+q_{\ell-1} \right|  $. Now, define the \defn{p-sequence} of a type
+$\mathbf{n}$ to be the weakly increasing infinite sequence $\left(
+p_{0}(\mathbf{n}), p_{1}(\mathbf{n}), p_{2}(\mathbf{n}), \ldots\right)  $ of
+integers (which uniquely determines $\mathbf{n}$). Furthermore, if $u$ is a
+word of type $\mathbf{n}$, then we define the p-sequence of $u$ to be the
+p-sequence of $\mathbf{n}$. Then, \eqref{eq:queue_type_change} shows the
+following: If $q$ is a queue and $u$ is a word, then the p-sequence of $q(u)$
+is obtained from the p-sequence of $u$ by inserting $\left|  q \right|  $ into
+the p-sequence at the appropriate position (appropriate in the sense that the
+resulting sequence is still weakly increasing). Hence, the p-sequence of the
+word $\mathbf{q} (1 \dotsm1)$ is obtained from the p-sequence $\left(  0, n,
+n, n, \ldots\right)  $ of the word $1 \dotsm1$ by inserting $\left|  q_{1}
+\right|  , \left|  q_{2} \right|  , \ldots, \left|  q_{\ell-1} \right|  $ at
+the appropriate positions. In other words, the p-sequence of the word
+$\mathbf{q} (1 \dotsm1)$ is $\left(  0, p_{1}(\mathbf{m}), p_{2}(\mathbf{m}),
+\ldots, p_{\ell-1}(\mathbf{m}), n, n, \ldots, n \right)  $ (since
+$p_{1}(\mathbf{m}), p_{2}(\mathbf{m}), \ldots, p_{\ell-1}(\mathbf{m})$ is the
+weakly increasing permutation of the sequence $\left|  q_{1} \right|  ,
+\left|  q_{2} \right|  , \ldots, \left|  q_{\ell-1} \right|  $). In other
+words, this p-sequence is $\left(  p_{0}(\mathbf{m}), p_{1}(\mathbf{m}),
+p_{2}(\mathbf{m}), \ldots\right)  $. Hence, the type of the word $\mathbf{q}
+(1 \dotsm1)$ is $\mathbf{m}$.]
 \end{proof}
 \end{verlong}
 
 \begin{example}
 Let $\ell\geq1$. Let $u$ be a packed word with $\ell$ classes and type
-$\mathbf{m}$. For each $k \in\left[  \ell-1 \right] $, let $q_{k}$ be the set
+$\mathbf{m}$. For each $k \in\left[  \ell-1 \right]  $, let $q_{k}$ be the set
 of all sites $i$ such that $u_{i} \leq k$. It is then easy to check that
-$\mathbf{q} := \left(  q_{1}, q_{2}, \ldots, q_{\ell-1} \right) $ is an MLQ of
-type $\mathbf{m}$ satisfying $\mathbf{q}(1 \dotsm1) = u$ and has weight
+$\mathbf{q} := \left(  q_{1}, q_{2}, \ldots, q_{\ell-1} \right)  $ is an MLQ
+of type $\mathbf{m}$ satisfying $\mathbf{q}(1 \dotsm1) = u$ and has weight
 $\wt(\mathbf{q}) = \prod_{j \in\mathbb{Z} / n \mathbb{Z}} x_{j}^{\ell- u_{j}}%
 $. Hence, $\left\langle u \right\rangle \neq0$ (as a polynomial over
 $\mathbb{Z}$).
@@ -779,7 +778,7 @@ $\mathbb{Z}$).
 
 We also need the \defn{elementary symmetric polynomials} and
 \defn{complete homogeneous symmetric polynomials}. Recall that they are
-defined for each $N \in\left\{ 0,1,\ldots,n\right\} $ and $k \geq0$ by
+defined for each $N \in\left\{  0,1,\ldots,n\right\}  $ and $k \geq0$ by
 \begin{align*}
 e_{k}(x_{1}, x_{2}, \dotsc, x_{N})  &  = \sum_{1 \leq i_{1} < \cdots< i_{k}
 \leq N} x_{i_{1}} \dotsm x_{i_{k}},\\
@@ -801,8 +800,8 @@ In this section, we state our main results and use them to prove the
 commutativity conjecture of~\cite{AAMP} and~\cite[Conj.~3.10]{AasLin17}.
 
 \begin{thm}
-\label{thm:permutation}  Let $u$ be a packed word of type $\mathbf{m}$ with
-$\ell$ classes.  For any $\sigma\in\mathfrak{S}_{\ell-1}$, we have
+\label{thm:permutation} Let $u$ be a packed word of type $\mathbf{m}$ with
+$\ell$ classes. For any $\sigma\in\mathfrak{S}_{\ell-1}$, we have
 \[
 \left\langle u \right\rangle = \left\langle u \right\rangle _{\sigma}.
 \]
@@ -820,7 +819,7 @@ the word obtained from $w$ by decrementing (by $1$) all but the $k$ smallest
 letters of $w$. This is only well-defined if these $k$ smallest letters are
 determined uniquely and the remaining $n-k$ letters are $> 1$. In other words,
 this is only well-defined if $k \in\left\{  p_{j}(\mathbf{m}) \mid j \geq1
-\right\} $, where $\mathbf{m}$ is the type of $w$. Note that $\vee^{(k)} w =
+\right\}  $, where $\mathbf{m}$ is the type of $w$. Note that $\vee^{(k)} w =
 \vee_{j} w$, where $j$ is such that $k = p_{j}(\mathbf{m})$.
 %Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
 
@@ -832,8 +831,8 @@ this is only well-defined if $k \in\left\{  p_{j}(\mathbf{m}) \mid j \geq1
 
 \begin{lemma}
 \label{lemma:queue_merge_commute} Let $u \in\mathcal{W}_{n}$ be a word of type
-$\mathbf{m}$. Let $k \in\left\{  p_{j}(\mathbf{m}) \mid j \geq1 \right\} $. If
-$q$ is a queue, then
+$\mathbf{m}$. Let $k \in\left\{  p_{j}(\mathbf{m}) \mid j \geq1 \right\}  $.
+If $q$ is a queue, then
 \[
 \vee^{(k)} q(u) = q(\vee^{(k)} u).
 \]
@@ -847,10 +846,10 @@ $\mathbf{n}$ of $q(u)$ satisfies
 \[
 k \in\left\{  p_{j}(\mathbf{m}) \mid j \geq1 \right\}  \subseteq\left\{
 p_{j}(\mathbf{m}) \mid j \geq1 \right\}  \cup\left\{  \left|  q \right|
-\right\}  = \left\{  p_{j}(\mathbf{n}) \mid j \geq1 \right\} .
+\right\}  = \left\{  p_{j}(\mathbf{n}) \mid j \geq1 \right\}  .
 \]
 Thus, it remains to prove $\vee^{(k)} q(u) = q(\vee^{(k)} u)$. The permutation
-$\left(  i_{1}, i_{2}, \dotsc, i_{n} \right) $ in the construction of $q(u)$
+$\left(  i_{1}, i_{2}, \dotsc, i_{n} \right)  $ in the construction of $q(u)$
 also works for the construction of $q(\vee^{(k)} u)$, since $(\vee^{(k)}
 u)_{a} \leq(\vee^{(k)} u)_{b}$ whenever $u_{a} \leq u_{b}$. Consequently, the
 construction of $q(\vee^{(k)} u)$ proceeds exactly like the construction of
@@ -864,7 +863,7 @@ same way. Therefore, we have $\vee^{(k)} q(u) = q(\vee^{(k)} u)$ as claimed.
 \end{proof}
 
 \begin{example}
-Consider $q = \left\{  1,4,5,9,10 \right\} $ and $v = 3455313321$:
+Consider $q = \left\{  1,4,5,9,10 \right\}  $ and $v = 3455313321$:
 \[
 \begin{tikzpicture}[baseline=-7]
 \def\ll{0.65}   % level 2
@@ -931,8 +930,8 @@ where we have $2663344511 = \vee_{4} 2773455611$.
 \end{example}
 
 \begin{lemma}
-\label{lemma:queue_merge}  Let $q^{\prime}$ be a $p_{i}(\mathbf{m})$-queue for
-some type $\mathbf{m}$ and some $i \geq1$.  Let the type $\mathbf{m}$ have
+\label{lemma:queue_merge} Let $q^{\prime}$ be a $p_{i}(\mathbf{m})$-queue for
+some type $\mathbf{m}$ and some $i \geq1$. Let the type $\mathbf{m}$ have
 $\ell$ classes, and let $\sigma\in\mathfrak{S}_{\ell-1}$.
 %be such that $\sigma(j) = j$ for all $j \geq i$.
 Let $\mathbf{q}$ be a $\sigma$-twisted MLQ of type $\vee_{i}\mathbf{m}$.
@@ -940,8 +939,7 @@ Let $\mathbf{q}$ be a $\sigma$-twisted MLQ of type $\vee_{i}\mathbf{m}$.
 %lemma repeatedly in the proof of Theorem \ref{thm:determinant_form}.
 %(To apply it repeatedly, we need $\sigma$-twisted MLQs, since an
 %MLQ might become $\sigma$-twisted after the first application.)
-For the word  $ u = \mathbf{q}\bigl( q^{\prime}(1 \dotsm1) \bigr),  $  we
-have
+For the word $u = \mathbf{q}\bigl( q^{\prime}(1 \dotsm1) \bigr), $ we have
 \[
 \mathbf{q}(1 \dotsm1) = \vee_{i} u.
 \]
@@ -970,7 +968,7 @@ q(\merge{h} u) = \begin{cases}
 \end{equation}
 \end{comment}
 Write the $\sigma$-twisted MLQ $\mathbf{q}$ as $\left(  q_{1}, \ldots,
-q_{\ell-1} \right) $. It has type $\vee_{i} \mathbf{m}$.
+q_{\ell-1} \right)  $. It has type $\vee_{i} \mathbf{m}$.
 
 %Thus, the queue $q_j$ has size
 %$p_{\sigma(j)}(\merge{i} \mm) = p_{\sigma(j)}(\mm)$
@@ -987,11 +985,11 @@ q_{\ell-1} \right) $. It has type $\vee_{i} \mathbf{m}$.
 %$\zeta := s_{i-1} \cdots s_2 s_1 \in \SymGp{\ell-1}$ is the
 %$i$-cycle sending $1, 2, \ldots, i$ to $i, 1, 2, \ldots, i-1$.
 Set $\mathbf{q}^{\prime}:= \left(  q^{\prime}, q_{1}, \ldots, q_{\ell-1}
-\right) $; this is easily seen to be a $\zeta$-twisted MLQ of type
+\right)  $; this is easily seen to be a $\zeta$-twisted MLQ of type
 $\mathbf{m}$, for some $\zeta\in\mathfrak{S}_{\ell}$ (since the multiset of
 the $p_{k}(\vee_{i}\mathbf{m})$ for $k \geq1$ is precisely the multiset of the
 $p_{k}(\mathbf{m})$ for $k \geq1$ with one copy of $p_{i}(\mathbf{m}) =
-\left|  q^{\prime}\right| $ removed). Furthermore, the definition of $u$
+\left|  q^{\prime}\right|  $ removed). Furthermore, the definition of $u$
 becomes $u = \mathbf{q}^{\prime}(1 \dotsm1)$. Hence, the type of $u$ is
 $\mathbf{m}$ (by Lemma~\ref{rmk:mlq-type}).
 
@@ -1016,8 +1014,8 @@ so~\eqref{pf.lemma:queue_merge.4} becomes $\mathbf{q}(1 \dotsm1) = \vee_{i} u$.
 \end{proof}
 
 \begin{thm}
-\label{thm:merge}  Let $\mathbf{m}$ be a type with $m_{i} \neq0$ and $m_{i+1}
-\neq0$.  Let $v$ be a packed word of type $\vee_{i}\mathbf{m}$.  Then,
+\label{thm:merge} Let $\mathbf{m}$ be a type with $m_{i} \neq0$ and $m_{i+1}
+\neq0$. Let $v$ be a packed word of type $\vee_{i}\mathbf{m}$. Then,
 \[
 \left\langle v \right\rangle e_{p_{i}(\mathbf{m})}(x_{1}, \dotsc, x_{n}) =
 \sum_{u} \left\langle u \right\rangle ,
@@ -1026,50 +1024,48 @@ where we sum over all $u$ of type $\mathbf{m}$ such that $v = \vee_{i} u$.
 \end{thm}
 
 \begin{proof}
-The type $\mathbf{m}$ is packed (since $m_{i} \neq0$ and $m_{i+1} \neq0$,  and
-since $\vee_{i}\mathbf{m}$ is packed).  Let $\vee_{i}\mathbf{m}$ have $\ell$
-classes; then, $\mathbf{m}$ has $\ell+1$  classes.  First note that
+The type $\mathbf{m}$ is packed (since $m_{i} \neq0$ and $m_{i+1} \neq0$, and
+since $\vee_{i}\mathbf{m}$ is packed). Let $\vee_{i}\mathbf{m}$ have $\ell$
+classes; then, $\mathbf{m}$ has $\ell+1$ classes. First note that
 \[
 \left\langle v \right\rangle e_{p_{i}(\mathbf{m})}(x_{1}, \dotsc, x_{n}) =
 \sum_{(\mathbf{q},q^{\prime})} \wt(\mathbf{q}) \wt(q^{\prime}),
 \]
-where we sum over all pairs $(\mathbf{q}, q^{\prime})$ such that 
+where we sum over all pairs $(\mathbf{q}, q^{\prime})$ such that
 
 \begin{itemize}
-
-
 \item $\mathbf{q} = (q_{1}, \dotsc, q_{\ell-1})$ is an MLQ of type $\vee
-_{i}\mathbf{m}$ such that $v = \mathbf{q}(1\cdots1)$ and 
+_{i}\mathbf{m}$ such that $v = \mathbf{q}(1\cdots1)$ and
 
-\item $q^{\prime}$ is a $p_{i}(\mathbf{m})$-queue. 
+\item $q^{\prime}$ is a $p_{i}(\mathbf{m})$-queue.
 \end{itemize}
 
-Given any such pair $\left(  \mathbf{q}, q^{\prime}\right) $, we set
+Given any such pair $\left(  \mathbf{q}, q^{\prime}\right)  $, we set
 \[
 \theta(\mathbf{q}, q^{\prime}) := (q^{\prime}, q_{1}, \dotsc, q_{\ell-1});
 \]
 the result is a $(s_{i-1} \dotsm s_{2} s_{1})$-twisted MLQ of type
-$\mathbf{m}$ with weight  $\wt\bigl( \theta(\mathbf{q}, q^{\prime}) \bigr) =
-\wt(\mathbf{q}) \wt(q^{\prime})$.  But recall that $v = \mathbf{q}(1 \dotsm
-1$); thus, by Lemma~\ref{lemma:queue_merge}, we have
+$\mathbf{m}$ with weight $\wt\bigl( \theta(\mathbf{q}, q^{\prime}) \bigr) =
+\wt(\mathbf{q}) \wt(q^{\prime})$. But recall that $v = \mathbf{q}(1 \dotsm1$);
+thus, by Lemma~\ref{lemma:queue_merge}, we have
 \[
 v = \mathbf{q}(1 \dotsm1) = \vee_{i} \mathbf{q}\bigl( q^{\prime}(1 \dotsm1)
 \bigr) = \vee_{i} \bigl( \theta(\mathbf{q}, q^{\prime})(1 \dotsm1) \bigr).
 \]
 Thus, we have defined a weight preserving bijection $\theta$ from the set of
-all pairs $(\mathbf{q}, q^{\prime})$ as above  to the set of all $(s_{i-1}
+all pairs $(\mathbf{q}, q^{\prime})$ as above to the set of all $(s_{i-1}
 \dotsm s_{1})$-twisted MLQs $\widetilde{\mathbf{q}}$ of type $\mathbf{m}$
-satisfying $v = \vee_{i} \widetilde{\mathbf{q}} \left(  1 \dotsm1 \right) $.
+satisfying $v = \vee_{i} \widetilde{\mathbf{q}} \left(  1 \dotsm1 \right)  $.
 Hence, we have
 \[
-\sum_{(\mathbf{q},q^{\prime})} \wt(\mathbf{q}) \wt(q^{\prime})  =
-\sum_{\widetilde{\mathbf{q}}} \wt(\widetilde{\mathbf{q}})  = \sum_{u}
+\sum_{(\mathbf{q},q^{\prime})} \wt(\mathbf{q}) \wt(q^{\prime}) =
+\sum_{\widetilde{\mathbf{q}}} \wt(\widetilde{\mathbf{q}}) = \sum_{u}
 \left\langle u \right\rangle _{s_{i-1} \dotsm s_{1}} ,
 \]
 where the last sum is over all words $u$ of type $\mathbf{m}$ satisfying $v =
-\vee_{i} u$.  Finally, we have $\left\langle u \right\rangle _{s_{i-1} \dotsm
+\vee_{i} u$. Finally, we have $\left\langle u \right\rangle _{s_{i-1} \dotsm
 s_{1}} = \left\langle u \right\rangle $ for all such $u$ by
-Theorem~\ref{thm:permutation}.  Combining all the above equalities, we find
+Theorem~\ref{thm:permutation}. Combining all the above equalities, we find
 $\left\langle v \right\rangle e_{p_{i}(\mathbf{m})}(x_{1}, \dotsc, x_{n}) =
 \sum_{u} \left\langle u \right\rangle $.
 \end{proof}
@@ -1082,8 +1078,8 @@ Theorem~\ref{thm:merge} by the composition $\omega\circ\theta$.
 
 \begin{example}
 Suppose $n = 5$. Let $v = 13234$, and we have that $v = \vee_{3} u$ if and
-only if $u \in\left\{  13245, 14235 \right\} $. By examining all possible MLQs
-for these words, we obtain
+only if $u \in\left\{  13245, 14235 \right\}  $. By examining all possible
+MLQs for these words, we obtain
 \begin{align*}
 \left\langle 13234 \right\rangle  &  = x_{1} x_{2} x_{3}^{2} x_{4} (x_{1}^{2}
 + x_{1} x_{4} + x_{1} x_{5} + x_{4} x_{5} + x_{5}^{2}),\\
@@ -1639,9 +1635,8 @@ $\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p^{\prime}}\right)
 \right)  \right)  $ as well). Thus, the paths $\widetilde{p}$ and
 $\widetilde{p^{\prime}}$ have a vertex in common (namely, $h_{M+1}\left(
 \widetilde{p^{\prime}}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $). This
-contradicts the fact that they don't.\textsl{ }This contradiction shows that
-our assumption was false. Hence, the paths $p$ and $p^{\prime}$ have a vertex
-in common.]
+contradicts the fact that they don't. This contradiction shows that our
+assumption was false. Hence, the paths $p$ and $p^{\prime}$ have a vertex in common.]
 \end{proof}
 
 We can now specialize Proposition \ref{prop.LGV.nonper} to a form that is most
@@ -2148,7 +2143,7 @@ looks as follows:%
 \begin{equation}
 \text{%
 \begin{tabular}
-[c]{r|c|ccccc}\cline{2-2}%
+[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}\cline{2-2}%
 $m_{\ell-1}$ rows $\left\{
 \vphantom{\dfrac{\dfrac{2}{2}}{\dfrac{2}{2}}}\right.  $ & $\widetilde{q_{\ell
 -1}^{\left(  \ell-1\right)  }}$ &  &  &  &  & \\\cline{2-3}%
@@ -2321,11 +2316,19 @@ q_{1}\left(  1\cdots1\right)  \right)  \right)  \right)  $. This word
 $u^{\left[  i\right]  }$ has type $\left(  m_{1},m_{2},\ldots,m_{i}%
 ,n-p_{i}\left(  \mathbf{m}\right)  ,0,0,\ldots\right)  $. (This is proven
 similarly to Lemma \ref{rmk:mlq-type}, using $\left\vert q_{i}\right\vert
-=m_{i}$.)
+=m_{i}$.) The definition of $u^{\left[  i\right]  }$ yields%
+\begin{equation}
+u^{\left[  i\right]  }=q_{i}\left(  u^{\left[  i-1\right]  }\right)
+\qquad\text{for each }i\in\left[  \ell-1\right]
+.\label{pf.lem:determinant_form.interl-act.rec}%
+\end{equation}
+
 
 $\Longrightarrow:$ Assume that $u=\mathbf{q}\left(  1\cdots1\right)  $. We
 must prove that the MLQ $\mathbf{q}$ is interlacing and satisfies $q_{\ell
 -1}=B$.
+
+We shall
 
 XXX
 \end{proof}
