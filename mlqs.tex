@@ -47,6 +47,7 @@
 \DeclareMathOperator{\id}{id} % identity
 \DeclareMathOperator{\ch}{ch} % character
 \DeclareMathOperator{\gr}{gr} % grading
+\DeclareMathOperator{\KM}{KM}
 
 \newcommand{\xx}{\mathbf{x}}
 \newcommand{\mm}{\mathbf{m}}
@@ -630,7 +631,7 @@ We also consider $\qq$ as a function on words by
 \end{dfn}
 
 \begin{remark}
-Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we can recover the labelling of level $k$ from the word $q_k( \cdots q_1(1 \dotsm 1) \cdots )$ (see Remark~\ref{rmk:queue-relations}(a)).
+Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we can recover the labeling of level $k$ from the word $q_k( \cdots q_1(1 \dotsm 1) \cdots )$ (see item~(a) in Appendix~\ref{app:queue-relations}).
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
 
@@ -680,8 +681,16 @@ Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has al
 In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
 This proves Lemma~\ref{rmk:mlq-type}.
 
-[The above proof is a bit informal. To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$. Thus, $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$.
-Now, define the \defn{p-sequence} of a type $\nn$ to be the weakly increasing infinite sequence $\tup{p_0(\nn), p_1(\nn), p_2(\nn), \ldots}$ of integers (which uniquely determines $\nn$). Furthermore, if $u$ is a word of type $\nn$, then we define the p-sequence of $u$ to be the p-sequence of $\nn$. Then, \eqref{eq:queue_type_change} shows the following: If $q$ is a queue and $u$ is a word, then the p-sequence of $q(u)$ is obtained from the p-sequence of $u$ by inserting $\abs{q}$ into the p-sequence at the appropriate position (appropriate in the sense that the resulting sequence is still weakly increasing). Hence, the p-sequence of the word $\qq (1 \dotsm 1)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1 \dotsm 1$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions. In other words, the p-sequence of the word $\qq (1 \dotsm 1)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$). In other words, this p-sequence is $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$. Hence, the type of the word $\qq (1 \dotsm 1)$ is $\mm$.]
+[The above proof is a bit informal.
+To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$.
+Thus, $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$.
+Now, define the \defn{p-sequence} of a type $\nn$ to be the weakly increasing infinite sequence $\tup{p_0(\nn), p_1(\nn), p_2(\nn), \ldots}$ of integers (which uniquely determines $\nn$).
+Furthermore, if $u$ is a word of type $\nn$, then we define the p-sequence of $u$ to be the p-sequence of $\nn$.
+Then,~\eqref{eq:queue_type_change} shows the following: If $q$ is a queue and $u$ is a word, then the p-sequence of $q(u)$ is obtained from the p-sequence of $u$ by inserting $\abs{q}$ into the p-sequence at the appropriate position (appropriate in the sense that the resulting sequence is still weakly increasing).
+Hence, the p-sequence of the word $\qq (1 \dotsm 1)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1 \dotsm 1$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions.
+In other words, the p-sequence of the word $\qq (1 \dotsm 1)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$).
+In other words, this p-sequence is $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$.
+Hence, the type of the word $\qq (1 \dotsm 1)$ is $\mm$.]
 \end{proof}
 \end{verlong}
 
@@ -854,7 +863,7 @@ where we have $2663344511 = \merge{4} 2773455611$.
   % be such that $\sigma(j) = j$ for all $j \geq i$.
   Let $\qq$ be a $\sigma$-twisted MLQ of type $\merge{i}\mm$.
   % Darij: Yes, we need $\sigma$-twisted here, due to how we apply this
-  % lemma repeatedly in the proof of Theorem \ref{thm:determinant_form}.
+  % lemma repeatedly in the proof of Theorem~\ref{thm:determinant_form}.
   % (To apply it repeatedly, we need $\sigma$-twisted MLQs, since an
   % MLQ might become $\sigma$-twisted after the first application.)
   For the word
@@ -1092,7 +1101,7 @@ As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ c
 Note that these are precisely the bully paths of~\cite{AasLin17}.
 We claim it is sufficient to show that for every MLQ $\qq$, there exists unique disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ such that $\rho_i$ passes through the point $\tau_i := (b_i, i - \gamma_i)$.
 This follows by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} and considering the initial points $\{ \iota_i \}_{i=1}^r$ and terminal points $\{ \tau_i \}_{i=1}^r$.
-We refer the reader to \cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is \cite[Cor.~2]{GesVie89}.}
+We refer the reader to~\cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is~\cite[Cor.~2]{GesVie89}.}
 
 Therefore, given disjoint $r$-paths $\rho = \{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq_{\rho} = (q_1, \dotsc, q_{\ell-1})$ by
 \[
@@ -3134,7 +3143,7 @@ Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ an
 Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
 This proves~\eqref{pf.prop:braid.inter}.
 
-The equality \eqref{pf.prop:braid.inter} can be rewritten as the
+The equality~\eqref{pf.prop:braid.inter} can be rewritten as the
 commutative diagram
 \[
 \xymatrix{
@@ -3622,28 +3631,28 @@ It could be interesting to see if our proof has any implications for the work of
 \section{Connections between queue constructions}
 \label{app:queue-relations}
 
-Our definition of $q(u)$ (for $u$ a word and $q$ a queue) is connected to two constructions in~\cite{AasLin17} and~\cite{AssSea18}.
+Let $u$ be a word and $q$ be a queue.
+Our definition of $q(u)$ is connected to the constructions in~\cite{AasLin17,AssSea18}.
 
-To clarify the connection, we introduce a mild variation of this definition. % which is implicit in \cite{AasLin17}
-Namely, we visualize any queue $q$ as a row of boxes (with each element $i \in q$ represented by a box in position $i$).
-(This is similar to \eqref{eq:boxes-and-balls-1}, but we don't represent the remaining elements $i \notin q$ by circles.)
-If $r$ is a further queue and $I$ is a set, then a \defn{labeling} of $r$ by $I$ means a map $f : r \to I$.
-To represent such a labeling $f$, we label each of the boxes with its corresponding value (i.e., we label the box in position $i$ by $f\tup{i}$).
-Of course, we refer to a value $f \tup{i}$ as the \defn{label} of $i$ in $f$.
+To clarify the connection, we introduce a mild variation of our visualization of queue by a row of circles with each $i \in q$ being a circle in position $i$ as in Example~\ref{ex:first_queue}.
+(This is similar to~\eqref{eq:boxes-and-balls-1} except we don't represent the remaining elements $i \notin q$ by boxes.)
+If $r$ is another queue and $I$ is a set, then a \defn{labeling} of $r$ by $I$ means a map $f \colon r \to I$.
+To represent such a labeling $f$, we label each of the circles with its corresponding value (\textit{i.e.}, we label the circle in position $i$ by $f(i)$).
+We refer to a value $f(i)$ as the \defn{label} of $i$ in $f$.
 
-Now, fix a $k \in \NN$ and two queues $r$ and $q$ with $\abs{r} \leq \abs{q}$. Also fix a labeling $f : r \to \ive{k}$ of $r$ by $\ive{k}$.
+Now, fix a $k \in \NN$ and two queues $r$ and $q$ with $\abs{r} \leq \abs{q}$. Also fix a labeling $f \colon r \to \ive{k}$ of $r$ by $\ive{k}$.
 Then, we can define a labeling \defn{$q(f)$} of $q$ by $\ive{k+1}$ as follows:
 \begin{enumerate}
-\item Let $\tup{i_1, i_2, \ldots, i_{\abs{r}}}$ be a list of all elements of $r$ in the order of increasing label in $f$ (that is, $f(i_1) \leq f(i_2) \leq \cdots \leq f(i_{\abs{r}})$.
+\item Let $\tup{i_1, i_2, \ldots, i_{\abs{r}}}$ be a list of all elements of $r$ in the order of increasing label in $f$ (that is, $f(i_1) \leq f(i_2) \leq \cdots \leq f(i_{\abs{r}})$).
  (The relative order between elements with equal label is immaterial.)
 
 \item Initialize a labeling $g$ of $q$ by $\ive{k+1}$. For now, none of its values is set.
 
 \item For $i = i_1, i_2, \ldots, i_{\abs{r}}$, do the following.
-    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $g\tup{j}$ is not set.
-    Then set $g\tup{j} = f\tup{i}$.
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $g(j)$ is not set.
+    Then set $g(j) = f(i)$.
 
-\item For all sites $j \in q$ for which $g \tup{j}$ is not set yet, set $g \tup{j} = k+1$.
+\item For all sites $j \in q$ for which $g(j)$ is not set yet, set $g(j) = k+1$.
 
 \item Define $q(f)$ to be the resulting labeling $g$.
 \end{enumerate}
@@ -3653,44 +3662,40 @@ TODO: Example.
 TODO: Connect this with parking functions?
 
 The connection between this labeling and the above definition of $q(u)$ is simple.
-Indeed, let $k \in \NN$, let $r$ be a queue, and let $f : r \to \ive{k}$ be a labeling.
+Indeed, let $k \in \NN$, let $r$ be a queue, and let $f \colon r \to \ive{k}$ be a labeling.
 Then we can can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
-For each $j \in r$, we set $\tup{\omega_k f}_j = f \tup{j}$.
+For each $j \in r$, we set $\tup{\omega_k f}_j = f(j)$.
 All other letters of $\omega_k f$ shall be $k+1$.
 Now, it is easy to see that if $q$ is a queue satisfying $\abs{r} \leq \abs{q}$, then
 \[
-q \tup{ \omega_k f } = \omega_{k+1} \tup{ q(f) } .
+q(\omega_k f) = \omega_{k+1}\bigl( q(f) \bigr).
 \]
 Thus, the action of a queue on a labeling can be computed in terms of its action on a word.
 (The converse is not true, since the condition $\abs{r} \leq \abs{q}$ is restrictive.
-Thus, our action of queues on words, with its two phases, is more general than their
-action on labelings.)
+Thus, our action of queues on words, with its two phases, is more general than their action on labelings.)
 
-The action of queues on labelings is connected with constructions in \cite{AasLin17} and \cite{AssSea18} as follows:
+The action of queues on labelings is connected with constructions in~\cite{AasLin17,AssSea18} as follows:
 
 \begin{enumerate}
-\item[(a)] Consider the labeling procedure in \cite[\S 2.2]{AasLin17}.
+\item[(a)] Consider the labeling procedure in~\cite[\S 2.2]{AasLin17}.
 % Indeed, let us define a {\defn labeled row of boxes} to be a placement of boxes on some of the sites of $\ive{n}$,
 % along with a labeling of each of these boxes by a positive integer.
 % (This is equivalent to a partial word -- i.e., a word where some letters are unset.)
 Let $q_1, q_2, \ldots, q_{\ell}$ be $\ell$ queues with
 $\abs{q_1} \leq \abs{q_2} \leq \cdots \leq \abs{q_{\ell}}$.
-These $\ell$ queues define what is called a ``discrete MLQ'' in the language of \cite{AasLin17}:
-an array with $\ell$ rows (corresponding to the queues) and $n$ columns (corresponding to the sites $1, 2, \ldots, n$),
-where the $i$-th row has a box in each site $j \in q_i$ (and in no other sites).
-(Note that the roles of $N$ and $n$ in \cite{AasLin17} correspond to the roles of $n$ and $\ell$ in our notations.)
-The labeling procedure in \cite{AasLin17} then labels the boxes in each row,
-assigning to each of the $\ell$ queues $q_1, q_2, \ldots, q_{\ell}$
-a corresponding labeling $f_i : q_i \to \ive{i}$.
+These $\ell$ queues define what is called a ``discrete MLQ'' in the language of~\cite{AasLin17}:
+an array with $\ell$ rows (corresponding to the queues) and $n$ columns (corresponding to the sites $1, 2, \dotsc, n$), where the $i$-th row has a circle in each site $j \in q_i$ (and in no other sites).
+(Note that the roles of $N$ and $n$ in~\cite{AasLin17} correspond to the roles of $n$ and $\ell$ in our notations.)
+The labeling procedure in~\cite{AasLin17} then labels the circles in each row, assigning to each of the $\ell$ queues $q_1, q_2, \ldots, q_{\ell}$ a corresponding labeling $f_i \colon q_i \to \ive{i}$.
 In our language, this procedure is given recursively by
-\begin{align*}
-f_i &= q_i \tup{ f_{i-1} } \qquad \text{for all } i \in \ive{\ell} ,
-\end{align*}
-where $f_0$ is understood to be the (trivial) labeling of the empty queue $\varnothing$.
+\[
+f_i = q_i(f_{i-1}) \qquad \text{for all } i \in \ive{\ell} ,
+\]
+where $f_0$ is understood to be the (trivial) labeling of the empty queue $\emptyset$.
 % In our language, such a labeling can be viewed as a sequence of $\ell$ words $w_1, w_2, \ldots, w_\ell$:
-% Every time the $i$-th row has a box labelled $j$, we put the letter $j$ in the corresponding position of $w_i$;
+% Every time the $i$-th row has a circle labelled $j$, we put the letter $j$ in the corresponding position of $w_i$;
 % all other positions of $w_i$ are to be filled with the letter $i+1$.
-% It is not hard to see that the construction of the labeling in \cite{AasLin17} can be written as
+% It is not hard to see that the construction of the labeling in~\cite{AasLin17} can be written as
 % \begin{align*}
 % w_1 &= q_1 \tup{1 \dotsm 1} \qquad \text{ and } \\
 % w_{i+1} &= q_{i+1} \tup{w_i} \qquad \text{ for all } i < \ell ,
@@ -3699,23 +3704,24 @@ where $f_0$ is understood to be the (trivial) labeling of the empty queue $\varn
 
 TODO: Make this clear, perhaps give an example.
 
-\item[(b)] The construction of the thread decomposition in \cite[Definition 3.5]{AssSea18} is similar, except that the sites are now assumed to belong to $\NN$ rather than $\ZZ / n \ZZ$ (so there is no ``wrapping around'' any more), that the roles of rows and columns are interchanged, and that instead of setting $g \tup{j} = k+1$ at the end of the construction, we fill the remaining boxes with distinct new labels.
+\item[(b)] The construction of the thread decomposition in~\cite[Def.~3.5]{AssSea18} is similar, except that the sites are now assumed to belong to $\NN$ rather than $\ZZ / n \ZZ$ (so there is no ``wrapping around'' any more), that the roles of rows and columns are interchanged, and that instead of setting $g(j) = k+1$ at the end of the construction, we fill the remaining circles with distinct new labels.
 
-In more details: Let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
+In more detail, let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
 So a queue is now a finite subset of $\NN$.
 In the above definition of the labeling $q \tup{f}$, we must replace the ``$\abs{r} \leq \abs{q}$'' requirement by the stronger requirement that every $k \in \NN$ satisfy
 \begin{equation}
-\abs{\set{ j \in r \mid j \geq k } } \leq \abs{\set{ j \in q \mid j \geq k } } .
-\label{eq.rmk:queue-relations.kohnert}
+\label{eq:queue-relations.kohnert}
+\abs{\set{ j \in r \mid j \geq k }} \leq \abs{\set{  j \in q \mid j \geq k }} .
 \end{equation}
-This stronger requirement can be shown to guarantee that $q \tup{f}$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
+This stronger requirement can be shown to guarantee that $q(f)$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
 It is, actually, necessary and sufficient.
 
 TODO: Should we prove this? Not quite trivial.
 
-Given a Kohnert diagram $D \in \operatorname{KM}\tup{a}$ (see \cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
-(\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$. To see that this is well-defined, we need merely to observe that \eqref{eq.rmk:queue-relations.kohnert} holds by \cite[Lemma 2.2]{AssSea18}.)
-The resulting labeling is similar to (but different from) the Kohnert labeling in \cite[Definition 2.5]{AssSea18}. It is also related to the ``thread decomposition'' in \cite[Definition 3.5]{AssSea18} (indeed, all cells in a single thread will receive identical labels in the labelling).
+Given a Kohnert diagram $D \in \KM(a)$ (see~\cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
+(\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$.
+To see that this is well-defined, we need merely to observe that~\eqref{eq:queue-relations.kohnert} holds by~\cite[Lemma 2.2]{AssSea18}.)
+The resulting labeling is similar to (but different from) the Kohnert labeling in~\cite[Def.~2.5]{AssSea18}. It is also related to the ``thread decomposition'' in~\cite[Def.~3.5]{AssSea18} (indeed, all cells in a single thread will receive identical labels in the labeling).
 \end{enumerate}
 
 
@@ -3971,7 +3977,7 @@ Consequently, the sites of the unmatched parentheses are precisely the unbalance
 
 Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter-old6}.
 
-The equality \eqref{pf.prop:braid.inter-old6} can be rewritten as the
+The equality~\eqref{pf.prop:braid.inter-old6} can be rewritten as the
 commutative diagram
 \[
 \xymatrix{
