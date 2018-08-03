@@ -562,7 +562,7 @@ Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array, where the first row is the word $u$
 and the second row has a circle labeled $v_j$ for $j \in q$ or a square labeled $v_j$ for $j \notin q$ in position $j$.
 Using this convention, we can write Example~\ref{ex:first_queue} as
-\[
+\begin{equation}
 \begin{tikzpicture}[baseline=10]
   \def\ll{0.65}   % level 2
   \foreach \i in {5,9} { \node at (\i,\ll) {$1$}; }
@@ -579,7 +579,8 @@ Using this convention, we can write Example~\ref{ex:first_queue} as
   \foreach \i in {7} { \node at (\i,0) {$5$}; }
   \foreach \i in {2,3} { \node at (\i,0) {$7$}; }
 \end{tikzpicture}
-\]
+\label{eq:boxes-and-balls-1}
+\end{equation}
 
 \begin{comment}  % s-flow only seems to be used in this paragraph
 Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
@@ -611,6 +612,106 @@ Hence the claim follows.
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
+\begin{remark} \label{rmk:queue-relations}
+Our definition of $q(u)$ (for $u$ a word and $q$ a queue) is connected
+to two constructions in \cite{AasLin17} and \cite{AssSea18}.
+
+To clarify the connection, we introduce a mild variation of this definition. % which is implicit in \cite{AasLin17}
+Namely, we visualize any queue $q$ as a row of boxes (with each element $i \in q$ represented by a box in position $i$).
+(This is similar to \eqref{eq:boxes-and-balls-1}, but we don't represent the remaining elements $i \notin q$ by circles.)
+If $r$ is a further queue and $I$ is a set, then a \defn{labeling} of $r$ by $I$ means a map $f : r \to I$.
+To represent such a labeling $f$, we label each of the boxes with its corresponding value (i.e., we label the box in position $i$ by $f\tup{i}$).
+Of course, we refer to a value $f \tup{i}$ as the \defn{label} of $i$ in $f$.
+
+Now, fix a $k \in \NN$ and two queues $r$ and $q$ with $\abs{r} \leq \abs{q}$. Also fix a labeling $f : r \to \ive{k}$ of $r$ by $\ive{k}$.
+Then, we can define a labeling \defn{$q(f)$} of $q$ by $\ive{k+1}$ as follows:
+\begin{enumerate}
+\item Let $\tup{i_1, i_2, \ldots, i_{\abs{r}}}$ be a list of all elements of $r$ in the order of increasing label in $f$ (that is, $f(i_1) \leq f(i_2) \leq \cdots \leq f(i_{\abs{r}})$.
+ (The relative order between elements with equal label is immaterial.)
+
+\item Initialize a labeling $g$ of $q$ by $\ive{k+1}$. For now, none of its values is set.
+
+\item For $i = i_1, i_2, \ldots, i_{\abs{r}}$, do the following.
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $g\tup{j}$ is not set.
+    Then set $g\tup{j} = f\tup{i}$.
+
+\item For all sites $j \in q$ for which $g \tup{j}$ is not set yet, set $g \tup{j} = k+1$.
+
+\item Define $q(f)$ to be the resulting labeling $g$.
+\end{enumerate}
+
+TODO: Example.
+
+TODO: Connect this with parking functions?
+
+The connection between this labeling and the above definition of $q(u)$ is simple.
+Indeed, let $k \in \NN$, let $r$ be a queue, and let $f : r \to \ive{k}$ be a labeling.
+Then we can can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
+For each $j \in r$, we set $\tup{\omega_k f}_j = f \tup{j}$.
+All other letters of $\omega_k f$ shall be $k+1$.
+Now, it is easy to see that if $q$ is a queue satisfying $\abs{r} \leq \abs{q}$, then
+\[
+q \tup{ \omega_k f } = \omega_{k+1} \tup{ q(f) } .
+\]
+Thus, the action of a queue on a labeling can be computed in terms of its action on a word.
+(The converse is not true, since the condition $\abs{r} \leq \abs{q}$ is restrictive.
+Thus, our action of queues on words, with its two phases, is more general than their
+action on labelings.)
+
+The action of queues on labelings is connected with constructions in \cite{AasLin17} and \cite{AssSea18} as follows:
+
+\begin{enumerate}
+\item[(a)] Consider the labeling procedure in \cite[\S 2.2]{AasLin17}.
+% Indeed, let us define a {\defn labeled row of boxes} to be a placement of boxes on some of the sites of $\ive{n}$,
+% along with a labeling of each of these boxes by a positive integer.
+% (This is equivalent to a partial word -- i.e., a word where some letters are unset.)
+Let $q_1, q_2, \ldots, q_{\ell}$ be $\ell$ queues with
+$\abs{q_1} \leq \abs{q_2} \leq \cdots \leq \abs{q_{\ell}}$.
+These $\ell$ queues define what is called a ``discrete MLQ'' in the language of \cite{AasLin17}:
+an array with $\ell$ rows (corresponding to the queues) and $n$ columns (corresponding to the sites $1, 2, \ldots, n$),
+where the $i$-th row has a box in each site $j \in q_i$ (and in no other sites).
+(Note that the roles of $N$ and $n$ in \cite{AasLin17} correspond to the roles of $n$ and $\ell$ in our notations.)
+The labeling procedure in \cite{AasLin17} then labels the boxes in each row,
+assigning to each of the $\ell$ queues $q_1, q_2, \ldots, q_{\ell}$
+a corresponding labeling $f_i : q_i \to \ive{i}$.
+In our language, this procedure is given recursively by
+\begin{align*}
+f_i &= q_i \tup{ f_{i-1} } \qquad \text{for all } i \in \ive{\ell} ,
+\end{align*}
+where $f_0$ is understood to be the (trivial) labeling of the empty queue $\varnothing$.
+% In our language, such a labeling can be viewed as a sequence of $\ell$ words $w_1, w_2, \ldots, w_\ell$:
+% Every time the $i$-th row has a box labelled $j$, we put the letter $j$ in the corresponding position of $w_i$;
+% all other positions of $w_i$ are to be filled with the letter $i+1$.
+% It is not hard to see that the construction of the labeling in \cite{AasLin17} can be written as
+% \begin{align*}
+% w_1 &= q_1 \tup{1 \dotsm 1} \qquad \text{ and } \\
+% w_{i+1} &= q_{i+1} \tup{w_i} \qquad \text{ for all } i < \ell ,
+% \end{align*}
+% where $1 \dotsm 1$ denotes the word whose all letters are $1$.
+
+TODO: Make this clear, perhaps give an example.
+
+\item[(b)] The construction of the thread decomposition in \cite[Definition 3.5]{AssSea18} is similar, except that the sites are now assumed to belong to $\NN$ rather than $\ZZ / n \ZZ$ (so there is no ``wrapping around'' any more), that the roles of rows and columns are interchanged, and that instead of setting $g \tup{j} = k+1$ at the end of the construction, we fill the remaining boxes with distinct new labels.
+
+In more details: Let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
+So a queue is now a finite subset of $\NN$.
+In the above definition of the labeling $q \tup{f}$, we must replace the ``$\abs{r} \leq \abs{q}$'' requirement by the stronger requirement that every $k \in \NN$ satisfy
+\begin{equation}
+\abs{\set{ j \in r \mid j \geq k } } \leq \abs{\set{ j \in q \mid j \geq k } } .
+\label{eq.rmk:queue-relations.kohnert}
+\end{equation}
+This stronger requirement can be shown to guarantee that $q \tup{f}$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
+It is, actually, necessary and sufficient.
+
+TODO: Should we prove this? Not quite trivial.
+
+Given a Kohnert diagram $D \in \operatorname{KM}\tup{a}$ (see \cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
+(\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$. To see that this is well-defined, we need merely to observe that \eqref{eq.rmk:queue-relations.kohnert} holds by \cite[Lemma 2.2]{AssSea18}.)
+The resulting labeling is similar to (but different from) the Kohnert labeling in \cite[Definition 2.5]{AssSea18}. It is also related to the ``thread decomposition'' in \cite[Definition 3.5]{AssSea18} (indeed, all cells in a single thread will receive identical labels in the labelling).
+\end{enumerate}
+\end{remark}
+
+
 
 %%%%%%%%%%
 \subsection{Multiline queues}
@@ -627,7 +728,7 @@ We also consider $\qq$ as a function on words by
 \end{dfn}
 
 \begin{remark}
-Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we recover the labelling of level $k$ by $q_k( \cdots q_1(1 \dotsm 1) \cdots )$.
+Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we can recover the labelling of level $k$ from the word $q_k( \cdots q_1(1 \dotsm 1) \cdots )$ (see Remark~\ref{rmk:queue-relations}(a)).
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
 
@@ -691,6 +792,7 @@ MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$ and has weight
 $\wt(\qq) = \prod_{j \in \ZZ / n \ZZ} x_j^{\ell - u_j}$.
 Hence, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
 \end{example}
+
 
 
 
