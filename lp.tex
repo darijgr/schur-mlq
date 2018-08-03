@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Friday, August 03, 2018 14:02:54}
+%TCIDATA{LastRevised=Friday, August 03, 2018 17:04:38}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -94,6 +94,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \excludecomment{verlong}
 \includecomment{vershort}
 \excludecomment{noncompile}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
 \newcommand{\rev}{\operatorname{rev}}
 \newcommand{\conncomp}{\operatorname{conncomp}}
 \newcommand{\core}{\operatorname{core}}
@@ -1176,11 +1177,11 @@ Fix $k\in\mathbb{N}$. A \defn{$k$-vertex} shall mean a $k$-tuple of vertices
 of the lattice.
 
 \begin{verlong}
-If $\mathbf{v}=\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ is a
-$k$-vertex, and if $\sigma\in\mathfrak{S}_{k}$ is a permutation, then
-$\sigma\left(  \mathbf{v}\right)  $ denotes the $k$-vertex $\left(
-A_{\sigma\left(  1\right)  },A_{\sigma\left(  2\right)  },\ldots
-,A_{\sigma\left(  k\right)  }\right)  $.
+If $\mathbf{v}=\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ is a $k$-vertex, and
+if $\sigma\in\mathfrak{S}_{k}$ is a permutation, then $\sigma\left(
+\mathbf{v}\right)  $ denotes the $k$-vertex $\left(  A_{\sigma\left(
+1\right)  },A_{\sigma\left(  2\right)  },\ldots,A_{\sigma\left(  k\right)
+}\right)  $.
 \end{verlong}
 
 A \defn{path} will simply mean a (directed) path in the lattice. The
@@ -1649,11 +1650,10 @@ suited for our applications:
 \end{verlong}
 
 We now shall state a crucial result, which follows from the
-Lindstr\"om--Gessel--Viennot lemma\footnote{See the proof of
-Theorem 4 in
-\url{https://math.stackexchange.com/questions/2870640}
-(applied to $\omega_a = \operatorname{wt} a$) for a detailed
-derivation of Proposition~\ref{prop.LGV.concrete}.}:
+Lindstr\"om--Gessel--Viennot lemma\footnote{See the proof of Theorem 4 in
+\url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a}
+= \operatorname{wt} a$) for a detailed derivation of
+Proposition~\ref{prop.LGV.concrete}.}:
 
 \begin{prop}
 \label{prop.LGV.concrete}Let $k\in\mathbb{N}$. Let $\mathbf{u}=\left(
@@ -2337,15 +2337,97 @@ u^{\left[  i\right]  }=q_{i}\left(  u^{\left[  i-1\right]  }\right)
 \qquad\text{for each }i\in\left[  \ell-1\right]
 .\label{pf.lem:determinant_form.interl-act.rec}%
 \end{equation}
+The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[
+\ell-1\right]  }=\mathbf{q}\left(  1\cdots1\right)  $.
 
+We need another piece of notation: If $s\in\mathcal{W}_{n}$ and $t\in
+\mathbb{N}$, then we say that $s$ is \defn{weakly decreasing up to level $t$}
+if and only if every two sites $i<j$ in $\left[  n\right]  $ satisfying
+$s_{j}\leq t$ must satisfy $s_{i}\geq s_{j}$. Equivalently, $s$ is weakly
+decreasing up to level $t$ if and only if $s$ becomes weakly decreasing if all
+letters larger than $t$ are removed. Our construction of $u$ shows that $u$ is
+weakly decreasing up to level $\ell-1$.
 
 $\Longrightarrow:$ Assume that $u=\mathbf{q}\left(  1\cdots1\right)  $. We
 must prove that the MLQ $\mathbf{q}$ is interlacing and satisfies $q_{\ell
 -1}=B$.
 
-We shall
+We have $u=\mathbf{q}\left(  1\cdots1\right)  =u^{\left[  \ell-1\right]  }$.
 
-XXX
+\begin{statement}
+\textit{Claim 1:} For each $i\in\left\{  0,1,\ldots,\ell-1\right\}  $, the
+word $u^{\left[  i\right]  }$ is weakly increasing up to level $i$.
+\end{statement}
+
+[\textit{Proof of Claim 1:} We proceed by descending induction on $i$. The
+base case ($i=\ell-1$) follows from the fact that $u^{\left[  \ell-1\right]
+}=u$ is weakly decreasing up to level $\ell-1$.
+
+For the induction step, TODO XXX.]
+
+\begin{statement}
+\textit{Claim 2:} Let $i\in\left[  \ell-1\right]  $ and $j\in\left[  i\right]
+$. Then, $q_{i}^{\left(  j\right)  }$ is the set of all $t\in\left[  n\right]
+$ satisfying $\left(  u^{\left[  i\right]  }\right)  _{t}=j$.
+\end{statement}
+
+[\textit{Proof of Claim 2:} Explain how this follows from Claim 1 and the type
+of $u^{\left[  i\right]  }$. TODO XXX]
+
+\begin{statement}
+\textit{Claim 3:} Let $i\in\left[  \ell-1\right]  $. Then, the construction of
+$q_{i}\left(  u^{\left[  i-1\right]  }\right)  $ involves no wrapping-around.
+TODO clarify.
+\end{statement}
+
+[\textit{Proof of Claim 3:} TODO XXX]
+
+\begin{statement}
+\textit{Claim 4:} Let $i\in\left[  \ell-1\right]  $ and $j\in\left[
+i-1\right]  $. Then, $q_{i}^{\left(  j\right)  }\succeq q_{i-1}^{\left(
+j\right)  }\gg q_{i}^{\left(  j+1\right)  }$.
+\end{statement}
+
+[\textit{Proof of Claim 4:} Descending induction on $j$. Use Claim 1 and Claim
+2 too. TODO XXX Fix a permutation $\left(  i_{1},i_{2},\ldots,i_{n}\right)  $
+of $\left(  1,2,\ldots,n\right)  $ such that $u_{i_{1}}\leq u_{i_{2}}%
+\leq\cdots\leq u_{i_{n}}$. XXX Careful with the letter $i$]
+
+\begin{statement}
+\textit{Claim 5:} We have $q_{\ell-1}=B$. 
+\end{statement}
+
+[\textit{Proof of Claim 5:} TODO XXX]
+
+Now, the MLQ $\mathbf{q}$ is interlacing (by Claim 4) and satisfies
+$q_{\ell-1}=B$ (by Claim 5). This proves the $\Longrightarrow$ direction of
+Lemma \ref{lem:determinant_form.interl-act}.
+
+$\Longleftarrow:$ Assume that the MLQ $\mathbf{q}$ is interlacing and
+satisfies $q_{\ell-1}=B$. We must prove that $u=\mathbf{q}\left(
+1\cdots1\right)  $.
+
+\begin{statement}
+\textit{Claim 11:} Let $i\in\left[  \ell-1\right]  $. Then, all letters of the
+word $u^{\left[  i\right]  }$ are given as follows:%
+\[
+\left(  u^{\left[  i\right]  }\right)  _{t}=%
+\begin{cases}
+j, & \text{if }t\in q_{i}^{\left(  j\right)  }\text{ for some }j\in\left[
+i\right]  ;\\
+i+1, & \text{if }t\notin q_{i}.
+\end{cases}
+\]
+
+\end{statement}
+
+[\textit{Proof of Claim 11:} Induction on $i$. TODO XXX]
+
+Applying Claim 11 to $i=\ell-1$, we conclude that TODO XXX
+
+Therefore, $u^{\left[  \ell-1\right]  }=u$. Hence, $u=u^{\left[
+\ell-1\right]  }=\mathbf{q}\left(  1\cdots1\right)  $. This proves the
+$\Longleftarrow$ direction of Lemma \ref{lem:determinant_form.interl-act}.
 \end{proof}
 
 XXX Our first concerns words and queues.
@@ -2463,6 +2545,4 @@ XXX
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
-
-
 \end{document}
