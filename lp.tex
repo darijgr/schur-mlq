@@ -1173,11 +1173,15 @@ Thus, north-steps have weight $1$, while east-steps at y-coordinate $j$ have
 weight $x_{j}$.
 
 Fix $k\in\mathbb{N}$. A \defn{$k$-vertex} shall mean a $k$-tuple of vertices
-of the lattice. If $\mathbf{v}=\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ is a
+of the lattice.
+
+\begin{verlong}
+If $\mathbf{v}=\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ is a
 $k$-vertex, and if $\sigma\in\mathfrak{S}_{k}$ is a permutation, then
 $\sigma\left(  \mathbf{v}\right)  $ denotes the $k$-vertex $\left(
 A_{\sigma\left(  1\right)  },A_{\sigma\left(  2\right)  },\ldots
 ,A_{\sigma\left(  k\right)  }\right)  $.
+\end{verlong}
 
 A \defn{path} will simply mean a (directed) path in the lattice. The
 \defn{weight $\operatorname{wt}p$} of a path $p$ is defined as the product of
@@ -1185,55 +1189,7 @@ the weights of all arcs of this path; this weight is a monomial. If $A$ and
 $B$ are two vertices, then \defn{$N\left(  A,B\right)$} shall denote the set
 of all paths from $A$ to $B$.
 
-If $\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ and $\left(  B_{1},B_{2}%
-,\ldots,B_{k}\right)  $ are two $k$-vertices, then a \defn{NILP} from $\left(
-A_{1},A_{2},\ldots,A_{k}\right)  $ to $\left(  B_{1},B_{2},\ldots
-,B_{k}\right)  $ shall mean a $k$-tuple $\left(  p_{1},p_{2},\ldots
-,p_{k}\right)  $ of paths such that
-
-\begin{itemize}
-\item each $p_{i}$ is a path from $A_{i}$ to $B_{i}$;
-
-\item no two of the paths $p_{1},p_{2},\ldots,p_{k}$ have a vertex in common.
-\end{itemize}
-
-(\textquotedblleft NILP\textquotedblright\ stands for \textquotedblleft
-non-intersecting lattice paths\textquotedblright, but note that the paths must
-neither cross nor touch.)
-
-The \defn{weight $\operatorname{wt}\mathbf{p}$} of a NILP $\mathbf{p}=\left(
-p_{1},p_{2},\ldots,p_{k}\right)  $ is defined as $\prod_{i=1}^{k}%
-\operatorname*{wt}\left(  p_{i}\right)  $; this weight is a monomial.
-
-TODO: Picture of a NILP with weight. Don't align the sources or targets on a line.
-
-If $\mathbf{u}$ and $\mathbf{v}$ are two $k$-vertices, then
-\defn{$N\left( \mathbf{u},\mathbf{v}\right)  $} denotes the set of all NILPs
-from $\mathbf{u}$ to $\mathbf{v}$.
-
-A pair $\left(  \mathbf{u},\mathbf{v}\right)  $ of two $k$-vertices
-$\mathbf{u}$ and $\mathbf{v}$ is said to be \defn{nonpermutable} if and only
-if every permutation $\sigma\neq\operatorname*{id}$ in $\mathfrak{S}_{k}$
-satisfies $N\left(  \mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)
-=\varnothing$. Note that we are not requiring that $N\left(  \mathbf{u}%
-,\mathbf{v}\right)  \neq\varnothing$ here.
-
-The following fact (a particular case of \cite[Corollary 2]{GesVie89}) is crucial:
-
-\begin{prop}
-\label{prop.LGV.nonper}Let $k\in\mathbb{N}$. Let $\left(  \mathbf{u}%
-,\mathbf{v}\right)  $ be a nonpermutable pair of two $k$-vertices
-$\mathbf{u}=\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ and $\mathbf{v}=\left(
-B_{1},B_{2},\ldots,B_{k}\right)  $. Then,%
-\[
-\sum_{\mathbf{p}\in N\left(  \mathbf{u},\mathbf{v}\right)  }\operatorname*{wt}%
-\mathbf{p}=\det\left(  \left(  \sum_{p\in N\left(  A_{i},B_{j}\right)
-}\operatorname*{wt}p\right)  _{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
-\]
-
-\end{prop}
-
-It is also easy to see that any two vertices $A=\left(  a,b\right)  $ and
+It is easy to see that any two vertices $A=\left(  a,b\right)  $ and
 $B=\left(  c,d\right)  $ satisfy%
 \begin{equation}
 \sum_{p\in N\left(  A,B\right)  }\operatorname*{wt}p=h_{c-a}\left(
@@ -1273,6 +1229,55 @@ c-a\right)  \text{-tuple of elements of }\left\{  b,b+1,\ldots,d\right\}
 \]
 
 \end{proof}
+
+If $\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ and $\left(  B_{1},B_{2}%
+,\ldots,B_{k}\right)  $ are two $k$-vertices, then a \defn{NILP} from $\left(
+A_{1},A_{2},\ldots,A_{k}\right)  $ to $\left(  B_{1},B_{2},\ldots
+,B_{k}\right)  $ shall mean a $k$-tuple $\left(  p_{1},p_{2},\ldots
+,p_{k}\right)  $ of paths such that
+
+\begin{itemize}
+\item each $p_{i}$ is a path from $A_{i}$ to $B_{i}$;
+
+\item no two of the paths $p_{1},p_{2},\ldots,p_{k}$ have a vertex in common.
+\end{itemize}
+
+(\textquotedblleft NILP\textquotedblright\ stands for \textquotedblleft
+non-intersecting lattice paths\textquotedblright, but note that the paths must
+neither cross nor touch.)
+
+The \defn{weight $\operatorname{wt}\mathbf{p}$} of a NILP $\mathbf{p}=\left(
+p_{1},p_{2},\ldots,p_{k}\right)  $ is defined as $\prod_{i=1}^{k}%
+\operatorname*{wt}\left(  p_{i}\right)  $; this weight is a monomial.
+
+TODO: Picture of a NILP with weight. Don't align the sources or targets on a line.
+
+If $\mathbf{u}$ and $\mathbf{v}$ are two $k$-vertices, then
+\defn{$N\left( \mathbf{u},\mathbf{v}\right)  $} denotes the set of all NILPs
+from $\mathbf{u}$ to $\mathbf{v}$.
+
+\begin{verlong}
+A pair $\left(  \mathbf{u},\mathbf{v}\right)  $ of two $k$-vertices
+$\mathbf{u}$ and $\mathbf{v}$ is said to be \defn{nonpermutable} if and only
+if every permutation $\sigma\neq\operatorname*{id}$ in $\mathfrak{S}_{k}$
+satisfies $N\left(  \mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)
+=\varnothing$. Note that we are not requiring that $N\left(  \mathbf{u}%
+,\mathbf{v}\right)  \neq\varnothing$ here.
+
+The following fact (a particular case of \cite[Corollary 2]{GesVie89}) is crucial:
+
+\begin{prop}
+\label{prop.LGV.nonper}Let $k\in\mathbb{N}$. Let $\left(  \mathbf{u}%
+,\mathbf{v}\right)  $ be a nonpermutable pair of two $k$-vertices
+$\mathbf{u}=\left(  A_{1},A_{2},\ldots,A_{k}\right)  $ and $\mathbf{v}=\left(
+B_{1},B_{2},\ldots,B_{k}\right)  $. Then,%
+\[
+\sum_{\mathbf{p}\in N\left(  \mathbf{u},\mathbf{v}\right)  }\operatorname*{wt}%
+\mathbf{p}=\det\left(  \left(  \sum_{p\in N\left(  A_{i},B_{j}\right)
+}\operatorname*{wt}p\right)  _{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
+\]
+
+\end{prop}
 
 Next, we state a simple lemma that will help us show that certain pairs of
 $k$-vertices are nonpermutable:
@@ -1641,6 +1646,14 @@ assumption was false. Hence, the paths $p$ and $p^{\prime}$ have a vertex in com
 
 We can now specialize Proposition \ref{prop.LGV.nonper} to a form that is most
 suited for our applications:
+\end{verlong}
+
+We now shall state a crucial result, which follows from the
+Lindstr\"om--Gessel--Viennot lemma\footnote{See the proof of
+Theorem 4 in
+\url{https://math.stackexchange.com/questions/2870640}
+(applied to $\omega_a = \operatorname{wt} a$) for a detailed
+derivation of Proposition~\ref{prop.LGV.concrete}.}:
 
 \begin{prop}
 \label{prop.LGV.concrete}Let $k\in\mathbb{N}$. Let $\mathbf{u}=\left(
@@ -1665,6 +1678,7 @@ Then,%
 
 \end{prop}
 
+\begin{verlong}
 \begin{proof}
 [Proof of Proposition \ref{prop.LGV.concrete}.]This will follow immediately
 from Proposition \ref{prop.LGV.nonper} once we have shown that $\left(
@@ -1713,6 +1727,7 @@ Thus we have found a contradiction for each $\mathbf{p}\in N\left(
 \mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)  $. Hence, $N\left(
 \mathbf{u},\sigma\left(  \mathbf{v}\right)  \right)  =\varnothing$, as we desired.
 \end{proof}
+\end{verlong}
 
 \subsection{Pseudo-partitions and tableaux}
 
