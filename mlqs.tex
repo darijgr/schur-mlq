@@ -2130,13 +2130,25 @@ J\right\vert $ and every $k\in\left[  \left\vert I\right\vert \right]  $
 satisfies $\max\nolimits_{k}A\geq\max\nolimits_{k}B$.
 
 \item Given two subsets $A$ and $B$ of $\left[  n \right]  $, we say that
-\defn{$A \gg B$} if and only if both sets $A$ and $B$ are nonempty and satisfy
-$\min A \geq\max B$.
+\defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy
+$a > b$.
 \end{itemize}
 
 For example, $\left\{  10,8\right\}  \gg\left\{  4,6,7\right\}  \succeq
 \left\{  4,5,7\right\}  \succeq\left\{  2,5,6\right\}  \gg\left\{  1\right\}
 $.
+Note that $A \gg \varnothing$ and $\varnothing \gg A$ for any subset
+$A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial
+order (but it becomes a partial order if we forbid $\varnothing$).
+
+The following criterion (proof left to the reader) will be useful:
+
+\begin{lemma} \label{lem:determinant_form.gale1}
+Let $A$ and $B$ be two subsets of $\ive{n}$, and let $\phi : B \to A$
+be a bijection.
+Assume that $\phi\tup{b} \geq b$ for each $b \in B$.
+Then, $A \succeq B$.
+\end{lemma}
 
 Fix some $\ell\in\mathbb{N}$ and a type $\mathbf{m}=\left(  m_{1},m_{2}%
 ,\ldots,m_{\ell},0,0,\ldots\right)  $ with $\ell$ classes. Assume that
@@ -2157,11 +2169,13 @@ of $\left[  n\right]  $ satisfying
 \begin{align}
 q_{i}  &  =q_{i}^{\left(  1\right)  }\cup q_{i}^{\left(  2\right)  }\cup
 \cdots\cup q_{i}^{\left(  i\right)  }\text{ (disjoint union)}\qquad
-\text{and}\label{eq.determinant_form.qij.1}\\
+\text{and}
+\label{eq.determinant_form.qij.1}\\
 q_{i}^{\left(  1\right)  }  &  \gg q_{i}^{\left(  2\right)  }\gg\cdots\gg
 q_{i}^{\left(  i\right)  }\qquad\text{and}\label{eq.determinant_form.qij.2}\\
 \left\vert q_{i}^{\left(  j\right)  }\right\vert  &  =m_{j}\text{ for all
-}j\in\left[  i\right]  . \label{eq.determinant_form.qij.3}%
+}j\in\left[  i\right]  .
+\label{eq.determinant_form.qij.3}%
 \end{align}
 Thus, we have defined nonempty queues
 \defn{$q_{i}^{\left(j\right)}$}$\ \subseteq\left[  n\right]  $ for all
@@ -2312,7 +2326,23 @@ Let $\mathbf{q}$ be an MLQ of type $\mathbf{m}$. Then, the tableau $P\left(
 j\right)  }$ satisfy \eqref{eq.determinant_form.interlacing.def} (this is
 easily seen from \eqref{pf.lem:determinant_form.bij1.visual} and from the fact
 that the columns $\widetilde{q_{i}^{\left(  j\right)  }}$ are strictly
-increasing); in other words, the tableau $P\left(  \mathbf{q}\right)  $ is
+increasing\footnote{In more detail:
+\begin{itemize}
+\item The entries of $P \tup{\mathbf{q}}$ are weakly increasing along each row
+if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
+$q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
+\item The entries of $P \tup{\mathbf{q}}$ are strictly increasing down each
+column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
+$q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
+(Here, we are also tacitly using the fact that the sets
+$q_{i}^{\left(  j\right)  }$ are nonempty. This ensures that the southern
+neighbor of a cell in $\widetilde{q_{i}^{\left(  j\right)  }}$ belongs either
+to $\widetilde{q_{i}^{\left(  j\right)  }}$ again or to
+$\widetilde{q_{i-1}^{\left(  j-1\right)  }}$, rather than (say) to
+$\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
+\end{itemize}
+});
+in other words, the tableau $P\left(  \mathbf{q}\right)  $ is
 semistandard if and only if $\mathbf{q}$ is interlacing. This proves property (c).
 
 Finally, if $T$ is a semistandard tableau of shape $\lambda$, then $T$ has the
@@ -2581,20 +2611,102 @@ Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 
 (b) Let $h\in \left[ t-1\right] $. Thus, $h<t$.
 
-TODO: Proving the $\succeq $ sign is easy: The elements of $\left\{ p\in %
-\left[ n\right] \ \mid \ u_{p}=h\right\} $ are some $i_{k}$'s, while the
-elements of $\left\{ p\in \left[ n\right] \ \mid \ \left( q\left( u\right)
-\right) _{p}=h\right\} $ are the corresponding $j_{k}$'s. But we know from
-above that $i_{k}\leq j_{k}$ (since $h<t$).
+Note that $\left( j_{1},j_{2},\ldots ,j_{n}\right) $ is a permutation of $%
+\left( 1,2,\ldots ,n\right) $ (since each letter of $q\left( u\right) $ is
+set exactly once during the construction of $q\left( u\right) $). Thus, the $%
+j_{1},j_{2},\ldots ,j_{n}$ are distinct.
 
-TODO: Prove the $\gg $ sign: Let $x,y\in \left[ n\right] $ be such that $%
-u_{x}=h$ and $\left( q\left( u\right) \right) _{y}=h+1$; then we must prove
-that $x>y$. But otherwise, the falling $u_{x}$-ball would settle in the
-empty $\left( q\left( u\right) \right) _{y}$-site or a site to its left, and
-this would violate the \textquotedblleft weakly decreasing up to level $t$%
-\textquotedblright\ condition. To make this precise, let $x=i_{k}$ (so that $%
-k\leq \left\vert q\right\vert $), and apply Claim 3 to $j_{!}=y$; this shows
-that $j_{!}$ cannot be $\geq i_{k}$.
+If $k\in \left[ n\right] $ satisfies $i_{k}\in B$, then%
+\begin{equation}
+k\leq \left\vert q\right\vert   \label{pf.lem:determinant_form.interl-A.b.1}
+\end{equation}%
+\footnote{\textit{Proof.} Let $k\in \left[ n\right] $ be such that $i_{k}\in
+B$. We must prove that $k\leq \left\vert q\right\vert $.
+\par
+Assume the contrary. Thus, $k>\left\vert q\right\vert $.
+\par
+From $i_{k}\in B$, we obtain $u_{i_{k}}=h$ (by the definition of $B$).
+\par
+Consider the unique step of the construction of $q\left( u\right) $ at which 
+$i=i_{k}$. This step is part of Phase~I, since $k>\left\vert q\right\vert $.
+Hence, $j_{k}\notin q$ and $\left( q\left( u\right) \right)
+_{j_{k}}=u_{i_{k}}+1$ (by the way Phase I operates). Thus, $%
+u_{i_{k}}+1=\left( q\left( u\right) \right) _{j_{k}}=t+1$ (by %
+\eqref{pf.lem:determinant_form.interl-A.2}, since $j_{k}\notin q$), so that $%
+u_{i_{k}}=t$. This contradicts $u_{i_{k}}=h<t$. This contradiction shows
+that our assumption was wrong, qed.}
+
+Let $A=\left\{ p\in \left[ n\right] \ \mid \ \left( q\left( u\right) \right)
+_{p}=h\right\} $, $B=\left\{ p\in \left[ n\right] \ \mid \ u_{p}=h\right\} $
+and $C=\left\{ p\in \left[ n\right] \ \mid \ \left( q\left( u\right) \right)
+_{p}=h+1\right\} $. Then, we must prove that $A\succeq B\gg C$.
+
+Let us first prove $A\succeq B$. Indeed, let $i_{k}\in B$ for some $k\in %
+\left[ n\right] $. From $i_{k}\in B$, we obtain $u_{i_{k}}=h$ (by the
+definition of $B$), so that $u_{i_{k}}=h<t$. Also, %
+\eqref{pf.lem:determinant_form.interl-A.b.1} yields $k\leq \left\vert
+q\right\vert $. Thus, the letter $\left( q\left( u\right) \right) _{j_{k}}$
+is set during Phase II of the construction. Hence, $\left( q\left( u\right)
+\right) _{j_{k}}=u_{i_{k}}=h$. Therefore, $j_{k}\in A$ (by the definition of 
+$A$). Also, Claim 2 yields $i_{k}\leq j_{k}$. Hence, $j_{k}\geq i_{k}$.
+
+Forget that we fixed $k$. We thus have shown that if $i_{k}\in B$ for some $%
+k\in \left[ n\right] $, then $j_{k}\in A$ and $j_{k}\geq i_{k}$. Hence, we
+can define a map%
+\begin{equation*}
+\phi :B\rightarrow A,\ i_{k}\mapsto j_{k}
+\end{equation*}%
+(since each element of $B$ can be written as $i_{k}$ for a unique $k\in %
+\left[ n\right] $), and it satisfies $\phi \left( b\right) \geq b$ for each $%
+b\in B$ (since $j_{k}\geq i_{k}$). This map $\phi $ is furthermore injective
+(since the algorithm shows that the $j_{1},j_{2},\ldots ,j_{n}$ are
+distinct) and surjective\footnote{\textit{Proof.} Let $a\in A$. We must
+prove that there exists some $k\in \left[ n\right] $ satisfying $i_{k}\in B$
+and $j_{k}=a$.
+\par
+Indeed, recall that $\left( j_{1},j_{2},\ldots ,j_{n}\right) $ is a
+permutation of $\left( 1,2,\ldots ,n\right) $. Thus, there exists some $k\in %
+\left[ n\right] $ satisfying $j_{k}=a$. Consider this $k$. All we need to
+prove now is that $i_{k}\in B$.
+\par
+We have $j_{k}=a$ and thus $\left( q\left( u\right) \right) _{j_{k}}=\left(
+q\left( u\right) \right) _{a}=h$ (since $a\in A$).
+\par
+If we had $k>\left\vert q\right\vert $, then the letter $\left( q\left(
+u\right) \right) _{j_{k}}$ would be set in Phase I of the construction;
+thus, we would have $j_{k}\notin q$, so that $\left( q\left( u\right)
+\right) _{j_{k}}=t+1$ (by \eqref{pf.lem:determinant_form.interl-A.2}). But
+this would contradict $\left( q\left( u\right) \right) _{j_{k}}=h<t<t+1$.
+Thus, we cannot have $k>\left\vert q\right\vert $. Hence, $k\leq \left\vert
+q\right\vert $. Hence, the letter $\left( q\left( u\right) \right) _{j_{k}}$
+is set in Phase II of the construction. Therefore, $\left( q\left( u\right)
+\right) _{j_{k}}=u_{i_{k}}$, so that $u_{i_{k}}=\left( q\left( u\right)
+\right) _{j_{k}}=h$. In other words, $i_{k}\in B$. This is precisely what we
+wanted to show.}. Thus, it is bijective. Hence, we have found a bijective
+map $\phi :B\rightarrow A$ which furthermore satisfies $\phi \left( b\right)
+\geq b$ for each $b\in B$. Therefore, Lemma \ref{lem:determinant_form.gale1}
+shows that $A\succeq B$.
+
+It remains to show that $B\gg C$. To do so, we need to check that $b>c$ for
+every $b\in B$ and $c\in C$. So let us fix $b\in B$ and $c\in C$. We must
+prove that $b>c$. Assume the contrary; thus, $c\geq b$.
+
+From $b\in B$, we obtain $b\in \left[ n\right] $ and $u_{b}=h$. From $c\in C$%
+, we obtain $c\in \left[ n\right] $ and $\left( q\left( u\right) \right)
+_{c}=h+1$. Write $b$ in the form $b=i_{k}$ for some $k\in \left[ n\right] $.
+Then, $i_{k}=b\in B$, so that $k\leq \left\vert q\right\vert $ (by %
+\eqref{pf.lem:determinant_form.interl-A.b.1}). Also, if we had $c\notin q$,
+then \eqref{pf.lem:determinant_form.interl-A.2} would yield $\left( q\left(
+u\right) \right) _{c}=t+1$, which would contradict $\left( q\left( u\right)
+\right) _{c}=\underbrace{h}_{<t}+1<t+1$. Thus, we have $c\in q$. Hence,
+Claim 3 (applied to $j_{!}=c$) shows that $\left( q\left( u\right) \right)
+_{c}\leq \left( q\left( u\right) \right) _{j_{k}}=u_{i_{k}}$ (since $c\geq
+b=i_{k}$). In view of $i_{k}=b$, this rewrites as $\left( q\left( u\right)
+\right) _{c}\leq u_{b}$. This contradicts $\left( q\left( u\right) \right)
+_{c}=h+1>h=u_{b}$. This contradiction proves that our assumption was false.
+Hence, $B\gg C$ is proven. Combining this with $A\succeq B$, we obtain $%
+A\succeq B\gg C$. This completes the proof of Lemma~\ref%
+{lem:determinant_form.interl-A}(b).
 \end{proof}
 
 Next, we shall connect the interlacingness of an MLQ with its action on the
