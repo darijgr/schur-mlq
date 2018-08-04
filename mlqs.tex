@@ -2255,7 +2255,7 @@ $i\in\left[  \ell-1\right]  $ and $j\in\left[  i\right]  $ whenever
 $\mathbf{q}=\left(  q_{1},\ldots,q_{\ell-1}\right)  $ is an MLQ of type
 $\mathbf{m}$.
 
-TODO:\ Example.
+TODO: Example.
 
 We say that the MLQ $\mathbf{q}=\left(  q_{1},\ldots,q_{\ell-1}\right)  $ is
 \defn{interlacing} if each $i\in\left\{  2,3,\ldots,\ell-1\right\}  $
@@ -2269,7 +2269,7 @@ q_{i}^{\left(  i\right)  } \label{eq.determinant_form.interlacing.def}%
 (that is, $q_{i}^{\left(  j\right)  }\succeq q_{i-1}^{\left(  j\right)  }\gg
 q_{i}^{\left(  j+1\right)  }$ for all $j\in\left[  i-1\right]  $).
 
-TODO:\ Example.
+TODO: Example.
 
 Forget that we fixed $\mathbf{q}$.
 
@@ -2526,29 +2526,133 @@ t$). Meanwhile, all the latter letters of $q\left(  u\right)  $ must be $>t$
 $\leq t$, and we have already accounted for them all), and thus must be $=t+1$
 (since all letters of $q\left(  u\right)  $ belong to $\left[  t+1\right]  $).
 So we have shown that%
-\begin{align*}
+\begin{align}
 \left(  q\left(  u\right)  \right)  _{j}  & \leq t\qquad\text{for each }j\in
-q;\\
+q; \label{pf.lem:determinant_form.interl-A.1} \\
 \left(  q\left(  u\right)  \right)  _{j}  & =t+1\qquad\text{for each }j\notin
-q.
-\end{align*}
+q \label{pf.lem:determinant_form.interl-A.2} .
+\end{align}
+Thus, all letters set during Phase~II of the algorithm are $\leq t$,
+while all letters set during Phase~I of the algorithm are $t+1$.
 
+Next, we claim that
+\begin{equation}
+\text{each $k \leq \abs{q}$ satisfying $u_{i_{k}}<t$
+satisfies $i_{k}\leq j_{k}$.} 
+\label{pf.lem:determinant_form.interl-A.no-wrap}
+\end{equation}
 
-TODO: Argue that each $k\leq\left\vert q\right\vert $ satisfying $u_{i_{k}}<t$
-satisfies $i_{k}\leq j_{k}$. Indeed, otherwise, the first time it fails,
-$j_{k}$ is the smallest element of $q$, so we get $\left(  q\left(  u\right)
-\right)  _{j_{k}}=u_{i_{k}}<t$, but this contradicts the fact that the word
-$q\left(  u\right)  $ has at least one letter equal to $t$ and that letter
-must be in the first $q$-position (because $q\left(  u\right)  $ is weakly
-decreasing up to level $t$). Thus, there is no wrap-around in Phase II as long
-as the letters $1,2,\ldots,t-1$ are being processed.
+[\textit{Proof of \eqref{pf.lem:determinant_form.interl-A.no-wrap}:}
+Assume the contrary.
+Then, there is a \textbf{smallest} $k\leq\left\vert q\right\vert $
+satisfying $u_{i_{k}}<t$ and $i_{k} > j_{k}$.
+Consider this $k$.
+Since $i_k > j_k$, the interval between $i_k$ and
+$j_k$ ``wraps around'' the circle (\textit{i.e.},
+it is an interval only in $\ZZ / n \ZZ$, not in $\ive{n}$).
 
-TODO: Now, prove (a). Indeed, let $x<y$ in $\left[  n\right]  $ be such that
-$u_{x}<u_{y}<t$. We must derive a contradiction. Let $k$ and $\ell$ be such
-that $x=i_{k}$ and $y=i_{\ell}$; then, $k<\ell$, and the corresponding j-sites
-satisfy $j_{k}<j_{\ell}$ (because no wrap-around as said before, and because
-$j_{k}\geq j_{\ell}$ would force the falling $u_{x}$-ball to settle in the
-empty $j_{\ell}$-site first).
+Let $j_{\min}$ be the smallest element of $q$. Then,
+\eqref{pf.lem:determinant_form.interl-A.1} and
+\eqref{pf.lem:determinant_form.interl-A.2} reveal that
+$\tup{q\tup{u}}_{j_{\min}}$ is the first among the letters of
+$q\tup{u}$ that are $\leq t$, and therefore also the largest
+of these letters
+(since $q \tup{u}$ is weakly decreasing up to level $t$).
+But this largest letter must be $t$ (since the word
+$q\left(  u\right)  $ has at least one letter equal to $t$).
+Hence, $\tup{q\tup{u}}_{j_{\min}} = t$.
+
+Now, consider the unique step of the construction of $q \tup{u}$
+at which $i = i_k$.
+This step (which is part of Phase~II, since $k \leq \abs{q}$)
+sees $j_k$ being defined as the first $j$ weakly to the right
+(cyclically)
+of $i = i_k$ such that $j \in q$ and $\tup{q\tup{u}}_j$ is not
+set.
+Thus, in particular, for every site $j_!$ in $q$ that lies between
+$i_k$ (inclusive) and $j_k$ (exclusive), the letter
+$\tup{q\tup{u}}_{j_!}$ must already be set.
+
+Note that the only letters of $q\tup{u}$ that are set at this
+step are letters $\leq u_{i_k}$ (from Phase~II) and letters
+$t+1$ (from Phase~I).
+Thus, none of these letters is $t$ (since $u_{i_k} < t < t+1$).
+Therefore, no letter equal to $t$ is already set in $q \tup{u}$.
+Consequently, the letter $\tup{q\tup{u}}_{j_{\min}}$ is not set.
+Hence, the site $j_{\min}$ cannot lie between $i_k$ (inclusive)
+and $j_k$ (exclusive) (because for every site $j_!$ in $q$ that
+lies between $i_k$ (inclusive) and $j_k$ (exclusive), the letter
+$\tup{q\tup{u}}_{j_!}$ must already be set).
+Since the interval between $i_k$ and
+$j_k$ ``wraps around'' the circle, this shows that $j_{\min} \geq j_k$.
+In view of $j_k \in q$, this yields $j_{\min} = j_k$ (since $j_{\min}$ is
+the smallest element of $q$).
+
+But the rule for Phase~II yields
+$\tup{q\tup{u}}_{j_k} = u\tup{i_k} < t$, whereas
+$\tup{q\tup{u}}_{j_{\min}} = t$. Thus,
+$\tup{q\tup{u}}_{j_k} \neq \tup{q\tup{u}}_{j_{\min}}$,
+so that $j_k \neq j_{\min}$. This contradicts $j_{\min} = j_k$.
+This contradiction shows that our assumption was false, and
+so \eqref{pf.lem:determinant_form.interl-A.no-wrap} is proven.]
+
+We are now ready to prove the two parts of the lemma:
+
+(a) Assume the contrary. Thus, there exist sites $x$ and $y$ in $\ive{n}$
+such that $x < y$ and $u_x < u_y < t$.
+Let $k$ and $\ell$ be such that $x=i_{k}$ and $y=i_{\ell}$; then,
+$u_{i_k} = u_x < u_y = u_{i_{\ell}}$
+and thus $u_{i_k} < u_{i_{\ell}} = u_y < t$.
+Hence,
+$k<\ell$ (since $u_{i_k} < u_{i_\ell}$ and
+$u_{i_{1}}\leq u_{i_{2}}\leq\cdots\leq u_{i_{n}}$).
+Due to $u_{i_k} < t$, we know that the letter $\tup{q\tup{u}}_{j_k}$
+must be set in Phase~II of the algorithm (since otherwise, it would be
+set in Phase~I, which would yield
+$\tup{q\tup{u}}_{j_k} = u_{i_k} + 1 < t + 1$, contradicting the fact that
+all letters set during Phase~I are $t + 1$). Hence, $k \leq \abs{q}$
+and $\tup{q\tup{u}}_{j_k} = u_{i_k}$. Similarly, $\ell \leq \abs{q}$ and
+$\tup{q\tup{u}}_{j_{\ell}} = u_{i_{\ell}}$.
+Hence,
+$\tup{q\tup{u}}_{j_k} = u_{i_k}
+< u_{i_{\ell}} = \tup{q\tup{u}}_{j_{\ell}}$.
+Since the letters $\tup{q\tup{u}}_{j_k}$ and $\tup{q\tup{u}}_{j_{\ell}}$
+of $q \tup{u}$ are also $\leq t$ (because
+$\tup{q\tup{u}}_{j_k} = u_{i_k} = u_x < t$
+and
+$\tup{q\tup{u}}_{j_{\ell}} = u_{i_{\ell}} = u_y < t$),
+this entails $j_k > j_{\ell}$
+(since $q \tup{u}$ is weakly decreasing up to level $t$).
+From \eqref{pf.lem:determinant_form.interl-A.no-wrap}, we have
+$i_{k}\leq j_{k}$ and similarly $i_{\ell} \leq j_{\ell}$.
+Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
+Thus, the site $j_{\ell}$ lies between $i_k$ (inclusive)
+and $j_k$ (exclusive).
+
+Now, consider the unique step of the construction of $q \tup{u}$
+at which $i = i_k$.
+This step (which is part of Phase~II, since $k \leq \abs{q}$)
+sees $j_k$ being defined as the first $j$ weakly to the right
+(cyclically)
+of $i = i_k$ such that $j \in q$ and $\tup{q\tup{u}}_j$ is not
+set.
+Thus, in particular, for every site $j_!$ in $q$ that lies between
+$i_k$ (inclusive) and $j_k$ (exclusive), the letter
+$\tup{q\tup{u}}_{j_!}$ must already be set.
+Applying this to $j_! = j_{\ell}$, we conclude that
+$\tup{q\tup{u}}_{j_{\ell}}$ must already be set.
+
+Note that the only letters of $q\tup{u}$ that are set at this
+step are letters $\leq u_{i_k}$ (from Phase~II) and letters
+$t+1$ (from Phase~I).
+Thus, none of these letters is $u_y$ (since $u_{i_k} < u_y < t+1$).
+Therefore, no letter equal to $u_y$ is already set in $q \tup{u}$.
+Consequently, the letter $\tup{q\tup{u}}_{j_{\ell}}$ is not set
+(since $\tup{q\tup{u}}_{j_{\ell}} = u_y$).
+This contradicts the fact that
+$\tup{q\tup{u}}_{j_{\ell}}$ must already be set.
+This contradiction shows that our assumption was false, and
+so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 
 TODO: Prove (b). Proving the $\succeq$ sign is easy: The elements of $\left\{
 p\in\left[  n\right]  \ \mid\ u_{p}=h\right\}  $ are some $i_{k}$'s, while the
