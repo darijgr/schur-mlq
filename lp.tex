@@ -23,7 +23,7 @@ citecolor=blue, urlcolor=blue]{hyperref}
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Friday, August 03, 2018 17:04:38}
+%TCIDATA{LastRevised=Saturday, August 04, 2018 02:46:49}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=BibTeX}
@@ -2277,7 +2277,7 @@ in the sum on the left hand side of Theorem \ref{thm.tableau.jt}. We thus
 obtain%
 \begin{align*}
 \sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
-\lambda\text{ and surface }s}}\operatorname*{wt}T  &  =\underbrace{\sum
+\lambda\text{ and surface }s}}\operatorname*{wt}T &  =\underbrace{\sum
 _{\substack{\mathbf{q}=\left(  q_{1},q_{2},\ldots,q_{\ell-1}\right)  \text{ is
 an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such that}\\\text{the
 surface of }P\left(  \mathbf{q}\right)  \text{ is }s}}}_{\substack{=\sum
@@ -2298,6 +2298,98 @@ q_{\ell-1}=S}}\operatorname*{wt}\mathbf{q}%
 (since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if
 and only if $q_{\ell-1}=S$). Therefore, the claim of Corollary
 \ref{cor:determinant_form.bij1c} follows from Theorem \ref{thm.tableau.jt}.
+\end{proof}
+
+We need another notation: If $u\in\mathcal{W}_{n}$ and $t\in\mathbb{N}$, then
+we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if
+every two sites $i<j$ in $\left[  n\right]  $ satisfying $u_{j}\leq t$ must
+satisfy $u_{i}\geq u_{j}$. Equivalently, $u$ is weakly decreasing up to level
+$t$ if and only if $u$ becomes weakly decreasing when all letters larger than
+$t$ are removed. For example, the word $5455433252215$ is weakly decreasing up
+to level $4$ (and up to any level $\leq4$).
+
+\begin{lemma}
+\label{lem:determinant_form.interl-A}Let $u\in\mathcal{W}_{n}$ and $t>0$.
+Assume that all letters of $u$ belong to $\left[  t\right]  $. Assume
+furthermore that the word $q\left(  u\right)  $ has at least one letter equal
+to $t$, and that this word is weakly decreasing up to level $t$. Assume also
+that $q\left(  u\right)  $ has exactly $\left\vert q\right\vert $ letters
+$\leq t$. Then:
+
+\begin{enumerate}
+\item[(a)] The word $u$ is weakly decreasing up to level $t-1$.
+
+\item[(b)] For each $h\in\left[  t-1\right]  $, we have%
+\begin{align*}
+\left\{  p\in\left[  n\right]  \ \mid\ \left(  q\left(  u\right)  \right)
+_{p}=h\right\}    & \succeq\left\{  p\in\left[  n\right]  \ \mid
+\ u_{p}=h\right\}  \\
+& \gg\left\{  p\in\left[  n\right]  \ \mid\ \left(  q\left(  u\right)
+\right)  _{p}=h+1\right\}  .
+\end{align*}
+
+\end{enumerate}
+\end{lemma}
+
+TODO: Example.
+
+\begin{proof}
+[Proof of Lemma \ref{lem:determinant_form.interl-A}.] Fix a permutation
+$\left(  i_{1},i_{2},\ldots,i_{n}\right)  $ of $\left(  1,2,\ldots,n\right)  $
+such that $u_{i_{1}}\leq u_{i_{2}}\leq\cdots\leq u_{i_{n}}$. Recall the
+construction of $q\left(  u\right)  $ (using this permutation). For each
+$k\in\left[  n\right]  $, there is exactly one step in this construction at
+which $i=i_{k}$; we let $j_{k}$ denote the site $j$ that is found during this
+step. Note that this step is part of Phase II if $k\leq\left\vert q\right\vert
+$, and otherwise is part of Phase I. Hence, we have $\left(  q\left(
+u\right)  \right)  _{j_{k}}=u_{i_{k}}$ if $k\leq\left\vert q\right\vert $, and
+otherwise $\left(  q\left(  u\right)  \right)  _{j_{k}}=u_{i_{k}}+1$. This
+shows that all letters of $q\left(  u\right)  $ belong to $\left[  t+1\right]
+$ (since all letters of $u$ belong to $\left[  t\right]  $). It also shows
+that the letters of $q\left(  u\right)  $ at the sites $j\in q$ are all
+smaller than the letters of $q\left(  u\right)  $ at the sites $j\notin q$.
+Therefore, the former letters are the $\left\vert q\right\vert $ smallest
+letters of $q\left(  u\right)  $, and thus must all be $\leq t$ (since
+$q\left(  u\right)  $ has exactly $\left\vert q\right\vert $ letters $\leq
+t$). Meanwhile, all the latter letters of $q\left(  u\right)  $ must be $>t$
+(since $q\left(  u\right)  $ has exactly $\left\vert q\right\vert $ letters
+$\leq t$, and we have already accounted for them all), and thus must be $=t+1$
+(since all letters of $q\left(  u\right)  $ belong to $\left[  t+1\right]  $).
+So we have shown that%
+\begin{align*}
+\left(  q\left(  u\right)  \right)  _{j}  & \leq t\qquad\text{for each }j\in
+q;\\
+\left(  q\left(  u\right)  \right)  _{j}  & =t+1\qquad\text{for each }j\notin
+q.
+\end{align*}
+
+
+TODO: Argue that each $k\leq\left\vert q\right\vert $ satisfying $u_{i_{k}}<t$
+satisfies $i_{k}\leq j_{k}$. Indeed, otherwise, the first time it fails,
+$j_{k}$ is the smallest element of $q$, so we get $\left(  q\left(  u\right)
+\right)  _{j_{k}}=u_{i_{k}}<t$, but this contradicts the fact that the word
+$q\left(  u\right)  $ has at least one letter equal to $t$ and that letter
+must be in the first $q$-position (because $q\left(  u\right)  $ is weakly
+decreasing up to level $t$). Thus, there is no wrap-around in Phase II as long
+as the letters $1,2,\ldots,t-1$ are being processed.
+
+TODO: Now, prove (a). Indeed, let $x<y$ in $\left[  n\right]  $ be such that
+$u_{x}<u_{y}<t$. We must derive a contradiction. Let $k$ and $\ell$ be such
+that $x=i_{k}$ and $y=i_{\ell}$; then, $k<\ell$, and the corresponding j-sites
+satisfy $j_{k}<j_{\ell}$ (because no wrap-around as said before, and because
+$j_{k}\geq j_{\ell}$ would force the falling $u_{x}$-ball to settle in the
+empty $j_{\ell}$-site first).
+
+TODO: Prove (b). Proving the $\succeq$ sign is easy: The elements of $\left\{
+p\in\left[  n\right]  \ \mid\ u_{p}=h\right\}  $ are some $i_{k}$'s, while the
+elements of $\left\{  p\in\left[  n\right]  \ \mid\ \left(  q\left(  u\right)
+\right)  _{p}=h\right\}  $ are the corresponding $j_{k}$'s. But we know from
+above that $i_{k}\leq j_{k}$ (since $h<t$). Now let's prove the $\gg$ sign:
+Let $x,y\in\left[  n\right]  $ be such that $u_{x}=h$ and $\left(  q\left(
+u\right)  \right)  _{y}=h+1$; then we must prove that $x<y$. But otherwise,
+the falling $u_{x}$-ball would settle in the empty $\left(  q\left(  u\right)
+\right)  _{y}$-site or a site to its left, and this would violate the
+\textquotedblleft weakly decreasing up to level $t$\textquotedblright\ condition.
 \end{proof}
 
 Next, we shall connect the interlacingness of an MLQ with its action on the
@@ -2338,15 +2430,8 @@ u^{\left[  i\right]  }=q_{i}\left(  u^{\left[  i-1\right]  }\right)
 .\label{pf.lem:determinant_form.interl-act.rec}%
 \end{equation}
 The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[
-\ell-1\right]  }=\mathbf{q}\left(  1\cdots1\right)  $.
-
-We need another piece of notation: If $s\in\mathcal{W}_{n}$ and $t\in
-\mathbb{N}$, then we say that $s$ is \defn{weakly decreasing up to level $t$}
-if and only if every two sites $i<j$ in $\left[  n\right]  $ satisfying
-$s_{j}\leq t$ must satisfy $s_{i}\geq s_{j}$. Equivalently, $s$ is weakly
-decreasing up to level $t$ if and only if $s$ becomes weakly decreasing if all
-letters larger than $t$ are removed. Our construction of $u$ shows that $u$ is
-weakly decreasing up to level $\ell-1$.
+\ell-1\right]  }=\mathbf{q}\left(  1\cdots1\right)  $. Our construction of $u$
+shows that $u$ is weakly decreasing up to level $\ell-1$.
 
 $\Longrightarrow:$ Assume that $u=\mathbf{q}\left(  1\cdots1\right)  $. We
 must prove that the MLQ $\mathbf{q}$ is interlacing and satisfies $q_{\ell
@@ -2356,51 +2441,41 @@ We have $u=\mathbf{q}\left(  1\cdots1\right)  =u^{\left[  \ell-1\right]  }$.
 
 \begin{statement}
 \textit{Claim 1:} For each $i\in\left\{  0,1,\ldots,\ell-1\right\}  $, the
-word $u^{\left[  i\right]  }$ is weakly increasing up to level $i$.
+word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
 \end{statement}
 
 [\textit{Proof of Claim 1:} We proceed by descending induction on $i$. The
 base case ($i=\ell-1$) follows from the fact that $u^{\left[  \ell-1\right]
 }=u$ is weakly decreasing up to level $\ell-1$.
 
-For the induction step, TODO XXX.]
+For the induction step, TODO using Lemma \ref{lem:determinant_form.interl-A}(a).]
 
 \begin{statement}
 \textit{Claim 2:} Let $i\in\left[  \ell-1\right]  $ and $j\in\left[  i\right]
-$. Then, $q_{i}^{\left(  j\right)  }$ is the set of all $t\in\left[  n\right]
-$ satisfying $\left(  u^{\left[  i\right]  }\right)  _{t}=j$.
+$. Then, $q_{i}^{\left(  j\right)  }$ is the set of all $p\in\left[  n\right]
+$ satisfying $\left(  u^{\left[  i\right]  }\right)  _{p}=j$.
 \end{statement}
 
 [\textit{Proof of Claim 2:} Explain how this follows from Claim 1 and the type
-of $u^{\left[  i\right]  }$. TODO XXX]
+of $u^{\left[  i\right]  }$. TODO]
 
 \begin{statement}
-\textit{Claim 3:} Let $i\in\left[  \ell-1\right]  $. Then, the construction of
-$q_{i}\left(  u^{\left[  i-1\right]  }\right)  $ involves no wrapping-around.
-TODO clarify.
-\end{statement}
-
-[\textit{Proof of Claim 3:} TODO XXX]
-
-\begin{statement}
-\textit{Claim 4:} Let $i\in\left[  \ell-1\right]  $ and $j\in\left[
+\textit{Claim 3:} Let $i\in\left[  \ell-1\right]  $ and $j\in\left[
 i-1\right]  $. Then, $q_{i}^{\left(  j\right)  }\succeq q_{i-1}^{\left(
 j\right)  }\gg q_{i}^{\left(  j+1\right)  }$.
 \end{statement}
 
-[\textit{Proof of Claim 4:} Descending induction on $j$. Use Claim 1 and Claim
-2 too. TODO XXX Fix a permutation $\left(  i_{1},i_{2},\ldots,i_{n}\right)  $
-of $\left(  1,2,\ldots,n\right)  $ such that $u_{i_{1}}\leq u_{i_{2}}%
-\leq\cdots\leq u_{i_{n}}$. XXX Careful with the letter $i$]
+[\textit{Proof of Claim 3:} Descending induction on $j$. Use Claim 1 and Claim
+2 too. TODO Use Lemma \ref{lem:determinant_form.interl-A}(b).]
 
 \begin{statement}
-\textit{Claim 5:} We have $q_{\ell-1}=B$. 
+\textit{Claim 4:} We have $q_{\ell-1}=B$.
 \end{statement}
 
-[\textit{Proof of Claim 5:} TODO XXX]
+[\textit{Proof of Claim 4:} TODO this is easy.]
 
-Now, the MLQ $\mathbf{q}$ is interlacing (by Claim 4) and satisfies
-$q_{\ell-1}=B$ (by Claim 5). This proves the $\Longrightarrow$ direction of
+Now, the MLQ $\mathbf{q}$ is interlacing (by Claim 3) and satisfies
+$q_{\ell-1}=B$ (by Claim 4). This proves the $\Longrightarrow$ direction of
 Lemma \ref{lem:determinant_form.interl-act}.
 
 $\Longleftarrow:$ Assume that the MLQ $\mathbf{q}$ is interlacing and
@@ -2421,22 +2496,14 @@ i+1, & \text{if }t\notin q_{i}.
 
 \end{statement}
 
-[\textit{Proof of Claim 11:} Induction on $i$. TODO XXX]
+[\textit{Proof of Claim 11:} Induction on $i$. TODO]
 
-Applying Claim 11 to $i=\ell-1$, we conclude that TODO XXX
+Applying Claim 11 to $i=\ell-1$, we conclude that TODO.
 
 Therefore, $u^{\left[  \ell-1\right]  }=u$. Hence, $u=u^{\left[
 \ell-1\right]  }=\mathbf{q}\left(  1\cdots1\right)  $. This proves the
 $\Longleftarrow$ direction of Lemma \ref{lem:determinant_form.interl-act}.
 \end{proof}
-
-XXX Our first concerns words and queues.
-
-We say that a word $u\in\mathcal{W}_{n}$ is
-
-\begin{lemma}
-\label{lem:determinant_form.1}XXX
-\end{lemma}
 
 \subsection{Spectral weights of \textquotedblleft
 almost-decreasing\textquotedblright\ words}
@@ -2545,4 +2612,6 @@ XXX
 \bibliographystyle{alpha}
 \bibliography{queue}
 {}
+
+
 \end{document}
