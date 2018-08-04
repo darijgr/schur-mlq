@@ -3873,12 +3873,15 @@ We describe how our definition of $q(u)$ is connected to the construction of~\ci
 
 To clarify the connection, we introduce a mild variation of our visualization of queue (\textit{e.g.}, from~\eqref{eq:boxes-and-balls-1}) by a row of circles with each $i \in q$ being a circle in position $i$ as in Example~\ref{ex:first_queue} (\textit{i.e.} we do not represent the $i \notin q$ by boxes).
 We first connect our MLQs with those from~\cite{FM07}.
-We will use the language of~\cite{AL17}, where we are only considering ``discrete MLQs'' as we consider our ring to have a finite number of sites.
+We will use the language of~\cite{AasLin17}, where we are only considering ``discrete MLQs'' as we consider our ring to have a finite number of sites.
 
 Consider a MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$.
-A \defn{labeling} of $\qq$ is a sequence of maps $\ff = (f_1, \dotsc, f_{\ell})$, where $f_i \colon q_i \mapsto \ive{\ell}$.
+A \defn{labeling} of $\qq$ is a sequence of maps $\ff = (f_1, \dotsc, f_{\ell})$, where $f_i \colon q_i \to \ive{i}$.
 We represent this by placing an $f_i(j)$, which we call the \defn{label}, inside of the circle corresponding to $j \in q_i$.
-We construct the labeling $\ff_{\qq}$ on $\qq$ by $f_i(j) = \bigl( q_i( \cdots q_1(1 \cdots 1) \cdots 1) \bigr)_j$.
+We construct the labeling $\ff_{\qq}$ on $\qq$ by
+\[
+f_i(j) = \bigl( q_i( \cdots q_1(1 \cdots 1) \cdots ) \bigr)_j.
+\]
 For example, the labeling of each MLQ in Example~\ref{ex:merge_theorem} is precisely the circled values.
 We can also describe this iteratively for an ordinary MLQ as follows:
 \begin{enumerate}
@@ -3889,34 +3892,38 @@ We can also describe this iteratively for an ordinary MLQ as follows:
 \end{enumerate}
 We consider $q_0 = \emptyset$ to start the construction.
 
-Now consider the labeling procedure in~\cite[\S 2.2]{AasLin17}.
+Now consider the labeling procedure in~\cite[\S 2.2]{AasLin17} given by \defn{$k$-bully paths}.
 Note that a $k$-bully path from one line to the next precisely corresponds to the path of a letter $k$ under Phase~II of our definition of a queue as a function on words.
+For example, the bully paths would correspond to the blue paths in Example~\ref{ex:first_queue}.
 In addition, this is exactly the recursive labeling procedure given above.
 Thus, we obtain the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17}.
-Note that the bully paths would correspond to the blue paths in Example~\ref{ex:first_queue}.
 
 \Darij{TODO: Connect this with parking functions?}
 
-Now we relate the queuing process with the Kohnert fillings in~\cite[Def.~2.5]{AssSea18} and the thread decomposition in~\cite[Def.~3.5]{AssSea18}.
+Next we relate the queuing process with the \defn{Kohnert fillings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
 We remark that the thread decomposition is the same as the Kohnert filling procedure when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
-Roughly speaking, a Kohnert filling is a standardization of the bully path construction except labels are allowed to ``escape'' as we break the ring into a line.
+Roughly speaking, a Kohnert filling (and a thread decomposition) is a standardization of the bully path construction.
 
-In more detail, for a Kohnert diagram $D \in \KM(a)$ (see~\cite{AssSea18} for notations), we view its columns as queues.
-In general, we consider the reflection across the line $x = y$.
-Next, we note that the algorithm in computing the thread decomposition follows that the bully paths except the sites are assumes to belong to $\NN$ (or $\ZZ$) rather than $\ZZ/n\ZZ$.
-We can consider there to be an element in each queue ``at infinity'' that absorbs these paths.
-More formally, we take $n \gg 1$ and for a Kohnert diagram of height $K$, for each thread that goes outside of $K$ in column $i$ in $D$, we add some $k \in q_i$ such that $k > K$ and $k \notin q_j$ for all $j > i$.
-Restricting to $k \in q_i$ for all $1 \leq k \leq K$ and all $i$, the corresponding labeling in this regime is a semistandard version of the thread decomposition.
-Indeed, to obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm.
+In more detail, for a Kohnert diagram $D \in \KM(\alpha)$ for any fixed weak composition $\alpha$ (see~\cite{AssSea18} for notations), we view its columns as queues.
+We will also consider our queues on $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$ so we have a well-defined notion of direction.
+We consider the reflection of $D$ across the line $x = y$, and this forms an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$ by a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$.
+We then apply the bully path construction to the boxes of this reflected Kohnert diagram.
+To obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm, where we consider the labels to be decreasing from left to right.
 Hence, this can be considered as a standardization of our construction or, equivalently, as fixing specific permutations for how the queues act on words.
 
-To obtain a Kohnert filling, we can construct an MLQ
+Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $\qq_D$ and all $i$, we have
 \[
-\widetilde{\qq} = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
+\abs{\set{ j \in q_i \mid j \geq k }} \leq \abs{\set{  j \in q_{i+1} \mid j \geq k }},
 \]
-from the MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$ corresponding to $D$ to obtain the correct labelings.
+which means we can apply~\cite[Lemma~2.2]{AssSea18} to see that there is no ``wrapping'' around the cylinder.
+
+To obtain a Kohnert filling from a Kohnert diagram of height $K$ (for this, we require $n \gg 1$), we can construct an MLQ
+\[
+\widetilde{\qq}_D = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
+\]
+from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings.
 Indeed, a label added in column $i$ comes from a $k \in q$ with $k > K$ for sufficiently many queues $q$ before $q_i$.
-Again, we only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
+We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
 We leave the precise details for the interested reader.
 
 \Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
@@ -3928,13 +3935,13 @@ In the above definition of the labeling $q(f)$, we must replace the ``$\abs{r} \
 \begin{equation}
 \label{eq:queue-relations.kohnert}
 \abs{\set{ j \in r \mid j \geq k }} \leq \abs{\set{  j \in q \mid j \geq k }} .
-\end{equation}onstruct
+\end{equation}
 This stronger requirement can be shown to guarantee that $q(f)$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
 It is, actually, necessary and sufficient.
 
 TODO: Should we prove this? Not quite trivial.
 
- and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
+Given a Kohnert diagram $D \in \KM(a)$ (see~\cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
 (\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$.
 To see that this is well-defined, we need merely to observe that~\eqref{eq:queue-relations.kohnert} holds by~\cite[Lemma 2.2]{AssSea18}.)
 The resulting labeling is similar to (but different from) the Kohnert labeling in~\cite[Def.~2.5]{AssSea18}. It is also related to the ``thread decomposition'' in~\cite[Def.~3.5]{AssSea18} (indeed, all cells in a single thread will receive identical labels in the labeling).
