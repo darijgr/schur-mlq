@@ -1202,20 +1202,13 @@ See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bije
 \end{example}
 \end{comment}
 
-The goal of this section is to prove a determinantal formula (Theorem
-\ref{thm:determinant_form}) for $\left\langle u\right\rangle $ in the special
-case when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and
-becomes weakly decreasing if we disregard all letters $\ell$. (For example,
-$u={\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}%
-211{\color{gray}4}$ is such a word, with $\ell=4$.) This will then help us
-settle two conjectures from~\cite{AasLin17}.
+The goal of this section is to prove a determinantal formula (Theorem~\ref{thm:determinant_form}) for $\swt{u}$ in the special case when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and becomes weakly decreasing if we disregard all letters $\ell$.
+For example, $u = {\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}211{\color{gray}4}$ is such a word, with $\ell=4$.
+This will then we used to settle two conjectures from~\cite{AasLin17}.
 
-Throughout this section, we shall regard the sites $1,2,\ldots,n$ as positive
-integers rather than elements of $\mathbb{Z}/n\mathbb{Z}$. In particular, they
-are totally ordered by $1<2<\cdots<n$. Moreover, we shall use infinitely many
-distinct commuting indeterminates $\ldots,x_{-2},x_{-1},x_{0},x_1%
-,x_2,\ldots$ instead of the $n$ indeterminates $x_1,x_2,\ldots,x_n$;
-thus, we don't have $x_{n+k}=x_k$ for $k\in\mathbb{Z}$ in this section.
+Throughout this section, we shall regard the sites $1, 2, \ldots, n$ as positive integers rather than elements of $\ZZ/n\ZZ$.
+In particular, they are totally ordered by $1 < 2 < \cdots < n$.
+Moreover, we shall use infinitely many distinct commuting indeterminates $\ldots, x_{-2}, x_{-1}, x_0, x_1, x_2, \ldots$ instead of the $n$ indeterminates $x_1,x_2,\ldots,x_n$; thus, we don't have $x_{n+k} = x_k$ for $k \in \ZZ$ in this section.
 
 
 %%%%%%%%%%
@@ -1270,6 +1263,7 @@ $B=\left(  c,d\right)  $ satisfy%
 (Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
 \travis{This is not a (re)definition, but a simple direct substitution. It probably does not even need to be stated unless we assume our readers are completely incompetent.}
 
+\begin{comment}
 \Travis{This is almost certainly well-known and understood and could be an easy excerise for your 4707 students. This is also likely in Stanley (maybe implicitly/left to the reader). I think we should remove it (not even include in the long version).}
 
 \begin{proof}[Proof of~\eqref{eq.LGV.single-paths}.]
@@ -1286,13 +1280,14 @@ This yields
 \\ & = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
 \end{align*}
 \end{proof}
+\end{comment}
 
 If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-vertices, then a \defn{non-intersecting lattice paths (NILP)} from $\tup{A_1, A_2, \dotsc, A_k}$ to $\tup{B_1, B_2, \dotsc, B_k}$ shall mean a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths such that
 \begin{itemize}
 \item each $p_i$ is a path from $A_i$ to $B_i$;
 \item no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
 \end{itemize}
-(Note that the paths must neither cross nor touch.)
+(Visually speaking, the paths must neither cross nor touch.)
 
 The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is defined as
 \[
@@ -1819,17 +1814,13 @@ Then,
 
 We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of a \defn{multi-Schur function} as defined in~\cite[(SCHUR.2.2)]{LLPT18}.
 
-\begin{proof}
-[Proof of Theorem~\ref{thm.tableau.jt}.]Define two $k$-vertices $\uu%
-=\left(  A_1,A_2,\ldots,A_k\right)  $ and $\vv=\left(
-B_1,B_2,\ldots,B_k\right)  $ by%
+\begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
+Define two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$ by
 \[
-A_i=\left(  k-i,1\right)  \qquad\text{and}\qquad B_i=\left(  \lambda
-_i+k-i-1,s_i\right)  .
+A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
-The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since
-$\lambda$ is a $k$-pseudo-partition and $s$ is weakly increasing). Thus,
-Proposition~\ref{prop.LGV.concrete} yields
+The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a $k$-pseudo-partition and $s$ is weakly increasing).
+Thus, Proposition~\ref{prop.LGV.concrete} yields
 \begin{align*}
 \sum_{\pp \in N(\uu,\vv)} \wt \pp & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt p \right)_{1\leq i\leq k,\ 1\leq j\leq k}
 \\ & = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k},
@@ -2025,17 +2016,15 @@ Thus, we have defined nonempty queues $q_i^{(j)} \subseteq \ive{n}$ for all $i \
 
 \Darij{TODO: Example.}
 
-We say that the MLQ $\mathbf{q}=\left(  q_1,\ldots,q_{\ell-1}\right)  $ is
-\defn{interlacing} if each $i\in\left\{  2,3,\ldots,\ell-1\right\}  $
-satisfies%
+We say that the MLQ $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is \defn{interlacing} if each $i \in \set{2,3,\dotsc,\ell-1}$ satisfies
 \begin{equation}
-q_i^{\left(  1\right)  }\succeq q_{i-1}^{\left(  1\right)  }\gg
-q_i^{\left(  2\right)  }\succeq q_{i-1}^{\left(  2\right)  }\gg
-q_i^{\left(  3\right)  }\succeq q_{i-1}^{\left(  3\right)  }\gg\cdots\gg
-q_i^{\left(  i\right)  } \label{eq.determinant_form.interlacing.def}%
+\label{eq.determinant_form.interlacing.def}
+q_i^{(1)} \succeq q_{i-1}^{(1)} \gg
+q_i^{(2)} \succeq q_{i-1}^{(2)} \gg
+q_i^{(3)} \succeq q_{i-1}^{(3)} \gg \cdots \gg
+q_i^{(i)}
 \end{equation}
-(that is, $q_i^{\left(  j\right)  }\succeq q_{i-1}^{\left(  j\right)  }\gg
-q_i^{\left(  j+1\right)  }$ for all $j\in\left[  i-1\right]  $).
+(that is, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$ for all $j \in \ive{i-1}$).
 
 \Darij{TODO: Example.}
 
@@ -2073,17 +2062,11 @@ with the following properties:
 \end{enumerate}
 \end{lemma}
 
-\begin{proof}
-[Proof of Lemma~\ref{lem:determinant_form.bij1}.]If $r\subseteq\left[
-n\right]  $ is any queue, then $\widetilde{r}$ shall denote the entries of $r$
-written vertically in a column, strictly increasing from top to bottom. For
-example, if $r=\left\{  2,5,6\right\}  $, then $\widetilde{r}$ is the column
-$\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.bij1}.]
+If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
+For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
 
-Now, we define the map $P$ as follows: If $\mathbf{q}=\left(  q_1%
-,q_2,\ldots,q_{\ell-1}\right)  $ is any MLQ of type $\mathbf{m}$, then we
-let $P(\qq)$ be the tableau of shape $\lambda$ that
-looks as follows:%
+Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the tableau of shape $\lambda$ as follows:
 \begin{equation}
 \label{pf.lem:determinant_form.bij1.visual}
 \begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
@@ -2194,26 +2177,23 @@ q_{\ell-1}=S}}\wt \mathbf{q}%
 Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
 \end{proof}
 
-We need another notation: If $u\in\mathcal{W}_n$ and $t\in\mathbb{N}$, then
-we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if
-every two sites $i<j$ in $\left[  n\right]  $ satisfying $u_j\leq t$ must
-satisfy $u_i\geq u_j$. Equivalently, $u$ is weakly decreasing up to level
-$t$ if and only if $u$ becomes weakly decreasing when all letters larger than
-$t$ are removed. For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up
-to level $4$ (and up to any level $\leq4$).
+We need another notation:
+If $u \in \mcW_n$ and $t \in \NN$, then we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if every two sites $i < j$ in $\ive{n}$ satisfying $u_j \leq t$ must satisfy $u_i \geq u_j$.
+Equivalently, $u$ is weakly decreasing up to level $t$ if and only if $u$ becomes weakly decreasing when all letters larger than $t$ are removed.
+For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up to level $4$ (and up to any level $\leq4$).
 
 \begin{lemma}
-\label{lem:determinant_form.interl-A}Let $u\in\mathcal{W}_n$ and $t>0$.
-Assume that all letters of $u$ belong to $\left[  t\right]  $. Assume
-furthermore that the word $q\left(  u\right)  $ has at least one letter equal
-to $t$, and that this word is weakly decreasing up to level $t$. Assume also
-that $q\left(  u\right)  $ has exactly $\left\vert q\right\vert $ letters
-$\leq t$. Then:
+\label{lem:determinant_form.interl-A}
+Let $u \in \mcW_n$ and $t>0$.
+Assume that all letters of $u$ belong to $\ive{t}$.
+Assume furthermore that the word $q(u)$ has at least one letter equal to $t$, and that this word is weakly decreasing up to level $t$.
+Assume also that $q(u)$ has exactly $\abs{q}$ letters at most $t$.
+Then:
 
 \begin{enumerate}
 \item[(a)] The word $u$ is weakly decreasing up to level $t-1$.
 
-\item[(b)] For each $h\in\left[  t-1\right]  $, we have
+\item[(b)] For each $h \in \ive{t-1}$, we have
 \[
 \set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h} \succeq \set{  p \in \ive{n} \mid u_p = h} \gg \set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1} .
 \]
@@ -2223,33 +2203,25 @@ $\leq t$. Then:
 \Darij{TODO: Example.}
 
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
-Fix a permutation $\left(  i_1,i_2,\ldots,i_n\right)  $ of $\left(  1,2,\ldots,n\right)  $
-such that $u_{i_1}\leq u_{i_2}\leq\cdots\leq u_{i_n}$. Recall the
-construction of $q\left(  u\right)  $ (using this permutation). For each
-$k\in\left[  n\right]  $, there is exactly one step in this construction at
-which $i=i_k$; we let $j_k$ denote the site $j$ that is found during this
-step. Note that this step is part of Phase~II if $k\leq\left\vert q\right\vert
-$, and otherwise is part of Phase~I. Hence, we have $\left(  q\left(
-u\right)  \right)  _{j_k}=u_{i_k}$ if $k\leq\left\vert q\right\vert $, and
-otherwise $\left(  q\left(  u\right)  \right)  _{j_k}=u_{i_k}+1$. This
-shows that all letters of $q\left(  u\right)  $ belong to $\left[  t+1\right]
-$ (since all letters of $u$ belong to $\left[  t\right]  $). It also shows
-that the letters of $q\left(  u\right)  $ at the sites $j\in q$ are all
-smaller than the letters of $q\left(  u\right)  $ at the sites $j\notin q$.
-Therefore, the former letters are the $\left\vert q\right\vert $ smallest
-letters of $q\left(  u\right)  $, and thus must all be $\leq t$ (since
-$q\left(  u\right)  $ has exactly $\left\vert q\right\vert $ letters $\leq
-t$). Meanwhile, all the latter letters of $q\left(  u\right)  $ must be $>t$
-(since $q\left(  u\right)  $ has exactly $\left\vert q\right\vert $ letters
-$\leq t$, and we have already accounted for them all), and thus must be $=t+1$
-(since all letters of $q\left(  u\right)  $ belong to $\left[  t+1\right]  $).
-So we have shown that%
+Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
+Recall the construction of $q(u)$ (using this permutation).
+For each $k \in \ive{n}$, there is exactly one step in this construction at which $i = i_k$; we let $j_k$ denote the site $j$ that is found during this step.
+Note that this step is part of Phase~II if $k \leq \abs{q}$, and otherwise is part of Phase~I.
+Hence, we have $\bigl( q(u) \bigr)_{j_k}=u_{i_k}$ if $k\leq\left\vert q\right\vert $, and otherwise $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$.
+This shows that all letters of $q(u)$ belong to $\ive{t+1}$ (since all letters of $u$ belong to $\ive{t}$).
+It also shows that the letters of $q(u)$ at the sites $j \in q$ are all smaller than the letters of $q(u)$ at the sites $j \notin q$.
+Therefore, the former letters are the $\abs{q}$ smallest letters of $q(u)$, and thus must all be at most $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$).
+Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters $\leq t$, and we have already accounted for them all), and thus must be equal to $t+1$ (since all letters of $q(u)$ belong to $\ive{t+1}$).
+So we have shown that
+\begin{subequations}
 \begin{align}
-\left(  q\left(  u\right)  \right)  _j  & \leq t\qquad\text{for each }j\in
-q; \label{pf.lem:determinant_form.interl-A.1} \\
-\left(  q\left(  u\right)  \right)  _j  & =t+1\qquad\text{for each }j\notin
-q \label{pf.lem:determinant_form.interl-A.2} .
+\label{pf.lem:determinant_form.interl-A.1}
+\bigl( q(u) \bigr)_j  & \leq t && \text{for each } j \in q,
+\\
+\label{pf.lem:determinant_form.interl-A.2}
+\bigl( q(u) \bigr)_j  & = t+1 && \text{for each } j \notin q.
 \end{align}
+\end{subequations}
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $t+1$.
 
