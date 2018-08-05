@@ -1237,7 +1237,7 @@ The \defn{$y$-coordinate} of an east-step $(i,j) \to (i+1, j)$ is defined to be 
 
 For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as the following monomial:
 \[
-\wt a= \begin{cases}
+\wt(a) = \begin{cases}
 x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
 1 & \text{if $a$ is a north-step } (i,j) \to (i,j+1).
 \end{cases}
@@ -1252,14 +1252,14 @@ If $\vv = \tup{A_1, A_2, \dotsc, A_k}$ is a $k$-vertex, and if $\sigma \in \SymG
 \end{verlong}
 
 A \defn{path} will simply mean a (directed) path in the lattice.
-The \defn{weight} of a path $p$, denoted $\wt p$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
+The \defn{weight} of a path $p$, denoted $\wt(p)$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
 If $A$ and $B$ are two vertices, then \defn{$N(A,B)$} shall denote the set of all paths from $A$ to $B$.
 
 It is easy to see that any two vertices $A=\left(  a,b\right)  $ and
 $B=\left(  c,d\right)  $ satisfy%
 \begin{equation}
 \label{eq.LGV.single-paths}
-\sum_{p \in N(A,B)}\wt p = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
+\sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
 \end{equation}
 (Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
 \travis{This is not a (re)definition, but a simple direct substitution. It probably does not even need to be stated unless we assume our readers are completely incompetent.}
@@ -1277,7 +1277,7 @@ Conversely, any weakly increasing $(c-a)$-tuple of elements of $\set{b, b+1, \do
 Thus, there is a bijection between the paths $p$ from $A$ to $B$ and the weakly increasing $(c-a)$-tuples of elements of $\set{b, b+1, \dotsc, d}$.
 This yields
 \begin{align*}
-\sum_{p \in N(A,B)} \wt p & = \sum_{\substack{ \tup{k_1,k_2,\ldots,k_{c-a}} \text{ is a weakly increasing} \\ (c-a)\text{-tuple of elements of }\set{b,b+1,\dotsc,d} }} x_{k_1} x_{k_2} \cdots x_{k_{c-a}}
+\sum_{p \in N(A,B)} \wt(p) & = \sum_{\substack{ \tup{k_1,k_2,\ldots,k_{c-a}} \text{ is a weakly increasing} \\ (c-a)\text{-tuple of elements of }\set{b,b+1,\dotsc,d} }} x_{k_1} x_{k_2} \cdots x_{k_{c-a}}
 \\ & = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
 \end{align*}
 \end{proof}
@@ -1292,7 +1292,7 @@ If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-v
 
 The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is defined as
 \[
-\wt \pp := \prod_{i=1}^{k} \wt(p_i).
+\wt(\pp) := \prod_{i=1}^{k} \wt(p_i).
 \]
 Note that this weight is a monomial.
 
@@ -1301,63 +1301,48 @@ Note that this weight is a monomial.
 If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the set of all NILPs from $\uu$ to $\vv$.
 
 \begin{verlong}
-A pair $\left(  \uu,\vv\right)  $ of two $k$-vertices
-$\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
-if every permutation $\sigma\neq\operatorname*{id}$ in $\mathfrak{S}_k$
-satisfies $N\left(  \uu,\sigma\left(  \vv\right)  \right) = \emptyset$. Note that we are not requiring that $N\left(  \uu, \vv \right) \neq \emptyset$ here.
+A pair $(\uu, \vv)$ of two $k$-vertices $\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
+if every permutation $\sigma \neq \id$ in $\SymGp{k}$ satisfies $N\bigl( \uu,\sigma(\vv) \bigr) = \emptyset$.
+Note that we are not requiring that $N(\uu, \vv) \neq \emptyset$ here.
 
 The following fact (a particular case of~\cite[Corollary 2]{GesVie89}) is crucial:
 
 \begin{prop}
-\label{prop.LGV.nonper}Let $k\in\mathbb{N}$. Let $\left(  \uu%
-,\vv\right)  $ be a nonpermutable pair of two $k$-vertices
-$\uu=\left(  A_1,A_2,\ldots,A_k\right)  $ and $\vv=\left(
-B_1,B_2,\ldots,B_k\right)  $. Then,%
+\label{prop.LGV.nonper}
+Let $k \in \NN$.
+Let $(\uu, \vv)$ be a nonpermutable pair of two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$.
+Then,
 \[
-\sum_{\pp\in N\left(  \uu,\vv\right)  }\wt %
-\pp=\det\left(  \left(  \sum_{p\in N\left(  A_i,B_j\right)
-}\wt p\right)  _{1\leq i\leq k,\ 1\leq j\leq k}\right)  .
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p \in N(A_i,B_j)} \wt(p) \right)_{1 \leq i \leq k,\ 1 \leq j \leq k}.
 \]
-
 \end{prop}
 
-Next, we state a simple lemma that will help us show that certain pairs of
-$k$-vertices are nonpermutable:
+Next, we state a simple lemma that will help us show that certain pairs of $k$-vertices are nonpermutable:
 
 \begin{lemma}
-\label{lem.LGV.hex}Let $A$, $B$, $A'$ and $B'$ be four
-vertices such that%
+\label{lem.LGV.hex}
+Let $A$, $B$, $A'$ and $B'$ be four vertices such that
 \[
-\operatorname*{x}\left(  A'\right)  \leq\operatorname*{x}\left(
-A\right)  ,\qquad\operatorname*{y}\left(  A'\right)  \geq
-\operatorname*{y}\left(  A\right)  ,\qquad\operatorname*{x}\left(  B^{\prime
-}\right)  \leq\operatorname*{x}\left(  B\right)  ,\qquad\operatorname*{y}%
-\left(  B'\right)  \geq\operatorname*{y}\left(  B\right)  .
+\operatorname*{x}(A') \leq\operatorname*{x}(A), \qquad \operatorname*{y}(A') \geq \operatorname*{y}(A),\qquad \operatorname*{x}(B') \leq \operatorname*{x}(B), \qquad \operatorname*{y}(B') \geq \operatorname*{y}(  B).
 \]
-Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from
-$A'$ to $B$. Then, $p$ and $p'$ have a vertex in common.
+Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
+Then, $p$ and $p'$ have a vertex in common.
 \end{lemma}
 
 TODO: Example picture.
 
-\begin{proof}
-[First proof of Lemma~\ref{lem.LGV.hex}.]If $q$ is any path, then the
-\defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
+\begin{proof}[First proof of Lemma~\ref{lem.LGV.hex}.]
+If $q$ is any path, then the \defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
 of $q$.
 
-We shall now prove Lemma~\ref{lem.LGV.hex} by strong induction on $\ell\left(
-p\right)  +\ell\left(  p'\right)  $:
+We shall now prove Lemma~\ref{lem.LGV.hex} by strong induction on $\ell(p) + \ell(p')$:
 
-\textit{Induction step:} Fix $N\in\mathbb{N}$. Assume (as the induction
-hypothesis) that Lemma~\ref{lem.LGV.hex} holds whenever $\ell\left(  p\right)
-+\ell\left(  p'\right)  <N$. We must now prove that Lemma
-\ref{lem.LGV.hex} holds when $\ell\left(  p\right)  +\ell\left(  p^{\prime
-}\right)  =N$.
+\textit{Induction step:}
+Fix $N \in \NN$. Assume (as the induction hypothesis) that Lemma~\ref{lem.LGV.hex} holds whenever $\ell(p) + \ell(p') < N$.
+We must now prove that Lemma~\ref{lem.LGV.hex} holds when $\ell(p) + \ell(p') = N$.
 
-So let $A$, $B$, $A'$, $B'$, $p$ and $p'$ be as in
-Lemma~\ref{lem.LGV.hex}, and let us assume that $\ell\left(  p\right)
-+\ell\left(  p'\right)  =N$. We must prove that $p$ and $p'$
-have a vertex in common.
+So let $A$, $B$, $A'$, $B'$, $p$ and $p'$ be as in Lemma~\ref{lem.LGV.hex}, and let us assume that $\ell(p) + \ell(p') = N$.
+We must prove that $p$ and $p'$ have a vertex in common.
 
 Assume the contrary. Thus, $p$ and $p'$ have no vertex in common.
 
@@ -1686,7 +1671,7 @@ suited for our applications:
 
 We now shall state a crucial result, which follows from the
 Lindstr\"om--Gessel--Viennot lemma:\footnote{See the proof of Theorem 4 in
-\url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt a$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
+\url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
 
 \begin{prop}
 \label{prop.LGV.concrete}
@@ -1700,7 +1685,7 @@ Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ b
 \end{align*}
 Then,
 \[
-\sum_{\pp \in N(\uu,\vv)} \wt \pp = \det\left(  \sum_{p\in N(A_i,B_j) } \wt p\right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left(  \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
 \]
 
 \end{prop}
@@ -1808,7 +1793,7 @@ Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a $k$-pseudo-pa
 Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
 Then,
 \begin{align*}
-&  \sum_{\substack{T \text{ is a semistandard tableau}\\\text{of shape } \lambda \text{ and surface }s }} \wt T \\
+&  \sum_{\substack{T \text{ is a semistandard tableau}\\\text{of shape } \lambda \text{ and surface }s }} \wt(T) \\
 &  = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
 \end{align*}
 \end{thm}
@@ -1823,12 +1808,12 @@ A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a $k$-pseudo-partition and $s$ is weakly increasing).
 Thus, Proposition~\ref{prop.LGV.concrete} yields
 \begin{align*}
-\sum_{\pp \in N(\uu,\vv)} \wt \pp & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt p \right)_{1\leq i\leq k,\ 1\leq j\leq k}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{1\leq i\leq k,\ 1\leq j\leq k}
 \\ & = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k},
 \end{align*}
 where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
 \[
-\sum_{p \in N(A_i,B_j)} \wt p = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
+\sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
 \]
 (by~\eqref{eq.LGV.single-paths}, applied to $A=A_i$ and $B=B_j$). 
 
@@ -1947,7 +1932,7 @@ forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
 Thus, $\Phi$ is a bijection.
 Moreover, it is easy to see that
 \[
-\wt\bigl(  \Phi(\pp) \bigr) = \left( \prod_{i=1}^k x_{s_i} \right) \wt \pp
+\wt\bigl(  \Phi(\pp) \bigr) = \left( \prod_{i=1}^k x_{s_i} \right) \wt(\pp)
 \]
 for each $\pp \in N(\uu,\vv)$.
 Hence,
@@ -1955,7 +1940,7 @@ Hence,
 &  \sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
 \lambda \text{ and surface } s}} \wt(T) \\
 &  = \sum_{\pp\in N(\uu,\vv)  }\left(
-\prod_{i=1}^{k}x_{s_i}\right)  \wt \pp = \left( \prod_{i=1}^{k}x_{s_i}\right)  \sum_{\pp \in N(\uu,\vv)  } \wt \pp\\
+\prod_{i=1}^{k}x_{s_i}\right)  \wt(\pp) = \left( \prod_{i=1}^{k}x_{s_i}\right)  \sum_{\pp \in N(\uu,\vv)  } \wt(\pp) \\
 &  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left(
 h_{\lambda_j-j+i-1}\left(  x_1,x_2,\ldots,x_{s_j}\right)  \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
 \end{align*}
@@ -1987,8 +1972,7 @@ The following criterion (proof left to the reader) will be useful:
 
 \begin{lemma}
 \label{lem:determinant_form.gale1}
-Let $A$ and $B$ be two subsets of $\ive{n}$, and let $\phi \colon B \to A$ be a bijection.
-Assume that $\phi(b) \geq b$ for each $b \in B$.
+Let $A, B \subseteq \ive{n}$ such that there exists $\phi \colon B \to A$ a bijection satisfying $\phi(b) \geq b$ for each $b \in B$.
 Then, $A \succeq B$.
 \end{lemma}
 
@@ -2053,7 +2037,7 @@ P \colon \left\{  \text{MLQs of type } \mm \right\} \to \left\{ \text{tableaux o
 \]
 with the following properties:
 \begin{enumerate}
-\item[(a)] We have $\wt\bigl(  P(\qq) \bigr) = \wt \qq$ for each MLQ $\qq$ of type $\mm$.
+\item[(a)] We have $\wt\bigl(  P(\qq) \bigr) = \wt(\qq)$ for each MLQ $\qq$ of type $\mm$.
 
 \item[(b)] If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$, then the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
 
@@ -2092,7 +2076,7 @@ Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q_i^{(i)}}, \wide
 Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda}$ is defined.
 This map $P$ is an injection, because the MLQ $\qq$ can be recovered
 from the tableau $P(\qq)$ (indeed, each of the elements
-of each of the queues of $\mathbf{q}$ lands in some predictable cell of
+of each of the queues of $\qq$ lands in some predictable cell of
 $P(\qq)$).
 
 We shall now prove the four properties we claimed about this injection $P$.
@@ -2106,10 +2090,10 @@ This proves property~(b).
 Let $\qq$ be an MLQ of type $\mm$.
 Then, the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def} (this is easily seen from~\eqref{pf.lem:determinant_form.bij1.visual} and from the fact that the columns $\widetilde{q_i^{(j)}}$ are strictly increasing\footnote{In more detail:
 \begin{itemize}
-\item The entries of $P \tup{\mathbf{q}}$ are weakly increasing along each row
+\item The entries of $P(\qq)$ are weakly increasing along each row
 if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
 $q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
-\item The entries of $P \tup{\mathbf{q}}$ are strictly increasing down each
+\item The entries of $P(\qq)$ are strictly increasing down each
 column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
 $q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
 (Here, we are also tacitly using the fact that the sets
@@ -2155,24 +2139,10 @@ Property~(d) shows that this restricted injection is also surjective, and thus a
 Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt}.
 We thus obtain
 \begin{align*}
-\sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
-\lambda\text{ and surface }s}}\wt T &  =\underbrace{\sum
-_{\substack{\mathbf{q}=\left(  q_1,q_2,\ldots,q_{\ell-1}\right)  \text{ is
-an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such that}\\\text{the
-surface of }P(\qq)\text{ is }s}}}_{\substack{=\sum
-_{\substack{\mathbf{q}=\left(  q_1,q_2,\ldots,q_{\ell-1}\right)  \text{ is
-an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such that}\\\text{the
-list of all elements of }q_{\ell-1}\text{ in}\\\text{increasing order is }%
-s}}\\\text{(by property (b))}}}\underbrace{\wt \left(  P\left(
-\mathbf{q}\right)  \right)  }_{\substack{=\wt \mathbf{q}%
-\\\text{(by property (a))}}}\\
-&  =\sum_{\substack{\mathbf{q}=\left(  q_1,q_2,\ldots,q_{\ell-1}\right)
-\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ such
-that}\\\text{the list of all elements of }q_{\ell-1}\text{ in}%
-\\\text{increasing order is }s}}\wt \mathbf{q}\\
-&  =\sum_{\substack{\mathbf{q}=\left(  q_1,q_2,\ldots,q_{\ell-1}\right)
-\text{ is an interlacing}\\\text{MLQ of type }\mathbf{m}\text{ with }%
-q_{\ell-1}=S}}\wt \mathbf{q}%
+\sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape } \lambda \text{ and surface } s}}\wt(T)
+  & = \underbrace{\sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}}}_{\substack{=\sum_{\substack{\qq=\tup{q_1,q_2,\ldots,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type }\mm \text{ such that} \\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}}\\\text{(by property (b))}}}\underbrace{\wt\bigl(  P(\qq) \bigr)  }_{\substack{= \wt(\qq) \\\text{(by property (a))}}}\\
+&  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
+&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
 \end{align*}
 (since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$).
 Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
@@ -2570,10 +2540,9 @@ Moreover, it shows that the word $u$ has type $\mm$ (since the entries of $u$ ar
 Also, $m_i > 0$ for all $i \in \ive{\ell-1}$ (by~\eqref{pf.thm:determinant_form.v=} and because of $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
 Hence, the word $u$ is packed.
 
-Moreover, the definition of $\mathbf{m}$ shows that $r=m_1+m_2%
-+\cdots+m_{\ell-1}=p_{r-1}\left(  \mathbf{m}\right)  $.
+Moreover, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{r-1}(\mm)$.
 
-Let $k = p_{\ell-1}(\mm)  \in \NN$, and so $k = r$.
+Let $k = p_{\ell-1}(\mm) \in \NN$, and so $k = r$.
 Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
 Define a $k$-pseudo-partition $\lambda = \tup{\lambda_1,\lambda_2, \dotsc, \lambda_k}$ by~\eqref{eq.determinant_form.interlacing.lam}.
@@ -2582,12 +2551,10 @@ Hence, each $j \in \ive{r}$ satisfies $\lambda_j = \ell - v_j = \gamma_j$.
 
 The definition of $\left\langle u\right\rangle $ yields%
 \begin{align*}
-\left\langle u\right\rangle  &  =\sum_{\substack{\mathbf{q}\text{ is an MLQ of
-type }\mathbf{m};\\u=\mathbf{q}\left(  1\cdots1\right)  }}\wt %
-\mathbf{q}\\
-&  = \sum_{\substack{\mathbf{q}=\left(  q_1,q_2,\ldots,q_{\ell-1}\right) \text{ is an MLQ of type }\mathbf{m};\\\mathbf{q}\text{ is interlacing and satisfies } q_{\ell-1}=B}}\wt \mathbf{q}\qquad\left(  \text{by Lemma~\ref{lem:determinant_form.interl-act}}\right) \\
-&  = \sum_{\substack{\mathbf{q}=\left(  q_1,q_2,\ldots,q_{\ell-1}\right) \text{ is an interlacing} \\\text{MLQ of type }\mathbf{m} \text{ with } q_{\ell-1}=B}}\wt \mathbf{q}\\
-&  = \underbrace{\left(  \prod_{i=1}^{k}x_{b_i}\right)  }_{=\prod_{i \in B} x_i} \det\Biggl(  \underbrace{h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  }_{\substack{=h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j})\\\text{(since $\lambda_j=\gamma_j$)}}} \Biggr)_{1\leq i\leq k,\ 1\leq j\leq k} \\
+\swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1\dotsm 1)}}\wt(\qq) \\
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq)\\
+&  = \underbrace{\left(  \prod_{i=1}^k x_{b_i} \right)  }_{= \prod_{i \in B} x_i} \det\Biggl(  \underbrace{h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  }_{\substack{= h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j})\\\text{(since $\lambda_j=\gamma_j$)}}} \Biggr)_{1\leq i\leq k,\ 1\leq j\leq k} \\
 &  \qquad\left(
   \begin{array}[c]{c}
   \text{by Corollary~\ref{cor:determinant_form.bij1c}, applied to } B \text{ and } b_i\\
@@ -3136,7 +3103,7 @@ Hence, the parenthesis sequence $\SP(q_1, q_2)$ between $\alpha$ and $\gamma$ (i
 \]
 where $\alpha$ and $\beta$ may be the same parenthesis.
 Therefore $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing $\alpha$ and $\gamma$.
-Yet this is tantamount to removing $\beta$ and $\gamma$ from $\SP \tup{q_1, q_2}$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
+Yet this is tantamount to removing $\beta$ and $\gamma$ from $\SP(q_1, q_2)$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
 \end{proof}
 
 \begin{lemma} \label{lem:SL.dual.3}
