@@ -40,6 +40,7 @@
 \newcommand{\SymGp}[1]{\mathfrak{S}_{#1}} % symmetric group
 \newcommand{\std}[1]{\widetilde{#1}} % standardization
 \newcommand{\MLQ}{\mathbf{S}} % (old symbol for) MLQs
+\newcommand{\diag}[1]{\left[#1\right]} % diagram
 
 \DeclareMathOperator{\supp}{supp} % Support
 \DeclareMathOperator{\inter}{int} % queuing interval
@@ -1758,7 +1759,7 @@ A \defn{$k$-pseudo-partition} shall mean a $k$-tuple $\tup{\lambda_1, \lambda_2,
 \]
 For example, $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are both $5$-pseudo-partitions.
 
-The \defn{diagram $[\lambda]$} of a $k$-pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
+The \defn{diagram $\diag{\lambda}$} of a $k$-pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
 $\left\{  \left(  i,j\right)  \in \ive{k} \times \left\{1,2,3,\ldots\right\}  \mid  j \leq \lambda_i \right\}$.
 This diagram is drawn in the plane like usual Young diagrams, in English notation.
 For example, the diagram of the $4$-pseudo-partition $\tup{3,2,3,1}$ is drawn as
@@ -1767,9 +1768,9 @@ For example, the diagram of the $4$-pseudo-partition $\tup{3,2,3,1}$ is drawn as
 \]
 
 
-If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a $k$-pseudo-partition, then a \defn{tableau of shape $\lambda$} is a map $T \colon [\lambda] \to \set{1,2,3,\ldots}$.
-For each such tableau $T$ and each $(i,j) \in [\lambda]$, we refer to the value $T(i,j)$ as the \defn{entry of $T$ in cell $\left(i,j\right)$}.
-As usual, we represent a tableau $T$ of shape $\lambda$ by placing the entry $T(i,j)$ into the box corresponding to $(i,j) \in [\lambda]$.
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a $k$-pseudo-partition, then a \defn{tableau of shape $\lambda$} is a map $T \colon \diag{\lambda} \to \set{1,2,3,\ldots}$.
+For each such tableau $T$ and each $(i,j) \in \diag{\lambda}$, we refer to the value $T(i,j)$ as the \defn{entry of $T$ in cell $\left(i,j\right)$}.
+As usual, we represent a tableau $T$ of shape $\lambda$ by placing the entry $T(i,j)$ into the box corresponding to $(i,j) \in \diag{\lambda}$.
 For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
 \begin{equation}
 \label{eq.tableau.exas}
@@ -1782,9 +1783,9 @@ For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
 A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only if
 
 \begin{itemize}
-\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(  i,j_2)$ whenever $(i,j_1)  \in [\lambda]$ and $(i,j_2) \in [\lambda]$ satisfy $j_1 < j_2$);
+\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(  i,j_2)$ whenever $(i,j_1)  \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
 
-\item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in [\lambda]$ and $(i_2,j) \in [\lambda]$ satisfy $i_1 < i_2$).
+\item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
 \end{itemize}
 
 For example, the second tableaux in~\eqref{eq.tableau.exas} is semistandard, while the first is not.
@@ -1793,7 +1794,7 @@ If $T$ is a tableau of shape $\lambda$, then the \defn{surface} of $T$ is define
 
 If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
 \[
-\wt(T) := \prod_{(i,j) \in [\lambda]} x_{T(i,j)}
+\wt(T) := \prod_{(i,j) \in \diag{\lambda}} x_{T(i,j)}
 \]
 (that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
 For example, the two tableaux in~\eqref{eq.tableau.exas} have weights $x_1^{3}x_2^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_1^{2}x_2x_{3}^{2}x_{4}x_{5}^{3}$, respectively (assuming that $n \geq 7$).
@@ -1859,7 +1860,7 @@ Note that for each $i \in \ive{k}$,
 \end{gather}
 \end{subequations}
 
-Now, let $T$ be the tableau of shape $\lambda$ that sends each $(i,j) \in [\lambda]$  to $p_{i,j}$.
+Now, let $T$ be the tableau of shape $\lambda$ that sends each $(i,j) \in \diag{\lambda}$  to $p_{i,j}$.
 Then, the entries of $T$ are weakly increasing along each row by~\eqref{pf.thm.tableau.jt.row-weak}.
 We shall next show that the entries of $T$ are strictly increasing down each column.
 
@@ -1908,12 +1909,12 @@ Let $j \in \ive{\lambda_{i_1}} \cap \ive{\lambda_{i_2}}$.
 We must show that $T( i_1,j) < T(i_2, j)$.
 In other words, we must prove that $p_{i_1,j} < p_{i_2,j}$ (since $T(i,j) = p_{i,j}$ for all $i$).
 
-If the column $j$ of $[\lambda]$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in [\lambda]$ for each $i \in [i_1, i_1+1, \dotsc, i_2]$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
-Hence, without loss of generality, we assume that column $j$ of $[\lambda]$ has at least one gap between row $i_1$ and row $i_2$.
-In other words, there exists some $q \in [i_1, i_1+1, \dotsc, i_2]$ such that $(q,j) \notin [\lambda]$.
+If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in [i_1, i_1+1, \dotsc, i_2]$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
+Hence, without loss of generality, we assume that column $j$ of $\diag{\lambda}$ has at least one gap between row $i_1$ and row $i_2$.
+In other words, there exists some $q \in [i_1, i_1+1, \dotsc, i_2]$ such that $(q,j) \notin \diag{\lambda}$.
 Consider the \emph{largest} such $q$.
 Clearly, $i_1 < q < i_2$.
-Also, $\lambda_{q} < j$ (since $(q,j) \notin [\lambda]$).
+Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
 
 The maximality of $q$ shows that column $j$ of $\left[  \lambda\right]  $ has
 no gaps between row $q$ and row $i_2$. Hence,
@@ -2041,7 +2042,7 @@ Define a $k$-pseudo-partition $\lambda =\tup{\lambda_1, \lambda_2, \dotsc, \lamb
   \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
 ).
 \end{equation}
-Thus, the columns of the diagram $[\lambda]$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
+Thus, the columns of the diagram $\diag{\lambda}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
 
 \begin{lemma}
 \label{lem:determinant_form.bij1}
