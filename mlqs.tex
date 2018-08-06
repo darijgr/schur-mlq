@@ -1319,7 +1319,7 @@ Let $k \in \NN$.
 Let $(\uu, \vv)$ be a nonpermutable pair of two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$.
 Then,
 \[
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p \in N(A_i,B_j)} \wt(p) \right)_{1 \leq i \leq k,\ 1 \leq j \leq k}.
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p \in N(A_i,B_j)} \wt(p) \right)_{1 \leq i,j \leq k}.
 \]
 \end{prop}
 
@@ -1676,8 +1676,7 @@ We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
 suited for our applications:
 \end{verlong}
 
-We now shall state a crucial result, which follows from the Lindstr\"om--Gessel--Viennot lemma and exists in the folklore\travis{This is poorly phrased, but otherwise Darij, the footnote as currently stated makes it seems like we are just avoiding a proof. We should try to make this better.
-[Darij: Well, we are, and so is everyone. This is known as ``folklore''. I don't see how it shames us, seeing that we are giving a detailed reference.]}:\footnote{
+We now shall state a folklore result, which follows from the Lindstr\"om--Gessel--Viennot lemma:\footnote{
 See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
 
 \begin{prop}
@@ -1692,7 +1691,7 @@ Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ b
 \end{align*}
 Then,
 \[
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left(  \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left(  \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{1\leq i,\leq k} .
 \]
 
 \end{prop}
@@ -1804,7 +1803,7 @@ Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a $k$-pseudo-pa
 Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
 Then,
 \[
-\sum_{T \in \SST(\lambda, s)} \wt(T) = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+\sum_{T \in \SST(\lambda, s)} \wt(T) = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{1\leq i,j \leq k} .
 \]
 \end{thm}
 
@@ -1817,12 +1816,13 @@ A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
 The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a $k$-pseudo-partition and $s$ is weakly increasing).
 Thus, Proposition~\ref{prop.LGV.concrete} yields
-\begin{align}
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{1\leq i\leq k,\ 1\leq j\leq k}
-\nonumber\\
-& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k},
+\begin{equation}
 \label{pf.thm.tableau.jt.1}
-\end{align}
+\begin{split}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{1\leq i,j \leq k} \\
+& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i,j \leq k},
+\end{split}
+\end{equation}
 where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
 \[
 \sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
@@ -1954,7 +1954,7 @@ Hence,
 \begin{align*}
 \sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp)
 = \left( \prod_{i=1}^k x_{s_i} \right) \sum_{\pp\in N(\uu,\vv)  } \wt(\pp) \\
-&  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k}
+&  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i,j \leq k}
 \end{align*}
 (by \eqref{pf.thm.tableau.jt.1}).
 \end{proof}
@@ -2136,7 +2136,7 @@ Then,
 \begin{align*}
 &  \sum_{\substack{\qq=\tup{q_1,q_2,\ldots,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type $\mm$ with } q_{\ell-1}=S}} \wt(\qq) \\
 &  = \left(  \prod_{i=1}^{k}x_{s_i}\right)
-    \det\left(h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+    \det\left(h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i,j \leq k} .
 \end{align*}
 \end{cor}
 
@@ -2495,7 +2495,7 @@ word $u^{\left[  i\right]}$ are given as follows:
 \[
 \left( u^{\left[  i\right]} \right)_{t} =
 \begin{cases}
-j & \text{if } t \in q_i^{(j)} \text{ for some } j \in\ive{i}, \\
+j & \text{if } t \in q_i^{(j)} \text{ for some } j \in\ive{i}\!, \\
 i+1 & \text{if }t\notin q_i.
 \end{cases}
 \]
@@ -2529,7 +2529,7 @@ Define a word $u \in \mcW_n$ by $u_i=v_j$ if $i = b_j$ for some $j$, otherwise $
 For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
 Then
 \[
-\swt{u} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1 \leq i \leq r,\ 1 \leq j \leq r}.
+\swt{u} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1 \leq i,j \leq r}.
 \]
 \end{thm}
 
@@ -2574,8 +2574,8 @@ The definition of $\swt{u}$ yields
 %&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
 % The above is just a trivial rewording of the summation set for the equation below -- Travis
 &  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
-&  = \left(  \prod_{i=1}^k x_{b_i} \right) \det\biggl( h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{1\leq i\leq k,\ 1\leq j\leq k} ,
-%& \\ & = \left( \prod_{b \in B} x_b \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1\leq i\leq r,\ 1\leq j\leq r} ,
+&  = \left(  \prod_{i=1}^k x_{b_i} \right) \det\biggl( h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{1\leq i,j \leq k} ,
+%& \\ & = \left( \prod_{b \in B} x_b \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1\leq i,j \leq r} ,
 \end{align*}
 where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $B$ and $b_i$ instead of $S$ and $s_i$).
 Hence the claim follows since $\gamma_j = \lambda_j$ and $ \prod_{i=1}^k x_{b_i} = \prod_{b \in B} x_b$.
