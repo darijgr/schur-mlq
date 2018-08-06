@@ -623,7 +623,7 @@ Hence the claim follows.
 %  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
 %\end{remark}
 
-We note that our construction is a minor variation of the construction given by~\cite[\S 3.1]{AAMP11}, which is a reformulation of that of~\cite{FM07}.
+We note that our construction is a minor variation of the construction given by~\cite[\S 3.1]{AAMP}, which is a reformulation of that of~\cite{FM07}.
 We more precisely describe the relationship with~\cite{FM07} in Appendix~\ref{app:queue-relations}, where we also discuss a small variant that has appeared in~\cite{AssSea18}.
 
 
@@ -730,13 +730,13 @@ Hence, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
 \subsection{Symmetric polynomials}
 
 We also need the \defn{elementary symmetric polynomials} and \defn{complete homogeneous symmetric polynomials}.
-Recall that they are defined for each $N \in \left\{0,1,\ldots,n\right\}$ and $k \geq 0$ by
+Recall that they are defined for each $N \in \NN$ and $k \geq 0$ and any $N$ indeterminates $y_1, y_2, \ldots, y_N$ by
 \begin{align*}
-e_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} x_{i_1} \dotsm x_{i_k},
-\\ h_k(x_1, x_2, \dotsc, x_N) & = \sum_{1 \leq i_1 \leq \cdots \leq i_k \leq N} x_{i_1} \dotsm x_{i_k},
+e_k(y_1, y_2, \dotsc, y_N) & = \sum_{1 \leq i_1 < \cdots < i_k \leq N} y_{i_1} \dotsm y_{i_k},
+\\ h_k(y_1, y_2, \dotsc, y_N) & = \sum_{1 \leq i_1 \leq \cdots \leq i_k \leq N} y_{i_1} \dotsm y_{i_k},
 \end{align*}
 respectively.
-We define $e_k(x_1, \dotsc, x_N) = 0$ and $h_k(x_1, \dotsc, x_N) = 0$ for $k < 0$.
+We define $e_k(y_1, \dotsc, y_N) = 0$ and $h_k(y_1, \dotsc, y_N) = 0$ for $k < 0$.
 For more details on symmetric polynomials, we refer the reader to~\cite[Ch.~7]{Stanley-EC2}.
 
 
@@ -982,7 +982,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \]
   where we sum over all pairs $(\qq, q')$ such that
   \begin{itemize}
-  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\cdots1)$ and
+  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\dotsm 1)$ and
   \item $q'$ is a $p_i(\mm)$-queue.
   \end{itemize}
   Given any such pair $\tup{\qq, q'}$, we set
@@ -1233,8 +1233,8 @@ The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
 all pairs of integers (that is, its vertex set is $\ZZ^{2}$), and whose
 arcs are
 \begin{align*}
-(i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ, \qquad \text{and} \\
-(i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ.
+(i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ^2, \qquad \text{and} \\
+(i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ^2.
 \end{align*}
 The arcs of the first kind are called \defn{north-steps}, whereas the arcs of
 the second kind are called \defn{east-steps}. The vertices of the lattice will
@@ -1254,7 +1254,8 @@ x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
 \]
 Thus, all north-steps have weight $1$, while east-steps with $y$-coordinate $j$ have weight $x_j$.
 
-We call a $k$-tuple of vertices of the lattice a \defn{$k$-vertex}.
+Fix $k \in \NN$.
+A $k$-tuple of vertices of the lattice will be called a \defn{$k$-vertex}.
 \begin{verlong}
 If $\vv = \tup{A_1, A_2, \dotsc, A_k}$ is a $k$-vertex, and if $\sigma \in \SymGp{k}$ is a permutation, then $\sigma(\vv)$ denotes the $k$-vertex $\tup{A_{\sigma(1)}, A_{\sigma(2)}, \dotsc, A_{\sigma(k)}}$.
 \end{verlong}
@@ -1271,7 +1272,7 @@ It is easy to see that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
 %(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
 
 \begin{comment}
-\Travis{This is almost certainly well-known and understood and could be an easy excerise for your 4707 students. This is also likely in Stanley (maybe implicitly/left to the reader). I think we should remove it (not even include in the long version).}
+\Travis{This is almost certainly well-known and understood and could be an easy exercise for your 4707 students. This is also likely in Stanley (maybe implicitly/left to the reader). I think we should remove it (not even include in the long version).}
 
 \begin{proof}[Proof of~\eqref{eq.LGV.single-paths}.]
 Let $A = (a,b)$ and $B = (c,d)$ be two vertices.
@@ -1289,18 +1290,17 @@ This yields
 \end{proof}
 \end{comment}
 
-If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-vertices, then a \defn{non-intersecting lattice paths (NILP)} from $\tup{A_1, A_2, \dotsc, A_k}$ to $\tup{B_1, B_2, \dotsc, B_k}$ shall mean a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths such that
+If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-vertices, then a \defn{non-intersecting lattice path tuple (NILP)} from $\tup{A_1, A_2, \dotsc, A_k}$ to $\tup{B_1, B_2, \dotsc, B_k}$ shall mean a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths such that
 \begin{itemize}
 \item each $p_i$ is a path from $A_i$ to $B_i$;
 \item no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
 \end{itemize}
 (Visually speaking, the paths must neither cross nor touch.)
 
-The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is defined as
+The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is the monomial $\wt(\pp)$ defined by
 \[
 \wt(\pp) := \prod_{i=1}^{k} \wt(p_i).
 \]
-Note that this weight is a monomial.
 
 \Darij{TODO: Picture of a NILP with weight. Don't align the sources or targets on a line.}
 
@@ -1329,7 +1329,8 @@ Next, we state a simple lemma that will help us show that certain pairs of $k$-v
 \label{lem.LGV.hex}
 Let $A$, $B$, $A'$ and $B'$ be four vertices such that
 \[
-\xcoord(A') \leq\xcoord(A), \qquad \ycoord(A') \geq \ycoord(A),\qquad \xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(  B).
+\xcoord(A') \leq \xcoord(A), \qquad \ycoord(A') \geq \ycoord(A), \qquad
+\xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(B).
 \]
 Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
 Then, $p$ and $p'$ have a vertex in common.
@@ -1360,12 +1361,11 @@ Recall that each arc of the lattice is either an east-step or a north-step.
 Thus, the $x$-coordinates of the vertices of a path are always weakly
 increasing, and so are the $y$-coordinates. Hence, the existence of a path $p$
 from $A$ to $B'$ shows that $\xcoord\left(  A\right)
-\leq\xcoord\left(  B'\right)  $ and $\ycoord%
-\left(  A\right)  \leq\ycoord\left(  B'\right)  $.
-Similarly, the existence of a path $p'$ from $A'$ to $B$
-yields $\xcoord\left(  A'\right)  \leq\xcoord%
-\left(  B\right)  $ and $\ycoord\left(  A'\right)
-\leq\ycoord\left(  B\right)  $.
+\leq\xcoord\left(  B'\right)  $ and
+$\ycoord\left(  A\right)  \leq\ycoord\left(  B'\right)  $.
+Similarly, the existence of a path $p'$ from $A'$ to $B$ yields
+$\xcoord\left(  A'\right)  \leq\xcoord\left(  B\right)  $ and
+$\ycoord\left(  A'\right)  \leq\ycoord\left(  B\right)  $.
 
 Next, we claim that $\ell\left(  p\right)  \neq0$.
 
@@ -1381,21 +1381,20 @@ A'\right)  =\ycoord\left(  B\right)  $. Combining
 $\ycoord\left(  A'\right)  \geq\ycoord\left(
 A\right)  $ with $\ycoord\left(  A'\right)
 =\ycoord\left(  B\right)  \leq\ycoord\left(  A\right)  $,
-we obtain $\ycoord\left(  A'\right)  =\ycoord%
-\left(  A\right)  $. Thus, $\ycoord\left(  A'\right)
+we obtain $\ycoord\left(  A'\right)  =\ycoord\left(  A\right)  $.
+Thus, $\ycoord\left(  A'\right)
 =\ycoord\left(  A\right)  =\ycoord\left(  B\right)  $.
 Therefore, the vertex $A$ lies on the horizontal line that contains
 $A'$ and $B$. Furthermore, this vertex $A$ must lie on the line
 segment between $A'$ and $B$ (since $\xcoord\left(
-A'\right)  \leq\xcoord\left(  \underbrace{A}_{=B'%
-}\right)  =\xcoord\left(  B'\right)  \leq\xcoord%
-\left(  B\right)  $).
+A'\right)  \leq\xcoord\left(  \underbrace{A}_{=B'}\right)
+=\xcoord\left(  B'\right)  \leq\xcoord\left(  B\right)  $).
 
 Recall again that the $y$-coordinates of the vertices a path are always weakly
 increasing. Moreover, they increase strictly whenever the path makes a
 north-step. Hence, if the path $p'$ would have any north-step, then we
-would have $\ycoord\left(  A'\right)  <\ycoord%
-\left(  B\right)  $ (since $p'$ is a path from $A'$ to $B$).
+would have $\ycoord\left(  A'\right)  <\ycoord\left(  B\right)  $
+(since $p'$ is a path from $A'$ to $B$).
 But this would contradict $\ycoord\left(  A'\right)
 \geq\ycoord\left(  B\right)  $. Hence, the path $p'$ has no
 north-step. Thus, $p'$ consists entirely of east-steps. Hence,
@@ -1574,12 +1573,13 @@ A\right)  \leq\xcoord\left(  B'\right)  \leq
 \xcoord\left(  B\right)  \qquad\text{and}\label{pf.lem.LGV.hex.1}\\
 \ycoord\left(  A\right)   &  \leq\ycoord\left(  A^{\prime
 }\right)  \leq\ycoord\left(  B\right)  \leq\ycoord\left(
-B'\right)  . \label{pf.lem.LGV.hex.2}%
+B'\right)  . \label{pf.lem.LGV.hex.2}
 \end{align}
-Now, consider the rectangle whose four sides are given by the equations%
+Now, consider the rectangle whose four sides are given by the equations
 \[
-x=\xcoord\left(  A'\right)  ,\qquad y=\ycoord%
-\left(  A\right)  ,\qquad x=\xcoord\left(  B\right)  ,\qquad
+x=\xcoord\left(  A'\right)  , \qquad
+y=\ycoord\left(  A\right)  , \qquad
+x=\xcoord\left(  B\right)  , \qquad
 y=\ycoord\left(  B'\right)  ,
 \]
 respectively (all in Cartesian coordinates). Then, the path $p$ joins two
@@ -1613,19 +1613,19 @@ C\right)  +\ycoord\left(  C\right)  $ is incremented by $1$ with
 each step. Hence, if $q$ is a bidirectionally infinite path, then, for each
 $N\in\mathbb{Z}$, there is a unique vertex $C$ of $q$ satisfying
 $\xcoord\left(  C\right)  +\ycoord\left(  C\right)  =N$.
-Denote this vertex $C$ by $h_n\left(  q\right)  $. Thus, the vertices of $q$
+Denote this vertex $C$ by $h_N\left(  q\right)  $. Thus, the vertices of $q$
 are $\ldots,h_{-1}\left(  q\right)  ,h_{0}\left(  q\right)  ,h_1\left(
 q\right)  ,\ldots$ in this order.
 
 All sufficiently low $N\in\mathbb{Z}$ satisfy $\xcoord\left(
-h_n\left(  \widetilde{p'}\right)  \right)  <\xcoord\left(
-h_n\left(  \widetilde{p}\right)  \right)  $, whereas all sufficiently high
-$N\in\mathbb{Z}$ satisfy $\xcoord\left(  h_n\left(
-\widetilde{p'}\right)  \right)  >\xcoord\left(  h_n\left(
+h_N\left(  \widetilde{p'}\right)  \right)  <\xcoord\left(
+h_N\left(  \widetilde{p}\right)  \right)  $, whereas all sufficiently high
+$N\in\mathbb{Z}$ satisfy $\xcoord\left(  h_N\left(
+\widetilde{p'}\right)  \right)  >\xcoord\left(  h_N\left(
 \widetilde{p}\right)  \right)  $. Hence, the set of all $N\in\mathbb{Z}$ that
-satisfy $\xcoord\left(  h_n\left(  \widetilde{p'}\right)
-\right)  <\xcoord\left(  h_n\left(  \widetilde{p}\right)  \right)
-$ is a nonempty set of integers that is bounded from above. Therefore, this
+satisfy $\xcoord\left(  h_N\left(  \widetilde{p'}\right)
+\right)  <\xcoord\left(  h_N\left(  \widetilde{p}\right)  \right)$
+is a nonempty set of integers that is bounded from above. Therefore, this
 set has a maximum. Let $M$ be this maximum. Thus, $M\in\mathbb{Z}$ satisfies
 $\xcoord\left(  h_{M}\left(  \widetilde{p'}\right)  \right)
 <\xcoord\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
@@ -1634,8 +1634,9 @@ $\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
 \right)  $.
 
 But the point $h_{M+1}\left(  \widetilde{p'}\right)  $ is either the
-eastern or the northern neighbor of $h_{M}\left(  \widetilde{p'%
-}\right)  $; hence, $\xcoord\left(  h_{M+1}\left(
+eastern or the northern neighbor of
+$h_{M}\left(  \widetilde{p'}\right)  $; hence,
+$\xcoord\left(  h_{M+1}\left(
 \widetilde{p'}\right)  \right)  \leq\xcoord\left(
 h_{M}\left(  \widetilde{p'}\right)  \right)  +1$. Also, the point
 $h_{M+1}\left(  \widetilde{p}\right)  $ is either the eastern or the northern
@@ -1675,7 +1676,8 @@ We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
 suited for our applications:
 \end{verlong}
 
-We now shall state a crucial result, which follows from the Lindstr\"om--Gessel--Viennot lemma and exists in the folklore\travis{This is poorly phrased, but otherwise Darij, the footnote as currently stated makes it seems like we are just avoiding a proof. We should try to make this better.}:\footnote{
+We now shall state a crucial result, which follows from the Lindstr\"om--Gessel--Viennot lemma and exists in the folklore\travis{This is poorly phrased, but otherwise Darij, the footnote as currently stated makes it seems like we are just avoiding a proof. We should try to make this better.
+[Darij: Well, we are, and so is everyone. This is known as ``folklore''. I don't see how it shames us, seeing that we are giving a detailed reference.]}:\footnote{
 See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
 
 \begin{prop}
@@ -1702,7 +1704,7 @@ from Proposition~\ref{prop.LGV.nonper} once we have shown that $\left(
 \uu,\vv\right)  $ is nonpermutable. Thus, it remains to show the
 latter fact.
 
-Let $\sigma\neq\operatorname*{id}$ be a permutation in $\mathfrak{S}_k$. We
+Let $\sigma\neq\id$ be a permutation in $\SymGp{k}$. We
 must show that $N\left(  \uu,\sigma\left(  \vv\right)  \right)
 =\emptyset$. Indeed, let $\pp\in N\left(  \uu,\sigma\left(
 \vv\right)  \right)  $.
@@ -1724,7 +1726,10 @@ By the definition of a NILP, this implies that
 \end{itemize}
 
 However, the assumptions of Proposition~\ref{prop.LGV.concrete} yield
-$\xcoord(A_j) \leq \xcoord(A_i)$, $\ycoord(A_j) \geq \ycoord(A_i)$, $\xcoord(B_{\sigma(i)}) \leq \xcoord(B_{\sigma(j)})$, and $\ycoord(B_{\sigma(i)}) \geq \ycoord(B_{\sigma(j)})$.
+$\xcoord(A_j) \leq \xcoord(A_i)$,
+$\ycoord(A_j) \geq \ycoord(A_i)$,
+$\xcoord(B_{\sigma(i)}) \leq \xcoord(B_{\sigma(j)})$, and
+$\ycoord(B_{\sigma(i)}) \geq \ycoord(B_{\sigma(j)})$.
 Hence, Lemma~\ref{lem.LGV.hex} (applied to $A = A_i$, $B = B_{\sigma(j)}$, $A' = A_j$, $B' = B_{\sigma(i)}$, $p = p_i$ and $p' = p_j$) shows that $p_i$ and $p_j$ have a vertex in common.
 This contradicts the fact that the paths $p_i$ and $p_j$ have no vertex in common.
 
@@ -1739,7 +1744,7 @@ Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
 We shall next introduce the concepts of pseudo-partitions and their corresponding semistandard tableaux.
 The first is similar to the concept of partitions, but allows entries to increase by $1$.
 The second is just a calque of the usual notion of semistandard tableaux, extended to pseudo-partitions.
-We will then prove a Jacobi--Trudi-like formula for a generating function of these semistandard tableaux of a given shape (a pseudo-partition) and a given surface (\textit{i.e.}, the list of the rightmost entries of each row). Later we will translate these tableaux into MLQs that yield a specific word when applied to $1\cdots1$.
+We will then prove a Jacobi--Trudi-like formula for a generating function of these semistandard tableaux of a given shape (a pseudo-partition) and a given surface (\textit{i.e.}, the list of the rightmost entries of each row). Later we will translate these tableaux into MLQs that yield a specific word when applied to $1\dotsm 1$.
 
 We start with the basics.
 Fix some $k \in \NN$.
@@ -1750,7 +1755,7 @@ A \defn{$k$-pseudo-partition} shall mean a $k$-tuple $\tup{\lambda_1, \lambda_2,
 For example, $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are both $5$-pseudo-partitions.
 
 The \defn{diagram $\diag{\lambda}$} of a $k$-pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
-$\left\{  \left(  i,j\right)  \in \ive{k} \times \left\{1,2,3,\ldots\right\}  \mid  j \leq \lambda_i \right\}$.
+$\set{  \left(  i,j\right)  \in \ive{k} \times \set{ 1,2,3,\ldots }  \mid  j \leq \lambda_i }$.
 This diagram is drawn in the plane like usual Young diagrams, in English notation.
 For example, the diagram of the $4$-pseudo-partition $\tup{3,2,3,1}$ is drawn as
 \[
@@ -1778,7 +1783,7 @@ A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only i
 \item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
 \end{itemize}
 
-For example, the second tableaux in~\eqref{eq.tableau.exas} is semistandard, while the first is not.
+For example, the second tableau in~\eqref{eq.tableau.exas} is semistandard, while the first is not.
 
 If $T$ is a tableau of shape $\lambda$, then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$). For example, the two tableaux in~\eqref{eq.tableau.exas} have surfaces $(3,1,1,7)$ and $(3,3,5,5)$, respectively.
 
@@ -1812,10 +1817,12 @@ A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
 The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a $k$-pseudo-partition and $s$ is weakly increasing).
 Thus, Proposition~\ref{prop.LGV.concrete} yields
-\begin{align*}
+\begin{align}
 \sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{1\leq i\leq k,\ 1\leq j\leq k}
-\\ & = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k},
-\end{align*}
+\nonumber\\
+& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k},
+\label{pf.thm.tableau.jt.1}
+\end{align}
 where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
 \[
 \sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
@@ -1899,28 +1906,31 @@ Let $j \in \ive{\lambda_{i_1}} \cap \ive{\lambda_{i_2}}$.
 We must show that $T( i_1,j) < T(i_2, j)$.
 In other words, we must prove that $p_{i_1,j} < p_{i_2,j}$ (since $T(i,j) = p_{i,j}$ for all $i$).
 
-If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in [i_1, i_1+1, \dotsc, i_2]$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
+If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in \set{i_1, i_1+1, \dotsc, i_2}$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
 Hence, without loss of generality, we assume that column $j$ of $\diag{\lambda}$ has at least one gap between row $i_1$ and row $i_2$.
-In other words, there exists some $q \in [i_1, i_1+1, \dotsc, i_2]$ \travis{What does this mean? Is this suppose to be a set?} such that $(q,j) \notin \diag{\lambda}$.
+In other words, there exists some $q \in \set{i_1, i_1+1, \dotsc, i_2}$ such that $(q,j) \notin \diag{\lambda}$.
 Consider the \emph{largest} such $q$.
 Clearly, $i_1 < q < i_2$.
 Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
 
-The maximality of $q$ shows that column $j$ of $\left[  \lambda\right]  $ has
+The maximality of $q$ shows that column $j$ of $[\lambda]$ has
 no gaps between row $q$ and row $i_2$. Hence,
 \eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$
 (since $q<i_2$).
 
-From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i_1,j}\leq s_{i_1%
-}\leq s_{q}$ (since $i_1<q$, but the sequence $s$ is weakly increasing).
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain
+$p_{i_1,j}\leq s_{i_1}\leq s_{q}$ (since $i_1<q$, but the sequence
+$s$ is weakly increasing).
 Also, $p_{q,\lambda_{q}}=s_{q}$ (by the definition of $p_{q,\lambda_{q}}$),
 whence $s_{q}=p_{q,\lambda_{q}}\leq p_{q,j}$ (by
 \eqref{pf.thm.tableau.jt.row-weak}, since $\lambda_{q}<j$). Hence,
 $p_{i_1,j}\leq s_{q}\leq p_{q,j}<p_{i_2,j}$. This proves our claim.]
 
 Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$
-and surface $s$ (since $T\left(  i,\lambda_i\right)  =p_{i,\lambda_i%
-}=s_i$ for all $i\in\ive{k}$). So let us set%
+and surface $s$ (since
+$T\left(  i,\lambda_i\right)  =p_{i,\lambda_i}=s_i$ for all $i\in\ive{k}$).
+That is, $T \in \SST(\lambda, s)$.
+So let us set
 \[
 \Phi\left(  p_1,p_2,\ldots,p_k\right)  =T.
 \]
@@ -1930,7 +1940,7 @@ It is easy to see that this map $\Phi$ is injective (indeed, $\left(
 p_1,p_2,\ldots,p_k\right)  $ can be reconstructed from $T$, since the
 $i$-th row of $T$ encodes the $y$-coordinates of all the east-steps of $p_i$)
 and surjective (indeed, the reverse of the above construction turns every
-semistandard tableau $T$ of shape $\lambda$ and surface $s$ into a $k$-tuple
+$T \in \SST(\lambda, s)$ into a $k$-tuple
 $\left(  p_1,p_2,\ldots,p_k\right)  $ of paths $p_i$ from $A_i$ to
 $B_i$; furthermore, the strict increase of the entries of $T$ down columns
 forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
@@ -1942,9 +1952,11 @@ Moreover, it is easy to see that
 for each $\pp \in N(\uu,\vv)$.
 Hence,
 \begin{align*}
-\sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp) \\
-&  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+\sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp)
+= \left( \prod_{i=1}^k x_{s_i} \right) \sum_{\pp\in N(\uu,\vv)  } \wt(\pp) \\
+&  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k}
 \end{align*}
+(by \eqref{pf.thm.tableau.jt.1}).
 \end{proof}
 
 \Darij{TODO: Example.}
@@ -1955,7 +1967,7 @@ Hence,
 
 Let us introduce some further notations now.
 
-Next, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
+First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
 
 \begin{itemize}
 \item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
@@ -1965,14 +1977,15 @@ Next, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\iv
 
 For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
 Note that $A \gg \emptyset$ and $\emptyset \gg A$ for any subset $A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial order (but it becomes a partial order if we forbid $\emptyset$).
-\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
+%\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
+%\darij{Yeah, tried that, it made Lemma \ref{lem:determinant_form.interl-A} even more complicated.}
 
 The following criterion (proof left to the reader) will be useful:
 
 \begin{lemma}
 \label{lem:determinant_form.gale1}
 Let $A, B \subseteq \ive{n}$.
-We have $A \succeq B$ if and only if there exists $\phi \colon B \to A$ a bijection satisfying $\phi(b) \geq b$ for each $b \in B$.
+We have $A \succeq B$ if and only if there exists a bijection $\phi \colon B \to A$ satisfying $\phi(b) \geq b$ for each $b \in B$.
 \end{lemma}
 
 Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\ell$ classes.
@@ -2012,7 +2025,9 @@ q_i^{(i)}
 
 \Darij{TODO: Example.}
 
-%Forget that we fixed $\qq$. % I don't understand what purpose this sentence serves -- Travis
+Forget that we fixed $\qq$.
+% I don't understand what purpose this sentence serves -- Travis
+% It serves to clarify that $\qq$ is no longer fixed. --Darij
 
 Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
 Define a $k$-pseudo-partition $\lambda =\tup{\lambda_1, \lambda_2, \dotsc, \lambda_k})$ by
@@ -2032,7 +2047,7 @@ Thus, the columns of the diagram $\diag{\lambda}$ are aligned to the bottom, and
 Let $\ell$, $\mm$, $m_i$, $k$, $\lambda$ and $\lambda_i$ be as above.
 Then, there is an injection
 \[
-P \colon \left\{  \text{MLQs of type } \mm \right\} \to \left\{ \text{tableaux of shape } \lambda \right\}
+P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda }
 \]
 with the following properties:
 \begin{enumerate}
@@ -2050,7 +2065,7 @@ with the following properties:
 If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
 For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
 
-Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the tableau of shape $\lambda$ as follows:
+Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda$:
 \begin{equation}
 \label{pf.lem:determinant_form.bij1.visual}
 \begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
@@ -2107,7 +2122,7 @@ in other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is int
 This proves property (c).
 
 Finally, if $T$ is a semistandard tableau of shape $\lambda$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
-(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combine them to obtain queues $q_i$ and an MLQ $\qq$.
+(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combining them to obtain queues $q_i$ and an MLQ $\qq$.
 This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
 This proves property~(d).
 Hence, we have proven all four properties (a--d).
@@ -2128,7 +2143,7 @@ Then,
 \begin{proof}
 Let $s$ be the strictly increasing sequence $\tup{s_1 < s_2 < \cdots < s_k}$ of elements of $\ive{n}$.
 
-Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1} and recall the properties (a--d).
+Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
 Property~(c) shows that this injection $P$ restricts to an injection
 \[
 \set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda}.
@@ -2156,7 +2171,7 @@ For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\c
 Let $u \in \mcW_n$ and $t>0$.
 Assume that all letters of $u$ belong to $\ive{t}$.
 Assume furthermore that the word $q(u)$ has at least one letter equal to $t$, and that this word is weakly decreasing up to level $t$.
-Assume also that $q(u)$ has exactly $\abs{q}$ letters at most $t$.
+Assume also that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$.
 Then:
 
 \begin{enumerate}
@@ -2164,28 +2179,32 @@ Then:
 
 \item[(b)] For each $h \in \ive{t-1}$, we have
 \[
-\set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h} \succeq \set{  p \in \ive{n} \mid u_p = h} \gg \set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1} .
+\set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h }
+\succeq
+\set{ p \in \ive{n} \mid u_p = h }
+\gg
+\set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1 } .
 \]
 \end{enumerate}
 \end{lemma}
 
-\Darij{TODO: Example.}
+\Darij{TODO: Example. More precisely, counterexamples, showing how each condition is actually needed.}
 
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
 Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
 Recall the construction of $q(u)$ (using this permutation).
 For each $k \in \ive{n}$, there is exactly one step in this construction at which $i = i_k$; we let $j_k$ denote the site $j$ that is found during this step.
-Note that this step is part of Phase~II if $k \leq \abs{q}$, and otherwise is part of Phase~I.
-Hence, we have $\bigl( q(u) \bigr)_{j_k}=u_{i_k}$ if $k\leq\left\vert q\right\vert $, and otherwise $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$.
+This step is part of Phase~II if $k \leq \abs{q}$, and otherwise is part of Phase~I.
+Hence, we have $\bigl( q(u) \bigr)_{j_k}=u_{i_k}$ if $k\leq \abs{q}$, and otherwise $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$.
 This shows that all letters of $q(u)$ belong to $\ive{t+1}$ (since all letters of $u$ belong to $\ive{t}$).
 It also shows that the letters of $q(u)$ at the sites $j \in q$ are all smaller than the letters of $q(u)$ at the sites $j \notin q$.
 Therefore, the former letters are the $\abs{q}$ smallest letters of $q(u)$, and thus must all be at most $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$).
-Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters $\leq t$, and we have already accounted for them all), and thus must be equal to $t+1$ (since all letters of $q(u)$ belong to $\ive{t+1}$).
+Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$, and we have already accounted for them all), and thus must be equal to $t+1$ (since all letters of $q(u)$ belong to $\ive{t+1}$).
 So we have shown that
 \begin{subequations}
 \begin{align}
 \label{pf.lem:determinant_form.interl-A.1}
-\bigl( q(u) \bigr)_j  & \leq t && \text{for each } j \in q,
+\bigl( q(u) \bigr)_j  & \leq t && \text{for each } j \in q;
 \\
 \label{pf.lem:determinant_form.interl-A.2}
 \bigl( q(u) \bigr)_j  & = t+1 && \text{for each } j \notin q.
@@ -2291,7 +2310,7 @@ This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k} = \big
 This contradiction shows that our assumption was false, and so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 
 (b) Let $h \in \ive{t-1}$.
-Thus, $h < t$.
+Thus, $h < t$, so that $h + 1 < t + 1$.
 
 Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
 Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
@@ -2316,9 +2335,9 @@ This contradicts $u_{i_k} = h < t$.}
 
 Define
 \begin{align*}
-A & := \left\{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h \right\},
-\\ B & := \left\{ p\in \ive{n} \mid u_p = h \right\},
-\\ C & := \left\{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1 \right\}.
+A & := \set{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h },
+\\ B & := \set{ p\in \ive{n} \mid u_p = h },
+\\ C & := \set{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1 }.
 \end{align*}
 Then, we must prove that $A \succeq B \gg C$.
 
@@ -2358,7 +2377,7 @@ This map $\phi $ is furthermore injective (since the algorithm shows that the $j
   Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
   This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
   In other words, $i_k \in B$ as desired}
-  Thus, it is bijective. Hence, we have found a bijective
+Thus, it is bijective. Hence, we have found a bijective
 map $\phi \colon B \to A$ that furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
 Therefore, Lemma~\ref{lem:determinant_form.gale1} shows that $A \succeq B$.
 
@@ -2381,17 +2400,17 @@ Combining this with $A\succeq B$, we obtain $A \succeq B \gg C$.
 This completes the proof of Lemma~\ref{lem:determinant_form.interl-A}(b).
 \end{proof}
 
-Next, we shall connect the interlacingness of an MLQ with its action on the word $1\cdots1$:
+Next, we shall connect the interlacingness of an MLQ with its action on the word $1\dotsm 1$:
 
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
 Let $\ell$ be a positive integer. Let
-$B = \left\{  b_1 < b_2 < \cdots < b_r \right\}  \subseteq \ive{n}$.
-Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r$-tuple of integers such that $\left\{ v_1, v_2, \dotsc, v_r \right\} = \ive{\ell-1}$.
+$B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$.
+Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r$-tuple of integers such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$.
 Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
 
 Let $\mm$ be the type of $u$. Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
-Then, $u = \qq(1\cdots1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
+Then, $u = \qq(1\dotsm 1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 \end{lemma}
 
 \Darij{TODO: Example.}
@@ -2401,23 +2420,23 @@ Consider the queues $q_i^{(j)}$ defined as above.
 
 For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
 \[
-u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1 \dotsm 1)  = q_i\bigl( \cdots q_2\bigl( q_1(1 \dotsm 1) \bigr) \cdots \bigr),
+u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1 \dotsm 1)  = q_i\bigl( \cdots q_2\bigl( q_1(1 \dotsm 1) \bigr) \cdots \bigr)  \in \mcW_n .
 \]
-Note that $u^{\left[  i\right]  } \in \mcW_n$ and has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
+Note that $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
 (This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = m_i$.)
 The definition of $u^{\left[  i\right]  }$ yields
 \begin{equation}
 \label{pf.lem:determinant_form.interl-act.rec}
 u^{\left[  i\right]  }=q_i\left(  u^{\left[  i-1\right]  }\right) \qquad \text{for each } i \in \ive{\ell-1}.
 \end{equation}
-The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[\ell-1\right]  } = \qq(1\cdots1)$.
+The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[\ell-1\right]} = \qq(1\dotsm 1)$.
 Our construction of $u$ shows that $u$ is weakly decreasing up to level $\ell-1$.
 
 $\Longrightarrow:$
 Assume that $u = \qq(1 \dotsm 1)$.
 We must prove that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 
-We have $u = \qq(1\cdots1) = u^{\left[  \ell-1\right]  }$.
+We have $u = \qq(1\dotsm 1) = u^{\left[  \ell-1\right]  }$.
 
 \begin{claim}
 \label{claim:weakly_decreasing_level_i}
@@ -2559,7 +2578,7 @@ The definition of $\swt{u}$ yields
 %& \\ & = \left( \prod_{b \in B} x_b \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1\leq i\leq r,\ 1\leq j\leq r} ,
 \end{align*}
 where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $B$ and $b_i$ instead of $S$ and $s_i$).
-% Hence the claim follows since $\gamma_j = \lambda_j$.
+Hence the claim follows since $\gamma_j = \lambda_j$ and $ \prod_{i=1}^k x_{b_i} = \prod_{b \in B} x_b$.
 \end{proof}
 
 
@@ -3503,7 +3522,7 @@ It could be interesting to see if our proof has any implications for the work of
 \appendix
 
 %=====================================================================
-\section{Connections between other constructions}
+\section{Connections with other constructions}
 \label{app:queue-relations}
 
 Let $u$ be a word and $q$ be a queue.
