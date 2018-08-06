@@ -2981,12 +2981,17 @@ as follows:
        and is always a word whose non-frozen
        part (\textit{i.e.}, the word obtained by removing
        all frozen letters) is
-       $\underbrace{))\cdots)}_{a\text{ parentheses}}
-       \underbrace{((\cdots(}_{b\text{ parentheses}}$
+       \[
+       \label{eq:reduced_parens}
+       \underbrace{))\cdots)}_{a\text{ parentheses}}
+       \underbrace{((\cdots(}_{b\text{ parentheses}}
+       \]
        for some integers $a, b \geq 0$.
- \item Now, replace this non-frozen part by
-       $\underbrace{))\cdots)}_{b\text{ parentheses}}
-       \underbrace{((\cdots(}_{a\text{ parentheses}}$
+ \item Now, replace the non-frozen part~\eqref{eq:reduced_parens} by
+       \[
+       \underbrace{))\cdots)}_{b\text{ parentheses}}
+       \underbrace{((\cdots(}_{a\text{ parentheses}}
+       \]
        while keeping all frozen letters in their places.
        The resulting word is $\sigma_i p$.
 \end{enumerate}
@@ -3773,8 +3778,8 @@ $\sigma_i \colon A^* \to A^*$ from~\cite[\S5.5]{Loth}.
 This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
 as follows:
 \begin{enumerate}
- \item Treat all letters $i$ in $p$ as opening parentheses `(',
-       all letters $i+1$ as closing parentheses `)',
+ \item Treat all letters $i$ in $p$ as opening parentheses `$($',
+       all letters $i+1$ as closing parentheses `$)$',
        and consider all other letters to be frozen.
        Now, match as many parentheses as possible
        according to the standard parenthesis-matching
@@ -3841,21 +3846,21 @@ Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
 
 We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
 \begin{itemize}
-\item an opening parenthesis `(' if $j \in q_1$ and $j \notin q_2$,
-\item a closing parenthesis `)' if $j \notin q_1$ and $j \in q_2$,
-\item a matched pair of parentheses `()' if $j \in q_1$ and $j \in q_2$,
+\item an opening parenthesis `$($' if $j \in q_1$ and $j \notin q_2$,
+\item a closing parenthesis `$)$' if $j \notin q_1$ and $j \in q_2$,
+\item a matched pair of parentheses `$()$' if $j \in q_1$ and $j \in q_2$,
 \item nothing otherwise.
 \end{itemize}
 Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
-Furthermore, every `(' and `)' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
+Furthermore, every `$($' and `$)$' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
 Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
 % [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
-Thus, if the algorithm would leave both a `)' and a `(' unmatched, then the (cyclic) interval between the rightmost unmatched `)' and the leftmost unmatched `(' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
-Consequently, the algorithm either leaves only `)' parentheses unmatched, or leaves only `(' parentheses unmatched.
+Thus, if the algorithm would leave both a `$)$' and a `$($' unmatched, then the (cyclic) interval between the rightmost unmatched `$)$' and the leftmost unmatched `$($' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
+Consequently, the algorithm either leaves only `$)$' parentheses unmatched, or leaves only `$($' parentheses unmatched.
 The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
 Consequently, the sites of the unmatched parentheses are precisely the unbalanced sites.
 
-Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `)'s with the number of unmatched `('s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `)' into a `(' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter-old6}.
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `$)$'s with the number of unmatched `$($'s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `$)$' into a `$($' or vice versa, because one of the numbers is $0$). Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$. This proves~\eqref{pf.prop:braid.inter-old6}.
 
 The equality~\eqref{pf.prop:braid.inter-old6} can be rewritten as the
 commutative diagram
