@@ -2170,8 +2170,7 @@ For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\c
 \label{lem:determinant_form.interl-A}
 Let $u \in \mcW_n$ and $t>0$.
 Let $q$ be a queue.
-Assume that all letters of $u$ belong to $\ive{t}$.
-Assume furthermore that the word $q(u)$ has at least one letter equal to $t$, and that this word is weakly decreasing up to level $t$.
+Assume that the word $q(u)$ has at least one letter equal to $t$, and that this word is weakly decreasing up to level $t$.
 Assume also that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$.
 Then:
 
@@ -2197,10 +2196,9 @@ Recall the construction of $q(u)$ (using this permutation).
 For each $k \in \ive{n}$, there is exactly one step in this construction at which $i = i_k$; we let $j_k$ denote the site $j$ that is found during this step.
 This step is part of Phase~II if $k \leq \abs{q}$, and otherwise is part of Phase~I.
 Hence, we have $\bigl( q(u) \bigr)_{j_k}=u_{i_k}$ if $k\leq \abs{q}$, and otherwise $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$.
-This shows that all letters of $q(u)$ belong to $\ive{t+1}$ (since all letters of $u$ belong to $\ive{t}$).
-It also shows that the letters of $q(u)$ at the sites $j \in q$ are all smaller than the letters of $q(u)$ at the sites $j \notin q$.
+This shows that the letters of $q(u)$ at the sites $j \in q$ are all smaller than the letters of $q(u)$ at the sites $j \notin q$.
 Therefore, the former letters are the $\abs{q}$ smallest letters of $q(u)$, and thus must all be at most $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$).
-Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$, and we have already accounted for them all), and thus must be equal to $t+1$ (since all letters of $q(u)$ belong to $\ive{t+1}$).
+Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$, and we have already accounted for them all).
 So we have shown that
 \begin{subequations}
 \begin{align}
@@ -2208,11 +2206,11 @@ So we have shown that
 \bigl( q(u) \bigr)_j  & \leq t && \text{for each } j \in q;
 \\
 \label{pf.lem:determinant_form.interl-A.2}
-\bigl( q(u) \bigr)_j  & = t+1 && \text{for each } j \notin q.
+\bigl( q(u) \bigr)_j  & > t && \text{for each } j \notin q.
 \end{align}
 \end{subequations}
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
-while all letters set during Phase~I of the algorithm are $t+1$.
+while all letters set during Phase~I of the algorithm are $> t$.
 
 
 We first argue four auxiliary claims:
@@ -2301,7 +2299,8 @@ Assume that $k > \abs{q}$.
 Consider the unique step of the construction of $q(u)$ at which $i = i_k$.
 This step is part of Phase~I, since $k > \abs{q}$.
 Hence, $j_k \notin q$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$ (by the way Phase~I operates).
-Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} = t+1$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} = t$.
+Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} > t$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} > t-1$.
+In other words, $u_{i_k} \geq t$.
 This contradicts $u_{i_k} < t$.
 Thus, our assumption (that $k > \abs{q}$) was false.
 Hence, $k \leq \abs{q}$.
@@ -2329,7 +2328,7 @@ This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k}$.
 This contradiction shows that our assumption was false, and so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 
 (b) Let $h \in \ive{t-1}$.
-Thus, $h < t$, so that $h + 1 < t + 1$.
+Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
 
 Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
 Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
@@ -2369,8 +2368,8 @@ This map $\phi $ is furthermore injective (since the $j_1, j_2, \dotsc, j_n$ are
   We have $j_k = a$, and thus $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h$ (since $a \in A$).
   \par
   If we had $k > \abs{q}$, then the letter $\bigl( q(u) \bigr)_{j_k}$ would be set in Phase~I of the construction;
-  thus, we would have $j_k\notin q$, so that $\bigl( q(u) \bigr)_{j_k}=t+1$ (by~\eqref{pf.lem:determinant_form.interl-A.2}).
-  However, this would contradict $\bigl( q(u) \bigr)_{j_k} = h < t < t+1$.
+  thus, we would have $j_k\notin q$, so that $\bigl( q(u) \bigr)_{j_k} > t$ (by~\eqref{pf.lem:determinant_form.interl-A.2}).
+  However, this would contradict $\bigl( q(u) \bigr)_{j_k} = h < t$.
   Thus, we cannot have $k > \abs{q}$.
   Hence, $k \leq \abs{q}$.
   Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
@@ -2391,7 +2390,7 @@ Write $b$ in the form $b=i_k$ for some $k\in \ive{n}$.
 Then, $i_k=b\in B$, so that $u_{i_k} = h$ (by the definition of $B$).
 Thus, $u_{i_k} = h < t$.
 Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
-Also, if we had $c\notin q$, then~\eqref{pf.lem:determinant_form.interl-A.2} would yield $\bigl( q(u) \bigr)_{c} = t+1$, which would contradict $\bigl( q(u) \bigr)_c = h + 1 < t + 1$.
+Also, if we had $c\notin q$, then~\eqref{pf.lem:determinant_form.interl-A.2} would yield $\bigl( q(u) \bigr)_{c} > t$, which would contradict $\bigl( q(u) \bigr)_c = h + 1 \leq t$.
 Thus, we have $c\in q$.
 Also, $c \geq b = i_k$.
 Hence, Claim~\ref{claim:smaller_site_jbang} (applied to $j_{!} = c$) shows that $\bigl( q(u) \bigr)_c \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_{b}$ (since $i_k = b$).
@@ -2455,8 +2454,8 @@ For the induction step, we fix some $i \in \ive{\ell-1}$, and we assume that $u^
 Our goal is then to show that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
 
 But~\eqref{pf.lem:determinant_form.interl-act.rec} yields $u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right)$.
-We know that all letters of $u^{\left[i-1\right]}$ belong to $\ive{i}$ (since $u^{\left[i-1\right]}$ has type $\tup{m_1, m_2, \dotsc, m_{i-1}, n-p_{i-1}(\mm), 0, 0, \ldots}$).
-Furthermore, the word $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
+% We know that all letters of $u^{\left[i-1\right]}$ belong to $\ive{i}$ (since $u^{\left[i-1\right]}$ has type $\tup{m_1, m_2, \dotsc, m_{i-1}, n-p_{i-1}(\mm), 0, 0, \ldots}$).
+This word $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
 Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u^{\left[i-1\right]}$ and $q_i$ instead of $u$ and $q$)
 yields that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
