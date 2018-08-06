@@ -107,7 +107,7 @@
 \renewcommand{\bigcup}{\cupnonlimits\limits}
 \renewcommand{\bigcap}{\capnonlimits\limits}
 
-\newenvironment{subproof}{[\textit{Proof.} }{\hfill$\blacksquare$ ]\medskip}
+\newenvironment{subproof}{\textit{Proof.} }{\hfill$\blacksquare$\medskip}
 
 \newenvironment{verlong}{}{}
 \newenvironment{vershort}{}{}
@@ -2030,24 +2030,24 @@ Forget that we fixed $\qq$.
 % It serves to clarify that $\qq$ is no longer fixed. --Darij
 
 Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
-Define a $k$-pseudo-partition $\lambda =\tup{\lambda_1, \lambda_2, \dotsc, \lambda_k})$ by
-\begin{equation}
+Define a $k$-pseudo-partition
+\[
 \label{eq.determinant_form.interlacing.lam}
-\lambda = (
+\lambda^{\mm} := (
   \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}},
   \underbrace{2,2,\ldots,2}_{m_{\ell-2}\text{ times}},
   \ldots,
   \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
 ).
-\end{equation}
-Thus, the columns of the diagram $\diag{\lambda}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
+\]
+Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
 
 \begin{lemma}
 \label{lem:determinant_form.bij1}
-Let $\ell$, $\mm$, $m_i$, $k$, $\lambda$ and $\lambda_i$ be as above.
+Let $\ell$, $\mm$, $m_i$, and $k$ be as above.
 Then, there is an injection
 \[
-P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda }
+P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda^{\mm} }
 \]
 with the following properties:
 \begin{enumerate}
@@ -2055,9 +2055,9 @@ with the following properties:
 
 \item[(b)] If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$, then the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
 
-\item[(c)] If $\qq$ is an interlacing MLQ of type $\mm$, then $P(\qq)$ is a semistandard tableau of shape $\lambda$.
+\item[(c)] If $\qq$ is an interlacing MLQ of type $\mm$, then $P(\qq)$ is a semistandard tableau of shape $\lambda^{\mm}$.
 
-\item[(d)] Any semistandard tableau $T$ of shape $\lambda$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+\item[(d)] Any semistandard tableau $T$ of shape $\lambda^{\mm}$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
 \end{enumerate}
 \end{lemma}
 
@@ -2067,7 +2067,7 @@ with the following properties:
 If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
 For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
 
-Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda$:
+Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda^{\mm}$:
 \begin{equation}
 \label{pf.lem:determinant_form.bij1.visual}
 \begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
@@ -2085,11 +2085,11 @@ m_1 \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
     & \widetilde{q_1^{(1)}} & \widetilde{q_2^{(1)}} & \multicolumn{1}{|c}{\widetilde{q_{3}^{(1)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-2}^{(1)}}} & \multicolumn{1}{|c|}{\widetilde{q_{\ell-1}^{(1)}}}\\\cline{2-4}\cline{6-7}
 \end{array}
 \end{equation}
-Formally speaking, this is the tableau of shape $\lambda$ whose $\ell-1$ columns are given as follows:
+Formally speaking, this is the tableau of shape $\lambda^{\mm}$ whose $\ell-1$ columns are given as follows:
 For each $j \in \ive{\ell-1}$, the $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{(\ell-j)}}, \widetilde{q_{\ell-2}^{(\ell-j-1)}}, \dotsc, \widetilde{q_j^{(1)}}$ stacked atop each other (with $\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top, $\widetilde{q_{\ell-2}^{(\ell-j-1)}}$ coming next under it, and so on).
 Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q_i^{(i)}}, \widetilde{q_{i+1}^{(i)}}, \dotsc, \widetilde{q_{\ell-1}^{(i)}}$ of columns $1,2,\ldots,\ell-i$ align with each other horizontally (and together form the topmost $m_i$ among the bottommost $m_1+m_2+\cdots+m_i$ rows of $P(\qq)$).
 
-Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda}$ is defined.
+Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda^{\mm}}$ is defined.
 This map $P$ is an injection, because the MLQ $\qq$ can be recovered
 from the tableau $P(\qq)$ (indeed, each of the elements
 of each of the queues of $\qq$ lands in some predictable cell of
@@ -2123,7 +2123,7 @@ $\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
 in other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
 This proves property (c).
 
-Finally, if $T$ is a semistandard tableau of shape $\lambda$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+Finally, if $T$ is a semistandard tableau of shape $\lambda^{\mm}$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
 (Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combining them to obtain queues $q_i$ and an MLQ $\qq$.
 This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
 This proves property~(d).
@@ -2132,7 +2132,8 @@ Hence, we have proven all four properties (a--d).
 
 \begin{cor}
 \label{cor:determinant_form.bij1c}
-Let $\ell$, $\mm$, $m_i$, $k$, $\lambda$ and $\lambda_i$ be as above.
+Let $\ell$, $\mm$, $m_i$, and $k$ be as above.
+Let $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$
 Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
 Then,
 \begin{align*}
@@ -2148,13 +2149,13 @@ Let $s$ be the strictly increasing sequence $\tup{s_1 < s_2 < \cdots < s_k}$ of 
 Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
 Property~(c) shows that this injection $P$ restricts to an injection
 \[
-\set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda}.
+\set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
 \]
 Property~(d) shows that this restricted injection is also surjective, and thus a bijection.
 Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt}.
 We thus obtain
 \begin{align*}
-\sum_{T \in \SST(\lambda, s)} \wt(T)
+\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
   & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
 &  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
 &  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
@@ -2673,12 +2674,13 @@ Hence, the word $u$ is packed.
 
 Moreover, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
 
-Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
-Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
+%This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
+%Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
+%Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
-Define a $k$-pseudo-partition $\lambda = \tup{\lambda_1,\lambda_2, \dotsc, \lambda_k}$ by~\eqref{eq.determinant_form.interlacing.lam}.
-Then, comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain $\lambda = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}$.
-Hence, each $j \in \ive{r}$ satisfies $\lambda_j = \ell - v_j = \gamma_j$.
+Consider the $r$-pseudo-partition $\lambda^{\mm} = \tup{\lambda_1,\lambda_2, \dotsc, \lambda_r}$.
+From~\eqref{pf.thm:determinant_form.v=}, we obtain $\lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}$.
+Hence, we have $\lambda_j = \ell - v_j = \gamma_j$ for all $j \in \ive{r}$.
 
 The definition of $\swt{u}$ yields
 \begin{align*}
@@ -2690,7 +2692,8 @@ The definition of $\swt{u}$ yields
 %& \\ & = \left( \prod_{b \in B} x_b \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{i, j \in \ive{r}} ,
 \end{align*}
 where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $B$ and $b_i$ instead of $S$ and $s_i$).
-Hence the claim follows since $\gamma_j = \lambda_j$ and $ \prod_{i=1}^k x_{b_i} = \prod_{b \in B} x_b$.
+% This is pointless. The reader is certainly smart enough to do the second (trivial) equality and at the end of the previous paragraph we state the first equality. They will still have to look up the first equality anyways.
+%Hence the claim follows since $\gamma_j = \lambda_j$ and $ \prod_{i=1}^k x_{b_i} = \prod_{b \in B} x_b$.
 \end{proof}
 
 
