@@ -2169,6 +2169,7 @@ For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\c
 \begin{lemma}
 \label{lem:determinant_form.interl-A}
 Let $u \in \mcW_n$ and $t>0$.
+Let $q$ be a queue.
 Assume that all letters of $u$ belong to $\ive{t}$.
 Assume furthermore that the word $q(u)$ has at least one letter equal to $t$, and that this word is weakly decreasing up to level $t$.
 Assume also that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$.
@@ -2214,7 +2215,7 @@ Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $t+1$.
 
 
-We first argue three auxiliary claims:
+We first argue four auxiliary claims:
 
 \begin{claim}
 \label{claim:little_interlacing}
@@ -2239,11 +2240,10 @@ Hence, the site $j_{!}$ lies between $i_k$ (inclusive) and $j_k$ (\emph{exclusiv
 Recall again that $j_k$ is the first $j$ weakly to the right (cyclically) of $i = i_k$ such that $j \in q$ and $\bigl( q(u) \bigr)_j$ is not set.
 Hence, for every site $j_{?}$ in $q$ that lies between $i_k$ (inclusive) and $j_k$ (exclusive), the letter $\bigl( q(u) \bigr)_{j_{?}}$ must already be set.
 Applying this to $j_{?} = j_{!}$, we conclude that the letter $a := \bigl( q(u) \bigr)_{j_{!}}$ must already be set.
-Moreover, $a$ must have been set in Phase~II because the site $j_{!}$ belongs to $q$, whereas Phase~I only sets letters in sites outside of $q$.
+Moreover, $a$ must have been set in Phase~II (because the site $j_{!}$ belongs to $q$, whereas Phase~I only sets letters in sites outside of $q$).
 Hence, $a \leq u_{i_k}$ because all letters that have been set in Phase~II before the current step are $\leq u_{i_k}$.
-Thus, $\bigl( q(u) \bigr)_{j_{!}} \leq u_{i_k}$.
-Also, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
-Combining these, we obtain $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k}=u_{i_k}$.
+Thus, $\bigl( q(u) \bigr)_{j_{!}} = a \leq u_{i_k}$.
+Combining this with $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, we obtain $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k}=u_{i_k}$.
 This proves Claim~\ref{claim:little_interlacing}.
 \end{subproof}
 
@@ -2254,12 +2254,12 @@ Then, $i_k \leq j_k$.
 \end{claim}
 
 \begin{subproof}
-Assume that $i_k>j_k$.
+Assume the contrary. That is, $i_k>j_k$.
 Hence, the interval between $i_k$ and $j_k$ ``wraps around'' the circle (\textit{i.e.}, it is an interval only
 in $\ZZ/n\ZZ$, not in $\ive{n} $).
 
 Let $j_{\min }$ be the smallest element of $q$.
-Then,~\eqref{pf.lem:determinant_form.interl-A.1} and~\eqref{pf.lem:determinant_form.interl-A.2} reveal that $\bigl( q(u) \bigr)_{j_{\min}}$ is the first among the letters of $q(u)$ that are at most $t$ and therefore also the largest of these letters (since $q(u) $ is weakly decreasing up to level $t$).
+Then,~\eqref{pf.lem:determinant_form.interl-A.1} and~\eqref{pf.lem:determinant_form.interl-A.2} reveal that $\bigl( q(u) \bigr)_{j_{\min}}$ is the first among the letters of $q(u)$ that are at most $t$, and therefore also the largest of these letters (since $q(u)$ is weakly decreasing up to level $t$).
 Yet, this largest letter must be $t$ since the word $q(u)$ has at least one letter equal to $t$.
 Hence, we have $\bigl( q(u) \bigr)_{j_{\min}} = t$.
 
@@ -2269,7 +2269,7 @@ Hence, the site $j_{\min}$ cannot lie between $i_k$ (inclusive) and $j_k$ (inclu
 Since the interval between $i_k$ and $j_k$ ``wraps around'' the circle, this shows that $j_{\min} > j_k$.
 Thus, $j_k\notin q$ (since $j_{\min}$ is the smallest element of $q$).
 However, $k \leq \abs{q}$, and thus $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II; therefore, $j_k\in q$.
-This contradicts $j_k\notin q$, and so Claim~\ref{claim:fixed_k_decreasing_i_from_j}
+This contradicts $j_k\notin q$, and so Claim~\ref{claim:fixed_k_decreasing_i_from_j} is proven.
 \end{subproof}
 
 \begin{claim}
@@ -2291,22 +2291,41 @@ Hence, from $j_k < j_{!}$, we obtain $\bigl( q(u) \bigr)_{j_k} \geq \bigl( q(u) 
 Thus, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$, proving Claim~\ref{claim:smaller_site_jbang}.
 \end{subproof}
 
+\begin{claim}
+\label{claim:pf.lem:determinant_form.interl-A.b.1}
+Let $k\in \ive{n}$ be such that $u_{i_k} < t$. Then, $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+\end{claim}
+
+\begin{subproof}
+Assume that $k > \abs{q}$.
+Consider the unique step of the construction of $q(u)$ at which $i = i_k$.
+This step is part of Phase~I, since $k > \abs{q}$.
+Hence, $j_k \notin q$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$ (by the way Phase~I operates).
+Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} = t+1$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} = t$.
+This contradicts $u_{i_k} < t$.
+Thus, our assumption (that $k > \abs{q}$) was false.
+Hence, $k \leq \abs{q}$.
+Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ must be set in Phase~II of the algorithm that constructs $q(u)$.
+Therefore, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
+Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} is thus proven.
+\end{subproof}
+
 We are now ready to prove the two parts of the lemma:
 
 (a) Assume the contrary.
 Thus, there exist sites $x$ and $y$ in $\ive{n}$ such that $x<y$ and $u_{x} < u_{y} < t$.
 Let $k$ and $\ell $ be such that $x = i_k$ and $y = i_{\ell}$; then, $u_{i_k} = u_{x} < u_{y} = u_{i_{\ell}}$, and thus $u_{i_k} < u_{i_{\ell}} = u_{y} < t$.
-Hence, $k < \ell$ (since $u_{i_k} < u_{i_{\ell}}$ and $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$).
-Due to $u_{i_k} < t$, we know that the letter $\bigl( q(u) \bigr)_{j_k}$ must be set in Phase~II of the algorithm (since otherwise, it would be set in Phase~I, which would yield $\bigl( q(u) \bigr)_{j_k} = u_{i_k} + 1 < t + 1$, contradicting the fact that all letters set during Phase~I are $t+1$).
-Hence, $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
-Similarly, $\ell \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell}}$.
+% But $k < \ell$ (since $u_{i_k} < u_{i_{\ell}}$ and $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$).
+Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+Similarly, $\ell \leq \abs{q}$ and
+$\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell}}$.
 Therefore, $\bigl( q(u) \bigr)_{j_k} = u_{i_k} < u_{i_{\ell}} = \bigl( q(u) \bigr)_{j_{\ell}}$.
 Since the letters $\bigl( q(u) \bigr) _{j_k}$ and $\bigl( q(u) \bigr)_{j_{\ell}}$ of $q(u)$ are also at most $t$ (because $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_{x} < t$ and  $\bigl( q(u) \bigr)_{j_{\ell }} = u_{i_{\ell}} = u_{y} < t$), this entails $j_k > j_{\ell }$ (since $q(u)$ is weakly decreasing up to level $t$).
 From Claim~\ref{claim:fixed_k_decreasing_i_from_j}, we have $i_k \leq j_k$ and similarly $i_{\ell} \leq j_{\ell}$.
 Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
 Hence, the site $j_{\ell}$ lies between $i_k$ (inclusive) and $j_k$ (inclusive).
 Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!}=j_{\ell }$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
-This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
+This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k}$.
 This contradiction shows that our assumption was false, and so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 
 (b) Let $h \in \ive{t-1}$.
@@ -2314,24 +2333,6 @@ Thus, $h < t$, so that $h + 1 < t + 1$.
 
 Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
 Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
-
-If $k\in \ive{n} $ satisfies $i_k\in B$, then
-\begin{equation}
-\label{pf.lem:determinant_form.interl-A.b.1}
-k \leq \abs{q}.
-\end{equation}
-\footnote{\textit{Proof.} Let $k \in \ive{n} $ be such that $i_k\in B$.
-We must prove that $k \leq \abs{q}$.
-\par
-Assume that $k > \abs{q}$.
-\par
-From $i_k\in B$, we obtain $u_{i_k}=h$ (by the definition of $B$).
-\par
-Consider the unique step of the construction of $q(u) $ at which $i = i_k$.
-This step is part of Phase~I, since $k > \abs{q}$.
-Hence, $j_k \notin q$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$ (by the way Phase~I operates).
-Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} = t+1$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} = t$.
-This contradicts $u_{i_k} = h < t$.}
 
 Define
 \begin{align*}
@@ -2344,10 +2345,8 @@ Then, we must prove that $A \succeq B \gg C$.
 Let us first prove $A \succeq B$.
 Indeed, let $i_k\in B$ for some $k \in \ive{n}$.
 From $i_k\in B$, we obtain $u_{i_k} = h$ (by the definition of $B$), so that $u_{i_k} = h < t$.
-Also,~\eqref{pf.lem:determinant_form.interl-A.b.1} yields $k\leq \abs{q}$.
-Thus, the letter $\left( q(u) \right) _{j_k}$ is set during Phase~II of the construction.
-Hence, $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = h$.
-Therefore, $j_k\in A$ (by the definition of  $A$).
+Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k\leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = h$.
+Therefore, $j_k\in A$ (by the definition of $A$).
 Also, Claim~\ref{claim:fixed_k_decreasing_i_from_j} yields $i_k\leq j_k$.
 Hence, $j_k\geq i_k$.
 
@@ -2355,12 +2354,12 @@ Forget that we fixed $k$. We thus have shown that if $i_k\in B$ for some $k \in 
 Hence, we can define a map
 \begin{align*}
 \phi \colon B & \to A, \\
-i_k & \mapsto j_k,
+i_k & \mapsto j_k
 \end{align*}
 (since each element of $B$ can be written as $i_k$ for a unique $k\in \ive{n} $), and it satisfies $\phi(b) \geq b$ for each $b \in B$ (since $j_k \geq i_k$).
-This map $\phi $ is furthermore injective (since the algorithm shows that the $j_1, j_2, \dotsc, j_n$ are distinct) and surjective.\footnote{\textit{Proof.}
+This map $\phi $ is furthermore injective (since the $j_1, j_2, \dotsc, j_n$ are distinct) and surjective\footnote{\textit{Proof.}
   Let $a\in A$.
-  We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$.
+  We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
   \par
   Indeed, recall that $\left( j_1,j_2,\ldots ,j_n\right) $ is a permutation of $\tup{1, 2, \dotsc, n}$.
   Thus, there exists some $k \in \ive{n} $ satisfying $j_k = a$.
@@ -2376,9 +2375,9 @@ This map $\phi $ is furthermore injective (since the algorithm shows that the $j
   Hence, $k \leq \abs{q}$.
   Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
   This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
-  In other words, $i_k \in B$ as desired}
-Thus, it is bijective. Hence, we have found a bijective
-map $\phi \colon B \to A$ that furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
+  In other words, $i_k \in B$ as desired.}.
+Thus, it is bijective. Hence, we have found a bijection
+$\phi \colon B \to A$ that furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
 Therefore, Lemma~\ref{lem:determinant_form.gale1} shows that $A \succeq B$.
 
 It remains to show that $B \gg C$.
@@ -2389,11 +2388,13 @@ We must prove that $b > c$. Assume instead $c \geq b$.
 From $b\in B$, we obtain $b \in \ive{n}$ and $u_{b} = h$.
 From $c\in C$, we obtain $c\in \ive{n}$ and $\bigl( q(u) \bigr)_{c} = h+1$.
 Write $b$ in the form $b=i_k$ for some $k\in \ive{n}$.
-Then, $i_k=b\in B$, so that $k\leq \abs{q}$ (by~\eqref{pf.lem:determinant_form.interl-A.b.1}).
+Then, $i_k=b\in B$, so that $u_{i_k} = h$ (by the definition of $B$).
+Thus, $u_{i_k} = h < t$.
+Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 Also, if we had $c\notin q$, then~\eqref{pf.lem:determinant_form.interl-A.2} would yield $\bigl( q(u) \bigr)_{c} = t+1$, which would contradict $\bigl( q(u) \bigr)_c = h + 1 < t + 1$.
 Thus, we have $c\in q$.
-Hence, Claim~\ref{claim:smaller_site_jbang} (applied to $j_{!} = c$) shows that $\bigl( q(u) \bigr)_c \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (since $c \geq b = i_k$).
-In view of $i_k = b$, this rewrites as $\bigl( q(u) \bigr)_{c} \leq u_{b}$.
+Also, $c \geq b = i_k$.
+Hence, Claim~\ref{claim:smaller_site_jbang} (applied to $j_{!} = c$) shows that $\bigl( q(u) \bigr)_c \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_{b}$ (since $i_k = b$).
 This contradicts $\bigl( q(u) \bigr)_c = h + 1 > h = u_{b}$.
 Hence, we have $B\gg C$.
 Combining this with $A\succeq B$, we obtain $A \succeq B \gg C$.
@@ -2418,16 +2419,19 @@ Then, $u = \qq(1\dotsm 1)$ if and only if the MLQ $\qq$ is interlacing and satis
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-act}.]
 Consider the queues $q_i^{(j)}$ defined as above.
 
+Write the type $\mm$ as $\tup{m_1, m_2, m_3, \ldots}$.
+Since $\qq$ is an MLQ of type $\mm$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$ for each $i \in \ive{\ell-1}$.
+
 For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
 \[
 u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1 \dotsm 1)  = q_i\bigl( \cdots q_2\bigl( q_1(1 \dotsm 1) \bigr) \cdots \bigr)  \in \mcW_n .
 \]
 Note that $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
-(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = m_i$.)
+(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = m_1 + m_2 + \cdots + m_i$.)
 The definition of $u^{\left[  i\right]  }$ yields
 \begin{equation}
 \label{pf.lem:determinant_form.interl-act.rec}
-u^{\left[  i\right]  }=q_i\left(  u^{\left[  i-1\right]  }\right) \qquad \text{for each } i \in \ive{\ell-1}.
+u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right) \qquad \text{for each } i \in \ive{\ell-1}.
 \end{equation}
 The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[\ell-1\right]} = \qq(1\dotsm 1)$.
 Our construction of $u$ shows that $u$ is weakly decreasing up to level $\ell-1$.
@@ -2447,7 +2451,16 @@ For each $i \in \set{0, 1, \dotsc, \ell-1} $, the word $u^{\left[  i\right]  }$ 
 We proceed by descending induction on $i$.
 The base case ($i=\ell-1$) follows from the fact that $u^{\left[  \ell-1\right]} = u$ is weakly decreasing up to level $\ell-1$.
 
-\Darij{For the induction step, TODO using Lemma~\ref{lem:determinant_form.interl-A}(a).}
+For the induction step, we fix some $i \in \ive{\ell-1}$, and we assume that $u^{\left[i\right]}$ is weakly decreasing up to level $i$.
+Our goal is then to show that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
+
+But~\eqref{pf.lem:determinant_form.interl-act.rec} yields $u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right)$.
+We know that all letters of $u^{\left[i-1\right]}$ belong to $\ive{i}$ (since $u^{\left[i-1\right]}$ has type $\tup{m_1, m_2, \dotsc, m_{i-1}, n-p_{i-1}(\mm), 0, 0, \ldots}$).
+Furthermore, the word $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+Hence, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u^{\left[i-1\right]}$ and $q_i$ instead of $u$ and $q$)
+yields that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
+This completes the induction step; Claim~\ref{claim:weakly_decreasing_level_i} is thus proven.
 \end{subproof}
 
 \begin{claim}
@@ -2493,10 +2506,10 @@ We must prove that $u = \qq(1 \cdots 1)$.
 Let $i \in \ive{\ell-1}$. Then, all letters of the
 word $u^{\left[  i\right]}$ are given as follows:
 \[
-\left( u^{\left[  i\right]} \right)_{t} =
+\left( u^{\left[  i\right]} \right)_t =
 \begin{cases}
 j & \text{if } t \in q_i^{(j)} \text{ for some } j \in\ive{i}\!, \\
-i+1 & \text{if }t\notin q_i.
+i+1 & \text{if } t \notin q_i.
 \end{cases}
 \]
 \end{claim}
@@ -2540,11 +2553,11 @@ Define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ by
 \[
 m_i =
   \begin{cases}
-  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i > \ell,\\
+  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i < \ell,\\
   n - r & \text{if } i = \ell.
   \end{cases}
 \]
-Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $1$; the next $m_{\ell-2}$ of its entries equal $2$; the next $m_{\ell-3}$ of its entries equal $3$; and so on.
+Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
 This has the consequence that
 \begin{equation}
 \label{pf.thm:determinant_form.v=}
@@ -2559,9 +2572,9 @@ Moreover, it shows that the word $u$ has type $\mm$ (since the entries of $u$ ar
 Also, $m_i > 0$ for all $i \in \ive{\ell-1}$ (by~\eqref{pf.thm:determinant_form.v=} and because of $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
 Hence, the word $u$ is packed.
 
-Moreover, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{r-1}(\mm)$.
+Moreover, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
 
-Let $k = p_{\ell-1}(\mm) \in \NN$, and so $k = r$.
+Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
 Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
 Define a $k$-pseudo-partition $\lambda = \tup{\lambda_1,\lambda_2, \dotsc, \lambda_k}$ by~\eqref{eq.determinant_form.interlacing.lam}.
