@@ -49,11 +49,14 @@
 \DeclareMathOperator{\col}{col} % column
 \DeclareMathOperator{\colw}{colw} % column word
 \DeclareMathOperator{\word}{word} % word
-\DeclareMathOperator{\rev}{rev}
+\DeclareMathOperator{\xcoord}{x} % the x-coordinate
+\DeclareMathOperator{\ycoord}{y} % the y-coordinate
 \DeclareMathOperator{\id}{id} % identity
+\DeclareMathOperator{\SST}{SST} % Semistandard tableaux
+\DeclareMathOperator{\KM}{KM}
 \DeclareMathOperator{\ch}{ch} % character
 \DeclareMathOperator{\gr}{gr} % grading
-\DeclareMathOperator{\KM}{KM}
+\DeclareMathOperator{\rev}{rev}
 \DeclareMathOperator{\conncomp}{conncomp}
 \DeclareMathOperator{\core}{core}
 
@@ -647,19 +650,26 @@ We omit the word ``discrete'' as these are the only MLQs in this note.
 We shall now introduce generating functions for queues.
 
 \begin{dfn}
-Let $\xx := \{x_1, x_2, \ldots, x_n\}$ be commuting indeterminates indexed by elements of $\ZZ / n \ZZ$. (Thus, $x_{n+k} = x_k$ for all $k \in \ZZ$.)
-
-The \defn{weight} of a queue $q$ is $\wt(q) := \prod_{i \in q} x_i$.
-
-The \defn{weight} of a $\sigma$-twisted MLQ $\qq = (q_1, \dotsc, q_{\ell-1})$ is $\wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i)$.
+Let $\xx := \{x_1, x_2, \ldots, x_n\}$ be commuting indeterminates indexed by elements of $\ZZ / n \ZZ$.
+(Thus, $x_{n+k} = x_k$ for all $k \in \ZZ$.)
+The \defn{weight} of a queue $q$ is
+\[
+  \wt(q) := \prod_{i \in q} x_i.
+\]
+The \defn{weight} of a $\sigma$-twisted MLQ $\qq = (q_1, \dotsc, q_{\ell-1})$ is
+\[
+  \wt(\qq) := \prod_{i=1}^{\ell-1} \wt(q_i).
+\]
 \end{dfn}
 
 \begin{dfn}
 For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{$\sigma$-spectral weight} or \defn{$\sigma$-amplitude} as
-\begin{equation}
-\label{eq:amplitude}
+\[
+%\begin{equation}
+%\label{eq:amplitude}
   \swt{u}_{\sigma} := \sum_{\qq} \wt(\qq),
-\end{equation}
+%\end{equation}
+\]
 where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1 \dotsm 1)$.
 (Here, $1 \dotsm 1$ denotes the word in $\mcW_n$ whose all letters are $1$.)
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
@@ -1204,18 +1214,18 @@ See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bije
 \end{comment}
 
 The goal of this section is to prove a determinantal formula (Theorem~\ref{thm:determinant_form}) for $\swt{u}$ in the special case when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and becomes weakly decreasing if we disregard all letters $\ell$.
-For example, $u = {\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}211{\color{gray}4}$ is such a word, with $\ell=4$.
-This will then we used to settle two conjectures from~\cite{AasLin17}.
+%For example, $u = {\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}211{\color{gray}4}$ is such a word, with $\ell=4$.
+This will then be used to settle two conjectures from~\cite{AasLin17}.
 
-Throughout this section, we shall regard the sites $1, 2, \ldots, n$ as positive integers rather than elements of $\ZZ/n\ZZ$.
+Throughout this section, we shall regard the sites $1, 2, \ldots, n$ as elements of $\ZZ$ rather than of $\ZZ/n\ZZ$.
 In particular, they are totally ordered by $1 < 2 < \cdots < n$.
-Moreover, we shall use infinitely many distinct commuting indeterminates $\ldots, x_{-2}, x_{-1}, x_0, x_1, x_2, \ldots$ instead of the $n$ indeterminates $x_1,x_2,\ldots,x_n$; thus, we don't have $x_{n+k} = x_k$ for $k \in \ZZ$ in this section.
+Moreover, we shall use infinitely many distinct commuting indeterminates $\ldots, x_{-2}, x_{-1}, x_0, x_1, x_2, \ldots$ instead of those indexed by $\ZZ/n\ZZ$; thus we do not have $x_{n+k} = x_k$ in this section.
 
 
 %%%%%%%%%%
 \subsection{Lattice paths and the Lindstr\"{o}m--Gessel--Viennot theorem}
 
-Our arguments will rely on the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73} and on a re-interpretation of MLQs as a certain kind of semistandard tableaux (of non-partition shape).
+Our arguments will rely on the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{GV85,Lindstrom73} and on a re-interpretation of MLQs as a certain kind of semistandard tableaux (of non-partition shape).
 This takes inspiration from the ``bully paths'' of~\cite{AasLin17} as well as from the standard proof of the Jacobi--Trudi identities for Schur functions~\cite[First proof of Theorem 7.16.1]{Stanley-EC2}.
 We begin with basic definitions.
 
@@ -1231,8 +1241,8 @@ the second kind are called \defn{east-steps}. The vertices of the lattice will
 just be called \defn{vertices}. We draw the lattice as the usual integer
 lattice in the Cartesian plane.
 
-For each vertex $v = (i,j)$, we set $\operatorname*{x}(v) = i$ and $\operatorname*{y}(v) = j$.
-We refer to $\operatorname*{x}(v)$ (resp.~$\operatorname*{y}(v)$) as the \defn{$x$-coordinate} (resp.~\defn{$y$-coordinate}) of $v$.
+For each vertex $v = (i,j)$, we set $\xcoord(v) = i$ and $\ycoord(v) = j$.
+We refer to $\xcoord(v)$ (resp.~$\ycoord(v)$) as the \defn{$x$-coordinate} (resp.~\defn{$y$-coordinate}) of $v$.
 The \defn{$y$-coordinate} of an east-step $(i,j) \to (i+1, j)$ is defined to be $j$.
 
 For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as the following monomial:
@@ -1242,27 +1252,23 @@ x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
 1 & \text{if $a$ is a north-step } (i,j) \to (i,j+1).
 \end{cases}
 \]
-Thus, all north-steps have weight $1$, while east-steps at $y$-coordinate $j$ have weight $x_j$.
+Thus, all north-steps have weight $1$, while east-steps with $y$-coordinate $j$ have weight $x_j$.
 
-Fix $k \in \NN$.
-A \defn{$k$-vertex} shall mean a $k$-tuple of vertices of the lattice.
-
+We call a $k$-tuple of vertices of the lattice a \defn{$k$-vertex}.
 \begin{verlong}
 If $\vv = \tup{A_1, A_2, \dotsc, A_k}$ is a $k$-vertex, and if $\sigma \in \SymGp{k}$ is a permutation, then $\sigma(\vv)$ denotes the $k$-vertex $\tup{A_{\sigma(1)}, A_{\sigma(2)}, \dotsc, A_{\sigma(k)}}$.
 \end{verlong}
-
-A \defn{path} will simply mean a (directed) path in the lattice.
+A \defn{path} simply means a (directed) path in the lattice.
 The \defn{weight} of a path $p$, denoted $\wt(p)$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
 If $A$ and $B$ are two vertices, then \defn{$N(A,B)$} shall denote the set of all paths from $A$ to $B$.
 
-It is easy to see that any two vertices $A=\left(  a,b\right)  $ and
-$B=\left(  c,d\right)  $ satisfy%
+It is easy to see that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
 \begin{equation}
 \label{eq.LGV.single-paths}
 \sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
 \end{equation}
-(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
-\travis{This is not a (re)definition, but a simple direct substitution. It probably does not even need to be stated unless we assume our readers are completely incompetent.}
+% This really is just a substitution and we can assume the readers are not completely incompetent
+%(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
 
 \begin{comment}
 \Travis{This is almost certainly well-known and understood and could be an easy excerise for your 4707 students. This is also likely in Stanley (maybe implicitly/left to the reader). I think we should remove it (not even include in the long version).}
@@ -1323,7 +1329,7 @@ Next, we state a simple lemma that will help us show that certain pairs of $k$-v
 \label{lem.LGV.hex}
 Let $A$, $B$, $A'$ and $B'$ be four vertices such that
 \[
-\operatorname*{x}(A') \leq\operatorname*{x}(A), \qquad \operatorname*{y}(A') \geq \operatorname*{y}(A),\qquad \operatorname*{x}(B') \leq \operatorname*{x}(B), \qquad \operatorname*{y}(B') \geq \operatorname*{y}(  B).
+\xcoord(A') \leq\xcoord(A), \qquad \ycoord(A') \geq \ycoord(A),\qquad \xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(  B).
 \]
 Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
 Then, $p$ and $p'$ have a vertex in common.
@@ -1353,45 +1359,45 @@ the vertex $A'$ does not belong to the path $p$.
 Recall that each arc of the lattice is either an east-step or a north-step.
 Thus, the $x$-coordinates of the vertices of a path are always weakly
 increasing, and so are the $y$-coordinates. Hence, the existence of a path $p$
-from $A$ to $B'$ shows that $\operatorname*{x}\left(  A\right)
-\leq\operatorname*{x}\left(  B'\right)  $ and $\operatorname*{y}%
-\left(  A\right)  \leq\operatorname*{y}\left(  B'\right)  $.
+from $A$ to $B'$ shows that $\xcoord\left(  A\right)
+\leq\xcoord\left(  B'\right)  $ and $\ycoord%
+\left(  A\right)  \leq\ycoord\left(  B'\right)  $.
 Similarly, the existence of a path $p'$ from $A'$ to $B$
-yields $\operatorname*{x}\left(  A'\right)  \leq\operatorname*{x}%
-\left(  B\right)  $ and $\operatorname*{y}\left(  A'\right)
-\leq\operatorname*{y}\left(  B\right)  $.
+yields $\xcoord\left(  A'\right)  \leq\xcoord%
+\left(  B\right)  $ and $\ycoord\left(  A'\right)
+\leq\ycoord\left(  B\right)  $.
 
 Next, we claim that $\ell\left(  p\right)  \neq0$.
 
 [\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p\right)  =0$. Hence,
 the path $p$ has no steps. Therefore, $A=B'$ (since $p$ is a path from
-$A$ to $B'$). Hence, $\operatorname*{y}\left(  A\right)
-=\operatorname*{y}\left(  B'\right)  \geq\operatorname*{y}\left(
-B\right)  $, so that $\operatorname*{y}\left(  A'\right)
-\geq\operatorname*{y}\left(  A\right)  \geq\operatorname*{y}\left(  B\right)
-$. Combining this with $\operatorname*{y}\left(  A'\right)
-\leq\operatorname*{y}\left(  B\right)  $, we obtain $\operatorname*{y}\left(
-A'\right)  =\operatorname*{y}\left(  B\right)  $. Combining
-$\operatorname*{y}\left(  A'\right)  \geq\operatorname*{y}\left(
-A\right)  $ with $\operatorname*{y}\left(  A'\right)
-=\operatorname*{y}\left(  B\right)  \leq\operatorname*{y}\left(  A\right)  $,
-we obtain $\operatorname*{y}\left(  A'\right)  =\operatorname*{y}%
-\left(  A\right)  $. Thus, $\operatorname*{y}\left(  A'\right)
-=\operatorname*{y}\left(  A\right)  =\operatorname*{y}\left(  B\right)  $.
+$A$ to $B'$). Hence, $\ycoord\left(  A\right)
+=\ycoord\left(  B'\right)  \geq\ycoord\left(
+B\right)  $, so that $\ycoord\left(  A'\right)
+\geq\ycoord\left(  A\right)  \geq\ycoord\left(  B\right)
+$. Combining this with $\ycoord\left(  A'\right)
+\leq\ycoord\left(  B\right)  $, we obtain $\ycoord\left(
+A'\right)  =\ycoord\left(  B\right)  $. Combining
+$\ycoord\left(  A'\right)  \geq\ycoord\left(
+A\right)  $ with $\ycoord\left(  A'\right)
+=\ycoord\left(  B\right)  \leq\ycoord\left(  A\right)  $,
+we obtain $\ycoord\left(  A'\right)  =\ycoord%
+\left(  A\right)  $. Thus, $\ycoord\left(  A'\right)
+=\ycoord\left(  A\right)  =\ycoord\left(  B\right)  $.
 Therefore, the vertex $A$ lies on the horizontal line that contains
 $A'$ and $B$. Furthermore, this vertex $A$ must lie on the line
-segment between $A'$ and $B$ (since $\operatorname*{x}\left(
-A'\right)  \leq\operatorname*{x}\left(  \underbrace{A}_{=B'%
-}\right)  =\operatorname*{x}\left(  B'\right)  \leq\operatorname*{x}%
+segment between $A'$ and $B$ (since $\xcoord\left(
+A'\right)  \leq\xcoord\left(  \underbrace{A}_{=B'%
+}\right)  =\xcoord\left(  B'\right)  \leq\xcoord%
 \left(  B\right)  $).
 
 Recall again that the $y$-coordinates of the vertices a path are always weakly
 increasing. Moreover, they increase strictly whenever the path makes a
 north-step. Hence, if the path $p'$ would have any north-step, then we
-would have $\operatorname*{y}\left(  A'\right)  <\operatorname*{y}%
+would have $\ycoord\left(  A'\right)  <\ycoord%
 \left(  B\right)  $ (since $p'$ is a path from $A'$ to $B$).
-But this would contradict $\operatorname*{y}\left(  A'\right)
-\geq\operatorname*{y}\left(  B\right)  $. Hence, the path $p'$ has no
+But this would contradict $\ycoord\left(  A'\right)
+\geq\ycoord\left(  B\right)  $. Hence, the path $p'$ has no
 north-step. Thus, $p'$ consists entirely of east-steps. Hence,
 $p'$ contains every vertex on the line segment between $A'$
 and $B$. Therefore, $p'$ contains the vertex $A$ (since the vertex $A$
@@ -1404,33 +1410,33 @@ Furthermore, we claim that $\ell\left(  p'\right)  \neq0$.
 [\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p'\right)
 =0$. Hence, the path $p'$ has no steps. Therefore, $A'=B$
 (since $p'$ is a path from $A'$ to $B$). Hence,
-$\operatorname*{x}\left(  A'\right)  =\operatorname*{x}\left(
-B\right)  \geq\operatorname*{x}\left(  B'\right)  $, so that
-$\operatorname*{x}\left(  A\right)  \geq\operatorname*{x}\left(  A^{\prime
-}\right)  \geq\operatorname*{x}\left(  B'\right)  $. Combining this
-with $\operatorname*{x}\left(  A\right)  \leq\operatorname*{x}\left(
-B'\right)  $, we obtain $\operatorname*{x}\left(  A\right)
-=\operatorname*{x}\left(  B'\right)  $. Combining $\operatorname*{x}%
-\left(  A\right)  \geq\operatorname*{x}\left(  A'\right)  $ with
-$\operatorname*{x}\left(  A'\right)  \geq\operatorname*{x}\left(
-B'\right)  =\operatorname*{x}\left(  A\right)  $, we obtain
-$\operatorname*{x}\left(  A\right)  =\operatorname*{x}\left(  A^{\prime
-}\right)  $. Thus, $\operatorname*{x}\left(  A'\right)
-=\operatorname*{x}\left(  A\right)  =\operatorname*{x}\left(  B^{\prime
+$\xcoord\left(  A'\right)  =\xcoord\left(
+B\right)  \geq\xcoord\left(  B'\right)  $, so that
+$\xcoord\left(  A\right)  \geq\xcoord\left(  A^{\prime
+}\right)  \geq\xcoord\left(  B'\right)  $. Combining this
+with $\xcoord\left(  A\right)  \leq\xcoord\left(
+B'\right)  $, we obtain $\xcoord\left(  A\right)
+=\xcoord\left(  B'\right)  $. Combining $\xcoord%
+\left(  A\right)  \geq\xcoord\left(  A'\right)  $ with
+$\xcoord\left(  A'\right)  \geq\xcoord\left(
+B'\right)  =\xcoord\left(  A\right)  $, we obtain
+$\xcoord\left(  A\right)  =\xcoord\left(  A^{\prime
+}\right)  $. Thus, $\xcoord\left(  A'\right)
+=\xcoord\left(  A\right)  =\xcoord\left(  B^{\prime
 }\right)  $. Therefore, the vertex $A'$ lies on the vertical line that
 contains $A$ and $B'$. Furthermore, this vertex $A'$ must lie
-on the line segment between $A$ and $B'$ (since $\operatorname*{y}%
-\left(  A'\right)  \geq\operatorname*{y}\left(  A\right)  $ and
-$\operatorname*{y}\left(  \underbrace{A'}_{=B}\right)
-=\operatorname*{y}\left(  B\right)  \leq\operatorname*{y}\left(  B^{\prime
+on the line segment between $A$ and $B'$ (since $\ycoord%
+\left(  A'\right)  \geq\ycoord\left(  A\right)  $ and
+$\ycoord\left(  \underbrace{A'}_{=B}\right)
+=\ycoord\left(  B\right)  \leq\ycoord\left(  B^{\prime
 }\right)  $).
 
 Recall again that the $x$-coordinates of the vertices a path are always weakly
 increasing. Moreover, they increase strictly whenever the path makes an
 east-step. Hence, if the path $p$ would have any east-step, then we would have
-$\operatorname*{x}\left(  A\right)  <\operatorname*{x}\left(  B^{\prime
+$\xcoord\left(  A\right)  <\xcoord\left(  B^{\prime
 }\right)  $ (since $p$ is a path from $A$ to $B'$). But this would
-contradict $\operatorname*{x}\left(  A\right)  =\operatorname*{x}\left(
+contradict $\xcoord\left(  A\right)  =\xcoord\left(
 B'\right)  $. Hence, the path $p$ has no east-step. Thus, $p$ consists
 entirely of north-steps. Hence, $p$ contains every vertex on the line segment
 between $A$ and $B'$. Therefore, $p$ contains the vertex $A'$
@@ -1441,11 +1447,11 @@ $\ell\left(  p'\right)  \neq0$ is proven.]
 
 Let $P$ be the second vertex of the path $p$. (This is well-defined, since
 $\ell\left(  p\right)  \neq0$.) Hence, $P$ lies on a path from $A$ to
-$B'$ (namely, on the path $p$). Therefore, $\operatorname*{x}\left(
-A\right)  \leq\operatorname*{x}\left(  P\right)  \leq\operatorname*{x}\left(
+$B'$ (namely, on the path $p$). Therefore, $\xcoord\left(
+A\right)  \leq\xcoord\left(  P\right)  \leq\xcoord\left(
 B'\right)  $ (since the $x$-coordinates of the vertices a path are
-always weakly increasing) and $\operatorname*{y}\left(  A\right)
-\leq\operatorname*{y}\left(  P\right)  \leq\operatorname*{y}\left(  B^{\prime
+always weakly increasing) and $\ycoord\left(  A\right)
+\leq\ycoord\left(  P\right)  \leq\ycoord\left(  B^{\prime
 }\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
 increasing). Let $r$ be the path from $P$ to $B'$ obtained by removing
 the first arc from $p$. Thus, $r$ is a subpath of $p$. Hence, the paths $r$
@@ -1455,45 +1461,45 @@ vertex in common). Also, $\ell\left(  r\right)  =\ell\left(  p\right)
 }_{<\ell\left(  p\right)  }+\ell\left(  p'\right)  <\ell\left(
 p\right)  +\ell\left(  p'\right)  =N$.
 
-Moreover, $\operatorname*{x}\left(  A'\right)  \leq\operatorname*{x}%
-\left(  A\right)  \leq\operatorname*{x}\left(  P\right)  $. If we had
-$\operatorname*{y}\left(  A'\right)  \geq\operatorname*{y}\left(
+Moreover, $\xcoord\left(  A'\right)  \leq\xcoord%
+\left(  A\right)  \leq\xcoord\left(  P\right)  $. If we had
+$\ycoord\left(  A'\right)  \geq\ycoord\left(
 P\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P$ and $r$
 instead of $A$ and $p$ (by the induction hypothesis, since $\ell\left(
 r\right)  +\ell\left(  p'\right)  <N$). We thus would conclude that
 the paths $r$ and $p'$ have a vertex in common; this would contradict
 the fact that the paths $r$ and $p'$ have no vertex in common. Hence,
-we cannot have $\operatorname*{y}\left(  A'\right)  \geq
-\operatorname*{y}\left(  P\right)  $. Thus, $\operatorname*{y}\left(
-A'\right)  <\operatorname*{y}\left(  P\right)  $. Hence,
-$\operatorname*{y}\left(  A'\right)  \leq\operatorname*{y}\left(
-P\right)  -1$ (since $\operatorname*{y}\left(  A'\right)  $ and
-$\operatorname*{y}\left(  P\right)  $ are integers).
+we cannot have $\ycoord\left(  A'\right)  \geq
+\ycoord\left(  P\right)  $. Thus, $\ycoord\left(
+A'\right)  <\ycoord\left(  P\right)  $. Hence,
+$\ycoord\left(  A'\right)  \leq\ycoord\left(
+P\right)  -1$ (since $\ycoord\left(  A'\right)  $ and
+$\ycoord\left(  P\right)  $ are integers).
 
 But $P$ is the next vertex after $A$ on the path $p$. Hence, there is an arc
 from $A$ to $P$. If this arc was an east-step, then we would have
-$\operatorname*{y}\left(  P\right)  =\operatorname*{y}\left(  A\right)  $,
-which would contradict $\operatorname*{y}\left(  A\right)  \leq
-\operatorname*{y}\left(  A'\right)  <\operatorname*{y}\left(
+$\ycoord\left(  P\right)  =\ycoord\left(  A\right)  $,
+which would contradict $\ycoord\left(  A\right)  \leq
+\ycoord\left(  A'\right)  <\ycoord\left(
 P\right)  $. Hence, this arc cannot be an east-step. Thus, this arc must be a
-north-step. Therefore, $\operatorname*{y}\left(  P\right)  =\operatorname*{y}%
-\left(  A\right)  +1$ and $\operatorname*{x}\left(  P\right)
-=\operatorname*{x}\left(  A\right)  $. Combining $\operatorname*{y}\left(
-A'\right)  \leq\operatorname*{y}\left(  P\right)  -1=\operatorname*{y}%
-\left(  A\right)  $ (since $\operatorname*{y}\left(  P\right)
-=\operatorname*{y}\left(  A\right)  +1$) with $\operatorname*{y}\left(
-A'\right)  \geq\operatorname*{y}\left(  A\right)  $, we obtain
-$\operatorname*{y}\left(  A'\right)  =\operatorname*{y}\left(
+north-step. Therefore, $\ycoord\left(  P\right)  =\ycoord%
+\left(  A\right)  +1$ and $\xcoord\left(  P\right)
+=\xcoord\left(  A\right)  $. Combining $\ycoord\left(
+A'\right)  \leq\ycoord\left(  P\right)  -1=\ycoord%
+\left(  A\right)  $ (since $\ycoord\left(  P\right)
+=\ycoord\left(  A\right)  +1$) with $\ycoord\left(
+A'\right)  \geq\ycoord\left(  A\right)  $, we obtain
+$\ycoord\left(  A'\right)  =\ycoord\left(
 A\right)  $.
 
 Let $P'$ be the second vertex on the path $p'$. (This is
 well-defined, since $\ell\left(  p'\right)  \neq0$.) Hence,
 $P'$ lies on a path from $A'$ to $B$ (namely, on the path
-$p'$). Therefore, $\operatorname*{x}\left(  A'\right)
-\leq\operatorname*{x}\left(  P'\right)  \leq\operatorname*{x}\left(
+$p'$). Therefore, $\xcoord\left(  A'\right)
+\leq\xcoord\left(  P'\right)  \leq\xcoord\left(
 B\right)  $ (since the $x$-coordinates of the vertices a path are always weakly
-increasing) and $\operatorname*{y}\left(  A'\right)  \leq
-\operatorname*{y}\left(  P'\right)  \leq\operatorname*{y}\left(
+increasing) and $\ycoord\left(  A'\right)  \leq
+\ycoord\left(  P'\right)  \leq\ycoord\left(
 B\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
 increasing). Let $r'$ be the path from $P'$ to $B$ obtained by
 removing the first arc from $p'$. Thus, $r'$ is a subpath of
@@ -1504,42 +1510,42 @@ r'\right)  =\ell\left(  p'\right)  -1<\ell\left(  p^{\prime
 r'\right)  }_{<\ell\left(  p'\right)  }<\ell\left(  p\right)
 +\ell\left(  p'\right)  =N$.
 
-Moreover, $\operatorname*{y}\left(  P'\right)  \geq\operatorname*{y}%
-\left(  A'\right)  \geq\operatorname*{y}\left(  A\right)  $. If we had
-$\operatorname*{x}\left(  P'\right)  \leq\operatorname*{x}\left(
+Moreover, $\ycoord\left(  P'\right)  \geq\ycoord%
+\left(  A'\right)  \geq\ycoord\left(  A\right)  $. If we had
+$\xcoord\left(  P'\right)  \leq\xcoord\left(
 A\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and
 $r'$ instead of $A'$ and $p'$ (by the induction
 hypothesis, since $\ell\left(  p\right)  +\ell\left(  r'\right)  <N$).
 We thus would conclude that the paths $p$ and $r'$ have a vertex in
 common; this would contradict the fact that the paths $p$ and $r'$
-have no vertex in common. Hence, we cannot have $\operatorname*{x}\left(
-P'\right)  \leq\operatorname*{x}\left(  A\right)  $. Thus,
-$\operatorname*{x}\left(  P'\right)  >\operatorname*{x}\left(
-A\right)  $. Hence, $\operatorname*{x}\left(  P'\right)
-\geq\operatorname*{x}\left(  A\right)  +1$ (since $\operatorname*{x}\left(
-P'\right)  $ and $\operatorname*{x}\left(  A\right)  $ are integers).
+have no vertex in common. Hence, we cannot have $\xcoord\left(
+P'\right)  \leq\xcoord\left(  A\right)  $. Thus,
+$\xcoord\left(  P'\right)  >\xcoord\left(
+A\right)  $. Hence, $\xcoord\left(  P'\right)
+\geq\xcoord\left(  A\right)  +1$ (since $\xcoord\left(
+P'\right)  $ and $\xcoord\left(  A\right)  $ are integers).
 
 But $P'$ is the next vertex after $A'$ on the path $p^{\prime
 }$. Hence, there is an arc from $A'$ to $P'$. If this arc was
-a north-step, then we would have $\operatorname*{x}\left(  P'\right)
-=\operatorname*{x}\left(  A'\right)  $, which would contradict
-$\operatorname*{x}\left(  A'\right)  \leq\operatorname*{x}\left(
-A\right)  <\operatorname*{x}\left(  P'\right)  $. Hence, this arc
+a north-step, then we would have $\xcoord\left(  P'\right)
+=\xcoord\left(  A'\right)  $, which would contradict
+$\xcoord\left(  A'\right)  \leq\xcoord\left(
+A\right)  <\xcoord\left(  P'\right)  $. Hence, this arc
 cannot be a north-step. Thus, this arc must be an east-step. Therefore,
-$\operatorname*{y}\left(  P'\right)  =\operatorname*{y}\left(
-A'\right)  $ and $\operatorname*{x}\left(  P'\right)
-=\operatorname*{x}\left(  A'\right)  +1$. Hence, $\operatorname*{x}%
-\left(  A'\right)  +1=\operatorname*{x}\left(  P'\right)
-\geq\operatorname*{x}\left(  A\right)  +1$, so that $\operatorname*{x}\left(
-A'\right)  \geq\operatorname*{x}\left(  A\right)  $. Combining this
-with $\operatorname*{x}\left(  A'\right)  \leq\operatorname*{x}\left(
-A\right)  $, we obtain $\operatorname*{x}\left(  A'\right)
-=\operatorname*{x}\left(  A\right)  $.
+$\ycoord\left(  P'\right)  =\ycoord\left(
+A'\right)  $ and $\xcoord\left(  P'\right)
+=\xcoord\left(  A'\right)  +1$. Hence, $\xcoord%
+\left(  A'\right)  +1=\xcoord\left(  P'\right)
+\geq\xcoord\left(  A\right)  +1$, so that $\xcoord\left(
+A'\right)  \geq\xcoord\left(  A\right)  $. Combining this
+with $\xcoord\left(  A'\right)  \leq\xcoord\left(
+A\right)  $, we obtain $\xcoord\left(  A'\right)
+=\xcoord\left(  A\right)  $.
 
 Now, the vertices $A$ and $A'$ have the same $x$-coordinate (since
-$\operatorname*{x}\left(  A'\right)  =\operatorname*{x}\left(
-A\right)  $) and the same $y$-coordinate (since $\operatorname*{y}\left(
-A'\right)  =\operatorname*{y}\left(  A\right)  $). Hence, these two
+$\xcoord\left(  A'\right)  =\xcoord\left(
+A\right)  $) and the same $y$-coordinate (since $\ycoord\left(
+A'\right)  =\ycoord\left(  A\right)  $). Hence, these two
 vertices are equal. In other words, $A=A'$. Hence, the vertex $A$
 belongs to the path $p'$ (since the vertex $A'$ belongs to the
 path $p'$). This contradicts the fact that the vertex $A$ does not
@@ -1558,23 +1564,23 @@ induction step. Hence, Lemma~\ref{lem.LGV.hex} is proven.
 \begin{proof}[Second proof of Lemma~\ref{lem.LGV.hex} (sketched).]
 Recall that each arc of the lattice is either an east-step or a north-step.
 Thus, the $x$-coordinates of the vertices of a path are always weakly increasing, and so are the $y$-coordinates.
-Hence, the existence of a path $p$ from $A$ to $B'$ shows that $\operatorname*{x}(A) \leq \operatorname*{x}(B')$ and $\operatorname*{y}(A) \leq \operatorname*{y}(B')$.
-Similarly, the existence of $p'$ yields $\operatorname*{x}(A') \leq \operatorname*{x}(B')$ and $\operatorname*{y}(A') \leq\operatorname*{y}(B)$.
+Hence, the existence of a path $p$ from $A$ to $B'$ shows that $\xcoord(A) \leq \xcoord(B')$ and $\ycoord(A) \leq \ycoord(B')$.
+Similarly, the existence of $p'$ yields $\xcoord(A') \leq \xcoord(B')$ and $\ycoord(A') \leq\ycoord(B)$.
 
 Thus,
 \begin{align}
-\operatorname*{x}\left(  A'\right)   &  \leq\operatorname*{x}\left(
-A\right)  \leq\operatorname*{x}\left(  B'\right)  \leq
-\operatorname*{x}\left(  B\right)  \qquad\text{and}\label{pf.lem.LGV.hex.1}\\
-\operatorname*{y}\left(  A\right)   &  \leq\operatorname*{y}\left(  A^{\prime
-}\right)  \leq\operatorname*{y}\left(  B\right)  \leq\operatorname*{y}\left(
+\xcoord\left(  A'\right)   &  \leq\xcoord\left(
+A\right)  \leq\xcoord\left(  B'\right)  \leq
+\xcoord\left(  B\right)  \qquad\text{and}\label{pf.lem.LGV.hex.1}\\
+\ycoord\left(  A\right)   &  \leq\ycoord\left(  A^{\prime
+}\right)  \leq\ycoord\left(  B\right)  \leq\ycoord\left(
 B'\right)  . \label{pf.lem.LGV.hex.2}%
 \end{align}
 Now, consider the rectangle whose four sides are given by the equations%
 \[
-x=\operatorname*{x}\left(  A'\right)  ,\qquad y=\operatorname*{y}%
-\left(  A\right)  ,\qquad x=\operatorname*{x}\left(  B\right)  ,\qquad
-y=\operatorname*{y}\left(  B'\right)  ,
+x=\xcoord\left(  A'\right)  ,\qquad y=\ycoord%
+\left(  A\right)  ,\qquad x=\xcoord\left(  B\right)  ,\qquad
+y=\ycoord\left(  B'\right)  ,
 \]
 respectively (all in Cartesian coordinates). Then, the path $p$ joins two
 opposite sides of this rectangle (namely, the second and the fourth), whereas
@@ -1602,62 +1608,62 @@ steps we have added to them to obtain $\widetilde{p}$ and
 $\widetilde{p'}$ escape this rectangle normally in four different
 directions, whence they intersect neither each other nor $p$ or $p'$).
 Recall that each arc of the lattice is either an east-step or a north-step.
-Thus, if a vertex $C$ runs through a path, the value $\operatorname*{x}\left(
-C\right)  +\operatorname*{y}\left(  C\right)  $ is incremented by $1$ with
+Thus, if a vertex $C$ runs through a path, the value $\xcoord\left(
+C\right)  +\ycoord\left(  C\right)  $ is incremented by $1$ with
 each step. Hence, if $q$ is a bidirectionally infinite path, then, for each
 $N\in\mathbb{Z}$, there is a unique vertex $C$ of $q$ satisfying
-$\operatorname*{x}\left(  C\right)  +\operatorname*{y}\left(  C\right)  =N$.
+$\xcoord\left(  C\right)  +\ycoord\left(  C\right)  =N$.
 Denote this vertex $C$ by $h_n\left(  q\right)  $. Thus, the vertices of $q$
 are $\ldots,h_{-1}\left(  q\right)  ,h_{0}\left(  q\right)  ,h_1\left(
 q\right)  ,\ldots$ in this order.
 
-All sufficiently low $N\in\mathbb{Z}$ satisfy $\operatorname*{x}\left(
-h_n\left(  \widetilde{p'}\right)  \right)  <\operatorname*{x}\left(
+All sufficiently low $N\in\mathbb{Z}$ satisfy $\xcoord\left(
+h_n\left(  \widetilde{p'}\right)  \right)  <\xcoord\left(
 h_n\left(  \widetilde{p}\right)  \right)  $, whereas all sufficiently high
-$N\in\mathbb{Z}$ satisfy $\operatorname*{x}\left(  h_n\left(
-\widetilde{p'}\right)  \right)  >\operatorname*{x}\left(  h_n\left(
+$N\in\mathbb{Z}$ satisfy $\xcoord\left(  h_n\left(
+\widetilde{p'}\right)  \right)  >\xcoord\left(  h_n\left(
 \widetilde{p}\right)  \right)  $. Hence, the set of all $N\in\mathbb{Z}$ that
-satisfy $\operatorname*{x}\left(  h_n\left(  \widetilde{p'}\right)
-\right)  <\operatorname*{x}\left(  h_n\left(  \widetilde{p}\right)  \right)
+satisfy $\xcoord\left(  h_n\left(  \widetilde{p'}\right)
+\right)  <\xcoord\left(  h_n\left(  \widetilde{p}\right)  \right)
 $ is a nonempty set of integers that is bounded from above. Therefore, this
 set has a maximum. Let $M$ be this maximum. Thus, $M\in\mathbb{Z}$ satisfies
-$\operatorname*{x}\left(  h_{M}\left(  \widetilde{p'}\right)  \right)
-<\operatorname*{x}\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
-$\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \geq\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}\right)
+$\xcoord\left(  h_{M}\left(  \widetilde{p'}\right)  \right)
+<\xcoord\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
+$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
 \right)  $.
 
 But the point $h_{M+1}\left(  \widetilde{p'}\right)  $ is either the
 eastern or the northern neighbor of $h_{M}\left(  \widetilde{p'%
-}\right)  $; hence, $\operatorname*{x}\left(  h_{M+1}\left(
-\widetilde{p'}\right)  \right)  \leq\operatorname*{x}\left(
+}\right)  $; hence, $\xcoord\left(  h_{M+1}\left(
+\widetilde{p'}\right)  \right)  \leq\xcoord\left(
 h_{M}\left(  \widetilde{p'}\right)  \right)  +1$. Also, the point
 $h_{M+1}\left(  \widetilde{p}\right)  $ is either the eastern or the northern
-neighbor of $h_{M}\left(  \widetilde{p}\right)  $; thus, $\operatorname*{x}%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  \geq\operatorname*{x}%
+neighbor of $h_{M}\left(  \widetilde{p}\right)  $; thus, $\xcoord%
+\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  \geq\xcoord%
 \left(  h_{M}\left(  \widetilde{p}\right)  \right)  $. Hence,
 \[
-\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \leq\underbrace{\operatorname*{x}\left(  h_{M}\left(
-\widetilde{p'}\right)  \right)  }_{<\operatorname*{x}\left(
-h_{M}\left(  \widetilde{p}\right)  \right)  }+1<\underbrace{\operatorname*{x}%
-\left(  h_{M}\left(  \widetilde{p}\right)  \right)  }_{\leq\operatorname*{x}%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  }+1\leq\operatorname*{x}%
+\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  \leq\underbrace{\xcoord\left(  h_{M}\left(
+\widetilde{p'}\right)  \right)  }_{<\xcoord\left(
+h_{M}\left(  \widetilde{p}\right)  \right)  }+1<\underbrace{\xcoord%
+\left(  h_{M}\left(  \widetilde{p}\right)  \right)  }_{\leq\xcoord%
+\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  }+1\leq\xcoord%
 \left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  +1.
 \]
-Therefore, $\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p'%
-}\right)  \right)  \leq\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}%
+Therefore, $\xcoord\left(  h_{M+1}\left(  \widetilde{p'%
+}\right)  \right)  \leq\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
 \right)  \right)  $ (since both sides are integers). Combining this with
-$\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \geq\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}\right)
-\right)  $, we obtain $\operatorname*{x}\left(  h_{M+1}\left(
-\widetilde{p'}\right)  \right)  =\operatorname*{x}\left(
+$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
+\right)  $, we obtain $\xcoord\left(  h_{M+1}\left(
+\widetilde{p'}\right)  \right)  =\xcoord\left(
 h_{M+1}\left(  \widetilde{p}\right)  \right)  $. Hence, $h_{M+1}\left(
 \widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $ (since
-$\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  -\operatorname*{y}\left(  h_{M+1}\left(  \widetilde{p'%
-}\right)  \right)  =M+1=\operatorname*{x}\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  -\operatorname*{y}\left(  h_{M+1}\left(  \widetilde{p}%
+$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p'%
+}\right)  \right)  =M+1=\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
+\right)  \right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p}%
 \right)  \right)  $ as well). Thus, the paths $\widetilde{p}$ and
 $\widetilde{p'}$ have a vertex in common (namely, $h_{M+1}\left(
 \widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $). This
@@ -1669,19 +1675,18 @@ We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
 suited for our applications:
 \end{verlong}
 
-We now shall state a crucial result, which follows from the
-Lindstr\"om--Gessel--Viennot lemma:\footnote{See the proof of Theorem 4 in
-\url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
+We now shall state a crucial result, which follows from the Lindstr\"om--Gessel--Viennot lemma and exists in the folklore\travis{This is poorly phrased, but otherwise Darij, the footnote as currently stated makes it seems like we are just avoiding a proof. We should try to make this better.}:\footnote{
+See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
 
 \begin{prop}
 \label{prop.LGV.concrete}
 Let $k \in \NN$.
 Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ be two $k$-vertices such that
 \begin{align*}
-\operatorname*{x}(A_1) & \geq \operatorname*{x}(A_2) \geq \cdots \geq \operatorname*{x}(A_k); \\
-\operatorname*{y}(A_1) & \leq \operatorname*{y}(A_2) \leq \cdots \leq \operatorname*{y}(A_k); \\
-\operatorname*{x}(B_1) & \geq \operatorname*{x}(B_2) \geq \cdots \geq \operatorname*{x}(B_k); \\
-\operatorname*{y}(B_1) & \leq \operatorname*{y}(B_2) \leq \cdots \leq \operatorname*{y}(B_k).
+\xcoord(A_1) & \geq \xcoord(A_2) \geq \cdots \geq \xcoord(A_k); \\
+\ycoord(A_1) & \leq \ycoord(A_2) \leq \cdots \leq \ycoord(A_k); \\
+\xcoord(B_1) & \geq \xcoord(B_2) \geq \cdots \geq \xcoord(B_k); \\
+\ycoord(B_1) & \leq \ycoord(B_2) \leq \cdots \leq \ycoord(B_k).
 \end{align*}
 Then,
 \[
@@ -1719,7 +1724,7 @@ By the definition of a NILP, this implies that
 \end{itemize}
 
 However, the assumptions of Proposition~\ref{prop.LGV.concrete} yield
-$\operatorname*{x}(A_j) \leq \operatorname*{x}(A_i)$, $\operatorname*{y}(A_j) \geq \operatorname*{y}(A_i)$, $\operatorname*{x}(B_{\sigma(i)}) \leq \operatorname*{x}(B_{\sigma(j)})$, and $\operatorname*{y}(B_{\sigma(i)}) \geq \operatorname*{y}(B_{\sigma(j)})$.
+$\xcoord(A_j) \leq \xcoord(A_i)$, $\ycoord(A_j) \geq \ycoord(A_i)$, $\xcoord(B_{\sigma(i)}) \leq \xcoord(B_{\sigma(j)})$, and $\ycoord(B_{\sigma(i)}) \geq \ycoord(B_{\sigma(j)})$.
 Hence, Lemma~\ref{lem.LGV.hex} (applied to $A = A_i$, $B = B_{\sigma(j)}$, $A' = A_j$, $B' = B_{\sigma(i)}$, $p = p_i$ and $p' = p_j$) shows that $p_i$ and $p_j$ have a vertex in common.
 This contradicts the fact that the paths $p_i$ and $p_j$ have no vertex in common.
 
@@ -1783,6 +1788,7 @@ If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then t
 \]
 (that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
 For example, the two tableaux in~\eqref{eq.tableau.exas} have weights $x_1^{3}x_2^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_1^{2}x_2x_{3}^{2}x_{4}x_{5}^{3}$, respectively (assuming that $n \geq 7$).
+Let $\SST(\lambda, s)$ denote the set of all semistandard tableaux of shape $\lambda$ and surface $s$.
 
 We now state the main result of this subsection:
 
@@ -1792,10 +1798,9 @@ Let $k \in \NN$.
 Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a $k$-pseudo-partition.
 Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
 Then,
-\begin{align*}
-&  \sum_{\substack{T \text{ is a semistandard tableau}\\\text{of shape } \lambda \text{ and surface }s }} \wt(T) \\
-&  = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
-\end{align*}
+\[
+\sum_{T \in \SST(\lambda, s)} \wt(T) = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+\]
 \end{thm}
 
 We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of a \defn{multi-Schur function} as defined in~\cite[(SCHUR.2.2)]{LLPT18}.
@@ -1815,11 +1820,11 @@ where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
 \[
 \sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
 \]
-(by~\eqref{eq.LGV.single-paths}, applied to $A=A_i$ and $B=B_j$). 
+(by~\eqref{eq.LGV.single-paths}, applied to $A = A_i$ and $B = B_j$). 
 
 Next, let us define a bijection
 \[
-\Phi \colon N(\uu, \vv) \to \set{ \text{semistandard tableaux of shape } \lambda \text{ and surface } s}.
+\Phi \colon N(\uu, \vv) \to \SST(\lambda, s).
 \]
 
 Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be arbitrary.
@@ -1896,7 +1901,7 @@ In other words, we must prove that $p_{i_1,j} < p_{i_2,j}$ (since $T(i,j) = p_{i
 
 If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in [i_1, i_1+1, \dotsc, i_2]$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
 Hence, without loss of generality, we assume that column $j$ of $\diag{\lambda}$ has at least one gap between row $i_1$ and row $i_2$.
-In other words, there exists some $q \in [i_1, i_1+1, \dotsc, i_2]$ such that $(q,j) \notin \diag{\lambda}$.
+In other words, there exists some $q \in [i_1, i_1+1, \dotsc, i_2]$ \travis{What does this mean? Is this suppose to be a set?} such that $(q,j) \notin \diag{\lambda}$.
 Consider the \emph{largest} such $q$.
 Clearly, $i_1 < q < i_2$.
 Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
@@ -1937,12 +1942,8 @@ Moreover, it is easy to see that
 for each $\pp \in N(\uu,\vv)$.
 Hence,
 \begin{align*}
-&  \sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape }%
-\lambda \text{ and surface } s}} \wt(T) \\
-&  = \sum_{\pp\in N(\uu,\vv)  }\left(
-\prod_{i=1}^{k}x_{s_i}\right)  \wt(\pp) = \left( \prod_{i=1}^{k}x_{s_i}\right)  \sum_{\pp \in N(\uu,\vv)  } \wt(\pp) \\
-&  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left(
-h_{\lambda_j-j+i-1}\left(  x_1,x_2,\ldots,x_{s_j}\right)  \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
+\sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp) \\
+&  = \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{1\leq i\leq k,\ 1\leq j\leq k} .
 \end{align*}
 \end{proof}
 
@@ -1954,26 +1955,24 @@ h_{\lambda_j-j+i-1}\left(  x_1,x_2,\ldots,x_{s_j}\right)  \right)_{1\leq i\leq k
 
 Let us introduce some further notations now.
 
-If $A$ is a finite set of integers, and if $k \in \ive{\abs{A}}$, then \defn{$\max_k A$} denotes the $k$-th largest element of $A$.
-For example, $\max\nolimits_2 \set{4,5,6,8} = 6$.
-
 Next, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
 
 \begin{itemize}
-\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\abs{ I } = \abs{J}$ and every $k\in \ive{ \abs{I} }$ satisfies $\max_k A \geq \max_k B$.
+\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
 
 \item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$.
 \end{itemize}
 
 For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
 Note that $A \gg \emptyset$ and $\emptyset \gg A$ for any subset $A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial order (but it becomes a partial order if we forbid $\emptyset$).
+\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
 
 The following criterion (proof left to the reader) will be useful:
 
 \begin{lemma}
 \label{lem:determinant_form.gale1}
-Let $A, B \subseteq \ive{n}$ such that there exists $\phi \colon B \to A$ a bijection satisfying $\phi(b) \geq b$ for each $b \in B$.
-Then, $A \succeq B$.
+Let $A, B \subseteq \ive{n}$.
+We have $A \succeq B$ if and only if there exists $\phi \colon B \to A$ a bijection satisfying $\phi(b) \geq b$ for each $b \in B$.
 \end{lemma}
 
 Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\ell$ classes.
@@ -2013,7 +2012,7 @@ q_i^{(i)}
 
 \Darij{TODO: Example.}
 
-Forget that we fixed $\qq$.
+%Forget that we fixed $\qq$. % I don't understand what purpose this sentence serves -- Travis
 
 Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
 Define a $k$-pseudo-partition $\lambda =\tup{\lambda_1, \lambda_2, \dotsc, \lambda_k})$ by
@@ -2111,7 +2110,7 @@ Finally, if $T$ is a semistandard tableau of shape $\lambda$, then $T$ has the f
 (Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combine them to obtain queues $q_i$ and an MLQ $\qq$.
 This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
 This proves property~(d).
-Hence, we have proven all four properties (a), (b), (c) and~(d).
+Hence, we have proven all four properties (a--d).
 \end{proof}
 
 \begin{cor}
@@ -2129,8 +2128,7 @@ Then,
 \begin{proof}
 Let $s$ be the strictly increasing sequence $\tup{s_1 < s_2 < \cdots < s_k}$ of elements of $\ive{n}$.
 
-Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}.
-Now recall the four properties (a)--(d) in Lemma~\ref{lem:determinant_form.bij1}.
+Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1} and recall the properties (a--d).
 Property~(c) shows that this injection $P$ restricts to an injection
 \[
 \set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda}.
@@ -2139,12 +2137,12 @@ Property~(d) shows that this restricted injection is also surjective, and thus a
 Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt}.
 We thus obtain
 \begin{align*}
-\sum_{\substack{T\text{ is a semistandard tableau}\\\text{of shape } \lambda \text{ and surface } s}}\wt(T)
-  & = \underbrace{\sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}}}_{\substack{=\sum_{\substack{\qq=\tup{q_1,q_2,\ldots,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type }\mm \text{ such that} \\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}}\\\text{(by property (b))}}}\underbrace{\wt\bigl(  P(\qq) \bigr)  }_{\substack{= \wt(\qq) \\\text{(by property (a))}}}\\
+\sum_{T \in \SST(\lambda, s)} \wt(T)
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
 &  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
 &  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
 \end{align*}
-(since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$).
+where the second equality follows from Property~(a) and Property~(b) and the last equality is since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$.
 Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
 \end{proof}
 
@@ -2221,11 +2219,11 @@ Hence, the site $j_{!}$ lies between $i_k$ (inclusive) and $j_k$ (\emph{exclusiv
 
 Recall again that $j_k$ is the first $j$ weakly to the right (cyclically) of $i = i_k$ such that $j \in q$ and $\bigl( q(u) \bigr)_j$ is not set.
 Hence, for every site $j_{?}$ in $q$ that lies between $i_k$ (inclusive) and $j_k$ (exclusive), the letter $\bigl( q(u) \bigr)_{j_{?}}$ must already be set.
-Applying this to $j_{?} = j_{!}$, we conclude that the letter $\bigl( q(u) \bigr)_{j_{!}}$ must already be set.
-Moreover, this letter must have been set in Phase~II (because the site $j_{!}$ belongs to $q$, whereas Phase~I only sets letters in sites outside of $q$).
-Hence, this letter must be $\leq u_{i_k}$ (because all letters that have been set in Phase~II before the current step are $\leq u_{i_k}$).
+Applying this to $j_{?} = j_{!}$, we conclude that the letter $a := \bigl( q(u) \bigr)_{j_{!}}$ must already be set.
+Moreover, $a$ must have been set in Phase~II because the site $j_{!}$ belongs to $q$, whereas Phase~I only sets letters in sites outside of $q$.
+Hence, $a \leq u_{i_k}$ because all letters that have been set in Phase~II before the current step are $\leq u_{i_k}$.
 Thus, $\bigl( q(u) \bigr)_{j_{!}} \leq u_{i_k}$.
-Also, $\bigl( q(u) \bigr)_{j_k}=u_{i_k}$ (due to how Phase~II works).
+Also, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
 Combining these, we obtain $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k}=u_{i_k}$.
 This proves Claim~\ref{claim:little_interlacing}.
 \end{subproof}
@@ -2373,7 +2371,7 @@ From $b\in B$, we obtain $b \in \ive{n}$ and $u_{b} = h$.
 From $c\in C$, we obtain $c\in \ive{n}$ and $\bigl( q(u) \bigr)_{c} = h+1$.
 Write $b$ in the form $b=i_k$ for some $k\in \ive{n}$.
 Then, $i_k=b\in B$, so that $k\leq \abs{q}$ (by~\eqref{pf.lem:determinant_form.interl-A.b.1}).
-Also, if we had $c\notin q$, then~\eqref{pf.lem:determinant_form.interl-A.2} would yield $\bigl( q(u) \bigr)_{c} = t+1$, which would contradict $\bigl( q(u) \bigr)_c = \underbrace{h}_{<t} + 1 < t + 1$.
+Also, if we had $c\notin q$, then~\eqref{pf.lem:determinant_form.interl-A.2} would yield $\bigl( q(u) \bigr)_{c} = t+1$, which would contradict $\bigl( q(u) \bigr)_c = h + 1 < t + 1$.
 Thus, we have $c\in q$.
 Hence, Claim~\ref{claim:smaller_site_jbang} (applied to $j_{!} = c$) shows that $\bigl( q(u) \bigr)_c \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (since $c \geq b = i_k$).
 In view of $i_k = b$, this rewrites as $\bigl( q(u) \bigr)_{c} \leq u_{b}$.
@@ -2393,7 +2391,6 @@ Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r
 Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
 
 Let $\mm$ be the type of $u$. Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
-
 Then, $u = \qq(1\cdots1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 \end{lemma}
 
@@ -2402,8 +2399,11 @@ Then, $u = \qq(1\cdots1)$ if and only if the MLQ $\qq$ is interlacing and satisf
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-act}.]
 Consider the queues $q_i^{(j)}$ defined as above.
 
-For each $i\in\left\{  0,1,\ldots,\ell-1\right\}  $, let $u^{\left[  i\right]} \in \mcW_n$ be the word $\left(  q_1,q_2,\ldots,q_i\right) \left(  1\cdots1\right)  = q_i\left(  q_{i-1}\left(  \cdots\left( q_1\left(  1\cdots1\right)  \right)  \right)  \right)$.
-This word $u^{\left[  i\right]  }$ has type $\left(  m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots \right)$.
+For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
+\[
+u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1 \dotsm 1)  = q_i\bigl( \cdots q_2\bigl( q_1(1 \dotsm 1) \bigr) \cdots \bigr),
+\]
+Note that $u^{\left[  i\right]  } \in \mcW_n$ and has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
 (This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = m_i$.)
 The definition of $u^{\left[  i\right]  }$ yields
 \begin{equation}
@@ -2510,7 +2510,7 @@ Define a word $u \in \mcW_n$ by $u_i=v_j$ if $i = b_j$ for some $j$, otherwise $
 For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
 Then
 \[
-\swt{u} = \left(  \prod_{i \in B} x_i \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1 \leq i \leq r,\ 1 \leq j \leq r}.
+\swt{u} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1 \leq i \leq r,\ 1 \leq j \leq r}.
 \]
 \end{thm}
 
@@ -2549,20 +2549,17 @@ Define a $k$-pseudo-partition $\lambda = \tup{\lambda_1,\lambda_2, \dotsc, \lamb
 Then, comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain $\lambda = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}$.
 Hence, each $j \in \ive{r}$ satisfies $\lambda_j = \ell - v_j = \gamma_j$.
 
-The definition of $\left\langle u\right\rangle $ yields%
+The definition of $\swt{u}$ yields
 \begin{align*}
 \swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1\dotsm 1)}}\wt(\qq) \\
-&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
-&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq)\\
-&  = \underbrace{\left(  \prod_{i=1}^k x_{b_i} \right)  }_{= \prod_{i \in B} x_i} \det\Biggl(  \underbrace{h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  }_{\substack{= h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j})\\\text{(since $\lambda_j=\gamma_j$)}}} \Biggr)_{1\leq i\leq k,\ 1\leq j\leq k} \\
-&  \qquad\left(
-  \begin{array}[c]{c}
-  \text{by Corollary~\ref{cor:determinant_form.bij1c}, applied to } B \text{ and } b_i\\
-  \text{instead of } S \text{ and } s_i
-  \end{array}
-  \right) \\
-&  = \left( \prod_{i\in B} x_i \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1\leq i\leq r,\ 1\leq j\leq r} .
+%&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+% The above is just a trivial rewording of the summation set for the equation below -- Travis
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+&  = \left(  \prod_{i=1}^k x_{b_i} \right) \det\biggl( h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{1\leq i\leq k,\ 1\leq j\leq k} ,
+%& \\ & = \left( \prod_{b \in B} x_b \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{1\leq i\leq r,\ 1\leq j\leq r} ,
 \end{align*}
+where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $B$ and $b_i$ instead of $S$ and $s_i$).
+% Hence the claim follows since $\gamma_j = \lambda_j$.
 \end{proof}
 
 
