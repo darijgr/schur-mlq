@@ -2061,6 +2061,8 @@ with the following properties:
 \end{enumerate}
 \end{lemma}
 
+(To make sense of this in the border case $\ell = 1$, we agree to interpret $q_0$ as the empty set whenever $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ.)
+
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.bij1}.]
 If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
 For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
@@ -2485,12 +2487,58 @@ This completes the induction step; Claim~\ref{claim:weakly_decreasing_level_i} i
 
 \begin{claim}
 \label{claim:description_q_i^(j)}
-Let $i\in \ive{\ell-1}$ and $j \in \ive{i}$.
-Then, $q_i^{(j)}$ is the set of all $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = j$.
+Let $i\in \ive{\ell-1}$. Then,
+\[
+q_i^{(j)} = \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
+\qquad \text{for each } j \in \ive{i} .
+\]
 \end{claim}
 
 \begin{subproof}
-\Darij{Explain how this follows from Claim~\ref{claim:weakly_decreasing_level_i} and the type of $u^{\left[  i\right]  }$. TODO}
+If $q$ is any queue and $w \in \mcW_n$ is any word, then each of the letters $(q(w))_j$ with $j \notin q$ is larger than each of the letters $(q(w))_j$ with $j \in q$.
+(This follows from the construction of $q(w)$.)
+Applying this to $q = q_i$ and $w = u^{\left[i-1\right]}$, we conclude that
+each of the letters $(u^{\left[  i\right]})_j$ with $j \notin q_i$ is larger than each of the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$
+(since~\eqref{pf.lem:determinant_form.interl-act.rec} yields $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$).
+Thus,
+\begin{align}
+&\text{the $\abs{q_i}$ smallest letters of the word $u^{\left[  i\right]}$} \nonumber \\
+&\text{are exactly the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$} .
+\label{pf.claim:description_q_i^(j).1}
+\end{align}
+
+Claim~\ref{claim:weakly_decreasing_level_i} shows that the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
+Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (i.e., first all $i$'s, then all $i-1$'s, etc.).
+Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$).
+
+Recall that the word $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
+Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $m_1 + m_2 + \cdots + m_i$ smallest letters of this word.
+In other words, they are the $\abs{q_i}$ smallest letters of this word (since $m_1 + m_2 + \cdots + m_i = \abs{q_i}$).
+In view of \eqref{pf.claim:description_q_i^(j).1}, this rewrites as follows:
+The letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ are exactly the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$.
+In other words, these letters appear precisely in the positions $j \in q_i$.
+Since these letters must appear in weakly decreasing order, and since we know how often each letter appears, we thus know the exact position of each of these letters:
+\begin{itemize}
+\item The letters $1$ appear in the largest $m_1$ positions of $q_i$.
+\item The letters $2$ appear in the next-largest $m_2$ positions of $q_i$.
+\item And so on, until we get to the letters $i$.
+\end{itemize}
+In other words:
+\begin{itemize}
+\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 1$ are precisely the largest $m_1$ elements of $q_i$.
+\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 2$ are precisely the next-largest $m_2$ elements of $q_i$.
+\item And so on, until we get to the $j \in \ive{n}$ satisfying $(u^{\left[  i\right]})_j = i$.
+\end{itemize}
+In other words:
+\begin{itemize}
+\item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 1 }$ consists of the largest $m_1$ elements of $q_i$, so that it is $q_i^{(1)}$.
+\item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 2 }$ consists of the next-largest $m_2$ elements of $q_i$, so that it is $q_i^{(2)}$.
+\item And so on, until we get to the set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = i }$.
+\end{itemize}
+Thus, for each $j \in \ive{i}$, we have
+$\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j } = q_i^{(j)}$.
+This proves Claim~\ref{claim:description_q_i^(j)}.
+% So many words and so little content.
 \end{subproof}
 
 \begin{claim}
@@ -2500,9 +2548,23 @@ Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 \end{claim}
 
 \begin{subproof}
-Descending induction on $j$.
-Use Claim~\ref{claim:weakly_decreasing_level_i} and Claim~\ref{claim:description_q_i^(j)} too.
-\Darij{TODO Use Lemma~\ref{lem:determinant_form.interl-A}(b).}
+From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right)$.
+This word $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by Claim~\ref{claim:weakly_decreasing_level_i}).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+Hence, Lemma~\ref{lem:determinant_form.interl-A}(b) (applied to $u^{\left[i-1\right]}$, $q_i$ and $j$ instead of $u$, $q$ and $h$)
+yields
+\[
+\set{ p \in \ive{n} \mid \bigl( u^{\left[i\right]} \bigr)_p = j }
+\succeq
+\set{ p \in \ive{n} \mid \bigl( u^{\left[i-1\right]} \bigr)_p = j }
+\gg
+\set{ p \in \ive{n} \mid \bigl( u^{\left[i\right]} \bigr)_p = j+1 }
+\]
+(since $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$).
+But the three sets appearing in this relation are
+$q_i^{(j)}$, $q_{i-1}^{(j)}$ and $q_i^{(j+1)}$ (from left to right),
+as follows from Claim~\ref{claim:description_q_i^(j)}.
+Thus, this relation becomes $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 \end{subproof}
 
 \begin{claim}
@@ -2511,7 +2573,20 @@ We have $q_{\ell-1} = B$.
 \end{claim}
 
 \begin{subproof}
-\Darij{TODO this is easy.}
+For each $i \in \ive{\ell-1}$, the equality~\eqref{eq.determinant_form.qij.1} leads to
+\begin{align*}
+  q_i & = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
+            \qquad \left(\text{by \eqref{claim:description_q_i^(j)}}\right) \\
+      &= \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p \leq i } .
+\end{align*}
+Applying this to $i = \ell-1$, we obtain
+\begin{align*}
+  q_{\ell-1}
+  &= \set{ p \in \ive{n} \mid ( u^{\left[\ell-1\right] } )_p \leq \ell-1 } \\
+  &= \set{ p \in \ive{n} \mid u_p \leq \ell-1 }
+   \qquad \left(\text{since } u^{\left[  \ell-1\right]  } = u \right) \\
+  &= B \qquad \left(\text{by the construction of }u\right) .
+\end{align*}
 \end{subproof}
 
 Now, the MLQ $\qq$ is interlacing (by Claim~\ref{claim:interlacing_subqueues}) and satisfies $q_{\ell-1} = B$ (by Claim~\ref{claim:the_last_queue}).
@@ -2536,6 +2611,10 @@ i+1 & \text{if } t \notin q_i.
 
 \begin{subproof}
 Induction on $i$.
+For convenience, we extend the claim to $i \in \set{0, 1, \ldots, \ell-1}$;
+thus, we can take the trivial case $i = 0$ as base case
+(remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1\dotsm1$).
+
 \Darij{TODO}
 \end{subproof}
 
