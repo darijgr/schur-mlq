@@ -2188,7 +2188,28 @@ Then:
 \end{enumerate}
 \end{lemma}
 
-\Darij{TODO: Example. More precisely, counterexamples, showing how each condition is actually needed.}
+\begin{example}
+\begin{itemize}
+\item Let $n = 9$, $u = 322131133$, $t = 3$ and $q = \set{1, 2, 3, 5, 6, 7}$.
+Then, $q(u) = 322411144$ satisfies all assumptions of
+Lemma~\ref{lem:determinant_form.interl-A}.
+Thus, part (a) of the lemma says that $u$ is weakly decreasing up to level $2$ (which is evident).
+% Part (b) of the lemma, applied to $h = 2$, says that
+% $\set{ 2, 3 } \succeq \set{ 2, 3 } \gg \set{ 1 }$.
+Part (b) of the lemma, applied to $h = 1$, says that
+$\set{ 5, 6, 7 } \succeq \set{ 4, 6, 7 } \gg \set{ 2, 3 }$.
+
+\item The assumption that $q(u)$ has at least one letter equal to $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
+Indeed, if $n = 4$, $u = 3312$, $t = 3$ and $q = \set{1, 3}$, then $q(u) = 2414$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+
+\item The assumption that $q(u)$ is weakly decreasing up to level $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
+Indeed, if $n = 4$, $u = 1233$, $t = 3$ and $q = \set{1, 2, 3}$, then $q(u) = 1234$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+
+\item The assumption that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
+Indeed, if $n = 5$, $u = 32112$, $t = 3$ and $q = \set{2, 3, 5}$, then $q(u) = 32141$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+% I think we can loosen this assumption to ``$q(u)$ has \emph{at most} $\abs{q}$ letters that are at most $t$'', at least as far as part (a) of the lemma is concerned. But not for part (b); the counterexample for that is $n = 4$, $u = 3312$, $t = 2$ and $q = \set{1, 2, 3}$.
+\end{itemize}
+\end{example}
 
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
 Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
