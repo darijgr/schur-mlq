@@ -2423,6 +2423,282 @@ Combining this with $A\succeq B$, we obtain $A \succeq B \gg C$.
 This completes the proof of Lemma~\ref{lem:determinant_form.interl-A}(b).
 \end{proof}
 
+Our next lemma gives an explicit expression for $q(u)$ when the queue $q$ and the word $u$ have a special form (essentially, when the word $u$ has all its letters belong to $\ive{h}$ for some positive integer $h$ and is weakly decreasing up to level $h-1$, and the queue $q$ is tailored to ``shift the letters of $u$ right''):
+
+\begin{lemma}
+\label{lem:determinant_form.interl-B}
+Let $u \in \mcW_n$ and let $h>0$ be a positive integer.
+Let $r$ and $q$ be two queues.
+Let $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ be nonempty disjoint subsets of $r$ satisfying
+\begin{subequations}
+\begin{align}
+\label{eq.lem:determinant_form.interl-B.rj.1}
+  r  & = r^{(1)} \cup r^{(2)} \cup \cdots \cup r^{(h-1)}
+\qquad \text{and}
+\\
+\label{eq.lem:determinant_form.interl-B.rj.2}
+  r^{(1)} & \gg r^{(2)} \gg \cdots \gg r^{(h-1)} .
+\end{align}
+\end{subequations}
+Let $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ be nonempty disjoint subsets of $q$ satisfying
+\begin{subequations}
+\begin{align}
+\label{eq.lem:determinant_form.interl-B.qj.1}
+  q  & = q^{(1)} \cup q^{(2)} \cup \cdots \cup q^{(h)}
+\qquad \text{and}
+\\
+\label{eq.lem:determinant_form.interl-B.qj.2}
+  q^{(1)} & \gg q^{(2)} \gg \cdots \gg q^{(h)} .
+\end{align}
+\end{subequations}
+Assume furthermore that
+$q^{(j)} \succeq r^{(j)} \gg q^{(j+1)}$ for all $j \in \ive{h-1}$.
+Finally, assume that each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{eq.lem:determinant_form.interl-B.asslast}
+u_t =
+\begin{cases}
+j & \text{if } t \in r^{(j)} \text{ for some } j \in\ive{h-1}\!, \\
+h & \text{if } t \notin r .
+\end{cases}
+\end{equation}
+Then, each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{eq.lem:determinant_form.interl-B.claim}
+(q(u))_t =
+\begin{cases}
+j & \text{if } t \in q^{(j)} \text{ for some } j \in\ive{h}\!, \\
+h+1 & \text{if } t \notin q .
+\end{cases}
+\end{equation}
+\end{lemma}
+
+\begin{example}
+Let $n = 11$, $u = 332 232 131 13$, $h = 3$,
+$r = \set{3, 4, 6, 7, 9, 10}$, $q = \set{2, 4, 5, 6, 9, 10, 11}$,
+$r^{(1)} = \set{7, 9, 10}$, $r^{(2)} = \set{3, 4, 6}$,
+$q^{(1)} = \set{9, 10, 11}$, $q^{(2)} = \set{4, 5, 6}$, and
+$q^{(3)} = \set{2}$.
+Then, the assumptions of Lemma~\ref{lem:determinant_form.interl-B}
+are satisfied.
+As Lemma~\ref{lem:determinant_form.interl-B} predicts, we then have
+$q(u) = 434 222 441 11$.
+\end{example}
+
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-B}.]
+For each $j \in \ive{h-1}$, we have
+$q^{(j)} \succeq r^{(j)}$ (by assumption), and thus in particular
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.qj=rj}
+\abs{q^{(j)}} = \abs{r^{(j)}}
+\end{equation}
+(by the definition of $\succeq$).
+Summing these equations over all $j \in \ive{h-1}$, we obtain
+\[
+\abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}}
+=
+\abs{r^{(1)}} + \abs{r^{(2)}} + \cdots + \abs{r^{(h-1)}}
+= \abs{r}
+\]
+(since~\eqref{eq.lem:determinant_form.interl-B.rj.1}
+and~\eqref{eq.lem:determinant_form.interl-B.rj.2}
+show that the sets $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ partition
+$r$).
+But~\eqref{eq.lem:determinant_form.interl-B.qj.1}
+and~\eqref{eq.lem:determinant_form.interl-B.qj.2}
+show that the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$;
+thus,
+\begin{equation}
+\abs{q}
+= \underbrace{\abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}}}_{= \abs{r}} + \abs{q^{(h)}}
+= \abs{r} + \abs{q^{(h)}} .
+\end{equation}
+Therefore, $\abs{q} - \abs{r} = \abs{q^{(h)}}$
+and $\abs{q} \geq \abs{r}$.
+
+From~\eqref{eq.lem:determinant_form.interl-B.asslast},
+we see that the word $u$ has type
+$\tup{\abs{r^{(1)}}, \abs{r^{(2)}}, \ldots, \abs{r^{(h-1)}}, n - \abs{r}}$.
+Hence,~\eqref{eq:queue_type_change} (using $\abs{q} \geq \abs{r}$)
+shows that the word $q(u)$ has type
+\begin{align}
+&\tup{\abs{r^{(1)}}, \abs{r^{(2)}}, \ldots, \abs{r^{(h-1)}}, \abs{q} - \abs{r} ,
+n - \abs{q}} \\
+&= \tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
+n - \abs{q}}
+\end{align}
+(by~\eqref{pf.lem:determinant_form.interl-B.qj=rj} and due to
+$\abs{q} - \abs{r} = \abs{q^{(h)}}$).
+Thus, in particular, the $n - \abs{q}$ largest letters of $q(u)$
+equal $h+1$.
+
+The construction of $q(u)$ shows that each of the letters $(q(u))_j$ with $j \notin q$ is larger than each of the letters $(q(u))_j$ with $j \in q$.
+(This is true for any queue $q$ and word $u$.)
+Hence, the letters $(q(u))_j$ with $j \notin q$ are the $n - \abs{q}$ largest letters of $q(u)$.
+Thus, these letters equal $h+1$ (since the $n - \abs{q}$ largest letters of $q(u)$ equal $h+1$).
+In other words,
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.res3}
+(q(u))_t = h+1
+\qquad \text{ for every } t \in \ive{n} \text{ satisfying } t \notin q .
+\end{equation}
+
+The properties~\eqref{eq.lem:determinant_form.interl-B.rj.1}
+and~\eqref{eq.lem:determinant_form.interl-B.rj.2} show that
+the set $r^{(1)}$ consists of the $\abs{r^{(1)}}$ largest
+elements of $r$;
+the set $r^{(2)}$ consists of the $\abs{r^{(2)}}$ next-largest
+elements of $r$;
+and so on.
+
+Now, we construct a permutation $\tup{i_1, i_2, \ldots, i_n}$ of
+$\tup{1, 2, \ldots, n}$ as follows:
+First list the elements of $r$ in decreasing order
+ (this automatically causes the list to start with the
+ elements of $r^{(1)}$, then with the elements
+ of $r^{(2)}$, and so on, because of what we just said);
+ then list the elements of $\ive{n} \setminus r$ in an arbitrary order.
+Thus, this permutation begins with a list of all elements of $r^{(1)}$,
+then continues with the elements of $r^{(2)}$, and so on, and finally
+ends with the elements of $\ive{n} \setminus r$.
+Hence, this permutation has the property that
+$u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$
+(by~\eqref{eq.lem:determinant_form.interl-B.asslast}).
+Hence, we can use this permutation in the construction of
+$q(u)$.
+For each $k \in \ive{n}$, let $j_k$ be the site $j$ that
+is found in this construction during the step at which $i = i_k$.
+Note that $i$ ranges over $i_1, i_2, \ldots, i_{\abs{q}}$ in
+Phase~II of the construction, and ranges over
+$i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$ in Phase~I.
+Also, the sites $j_1, j_2, \ldots, j_n$ are distinct.
+
+In order to better understand Phase~II, let us give a
+mental model for it.
+
+Consider a man named $M_k$ for each $k \in r$ (for a total of $\abs{r}$ many men).
+Consider a woman named $W_k$ for each $k \in q$ (for a total of $\abs{q}$ many women).
+
+The \defn{age} of a man $M_k$ or woman $W_k$ is defined to be the number $k \in \ive{n}$.
+
+We subdivide the (altogether $\abs{r} + \abs{q}$ many) people into $h$ \defn{age brackets}, numbered $1, 2, \ldots, h$:
+Namely, for each $j \in \ive{h}$, the $j$-th age bracket shall contain
+ the men $M_k$ with $k \in r^{(j)}$ (where $r^{(h)} := \emptyset$), and
+ the women $W_k$ with $k \in q^{(j)}$.
+
+Observe the following facts:
+\begin{enumerate}
+\item[(A)] Each age bracket has at least one woman (since the $q^{(j)}$ are nonempty); likewise, each but the $h$-th age bracket has at least one man.
+\item[(B)] If $j_1 < j_2$, then every man in the $j_1$-th age bracket is older than every man in the $j_2$-th age bracket (by~\eqref{eq.lem:determinant_form.interl-B.rj.2}). The same holds for women.
+\item[(C)] If $j \in \ive{h-1}$, then any man in the $j$-th age bracket is (strictly) older than any woman in the $j+1$-st age bracket (since $r^{(j)} \gg q^{(j+1)}$), and therefore is also older than any woman in the $j'$-th age bracket for all $j' > j$ (because of facts (A) and (B)).
+\item[(D)] If $j \in \ive{h-1}$, then the $j$-th age bracket has as many men as it has women (by~\eqref{pf.lem:determinant_form.interl-B.qj=rj}), and the women are ``generally older'' (this means that for each $p$, the $p$-th oldest woman in the $j$-th age bracket is at least as old as the $p$-th oldest man in the $j$-th age bracket). (This follows from $q^{(j)} \succeq r^{(j)}$.)
+\end{enumerate}
+
+We now consider a ``marriage procedure'' in which we try to marry off all men (monogamously).
+The procedure proceeds step-by-step:
+The men marry in the order of decreasing age; each man marries the youngest available woman that is \emph{at least as old} as him.
+Theoretically, it could happen that this procedure fails, in the sense that some man finds no such woman; we will soon see that this does not happen.
+
+Let us now see how the ``marriage procedure'' actually proceeds.
+The men marry in the order of decreasing age: thus, the men in the $1$-st age bracket marry first, then the men in the $2$-nd age bracket marry, and so on, until finally the men in the $h-1$-st age bracket marry (or the procedure fails).
+We now claim the following fact:
+\begin{enumerate}
+\item[(E)] Each man marries ``within his own age bracket'' (\textit{i.e.}, if the man belongs to the $j$-th age bracket for some $j \in \ive{h-1}$, then he marries a woman in the $j$-th age bracket).\footnote{In particular, we are saying that each man does marry; thus, the procedure does not fail.}
+\end{enumerate}
+[\textit{Proof:} To prove this, we argue by strong induction on the time -- i.e., we consider some man $M_\alpha$ marrying during the procedure, and we assume (as induction hypothesis) that all older men have married within their own age brackets. We then need to show that $M_\alpha$ also marries within his age bracket (and in particular, that he does marry).
+Let's say that $M_\alpha$ belongs to the $j$-th age bracket, and is the $p$-th oldest man in this age bracket. Then, by the induction assumption, we know that all men in the $1$-st, $2$-nd, ..., $j-1$-st age brackets are already married, and so are $p-1$ men in the $j$-th age bracket. Hence, by fact (D), we conclude that all women in the $1$-st, $2$-nd, ..., $j-1$-st age brackets are already married, and so are $p-1$ women in the $j$-th age bracket. Thus, man $M_\alpha$ seeks his wife-to-be among the remaining women in the $j$-th age bracket, as well as the higher brackets (\textit{i.e.}, the $j'$-th age brackets for $j' > j$). But since he must marry a woman that is at least as old as him, he finds no suitable candidates within the higher brackets (indeed, Fact (C) shows that all women in these higher brackets are younger than him); thus, he can only find a wife in the $j$-th age bracket. Fact (D) shows that the $p$-th oldest woman in the $j$-th age bracket is at least as old as him; thus, there are at least $p$ women in the $j$-th age bracket that are at least as old as him. Since only $p-1$ women in this bracket are already married, this implies that at least one unmarried woman is at least as old as him. Hence, $M_\alpha$ succeeds and marries a woman in the $j$-th age bracket. This completes the proof of fact (E).]
+
+Fact (E) shows that, in particular, each man marries; hence, the ``marriage procedure'' does not fail.
+
+Now, we claim that the ``marriage procedure'' precisely follows the first $\abs{r}$ steps of Phase~II:
+The men that get married are precisely the men $M_k$ with $k \in r$, in order of decreasing age; thus, they are $M_{i_1}, M_{i_2}, \ldots, M_{i_{\abs{r}}}$ (in this order)\footnote{This is because the permutation $\tup{i_1, i_2, \ldots, i_n}$ begins with the elements of $r$ listed in decreasing order.}; furthermore, each man $M_{i_k}$ marries woman $W_{j_k}$ (because his search for the youngest available woman that is at least as old as him is precisely the search for the first available site $j$ to the right of $i$ in Phase~II\footnote{Except for the fact that his search doesn't ``wrap around the circle'' (i.e., if he finds no wife older than him, then he doesn't wrap over to the youngest women), whereas the search for $j$ in Phase~II does. But this difference is immaterial, because we know from Fact (E) that man $M_{i_k}$ necessarily finds a wife, so that ``wrapping around the circle'' isn't necessary.}).
+% This is not very well explained, but I can't do better.
+
+Fact (E) thus shows that (for each man $M_{i_k}$) man $M_{i_k}$ and woman $W_{j_k}$ belong to the same age bracket.
+In other words, for each man $M_{i_k}$, we have
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.reso1}
+\text{if $i_k \in r^{(j)}$ for some $j \in \ive{h-1}$, then $j_k \in q^{(j)}$}
+\end{equation}
+(because of how age brackets are defined).
+
+Next, we claim that
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.res1}
+(q(u))_t = j
+\qquad \text{ for every } j \in \ive{h-1} \text{ and } t \in q^{(j)} .
+\end{equation}
+
+[\textit{Proof of~\eqref{pf.lem:determinant_form.interl-B.res1}:}
+Let $j \in \ive{h-1}$.
+
+Fix $k \in \ive{n}$ satisfying $i_k \in r^{(j)}$.
+Then, $i_k \in r$, so that man $M_{i_k}$ exists.
+Hence,~\eqref{pf.lem:determinant_form.interl-B.reso1} yields $j_k \in q^{(j)}$.
+Consider the step in the construction of $q(u)$ at which $i = i_k$.
+This step belongs to Phase~II (because otherwise, it would belong to Phase~I,
+which would entail $j_k \notin q$, which would contradict $j_k \in q^{(j)} \subseteq q$).
+Hence, the construction of $q(u)$ yields $(q(u))_{j_k} = u_{i_k} = j$
+(by~\eqref{eq.lem:determinant_form.interl-B.asslast}, since $i_k \in r^{(j)}$).
+
+Forget that we fixed $k$.
+We thus have shown that each $k \in \ive{n}$ satisfying $i_k \in r^{(j)}$
+satisfies $j_k \in q^{(j)}$ and $(q(u))_{j_k} = j$.
+Hence, we have found at least $\abs{r^{(j)}}$ many sites $t \in q^{(j)}$
+satisfying $(q(u))_t = j$ (namely, all the sites $j_k$ for $k \in \ive{n}$
+satisfying $i_k \in r^{(j)}$).
+(Here, we have used the fact that the sites $j_1, j_2, \ldots, j_n$ are distinct.)
+But~\eqref{pf.lem:determinant_form.interl-B.qj=rj} shows that there are
+only $\abs{r^{(j)}}$ many sites $t \in q^{(j)}$;
+hence, the $\abs{r^{(j)}}$ many sites that we found must cover all the
+sites $t \in q^{(j)}$.
+Therefore, all the sites $t \in q^{(j)}$ satisfy $(q(u))_t = j$.
+This proves~\eqref{pf.lem:determinant_form.interl-B.res1}.]
+
+Finally, we claim that
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.res2}
+(q(u))_t = h
+\qquad \text{ for every } t \in q^{(h)} .
+\end{equation}
+
+[\textit{Proof of~\eqref{pf.lem:determinant_form.interl-B.res2}:}
+We have seen that the word $q(u)$ has type
+$\tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
+n - \abs{q}}$.
+Thus, it has $\abs{q^{(h)}}$ many letters equal to $h$.
+In other words, there are $\abs{q^{(h)}}$ many positions $t \in \ive{n}$
+satisfying $(q(u))_t = h$.
+These positions $t$ cannot satisfy $t \notin q$ (since
+otherwise,~\eqref{pf.lem:determinant_form.interl-B.res3}
+would yield $(q(u))_t = h+1 \neq h$, contradicting $(q(u))_t = h$);
+thus, they have to belong to $q$.
+But they cannot belong to any of the $q^{(j)}$ with $j \in \ive{h-1}$
+(since otherwise,~\eqref{pf.lem:determinant_form.interl-B.res1}
+would yield $(q(u))_t = j \leq h-1 < h$, contradicting $(q(u))_t = h$);
+thus, they have to belong to
+\[
+q \setminus \tup{q^{(1)} \cup q^{(2)} \cup \cdots \cup q^{(h-1)}} = q^{(h)}
+\]
+(since the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$).
+Thus, we know that there are $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$
+satisfying $(q(u))_t = h$.
+These positions must cover all of $q^{(h)}$
+(since there are only $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$).
+Hence, every position $t \in q^{(h)}$ must satisfy $(q(u))_t = h$.
+This proves~\eqref{pf.lem:determinant_form.interl-B.res2}.]
+
+Combining~\eqref{pf.lem:determinant_form.interl-B.res1}
+with~\eqref{pf.lem:determinant_form.interl-B.res2}, we conclude that
+\[
+(q(u))_t = j
+\qquad \text{ for every } j \in \ive{h} \text{ and } t \in q^{(j)} .
+\]
+Combining this with~\eqref{pf.lem:determinant_form.interl-B.res3},
+we obtain~\eqref{eq.lem:determinant_form.interl-B.claim}.
+Thus, Lemma~\ref{lem:determinant_form.interl-B} is proven.
+\end{proof}
+
 Next, we shall connect the interlacingness of an MLQ with its action on the word $1\dotsm 1$:
 
 \begin{lemma}
@@ -2615,13 +2891,115 @@ For convenience, we extend the claim to $i \in \set{0, 1, \ldots, \ell-1}$;
 thus, we can take the trivial case $i = 0$ as base case
 (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1\dotsm1$).
 
-\Darij{TODO}
+For the induction step, we fix $h \in \ive{\ell-1}$, and we assume
+(as induction hypothesis)
+that Claim~\ref{claim:describing_u^[i]} holds for $i = h - 1$.
+We now must prove that Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
+
+The induction hypothesis shows that each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{pf.claim:describing_u^[i].IH}
+\left( u^{\left[  h-1\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_{h-1}^{(j)} \text{ for some } j \in\ive{h-1}\!, \\
+h & \text{if } t \notin q_{h-1} .
+\end{cases}
+\end{equation}
+
+Since $\qq$ is interlacing, we have
+$q_h^{(j)} \succeq q_{h-1}^{(j)} \gg q_h^{(j+1)}$ for all $j \in \ive{h-1}$.
+
+Altogether, we see that Lemma~\ref{lem:determinant_form.interl-B} (applied to $u^{\left[  h-1\right]  }$, $q_{h-1}$, $q_h$, $q_{h-1}^{(j)}$ and $q_h^{(j)}$ instead of $u$, $r$, $q$, $r^{(j)}$ and $q^{(j)}$) yields that each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{pf.claim:describing_u^[i].4}
+\left( q_h\left(  u^{\left[  h-1\right]  }\right) \right)_t =
+\begin{cases}
+j & \text{if } t \in q_h^{(j)} \text{ for some } j \in\ive{h}\!, \\
+h+1 & \text{if } t \notin q_h .
+\end{cases}
+\end{equation}
+
+From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have
+$u^{\left[  h\right]} = q_h\left(  u^{\left[  h-1\right]  }\right)$.
+Thus,~\eqref{pf.claim:describing_u^[i].4} rewrites as
+\[
+\left( u^{\left[  h\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_h^{(j)} \text{ for some } j \in\ive{h}\!, \\
+h+1 & \text{if } t \notin q_h .
+\end{cases}
+\]
+In other words, Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
+This completes the induction step.
+Thus, Claim~\ref{claim:describing_u^[i]} is proven.
 \end{subproof}
 
 Applying Claim~\ref{claim:describing_u^[i]} to $i=\ell-1$, we conclude that
-\Darij{TODO.}
-
-Therefore, $u^{\left[\ell-1\right]} = u$.
+all letters of the word $u^{\left[  \ell-1\right]}$ are given as follows:
+\begin{equation}
+\label{pf.lem:determinant_form.interl-act.fwd.5}
+\left( u^{\left[  \ell-1\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
+\ell & \text{if } t \notin q_{\ell-1}.
+\end{cases}
+\end{equation}
+On the other hand, the definition of the word $u$ shows that
+the letters of $u$ are given as follows:
+\[
+u_t =
+\begin{cases}
+v_j & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\ell & \text{otherwise}
+\end{cases}
+\in
+\begin{cases}
+\ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\set{\ell} & \text{otherwise} .
+\end{cases}
+\]
+In view of $\set{b_1, b_2, \ldots, b_r} = B = q_{\ell-1}$,
+this shows that
+the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$,
+whereas
+the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
+Hence, the letters $u_t$ for $t \in q_{\ell-1}$ are precisely
+those letters of $u$ that are $\leq \ell-1$.
+Thus, these letters appear in weakly decreasing order
+(since $u$ is weakly decreasing up to level $\ell-1$), and we
+also know how often each of the letters $1, 2, \ldots, \ell-1$
+appears among them (namely, each $k \in \ive{\ell-1}$ appears
+$m_k$ times, since $u$ has type $\mm$).
+Hence,
+\begin{itemize}
+\item the rightmost $m_1$ of these letters are $1$,
+\item the next-rightmost $m_2$ of these letters are $2$,
+\item and so on, until the letters that are $\ell-1$.
+\end{itemize}
+In other words,
+\begin{itemize}
+\item the letter $1$ appears in the rightmost $m_1$ positions in $q_{\ell-1}$;
+\item the letter $2$ appears in the next-rightmost $m_2$ positions in $q_{\ell-1}$;
+\item and so on, until the letter $\ell-1$.
+\end{itemize}
+In other words,
+\begin{itemize}
+\item the letter $1$ appears in the positions in $q_{\ell-1}^{(1)}$ (because these are the rightmost $m_1$ positions in $q_{\ell-1}$);
+\item the letter $2$ appears in the positions in $q_{\ell-1}^{(2)}$ (because these are the next-rightmost $m_2$ positions in $q_{\ell-1}$);
+\item and so on, until the letter $\ell-1$.
+\end{itemize}
+If we combine this with the fact that the remaining letters of $u$ are $\ell$ (indeed, the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$),
+we thus conclude that all letters of $u$ can be described as follows:
+\[
+u_t =
+\begin{cases}
+j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
+\ell & \text{if } t \notin q_{\ell-1}.
+\end{cases}
+\]
+Comparing this with~\eqref{pf.lem:determinant_form.interl-act.fwd.5}, we conclude that
+$\left( u^{\left[\ell-1\right]} \right)_t = u_t$ for all $t \in \ive{n}$.
+Thus, $u^{\left[\ell-1\right]} = u$.
 Hence, $u = u^{\left[\ell-1\right]} = \qq(1 \cdots 1)$.
 This proves the $\Longleftarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
 \end{proof}
