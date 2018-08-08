@@ -2525,19 +2525,13 @@ Since these letters must appear in weakly decreasing order, and since we know ho
 \end{itemize}
 In other words:
 \begin{itemize}
-\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 1$ are precisely the largest $m_1$ elements of $q_i$.
-\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 2$ are precisely the next-largest $m_2$ elements of $q_i$.
-\item And so on, until we get to the $j \in \ive{n}$ satisfying $(u^{\left[  i\right]})_j = i$.
-\end{itemize}
-In other words:
-\begin{itemize}
 \item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 1 }$ consists of the largest $m_1$ elements of $q_i$, so that it is $q_i^{(1)}$.
 \item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 2 }$ consists of the next-largest $m_2$ elements of $q_i$, so that it is $q_i^{(2)}$.
 \item And so on, until we get to the set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = i }$.
 \end{itemize}
 Thus, for each $j \in \ive{i}$, we have
 $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j } = q_i^{(j)}$.
-This proves Claim~\ref{claim:description_q_i^(j)}.
+Therefore, we have proven Claim~\ref{claim:description_q_i^(j)}.
 % So many words and so little content.
 \end{subproof}
 
@@ -2548,9 +2542,10 @@ Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 \end{claim}
 
 \begin{subproof}
-From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right)$.
-This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by Claim~\ref{claim:weakly_decreasing_level_i}).
-Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]  } )$.
+This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
+Thus, $u^{\left[  i\right]}$ has at least one letter equal to $i$ since $m_i > 0$ and is weakly decreasing up to level $i$ by Claim~\ref{claim:weakly_decreasing_level_i}.
+Also, $u^{\left[  i\right]}$ has exactly $\abs{q_i}$ letters that are at most $i$ since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$.
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(b) (applied to $u^{\left[i-1\right]}$, $q_i$ and $j$ instead of $u$, $q$ and $h$)
 yields
 \[
@@ -2561,9 +2556,7 @@ yields
 \set{ p \in \ive{n} \mid \bigl( u^{\left[i\right]} \bigr)_p = j+1 }
 \]
 (since $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$).
-But the three sets appearing in this relation are
-$q_i^{(j)}$, $q_{i-1}^{(j)}$ and $q_i^{(j+1)}$ (from left to right),
-as follows from Claim~\ref{claim:description_q_i^(j)}.
+However, the three sets appearing in this relation are $q_i^{(j)}$, $q_{i-1}^{(j)}$, and $q_i^{(j+1)}$ (from left to right), as follows from Claim~\ref{claim:description_q_i^(j)}.
 Thus, this relation becomes $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 \end{subproof}
 
@@ -2573,20 +2566,19 @@ We have $q_{\ell-1} = B$.
 \end{claim}
 
 \begin{subproof}
-For each $i \in \ive{\ell-1}$, Equation~\eqref{eq.determinant_form.qij.1} leads to
-\begin{align*}
-  q_i & = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
-            \qquad \text{(by Claim~\ref{claim:description_q_i^(j)})} \\
-      &= \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p \leq i } .
-\end{align*}
+For each $i \in \ive{\ell-1}$, Equation~\eqref{eq.determinant_form.qij.1} and Claim~\ref{claim:description_q_i^(j)} leads to
+\[
+  q_i = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
+      = \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p \leq i } .
+\]
 Applying this to $i = \ell-1$, we obtain
-\begin{align*}
+\[
   q_{\ell-1}
-  &= \set{ p \in \ive{n} \mid ( u^{\left[\ell-1\right] } )_p \leq \ell-1 } \\
-  &= \set{ p \in \ive{n} \mid u_p \leq \ell-1 }
-   \qquad \left(\text{since } u^{\left[  \ell-1\right]  } = u \right) \\
-  &= B \qquad \left(\text{by the construction of }u\right) .
-\end{align*}
+  = \set{ p \in \ive{n} \mid ( u^{\left[\ell-1\right] } )_p \leq \ell-1 }
+  = \set{ p \in \ive{n} \mid u_p \leq \ell-1 }
+  = B
+\]
+since $u^{\left[  \ell-1\right]  } = u$ and by the construction of $u$.
 \end{subproof}
 
 Now, the MLQ $\qq$ is interlacing (by Claim~\ref{claim:interlacing_subqueues}) and satisfies $q_{\ell-1} = B$ (by Claim~\ref{claim:the_last_queue}).
@@ -3095,11 +3087,11 @@ as follows:
        and is always a word whose non-frozen
        part (\textit{i.e.}, the word obtained by removing
        all frozen letters) is
-       \[
+       \begin{equation}
        \label{eq:reduced_parens}
        \underbrace{))\cdots)}_{a\text{ parentheses}}
        \underbrace{((\cdots(}_{b\text{ parentheses}}
-       \]
+       \end{equation}
        for some integers $a, b \geq 0$.
  \item Now, replace the non-frozen part~\eqref{eq:reduced_parens} by
        \[
@@ -3312,10 +3304,10 @@ Now,
 \begin{align*}
  %\label{eq:dual_config_equalities}
  \bigl( (q'_1)^*, (q'_2)^* \bigr)
- &= \tup{ ([u]_k)^* , q^* }'
+ &= \bigl( ([u]_k)^* , q^* \bigr)'
  = \tup{ [u^*]_{n-k} , q^* }' \\
- & = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }
- = \tup{ q^\dagger , [(q(u))^*]_{n-k} } ,
+ & = \tup{ q^{\dagger} , [q^*(u^*)]_{n-k} }
+ = \tup{ q^{\dagger} , \bigl[\bigl(q(u) \bigr)^* \bigr]_{n-k} } ,
 \end{align*}
 where
 \begin{itemize}
@@ -3323,7 +3315,7 @@ where
  \item the second equality is because $([u]_k)^* = [u^*]_{n-k}$; and
  \item the fourth equality follows from Lemma~\ref{le:dual}.
 \end{itemize}
-Therefore, $(q'_2)^* = [(q(u))^*]_{n-k} = ([q(u)]_k)^*$, so that
+Therefore, $(q'_2)^* = \bigl[\bigl( q(u) \bigr)^* \bigr]_{n-k} = ([q(u)]_k)^*$, so that
 $q'_2 = [q(u)]_k$.
 Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
 \end{proof}
