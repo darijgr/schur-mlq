@@ -3006,28 +3006,17 @@ We now state the main result of this section: a Jacobi--Trudi-like formula for $
 \label{thm:determinant_form}
 Let $\ell$ be a positive integer.
 Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
-Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
+Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.\travis{We probably want to introduce the notation of a weakly decreasing word, then we can just say ``Let $v = v_1 v_2 \dotsm v_r$ be a weakly decreasing packed word.''}
 Define a word $u \in \mcW_n$ by $u_i=v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
-For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
+For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.\footnote{The value $\gamma_j$ can also be described as the number of distinct letters in the (non-cyclic) word $v_1 \dotsm v_j$.}
 Then
 \[
 \swt{u} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{i, j \in \ive{r}}.
 \]
 \end{thm}
 
-Note that the $\gamma_j$ in Theorem~\ref{thm:determinant_form} can also be described as the number of distinct letters in the (non-cyclic) word $v_1 \dotsm v_j$.
-
-\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
-Define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ by
-\[
-m_i =
-  \begin{cases}
-  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i < \ell,\\
-  n - r & \text{if } i = \ell.
-  \end{cases}
-\]
-Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
-This has the consequence that
+\begin{proof}
+Suppose the $r$-tuple is
 \begin{equation}
 \label{pf.thm:determinant_form.v=}
 \tup{v_1, v_2, \dotsc, v_r} = (
@@ -3035,13 +3024,13 @@ This has the consequence that
   \underbrace{\ell-2,\ldots,\ell-2}_{m_{\ell-2}\text{ times}},
   \dotsc,
   \underbrace{1,\ldots,1}_{m_1\text{ times}}
-).
+),
 \end{equation}
-Moreover, it shows that the word $u$ has type $\mm$ (since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
-Also, $m_i > 0$ for all $i \in \ive{\ell-1}$ (by~\eqref{pf.thm:determinant_form.v=} and because of $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
+and so if we set $m_{\ell} = n - r$, we define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$.
+Moreover, the word $u$ has type $\mm$ by the construction of $u$.
+Note that $m_i > 0$ for all $i \in \ive{\ell-1}$ since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$.
 Hence, the word $u$ is packed.
-
-Moreover, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
+Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
 
 %This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
 %Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
