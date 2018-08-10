@@ -2170,8 +2170,7 @@ For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\c
 \label{lem:determinant_form.interl-A}
 Let $u \in \mcW_n$ and $t > 0$.
 Let $q$ be a queue.
-Assume that the word $q(u)$ has at least one letter equal to $t$, and that this word is weakly decreasing up to level $t$.
-Assume also that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$.
+Assume that the word $q(u)$ has at least one letter equal to $t$, is weakly decreasing up to level $t$, and has exactly $\abs{q}$ letters that are at most $t$.
 Then:
 
 \begin{enumerate}
@@ -2192,22 +2191,24 @@ Then:
 \mbox{}
 \begin{itemize}
 \item Let $n = 9$, $u = {\color{gray}3}221{\color{gray}3}11{\color{gray}33}$, $t = 3$ and $q = \set{1, 2, 3, 5, 6, 7}$.
-Then, $q(u) = 322411144$ satisfies all assumptions of
+Then, $q(u) = 322{\color{gray}4}111{\color{gray}44}$ satisfies all assumptions of
 Lemma~\ref{lem:determinant_form.interl-A}.
 Thus, part (a) of the lemma says that $u$ is weakly decreasing up to level $2$ (which is evident).
 % Part (b) of the lemma, applied to $h = 2$, says that
 % $\set{ 2, 3 } \succeq \set{ 2, 3 } \gg \set{ 1 }$.
 Part (b) of the lemma, applied to $h = 1$, says that
-$\set{ 5, 6, 7 } \succeq \set{ 4, 6, 7 } \gg \set{ 2, 3 }$.
+\[
+\set{ 5, 6, 7 } \succeq \set{ 4, 6, 7 } \gg \set{ 2, 3 }.
+\]
 
 \item The assumption that $q(u)$ has at least one letter equal to $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
-Indeed, if $n = 4$, $u = 3312$, $t = 3$ and $q = \set{1, 3}$, then $q(u) = 2414$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+Indeed, if $n = 4$, $u = {\color{gray}33}12$, $t = 3$ and $q = \set{1, 3}$, then $q(u) = 2{\color{gray}4}1{\color{gray}4}$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
 
 \item The assumption that $q(u)$ is weakly decreasing up to level $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
-Indeed, if $n = 4$, $u = 1233$, $t = 3$ and $q = \set{1, 2, 3}$, then $q(u) = 1234$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+Indeed, if $n = 4$, $u = 12{\color{gray}33}$, $t = 3$ and $q = \set{1, 2, 3}$, then $q(u) = 123{\color{gray}4}$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
 
 \item The assumption that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
-Indeed, if $n = 5$, $u = 32112$, $t = 3$ and $q = \set{2, 3, 5}$, then $q(u) = 32141$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, then $q(u) = 321{\color{gray}4}1$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
 % I think we can loosen this assumption to ``$q(u)$ has \emph{at most} $\abs{q}$ letters that are at most $t$'', at least as far as part (a) of the lemma is concerned. But not for part (b); the counterexample for that is $n = 4$, $u = 3312$, $t = 2$ and $q = \set{1, 2, 3}$.
 \end{itemize}
 \end{example}
@@ -2223,6 +2224,7 @@ Therefore, the former letters are the $\abs{q}$ smallest letters of $q(u)$, and 
 Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$, and we have already accounted for them all).
 So we have shown that
 \begin{subequations}
+\label{pf.lem:determinant_form.interl}
 \begin{align}
 \label{pf.lem:determinant_form.interl-A.1}
 \bigl( q(u) \bigr)_j  & \leq t && \text{for each } j \in q;
@@ -2231,6 +2233,7 @@ So we have shown that
 \bigl( q(u) \bigr)_j  & > t && \text{for each } j \notin q.
 \end{align}
 \end{subequations}
+\travis{This follows trivially from the definition of Phase~II: the $\abs{q}$ smallest elements of $q(u)$ are at $j \in q$, which by assumption are at most $t$. Everything else is strictly larger than $t$ (which is used during Phase~I). It does not need a whole paragraph to explain!}
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $> t$.
 
@@ -2239,13 +2242,9 @@ We first argue four auxiliary claims:
 
 \begin{claim}
 \label{claim:little_interlacing}
-Let $k\in \ive{n} $ be such that $k\leq \left\vert
-q\right\vert $. Let $j_{!} \in q$ that lies between $i_k$
-(inclusive) and $j_k$ (inclusive) on the circle $\mathbb{Z}/n\mathbb{Z}$.
-(If $i_k>j_k$, then this means that $j_{!}\geq i_k$ or $j_{!}\leq j_k
-$; otherwise, it means that $i_k\leq j_{!}\leq j_k$.) Then, $\left(
-q(u) \right) _{j_{!}}\leq \left( q(u) \right)
-_{j_k}=u_{i_k}$.
+Let $k\in \ive{n} $ be such that $k\leq \abs{q}$.
+Let $j_{!} \in q$ that lies between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$.
+(If $i_k>j_k$, then this means that $j_{!} \geq i_k$ or $j_{!}\leq j_k$; otherwise, it means that $i_k\leq j_{!}\leq j_k$.) Then, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 \end{claim}
 
 \begin{subproof}
@@ -2278,11 +2277,14 @@ Assume the contrary. That is, $i_k>j_k$.
 Hence, the interval between $i_k$ and $j_k$ ``wraps around'' the circle (\textit{i.e.}, it is an interval only
 in $\ZZ/n\ZZ$, not in $\ive{n} $).
 
-Let $j_{\min }$ be the smallest element of $q$.
-Then,~\eqref{pf.lem:determinant_form.interl-A.1} and~\eqref{pf.lem:determinant_form.interl-A.2} reveal that $\bigl( q(u) \bigr)_{j_{\min}}$ is the first among the letters of $q(u)$ that are at most $t$, and therefore also the largest of these letters (since $q(u)$ is weakly decreasing up to level $t$).
-Yet, this largest letter must be $t$ since the word $q(u)$ has at least one letter equal to $t$.
-Hence, we have $\bigl( q(u) \bigr)_{j_{\min}} = t$.
+Let $j_{\min}$ be the smallest element of $q$.
+Thus we have
+\[
+\bigl( q(u) \bigr)_{j_{\min}} = \max \set{\bigl( q(u) \bigr)_j \mid j \in q} = t
+\]
+since $q(u)$ is weakly decreasing up to level $t$, the dichotomy~\eqref{pf.lem:determinant_form.interl}, and that $q(u)$ has at least one letter equal to $t$.
 
+\Travis{You need notation for these intervals. It is too cumbersome explaining it in words.}
 If the site $j_{\min }$ would lie between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$, then Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\min}$) would yield $\bigl( q(u) \bigr)_{j_{\min}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 This would contradict $\bigl( q(u) \bigr)_{j_{\min}} = t > u_{i_k}$.
 Hence, the site $j_{\min}$ cannot lie between $i_k$ (inclusive) and $j_k$ (inclusive).
@@ -2323,11 +2325,9 @@ This step is part of Phase~I, since $k > \abs{q}$.
 Hence, $j_k \notin q$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$ (by the way Phase~I operates).
 Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} > t$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} > t-1$.
 In other words, $u_{i_k} \geq t$.
-This contradicts $u_{i_k} < t$.
-Thus, our assumption (that $k > \abs{q}$) was false.
-Hence, $k \leq \abs{q}$.
+This contradicts $u_{i_k} < t$, and hence, we have $k \leq \abs{q}$.
 Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ must be set in Phase~II of the algorithm that constructs $q(u)$.
-Therefore, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
+So we have $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
 Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} is thus proven.
 \end{subproof}
 
@@ -2347,14 +2347,11 @@ Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
 Hence, the site $j_{\ell}$ lies between $i_k$ (inclusive) and $j_k$ (inclusive).
 Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!}=j_{\ell }$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k}$.
-This contradiction shows that our assumption was false, and so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
+Therefore, Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 
 (b) Let $h \in \ive{t-1}$.
-Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
-
-Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
-Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
-
+%Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
+%  This is obvious.  -- Travis
 Define
 \begin{align*}
 A & := \set{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h },
@@ -2378,7 +2375,8 @@ Hence, we can define a map
 i_k & \mapsto j_k
 \end{align*}
 (since each element of $B$ can be written as $i_k$ for a unique $k\in \ive{n} $), and it satisfies $\phi(b) \geq b$ for each $b \in B$ (since $j_k \geq i_k$).
-This map $\phi $ is furthermore injective (since the $j_1, j_2, \dotsc, j_n$ are distinct) and surjective.\footnote{\textit{Proof.}
+This map $\phi$ is injective since the $j_1, j_2, \dotsc, j_n$ are distinct (recall that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ because each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
+Furthermore, the map $\phi$ is surjective.\footnote{\textit{Proof.}
   Let $a\in A$.
   We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
   \par
@@ -2438,6 +2436,7 @@ Let $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ be nonempty disjoint subsets of $r$ sa
   r^{(1)} & \gg r^{(2)} \gg \cdots \gg r^{(h-1)} .
 \end{align}
 \end{subequations}
+\travis{You need a term for this. You don't need to be referencing these equations but a definition. Perhaps a ``decreasing partition''.}
 Let $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ be nonempty disjoint subsets of $q$ satisfying
 \begin{subequations}
 \begin{align}
@@ -2449,8 +2448,7 @@ Let $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ be nonempty disjoint subsets of $q$ sati
   q^{(1)} & \gg q^{(2)} \gg \cdots \gg q^{(h)} .
 \end{align}
 \end{subequations}
-Assume furthermore that
-$q^{(j)} \succeq r^{(j)} \gg q^{(j+1)}$ for all $j \in \ive{h-1}$.
+Furthermore, assume that $q^{(j)} \succeq r^{(j)} \gg q^{(j+1)}$ for all $j \in \ive{h-1}$.
 Finally, assume that each $t \in \ive{n}$ satisfies
 \begin{equation}
 \label{eq.lem:determinant_form.interl-B.asslast}
@@ -2463,7 +2461,7 @@ h & \text{if } t \notin r .
 Then, each $t \in \ive{n}$ satisfies
 \begin{equation}
 \label{eq.lem:determinant_form.interl-B.claim}
-(q(u))_t =
+\bigl( q(u) \bigr)_t =
 \begin{cases}
 j & \text{if } t \in q^{(j)} \text{ for some } j \in\ive{h}\!, \\
 h+1 & \text{if } t \notin q .
@@ -2508,7 +2506,7 @@ show that the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$;
 thus,
 \begin{equation}
 \abs{q}
-= \underbrace{\abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}}}_{= \abs{r}} + \abs{q^{(h)}}
+= \abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}} + \abs{q^{(h)}}
 = \abs{r} + \abs{q^{(h)}} .
 \end{equation}
 Therefore, $\abs{q} - \abs{r} = \abs{q^{(h)}}$
@@ -2530,9 +2528,10 @@ $\abs{q} - \abs{r} = \abs{q^{(h)}}$).
 Thus, in particular, the $n - \abs{q}$ largest letters of $q(u)$
 equal $h+1$.
 
-The construction of $q(u)$ shows that each of the letters $(q(u))_j$ with $j \notin q$ is larger than each of the letters $(q(u))_j$ with $j \in q$.
+The construction of $q(u)$ shows that each of the letters $\bigl( q(u) \bigr)_j$ with $j \notin q$ is larger than each of the letters $\bigl( q(u) \bigr)_j$ with $j \in q$.
 (This is true for any queue $q$ and word $u$.)
-Hence, the letters $(q(u))_j$ with $j \notin q$ are the $n - \abs{q}$ largest letters of $q(u)$.
+Hence, the letters $\bigl( q(u) \bigr)_j$ with $j \notin q$ are the $n - \abs{q}$ largest letters of $q(u)$.
+\travis{It took you a fairly large paragraph to say the same thing in the previous lemma. This is sufficient.}
 Thus, these letters equal $h+1$ (since the $n - \abs{q}$ largest letters of $q(u)$ equal $h+1$).
 In other words,
 \begin{equation}
@@ -2543,11 +2542,10 @@ In other words,
 
 The properties~\eqref{eq.lem:determinant_form.interl-B.rj.1}
 and~\eqref{eq.lem:determinant_form.interl-B.rj.2} show that
-the set $r^{(1)}$ consists of the $\abs{r^{(1)}}$ largest
-elements of $r$;
-the set $r^{(2)}$ consists of the $\abs{r^{(2)}}$ next-largest
-elements of $r$;
+the set $r^{(1)}$ consists of the $\abs{r^{(1)}}$ largest elements of $r$;
+the set $r^{(2)}$ consists of the $\abs{r^{(2)}}$ next-largest elements of $r$;
 and so on.
+\travis{I am pretty sure you have said this same thing in a few places in similar forms.}
 
 Now, we construct a permutation $\tup{i_1, i_2, \ldots, i_n}$ of
 $\tup{1, 2, \ldots, n}$ as follows:
@@ -2571,13 +2569,14 @@ Phase~II of the construction, and ranges over
 $i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$ in Phase~I.
 Also, the sites $j_1, j_2, \ldots, j_n$ are distinct.
 
-In order to better understand Phase~II, let us give a
-mental model for it.
+In order to better understand Phase~II, let us give a mental model for it.
 
 Consider a man named $M_k$ for each $k \in r$ (for a total of $\abs{r}$ many men).
 Consider a woman named $W_k$ for each $k \in q$ (for a total of $\abs{q}$ many women).
 
 The \defn{age} of a man $M_k$ or woman $W_k$ is defined to be the number $k \in \ive{n}$.
+
+\Travis{This is a horrible model with potentially dangerous politically consequences: \emph{it is definitely not PC}. Also, how much of this is really just a rephrasing the algorithm in a more complicated (or at least new) language? Why not just use what will be the language in Section~\ref{sec:thm_proof} of brackets?}
 
 We subdivide the (altogether $\abs{r} + \abs{q}$ many) people into $h$ \defn{age brackets}, numbered $1, 2, \ldots, h$:
 Namely, for each $j \in \ive{h}$, the $j$-th age bracket shall contain
@@ -2623,7 +2622,7 @@ In other words, for each man $M_{i_k}$, we have
 Next, we claim that
 \begin{equation}
 \label{pf.lem:determinant_form.interl-B.res1}
-(q(u))_t = j
+\bigl( q(u) \bigr)_t = j
 \qquad \text{ for every } j \in \ive{h-1} \text{ and } t \in q^{(j)} .
 \end{equation}
 
@@ -2636,27 +2635,27 @@ Hence,~\eqref{pf.lem:determinant_form.interl-B.reso1} yields $j_k \in q^{(j)}$.
 Consider the step in the construction of $q(u)$ at which $i = i_k$.
 This step belongs to Phase~II (because otherwise, it would belong to Phase~I,
 which would entail $j_k \notin q$, which would contradict $j_k \in q^{(j)} \subseteq q$).
-Hence, the construction of $q(u)$ yields $(q(u))_{j_k} = u_{i_k} = j$
+Hence, the construction of $q(u)$ yields $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = j$
 (by~\eqref{eq.lem:determinant_form.interl-B.asslast}, since $i_k \in r^{(j)}$).
 
 Forget that we fixed $k$.
 We thus have shown that each $k \in \ive{n}$ satisfying $i_k \in r^{(j)}$
-satisfies $j_k \in q^{(j)}$ and $(q(u))_{j_k} = j$.
+satisfies $j_k \in q^{(j)}$ and $\bigl( q(u) \bigr)_{j_k} = j$.
 Hence, we have found at least $\abs{r^{(j)}}$ many sites $t \in q^{(j)}$
-satisfying $(q(u))_t = j$ (namely, all the sites $j_k$ for $k \in \ive{n}$
+satisfying $\bigl( q(u) \bigr)_t = j$ (namely, all the sites $j_k$ for $k \in \ive{n}$
 satisfying $i_k \in r^{(j)}$).
 (Here, we have used the fact that the sites $j_1, j_2, \ldots, j_n$ are distinct.)
 But~\eqref{pf.lem:determinant_form.interl-B.qj=rj} shows that there are
 only $\abs{r^{(j)}}$ many sites $t \in q^{(j)}$;
 hence, the $\abs{r^{(j)}}$ many sites that we found must cover all the
 sites $t \in q^{(j)}$.
-Therefore, all the sites $t \in q^{(j)}$ satisfy $(q(u))_t = j$.
+Therefore, all the sites $t \in q^{(j)}$ satisfy $\bigl( q(u) \bigr)_t = j$.
 This proves~\eqref{pf.lem:determinant_form.interl-B.res1}.]
 
 Finally, we claim that
 \begin{equation}
 \label{pf.lem:determinant_form.interl-B.res2}
-(q(u))_t = h
+\bigl( q(u) \bigr)_t = h
 \qquad \text{ for every } t \in q^{(h)} .
 \end{equation}
 
@@ -2673,23 +2672,21 @@ would yield $(q(u))_t = h+1 \neq h$, contradicting $(q(u))_t = h$);
 thus, they have to belong to $q$.
 But they cannot belong to any of the $q^{(j)}$ with $j \in \ive{h-1}$
 (since otherwise,~\eqref{pf.lem:determinant_form.interl-B.res1}
-would yield $(q(u))_t = j \leq h-1 < h$, contradicting $(q(u))_t = h$);
+would yield $\bigl( q(u) \bigr)_t = j \leq h-1 < h$, contradicting $\bigl( q(u) \bigr)_t = h$);
 thus, they have to belong to
 \[
 q \setminus \tup{q^{(1)} \cup q^{(2)} \cup \cdots \cup q^{(h-1)}} = q^{(h)}
 \]
 (since the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$).
-Thus, we know that there are $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$
-satisfying $(q(u))_t = h$.
-These positions must cover all of $q^{(h)}$
-(since there are only $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$).
-Hence, every position $t \in q^{(h)}$ must satisfy $(q(u))_t = h$.
+Thus, we know that there are $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$ satisfying $\bigl( q(u) \bigr)_t = h$.
+These positions must cover all of $q^{(h)}$ (since there are only $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$).
+Hence, every position $t \in q^{(h)}$ must satisfy $\bigl( q(u) \bigr)_t = h$.
 This proves~\eqref{pf.lem:determinant_form.interl-B.res2}.]
 
 Combining~\eqref{pf.lem:determinant_form.interl-B.res1}
 with~\eqref{pf.lem:determinant_form.interl-B.res2}, we conclude that
 \[
-(q(u))_t = j
+\bigl( q(u) \bigr)_t = j
 \qquad \text{ for every } j \in \ive{h} \text{ and } t \in q^{(j)} .
 \]
 Combining this with~\eqref{pf.lem:determinant_form.interl-B.res3},
@@ -2701,12 +2698,13 @@ Next, we shall connect the interlacingness of an MLQ with its action on the word
 
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
-Let $\ell$ be a positive integer. Let
-$B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$.
+Let $\ell$ be a positive integer.
+Let $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$.
 Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r$-tuple of integers such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$.
 Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
 
-Let $\mm$ be the type of $u$. Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
+Let $\mm$ be the type of $u$.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
 Then, $u = \qq(1\dotsm 1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 \end{lemma}
 
@@ -2904,7 +2902,7 @@ $q_h^{(j)} \succeq q_{h-1}^{(j)} \gg q_h^{(j+1)}$ for all $j \in \ive{h-1}$.
 Altogether, we see that Lemma~\ref{lem:determinant_form.interl-B} (applied to $u^{\left[  h-1\right]  }$, $q_{h-1}$, $q_h$, $q_{h-1}^{(j)}$ and $q_h^{(j)}$ instead of $u$, $r$, $q$, $r^{(j)}$ and $q^{(j)}$) yields that each $t \in \ive{n}$ satisfies
 \begin{equation}
 \label{pf.claim:describing_u^[i].4}
-\left( q_h\left(  u^{\left[  h-1\right]  }\right) \right)_t =
+\biggl( q_h\Bigl(  u^{\left[  h-1\right]  }\Bigr) \biggr)_t =
 \begin{cases}
 j & \text{if } t \in q_h^{(j)} \text{ for some } j \in\ive{h}\!, \\
 h+1 & \text{if } t \notin q_h .
@@ -2912,7 +2910,7 @@ h+1 & \text{if } t \notin q_h .
 \end{equation}
 
 From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have
-$u^{\left[  h\right]} = q_h\left(  u^{\left[  h-1\right]  }\right)$.
+$u^{\left[  h\right]} = q_h( u^{\left[  h-1\right]  } )$.
 Thus,~\eqref{pf.claim:describing_u^[i].4} rewrites as
 \[
 \left( u^{\left[  h\right]} \right)_t =
@@ -2956,7 +2954,7 @@ the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$,
 whereas
 the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
 Hence, the letters $u_t$ for $t \in q_{\ell-1}$ are precisely
-those letters of $u$ that are $\leq \ell-1$.
+those letters of $u$ that are at most $\ell-1$.
 Thus, these letters appear in weakly decreasing order
 (since $u$ is weakly decreasing up to level $\ell-1$), and we
 also know how often each of the letters $1, 2, \ldots, \ell-1$
