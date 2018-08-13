@@ -107,7 +107,7 @@
 \renewcommand{\bigcup}{\cupnonlimits\limits}
 \renewcommand{\bigcap}{\capnonlimits\limits}
 
-\newenvironment{subproof}{\textit{Proof.} }{\hfill$\blacksquare$\medskip}
+\newenvironment{subproof}{$\lceil$ \textit{Proof.} }{\hfill$\blacksquare \rfloor$ \medskip}
 
 \newenvironment{verlong}{}{}
 \newenvironment{vershort}{}{}
@@ -274,6 +274,8 @@ We give a determinant formula for the spectral weight of a word, which gives a p
 \end{abstract}
 
 \maketitle
+
+\Darij{Travis doesn't like the bracketty subproof formatting; I want it to have some "enclosing" element. Travis, is this better? I'd prefer elephant bookends, but I don't see them in LaTeX.}
 
 %=====================================================================
 \section{Introduction}
@@ -765,7 +767,7 @@ In this section, we state our main results and use them to prove the commutativi
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
 In order to prove our next result, we need the following.
 
-If $w$ is a word of type $\mm$, and if $j \geq 0$, then $p_j(\mm)$ is the number of letters $\leq j$ in $w$.
+If $w$ is a word of type $\mm$, and if $j \geq 0$, then $p_j(\mm)$ is the number of letters of $w$ that are at most $j$.
 
 For a word $w$ and a nonnegative integer $k$, we let \defn{$\vee^{(k)} w$} be the word obtained from $w$ by decrementing (by $1$) all but the $k$ smallest letters of $w$.
 This is only well-defined if these $k$ smallest letters are determined uniquely and the remaining $n-k$ letters are $> 1$.
@@ -1230,8 +1232,7 @@ This takes inspiration from the ``bully paths'' of~\cite{AasLin17} as well as fr
 We begin with basic definitions.
 
 The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
-all pairs of integers (that is, its vertex set is $\ZZ^{2}$), and whose
-arcs are
+all pairs of integers (that is, its vertex set is $\ZZ^{2}$), and whose arcs are
 \begin{align*}
 (i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ^2, \qquad \text{and} \\
 (i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ^2.
@@ -1784,7 +1785,8 @@ A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only i
 
 For example, the second tableau in~\eqref{eq.tableau.exas} is semistandard, while the first is not.
 
-If $T$ is a tableau of shape $\lambda$, then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$). For example, the two tableaux in~\eqref{eq.tableau.exas} have surfaces $(3,1,1,7)$ and $(3,3,5,5)$, respectively.
+If $T$ is a tableau of shape $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$, then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
+For example, the two tableaux in~\eqref{eq.tableau.exas} have surfaces $(3,1,1,7)$ and $(3,3,5,5)$, respectively.
 
 If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
 \[
@@ -1834,9 +1836,13 @@ Next, let us define a bijection
 \Phi \colon N(\uu, \vv) \to \SST(\lambda, s).
 \]
 
-Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be an arbitrary NILP, and so $p_i$ is a path from $A_i$ to $B_i$.
-% Just reminding the reader about what the notation means is sufficienet. We don't need to hit them over the head with things when we are not using those properties.  -- Travis
-%Thus, each $p_i$ is a path from $A_i$ to $B_i$, and no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+\begin{vershort}
+Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be an arbitrary NILP; thus, $p_i$ is a path from $A_i$ to $B_i$.
+\end{vershort}
+\begin{verlong}
+Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be arbitrary.
+Thus, each $p_i$ is a path from $A_i$ to $B_i$, and no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+\end{verlong}
 
 For each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$; thus, it must contain exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
 Let $p_{i,1},p_{i,2}, \dotsc, p_{i,\lambda_i-1}$ be the $y$-coordinates of these east-steps (from first to last).
@@ -1862,39 +1868,56 @@ Now, let $T$ be the tableau of shape $\lambda$ that sends each $(i,j) \in \diag{
 Then, the entries of $T$ are weakly increasing along each row by~\eqref{pf.thm.tableau.jt.row-weak}.
 We shall next show that the entries of $T$ are strictly increasing down each column.
 
-First, we claim that if $i \in \ive{k-1}$ then, for all $j \in \ive{\lambda_i} \cap \ive{\lambda_{i+1}}$, we have
+First, we claim that if $i \in \ive{k-1}$, then, for all $j \in \ive{\lambda_i} \cap \ive{\lambda_{i+1}}$, we have
 \begin{equation}
 \label{pf.thm.tableau.jt.col-strict-no-gap}
 p_{i,j} < p_{i+1,j}.
 \end{equation}
 
 [\textit{Proof of~\eqref{pf.thm.tableau.jt.col-strict-no-gap}:}
-%Let $i \in \ive{k-1}$.
-%We must prove~\eqref{pf.thm.tableau.jt.col-strict-no-gap} for each $j \in \ive{\lambda_i}  \cap \ive{\lambda_{i+1}}  $.
-We assume the contrary and pick the \emph{smallest} $j$ for which $p_{i,j} \geq p_{i+1,j}$.
+\begin{vershort}
+We assume the contrary and pick the $i, j$ with the \emph{smallest} $j$ for which $p_{i,j} \geq p_{i+1,j}$.
 We first consider the case when $j > 1$.
+\end{vershort}
+\begin{verlong}
+Let $i \in \ive{k-1}$.
+We must prove~\eqref{pf.thm.tableau.jt.col-strict-no-gap} for each $j \in \ive{\lambda_i}  \cap \ive{\lambda_{i+1}}  $.
+To do so, we assume the contrary, and pick the \emph{smallest} $j$ for which~\eqref{pf.thm.tableau.jt.col-strict-no-gap} fails.
+Thus, $p_{i,j} \geq p_{i+1,j}$.
+Assume that $j > 1$ (the argument for the case $j=1$ is similar).
+\end{verlong}
 Thus, the minimality of $j$ forces $p_{i,j-1} < p_{i+1,j-1}$.
-Finally,~\eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1}\leq p_{i+1,j}$.
+Finally,~\eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1} \leq p_{i+1,j}$.
 Hence, $p_{i,j-1} < p_{i+1,j-1} \leq p_{i+1,j} \leq p_{i,j}$.
 
-%No two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
-%Hence, $p_i$ and $p_{i+1}$ have no vertex in common.
-% You remind the reader of these things below when you state what the contradiction is  -- Travis
+\begin{verlong}
+No two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+Hence, $p_i$ and $p_{i+1}$ have no vertex in common.
+\end{verlong}
 Note that~\eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j}}$.
 Also,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $j-1$ instead of $j$) yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j-1}}$.
 However, the vertex $\tup{k-i+j-1, p_{i+1,j}}$ lies on the vertical line segment connecting the two vertices $\tup{k-i+j-1, p_{i,j}}$ and $\tup{k-i+j-1,p_{i,j-1}}$ (since $p_{i,j-1} \leq p_{i+1,j} \leq p_{i,j}$).
 Hence, $p_i$ must contain the former vertex (since $p_i$ contains the latter two vertices).
 
-From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j}\leq s_i < s_{i+1}$ (since $s$ is strictly increasing).
-If we had $j=\lambda_{i+1}$, then we would have $p_{i+1,j}=p_{i+1,\lambda_{i+1}} = s_{i+1}$ (by the definition of
-$p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j}\leq p_{i,j} < s_{i+1}$.
-Hence, $j\neq\lambda_{i+1}$. Thus, $j \in \ive{\lambda_{i+1}-1}$ (since $j \in \ive{\lambda_{i+1}}$).
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j} \leq s_i < s_{i+1}$ (since $s$ is strictly increasing).
+If we had $j = \lambda_{i+1}$, then we would have $p_{i+1,j} = p_{i+1,\lambda_{i+1}} = s_{i+1}$ (by the definition of
+$p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j} \leq p_{i,j} < s_{i+1}$.
+Hence, $j \neq \lambda_{i+1}$. Thus, $j \in \ive{\lambda_{i+1}-1}$ (since $j \in \ive{\lambda_{i+1}}$).
 Therefore,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows that $p_{i+1}$ contains the vertex $\tup{k-\left(  i+1\right)+j, p_{i+1,j}} = \tup{k-i+j-1, p_{i+1,j}}$.
 So we have shown that both $p_i$ and $p_{i+1}$ contain the vertex $\tup{k-i+j-1, p_{i+1,j}}$.
 This contradicts the fact that $p_i$ and $p_{i+1}$ have no vertex in common.
 
+\begin{vershort}
 The same argument works for $j = 1$ with minor changes (we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
 Thus, we always obtain a contradiction, and hence~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
+\end{vershort}
+\begin{verlong}
+We have assumed that $j > 1$; but the same argument works for $j = 1$ with minor 
+changes
+(we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
+Thus, we always obtain a contradiction.
+This contradiction shows that our assumption was false; hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
+\end{verlong}
 
 Next, we claim that the entries of $T$ are strictly increasing down each column.
 
@@ -2028,7 +2051,7 @@ Forget that we fixed $\qq$.
 
 Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
 Define a $k$-pseudo-partition
-\[
+\begin{equation}
 \label{eq.determinant_form.interlacing.lam}
 \lambda^{\mm} := (
   \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}},
@@ -2036,7 +2059,7 @@ Define a $k$-pseudo-partition
   \ldots,
   \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
 ).
-\]
+\end{equation}
 Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
 
 \begin{lemma}
@@ -2130,7 +2153,8 @@ Hence, we have proven all four properties (a--d).
 \begin{cor}
 \label{cor:determinant_form.bij1c}
 Let $\ell$, $\mm$, $m_i$, and $k$ be as above.
-Let $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$
+Let $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
+% This awkward wording should repel the misunderstanding that we are *defining* $\lambda^{\mm}$ here.
 Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
 Then,
 \begin{align*}
@@ -2164,7 +2188,7 @@ Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from 
 We need another notation:
 If $u \in \mcW_n$ and $t \in \NN$, then we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if every two sites $i < j$ in $\ive{n}$ satisfying $u_j \leq t$ must satisfy $u_i \geq u_j$.
 Equivalently, $u$ is weakly decreasing up to level $t$ if and only if $u$ becomes weakly decreasing when all letters larger than $t$ are removed.
-For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up to level $4$ (and up to any level $\leq4$).
+For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up to level $4$ (and up to any level $\leq 4$).
 
 \begin{lemma}
 \label{lem:determinant_form.interl-A}
@@ -2233,7 +2257,8 @@ So we have shown that
 \bigl( q(u) \bigr)_j  & > t && \text{for each } j \notin q.
 \end{align}
 \end{subequations}
-\travis{This follows trivially from the definition of Phase~II: the $\abs{q}$ smallest elements of $q(u)$ are at $j \in q$, which by assumption are at most $t$. Everything else is strictly larger than $t$ (which is used during Phase~I). It does not need a whole paragraph to explain!}
+\Travis{This follows trivially from the definition of Phase~II: the $\abs{q}$ smallest elements of $q(u)$ are at $j \in q$, which by assumption are at most $t$. Everything else is strictly larger than $t$ (which is used during Phase~I). It does not need a whole paragraph to explain!}
+\Darij{The paragraph also shows other things, which are used further below.}
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $> t$.
 
@@ -2243,8 +2268,9 @@ We first argue four auxiliary claims:
 \begin{claim}
 \label{claim:little_interlacing}
 Let $k\in \ive{n} $ be such that $k\leq \abs{q}$.
-Let $j_{!} \in q$ that lies between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$.
-(If $i_k>j_k$, then this means that $j_{!} \geq i_k$ or $j_{!}\leq j_k$; otherwise, it means that $i_k\leq j_{!}\leq j_k$.) Then, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+Let $j_{!} \in q$ be a site that lies between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$.
+(If $i_k > j_k$, then this means that $j_{!} \geq i_k$ or $j_{!} \leq j_k$; otherwise, it means that $i_k \leq j_{!} \leq j_k$.)
+Then, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 \end{claim}
 
 \begin{subproof}
@@ -2278,14 +2304,22 @@ Hence, the interval between $i_k$ and $j_k$ ``wraps around'' the circle (\textit
 in $\ZZ/n\ZZ$, not in $\ive{n} $).
 
 Let $j_{\min}$ be the smallest element of $q$.
-Thus we have
+\begin{vershort}
+Thus, the dichotomy~\eqref{pf.lem:determinant_form.interl} and the fact that $q(u)$ is weakly decreasing up to level $t$ yield
 \[
-\bigl( q(u) \bigr)_{j_{\min}} = \max \set{\bigl( q(u) \bigr)_j \mid j \in q} = t
+\bigl( q(u) \bigr)_{j_{\min}} = \max \set{\bigl( q(u) \bigr)_j \mid j \in q} = t ,
 \]
-since $q(u)$ is weakly decreasing up to level $t$, the dichotomy~\eqref{pf.lem:determinant_form.interl}, and that $q(u)$ has at least one letter equal to $t$.
+since $q(u)$ has at least one letter equal to $t$.
+\end{vershort}
+\begin{verlong}
+Then,~\eqref{pf.lem:determinant_form.interl-A.1} and~\eqref{pf.lem:determinant_form.interl-A.2} reveal that $\bigl( q(u) \bigr)_{j_{\min}}$ is the first among the letters of $q(u)$ that are at most $t$, and therefore also the largest of these letters (since $q(u)$ is weakly decreasing up to level $t$).
+Yet, this largest letter must be $t$ since the word $q(u)$ has at least one letter equal to $t$.
+Hence, we have $\bigl( q(u) \bigr)_{j_{\min}} = t$.
+\end{verlong}
 
 \Travis{You need notation for these intervals. It is too cumbersome explaining it in words.}
-If the site $j_{\min }$ would lie between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$, then Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\min}$) would yield $\bigl( q(u) \bigr)_{j_{\min}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+\Darij{Which intervals? The ``lie between'' parts? OK, I can do that.}
+If the site $j_{\min}$ would lie between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$, then Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\min}$) would yield $\bigl( q(u) \bigr)_{j_{\min}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 This would contradict $\bigl( q(u) \bigr)_{j_{\min}} = t > u_{i_k}$.
 Hence, the site $j_{\min}$ cannot lie between $i_k$ (inclusive) and $j_k$ (inclusive).
 Since the interval between $i_k$ and $j_k$ ``wraps around'' the circle, this shows that $j_{\min} > j_k$.
@@ -2308,7 +2342,7 @@ Hence, without loss of generality assume that $j_{!} > j_k$.
 Consider the unique step of the construction of $q(u) $ at which  $i=i_k$.
 This step is part of Phase~II, since $k\leq \abs{q}$.
 Recall that $j_k$ is the value of $j$ found during this step; thus, $j_k\in q$ (since this step is part of Phase~II). Also, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
-Both $j_k$ and $j_{!}$ belong to $q$; hence, both letters $\bigl( q(u) \bigr)_{j_{!}}$ and $\bigl( q(u) \bigr)_{j_k}$ are $\leq t$ (by~\eqref{pf.lem:determinant_form.interl-A.1}).
+Both $j_k$ and $j_{!}$ belong to $q$; hence, both letters $\bigl( q(u) \bigr)_{j_k}$ and $\bigl( q(u) \bigr)_{j_{!}}$ are $\leq t$ (by~\eqref{pf.lem:determinant_form.interl-A.1}).
 Hence, from $j_k < j_{!}$, we obtain $\bigl( q(u) \bigr)_{j_k} \geq \bigl( q(u) \bigr)_{j_{!}}$ (since $q(u)$ is weakly decreasing up to level $t$).
 Thus, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$, proving Claim~\ref{claim:smaller_site_jbang}.
 \end{subproof}
@@ -2325,7 +2359,14 @@ This step is part of Phase~I, since $k > \abs{q}$.
 Hence, $j_k \notin q$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$ (by the way Phase~I operates).
 Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} > t$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} > t-1$.
 In other words, $u_{i_k} \geq t$.
+\begin{vershort}
 This contradicts $u_{i_k} < t$, and hence, we have $k \leq \abs{q}$.
+\end{vershort}
+\begin{verlong}
+This contradicts $u_{i_k} < t$.
+Thus, our assumption (that $k > \abs{q}$) was false.
+Hence, $k \leq \abs{q}$.
+\end{verlong}
 Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ must be set in Phase~II of the algorithm that constructs $q(u)$.
 So we have $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
 Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} is thus proven.
@@ -2347,11 +2388,20 @@ Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
 Hence, the site $j_{\ell}$ lies between $i_k$ (inclusive) and $j_k$ (inclusive).
 Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!}=j_{\ell }$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k}$.
+\begin{vershort}
 Therefore, Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
+\end{vershort}
+\begin{verlong}
+This contradiction shows that our assumption was false, and so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
+\end{verlong}
 
 (b) Let $h \in \ive{t-1}$.
-%Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
-%  This is obvious.  -- Travis
+\begin{verlong}
+Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
+
+Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
+Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
+\end{verlong}
 Define
 \begin{align*}
 A & := \set{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h },
@@ -2375,7 +2425,7 @@ Hence, we can define a map
 i_k & \mapsto j_k
 \end{align*}
 (since each element of $B$ can be written as $i_k$ for a unique $k\in \ive{n} $), and it satisfies $\phi(b) \geq b$ for each $b \in B$ (since $j_k \geq i_k$).
-This map $\phi$ is injective since the $j_1, j_2, \dotsc, j_n$ are distinct (recall that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ because each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
+This map $\phi$ is injective since the $j_1, j_2, \dotsc, j_n$ are distinct (indeed, $\tup{j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ because each letter of $q(u)$ is set exactly once during the construction of $q(u)$).
 Furthermore, the map $\phi$ is surjective.\footnote{\textit{Proof.}
   Let $a\in A$.
   We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
@@ -2390,7 +2440,8 @@ Furthermore, the map $\phi$ is surjective.\footnote{\textit{Proof.}
   If we had $k > \abs{q}$, then the letter $\bigl( q(u) \bigr)_{j_k}$ would be set in Phase~I of the construction;
   thus, we would have $j_k\notin q$, so that $\bigl( q(u) \bigr)_{j_k} > t$ by~\eqref{pf.lem:determinant_form.interl-A.2}.
   However, this would contradict $\bigl( q(u) \bigr)_{j_k} = h < t$.
-  Thus, we must have $k \leq \abs{q}$.
+  Thus, we cannot have $k > \abs{q}$.
+  Hence, $k \leq \abs{q}$.
   Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
   This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
   In other words, $i_k \in B$ as desired.}
@@ -2504,11 +2555,20 @@ But~\eqref{eq.lem:determinant_form.interl-B.qj.1}
 and~\eqref{eq.lem:determinant_form.interl-B.qj.2}
 show that the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$;
 thus,
-\begin{equation}
-\abs{q}
-= \abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}} + \abs{q^{(h)}}
-= \abs{r} + \abs{q^{(h)}} .
-\end{equation}
+\begin{vershort}
+\[
+ \abs{q}
+ = \abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}} + \abs{q^{(h)}}
+ = \abs{r} + \abs{q^{(h)}} .
+\]
+\end{vershort}
+\begin{verlong}
+\[
+ \abs{q}
+ = \underbrace{\abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}}}_{= \abs{r}} + \abs{q^{(h)}}
+ = \abs{r} + \abs{q^{(h)}} .
+\]
+\end{verlong}
 Therefore, $\abs{q} - \abs{r} = \abs{q^{(h)}}$
 and $\abs{q} \geq \abs{r}$.
 
@@ -2577,6 +2637,7 @@ Consider a woman named $W_k$ for each $k \in q$ (for a total of $\abs{q}$ many w
 The \defn{age} of a man $M_k$ or woman $W_k$ is defined to be the number $k \in \ive{n}$.
 
 \Travis{This is a horrible model with potentially dangerous politically consequences: \emph{it is definitely not PC}. Also, how much of this is really just a rephrasing the algorithm in a more complicated (or at least new) language? Why not just use what will be the language in Section~\ref{sec:thm_proof} of brackets?}
+\Darij{Where exactly is this not PC? And should we care? My suggestion is to move this proof into verlong anyway, while in vershort it gets replaced by some good pictures showing the ``balls'' ßin the $r^{(j)}$ and $q^{(j)}$ and how everything moves to the right place. But I can't draw that picture, at least not in LaTeX.}
 
 We subdivide the (altogether $\abs{r} + \abs{q}$ many) people into $h$ \defn{age brackets}, numbered $1, 2, \ldots, h$:
 Namely, for each $j \in \ive{h}$, the $j$-th age bracket shall contain
@@ -2797,6 +2858,14 @@ Since these letters must appear in weakly decreasing order, and since we know ho
 \item The letters $2$ appear in the next-largest $m_2$ positions of $q_i$.
 \item And so on, until we get to the letters $i$.
 \end{itemize}
+\begin{verlong}
+In other words:
+\begin{itemize}
+\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 1$ are precisely the largest $m_1$ elements of $q_i$.
+\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 2$ are precisely the next-largest $m_2$ elements of $q_i$.
+\item And so on, until we get to the $p \in \ive{n}$ satisfying $(u^{\left[  i\right]})_p = i$.
+\end{itemize}
+\end{verlong}
 In other words:
 \begin{itemize}
 \item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 1 }$ consists of the largest $m_1$ elements of $q_i$, so that it is $q_i^{(1)}$.
@@ -2818,8 +2887,15 @@ Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 \begin{subproof}
 From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]  } )$.
 This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
-Thus, $u^{\left[  i\right]}$ has at least one letter equal to $i$ since $m_i > 0$ and is weakly decreasing up to level $i$ by Claim~\ref{claim:weakly_decreasing_level_i}.
-Also, $u^{\left[  i\right]}$ has exactly $\abs{q_i}$ letters that are at most $i$ since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$.
+Thus, it has at least one letter equal to $i$ (since $m_i > 0$)
+and is weakly decreasing up to level $i$ (by Claim~\ref{claim:weakly_decreasing_level_i}).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$
+\begin{vershort}
+(since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+\end{vershort}
+\begin{verlong}
+(since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+\end{verlong}
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(b) (applied to $u^{\left[i-1\right]}$, $q_i$ and $j$ instead of $u$, $q$ and $h$)
 yields
 \[
@@ -2839,6 +2915,7 @@ Thus, this relation becomes $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 We have $q_{\ell-1} = B$.
 \end{claim}
 
+\begin{vershort}
 \begin{subproof}
 For each $i \in \ive{\ell-1}$, Equation~\eqref{eq.determinant_form.qij.1} and Claim~\ref{claim:description_q_i^(j)} leads to
 \[
@@ -2854,6 +2931,25 @@ Applying this to $i = \ell-1$, we obtain
 \]
 since $u^{\left[  \ell-1\right]  } = u$ and by the construction of $u$.
 \end{subproof}
+\end{vershort}
+\begin{verlong}
+\begin{subproof}
+For each $i \in \ive{\ell-1}$, the equality~\eqref{eq.determinant_form.qij.1} leads to
+\begin{align*}
+  q_i & = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
+            \qquad \left(\text{by \eqref{claim:description_q_i^(j)}}\right) \\
+      &= \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p \leq i } .
+\end{align*}
+Applying this to $i = \ell-1$, we obtain
+\begin{align*}
+  q_{\ell-1}
+  &= \set{ p \in \ive{n} \mid ( u^{\left[\ell-1\right] } )_p \leq \ell-1 } \\
+  &= \set{ p \in \ive{n} \mid u_p \leq \ell-1 }
+   \qquad \left(\text{since } u^{\left[  \ell-1\right]  } = u \right) \\
+  &= B \qquad \left(\text{by the construction of } u \right) .
+\end{align*}
+\end{subproof}
+\end{verlong}
 
 Now, the MLQ $\qq$ is interlacing (by Claim~\ref{claim:interlacing_subqueues}) and satisfies $q_{\ell-1} = B$ (by Claim~\ref{claim:the_last_queue}).
 This proves the $\Longrightarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
@@ -3005,8 +3101,10 @@ We now state the main result of this section: a Jacobi--Trudi-like formula for $
 Let $\ell$ be a positive integer.
 Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
 Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.\travis{We probably want to introduce the notation of a weakly decreasing word, then we can just say ``Let $v = v_1 v_2 \dotsm v_r$ be a weakly decreasing packed word.''}
+\darij{I don't. Our words are cyclic with $n$ letters. Since we don't do wordy things with $v$, why call it a word?}\ 
 Define a word $u \in \mcW_n$ by $u_i=v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
-For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.\footnote{The value $\gamma_j$ can also be described as the number of distinct letters in the (non-cyclic) word $v_1 \dotsm v_j$.}
+For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
+(The value $\gamma_j$ can also be described as the number of distinct letters among $v_1, v_2, \dotsc, v_j$.)
 Then
 \[
 \swt{u} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{i, j \in \ive{r}}.
@@ -3014,7 +3112,7 @@ Then
 \end{thm}
 
 \begin{proof}
-Suppose the $r$-tuple is
+Write the $r$-tuple $\tup{v_1, v_2, \dotsc, v_r}$ in the form
 \begin{equation}
 \label{pf.thm:determinant_form.v=}
 \tup{v_1, v_2, \dotsc, v_r} = (
@@ -3022,21 +3120,47 @@ Suppose the $r$-tuple is
   \underbrace{\ell-2,\ldots,\ell-2}_{m_{\ell-2}\text{ times}},
   \dotsc,
   \underbrace{1,\ldots,1}_{m_1\text{ times}}
-),
+)
 \end{equation}
-and so if we set $m_{\ell} = n - r$, we define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$.
-Moreover, the word $u$ has type $\mm$ by the construction of $u$.
-Note that $m_i > 0$ for all $i \in \ive{\ell-1}$ since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$.
+for some $m_1, m_2, \ldots, m_{\ell-1} \geq 0$
+(we can do this, since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$ and $v_1 \geq v_2 \geq \cdots \geq v_r$).
+\begin{verlong}
+Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
+\end{verlong}
+Also set $m_{\ell} = n - r$, and define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$.
+Then, the word $u$ has type $\mm$
+\begin{vershort}
+by the construction of $u$.
+\end{vershort}
+\begin{verlong}
+(since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
+\end{verlong}
+Note that $m_i > 0$ for all $i \in \ive{\ell-1}$ (since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
 Hence, the word $u$ is packed.
 Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
+\begin{verlong}
+Each $i \in \ive{\ell}$ satisfies
+\[
+m_i =
+  \begin{cases}
+  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i < \ell,\\
+  n - r & \text{if } i = \ell
+  \end{cases}
+\]
+(by~\eqref{pf.thm:determinant_form.v=} and the definition of $m_{\ell}$).
+\end{verlong}
 
 %This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
 %Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
 %Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
-Consider the $r$-pseudo-partition $\lambda^{\mm} = \tup{\lambda_1,\lambda_2, \dotsc, \lambda_r}$.
-From~\eqref{pf.thm:determinant_form.v=}, we obtain $\lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}$.
-Hence, we have $\lambda_j = \ell - v_j = \gamma_j$ for all $j \in \ive{r}$.
+Define the $r$-pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam} (using $r$ instead of $k$, since $r = p_{\ell-1}(\mm)$).
+Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain
+\[
+\lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}
+= \tup{\gamma_1, \gamma_2, \ldots, \gamma_r}
+\]
+(since $\ell - v_j = \gamma_j$ for all $j \in \ive{r}$).
 
 The definition of $\swt{u}$ yields
 \begin{align*}
@@ -3044,12 +3168,12 @@ The definition of $\swt{u}$ yields
 %&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
 % The above is just a trivial rewording of the summation set for the equation below -- Travis
 &  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
-&  = \left(  \prod_{i=1}^k x_{b_i} \right) \det\biggl( h_{\lambda_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{k}} ,
-%& \\ & = \left( \prod_{b \in B} x_b \right)  \det\left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{i, j \in \ive{r}} ,
+&  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
 \end{align*}
-where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $B$ and $b_i$ instead of $S$ and $s_i$).
-% This is pointless. The reader is certainly smart enough to do the second (trivial) equality and at the end of the previous paragraph we state the first equality. They will still have to look up the first equality anyways.
-%Hence the claim follows since $\gamma_j = \lambda_j$ and $ \prod_{i=1}^k x_{b_i} = \prod_{b \in B} x_b$.
+where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $r$, $\gamma_i$, $B$ and $b_i$ instead of $k$, $\lambda_i$, $S$ and $s_i$).
+\begin{verlong}
+Hence the claim follows since $\prod_{i=1}^r x_{b_i} = \prod_{b \in B} x_b$.
+\end{verlong}
 \end{proof}
 
 
@@ -3264,34 +3388,12 @@ The sequence of parentheses obtained as above, but skipping these sites $j$, wil
 %If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
 A site $j \in \ZZ/n\ZZ$ is \defn{unbalanced} if it contributes an unmatched parenthesis; otherwise we say $j$ is \defn{balanced}.
 There are exactly $\abs{r_1 - r_2}$ unbalanced sites.
-% We say $\mcI \subseteq \ZZ / n \ZZ$ is a \defn{balanced set} if each $i \in \mcI$ is balanced.
-% If $\mcI$ is connected (as a subset of the cycle graph), we call $\mcI$ a \defn{balanced interval}.
 
 We construct $C' = (q'_1, q'_2)$ as follows.
 For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
 For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
 Note that $C$ and $C'$ have the same balanced sites, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
 Hence, we have $C'' = C$. Also, we have $\wt(C) = \wt(C')$.
-
-% The following facts are straightforward:
-% \begin{enumerate}
- % \item For any inclusion-maximal balanced interval $\mcI$, we have $\lvert q_1 \cap \mcI \rvert = \lvert q_2 \cap \mcI \rvert$.
- % \item The empty set is balanced.
- % \item The set $\ive{n}$ is a balanced set if and only if $r_1 = r_2$.
- % \item If $A$ and $B$ are two balanced sets, then the set $A \cap B$
-       % is balanced.\footnote{To prove this, first check it when $A$ and $B$
-       % are balanced intervals.}
- % \item If $A$ and $B$ are balanced intervals, and if $A \cup B$ is an
-       % interval, then $A \cup B$ is balanced.\footnote{This is obvious
-       % when one of $A$ and $B$ contains the other. Otherwise, argue
-       % that $A \cap B$, $A \setminus B$ and $B \setminus A$ are balanced.}
- % \item Thus, the union of all balanced intervals (\textit{i.e.}, the set of all balanced
-       % $i \in \ive{n}$) is also the disjoint union of all maximal balanced intervals
-       % (where ``maximal'' means ``maximal under inclusion'').
- % \item For $r_1 < r_2$ and $j \in \ive{n}$ unbalanced, we have $j \notin q_1$ and $j \in q_2$.
- % \item For $r_1 > r_2$ and $j \in \ive{n}$ unbalanced, we have $j \in q_1$ and $j \notin q_2$.
- % \item There are exactly $\abs{r_1 - r_2}$ unbalanced sites $i$.
-% \end{enumerate}
 
 \begin{example}
 Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
@@ -3509,7 +3611,6 @@ Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_
 Thus, in the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$, the site $1$ induces a parenthesis that stays unmatched throughout the algorithm.
 Hence, no two parentheses that get matched to each other during this algorithm have this parenthesis lying between them.
 Therefore, it does not matter whether we regard the sequence of parentheses as written on a cycle or on a straight line (as the wrapping-around is not used in the matching process).
-% Therefore, no balanced interval has the form $\inter[i,j]$ with $i > j$.
 Hence, the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$ proceeds exactly the same way as the standard parenthesis-matching algorithm used when applying $\sigma_1$ to $\word(\qq)$ (ignoring the letters that are neither $i$ nor $i+1$). That is, the parentheses that get matched in the former are the same as those that get matched in the latter.
 % Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
 Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `$)$'s with the number of unmatched `$($'s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `$)$' into a `$($' or vice versa, because one of these numbers is $0$).
