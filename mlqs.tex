@@ -1597,13 +1597,13 @@ Therefore, $p'$ contains the vertex $A$ (since the vertex $A$ lies on the line s
 This contradicts the fact that $A$ does not belong to the path $p'$.
 This contradiction shows that our assumption was false; hence, $\ell(p) \neq0$ is proven.]
 
-Furthermore, we claim that $\ell(p') \neq 0$. \travis{Isn't this basically the same as the above proof but with $\xcoord$ instead of $\ycood$?}
+Furthermore, we claim that $\ell(p') \neq 0$. \travis{Isn't this basically the same as the above proof but with $\xcoord$ instead of $\ycoord$?}
 
 [\textit{Proof:}
 Assume the contrary. Thus, $\ell(p') = 0$.
 Hence, the path $p'$ has no steps.
 Therefore, $A'=B$ (since $p'$ is a path from $A'$ to $B$).
-Hence, $\xcoord(A') = \xcoord(B) \geq \xcoord(B')$, so that $\xcoord(A) \geq \xcoord(A^') \geq \xcoord (B')$.
+Hence, $\xcoord(A') = \xcoord(B) \geq \xcoord(B')$, so that $\xcoord(A) \geq \xcoord(A') \geq \xcoord (B')$.
 Combining this with $\xcoord(A) \leq \xcoord(B')$, we obtain $\xcoord(A) = \xcoord(B')$.
 Combining $\xcoord(A) \geq \xcoord(A')$ with $\xcoord(A') \geq \xcoord(B') = \xcoord(A)$, we obtain $\xcoord(A)  = \xcoord(A')$.
 Thus, $\xcoord(A') = \xcoord(A) = \xcoord(B')$.
@@ -1653,7 +1653,7 @@ Therefore, $\xcoord(A') \leq \xcoord(P') \leq \xcoord(B)$ (since the $x$-coordin
 Let $r'$ be the path from $P'$ to $B$ obtained by removing the first arc from $p'$.
 Thus, $r'$ is a subpath of $p'$.
 Hence, the paths $p$ and $r'$ have no vertex in common (since $p$ and $p'$ have no vertex in common).
-Also, $\ell(r') = \ell(p') - 1 < \ell(p')$, and thus $\ell(p) + \underbrace{\ell\left(r')}_{<\ell(p')} < \ell(p) + \ell(p') = N$.
+Also, $\ell(r') = \ell(p') - 1 < \ell(p')$, and thus $\ell(p) + \underbrace{\ell(r')}_{<\ell(p')} < \ell(p) + \ell(p') = N$.
 
 Moreover, $\ycoord(P') \geq \ycoord(A') \geq \ycoord(A)$.
 If we had $\xcoord(P') \leq \xcoord(A)$, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and $r'$ instead of $A'$ and $p'$ (by the induction hypothesis, since $\ell(p) + \ell(r') < N$).
