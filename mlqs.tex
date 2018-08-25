@@ -1117,7 +1117,7 @@ we shall disregard this factor in the following.
 
 Let $\std{u}$ be the near standardization of $u$, and note that $W = B$ from Definition~\ref{def:near_std} (but in the reverse order).
 There exists $T$ such that $\bigvee_T \std{u} = u$.
-Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \cdots 1) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \cdots 1) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
+Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \dotsm 1) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
 As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ corresponds to disjoint $r$-paths with initial points $\iota_i := (0,i)$ and terminal points $(b_i,0)$.
 Note that these are precisely the bully paths of~\cite{AasLin17}.
 We claim it is sufficient to show that for every MLQ $\qq$, there exists unique disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ such that $\rho_i$ passes through the point $\tau_i := (b_i, i - \gamma_i)$.
@@ -3019,7 +3019,7 @@ This proves the $\Longrightarrow$ direction of Lemma~\ref{lem:determinant_form.i
 
 $\Longleftarrow:$
 Assume that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
-We must prove that $u = \qq(1 \cdots 1)$.
+We must prove that $u = \qq(1 \dotsm 1)$.
 
 \begin{claim}
 \label{claim:describing_u^[i]}
@@ -3149,7 +3149,7 @@ j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
 Comparing this with~\eqref{pf.lem:determinant_form.interl-act.fwd.5}, we conclude that
 $\left( u^{\left[\ell-1\right]} \right)_t = u_t$ for all $t \in \ive{n}$.
 Thus, $u^{\left[\ell-1\right]} = u$.
-Hence, $u = u^{\left[\ell-1\right]} = \qq(1 \cdots 1)$.
+Hence, $u = u^{\left[\ell-1\right]} = \qq(1 \dotsm 1)$.
 This proves the $\Longleftarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
 \end{proof}
 
@@ -4035,7 +4035,7 @@ There is the natural cyclic symmetry on our special weights.
   $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
   where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
   Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (1 \cdots 1) = \bigl( (\sigma \qq)(1 \cdots 1) \bigr) \sigma$.
+  $\qq (1 \dotsm 1) = \bigl( (\sigma \qq)(1 \dotsm 1) \bigr) \sigma$.
   From here, the claim follows by an obvious bijection
   (given by the action of $\sigma$) between the sums defining
   $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
@@ -4166,29 +4166,109 @@ It could be interesting to see if our proof has any implications for the work of
 \section{Connections with other constructions}
 \label{app:queue-relations}
 
-Let $u$ be a word and $q$ be a queue.
-We describe how our definition of $q(u)$ is connected to the construction of~\cite{FM07}, which was coined bully paths in~\cite{AasLin17}, and the tableaux combinatorics of~\cite{AssSea18}.
+We describe how our definition of $q(u)$ (when $q$ is a queue and $u$ a word) is connected to the construction of~\cite{FM07}, which was coined bully paths in~\cite{AasLin17}, and the tableaux combinatorics of~\cite{AssSea18}.
 
-To clarify the connection, we introduce a mild variation of our visualization of queue (\textit{e.g.}, from~\eqref{eq:boxes-and-balls-1}) by a row of circles with each $i \in q$ being a circle in position $i$ as in Example~\ref{ex:first_queue} (\textit{i.e.} we do not represent the $i \notin q$ by boxes).
+To clarify the connection, we recall our visualization of a queue $q$ in~\eqref{eq:boxes-and-balls-1} by a row of circles and squares.
+We modify this visualization slightly:
+Namely, we still represent each $i \in q$ by a circle as in Example~\ref{ex:first_queue}, but we no longer represent the $i \notin q$ by squares.
+We refer to the circles as ``boxes''.
+
+\subsection{Connection with Ferrari--Martin and Aas--Linusson MLQs}
+
 We first connect our MLQs with those from~\cite{FM07}.
 We will use the language of~\cite{AasLin17}, where we are only considering ``discrete MLQs'' as we consider our ring to have a finite number of sites.
 
 Consider a MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$.
 A \defn{labeling} of $\qq$ is a sequence of maps $\ff = (f_1, \dotsc, f_{\ell})$, where $f_i \colon q_i \to \ive{i}$.
 We represent this by placing an $f_i(j)$, which we call the \defn{label}, inside of the circle corresponding to $j \in q_i$.
-We construct the labeling $\ff_{\qq}$ on $\qq$ by
-\[
-f_i(j) = \bigl( q_i( \cdots q_1(1 \cdots 1) \cdots ) \bigr)_j.
-\]
+The \defn{canonical labeling} $\ff_{\qq}$ of $\qq$ is the labeling $(f_1, \dotsc, f_{\ell})$ defined by
+\begin{equation}
+f_k(j) = \bigl( q_k( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j.
+\label{eq.AasLin-lab.formula}
+\end{equation}
 For example, the labeling of each MLQ in Example~\ref{ex:merge_theorem} is precisely the circled values.
-We can also describe this iteratively for an ordinary MLQ as follows:
+When $\qq$ is an ordinary MLQ, we can also construct this canonical labeling recursively as follows:
 \begin{enumerate}
-\item Suppose $q_i$ is an $r$-queue, and let $\tup{j_1, j_2, \ldots, j_r}$ be a list of all elements of $q_i$ in the order of increasing label in $f_i$; that is $f_i(j_1) \leq f_i(j_2) \leq \cdots \leq f_i(j_r)$ (the relative order between elements with equal label is immaterial).
-\item For $j = j_1, j_2, \ldots, j_r$, do the following:
-    Find the first site $k$ weakly to the right (cyclically) of $j$ such that $k \in q_{i+1}$ and $f_{i+1}(k)$ is not set; then set $f_{i+1}(k) = f_i(j)$.
-\item For all sites $j \in q$ for which $f_{i+1}(j)$ is not set yet, set $f_{i+1}(j) = i+1$.
+\item Set $q_0 = \emptyset$, and let $f_0 : q_0 \to \ive{0}$ be the trivial map.
+\item For each $k = 0, 1, \ldots, \ell-1$:
+\begin{itemize}
+\item Suppose $f_k \colon q_k \to \ive{k}$ is already defined. Let $\tup{j_1, j_2, \ldots, j_r}$ be a list of all elements of $q_k$ in the order of increasing label in $f_k$; that is, $f_k(j_1) \leq f_k(j_2) \leq \cdots \leq f_k(j_r)$.
+      (The relative order between elements with equal label is immaterial.)
+\item For $i = i_1, i_2, \ldots, i_r$, do the following:
+      Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q_{k+1}$ and $f_{k+1}(j)$ is not set; then set $f_{k+1}(j) = f_k(i)$.
+\item For all sites $j \in q_{k+1}$ for which $f_{k+1}(j)$ is not set yet, set $f_{k+1}(j) = k+1$.
+\end{itemize}
+This defines $f_{k+1} \colon q_{k+1} \to \ive{k+1}$.
 \end{enumerate}
-We consider $q_0 = \emptyset$ to start the construction.
+
+\begin{verlong}
+In order to see that this recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}, we can proceed as follows:
+
+If $r$ is a queue and $I$ is a set, then a \defn{labeling} of $r$ by $I$ means a map $f \colon r \to I$.
+Of course, we refer to a value $f \tup{i}$ of such a labeling as the \defn{label} of $i$ in $f$.
+To represent such a labeling $f$, we label each of the boxes of $r$ with its corresponding value (i.e., we label the box in position $i$ by $f\tup{i}$).
+Thus, a labeling of an MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$ is a sequence of labelings $f_i \colon q_i \to \ive{i}$ of each of its queues $q_i$; and its visual representation is obtained by stacking the visual representations of the $f_i$ one atop another.
+
+Now, fix a $k \in \NN$ and two queues $r$ and $q$ with $\abs{r} \leq \abs{q}$. Also fix a labeling $f \colon r \to \ive{k}$ of $r$ by $\ive{k}$.
+Then, we can define a labeling \defn{$q(f)$} of $q$ by $\ive{k+1}$ as follows:
+\begin{enumerate}
+\item Let $\tup{i_1, i_2, \ldots, i_{\abs{r}}}$ be a list of all elements of $r$ in the order of increasing label in $f$ (that is, $f(i_1) \leq f(i_2) \leq \cdots \leq f(i_{\abs{r}})$.
+ (The relative order between elements with equal label is immaterial.)
+
+\item Initialize a labeling $g$ of $q$ by $\ive{k+1}$. For now, none of its values is set.
+
+\item For $i = i_1, i_2, \ldots, i_{\abs{r}}$, do the following.
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $g\tup{j}$ is not set.
+    Then set $g\tup{j} = f\tup{i}$.
+
+\item For all sites $j \in q$ for which $g \tup{j}$ is not set yet, set $g \tup{j} = k+1$.
+
+\item Define $q(f)$ to be the resulting labeling $g$.
+\end{enumerate}
+
+The connection between this labeling and the action of queues on words is simple.
+Indeed, let $k \in \NN$, let $r$ be a queue, and let $f \colon r \to \ive{k}$ be a labeling.
+Then we can can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
+For each $j \in r$, we set $\tup{\omega_k f}_j = f \tup{j}$.
+All other letters of $\omega_k f$ shall be $k+1$.
+Now, it is easy to see that if $q$ is a queue satisfying $\abs{r} \leq \abs{q}$, then
+\begin{equation}
+q \tup{ \omega_k f } = \omega_{k+1} \tup{ q(f) } .
+\label{eq.AasLin-lab.two-actions}
+\end{equation}
+Thus, the action of a queue on a labeling can be computed in terms of its action on a word.
+(The converse is not true, since the condition $\abs{r} \leq \abs{q}$ is restrictive.
+Thus, our action of queues on words, with its two phases, is more general than their
+action on labelings.)
+
+Now, let $\qq = (q_1, q_2, \dotsc, q_{\ell})$ be an ordinary MLQ
+(so that $\abs{q_1} \leq \abs{q_2} \leq \cdots \leq \abs{q_{\ell}}$),
+and consider the labeling $\ff_\qq = (f_1, \dotsc, f_{\ell})$ constructed by the above recursive procedure
+(not by~\eqref{eq.AasLin-lab.formula}).
+Then, the recursive procedure clearly yields
+\begin{align*}
+f_i &= q_i \tup{ f_{i-1} } \qquad \text{for all } i \in \ive{\ell} ,
+\end{align*}
+where $f_0$ is understood to be the (trivial) labeling of the empty queue $\varnothing$.
+In view of~\eqref{eq.AasLin-lab.two-actions}, this entails
+\[
+\omega_i \tup{ f_i } = q_i \tup{ \omega_{i-1} \tup{ f_{i-1} } } \qquad \text{for all } i \in \ive{\ell} .
+\]
+Thus, by induction,
+\[
+\omega_i \tup{ f_i } = q_i( \cdots q_1(1 \dotsm 1) \cdots )
+ \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
+\]
+(since $\omega_0 \tup{ f_0 } = 1 \dotsm 1$).
+Hence,
+\[
+f_i(j) = \bigl( q_i( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j
+ \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
+        \text{ and } j \in q_i .
+\]
+But this is precisely the equality~\eqref{eq.AasLin-lab.formula}.
+Hence, we have shown that the recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}.
+\end{verlong}
 
 Now consider the labeling procedure in~\cite[\S 2.2]{AasLin17} given by \defn{$k$-bully paths}.
 Note that a $k$-bully path from one line to the next precisely corresponds to the path of a letter $k$ under Phase~II of our definition of a queue as a function on words.
@@ -4196,15 +4276,19 @@ For example, the bully paths would correspond to the blue paths in Example~\ref{
 In addition, this is exactly the recursive labeling procedure given above.
 Thus, we obtain the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17}.
 
+\Darij{I find the above paragraph vague and unclear, but I have a verlong argument anyway.}
+
 \Darij{TODO: Connect this with parking functions?}
 
-Next we relate the queuing process with the \defn{Kohnert fillings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
+\subsection{Connection with Kohnert diagrams and Assaf--Searles theory}
+
+Next we relate the action of queues on words with the \defn{Kohnert fillings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
 We remark that the thread decomposition is the same as the Kohnert filling procedure when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
 Roughly speaking, a Kohnert filling (and a thread decomposition) is a standardization of the bully path construction.
 
 In more detail, for a Kohnert diagram $D \in \KM(\alpha)$ for any fixed weak composition $\alpha$ (see~\cite{AssSea18} for notations), we view its columns as queues.
-We will also consider our queues on $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$ so we have a well-defined notion of direction.
-We consider the reflection of $D$ across the line $x = y$, and this forms an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$ by a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$.
+This time, our queues are subsets of $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$; thus, there is no ``wrapping around''.
+We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$: namely, a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$.
 We then apply the bully path construction to the boxes of this reflected Kohnert diagram.
 To obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm, where we consider the labels to be decreasing from left to right.
 Hence, this can be considered as a standardization of our construction or, equivalently, as fixing specific permutations for how the queues act on words.
@@ -4225,6 +4309,8 @@ We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \le
 We leave the precise details for the interested reader.
 
 \Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
+
+\Darij{I find this part quite hard to follow, but so is everything about Kohnert diagrams.}
 
 \begin{comment}
 In more detail, let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
