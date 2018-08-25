@@ -1757,8 +1757,7 @@ A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lam
 \[
 \text{each } i \in \ive{k-1} \text{ satisfies } \lambda_i + 1 \geq \lambda_{i+1}.
 \]
-We say $\lambda$ has \defn{length} $k$.
-For example, both $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are pseudo-partitions of length $5$.
+For example, both $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are pseudo-partitions.
 
 The \defn{diagram $\diag{\lambda}$} of a pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
 $\set{  \left(  i,j\right)  \in \ive{k} \times \set{ 1,2,3,\ldots }  \mid  j \leq \lambda_i }$.
@@ -2325,7 +2324,7 @@ m_i =
 %Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
 Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
-This pseudo-partition $\lambda^{\mm}$ has length $r$, since $r = p_{\ell-1}(\mm)$.
+% This pseudo-partition $\lambda^{\mm}$ has $p_{\ell-1}(\mm) = r$ entries.
 Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain
 \[
 \lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}
@@ -2382,7 +2381,7 @@ Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization 
 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture of~\cite{AAMP}.
 
-There are $2^{n-1}$ packed types for words of length $n$, as they are the compositions of $n$.
+There are $2^{n-1}$ packed types for words of length $n$, as they are the compositions of $n$ (see \cite[Section 1.2]{Stanley-EC1}).
 We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
 Denote this type by $\mm_S$.
 Note that $\set{p_1(\mm_S), \dotsc, p_{\ell-1}(\mm_S)} = [n-1] \setminus S$, where $\mm_S$ has $\ell$ classes; this is the complement of the usual bijection between subsets of $\ive{n-1}$ and compositions of $n$.
