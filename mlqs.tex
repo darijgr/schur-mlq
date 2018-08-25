@@ -3517,6 +3517,10 @@ Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, 
 \end{example}
 
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
+We introduce another piece of notation.
+For any two sites $i$ and $j$, let $\inter[i,j]$ denote the closed (cyclic) interval from $i$ to $j$.
+This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$. (Thus, if $j = i-1$, then $\inter[i,j] = \ive{n}$.)
+
 Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
 Recall the construction of $q(u)$ (using this permutation).
 For each $k \in \ive{n}$, there is exactly one step in this construction at which $i = i_k$; we let $j_k$ denote the site $j$ that is found during this step.
@@ -3541,14 +3545,13 @@ So we have shown that
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $> t$.
 
-
 We first argue four auxiliary claims:
 
 \begin{claim}
 \label{claim:little_interlacing}
 Let $k\in \ive{n} $ be such that $k\leq \abs{q}$.
-Let $j_{!} \in q$ be a site that lies between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$.
-(If $i_k > j_k$, then this means that $j_{!} \geq i_k$ or $j_{!} \leq j_k$; otherwise, it means that $i_k \leq j_{!} \leq j_k$.)
+Let $j_{!} \in q$ be a site that belongs to $\inter[i_k, j_k]$.
+%(If $i_k > j_k$, then this means that $j_{!} \geq i_k$ or $j_{!} \leq j_k$; otherwise, it means that $i_k \leq j_{!} \leq j_k$.)
 Then, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 \end{claim}
 
@@ -3559,11 +3562,11 @@ Therefore, this step sees $j_k$ being defined as the first $j$ weakly to the rig
 Also, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
 If $j_{!} = j_k$, then Claim~\ref{claim:little_interlacing} follows immediately from this.
 Thus, without loss of generality, let us assume that $j_{!} \neq j_k$.
-Hence, the site $j_{!}$ lies between $i_k$ (inclusive) and $j_k$ (\emph{exclusive}) on the circle $\ZZ/n\ZZ$.
+That is, $j_{!}$ is distinct from $j_k$.
 
 Recall again that $j_k$ is the first $j$ weakly to the right (cyclically) of $i = i_k$ such that $j \in q$ and $\bigl( q(u) \bigr)_j$ is not set.
-Hence, for every site $j_{?}$ in $q$ that lies between $i_k$ (inclusive) and $j_k$ (exclusive), the letter $\bigl( q(u) \bigr)_{j_{?}}$ must already be set.
-Applying this to $j_{?} = j_{!}$, we conclude that the letter $a := \bigl( q(u) \bigr)_{j_{!}}$ must already be set.
+Hence, for every site $j_{?}$ in $q$ that lies in $\inter[i_k, j_k]$ but is distinct from $j_k$, the letter $\bigl( q(u) \bigr)_{j_{?}}$ must already be set.
+Applying this to $j_{?} = j_{!}$, we conclude that the letter $a := \bigl( q(u) \bigr)_{j_{!}}$ must already be set (since $j_{!}$ is distinct from $j_k$).
 Moreover, $a$ must have been set in Phase~II (because the site $j_{!}$ belongs to $q$, whereas Phase~I only sets letters in sites outside of $q$).
 Hence, $a \leq u_{i_k}$ because all letters that have been set in Phase~II before the current step are $\leq u_{i_k}$.
 Thus, $\bigl( q(u) \bigr)_{j_{!}} = a \leq u_{i_k}$.
@@ -3579,8 +3582,7 @@ Then, $i_k \leq j_k$.
 
 \begin{subproof}
 Assume the contrary. That is, $i_k>j_k$.
-Hence, the interval between $i_k$ and $j_k$ ``wraps around'' the circle (\textit{i.e.}, it is an interval only
-in $\ZZ/n\ZZ$, not in $\ive{n} $).
+Hence, the interval $\inter[i_k, j_k]$ ``wraps around'' the circle (\textit{i.e.}, it is an interval only in $\ZZ/n\ZZ$, not in $\ive{n} $).
 
 Let $j_{\min}$ be the smallest element of $q$.
 \begin{vershort}
@@ -3596,12 +3598,10 @@ Yet, this largest letter must be $t$ since the word $q(u)$ has at least one lett
 Hence, we have $\bigl( q(u) \bigr)_{j_{\min}} = t$.
 \end{verlong}
 
-\Travis{You need notation for these intervals. It is too cumbersome explaining it in words.}
-\Darij{Which intervals? The ``lie between'' parts? OK, I can do that.}
-If the site $j_{\min}$ would lie between $i_k$ (inclusive) and $j_k$ (inclusive) on the circle $\ZZ/n\ZZ$, then Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\min}$) would yield $\bigl( q(u) \bigr)_{j_{\min}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+If we had $j_{\min} \in \inter[i_k, j_k]$, then Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\min}$) would yield $\bigl( q(u) \bigr)_{j_{\min}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 This would contradict $\bigl( q(u) \bigr)_{j_{\min}} = t > u_{i_k}$.
-Hence, the site $j_{\min}$ cannot lie between $i_k$ (inclusive) and $j_k$ (inclusive).
-Since the interval between $i_k$ and $j_k$ ``wraps around'' the circle, this shows that $j_{\min} > j_k$.
+Hence, we cannot have $j_{\min} \in \inter[i_k, j_k]$.
+Since the interval $\inter[i_k, j_k]$ ``wraps around'' the circle, this shows that $j_{\min} > j_k$.
 Thus, $j_k\notin q$ (since $j_{\min}$ is the smallest element of $q$).
 However, $k \leq \abs{q}$, and thus $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II; therefore, $j_k\in q$.
 This contradicts $j_k\notin q$, and so Claim~\ref{claim:fixed_k_decreasing_i_from_j} is proven.
@@ -3652,6 +3652,7 @@ Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} is thus proven.
 \end{subproof}
 
 \Travis{How easy would it be to pull these claims out into separate lemmas?}
+\Darij{Not very easy. They refer to the $j_k$, which are temporary objects in the construction of $q(u)$.}
 
 We are now ready to prove the two parts of the lemma:
 
@@ -3666,8 +3667,8 @@ Therefore, $\bigl( q(u) \bigr)_{j_k} = u_{i_k} < u_{i_{\ell}} = \bigl( q(u) \big
 Since the letters $\bigl( q(u) \bigr) _{j_k}$ and $\bigl( q(u) \bigr)_{j_{\ell}}$ of $q(u)$ are also at most $t$ (because $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_{x} < t$ and  $\bigl( q(u) \bigr)_{j_{\ell }} = u_{i_{\ell}} = u_{y} < t$), this entails $j_k > j_{\ell }$ (since $q(u)$ is weakly decreasing up to level $t$).
 From Claim~\ref{claim:fixed_k_decreasing_i_from_j}, we have $i_k \leq j_k$ and similarly $i_{\ell} \leq j_{\ell}$.
 Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
-Hence, the site $j_{\ell}$ lies between $i_k$ (inclusive) and $j_k$ (inclusive).
-Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!}=j_{\ell }$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+Hence, $j_{\ell} \inter \inter[i_k, j_k]$.
+Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\ell}$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k}$.
 \begin{vershort}
 Therefore, Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
