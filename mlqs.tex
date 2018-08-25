@@ -1232,22 +1232,26 @@ This takes inspiration from the ``bully paths'' of~\cite{AasLin17} as well as fr
 We begin with basic definitions.
 
 The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
-all pairs of integers (that is, its vertex set is $\ZZ^{2}$), and whose arcs are
+all pairs of integers (that is, its vertex set is $\ZZ^2$), and whose arcs are
 \begin{align*}
 (i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ^2, \qquad \text{and} \\
 (i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ^2.
 \end{align*}
 The arcs of the first kind are called \defn{north-steps}, whereas the arcs of
 the second kind are called \defn{east-steps}.
+\begin{verlong}
+The vertices of the lattice will just be called \defn{vertices}.
+\end{verlong}
 We consider the lattice as the usual integer lattice in the Cartesian plane.
 
-For each vertex $v = (i,j)$, we set $\xcoord(v) = i$ and $\ycoord(v) = j$.
+For each vertex $v = (i,j) \in \ZZ^2$, we set $\xcoord(v) = i$ and $\ycoord(v) = j$.
 We refer to $\xcoord(v)$ (resp.~$\ycoord(v)$) as the \defn{$x$-coordinate} (resp.~\defn{$y$-coordinate}) of $v$.
 The \defn{$y$-coordinate} of an east-step $(i,j) \to (i+1, j)$ is defined to be $j$.
 
-For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as
+For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as the monomial
 \[
-\wt(a) = \begin{cases}
+\wt(a) :=
+\begin{cases}
 x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
 1 & \text{if $a$ is a north-step } (i,j) \to (i,j+1).
 \end{cases}
@@ -1327,7 +1331,7 @@ Next, we state a simple lemma that will help us show that certain pairs of $k$-v
 
 \begin{lemma}
 \label{lem.LGV.hex}
-Let $A$, $B$, $A'$ and $B'$ be four vertices such that
+Let $A$, $B$, $A'$ and $B'$ be four vertices of the lattice such that
 \[
 \xcoord(A') \leq \xcoord(A), \qquad \ycoord(A') \geq \ycoord(A), \qquad
 \xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(B).
@@ -1740,44 +1744,66 @@ Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
 %%%%%%%%%%
 \subsection{Pseudo-partitions and tableaux}
 
-We shall next introduce the concepts of pseudo-partitions and their corresponding semistandard tableaux.
-We do this to give a tableaux interpretation of our LGV Lemma determinant.
-A psuedo-partition is similar to the concept of partitions except it allows entries to increase by $1$.
-The corresponding semistandard tableaux is just a calque of the usual notion of semistandard tableaux extended to pseudo-partitions.
-We will then prove a Jacobi--Trudi-like formula for a generating function of these semistandard tableaux of a fixed pseudo-partition and rightmost entries of each row.
+We shall next introduce the concepts of pseudo-partitions and their corresponding semistandard tableaux;
+we will then express a generating function for these tableaux by a determinantal formula (Theorem~\ref{thm.tableau.jt}) akin to the Jacobi--Trudi formula for Schur functions (and, like the latter, the proof will rely on Proposition~\ref{prop.LGV.concrete}).
+A pseudo-partition is similar to the concept of a partition, except it allows entries to increase by $1$.
+The semistandard tableaux of a pseudo-partition shape are defined just like for partitions.
+The generating function in our determinantal formula is going to be a sum over the semistandard tableaux of a fixed pseudo-partition shape with given rightmost entries in each row.
 Later we will translate these tableaux into MLQs that yield a specific word when applied to $1\dotsm 1$.
 
 Let us formalize these definitions.
-Fix some $k \in \NN$.
-A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ of positive integers such that
+A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ of positive integers (for some $k \in \NN$) such that
 \[
 \text{each } i \in \ive{k-1} \text{ satisfies } \lambda_i + 1 \geq \lambda_{i+1}.
 \]
 We say $\lambda$ has \defn{length} $k$.
-For example, $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are both pseudo-partitions of length $5$.
+For example, both $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are pseudo-partitions of length $5$.
 
 The \defn{diagram $\diag{\lambda}$} of a pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
 $\set{  \left(  i,j\right)  \in \ive{k} \times \set{ 1,2,3,\ldots }  \mid  j \leq \lambda_i }$.
 This diagram is drawn in the plane like usual Young diagrams, in English notation.
+\begin{verlong}
+For example, the diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
+\[
+\ydiagram{3,2,3,1}.
+\]
+\end{verlong}
 
 If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, then a \defn{tableau of shape $\lambda$} is a map $T \colon \diag{\lambda} \to \set{1,2,3,\ldots}$.
 For each such tableau $T$ and each $(i,j) \in \diag{\lambda}$, we refer to the value $T(i,j)$ as the \defn{entry of $T$ in cell $\left(i,j\right)$}.
 As usual, we represent a tableau $T$ of shape $\lambda$ by placing the entry $T(i,j)$ into the box corresponding to $(i,j) \in \diag{\lambda}$.
+\begin{verlong}
+For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
+\begin{equation}
+\label{eq.tableau.exas-long}
+\begin{ytableau} 2 & 5 & 3 \\ 1 & 1 \\ 2 & 4 & 1 \\ 7 \end{ytableau}\qquad
+\text{and}\qquad
+\begin{ytableau} 1 & 1 & 3 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}.
+\end{equation}
+\end{verlong}
 
 A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only if
 \begin{itemize}
-\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(  i,j_2)$ whenever $(i,j_1)  \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
+\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(i,j_2)$ whenever $(i,j_1) \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
 
 \item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
 \end{itemize}
 
-If $T$ is a tableau of shape $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$, then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
+\begin{verlong}
+For example, the second tableau in~\eqref{eq.tableau.exas-long} is semistandard, while the first is not.
+\end{verlong}
+
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, and if $T$ is a tableau of shape $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$,
+then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
 
 If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
 \[
 \wt(T) := \prod_{(i,j) \in \diag{\lambda}} x_{T(i,j)}
 \]
 (that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
+\begin{verlong}
+For example, the two tableaux in~\eqref{eq.tableau.exas-long} have weights $x_1^{3}x_2^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_1^{2}x_2x_{3}^{2}x_{4}x_{5}^{3}$, respectively (assuming that $n \geq 7$).
+\end{verlong}
 Let $\SST(\lambda, s)$ denote the set of all semistandard tableaux of shape $\lambda$ and surface $s$.
 
 \begin{example}
@@ -1785,7 +1811,8 @@ The diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
 \[
 \ydiagram{3,2,3,1}\,.
 \]
-Assuming $n \geq 7$, the following are two tableaux of shape $\tup{3,2,3,1}$:
+The following are two tableaux of shape $\tup{3,2,3,1}$:
+% $n$ doesn't appear in our definitions; we fix the surface in our formula, which ensures no too-high entries.
 \[
 \label{eq.tableau.exas}
 \begin{ytableau} 1 & 2 & 5 \\ 2 & 3 \\ 3 & 4 & 5 \\ 7 \end{ytableau}\qquad
@@ -1794,7 +1821,7 @@ Assuming $n \geq 7$, the following are two tableaux of shape $\tup{3,2,3,1}$:
 \]
 \travis{I changed the first example to something that is more subtly not semistandard.}
 The right tableau is semistandard, while the left one is not (the two $5$'s in the rightmost column).
-These tableau have surfaces $(5,3,4,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
+These tableau have surfaces $(5,3,5,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
 \travis{I consolidated these examples because someone used to tableaux only needs to see this example to understand (or extrapolate what should be) the definitions.}
 \end{example}
 
@@ -1802,7 +1829,6 @@ We now state the main result of this subsection:
 
 \begin{thm}
 \label{thm.tableau.jt}
-Let $k \in \NN$.
 Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a pseudo-partition.
 Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
 Then,
@@ -1818,6 +1844,7 @@ Let us define two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \t
 \[
 A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
+\begin{vershort}
 Since $\lambda$ is a pseudo-partition and $s$ is weakly increasing, we can apply Proposition~\ref{prop.LGV.concrete} to obtain
 \begin{equation}
 \label{pf.thm.tableau.jt.1}
@@ -1826,6 +1853,21 @@ Since $\lambda$ is a pseudo-partition and $s$ is weakly increasing, we can apply
 & \overset{\eqref{eq.LGV.single-paths}}{=} \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
 \end{split}
 \end{equation}
+\end{vershort}
+\begin{verlong}
+The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
+Thus, Proposition~\ref{prop.LGV.concrete} yields
+\begin{align}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \nonumber \\
+& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
+\label{pf.thm.tableau.jt.1}
+\end{align}
+where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
+\[
+\sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
+\]
+(by~\eqref{eq.LGV.single-paths}, applied to $A = A_i$ and $B = B_j$).
+\end{verlong}
 
 Next, let us define a bijection
 \[
@@ -2053,7 +2095,7 @@ Forget that we fixed $\qq$.
 % I don't understand what purpose this sentence serves -- Travis
 % It serves to clarify that $\qq$ is no longer fixed. --Darij
 
-Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
+%Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
 Define a pseudo-partition
 \begin{equation}
 \label{eq.determinant_form.interlacing.lam}
@@ -2068,7 +2110,7 @@ Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the botto
 
 \begin{lemma}
 \label{lem:determinant_form.bij1}
-Let $\ell$, $\mm$, $m_i$, and $k$ be as above.
+Let $\ell$, $\mm$, and $m_i$ be as above.
 Then, there is an injection
 \[
 P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda^{\mm} }
@@ -2156,8 +2198,8 @@ Hence, we have proven all four properties (a--d).
 
 \begin{cor}
 \label{cor:determinant_form.bij1c}
-Let $\ell$, $\mm$, $m_i$, and $k$ be as above.
-Let $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
+Let $\ell$, $\mm$, and $m_i$ be as above.
+Let $k \in \NN$ and $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
 % This awkward wording should repel the misunderstanding that we are *defining* $\lambda^{\mm}$ here.
 Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
 Then,
@@ -2169,15 +2211,14 @@ Then,
 \end{cor}
 
 \begin{proof}
-%Let $s$ be the strictly increasing sequence $\tup{s_1 < s_2 < \cdots < s_k}$ of elements of $\ive{n}$.
-Let $s = \tup{s_1, s_2, \dotsc, s_k}$. \travis{These are the same $s_i$ as in the statement, correct?}
 Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
 Property~(c) shows that this injection $P$ restricts to an injection
 \[
 \set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
 \]
 Property~(d) shows that this restricted injection is also surjective, and thus a bijection.
-Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt}.
+Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
+\begin{vershort}
 We thus obtain
 \begin{align*}
 \sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
@@ -2185,6 +2226,17 @@ We thus obtain
 &  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
 \end{align*}
 where the second equality follows from Property~(a) and Property~(b) and that $s = S$ (where we consider $s$ as a set).
+\end{vershort}
+\begin{verlong}
+We thus obtain
+\begin{align*}
+\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
+&  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
+&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
+\end{align*}
+where the second equality follows from Property~(a) and Property~(b) and the last equality is since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$.
+\end{verlong}
 Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
 \end{proof}
 
@@ -2677,7 +2729,7 @@ Let's say that $M_\alpha$ belongs to the $j$-th age bracket, and is the $p$-th o
 Fact (E) shows that, in particular, each man marries; hence, the ``marriage procedure'' does not fail.
 
 Now, we claim that the ``marriage procedure'' precisely follows the first $\abs{r}$ steps of Phase~II:
-The men that get married are precisely the men $M_k$ with $k \in r$, in order of decreasing age; thus, they are $M_{i_1}, M_{i_2}, \ldots, M_{i_{\abs{r}}}$ (in this order).\footnote{This is because the permutation $\tup{i_1, i_2, \ldots, i_n}$ begins with the elements of $r$ listed in decreasing order.}
+The men that get married are precisely the men $M_k$ with $k \in r$, in order of decreasing age; thus, they are $M_{i_1}, M_{i_2}, \ldots, M_{i_{\abs{r}}}$ (in this order)\footnote{This is because the permutation $\tup{i_1, i_2, \ldots, i_n}$ begins with the elements of $r$ listed in decreasing order.}.
 Furthermore, each man $M_{i_k}$ marries woman $W_{j_k}$ (because his search for the youngest available woman that is at least as old as him is precisely the search for the first available site $j$ to the right of $i$ in Phase~II\footnote{Except for the fact that his search doesn't ``wrap around the circle'' (\textit{i.e.}, if he finds no wife older than him, then he doesn't wrap over to the youngest women), whereas the search for $j$ in Phase~II does. But this difference is immaterial, because we know from Fact (E) that man $M_{i_k}$ necessarily finds a wife, so that ``wrapping around the circle'' isn't necessary.}).
 % This is not very well explained, but I can't do better.
 
@@ -2731,8 +2783,10 @@ Finally, we claim that
 
 [\textit{Proof of~\eqref{pf.lem:determinant_form.interl-B.res2}:}
 We have seen that the word $q(u)$ has type
-$\tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
-n - \abs{q}}$.
+\[
+\tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
+n - \abs{q}} .
+\]
 Thus, it has $\abs{q^{(h)}}$ many letters equal to $h$.
 In other words, there are $\abs{q^{(h)}}$ many positions $t \in \ive{n}$
 satisfying $(q(u))_t = h$.
@@ -3164,6 +3218,7 @@ m_i =
 %Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
 Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
+This pseudo-partition $\lambda^{\mm}$ has length $r$, since $r = p_{\ell-1}(\mm)$.
 Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain
 \[
 \lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}
