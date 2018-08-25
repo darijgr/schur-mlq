@@ -3304,12 +3304,12 @@ In other words, the surface of $P(\qq)$ is the list of all elements of $q_{\ell-
 This proves property~(b).
 
 Let $\qq$ be an MLQ of type $\mm$.
-Then, the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def} (this is easily seen from~\eqref{pf.lem:determinant_form.bij1.visual} and from the fact that the columns $\widetilde{q_i^{(j)}}$ are strictly increasing\footnote{In more detail:
+Then, the columns $\widetilde{q_i^{(j)}}$ are strictly increasing. Hence, from~\eqref{pf.lem:determinant_form.bij1.visual}, we see the following:
 \begin{itemize}
-\item The entries of $P(\qq)$ are weakly increasing along each row
+\item The entries of the tableau $P(\qq)$ are weakly increasing along each row
 if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
 $q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
-\item The entries of $P(\qq)$ are strictly increasing down each
+\item The entries of the tableau $P(\qq)$ are strictly increasing down each
 column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
 $q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
 (Here, we are also tacitly using the fact that the sets
@@ -3319,8 +3319,8 @@ to $\widetilde{q_i^{\left(  j\right)  }}$ again or to
 $\widetilde{q_{i-1}^{\left(  j-1\right)  }}$, rather than (say) to
 $\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
 \end{itemize}
-}\travis{This is a really long footnote for something inside of a parenthetical. We should try to either shorten it or move it into the main body.});
-in other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
+Combining these two observations, we conclude that the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def}.
+In other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
 This proves property (c).
 
 Finally, if $T$ is a semistandard tableau of shape $\lambda^{\mm}$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
@@ -3480,7 +3480,7 @@ So we have shown that
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $> t$.
 
-We first argue four auxiliary claims:
+We first argue five auxiliary claims:
 
 \begin{claim}
 \label{claim:little_interlacing}
@@ -3586,6 +3586,21 @@ So we have $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
 Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} is thus proven.
 \end{subproof}
 
+\begin{claim}
+\label{claim:pf.lem:determinant_form.interl-A.b.for_surj}
+Let $k \in \ive{n}$ be such that $\bigl( q(u) \bigr)_{j_k} < t$. Then, $u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
+\end{claim}
+
+\begin{subproof}
+If we had $k > \abs{q}$, then the letter $\bigl( q(u) \bigr)_{j_k}$ would be set in Phase~I of the construction;
+thus, we would have $j_k \notin q$, so that $\bigl( q(u) \bigr)_{j_k} > t$ by~\eqref{pf.lem:determinant_form.interl-A.2}.
+However, this would contradict $\bigl( q(u) \bigr)_{j_k} < t$.
+Thus, we cannot have $k > \abs{q}$.
+Hence, $k \leq \abs{q}$.
+Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
+This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
+\end{subproof}
+
 \Travis{How easy would it be to pull these claims out into separate lemmas?}
 \Darij{Not very easy. They refer to the $j_k$, which are temporary objects in the construction of $q(u)$.}
 
@@ -3643,28 +3658,27 @@ i_k & \mapsto j_k
 \end{align*}
 (since each element of $B$ can be written as $i_k$ for a unique $k\in \ive{n} $), and it satisfies $\phi(b) \geq b$ for each $b \in B$ (since $j_k \geq i_k$).
 This map $\phi$ is injective since the $j_1, j_2, \dotsc, j_n$ are distinct (indeed, $\tup{j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ because each letter of $q(u)$ is set exactly once during the construction of $q(u)$).
-Furthermore, the map $\phi$ is surjective.\footnote{\textit{Proof.}
-  Let $a\in A$.
-  We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
-  \par
-  Indeed, recall that $\left( j_1,j_2,\ldots ,j_n\right) $ is a permutation of $\tup{1, 2, \dotsc, n}$.
-  Thus, there exists some $k \in \ive{n} $ satisfying $j_k = a$.
-  Consider this $k$.
-  All we need to prove now is that $i_k\in B$.
-  \par
-  We have $j_k = a$, and thus $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h$ (since $a \in A$).
-  \par
-  If we had $k > \abs{q}$, then the letter $\bigl( q(u) \bigr)_{j_k}$ would be set in Phase~I of the construction;
-  thus, we would have $j_k\notin q$, so that $\bigl( q(u) \bigr)_{j_k} > t$ by~\eqref{pf.lem:determinant_form.interl-A.2}.
-  However, this would contradict $\bigl( q(u) \bigr)_{j_k} = h < t$.
-  Thus, we cannot have $k > \abs{q}$.
-  Hence, $k \leq \abs{q}$.
-  Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
-  This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
-  In other words, $i_k \in B$ as desired.}
-\travis{No paragraph long footnotes. Either this is obvious, detail left for the reader, or it needs to actually be part of the proof.}
-Thus, it is bijective. Hence, we have found a bijection
-$\phi \colon B \to A$ that furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
+
+Next, we claim that the map $\phi$ is surjective.
+
+[\textit{Proof.} Let $a\in A$.
+We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
+
+Indeed, recall that $\left( j_1,j_2,\ldots ,j_n\right) $ is a permutation of $\tup{1, 2, \dotsc, n}$.
+Thus, there exists some $k \in \ive{n} $ satisfying $j_k = a$.
+Consider this $k$.
+All we need to prove now is that $i_k\in B$.
+
+We have $j_k = a$, and thus $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h$ (since $a \in A$).
+Hence, $\bigl( q(u) \bigr)_{j_k} = h < t$ (since $h \in \ive{t-1}$).
+Thus, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.for_surj} yields
+$u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
+In other words, $i_k \in B$.
+This completes the proof that $\phi$ is surjective.]
+
+We have thus shown that $\phi$ is both injective and surjective. Therefore, $\phi$ is bijective.
+Hence, we have found a bijection $\phi \colon B \to A$ that
+furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
 Therefore, Lemma~\ref{lem:determinant_form.gale1} shows that $A \succeq B$.
 
 It remains to show that $B \gg C$.
