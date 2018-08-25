@@ -339,8 +339,7 @@ Yet it seems unlikely that our weighting is related to the steady state distribu
 
 This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
-In Section~\ref{sec:result}, we give our main results.
-In Section~\ref{sec:JT_formula}, we show a Jacobi-Trudi like formula for special words $u$, which we use to prove some of the conjectures in~\cite{AasLin17}.
+In Section~\ref{sec:result}, we give our main results, and use them to prove some of the conjectures in~\cite{AasLin17}.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
 In Section~\ref{sec:thm_proof}, we give a proof of our main theorem (Theorem~\ref{thm:permutation}).
 In Section~\ref{sec:remarks}, we give some additional remarks about our results.
@@ -755,6 +754,8 @@ For more details on symmetric polynomials, we refer the reader to~\cite[Ch.~7]{S
 
 In this section, we state our main results and use them to prove the commutativity conjecture of~\cite{AAMP} and~\cite[Conj.~3.10]{AasLin17}.
 
+\subsection{$\sigma$-independence of the spectral weight}
+
 \begin{thm}
 \label{thm:permutation}
   Let $u$ be a packed word of type $\mm$ with $\ell$ classes.
@@ -765,7 +766,10 @@ In this section, we state our main results and use them to prove the commutativi
 \end{thm}
 
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
-In order to prove our next result, we need the following.
+%In order to prove our next result, we need the following.
+
+\subsection{Queue action and merges}
+We shall next study the interplay between the action of queues on words and the merging of adjacent classes.
 
 If $w$ is a word of type $\mm$, and if $j \geq 0$, then $p_j(\mm)$ is the number of letters of $w$ that are at most $j$.
 
@@ -962,6 +966,10 @@ It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
 and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
 \end{proof}
 
+\subsection{Spectral weights of merged words}
+
+The preceding lemmas will help us establish a rule for products of spectral weights with elementary symmetric polynomials (somewhat similar to the dual Pieri rule, \textit{e.g.}, \cite[Section 7.15]{Stanley-EC2}):
+
 \begin{thm}
 \label{thm:merge}
   Let $\mm$ be a type with $m_i \neq 0$ and $m_{i+1} \neq 0$.
@@ -1033,16 +1041,8 @@ By examining all possible MLQs for these words, we obtain
 We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
-
-
-
-
-
-
-
-%=====================================================================
-\section{A Jacobi-Trudi-like formula for special $u$}
-\label{sec:JT_formula}
+\subsection{A Jacobi-Trudi-like formula for special $u$}
+\label{subsec:JT_formula}
 
 \begin{comment}
 % Old version of this section, using too much handwaving. The graphics are probably worth reusing.
@@ -1217,1053 +1217,11 @@ See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bije
 \end{example}
 \end{comment}
 
-The goal of this section is to prove a determinantal formula (Theorem~\ref{thm:determinant_form}) for $\swt{u}$ in the special case when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and becomes weakly decreasing if we disregard all letters $\ell$.
-%For example, $u = {\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}211{\color{gray}4}$ is such a word, with $\ell=4$.
-This will then be used to settle two conjectures from~\cite{AasLin17}.
-
-Throughout this section, we shall regard the sites $1, 2, \ldots, n$ as elements of $\ZZ$ rather than of $\ZZ/n\ZZ$.
+Throughout this subsection, we shall regard the sites $1, 2, \ldots, n$ as elements of $\set{1, 2, \ldots, n}$ rather than of $\ZZ/n\ZZ$.
 In particular, they are totally ordered by $1 < 2 < \cdots < n$.
-Moreover, we shall use infinitely many distinct commuting indeterminates $\ldots, x_{-2}, x_{-1}, x_0, x_1, x_2, \ldots$ instead of those indexed by $\ZZ/n\ZZ$; thus we do not have $x_{n+k} = x_k$ in this section.
 
-
-%%%%%%%%%%
-\subsection{Lattice paths and the Lindstr\"{o}m--Gessel--Viennot theorem}
-
-Our arguments will rely on the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{GV85,Lindstrom73} and on a re-interpretation of MLQs as a certain kind of semistandard tableaux (of non-partition shape).
-This takes inspiration from the ``bully paths'' of~\cite{AasLin17} as well as from the standard proof of the Jacobi--Trudi identities for Schur functions~\cite[First proof of Theorem 7.16.1]{Stanley-EC2}.
-We begin with basic definitions.
-
-The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
-all pairs of integers (that is, its vertex set is $\ZZ^2$), and whose arcs are
-\begin{align*}
-(i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ^2, \qquad \text{and} \\
-(i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ^2.
-\end{align*}
-The arcs of the first kind are called \defn{north-steps}, whereas the arcs of
-the second kind are called \defn{east-steps}.
-\begin{verlong}
-The vertices of the lattice will just be called \defn{vertices}.
-\end{verlong}
-We consider the lattice as the usual integer lattice in the Cartesian plane.
-
-For each vertex $v = (i,j) \in \ZZ^2$, we set $\xcoord(v) = i$ and $\ycoord(v) = j$.
-We refer to $\xcoord(v)$ (resp.~$\ycoord(v)$) as the \defn{$x$-coordinate} (resp.~\defn{$y$-coordinate}) of $v$.
-The \defn{$y$-coordinate} of an east-step $(i,j) \to (i+1, j)$ is defined to be $j$.
-
-For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as the monomial
-\[
-\wt(a) :=
-\begin{cases}
-x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
-1 & \text{if $a$ is a north-step } (i,j) \to (i,j+1).
-\end{cases}
-\]
-Thus, all north-steps have weight $1$, while east-steps with $y$-coordinate $j$ have weight $x_j$.
-
-Fix $k \in \NN$.
-A $k$-tuple of vertices of the lattice will be called a \defn{$k$-vertex}.
-\begin{verlong}
-If $\vv = \tup{A_1, A_2, \dotsc, A_k}$ is a $k$-vertex, and if $\sigma \in \SymGp{k}$ is a permutation, then $\sigma(\vv)$ denotes the $k$-vertex $\tup{A_{\sigma(1)}, A_{\sigma(2)}, \dotsc, A_{\sigma(k)}}$.
-\end{verlong}
-A \defn{path} simply means a (directed) path in the lattice.
-The \defn{weight} of a path $p$, denoted $\wt(p)$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
-If $A$ and $B$ are two vertices, then \defn{$N(A,B)$} shall denote the set of all paths from $A$ to $B$.
-
-It is easy to see (see, \textit{e.g.}, \cite[(2.36)]{Stanley-EC1}) that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
-\begin{equation}
-\label{eq.LGV.single-paths}
-\sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
-\end{equation}
-% This really is just a substitution and we can assume the readers are not completely incompetent
-%(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
-
-\begin{comment}
-We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and classical fact that appears implicitly in various texts on enumerative combinatorics (\textit{e.g.}, \cite[(2.36)]{Stanley-EC1}).
-
-\begin{proof}[Proof of~\eqref{eq.LGV.single-paths}.]
-Let $A = (a,b)$ and $B = (c,d)$ be two vertices.
-If $p$ is a path from $A$ to $B$, then $p$ must have exactly $c-a$ east-steps, and the $y$-coordinates of these
-east-steps must belong to the interval $\set{b,b+1,\dotsc,d}$.
-Let $\bigl(  y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ be the weakly increasing $(c-a)$-tuple of elements of $\set{b,b+1, \dotsc, d}$ corresponding to the $y$-coordinates of the $c-a$ east-steps of $p$ (from left to right).
-Moreover, $p$ can be uniquely reconstructed from this $(c-a)$-tuple (since these $(c-a)$-tuple determines the east-steps of $p$).
-Conversely, any weakly increasing $(c-a)$-tuple of elements of $\set{b, b+1, \dotsc,d}$ has the form $\bigl(  y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ for a unique path $p$ from $A$ to $B$.
-Thus, there is a bijection between the paths $p$ from $A$ to $B$ and the weakly increasing $(c-a)$-tuples of elements of $\set{b, b+1, \dotsc, d}$.
-This yields
-\begin{align*}
-\sum_{p \in N(A,B)} \wt(p) & = \sum_{\substack{ \tup{k_1,k_2,\ldots,k_{c-a}} \text{ is a weakly increasing} \\ (c-a)\text{-tuple of elements of }\set{b,b+1,\dotsc,d} }} x_{k_1} x_{k_2} \cdots x_{k_{c-a}}
-\\ & = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
-\end{align*}
-\end{proof}
-\end{comment}
-
-If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-vertices, then a \defn{non-intersecting lattice path tuple (NILP)} from $\tup{A_1, A_2, \dotsc, A_k}$ to $\tup{B_1, B_2, \dotsc, B_k}$ shall mean a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths such that
-\begin{itemize}
-\item each $p_i$ is a path from $A_i$ to $B_i$;
-\item no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
-\end{itemize}
-(Visually speaking, the paths must neither cross nor touch.)
-
-The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is the monomial $\wt(\pp)$ defined by
-\[
-\wt(\pp) := \prod_{i=1}^{k} \wt(p_i).
-\]
-
-\Darij{TODO: Picture of a NILP with weight. Don't align the sources or targets on a line.}
-
-If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the set of all NILPs from $\uu$ to $\vv$.
-
-\begin{verlong}
-A pair $(\uu, \vv)$ of two $k$-vertices $\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
-if every permutation $\sigma \neq \id$ in $\SymGp{k}$ satisfies $N\bigl( \uu,\sigma(\vv) \bigr) = \emptyset$.
-Note that we are not requiring that $N(\uu, \vv) \neq \emptyset$ here.
-
-The following fact (a particular case of~\cite[Corollary 2]{GesVie89}) is crucial:
-
-\begin{prop}
-\label{prop.LGV.nonper}
-Let $k \in \NN$.
-Let $(\uu, \vv)$ be a nonpermutable pair of two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$.
-Then,
-\[
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p \in N(A_i,B_j)} \wt(p) \right)_{i, j \in \ive{k}}.
-\]
-\end{prop}
-
-Next, we state a simple lemma that will help us show that certain pairs of $k$-vertices are nonpermutable:
-
-\begin{lemma}
-\label{lem.LGV.hex}
-Let $A$, $B$, $A'$ and $B'$ be four vertices of the lattice such that
-\[
-\xcoord(A') \leq \xcoord(A), \qquad \ycoord(A') \geq \ycoord(A), \qquad
-\xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(B).
-\]
-Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
-Then, $p$ and $p'$ have a vertex in common.
-\end{lemma}
-
-TODO: Example picture.
-
-\begin{proof}[First proof of Lemma~\ref{lem.LGV.hex}.]
-If $q$ is any path, then the \defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
-of $q$.
-
-We shall now prove Lemma~\ref{lem.LGV.hex} by strong induction on $\ell(p) + \ell(p')$:
-
-\textit{Induction step:}
-Fix $N \in \NN$. Assume (as the induction hypothesis) that Lemma~\ref{lem.LGV.hex} holds whenever $\ell(p) + \ell(p') < N$.
-We must now prove that Lemma~\ref{lem.LGV.hex} holds when $\ell(p) + \ell(p') = N$.
-
-So let $A$, $B$, $A'$, $B'$, $p$ and $p'$ be as in Lemma~\ref{lem.LGV.hex}, and let us assume that $\ell(p) + \ell(p') = N$.
-We must prove that $p$ and $p'$ have a vertex in common.
-
-Assume the contrary. Thus, $p$ and $p'$ have no vertex in common.
-
-The vertex $A$ belongs to the path $p$, and thus does not belong to the path
-$p'$ (since $p$ and $p'$ have no vertex in common). Similarly,
-the vertex $A'$ does not belong to the path $p$.
-
-Recall that each arc of the lattice is either an east-step or a north-step.
-Thus, the $x$-coordinates of the vertices of a path are always weakly
-increasing, and so are the $y$-coordinates. Hence, the existence of a path $p$
-from $A$ to $B'$ shows that $\xcoord\left(  A\right)
-\leq\xcoord\left(  B'\right)  $ and
-$\ycoord\left(  A\right)  \leq\ycoord\left(  B'\right)  $.
-Similarly, the existence of a path $p'$ from $A'$ to $B$ yields
-$\xcoord\left(  A'\right)  \leq\xcoord\left(  B\right)  $ and
-$\ycoord\left(  A'\right)  \leq\ycoord\left(  B\right)  $.
-
-Next, we claim that $\ell\left(  p\right)  \neq0$.
-
-[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p\right)  =0$. Hence,
-the path $p$ has no steps. Therefore, $A=B'$ (since $p$ is a path from
-$A$ to $B'$). Hence, $\ycoord\left(  A\right)
-=\ycoord\left(  B'\right)  \geq\ycoord\left(
-B\right)  $, so that $\ycoord\left(  A'\right)
-\geq\ycoord\left(  A\right)  \geq\ycoord\left(  B\right)
-$. Combining this with $\ycoord\left(  A'\right)
-\leq\ycoord\left(  B\right)  $, we obtain $\ycoord\left(
-A'\right)  =\ycoord\left(  B\right)  $. Combining
-$\ycoord\left(  A'\right)  \geq\ycoord\left(
-A\right)  $ with $\ycoord\left(  A'\right)
-=\ycoord\left(  B\right)  \leq\ycoord\left(  A\right)  $,
-we obtain $\ycoord\left(  A'\right)  =\ycoord\left(  A\right)  $.
-Thus, $\ycoord\left(  A'\right)
-=\ycoord\left(  A\right)  =\ycoord\left(  B\right)  $.
-Therefore, the vertex $A$ lies on the horizontal line that contains
-$A'$ and $B$. Furthermore, this vertex $A$ must lie on the line
-segment between $A'$ and $B$ (since $\xcoord\left(
-A'\right)  \leq\xcoord\left(  \underbrace{A}_{=B'}\right)
-=\xcoord\left(  B'\right)  \leq\xcoord\left(  B\right)  $).
-
-Recall again that the $y$-coordinates of the vertices a path are always weakly
-increasing. Moreover, they increase strictly whenever the path makes a
-north-step. Hence, if the path $p'$ would have any north-step, then we
-would have $\ycoord\left(  A'\right)  <\ycoord\left(  B\right)  $
-(since $p'$ is a path from $A'$ to $B$).
-But this would contradict $\ycoord\left(  A'\right)
-\geq\ycoord\left(  B\right)  $. Hence, the path $p'$ has no
-north-step. Thus, $p'$ consists entirely of east-steps. Hence,
-$p'$ contains every vertex on the line segment between $A'$
-and $B$. Therefore, $p'$ contains the vertex $A$ (since the vertex $A$
-lies on the line segment between $A'$ and $B$). This contradicts the
-fact that $A$ does not belong to the path $p'$. This contradiction
-shows that our assumption was false; hence, $\ell\left(  p\right)  \neq0$ is proven.]
-
-Furthermore, we claim that $\ell\left(  p'\right)  \neq0$.
-
-[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p'\right)
-=0$. Hence, the path $p'$ has no steps. Therefore, $A'=B$
-(since $p'$ is a path from $A'$ to $B$). Hence,
-$\xcoord\left(  A'\right)  =\xcoord\left(
-B\right)  \geq\xcoord\left(  B'\right)  $, so that
-$\xcoord\left(  A\right)  \geq\xcoord\left(  A^{\prime
-}\right)  \geq\xcoord\left(  B'\right)  $. Combining this
-with $\xcoord\left(  A\right)  \leq\xcoord\left(
-B'\right)  $, we obtain $\xcoord\left(  A\right)
-=\xcoord\left(  B'\right)  $. Combining $\xcoord%
-\left(  A\right)  \geq\xcoord\left(  A'\right)  $ with
-$\xcoord\left(  A'\right)  \geq\xcoord\left(
-B'\right)  =\xcoord\left(  A\right)  $, we obtain
-$\xcoord\left(  A\right)  =\xcoord\left(  A^{\prime
-}\right)  $. Thus, $\xcoord\left(  A'\right)
-=\xcoord\left(  A\right)  =\xcoord\left(  B^{\prime
-}\right)  $. Therefore, the vertex $A'$ lies on the vertical line that
-contains $A$ and $B'$. Furthermore, this vertex $A'$ must lie
-on the line segment between $A$ and $B'$ (since $\ycoord%
-\left(  A'\right)  \geq\ycoord\left(  A\right)  $ and
-$\ycoord\left(  \underbrace{A'}_{=B}\right)
-=\ycoord\left(  B\right)  \leq\ycoord\left(  B^{\prime
-}\right)  $).
-
-Recall again that the $x$-coordinates of the vertices a path are always weakly
-increasing. Moreover, they increase strictly whenever the path makes an
-east-step. Hence, if the path $p$ would have any east-step, then we would have
-$\xcoord\left(  A\right)  <\xcoord\left(  B^{\prime
-}\right)  $ (since $p$ is a path from $A$ to $B'$). But this would
-contradict $\xcoord\left(  A\right)  =\xcoord\left(
-B'\right)  $. Hence, the path $p$ has no east-step. Thus, $p$ consists
-entirely of north-steps. Hence, $p$ contains every vertex on the line segment
-between $A$ and $B'$. Therefore, $p$ contains the vertex $A'$
-(since the vertex $A'$ lies on the line segment between $A$ and
-$B'$). This contradicts the fact that $A'$ does not belong to
-the path $p$. This contradiction shows that our assumption was false; hence,
-$\ell\left(  p'\right)  \neq0$ is proven.]
-
-Let $P$ be the second vertex of the path $p$. (This is well-defined, since
-$\ell\left(  p\right)  \neq0$.) Hence, $P$ lies on a path from $A$ to
-$B'$ (namely, on the path $p$). Therefore, $\xcoord\left(
-A\right)  \leq\xcoord\left(  P\right)  \leq\xcoord\left(
-B'\right)  $ (since the $x$-coordinates of the vertices a path are
-always weakly increasing) and $\ycoord\left(  A\right)
-\leq\ycoord\left(  P\right)  \leq\ycoord\left(  B^{\prime
-}\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
-increasing). Let $r$ be the path from $P$ to $B'$ obtained by removing
-the first arc from $p$. Thus, $r$ is a subpath of $p$. Hence, the paths $r$
-and $p'$ have no vertex in common (since $p$ and $p'$ have no
-vertex in common). Also, $\ell\left(  r\right)  =\ell\left(  p\right)
--1<\ell\left(  p\right)  $ and thus $\underbrace{\ell\left(  r\right)
-}_{<\ell\left(  p\right)  }+\ell\left(  p'\right)  <\ell\left(
-p\right)  +\ell\left(  p'\right)  =N$.
-
-Moreover, $\xcoord\left(  A'\right)  \leq\xcoord%
-\left(  A\right)  \leq\xcoord\left(  P\right)  $. If we had
-$\ycoord\left(  A'\right)  \geq\ycoord\left(
-P\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P$ and $r$
-instead of $A$ and $p$ (by the induction hypothesis, since $\ell\left(
-r\right)  +\ell\left(  p'\right)  <N$). We thus would conclude that
-the paths $r$ and $p'$ have a vertex in common; this would contradict
-the fact that the paths $r$ and $p'$ have no vertex in common. Hence,
-we cannot have $\ycoord\left(  A'\right)  \geq
-\ycoord\left(  P\right)  $. Thus, $\ycoord\left(
-A'\right)  <\ycoord\left(  P\right)  $. Hence,
-$\ycoord\left(  A'\right)  \leq\ycoord\left(
-P\right)  -1$ (since $\ycoord\left(  A'\right)  $ and
-$\ycoord\left(  P\right)  $ are integers).
-
-But $P$ is the next vertex after $A$ on the path $p$. Hence, there is an arc
-from $A$ to $P$. If this arc was an east-step, then we would have
-$\ycoord\left(  P\right)  =\ycoord\left(  A\right)  $,
-which would contradict $\ycoord\left(  A\right)  \leq
-\ycoord\left(  A'\right)  <\ycoord\left(
-P\right)  $. Hence, this arc cannot be an east-step. Thus, this arc must be a
-north-step. Therefore, $\ycoord\left(  P\right)  =\ycoord%
-\left(  A\right)  +1$ and $\xcoord\left(  P\right)
-=\xcoord\left(  A\right)  $. Combining $\ycoord\left(
-A'\right)  \leq\ycoord\left(  P\right)  -1=\ycoord%
-\left(  A\right)  $ (since $\ycoord\left(  P\right)
-=\ycoord\left(  A\right)  +1$) with $\ycoord\left(
-A'\right)  \geq\ycoord\left(  A\right)  $, we obtain
-$\ycoord\left(  A'\right)  =\ycoord\left(
-A\right)  $.
-
-Let $P'$ be the second vertex on the path $p'$. (This is
-well-defined, since $\ell\left(  p'\right)  \neq0$.) Hence,
-$P'$ lies on a path from $A'$ to $B$ (namely, on the path
-$p'$). Therefore, $\xcoord\left(  A'\right)
-\leq\xcoord\left(  P'\right)  \leq\xcoord\left(
-B\right)  $ (since the $x$-coordinates of the vertices a path are always weakly
-increasing) and $\ycoord\left(  A'\right)  \leq
-\ycoord\left(  P'\right)  \leq\ycoord\left(
-B\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
-increasing). Let $r'$ be the path from $P'$ to $B$ obtained by
-removing the first arc from $p'$. Thus, $r'$ is a subpath of
-$p'$. Hence, the paths $p$ and $r'$ have no vertex in common
-(since $p$ and $p'$ have no vertex in common). Also, $\ell\left(
-r'\right)  =\ell\left(  p'\right)  -1<\ell\left(  p^{\prime
-}\right)  $ and thus $\ell\left(  p\right)  +\underbrace{\ell\left(
-r'\right)  }_{<\ell\left(  p'\right)  }<\ell\left(  p\right)
-+\ell\left(  p'\right)  =N$.
-
-Moreover, $\ycoord\left(  P'\right)  \geq\ycoord%
-\left(  A'\right)  \geq\ycoord\left(  A\right)  $. If we had
-$\xcoord\left(  P'\right)  \leq\xcoord\left(
-A\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and
-$r'$ instead of $A'$ and $p'$ (by the induction
-hypothesis, since $\ell\left(  p\right)  +\ell\left(  r'\right)  <N$).
-We thus would conclude that the paths $p$ and $r'$ have a vertex in
-common; this would contradict the fact that the paths $p$ and $r'$
-have no vertex in common. Hence, we cannot have $\xcoord\left(
-P'\right)  \leq\xcoord\left(  A\right)  $. Thus,
-$\xcoord\left(  P'\right)  >\xcoord\left(
-A\right)  $. Hence, $\xcoord\left(  P'\right)
-\geq\xcoord\left(  A\right)  +1$ (since $\xcoord\left(
-P'\right)  $ and $\xcoord\left(  A\right)  $ are integers).
-
-But $P'$ is the next vertex after $A'$ on the path $p^{\prime
-}$. Hence, there is an arc from $A'$ to $P'$. If this arc was
-a north-step, then we would have $\xcoord\left(  P'\right)
-=\xcoord\left(  A'\right)  $, which would contradict
-$\xcoord\left(  A'\right)  \leq\xcoord\left(
-A\right)  <\xcoord\left(  P'\right)  $. Hence, this arc
-cannot be a north-step. Thus, this arc must be an east-step. Therefore,
-$\ycoord\left(  P'\right)  =\ycoord\left(
-A'\right)  $ and $\xcoord\left(  P'\right)
-=\xcoord\left(  A'\right)  +1$. Hence, $\xcoord%
-\left(  A'\right)  +1=\xcoord\left(  P'\right)
-\geq\xcoord\left(  A\right)  +1$, so that $\xcoord\left(
-A'\right)  \geq\xcoord\left(  A\right)  $. Combining this
-with $\xcoord\left(  A'\right)  \leq\xcoord\left(
-A\right)  $, we obtain $\xcoord\left(  A'\right)
-=\xcoord\left(  A\right)  $.
-
-Now, the vertices $A$ and $A'$ have the same $x$-coordinate (since
-$\xcoord\left(  A'\right)  =\xcoord\left(
-A\right)  $) and the same $y$-coordinate (since $\ycoord\left(
-A'\right)  =\ycoord\left(  A\right)  $). Hence, these two
-vertices are equal. In other words, $A=A'$. Hence, the vertex $A$
-belongs to the path $p'$ (since the vertex $A'$ belongs to the
-path $p'$). This contradicts the fact that the vertex $A$ does not
-belong to the path $p'$. This contradiction shows that our assumption
-was false. Hence, we have shown that $p$ and $p'$ have a vertex in common.
-
-Now, forget that we fixed $A$, $B$, $A'$, $B'$, $p$ and
-$p'$. We thus have proven that if $A$, $B$, $A'$, $B'%
-$, $p$ and $p'$ are as in Lemma~\ref{lem.LGV.hex}, and if $\ell\left(
-p\right)  +\ell\left(  p'\right)  =N$, then $p$ and $p'$ have
-a vertex in common. In other words, Lemma~\ref{lem.LGV.hex} holds when
-$\ell\left(  p\right)  +\ell\left(  p'\right)  =N$. This completes the
-induction step. Hence, Lemma~\ref{lem.LGV.hex} is proven.
-\end{proof}
-
-\begin{proof}[Second proof of Lemma~\ref{lem.LGV.hex} (sketched).]
-Recall that each arc of the lattice is either an east-step or a north-step.
-Thus, the $x$-coordinates of the vertices of a path are always weakly increasing, and so are the $y$-coordinates.
-Hence, the existence of a path $p$ from $A$ to $B'$ shows that $\xcoord(A) \leq \xcoord(B')$ and $\ycoord(A) \leq \ycoord(B')$.
-Similarly, the existence of $p'$ yields $\xcoord(A') \leq \xcoord(B')$ and $\ycoord(A') \leq\ycoord(B)$.
-
-Thus,
-\begin{align}
-\xcoord\left(  A'\right)   &  \leq\xcoord\left(
-A\right)  \leq\xcoord\left(  B'\right)  \leq
-\xcoord\left(  B\right)  \qquad\text{and}\label{pf.lem.LGV.hex.1}\\
-\ycoord\left(  A\right)   &  \leq\ycoord\left(  A^{\prime
-}\right)  \leq\ycoord\left(  B\right)  \leq\ycoord\left(
-B'\right)  . \label{pf.lem.LGV.hex.2}
-\end{align}
-Now, consider the rectangle whose four sides are given by the equations
-\[
-x=\xcoord\left(  A'\right)  , \qquad
-y=\ycoord\left(  A\right)  , \qquad
-x=\xcoord\left(  B\right)  , \qquad
-y=\ycoord\left(  B'\right)  ,
-\]
-respectively (all in Cartesian coordinates). Then, the path $p$ joins two
-opposite sides of this rectangle (namely, the second and the fourth), whereas
-the path $p'$ joins the other two sides of this rectangle; moreover,
-both paths stay fully within the rectangle (due to~\eqref{pf.lem.LGV.hex.1}
-and~\eqref{pf.lem.LGV.hex.2}). Hence, it is geometrically obvious that $p$ and
-$p'$ must meet; in other words, $p$ and $p'$ have a vertex in common.
-
-[This last geometric argument can also be substituted by a purely
-combinatorial one. Namely: Assume the contrary. Hence, the paths $p$ and
-$p'$ have no vertex in common.
-
-We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by
-vertical steps (\textit{i.e.}, arcs of the form $\left(  i,j\right)  \rightarrow\left(
-i,j+1\right)  $) in both directions (so the path $\widetilde{p}$ first reaches
-$A$ through infinitely many north-steps, then proceeds to $B'$ along
-$p$, and then leaves $B'$ along infinitely many north-steps). We
-extend the path $p'$ to a bidirectionally infinite path
-$\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $\left(
-i,j\right)  \rightarrow\left(  i+1,j\right)  $) in both directions. The
-resulting infinite paths $\widetilde{p}$ and $\widetilde{p'}$ have no
-vertex in common (indeed, the paths $p$ and $p'$ stay within the
-rectangle discussed above, and have no vertex in common; meanwhile, the new
-steps we have added to them to obtain $\widetilde{p}$ and
-$\widetilde{p'}$ escape this rectangle normally in four different
-directions, whence they intersect neither each other nor $p$ or $p'$).
-Recall that each arc of the lattice is either an east-step or a north-step.
-Thus, if a vertex $C$ runs through a path, the value $\xcoord\left(
-C\right)  +\ycoord\left(  C\right)  $ is incremented by $1$ with
-each step. Hence, if $q$ is a bidirectionally infinite path, then, for each
-$N\in\mathbb{Z}$, there is a unique vertex $C$ of $q$ satisfying
-$\xcoord\left(  C\right)  +\ycoord\left(  C\right)  =N$.
-Denote this vertex $C$ by $h_N\left(  q\right)  $. Thus, the vertices of $q$
-are $\ldots,h_{-1}\left(  q\right)  ,h_{0}\left(  q\right)  ,h_1\left(
-q\right)  ,\ldots$ in this order.
-
-All sufficiently low $N\in\mathbb{Z}$ satisfy $\xcoord\left(
-h_N\left(  \widetilde{p'}\right)  \right)  <\xcoord\left(
-h_N\left(  \widetilde{p}\right)  \right)  $, whereas all sufficiently high
-$N\in\mathbb{Z}$ satisfy $\xcoord\left(  h_N\left(
-\widetilde{p'}\right)  \right)  >\xcoord\left(  h_N\left(
-\widetilde{p}\right)  \right)  $. Hence, the set of all $N\in\mathbb{Z}$ that
-satisfy $\xcoord\left(  h_N\left(  \widetilde{p'}\right)
-\right)  <\xcoord\left(  h_N\left(  \widetilde{p}\right)  \right)$
-is a nonempty set of integers that is bounded from above. Therefore, this
-set has a maximum. Let $M$ be this maximum. Thus, $M\in\mathbb{Z}$ satisfies
-$\xcoord\left(  h_{M}\left(  \widetilde{p'}\right)  \right)
-<\xcoord\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
-$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
-\right)  $.
-
-But the point $h_{M+1}\left(  \widetilde{p'}\right)  $ is either the
-eastern or the northern neighbor of
-$h_{M}\left(  \widetilde{p'}\right)  $; hence,
-$\xcoord\left(  h_{M+1}\left(
-\widetilde{p'}\right)  \right)  \leq\xcoord\left(
-h_{M}\left(  \widetilde{p'}\right)  \right)  +1$. Also, the point
-$h_{M+1}\left(  \widetilde{p}\right)  $ is either the eastern or the northern
-neighbor of $h_{M}\left(  \widetilde{p}\right)  $; thus, $\xcoord%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  \geq\xcoord%
-\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $. Hence,
-\[
-\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \leq\underbrace{\xcoord\left(  h_{M}\left(
-\widetilde{p'}\right)  \right)  }_{<\xcoord\left(
-h_{M}\left(  \widetilde{p}\right)  \right)  }+1<\underbrace{\xcoord%
-\left(  h_{M}\left(  \widetilde{p}\right)  \right)  }_{\leq\xcoord%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  }+1\leq\xcoord%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  +1.
-\]
-Therefore, $\xcoord\left(  h_{M+1}\left(  \widetilde{p'%
-}\right)  \right)  \leq\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  $ (since both sides are integers). Combining this with
-$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
-\right)  $, we obtain $\xcoord\left(  h_{M+1}\left(
-\widetilde{p'}\right)  \right)  =\xcoord\left(
-h_{M+1}\left(  \widetilde{p}\right)  \right)  $. Hence, $h_{M+1}\left(
-\widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $ (since
-$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p'%
-}\right)  \right)  =M+1=\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  $ as well). Thus, the paths $\widetilde{p}$ and
-$\widetilde{p'}$ have a vertex in common (namely, $h_{M+1}\left(
-\widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $). This
-contradicts the fact that they don't. This contradiction shows that our
-assumption was false. Hence, the paths $p$ and $p'$ have a vertex in common.]
-\end{proof}
-
-We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
-suited for our applications:
-\end{verlong}
-
-We now shall state a folklore result, which follows from the Lindstr\"om--Gessel--Viennot lemma:\footnote{%
-See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
-
-\begin{prop}
-\label{prop.LGV.concrete}
-Let $k \in \NN$.
-Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ be two $k$-vertices such that
-\begin{align*}
-\xcoord(A_1) & \geq \xcoord(A_2) \geq \cdots \geq \xcoord(A_k), \\
-\ycoord(A_1) & \leq \ycoord(A_2) \leq \cdots \leq \ycoord(A_k), \\
-\xcoord(B_1) & \geq \xcoord(B_2) \geq \cdots \geq \xcoord(B_k), \\
-\ycoord(B_1) & \leq \ycoord(B_2) \leq \cdots \leq \ycoord(B_k).
-\end{align*}
-Then,
-\[
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left(  \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{i, j \in \ive{k}} .
-\]
-
-\end{prop}
-
-\begin{verlong}
-\begin{proof}[Proof of Proposition~\ref{prop.LGV.concrete}.]
-This will follow immediately from Proposition~\ref{prop.LGV.nonper}
-once we have shown that $\left( \uu,\vv\right)  $ is nonpermutable.
-Thus, it remains to show the latter fact.
-
-Let $\sigma\neq\id$ be a permutation in $\SymGp{k}$. We
-must show that $N\left(  \uu,\sigma\left(  \vv\right)  \right)
-=\emptyset$. Indeed, let $\pp\in N\left(  \uu,\sigma\left(
-\vv\right)  \right)  $.
-
-The permutation $\sigma$ has an inversion (since $\sigma \neq \id$).
-In other words, there exist some $i<j$ in $\ive{k}$ such that $\sigma(i) > \sigma(j)$.
-Consider such $i$ and $j$.
-
-Write $\pp$ in the form $\pp = \tup{p_1, p_2, \dotsc, p_k}$.
-Thus, $\tup{p_1, p_2, \dotsc, p_k}$ is a NILP from $\uu$ to $\sigma(\vv)$ (since $\tup{p_1, p_2, \dotsc, p_k} = \pp\in N\bigl( \uu, \sigma(\vv) \bigr)$).
-
-By the definition of a NILP, this implies that
-\begin{itemize}
-\item $p_i$ is a path from $A_i$ to $B_{\sigma(i)}$;
-
-\item $p_j$ is a path from $A_j$ to $B_{\sigma(j)}$;
-
-\item the paths $p_i$ and $p_j$ have no vertex in common.
-\end{itemize}
-
-However, the assumptions of Proposition~\ref{prop.LGV.concrete} yield
-$\xcoord(A_j) \leq \xcoord(A_i)$,
-$\ycoord(A_j) \geq \ycoord(A_i)$,
-$\xcoord(B_{\sigma(i)}) \leq \xcoord(B_{\sigma(j)})$, and
-$\ycoord(B_{\sigma(i)}) \geq \ycoord(B_{\sigma(j)})$.
-Hence, Lemma~\ref{lem.LGV.hex} (applied to $A = A_i$, $B = B_{\sigma(j)}$, $A' = A_j$, $B' = B_{\sigma(i)}$, $p = p_i$ and $p' = p_j$) shows that $p_i$ and $p_j$ have a vertex in common.
-This contradicts the fact that the paths $p_i$ and $p_j$ have no vertex in common.
-
-Thus we have found a contradiction for each $\pp\in N\bigl( \uu,\sigma(\vv) \bigr)$.
-Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
-\end{proof}
-\end{verlong}
-
-%%%%%%%%%%
-\subsection{Pseudo-partitions and tableaux}
-
-We shall next introduce the concepts of pseudo-partitions and their corresponding semistandard tableaux;
-we will then express a generating function for these tableaux by a determinantal formula (Theorem~\ref{thm.tableau.jt}) akin to the Jacobi--Trudi formula for Schur functions (and, like the latter, the proof will rely on Proposition~\ref{prop.LGV.concrete}).
-A pseudo-partition is similar to the concept of a partition, except it allows entries to increase by $1$.
-The semistandard tableaux of a pseudo-partition shape are defined just like for partitions.
-The generating function in our determinantal formula is going to be a sum over the semistandard tableaux of a fixed pseudo-partition shape with given rightmost entries in each row.
-Later we will translate these tableaux into MLQs that yield a specific word when applied to $1\dotsm 1$.
-
-Let us formalize these definitions.
-A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ of positive integers (for some $k \in \NN$) such that
-\[
-\text{each } i \in \ive{k-1} \text{ satisfies } \lambda_i + 1 \geq \lambda_{i+1}.
-\]
-For example, both $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are pseudo-partitions.
-
-The \defn{diagram $\diag{\lambda}$} of a pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
-$\set{  \left(  i,j\right)  \in \ive{k} \times \set{ 1,2,3,\ldots }  \mid  j \leq \lambda_i }$.
-This diagram is drawn in the plane like usual Young diagrams, in English notation.
-\begin{verlong}
-For example, the diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
-\[
-\ydiagram{3,2,3,1}.
-\]
-\end{verlong}
-
-If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, then a \defn{tableau of shape $\lambda$} is a map $T \colon \diag{\lambda} \to \set{1,2,3,\ldots}$.
-For each such tableau $T$ and each $(i,j) \in \diag{\lambda}$, we refer to the value $T(i,j)$ as the \defn{entry of $T$ in cell $\left(i,j\right)$}.
-As usual, we represent a tableau $T$ of shape $\lambda$ by placing the entry $T(i,j)$ into the box corresponding to $(i,j) \in \diag{\lambda}$.
-\begin{verlong}
-For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
-\begin{equation}
-\label{eq.tableau.exas-long}
-\begin{ytableau} 2 & 5 & 3 \\ 1 & 1 \\ 2 & 4 & 1 \\ 7 \end{ytableau}\qquad
-\text{and}\qquad
-\begin{ytableau} 1 & 1 & 3 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}.
-\end{equation}
-\end{verlong}
-
-A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only if
-\begin{itemize}
-\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(i,j_2)$ whenever $(i,j_1) \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
-
-\item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
-\end{itemize}
-
-\begin{verlong}
-For example, the second tableau in~\eqref{eq.tableau.exas-long} is semistandard, while the first is not.
-\end{verlong}
-
-If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, and if $T$ is a tableau of shape $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$,
-then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
-
-If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
-\[
-\wt(T) := \prod_{(i,j) \in \diag{\lambda}} x_{T(i,j)}
-\]
-(that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
-\begin{verlong}
-For example, the two tableaux in~\eqref{eq.tableau.exas-long} have weights $x_1^{3}x_2^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_1^{2}x_2x_{3}^{2}x_{4}x_{5}^{3}$, respectively (assuming that $n \geq 7$).
-\end{verlong}
-Let $\SST(\lambda, s)$ denote the set of all semistandard tableaux of shape $\lambda$ and surface $s$.
-
-\begin{example}
-The diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
-\[
-\ydiagram{3,2,3,1}\,.
-\]
-The following are two tableaux of shape $\tup{3,2,3,1}$:
-% $n$ doesn't appear in our definitions; we fix the surface in our formula, which ensures no too-high entries.
-\[
-\label{eq.tableau.exas}
-\begin{ytableau} 1 & 2 & 5 \\ 2 & 3 \\ 3 & 4 & 5 \\ 7 \end{ytableau}\qquad
-\text{and}\qquad
-\begin{ytableau} 1 & 1 & 4 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}\,.
-\]
-%\travis{I changed the first example to something that is more subtly not semistandard.}
-The right tableau is semistandard, while the left one is not (the two $5$'s in the rightmost column).
-These tableau have surfaces $(5,3,5,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
-\travis{I consolidated these examples because someone used to tableaux only needs to see this example to understand (or extrapolate what should be) the definitions.}
-\end{example}
-
-We now state the main result of this subsection:
-
-\begin{thm}
-\label{thm.tableau.jt}
-Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a pseudo-partition.
-Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
-Then,
-\[
-\sum_{T \in \SST(\lambda, s)} \wt(T) = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{i, j \in \ive{k}} .
-\]
-\end{thm}
-
-We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of a \defn{multi-Schur function} as defined in~\cite[(SCHUR.2.2)]{LLPT18}.
-
-\begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
-Let us define two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$ by
-\[
-A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
-\]
-\begin{vershort}
-Since $\lambda$ is a pseudo-partition and $s$ is weakly increasing, we can apply Proposition~\ref{prop.LGV.concrete} to obtain
-\begin{equation}
-\label{pf.thm.tableau.jt.1}
-\begin{split}
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \\
-& \overset{\eqref{eq.LGV.single-paths}}{=} \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
-\end{split}
-\end{equation}
-\end{vershort}
-\begin{verlong}
-The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
-Thus, Proposition~\ref{prop.LGV.concrete} yields
-\begin{align}
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \nonumber \\
-& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
-\label{pf.thm.tableau.jt.1}
-\end{align}
-where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
-\[
-\sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
-\]
-(by~\eqref{eq.LGV.single-paths}, applied to $A = A_i$ and $B = B_j$).
-\end{verlong}
-
-Next, let us define a bijection
-\[
-\Phi \colon N(\uu, \vv) \to \SST(\lambda, s).
-\]
-
-\begin{vershort}
-Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be an arbitrary NILP.
-
-Then, for each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$, and therefore contains exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
-\end{vershort}
-\begin{verlong}
-Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be arbitrary.
-Thus, each $p_i$ is a path from $A_i$ to $B_i$, and no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
-
-For each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$; thus, it must contain exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
-\end{verlong}
-
-Let $p_{i,1},p_{i,2}, \dotsc, p_{i,\lambda_i-1}$ be the $y$-coordinates of these east-steps (from first to last).
-Also, set $p_{i,\lambda_i} = s_i$.
-Thus,
-\begin{equation}
-\label{pf.thm.tableau.jt.row-weak}
-1 \leq p_{i,1} \leq p_{i,2} \leq \cdots \leq p_{i,\lambda_i-1} \leq p_{i,\lambda_i} = s_i
-\end{equation}
-for each $i \in \ive{k}$.
-Note that for each $i \in \ive{k}$,
-\begin{subequations}
-\begin{gather}
-\label{pf.thm.tableau.jt.pi-vert-1}
-\text{the path }p_i\text{ contains the vertices } (k-i+j-1, p_{i,j})  \text{ for all } j \in \ive{\lambda_i}
-\\
-\label{pf.thm.tableau.jt.pi-vert-2}
-\text{and the vertices } (k-i+j, p_{i,j}) \text{ for all } j \in \ive{\lambda_i-1}.
-\end{gather}
-\end{subequations}
-
-Now, let $T$ be the tableau of shape $\lambda$ that sends each $(i,j) \in \diag{\lambda}$  to $p_{i,j}$.
-Then, the entries of $T$ are weakly increasing along each row by~\eqref{pf.thm.tableau.jt.row-weak}.
-We shall next show that the entries of $T$ are strictly increasing down each column.
-
-First, we claim that if $i \in \ive{k-1}$, then, for all $j \in \ive{\lambda_i} \cap \ive{\lambda_{i+1}}$, we have
-\begin{equation}
-\label{pf.thm.tableau.jt.col-strict-no-gap}
-p_{i,j} < p_{i+1,j}.
-\end{equation}
-
-\Darij{This is classical and should be replaced in vershort by something like "Follow the classical JT proof."}
-
-[\textit{Proof of~\eqref{pf.thm.tableau.jt.col-strict-no-gap}:}
-\begin{vershort}
-We assume the contrary and pick the $i, j$ with the \emph{smallest} $j$ for which $p_{i,j} \geq p_{i+1,j}$.
-We first consider the case when $j > 1$.
-\end{vershort}
-\begin{verlong}
-Let $i \in \ive{k-1}$.
-We must prove~\eqref{pf.thm.tableau.jt.col-strict-no-gap} for each $j \in \ive{\lambda_i}  \cap \ive{\lambda_{i+1}}  $.
-To do so, we assume the contrary, and pick the \emph{smallest} $j$ for which~\eqref{pf.thm.tableau.jt.col-strict-no-gap} fails.
-Thus, $p_{i,j} \geq p_{i+1,j}$.
-Assume that $j > 1$ (the argument for the case $j=1$ is similar).
-\end{verlong}
-Thus, the minimality of $j$ forces $p_{i,j-1} < p_{i+1,j-1}$.
-Finally,~\eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1} \leq p_{i+1,j}$.
-Hence, $p_{i,j-1} < p_{i+1,j-1} \leq p_{i+1,j} \leq p_{i,j}$.
-
-\begin{verlong}
-No two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
-Hence, $p_i$ and $p_{i+1}$ have no vertex in common.
-\end{verlong}
-Note that~\eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j}}$.
-Also,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $j-1$ instead of $j$) yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j-1}}$.
-However, the vertex $\tup{k-i+j-1, p_{i+1,j}}$ lies on the vertical line segment connecting the two vertices $\tup{k-i+j-1, p_{i,j}}$ and $\tup{k-i+j-1,p_{i,j-1}}$ (since $p_{i,j-1} \leq p_{i+1,j} \leq p_{i,j}$).
-Hence, $p_i$ must contain the former vertex (since $p_i$ contains the latter two vertices).
-
-From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j} \leq s_i < s_{i+1}$ (since $s$ is strictly increasing).
-If we had $j = \lambda_{i+1}$, then we would have $p_{i+1,j} = p_{i+1,\lambda_{i+1}} = s_{i+1}$ (by the definition of
-$p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j} \leq p_{i,j} < s_{i+1}$.
-Hence, $j \neq \lambda_{i+1}$. Thus, $j \in \ive{\lambda_{i+1}-1}$ (since $j \in \ive{\lambda_{i+1}}$).
-Therefore,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows that $p_{i+1}$ contains the vertex $\tup{k-\left(  i+1\right)+j, p_{i+1,j}} = \tup{k-i+j-1, p_{i+1,j}}$.
-So we have shown that both $p_i$ and $p_{i+1}$ contain the vertex $\tup{k-i+j-1, p_{i+1,j}}$.
-This contradicts the fact that $p_i$ and $p_{i+1}$ have no vertex in common.
-
-\begin{vershort}
-The same argument works for $j = 1$ with minor changes (we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
-Thus, we always obtain a contradiction, and hence~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
-\end{vershort}
-\begin{verlong}
-We have assumed that $j > 1$; but the same argument works for $j = 1$ with minor 
-changes
-(we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
-Thus, we always obtain a contradiction.
-This contradiction shows that our assumption was false; hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
-\end{verlong}
-
-Next, we claim that the entries of $T$ are strictly increasing down each column.
-
-[\textit{Proof:}
-Let $i_1,i_2\in\ive{k}$ be such that $i_1 < i_2$.
-Let $j \in \ive{\lambda_{i_1}} \cap \ive{\lambda_{i_2}}$.
-We must show that $T( i_1,j) < T(i_2, j)$.
-In other words, we must prove that $p_{i_1,j} < p_{i_2,j}$ (since $T(i,j) = p_{i,j}$ for all $i$).
-
-If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in \set{i_1, i_1+1, \dotsc, i_2}$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
-Hence, without loss of generality, we assume that column $j$ of $\diag{\lambda}$ has at least one gap between row $i_1$ and row $i_2$.
-In other words, there exists some $q \in \set{i_1, i_1+1, \dotsc, i_2}$ such that $(q,j) \notin \diag{\lambda}$.
-Consider the \emph{largest} such $q$.
-Clearly, $i_1 < q < i_2$.
-Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
-
-The maximality of $q$ shows that column $j$ of $[\lambda]$ has
-no gaps between row $q$ and row $i_2$. Hence,
-\eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$
-(since $q<i_2$).
-
-From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain
-$p_{i_1,j}\leq s_{i_1}\leq s_{q}$ (since $i_1<q$, but the sequence
-$s$ is weakly increasing).
-Also, $p_{q,\lambda_{q}}=s_{q}$ (by the definition of $p_{q,\lambda_{q}}$),
-whence $s_{q}=p_{q,\lambda_{q}}\leq p_{q,j}$ (by
-\eqref{pf.thm.tableau.jt.row-weak}, since $\lambda_{q}<j$). Hence,
-$p_{i_1,j}\leq s_{q}\leq p_{q,j}<p_{i_2,j}$. This proves our claim.]
-
-Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$
-and surface $s$ (since
-$T\left(  i,\lambda_i\right)  =p_{i,\lambda_i}=s_i$ for all $i\in\ive{k}$).
-That is, $T \in \SST(\lambda, s)$.
-So let us set
-\[
-\Phi\left(  p_1,p_2,\ldots,p_k\right)  =T.
-\]
-Thus, the map $\Phi$ is defined.
-
-It is easy to see that this map $\Phi$ is injective (indeed, $\left(
-p_1,p_2,\ldots,p_k\right)  $ can be reconstructed from $T$, since the
-$i$-th row of $T$ encodes the $y$-coordinates of all the east-steps of $p_i$)
-and surjective (indeed, the reverse of the above construction turns every
-$T \in \SST(\lambda, s)$ into a $k$-tuple
-$\left(  p_1,p_2,\ldots,p_k\right)  $ of paths $p_i$ from $A_i$ to
-$B_i$; furthermore, the strict increase of the entries of $T$ down columns
-forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
-Thus, $\Phi$ is a bijection.
-Moreover, it is easy to see that
-\[
-\wt\bigl(  \Phi(\pp) \bigr) = \left( \prod_{i=1}^k x_{s_i} \right) \wt(\pp)
-\]
-for each $\pp \in N(\uu,\vv)$.
-Hence,
-\begin{align*}
-\sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp)
-= \left( \prod_{i=1}^k x_{s_i} \right) \sum_{\pp\in N(\uu,\vv)  } \wt(\pp) \\
-&  \overset{\eqref{pf.thm.tableau.jt.1}}{=} \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
-\end{align*}
-\end{proof}
-
-We note that during the construction of the bijection $\Phi$, the fixed surface $s$ condition on the semistandard tableaux translated into requiring each path $p_i$ to having a final arc $B_i \to (\lambda_i + k - i, s_i)$.
-Otherwise the rest of the proof is similar to the usual Jacobi-Turdi bijection relating semistandard tableaux and NILPs.
-
-\Darij{TODO: Example.}
-
-
-%%%%%%%%%%
-\subsection{Interlacing MLQs}
-
-Let us introduce some further notations now.
-
-First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
-
-\begin{itemize}
-\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
-
-\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$.
-\end{itemize}
-
-For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
-Note that $A \gg \emptyset$ and $\emptyset \gg A$ for any subset $A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial order (but it becomes a partial order if we forbid $\emptyset$).
-%\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
-%\darij{Yeah, tried that, it made Lemma \ref{lem:determinant_form.interl-A} even more complicated.}
-
-The following criterion (proof left to the reader) will be useful:
-
-\begin{lemma}
-\label{lem:determinant_form.gale1}
-Let $A, B \subseteq \ive{n}$.
-We have $A \succeq B$ if and only if there exists a bijection $\phi \colon B \to A$ satisfying $\phi(b) \geq b$ for each $b \in B$.
-\end{lemma}
-
-Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\ell$ classes.
-Assume that $m_i > 0$ for all $i \in \ive{\ell-1}$ (but $m_{\ell}$ may be $0$).
-
-Our next few definitions concern MLQs.
-Consider an (ordinary) MLQ $\qq = \tup{q_1,\ldots,q_{\ell-1}}$ of type $\mm$.
-Thus, for each $i \in \ive{\ell-1}$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$.
-Hence, for each $i \in \ive{\ell-1}$, we can subdivide the set $q_i$ into $i$ blocks: the block containing the largest $m_1$ elements; the block containing the next-largest $m_2$ elements; and so on, until the block containing the smallest $m_i$ elements.
-Denote these $i$ blocks by $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$, respectively.
-Thus, $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$ are pairwise disjoint nonempty subsets of $\ive{n}$ satisfying
-\begin{subequations}
-\begin{align}
-\label{eq.determinant_form.qij.1}
-  q_i  & = q_i^{(1)} \cup q_i^{(2)} \cup \cdots \cup q_i^{(i)}
-\qquad \text{and}
-\\ \label{eq.determinant_form.qij.2}
-  q_i^{(1)} & \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}
-\qquad \text{and}
-\\ \label{eq.determinant_form.qij.3}
-  \abs{q_i^{(j)}} & = m_j \text{ for all } j \in \ive{i}.
-\end{align}
-\end{subequations}
-Thus, we have defined nonempty queues $q_i^{(j)} \subseteq \ive{n}$ for all $i \in \ive{\ell-1}$ and $j \in \ive{i}$ whenever $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$.
-
-\Darij{TODO: Example.}
-
-We say that the MLQ $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is \defn{interlacing} if each $i \in \set{2,3,\dotsc,\ell-1}$ satisfies
-\begin{equation}
-\label{eq.determinant_form.interlacing.def}
-q_i^{(1)} \succeq q_{i-1}^{(1)} \gg
-q_i^{(2)} \succeq q_{i-1}^{(2)} \gg
-q_i^{(3)} \succeq q_{i-1}^{(3)} \gg \cdots \gg
-q_i^{(i)}
-\end{equation}
-(that is, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$ for all $j \in \ive{i-1}$).
-
-\Darij{TODO: Example.}
-
-Forget that we fixed $\qq$.
-% I don't understand what purpose this sentence serves -- Travis
-% It serves to clarify that $\qq$ is no longer fixed. --Darij
-
-%Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
-Define a pseudo-partition
-\begin{equation}
-\label{eq.determinant_form.interlacing.lam}
-\lambda^{\mm} := (
-  \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}},
-  \underbrace{2,2,\ldots,2}_{m_{\ell-2}\text{ times}},
-  \ldots,
-  \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
-).
-\end{equation}
-Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
-
-\begin{lemma}
-\label{lem:determinant_form.bij1}
-Let $\ell$, $\mm$, and $m_i$ be as above.
-Then, there is an injection
-\[
-P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda^{\mm} }
-\]
-with the following properties:
-\begin{enumerate}
-\item[(a)] We have $\wt\bigl(  P(\qq) \bigr) = \wt(\qq)$ for each MLQ $\qq$ of type $\mm$.
-
-\item[(b)] If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$, then the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
-
-\item[(c)] If $\qq$ is an interlacing MLQ of type $\mm$, then $P(\qq)$ is a semistandard tableau of shape $\lambda^{\mm}$.
-
-\item[(d)] Any semistandard tableau $T$ of shape $\lambda^{\mm}$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
-\end{enumerate}
-\end{lemma}
-
-(To make sense of this in the border case $\ell = 1$, we agree to interpret $q_0$ as the empty set whenever $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ.)
-
-\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.bij1}.]
-If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
-For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
-
-Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda^{\mm}$:
-\begin{equation}
-\label{pf.lem:determinant_form.bij1.visual}
-\begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
-\cline{2-2}%
-m_{\ell-1} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_{\ell-1}^{(\ell-1)}} &  &  &  &  & \\\cline{2-3}
-m_{\ell-2} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_{\ell-2}^{(\ell-2)}} & \widetilde{q_{\ell-1}^{(\ell-2)}} & \multicolumn{1}{|c}{} &  &  & \\\cline{2-4}
-m_{\ell-3} \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_{\ell-3}^{(\ell-3)}} & \widetilde{q_{\ell-2}^{(\ell-3)}} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(  \ell-3)}}} & \multicolumn{1}{|c}{} &  & \\\cline{2-4}%
-\vdots & \mathbf{\vdots} & \mathbf{\vdots} & \multicolumn{1}{|c}{\vdots} & \multicolumn{1}{|c}{\ddots} &  & \\\cline{2-4}\cline{6-6}
-m_2 \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_2^{(2)}} & \widetilde{q_{3}^{(2)}} & \multicolumn{1}{|c}{\widetilde{q_{4}^{(2)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(2)}}} & \multicolumn{1}{|c}{}\\\cline{2-4}\cline{6-7}
-m_1 \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_1^{(1)}} & \widetilde{q_2^{(1)}} & \multicolumn{1}{|c}{\widetilde{q_{3}^{(1)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-2}^{(1)}}} & \multicolumn{1}{|c|}{\widetilde{q_{\ell-1}^{(1)}}}\\\cline{2-4}\cline{6-7}
-\end{array}
-\end{equation}
-Formally speaking, this is the tableau of shape $\lambda^{\mm}$ whose $\ell-1$ columns are given as follows:
-For each $j \in \ive{\ell-1}$, the $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{(\ell-j)}}, \widetilde{q_{\ell-2}^{(\ell-j-1)}}, \dotsc, \widetilde{q_j^{(1)}}$ stacked atop each other (with $\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top, $\widetilde{q_{\ell-2}^{(\ell-j-1)}}$ coming next under it, and so on).
-Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q_i^{(i)}}, \widetilde{q_{i+1}^{(i)}}, \dotsc, \widetilde{q_{\ell-1}^{(i)}}$ of columns $1,2,\ldots,\ell-i$ align with each other horizontally (and together form the topmost $m_i$ among the bottommost $m_1+m_2+\cdots+m_i$ rows of $P(\qq)$).
-
-Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda^{\mm}}$ is defined.
-This map $P$ is an injection, because the MLQ $\qq$ can be recovered
-from the tableau $P(\qq)$ (indeed, each of the elements
-of each of the queues of $\qq$ lands in some predictable cell of
-$P(\qq)$).
-
-We shall now prove the four properties we claimed about this injection $P$.
-
-Property (a) is clear, since the entries of $q_1, q_2, \dotsc, q_{\ell-1}$ are in 1-to-1 correspondence with the entries of the tableau $P(\qq)$.
-
-Furthermore, the surface of $P(\qq)$ is the concatenation of the sequences $\widetilde{q_{\ell-1}^{(\ell-1)}},\widetilde{q_{\ell-1}^{(\ell-2)}}, \dotsc, \widetilde{q_{\ell-1}^{(1)}}$ (regarded as lists); but this concatenation is simply the sequence $\widetilde{q_{\ell-1}}$ (regarded as a list) (because of~\eqref{eq.determinant_form.qij.1} and~\eqref{eq.determinant_form.qij.2}).
-In other words, the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
-This proves property~(b).
-
-Let $\qq$ be an MLQ of type $\mm$.
-Then, the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def} (this is easily seen from~\eqref{pf.lem:determinant_form.bij1.visual} and from the fact that the columns $\widetilde{q_i^{(j)}}$ are strictly increasing\footnote{In more detail:
-\begin{itemize}
-\item The entries of $P(\qq)$ are weakly increasing along each row
-if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
-$q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
-\item The entries of $P(\qq)$ are strictly increasing down each
-column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
-$q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
-(Here, we are also tacitly using the fact that the sets
-$q_i^{\left(  j\right)  }$ are nonempty. This ensures that the southern
-neighbor of a cell in $\widetilde{q_i^{\left(  j\right)  }}$ belongs either
-to $\widetilde{q_i^{\left(  j\right)  }}$ again or to
-$\widetilde{q_{i-1}^{\left(  j-1\right)  }}$, rather than (say) to
-$\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
-\end{itemize}
-}\travis{This is a really long footnote for something inside of a parenthetical. We should try to either shorten it or move it into the main body.});
-in other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
-This proves property (c).
-
-Finally, if $T$ is a semistandard tableau of shape $\lambda^{\mm}$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
-(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combining them to obtain queues $q_i$ and an MLQ $\qq$.
-This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
-This proves property~(d).
-Hence, we have proven all four properties (a--d).
-\end{proof}
-
-\begin{cor}
-\label{cor:determinant_form.bij1c}
-Let $\ell$, $\mm$, and $m_i$ be as above.
-Let $k \in \NN$ and $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
-% This awkward wording should repel the misunderstanding that we are *defining* $\lambda^{\mm}$ here.
-Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
-Then,
-\begin{align*}
-&  \sum_{\substack{\qq=\tup{q_1,q_2,\ldots,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type $\mm$ with } q_{\ell-1}=S}} \wt(\qq) \\
-&  = \left(  \prod_{i=1}^{k}x_{s_i}\right)
-    \det\left(h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}} .
-\end{align*}
-\end{cor}
-
-\begin{proof}[Proof of Corollary~\ref{cor:determinant_form.bij1c}.]
-Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
-Property~(c) shows that this injection $P$ restricts to an injection
-\[
-\set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
-\]
-Property~(d) shows that this restricted injection is also surjective, and thus a bijection.
-Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
-\begin{vershort}
-We thus obtain
-\begin{align*}
-\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
-  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
-&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
-\end{align*}
-where the second equality follows from Property~(a) and Property~(b) and that $s = S$ (where we consider $s$ as a set).
-\end{vershort}
-\begin{verlong}
-We thus obtain
-\begin{align*}
-\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
-  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
-&  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
-&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
-\end{align*}
-where the second equality follows from Property~(a) and Property~(b) and the last equality is since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$.
-\end{verlong}
-Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
-\end{proof}
-
-Next, we shall connect the interlacingness of an MLQ with its action on the word $1\dotsm 1$:
-
-\begin{lemma}
-\label{lem:determinant_form.interl-act}
-Let $\ell$ be a positive integer.
-Let $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$.
-Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r$-tuple of integers such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$.
-Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
-
-Let $\mm$ be the type of $u$.
-Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
-Then, $u = \qq(1\dotsm 1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
-\end{lemma}
-
-\Darij{TODO: Example.}
-
-The proof of Lemma~\ref{lem:determinant_form.interl-act} is tedious and technical; we thus have banished it into the Appendix (Section~\ref{app:JT-proofs}).
-
-
-
-%%%%%%%%%%
-\subsection{Spectral weights of ``almost-decreasing'' words}
-
-We now state the main result of this section: a Jacobi--Trudi-like formula for $\swt{u}$ in certain cases.
+We shall now state a determinantal formula for $\swt{u}$ in the special case when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and becomes weakly decreasing if we disregard all letters $\ell$.
+%For example, $u = {\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}211{\color{gray}4}$ is such a word, with $\ell=4$.
 
 \begin{thm}
 \label{thm:determinant_form}
@@ -2281,75 +1239,15 @@ Then
 \]
 \end{thm}
 
-\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
-Write the $r$-tuple $\tup{v_1, v_2, \dotsc, v_r}$ in the form
-\begin{equation}
-\label{pf.thm:determinant_form.v=}
-\tup{v_1, v_2, \dotsc, v_r} = (
-  \underbrace{\ell-1,\ldots,\ell-1}_{m_{\ell-1}\text{ times}},
-  \underbrace{\ell-2,\ldots,\ell-2}_{m_{\ell-2}\text{ times}},
-  \dotsc,
-  \underbrace{1,\ldots,1}_{m_1\text{ times}}
-)
-\end{equation}
-for some $m_1, m_2, \ldots, m_{\ell-1} \geq 0$
-(we can do this, since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$ and $v_1 \geq v_2 \geq \cdots \geq v_r$).
-\begin{verlong}
-Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
-\end{verlong}
-Also set $m_{\ell} = n - r$, and define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$.
-Then, the word $u$ has type $\mm$
-\begin{vershort}
-by the construction of $u$.
-\end{vershort}
-\begin{verlong}
-(since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
-\end{verlong}
-Note that $m_i > 0$ for all $i \in \ive{\ell-1}$ (since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
-Hence, the word $u$ is packed.
-Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
-\begin{verlong}
-Each $i \in \ive{\ell}$ satisfies
-\[
-m_i =
-  \begin{cases}
-  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i < \ell,\\
-  n - r & \text{if } i = \ell
-  \end{cases}
-\]
-(by~\eqref{pf.thm:determinant_form.v=} and the definition of $m_{\ell}$).
-\end{verlong}
+The proof of this theorem is given in the Appendix (Section~\ref{app:JT-proofs}).
 
-%This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
-%Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
-%Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
-Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
-% This pseudo-partition $\lambda^{\mm}$ has $p_{\ell-1}(\mm) = r$ entries.
-Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain
-\[
-\lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}
-= \tup{\gamma_1, \gamma_2, \ldots, \gamma_r}
-\]
-(since $\ell - v_j = \gamma_j$ for all $j \in \ive{r}$).
-
-The definition of $\swt{u}$ yields
-\begin{align*}
-\swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1\dotsm 1)}}\wt(\qq) \\
-%&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
-% The above is just a trivial rewording of the summation set for the equation below -- Travis
-&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
-&  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
-\end{align*}
-where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $r$, $\gamma_i$, $B$ and $b_i$ instead of $k$, $\lambda_i$, $S$ and $s_i$).
-\begin{verlong}
-Hence the claim follows since $\prod_{i=1}^r x_{b_i} = \prod_{b \in B} x_b$.
-\end{verlong}
-\end{proof}
 
 
 %%%%%%%%%%
 \subsection{Conclusions for Aas--Linusson MLQs}
+
+We can use Theorem~\ref{thm:determinant_form} to settle two conjectures from~\cite{AasLin17}. Here is an outline:
 
 Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
 Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S := \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
@@ -3450,15 +2348,1052 @@ The resulting labeling is similar to (but different from) the Kohnert labeling i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%=====================================================================
-%\section{Technical proofs for Section~\ref{sec:JT_formula}}
-\section{Proof of Lemma~\ref{lem:determinant_form.interl-act}}
+\section{Proof of Theorem~\ref{thm:determinant_form}}
 \label{app:JT-proofs}
 
 %In this section, we gather some technical proofs that have been omitted from Section~\ref{sec:JT_formula}.
 % [Use the above line if we end up moving further unrelated proofs into this appendix.]
 
-The goal of this section is to prove Lemma~\ref{lem:determinant_form.interl-act}.
+The goal of this section is to prove Theorem~\ref{thm:determinant_form}.
+Along the way, we shall derive a number of intermediate results, some of which may be of independent interest.
+
+As in Subsection~\ref{subsec:JT_formula}, we shall consider the sites as elements of the totally ordered set $\set{1, 2, \ldots, n}$ (ordered by $1 < 2 < \cdots < n$) throughout this section.
+Moreover, we shall use infinitely many distinct commuting indeterminates $\ldots, x_{-2}, x_{-1}, x_0, x_1, x_2, \ldots$ instead of those indexed by $\ZZ/n\ZZ$; thus we do not have $x_{n+k} = x_k$ in this section.
+
+%%%%%%%%%%
+\subsection{Lattice paths and the Lindstr\"{o}m--Gessel--Viennot theorem}
+
+Our arguments will rely on the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{GV85,Lindstrom73} and on a re-interpretation of MLQs as a certain kind of semistandard tableaux (of non-partition shape).
+This takes inspiration from the ``bully paths'' of~\cite{AasLin17} as well as from the standard proof of the Jacobi--Trudi identities for Schur functions~\cite[First proof of Theorem 7.16.1]{Stanley-EC2}.
+We begin with basic definitions.
+
+The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
+all pairs of integers (that is, its vertex set is $\ZZ^2$), and whose arcs are
+\begin{align*}
+(i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ^2, \qquad \text{and} \\
+(i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ^2.
+\end{align*}
+The arcs of the first kind are called \defn{north-steps}, whereas the arcs of
+the second kind are called \defn{east-steps}.
+\begin{verlong}
+The vertices of the lattice will just be called \defn{vertices}.
+\end{verlong}
+We consider the lattice as the usual integer lattice in the Cartesian plane.
+
+For each vertex $v = (i,j) \in \ZZ^2$, we set $\xcoord(v) = i$ and $\ycoord(v) = j$.
+We refer to $\xcoord(v)$ (resp.~$\ycoord(v)$) as the \defn{$x$-coordinate} (resp.~\defn{$y$-coordinate}) of $v$.
+The \defn{$y$-coordinate} of an east-step $(i,j) \to (i+1, j)$ is defined to be $j$.
+
+For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as the monomial
+\[
+\wt(a) :=
+\begin{cases}
+x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
+1 & \text{if $a$ is a north-step } (i,j) \to (i,j+1).
+\end{cases}
+\]
+Thus, all north-steps have weight $1$, while east-steps with $y$-coordinate $j$ have weight $x_j$.
+
+Fix $k \in \NN$.
+A $k$-tuple of vertices of the lattice will be called a \defn{$k$-vertex}.
+\begin{verlong}
+If $\vv = \tup{A_1, A_2, \dotsc, A_k}$ is a $k$-vertex, and if $\sigma \in \SymGp{k}$ is a permutation, then $\sigma(\vv)$ denotes the $k$-vertex $\tup{A_{\sigma(1)}, A_{\sigma(2)}, \dotsc, A_{\sigma(k)}}$.
+\end{verlong}
+A \defn{path} simply means a (directed) path in the lattice.
+The \defn{weight} of a path $p$, denoted $\wt(p)$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
+If $A$ and $B$ are two vertices, then \defn{$N(A,B)$} shall denote the set of all paths from $A$ to $B$.
+
+It is easy to see (see, \textit{e.g.}, \cite[(2.36)]{Stanley-EC1}) that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
+\begin{equation}
+\label{eq.LGV.single-paths}
+\sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
+\end{equation}
+% This really is just a substitution and we can assume the readers are not completely incompetent
+%(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
+
+\begin{comment}
+We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and classical fact that appears implicitly in various texts on enumerative combinatorics (\textit{e.g.}, \cite[(2.36)]{Stanley-EC1}).
+
+\begin{proof}[Proof of~\eqref{eq.LGV.single-paths}.]
+Let $A = (a,b)$ and $B = (c,d)$ be two vertices.
+If $p$ is a path from $A$ to $B$, then $p$ must have exactly $c-a$ east-steps, and the $y$-coordinates of these
+east-steps must belong to the interval $\set{b,b+1,\dotsc,d}$.
+Let $\bigl(  y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ be the weakly increasing $(c-a)$-tuple of elements of $\set{b,b+1, \dotsc, d}$ corresponding to the $y$-coordinates of the $c-a$ east-steps of $p$ (from left to right).
+Moreover, $p$ can be uniquely reconstructed from this $(c-a)$-tuple (since these $(c-a)$-tuple determines the east-steps of $p$).
+Conversely, any weakly increasing $(c-a)$-tuple of elements of $\set{b, b+1, \dotsc,d}$ has the form $\bigl(  y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ for a unique path $p$ from $A$ to $B$.
+Thus, there is a bijection between the paths $p$ from $A$ to $B$ and the weakly increasing $(c-a)$-tuples of elements of $\set{b, b+1, \dotsc, d}$.
+This yields
+\begin{align*}
+\sum_{p \in N(A,B)} \wt(p) & = \sum_{\substack{ \tup{k_1,k_2,\ldots,k_{c-a}} \text{ is a weakly increasing} \\ (c-a)\text{-tuple of elements of }\set{b,b+1,\dotsc,d} }} x_{k_1} x_{k_2} \cdots x_{k_{c-a}}
+\\ & = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
+\end{align*}
+\end{proof}
+\end{comment}
+
+If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-vertices, then a \defn{non-intersecting lattice path tuple (NILP)} from $\tup{A_1, A_2, \dotsc, A_k}$ to $\tup{B_1, B_2, \dotsc, B_k}$ shall mean a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths such that
+\begin{itemize}
+\item each $p_i$ is a path from $A_i$ to $B_i$;
+\item no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+\end{itemize}
+(Visually speaking, the paths must neither cross nor touch.)
+
+The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is the monomial $\wt(\pp)$ defined by
+\[
+\wt(\pp) := \prod_{i=1}^{k} \wt(p_i).
+\]
+
+\Darij{TODO: Picture of a NILP with weight. Don't align the sources or targets on a line.}
+
+If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the set of all NILPs from $\uu$ to $\vv$.
+
+\begin{verlong}
+A pair $(\uu, \vv)$ of two $k$-vertices $\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
+if every permutation $\sigma \neq \id$ in $\SymGp{k}$ satisfies $N\bigl( \uu,\sigma(\vv) \bigr) = \emptyset$.
+Note that we are not requiring that $N(\uu, \vv) \neq \emptyset$ here.
+
+The following fact (a particular case of~\cite[Corollary 2]{GesVie89}) is crucial:
+
+\begin{prop}
+\label{prop.LGV.nonper}
+Let $k \in \NN$.
+Let $(\uu, \vv)$ be a nonpermutable pair of two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$.
+Then,
+\[
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p \in N(A_i,B_j)} \wt(p) \right)_{i, j \in \ive{k}}.
+\]
+\end{prop}
+
+Next, we state a simple lemma that will help us show that certain pairs of $k$-vertices are nonpermutable:
+
+\begin{lemma}
+\label{lem.LGV.hex}
+Let $A$, $B$, $A'$ and $B'$ be four vertices of the lattice such that
+\[
+\xcoord(A') \leq \xcoord(A), \qquad \ycoord(A') \geq \ycoord(A), \qquad
+\xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(B).
+\]
+Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
+Then, $p$ and $p'$ have a vertex in common.
+\end{lemma}
+
+TODO: Example picture.
+
+\begin{proof}[First proof of Lemma~\ref{lem.LGV.hex}.]
+If $q$ is any path, then the \defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
+of $q$.
+
+We shall now prove Lemma~\ref{lem.LGV.hex} by strong induction on $\ell(p) + \ell(p')$:
+
+\textit{Induction step:}
+Fix $N \in \NN$. Assume (as the induction hypothesis) that Lemma~\ref{lem.LGV.hex} holds whenever $\ell(p) + \ell(p') < N$.
+We must now prove that Lemma~\ref{lem.LGV.hex} holds when $\ell(p) + \ell(p') = N$.
+
+So let $A$, $B$, $A'$, $B'$, $p$ and $p'$ be as in Lemma~\ref{lem.LGV.hex}, and let us assume that $\ell(p) + \ell(p') = N$.
+We must prove that $p$ and $p'$ have a vertex in common.
+
+Assume the contrary. Thus, $p$ and $p'$ have no vertex in common.
+
+The vertex $A$ belongs to the path $p$, and thus does not belong to the path
+$p'$ (since $p$ and $p'$ have no vertex in common). Similarly,
+the vertex $A'$ does not belong to the path $p$.
+
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, the $x$-coordinates of the vertices of a path are always weakly
+increasing, and so are the $y$-coordinates. Hence, the existence of a path $p$
+from $A$ to $B'$ shows that $\xcoord\left(  A\right)
+\leq\xcoord\left(  B'\right)  $ and
+$\ycoord\left(  A\right)  \leq\ycoord\left(  B'\right)  $.
+Similarly, the existence of a path $p'$ from $A'$ to $B$ yields
+$\xcoord\left(  A'\right)  \leq\xcoord\left(  B\right)  $ and
+$\ycoord\left(  A'\right)  \leq\ycoord\left(  B\right)  $.
+
+Next, we claim that $\ell\left(  p\right)  \neq0$.
+
+[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p\right)  =0$. Hence,
+the path $p$ has no steps. Therefore, $A=B'$ (since $p$ is a path from
+$A$ to $B'$). Hence, $\ycoord\left(  A\right)
+=\ycoord\left(  B'\right)  \geq\ycoord\left(
+B\right)  $, so that $\ycoord\left(  A'\right)
+\geq\ycoord\left(  A\right)  \geq\ycoord\left(  B\right)
+$. Combining this with $\ycoord\left(  A'\right)
+\leq\ycoord\left(  B\right)  $, we obtain $\ycoord\left(
+A'\right)  =\ycoord\left(  B\right)  $. Combining
+$\ycoord\left(  A'\right)  \geq\ycoord\left(
+A\right)  $ with $\ycoord\left(  A'\right)
+=\ycoord\left(  B\right)  \leq\ycoord\left(  A\right)  $,
+we obtain $\ycoord\left(  A'\right)  =\ycoord\left(  A\right)  $.
+Thus, $\ycoord\left(  A'\right)
+=\ycoord\left(  A\right)  =\ycoord\left(  B\right)  $.
+Therefore, the vertex $A$ lies on the horizontal line that contains
+$A'$ and $B$. Furthermore, this vertex $A$ must lie on the line
+segment between $A'$ and $B$ (since $\xcoord\left(
+A'\right)  \leq\xcoord\left(  \underbrace{A}_{=B'}\right)
+=\xcoord\left(  B'\right)  \leq\xcoord\left(  B\right)  $).
+
+Recall again that the $y$-coordinates of the vertices a path are always weakly
+increasing. Moreover, they increase strictly whenever the path makes a
+north-step. Hence, if the path $p'$ would have any north-step, then we
+would have $\ycoord\left(  A'\right)  <\ycoord\left(  B\right)  $
+(since $p'$ is a path from $A'$ to $B$).
+But this would contradict $\ycoord\left(  A'\right)
+\geq\ycoord\left(  B\right)  $. Hence, the path $p'$ has no
+north-step. Thus, $p'$ consists entirely of east-steps. Hence,
+$p'$ contains every vertex on the line segment between $A'$
+and $B$. Therefore, $p'$ contains the vertex $A$ (since the vertex $A$
+lies on the line segment between $A'$ and $B$). This contradicts the
+fact that $A$ does not belong to the path $p'$. This contradiction
+shows that our assumption was false; hence, $\ell\left(  p\right)  \neq0$ is proven.]
+
+Furthermore, we claim that $\ell\left(  p'\right)  \neq0$.
+
+[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p'\right)
+=0$. Hence, the path $p'$ has no steps. Therefore, $A'=B$
+(since $p'$ is a path from $A'$ to $B$). Hence,
+$\xcoord\left(  A'\right)  =\xcoord\left(
+B\right)  \geq\xcoord\left(  B'\right)  $, so that
+$\xcoord\left(  A\right)  \geq\xcoord\left(  A^{\prime
+}\right)  \geq\xcoord\left(  B'\right)  $. Combining this
+with $\xcoord\left(  A\right)  \leq\xcoord\left(
+B'\right)  $, we obtain $\xcoord\left(  A\right)
+=\xcoord\left(  B'\right)  $. Combining $\xcoord%
+\left(  A\right)  \geq\xcoord\left(  A'\right)  $ with
+$\xcoord\left(  A'\right)  \geq\xcoord\left(
+B'\right)  =\xcoord\left(  A\right)  $, we obtain
+$\xcoord\left(  A\right)  =\xcoord\left(  A^{\prime
+}\right)  $. Thus, $\xcoord\left(  A'\right)
+=\xcoord\left(  A\right)  =\xcoord\left(  B^{\prime
+}\right)  $. Therefore, the vertex $A'$ lies on the vertical line that
+contains $A$ and $B'$. Furthermore, this vertex $A'$ must lie
+on the line segment between $A$ and $B'$ (since $\ycoord%
+\left(  A'\right)  \geq\ycoord\left(  A\right)  $ and
+$\ycoord\left(  \underbrace{A'}_{=B}\right)
+=\ycoord\left(  B\right)  \leq\ycoord\left(  B^{\prime
+}\right)  $).
+
+Recall again that the $x$-coordinates of the vertices a path are always weakly
+increasing. Moreover, they increase strictly whenever the path makes an
+east-step. Hence, if the path $p$ would have any east-step, then we would have
+$\xcoord\left(  A\right)  <\xcoord\left(  B^{\prime
+}\right)  $ (since $p$ is a path from $A$ to $B'$). But this would
+contradict $\xcoord\left(  A\right)  =\xcoord\left(
+B'\right)  $. Hence, the path $p$ has no east-step. Thus, $p$ consists
+entirely of north-steps. Hence, $p$ contains every vertex on the line segment
+between $A$ and $B'$. Therefore, $p$ contains the vertex $A'$
+(since the vertex $A'$ lies on the line segment between $A$ and
+$B'$). This contradicts the fact that $A'$ does not belong to
+the path $p$. This contradiction shows that our assumption was false; hence,
+$\ell\left(  p'\right)  \neq0$ is proven.]
+
+Let $P$ be the second vertex of the path $p$. (This is well-defined, since
+$\ell\left(  p\right)  \neq0$.) Hence, $P$ lies on a path from $A$ to
+$B'$ (namely, on the path $p$). Therefore, $\xcoord\left(
+A\right)  \leq\xcoord\left(  P\right)  \leq\xcoord\left(
+B'\right)  $ (since the $x$-coordinates of the vertices a path are
+always weakly increasing) and $\ycoord\left(  A\right)
+\leq\ycoord\left(  P\right)  \leq\ycoord\left(  B^{\prime
+}\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
+increasing). Let $r$ be the path from $P$ to $B'$ obtained by removing
+the first arc from $p$. Thus, $r$ is a subpath of $p$. Hence, the paths $r$
+and $p'$ have no vertex in common (since $p$ and $p'$ have no
+vertex in common). Also, $\ell\left(  r\right)  =\ell\left(  p\right)
+-1<\ell\left(  p\right)  $ and thus $\underbrace{\ell\left(  r\right)
+}_{<\ell\left(  p\right)  }+\ell\left(  p'\right)  <\ell\left(
+p\right)  +\ell\left(  p'\right)  =N$.
+
+Moreover, $\xcoord\left(  A'\right)  \leq\xcoord%
+\left(  A\right)  \leq\xcoord\left(  P\right)  $. If we had
+$\ycoord\left(  A'\right)  \geq\ycoord\left(
+P\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P$ and $r$
+instead of $A$ and $p$ (by the induction hypothesis, since $\ell\left(
+r\right)  +\ell\left(  p'\right)  <N$). We thus would conclude that
+the paths $r$ and $p'$ have a vertex in common; this would contradict
+the fact that the paths $r$ and $p'$ have no vertex in common. Hence,
+we cannot have $\ycoord\left(  A'\right)  \geq
+\ycoord\left(  P\right)  $. Thus, $\ycoord\left(
+A'\right)  <\ycoord\left(  P\right)  $. Hence,
+$\ycoord\left(  A'\right)  \leq\ycoord\left(
+P\right)  -1$ (since $\ycoord\left(  A'\right)  $ and
+$\ycoord\left(  P\right)  $ are integers).
+
+But $P$ is the next vertex after $A$ on the path $p$. Hence, there is an arc
+from $A$ to $P$. If this arc was an east-step, then we would have
+$\ycoord\left(  P\right)  =\ycoord\left(  A\right)  $,
+which would contradict $\ycoord\left(  A\right)  \leq
+\ycoord\left(  A'\right)  <\ycoord\left(
+P\right)  $. Hence, this arc cannot be an east-step. Thus, this arc must be a
+north-step. Therefore, $\ycoord\left(  P\right)  =\ycoord%
+\left(  A\right)  +1$ and $\xcoord\left(  P\right)
+=\xcoord\left(  A\right)  $. Combining $\ycoord\left(
+A'\right)  \leq\ycoord\left(  P\right)  -1=\ycoord%
+\left(  A\right)  $ (since $\ycoord\left(  P\right)
+=\ycoord\left(  A\right)  +1$) with $\ycoord\left(
+A'\right)  \geq\ycoord\left(  A\right)  $, we obtain
+$\ycoord\left(  A'\right)  =\ycoord\left(
+A\right)  $.
+
+Let $P'$ be the second vertex on the path $p'$. (This is
+well-defined, since $\ell\left(  p'\right)  \neq0$.) Hence,
+$P'$ lies on a path from $A'$ to $B$ (namely, on the path
+$p'$). Therefore, $\xcoord\left(  A'\right)
+\leq\xcoord\left(  P'\right)  \leq\xcoord\left(
+B\right)  $ (since the $x$-coordinates of the vertices a path are always weakly
+increasing) and $\ycoord\left(  A'\right)  \leq
+\ycoord\left(  P'\right)  \leq\ycoord\left(
+B\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
+increasing). Let $r'$ be the path from $P'$ to $B$ obtained by
+removing the first arc from $p'$. Thus, $r'$ is a subpath of
+$p'$. Hence, the paths $p$ and $r'$ have no vertex in common
+(since $p$ and $p'$ have no vertex in common). Also, $\ell\left(
+r'\right)  =\ell\left(  p'\right)  -1<\ell\left(  p^{\prime
+}\right)  $ and thus $\ell\left(  p\right)  +\underbrace{\ell\left(
+r'\right)  }_{<\ell\left(  p'\right)  }<\ell\left(  p\right)
++\ell\left(  p'\right)  =N$.
+
+Moreover, $\ycoord\left(  P'\right)  \geq\ycoord%
+\left(  A'\right)  \geq\ycoord\left(  A\right)  $. If we had
+$\xcoord\left(  P'\right)  \leq\xcoord\left(
+A\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and
+$r'$ instead of $A'$ and $p'$ (by the induction
+hypothesis, since $\ell\left(  p\right)  +\ell\left(  r'\right)  <N$).
+We thus would conclude that the paths $p$ and $r'$ have a vertex in
+common; this would contradict the fact that the paths $p$ and $r'$
+have no vertex in common. Hence, we cannot have $\xcoord\left(
+P'\right)  \leq\xcoord\left(  A\right)  $. Thus,
+$\xcoord\left(  P'\right)  >\xcoord\left(
+A\right)  $. Hence, $\xcoord\left(  P'\right)
+\geq\xcoord\left(  A\right)  +1$ (since $\xcoord\left(
+P'\right)  $ and $\xcoord\left(  A\right)  $ are integers).
+
+But $P'$ is the next vertex after $A'$ on the path $p^{\prime
+}$. Hence, there is an arc from $A'$ to $P'$. If this arc was
+a north-step, then we would have $\xcoord\left(  P'\right)
+=\xcoord\left(  A'\right)  $, which would contradict
+$\xcoord\left(  A'\right)  \leq\xcoord\left(
+A\right)  <\xcoord\left(  P'\right)  $. Hence, this arc
+cannot be a north-step. Thus, this arc must be an east-step. Therefore,
+$\ycoord\left(  P'\right)  =\ycoord\left(
+A'\right)  $ and $\xcoord\left(  P'\right)
+=\xcoord\left(  A'\right)  +1$. Hence, $\xcoord%
+\left(  A'\right)  +1=\xcoord\left(  P'\right)
+\geq\xcoord\left(  A\right)  +1$, so that $\xcoord\left(
+A'\right)  \geq\xcoord\left(  A\right)  $. Combining this
+with $\xcoord\left(  A'\right)  \leq\xcoord\left(
+A\right)  $, we obtain $\xcoord\left(  A'\right)
+=\xcoord\left(  A\right)  $.
+
+Now, the vertices $A$ and $A'$ have the same $x$-coordinate (since
+$\xcoord\left(  A'\right)  =\xcoord\left(
+A\right)  $) and the same $y$-coordinate (since $\ycoord\left(
+A'\right)  =\ycoord\left(  A\right)  $). Hence, these two
+vertices are equal. In other words, $A=A'$. Hence, the vertex $A$
+belongs to the path $p'$ (since the vertex $A'$ belongs to the
+path $p'$). This contradicts the fact that the vertex $A$ does not
+belong to the path $p'$. This contradiction shows that our assumption
+was false. Hence, we have shown that $p$ and $p'$ have a vertex in common.
+
+Now, forget that we fixed $A$, $B$, $A'$, $B'$, $p$ and
+$p'$. We thus have proven that if $A$, $B$, $A'$, $B'%
+$, $p$ and $p'$ are as in Lemma~\ref{lem.LGV.hex}, and if $\ell\left(
+p\right)  +\ell\left(  p'\right)  =N$, then $p$ and $p'$ have
+a vertex in common. In other words, Lemma~\ref{lem.LGV.hex} holds when
+$\ell\left(  p\right)  +\ell\left(  p'\right)  =N$. This completes the
+induction step. Hence, Lemma~\ref{lem.LGV.hex} is proven.
+\end{proof}
+
+\begin{proof}[Second proof of Lemma~\ref{lem.LGV.hex} (sketched).]
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, the $x$-coordinates of the vertices of a path are always weakly increasing, and so are the $y$-coordinates.
+Hence, the existence of a path $p$ from $A$ to $B'$ shows that $\xcoord(A) \leq \xcoord(B')$ and $\ycoord(A) \leq \ycoord(B')$.
+Similarly, the existence of $p'$ yields $\xcoord(A') \leq \xcoord(B')$ and $\ycoord(A') \leq\ycoord(B)$.
+
+Thus,
+\begin{align}
+\xcoord\left(  A'\right)   &  \leq\xcoord\left(
+A\right)  \leq\xcoord\left(  B'\right)  \leq
+\xcoord\left(  B\right)  \qquad\text{and}\label{pf.lem.LGV.hex.1}\\
+\ycoord\left(  A\right)   &  \leq\ycoord\left(  A^{\prime
+}\right)  \leq\ycoord\left(  B\right)  \leq\ycoord\left(
+B'\right)  . \label{pf.lem.LGV.hex.2}
+\end{align}
+Now, consider the rectangle whose four sides are given by the equations
+\[
+x=\xcoord\left(  A'\right)  , \qquad
+y=\ycoord\left(  A\right)  , \qquad
+x=\xcoord\left(  B\right)  , \qquad
+y=\ycoord\left(  B'\right)  ,
+\]
+respectively (all in Cartesian coordinates). Then, the path $p$ joins two
+opposite sides of this rectangle (namely, the second and the fourth), whereas
+the path $p'$ joins the other two sides of this rectangle; moreover,
+both paths stay fully within the rectangle (due to~\eqref{pf.lem.LGV.hex.1}
+and~\eqref{pf.lem.LGV.hex.2}). Hence, it is geometrically obvious that $p$ and
+$p'$ must meet; in other words, $p$ and $p'$ have a vertex in common.
+
+[This last geometric argument can also be substituted by a purely
+combinatorial one. Namely: Assume the contrary. Hence, the paths $p$ and
+$p'$ have no vertex in common.
+
+We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by
+vertical steps (\textit{i.e.}, arcs of the form $\left(  i,j\right)  \rightarrow\left(
+i,j+1\right)  $) in both directions (so the path $\widetilde{p}$ first reaches
+$A$ through infinitely many north-steps, then proceeds to $B'$ along
+$p$, and then leaves $B'$ along infinitely many north-steps). We
+extend the path $p'$ to a bidirectionally infinite path
+$\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $\left(
+i,j\right)  \rightarrow\left(  i+1,j\right)  $) in both directions. The
+resulting infinite paths $\widetilde{p}$ and $\widetilde{p'}$ have no
+vertex in common (indeed, the paths $p$ and $p'$ stay within the
+rectangle discussed above, and have no vertex in common; meanwhile, the new
+steps we have added to them to obtain $\widetilde{p}$ and
+$\widetilde{p'}$ escape this rectangle normally in four different
+directions, whence they intersect neither each other nor $p$ or $p'$).
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, if a vertex $C$ runs through a path, the value $\xcoord\left(
+C\right)  +\ycoord\left(  C\right)  $ is incremented by $1$ with
+each step. Hence, if $q$ is a bidirectionally infinite path, then, for each
+$N\in\mathbb{Z}$, there is a unique vertex $C$ of $q$ satisfying
+$\xcoord\left(  C\right)  +\ycoord\left(  C\right)  =N$.
+Denote this vertex $C$ by $h_N\left(  q\right)  $. Thus, the vertices of $q$
+are $\ldots,h_{-1}\left(  q\right)  ,h_{0}\left(  q\right)  ,h_1\left(
+q\right)  ,\ldots$ in this order.
+
+All sufficiently low $N\in\mathbb{Z}$ satisfy $\xcoord\left(
+h_N\left(  \widetilde{p'}\right)  \right)  <\xcoord\left(
+h_N\left(  \widetilde{p}\right)  \right)  $, whereas all sufficiently high
+$N\in\mathbb{Z}$ satisfy $\xcoord\left(  h_N\left(
+\widetilde{p'}\right)  \right)  >\xcoord\left(  h_N\left(
+\widetilde{p}\right)  \right)  $. Hence, the set of all $N\in\mathbb{Z}$ that
+satisfy $\xcoord\left(  h_N\left(  \widetilde{p'}\right)
+\right)  <\xcoord\left(  h_N\left(  \widetilde{p}\right)  \right)$
+is a nonempty set of integers that is bounded from above. Therefore, this
+set has a maximum. Let $M$ be this maximum. Thus, $M\in\mathbb{Z}$ satisfies
+$\xcoord\left(  h_{M}\left(  \widetilde{p'}\right)  \right)
+<\xcoord\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
+$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
+\right)  $.
+
+But the point $h_{M+1}\left(  \widetilde{p'}\right)  $ is either the
+eastern or the northern neighbor of
+$h_{M}\left(  \widetilde{p'}\right)  $; hence,
+$\xcoord\left(  h_{M+1}\left(
+\widetilde{p'}\right)  \right)  \leq\xcoord\left(
+h_{M}\left(  \widetilde{p'}\right)  \right)  +1$. Also, the point
+$h_{M+1}\left(  \widetilde{p}\right)  $ is either the eastern or the northern
+neighbor of $h_{M}\left(  \widetilde{p}\right)  $; thus, $\xcoord%
+\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  \geq\xcoord%
+\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $. Hence,
+\[
+\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  \leq\underbrace{\xcoord\left(  h_{M}\left(
+\widetilde{p'}\right)  \right)  }_{<\xcoord\left(
+h_{M}\left(  \widetilde{p}\right)  \right)  }+1<\underbrace{\xcoord%
+\left(  h_{M}\left(  \widetilde{p}\right)  \right)  }_{\leq\xcoord%
+\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  }+1\leq\xcoord%
+\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  +1.
+\]
+Therefore, $\xcoord\left(  h_{M+1}\left(  \widetilde{p'%
+}\right)  \right)  \leq\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
+\right)  \right)  $ (since both sides are integers). Combining this with
+$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
+\right)  $, we obtain $\xcoord\left(  h_{M+1}\left(
+\widetilde{p'}\right)  \right)  =\xcoord\left(
+h_{M+1}\left(  \widetilde{p}\right)  \right)  $. Hence, $h_{M+1}\left(
+\widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $ (since
+$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
+\right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p'%
+}\right)  \right)  =M+1=\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
+\right)  \right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p}%
+\right)  \right)  $ as well). Thus, the paths $\widetilde{p}$ and
+$\widetilde{p'}$ have a vertex in common (namely, $h_{M+1}\left(
+\widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $). This
+contradicts the fact that they don't. This contradiction shows that our
+assumption was false. Hence, the paths $p$ and $p'$ have a vertex in common.]
+\end{proof}
+
+We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
+suited for our applications:
+\end{verlong}
+
+We now shall state a folklore result, which follows from the Lindstr\"om--Gessel--Viennot lemma:\footnote{%
+See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
+
+\begin{prop}
+\label{prop.LGV.concrete}
+Let $k \in \NN$.
+Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ be two $k$-vertices such that
+\begin{align*}
+\xcoord(A_1) & \geq \xcoord(A_2) \geq \cdots \geq \xcoord(A_k), \\
+\ycoord(A_1) & \leq \ycoord(A_2) \leq \cdots \leq \ycoord(A_k), \\
+\xcoord(B_1) & \geq \xcoord(B_2) \geq \cdots \geq \xcoord(B_k), \\
+\ycoord(B_1) & \leq \ycoord(B_2) \leq \cdots \leq \ycoord(B_k).
+\end{align*}
+Then,
+\[
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left(  \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{i, j \in \ive{k}} .
+\]
+
+\end{prop}
+
+\begin{verlong}
+\begin{proof}[Proof of Proposition~\ref{prop.LGV.concrete}.]
+This will follow immediately from Proposition~\ref{prop.LGV.nonper}
+once we have shown that $\left( \uu,\vv\right)  $ is nonpermutable.
+Thus, it remains to show the latter fact.
+
+Let $\sigma\neq\id$ be a permutation in $\SymGp{k}$. We
+must show that $N\left(  \uu,\sigma\left(  \vv\right)  \right)
+=\emptyset$. Indeed, let $\pp\in N\left(  \uu,\sigma\left(
+\vv\right)  \right)  $.
+
+The permutation $\sigma$ has an inversion (since $\sigma \neq \id$).
+In other words, there exist some $i<j$ in $\ive{k}$ such that $\sigma(i) > \sigma(j)$.
+Consider such $i$ and $j$.
+
+Write $\pp$ in the form $\pp = \tup{p_1, p_2, \dotsc, p_k}$.
+Thus, $\tup{p_1, p_2, \dotsc, p_k}$ is a NILP from $\uu$ to $\sigma(\vv)$ (since $\tup{p_1, p_2, \dotsc, p_k} = \pp\in N\bigl( \uu, \sigma(\vv) \bigr)$).
+
+By the definition of a NILP, this implies that
+\begin{itemize}
+\item $p_i$ is a path from $A_i$ to $B_{\sigma(i)}$;
+
+\item $p_j$ is a path from $A_j$ to $B_{\sigma(j)}$;
+
+\item the paths $p_i$ and $p_j$ have no vertex in common.
+\end{itemize}
+
+However, the assumptions of Proposition~\ref{prop.LGV.concrete} yield
+$\xcoord(A_j) \leq \xcoord(A_i)$,
+$\ycoord(A_j) \geq \ycoord(A_i)$,
+$\xcoord(B_{\sigma(i)}) \leq \xcoord(B_{\sigma(j)})$, and
+$\ycoord(B_{\sigma(i)}) \geq \ycoord(B_{\sigma(j)})$.
+Hence, Lemma~\ref{lem.LGV.hex} (applied to $A = A_i$, $B = B_{\sigma(j)}$, $A' = A_j$, $B' = B_{\sigma(i)}$, $p = p_i$ and $p' = p_j$) shows that $p_i$ and $p_j$ have a vertex in common.
+This contradicts the fact that the paths $p_i$ and $p_j$ have no vertex in common.
+
+Thus we have found a contradiction for each $\pp\in N\bigl( \uu,\sigma(\vv) \bigr)$.
+Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
+\end{proof}
+\end{verlong}
+
+%%%%%%%%%%
+\subsection{Pseudo-partitions and tableaux}
+
+We shall next introduce the concepts of pseudo-partitions and their corresponding semistandard tableaux;
+we will then express a generating function for these tableaux by a determinantal formula (Theorem~\ref{thm.tableau.jt}) akin to the Jacobi--Trudi formula for Schur functions (and, like the latter, the proof will rely on Proposition~\ref{prop.LGV.concrete}).
+A pseudo-partition is similar to the concept of a partition, except it allows entries to increase by $1$.
+The semistandard tableaux of a pseudo-partition shape are defined just like for partitions.
+The generating function in our determinantal formula is going to be a sum over the semistandard tableaux of a fixed pseudo-partition shape with given rightmost entries in each row.
+Later we will translate these tableaux into MLQs that yield a specific word when applied to $1\dotsm 1$.
+
+Let us formalize these definitions.
+A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ of positive integers (for some $k \in \NN$) such that
+\[
+\text{each } i \in \ive{k-1} \text{ satisfies } \lambda_i + 1 \geq \lambda_{i+1}.
+\]
+For example, both $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are pseudo-partitions.
+
+The \defn{diagram $\diag{\lambda}$} of a pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
+$\set{  \left(  i,j\right)  \in \ive{k} \times \set{ 1,2,3,\ldots }  \mid  j \leq \lambda_i }$.
+This diagram is drawn in the plane like usual Young diagrams, in English notation.
+\begin{verlong}
+For example, the diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
+\[
+\ydiagram{3,2,3,1}.
+\]
+\end{verlong}
+
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, then a \defn{tableau of shape $\lambda$} is a map $T \colon \diag{\lambda} \to \set{1,2,3,\ldots}$.
+For each such tableau $T$ and each $(i,j) \in \diag{\lambda}$, we refer to the value $T(i,j)$ as the \defn{entry of $T$ in cell $\left(i,j\right)$}.
+As usual, we represent a tableau $T$ of shape $\lambda$ by placing the entry $T(i,j)$ into the box corresponding to $(i,j) \in \diag{\lambda}$.
+\begin{verlong}
+For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
+\begin{equation}
+\label{eq.tableau.exas-long}
+\begin{ytableau} 2 & 5 & 3 \\ 1 & 1 \\ 2 & 4 & 1 \\ 7 \end{ytableau}\qquad
+\text{and}\qquad
+\begin{ytableau} 1 & 1 & 3 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}.
+\end{equation}
+\end{verlong}
+
+A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only if
+\begin{itemize}
+\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(i,j_2)$ whenever $(i,j_1) \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
+
+\item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
+\end{itemize}
+
+\begin{verlong}
+For example, the second tableau in~\eqref{eq.tableau.exas-long} is semistandard, while the first is not.
+\end{verlong}
+
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, and if $T$ is a tableau of shape $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$,
+then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
+
+If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
+\[
+\wt(T) := \prod_{(i,j) \in \diag{\lambda}} x_{T(i,j)}
+\]
+(that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
+\begin{verlong}
+For example, the two tableaux in~\eqref{eq.tableau.exas-long} have weights $x_1^{3}x_2^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_1^{2}x_2x_{3}^{2}x_{4}x_{5}^{3}$, respectively (assuming that $n \geq 7$).
+\end{verlong}
+Let $\SST(\lambda, s)$ denote the set of all semistandard tableaux of shape $\lambda$ and surface $s$.
+
+\begin{example}
+The diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
+\[
+\ydiagram{3,2,3,1}\,.
+\]
+The following are two tableaux of shape $\tup{3,2,3,1}$:
+% $n$ doesn't appear in our definitions; we fix the surface in our formula, which ensures no too-high entries.
+\[
+\label{eq.tableau.exas}
+\begin{ytableau} 1 & 2 & 5 \\ 2 & 3 \\ 3 & 4 & 5 \\ 7 \end{ytableau}\qquad
+\text{and}\qquad
+\begin{ytableau} 1 & 1 & 4 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}\,.
+\]
+%\travis{I changed the first example to something that is more subtly not semistandard.}
+The right tableau is semistandard, while the left one is not (the two $5$'s in the rightmost column).
+These tableau have surfaces $(5,3,5,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
+\travis{I consolidated these examples because someone used to tableaux only needs to see this example to understand (or extrapolate what should be) the definitions.}
+\end{example}
+
+We now state the main result of this subsection:
+
+\begin{thm}
+\label{thm.tableau.jt}
+Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a pseudo-partition.
+Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
+Then,
+\[
+\sum_{T \in \SST(\lambda, s)} \wt(T) = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{i, j \in \ive{k}} .
+\]
+\end{thm}
+
+We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of a \defn{multi-Schur function} as defined in~\cite[(SCHUR.2.2)]{LLPT18}.
+
+\begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
+Let us define two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$ by
+\[
+A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
+\]
+\begin{vershort}
+Since $\lambda$ is a pseudo-partition and $s$ is weakly increasing, we can apply Proposition~\ref{prop.LGV.concrete} to obtain
+\begin{equation}
+\label{pf.thm.tableau.jt.1}
+\begin{split}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \\
+& \overset{\eqref{eq.LGV.single-paths}}{=} \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
+\end{split}
+\end{equation}
+\end{vershort}
+\begin{verlong}
+The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
+Thus, Proposition~\ref{prop.LGV.concrete} yields
+\begin{align}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \nonumber \\
+& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
+\label{pf.thm.tableau.jt.1}
+\end{align}
+where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
+\[
+\sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
+\]
+(by~\eqref{eq.LGV.single-paths}, applied to $A = A_i$ and $B = B_j$).
+\end{verlong}
+
+Next, let us define a bijection
+\[
+\Phi \colon N(\uu, \vv) \to \SST(\lambda, s).
+\]
+
+\begin{vershort}
+Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be an arbitrary NILP.
+
+Then, for each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$, and therefore contains exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
+\end{vershort}
+\begin{verlong}
+Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be arbitrary.
+Thus, each $p_i$ is a path from $A_i$ to $B_i$, and no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+
+For each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$; thus, it must contain exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
+\end{verlong}
+
+Let $p_{i,1},p_{i,2}, \dotsc, p_{i,\lambda_i-1}$ be the $y$-coordinates of these east-steps (from first to last).
+Also, set $p_{i,\lambda_i} = s_i$.
+Thus,
+\begin{equation}
+\label{pf.thm.tableau.jt.row-weak}
+1 \leq p_{i,1} \leq p_{i,2} \leq \cdots \leq p_{i,\lambda_i-1} \leq p_{i,\lambda_i} = s_i
+\end{equation}
+for each $i \in \ive{k}$.
+Note that for each $i \in \ive{k}$,
+\begin{subequations}
+\begin{gather}
+\label{pf.thm.tableau.jt.pi-vert-1}
+\text{the path }p_i\text{ contains the vertices } (k-i+j-1, p_{i,j})  \text{ for all } j \in \ive{\lambda_i}
+\\
+\label{pf.thm.tableau.jt.pi-vert-2}
+\text{and the vertices } (k-i+j, p_{i,j}) \text{ for all } j \in \ive{\lambda_i-1}.
+\end{gather}
+\end{subequations}
+
+Now, let $T$ be the tableau of shape $\lambda$ that sends each $(i,j) \in \diag{\lambda}$  to $p_{i,j}$.
+Then, the entries of $T$ are weakly increasing along each row by~\eqref{pf.thm.tableau.jt.row-weak}.
+We shall next show that the entries of $T$ are strictly increasing down each column.
+
+First, we claim that if $i \in \ive{k-1}$, then, for all $j \in \ive{\lambda_i} \cap \ive{\lambda_{i+1}}$, we have
+\begin{equation}
+\label{pf.thm.tableau.jt.col-strict-no-gap}
+p_{i,j} < p_{i+1,j}.
+\end{equation}
+
+\Darij{This is classical and should be replaced in vershort by something like "Follow the classical JT proof."}
+
+[\textit{Proof of~\eqref{pf.thm.tableau.jt.col-strict-no-gap}:}
+\begin{vershort}
+We assume the contrary and pick the $i, j$ with the \emph{smallest} $j$ for which $p_{i,j} \geq p_{i+1,j}$.
+We first consider the case when $j > 1$.
+\end{vershort}
+\begin{verlong}
+Let $i \in \ive{k-1}$.
+We must prove~\eqref{pf.thm.tableau.jt.col-strict-no-gap} for each $j \in \ive{\lambda_i}  \cap \ive{\lambda_{i+1}}  $.
+To do so, we assume the contrary, and pick the \emph{smallest} $j$ for which~\eqref{pf.thm.tableau.jt.col-strict-no-gap} fails.
+Thus, $p_{i,j} \geq p_{i+1,j}$.
+Assume that $j > 1$ (the argument for the case $j=1$ is similar).
+\end{verlong}
+Thus, the minimality of $j$ forces $p_{i,j-1} < p_{i+1,j-1}$.
+Finally,~\eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1} \leq p_{i+1,j}$.
+Hence, $p_{i,j-1} < p_{i+1,j-1} \leq p_{i+1,j} \leq p_{i,j}$.
+
+\begin{verlong}
+No two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+Hence, $p_i$ and $p_{i+1}$ have no vertex in common.
+\end{verlong}
+Note that~\eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j}}$.
+Also,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $j-1$ instead of $j$) yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j-1}}$.
+However, the vertex $\tup{k-i+j-1, p_{i+1,j}}$ lies on the vertical line segment connecting the two vertices $\tup{k-i+j-1, p_{i,j}}$ and $\tup{k-i+j-1,p_{i,j-1}}$ (since $p_{i,j-1} \leq p_{i+1,j} \leq p_{i,j}$).
+Hence, $p_i$ must contain the former vertex (since $p_i$ contains the latter two vertices).
+
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j} \leq s_i < s_{i+1}$ (since $s$ is strictly increasing).
+If we had $j = \lambda_{i+1}$, then we would have $p_{i+1,j} = p_{i+1,\lambda_{i+1}} = s_{i+1}$ (by the definition of
+$p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j} \leq p_{i,j} < s_{i+1}$.
+Hence, $j \neq \lambda_{i+1}$. Thus, $j \in \ive{\lambda_{i+1}-1}$ (since $j \in \ive{\lambda_{i+1}}$).
+Therefore,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows that $p_{i+1}$ contains the vertex $\tup{k-\left(  i+1\right)+j, p_{i+1,j}} = \tup{k-i+j-1, p_{i+1,j}}$.
+So we have shown that both $p_i$ and $p_{i+1}$ contain the vertex $\tup{k-i+j-1, p_{i+1,j}}$.
+This contradicts the fact that $p_i$ and $p_{i+1}$ have no vertex in common.
+
+\begin{vershort}
+The same argument works for $j = 1$ with minor changes (we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
+Thus, we always obtain a contradiction, and hence~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
+\end{vershort}
+\begin{verlong}
+We have assumed that $j > 1$; but the same argument works for $j = 1$ with minor 
+changes
+(we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
+Thus, we always obtain a contradiction.
+This contradiction shows that our assumption was false; hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
+\end{verlong}
+
+Next, we claim that the entries of $T$ are strictly increasing down each column.
+
+[\textit{Proof:}
+Let $i_1,i_2\in\ive{k}$ be such that $i_1 < i_2$.
+Let $j \in \ive{\lambda_{i_1}} \cap \ive{\lambda_{i_2}}$.
+We must show that $T( i_1,j) < T(i_2, j)$.
+In other words, we must prove that $p_{i_1,j} < p_{i_2,j}$ (since $T(i,j) = p_{i,j}$ for all $i$).
+
+If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in \set{i_1, i_1+1, \dotsc, i_2}$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
+Hence, without loss of generality, we assume that column $j$ of $\diag{\lambda}$ has at least one gap between row $i_1$ and row $i_2$.
+In other words, there exists some $q \in \set{i_1, i_1+1, \dotsc, i_2}$ such that $(q,j) \notin \diag{\lambda}$.
+Consider the \emph{largest} such $q$.
+Clearly, $i_1 < q < i_2$.
+Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
+
+The maximality of $q$ shows that column $j$ of $[\lambda]$ has
+no gaps between row $q$ and row $i_2$. Hence,
+\eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$
+(since $q<i_2$).
+
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain
+$p_{i_1,j}\leq s_{i_1}\leq s_{q}$ (since $i_1<q$, but the sequence
+$s$ is weakly increasing).
+Also, $p_{q,\lambda_{q}}=s_{q}$ (by the definition of $p_{q,\lambda_{q}}$),
+whence $s_{q}=p_{q,\lambda_{q}}\leq p_{q,j}$ (by
+\eqref{pf.thm.tableau.jt.row-weak}, since $\lambda_{q}<j$). Hence,
+$p_{i_1,j}\leq s_{q}\leq p_{q,j}<p_{i_2,j}$. This proves our claim.]
+
+Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$
+and surface $s$ (since
+$T\left(  i,\lambda_i\right)  =p_{i,\lambda_i}=s_i$ for all $i\in\ive{k}$).
+That is, $T \in \SST(\lambda, s)$.
+So let us set
+\[
+\Phi\left(  p_1,p_2,\ldots,p_k\right)  =T.
+\]
+Thus, the map $\Phi$ is defined.
+
+It is easy to see that this map $\Phi$ is injective (indeed, $\left(
+p_1,p_2,\ldots,p_k\right)  $ can be reconstructed from $T$, since the
+$i$-th row of $T$ encodes the $y$-coordinates of all the east-steps of $p_i$)
+and surjective (indeed, the reverse of the above construction turns every
+$T \in \SST(\lambda, s)$ into a $k$-tuple
+$\left(  p_1,p_2,\ldots,p_k\right)  $ of paths $p_i$ from $A_i$ to
+$B_i$; furthermore, the strict increase of the entries of $T$ down columns
+forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
+Thus, $\Phi$ is a bijection.
+Moreover, it is easy to see that
+\[
+\wt\bigl(  \Phi(\pp) \bigr) = \left( \prod_{i=1}^k x_{s_i} \right) \wt(\pp)
+\]
+for each $\pp \in N(\uu,\vv)$.
+Hence,
+\begin{align*}
+\sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp)
+= \left( \prod_{i=1}^k x_{s_i} \right) \sum_{\pp\in N(\uu,\vv)  } \wt(\pp) \\
+&  \overset{\eqref{pf.thm.tableau.jt.1}}{=} \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
+\end{align*}
+\end{proof}
+
+We note that during the construction of the bijection $\Phi$, the fixed surface $s$ condition on the semistandard tableaux translated into requiring each path $p_i$ to having a final arc $B_i \to (\lambda_i + k - i, s_i)$.
+Otherwise the rest of the proof is similar to the usual Jacobi--Trudi bijection relating semistandard tableaux and NILPs.
+
+\Darij{TODO: Example.}
+
+
+%%%%%%%%%%
+\subsection{Interlacing MLQs}
+
+Let us introduce some further notations now.
+
+First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
+
+\begin{itemize}
+\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
+
+\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$.
+\end{itemize}
+
+For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
+Note that $A \gg \emptyset$ and $\emptyset \gg A$ for any subset $A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial order (but it becomes a partial order if we forbid $\emptyset$).
+%\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
+%\darij{Yeah, tried that, it made Lemma \ref{lem:determinant_form.interl-A} even more complicated.}
+
+The following criterion (proof left to the reader) will be useful:
+
+\begin{lemma}
+\label{lem:determinant_form.gale1}
+Let $A, B \subseteq \ive{n}$.
+We have $A \succeq B$ if and only if there exists a bijection $\phi \colon B \to A$ satisfying $\phi(b) \geq b$ for each $b \in B$.
+\end{lemma}
+
+Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\ell$ classes.
+Assume that $m_i > 0$ for all $i \in \ive{\ell-1}$ (but $m_{\ell}$ may be $0$).
+
+Our next few definitions concern MLQs.
+Consider an (ordinary) MLQ $\qq = \tup{q_1,\ldots,q_{\ell-1}}$ of type $\mm$.
+Thus, for each $i \in \ive{\ell-1}$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$.
+Hence, for each $i \in \ive{\ell-1}$, we can subdivide the set $q_i$ into $i$ blocks: the block containing the largest $m_1$ elements; the block containing the next-largest $m_2$ elements; and so on, until the block containing the smallest $m_i$ elements.
+Denote these $i$ blocks by $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$, respectively.
+Thus, $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$ are pairwise disjoint nonempty subsets of $\ive{n}$ satisfying
+\begin{subequations}
+\begin{align}
+\label{eq.determinant_form.qij.1}
+  q_i  & = q_i^{(1)} \cup q_i^{(2)} \cup \cdots \cup q_i^{(i)}
+\qquad \text{and}
+\\ \label{eq.determinant_form.qij.2}
+  q_i^{(1)} & \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}
+\qquad \text{and}
+\\ \label{eq.determinant_form.qij.3}
+  \abs{q_i^{(j)}} & = m_j \text{ for all } j \in \ive{i}.
+\end{align}
+\end{subequations}
+Thus, we have defined nonempty queues $q_i^{(j)} \subseteq \ive{n}$ for all $i \in \ive{\ell-1}$ and $j \in \ive{i}$ whenever $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$.
+
+\Darij{TODO: Example.}
+
+We say that the MLQ $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is \defn{interlacing} if each $i \in \set{2,3,\dotsc,\ell-1}$ satisfies
+\begin{equation}
+\label{eq.determinant_form.interlacing.def}
+q_i^{(1)} \succeq q_{i-1}^{(1)} \gg
+q_i^{(2)} \succeq q_{i-1}^{(2)} \gg
+q_i^{(3)} \succeq q_{i-1}^{(3)} \gg \cdots \gg
+q_i^{(i)}
+\end{equation}
+(that is, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$ for all $j \in \ive{i-1}$).
+
+\Darij{TODO: Example.}
+
+Forget that we fixed $\qq$.
+% I don't understand what purpose this sentence serves -- Travis
+% It serves to clarify that $\qq$ is no longer fixed. --Darij
+
+%Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
+Define a pseudo-partition
+\begin{equation}
+\label{eq.determinant_form.interlacing.lam}
+\lambda^{\mm} := (
+  \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}},
+  \underbrace{2,2,\ldots,2}_{m_{\ell-2}\text{ times}},
+  \ldots,
+  \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
+).
+\end{equation}
+Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
+
+\begin{lemma}
+\label{lem:determinant_form.bij1}
+Let $\ell$, $\mm$, and $m_i$ be as above.
+Then, there is an injection
+\[
+P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda^{\mm} }
+\]
+with the following properties:
+\begin{enumerate}
+\item[(a)] We have $\wt\bigl(  P(\qq) \bigr) = \wt(\qq)$ for each MLQ $\qq$ of type $\mm$.
+
+\item[(b)] If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$, then the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
+
+\item[(c)] If $\qq$ is an interlacing MLQ of type $\mm$, then $P(\qq)$ is a semistandard tableau of shape $\lambda^{\mm}$.
+
+\item[(d)] Any semistandard tableau $T$ of shape $\lambda^{\mm}$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+\end{enumerate}
+\end{lemma}
+
+(To make sense of this in the border case $\ell = 1$, we agree to interpret $q_0$ as the empty set whenever $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ.)
+
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.bij1}.]
+If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
+For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
+
+Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda^{\mm}$:
+\begin{equation}
+\label{pf.lem:determinant_form.bij1.visual}
+\begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
+\cline{2-2}%
+m_{\ell-1} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_{\ell-1}^{(\ell-1)}} &  &  &  &  & \\\cline{2-3}
+m_{\ell-2} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_{\ell-2}^{(\ell-2)}} & \widetilde{q_{\ell-1}^{(\ell-2)}} & \multicolumn{1}{|c}{} &  &  & \\\cline{2-4}
+m_{\ell-3} \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_{\ell-3}^{(\ell-3)}} & \widetilde{q_{\ell-2}^{(\ell-3)}} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(  \ell-3)}}} & \multicolumn{1}{|c}{} &  & \\\cline{2-4}%
+\vdots & \mathbf{\vdots} & \mathbf{\vdots} & \multicolumn{1}{|c}{\vdots} & \multicolumn{1}{|c}{\ddots} &  & \\\cline{2-4}\cline{6-6}
+m_2 \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_2^{(2)}} & \widetilde{q_{3}^{(2)}} & \multicolumn{1}{|c}{\widetilde{q_{4}^{(2)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(2)}}} & \multicolumn{1}{|c}{}\\\cline{2-4}\cline{6-7}
+m_1 \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_1^{(1)}} & \widetilde{q_2^{(1)}} & \multicolumn{1}{|c}{\widetilde{q_{3}^{(1)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-2}^{(1)}}} & \multicolumn{1}{|c|}{\widetilde{q_{\ell-1}^{(1)}}}\\\cline{2-4}\cline{6-7}
+\end{array}
+\end{equation}
+Formally speaking, this is the tableau of shape $\lambda^{\mm}$ whose $\ell-1$ columns are given as follows:
+For each $j \in \ive{\ell-1}$, the $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{(\ell-j)}}, \widetilde{q_{\ell-2}^{(\ell-j-1)}}, \dotsc, \widetilde{q_j^{(1)}}$ stacked atop each other (with $\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top, $\widetilde{q_{\ell-2}^{(\ell-j-1)}}$ coming next under it, and so on).
+Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q_i^{(i)}}, \widetilde{q_{i+1}^{(i)}}, \dotsc, \widetilde{q_{\ell-1}^{(i)}}$ of columns $1,2,\ldots,\ell-i$ align with each other horizontally (and together form the topmost $m_i$ among the bottommost $m_1+m_2+\cdots+m_i$ rows of $P(\qq)$).
+
+Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda^{\mm}}$ is defined.
+This map $P$ is an injection, because the MLQ $\qq$ can be recovered
+from the tableau $P(\qq)$ (indeed, each of the elements
+of each of the queues of $\qq$ lands in some predictable cell of
+$P(\qq)$).
+
+We shall now prove the four properties we claimed about this injection $P$.
+
+Property (a) is clear, since the entries of $q_1, q_2, \dotsc, q_{\ell-1}$ are in 1-to-1 correspondence with the entries of the tableau $P(\qq)$.
+
+Furthermore, the surface of $P(\qq)$ is the concatenation of the sequences $\widetilde{q_{\ell-1}^{(\ell-1)}},\widetilde{q_{\ell-1}^{(\ell-2)}}, \dotsc, \widetilde{q_{\ell-1}^{(1)}}$ (regarded as lists); but this concatenation is simply the sequence $\widetilde{q_{\ell-1}}$ (regarded as a list) (because of~\eqref{eq.determinant_form.qij.1} and~\eqref{eq.determinant_form.qij.2}).
+In other words, the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
+This proves property~(b).
+
+Let $\qq$ be an MLQ of type $\mm$.
+Then, the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def} (this is easily seen from~\eqref{pf.lem:determinant_form.bij1.visual} and from the fact that the columns $\widetilde{q_i^{(j)}}$ are strictly increasing\footnote{In more detail:
+\begin{itemize}
+\item The entries of $P(\qq)$ are weakly increasing along each row
+if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
+$q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
+\item The entries of $P(\qq)$ are strictly increasing down each
+column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
+$q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
+(Here, we are also tacitly using the fact that the sets
+$q_i^{\left(  j\right)  }$ are nonempty. This ensures that the southern
+neighbor of a cell in $\widetilde{q_i^{\left(  j\right)  }}$ belongs either
+to $\widetilde{q_i^{\left(  j\right)  }}$ again or to
+$\widetilde{q_{i-1}^{\left(  j-1\right)  }}$, rather than (say) to
+$\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
+\end{itemize}
+}\travis{This is a really long footnote for something inside of a parenthetical. We should try to either shorten it or move it into the main body.});
+in other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
+This proves property (c).
+
+Finally, if $T$ is a semistandard tableau of shape $\lambda^{\mm}$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combining them to obtain queues $q_i$ and an MLQ $\qq$.
+This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
+This proves property~(d).
+Hence, we have proven all four properties (a--d).
+\end{proof}
+
+\begin{cor}
+\label{cor:determinant_form.bij1c}
+Let $\ell$, $\mm$, and $m_i$ be as above.
+Let $k \in \NN$ and $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
+% This awkward wording should repel the misunderstanding that we are *defining* $\lambda^{\mm}$ here.
+Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
+Then,
+\begin{align*}
+&  \sum_{\substack{\qq=\tup{q_1,q_2,\ldots,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type $\mm$ with } q_{\ell-1}=S}} \wt(\qq) \\
+&  = \left(  \prod_{i=1}^{k}x_{s_i}\right)
+    \det\left(h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}} .
+\end{align*}
+\end{cor}
+
+\begin{proof}[Proof of Corollary~\ref{cor:determinant_form.bij1c}.]
+Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
+Property~(c) shows that this injection $P$ restricts to an injection
+\[
+\set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
+\]
+Property~(d) shows that this restricted injection is also surjective, and thus a bijection.
+Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
+\begin{vershort}
+We thus obtain
+\begin{align*}
+\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
+&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
+\end{align*}
+where the second equality follows from Property~(a) and Property~(b) and that $s = S$ (where we consider $s$ as a set).
+\end{vershort}
+\begin{verlong}
+We thus obtain
+\begin{align*}
+\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
+&  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
+&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
+\end{align*}
+where the second equality follows from Property~(a) and Property~(b) and the last equality is since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$.
+\end{verlong}
+Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
+\end{proof}
+
+Next, we shall connect the interlacingness of an MLQ with its action on the word $1\dotsm 1$:
+
+\begin{lemma}
+\label{lem:determinant_form.interl-act}
+Let $\ell$ be a positive integer.
+Let $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$.
+Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r$-tuple of integers such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$.
+Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
+
+Let $\mm$ be the type of $u$.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
+Then, $u = \qq(1\dotsm 1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
+\end{lemma}
+
+\Darij{TODO: Example.}
+
+The proof of Lemma~\ref{lem:determinant_form.interl-act} is tedious and technical; it will be completed in the next subsection (after a few auxiliary lemmas).
+
+\subsection{Proof of Lemma~\ref{lem:determinant_form.interl-act}}
+
 There is nothing deep or surprising to this proof; it is merely a lengthy combinatorial argument that does not lend itself to a neat formalization.
 Before we begin the proof, we will pave our way with several lemmas.
 
@@ -4361,6 +4296,78 @@ Thus, $u^{\left[\ell-1\right]} = u$.
 Hence, $u = u^{\left[\ell-1\right]} = \qq(1 \dotsm 1)$.
 This proves the $\Longleftarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
 \end{proof}
+
+%%%%%%%%%%
+\subsection{Proof of Theorem~\ref{thm:determinant_form}}
+
+We are now ready to prove Theorem~\ref{thm:determinant_form}:
+
+\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
+Write the $r$-tuple $\tup{v_1, v_2, \dotsc, v_r}$ in the form
+\begin{equation}
+\label{pf.thm:determinant_form.v=}
+\tup{v_1, v_2, \dotsc, v_r} = (
+  \underbrace{\ell-1,\ldots,\ell-1}_{m_{\ell-1}\text{ times}},
+  \underbrace{\ell-2,\ldots,\ell-2}_{m_{\ell-2}\text{ times}},
+  \dotsc,
+  \underbrace{1,\ldots,1}_{m_1\text{ times}}
+)
+\end{equation}
+for some $m_1, m_2, \ldots, m_{\ell-1} \geq 0$
+(we can do this, since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$ and $v_1 \geq v_2 \geq \cdots \geq v_r$).
+\begin{verlong}
+Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
+\end{verlong}
+Also set $m_{\ell} = n - r$, and define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$.
+Then, the word $u$ has type $\mm$
+\begin{vershort}
+by the construction of $u$.
+\end{vershort}
+\begin{verlong}
+(since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
+\end{verlong}
+Note that $m_i > 0$ for all $i \in \ive{\ell-1}$ (since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
+Hence, the word $u$ is packed.
+Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
+\begin{verlong}
+Each $i \in \ive{\ell}$ satisfies
+\[
+m_i =
+  \begin{cases}
+  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i < \ell,\\
+  n - r & \text{if } i = \ell
+  \end{cases}
+\]
+(by~\eqref{pf.thm:determinant_form.v=} and the definition of $m_{\ell}$).
+\end{verlong}
+
+%This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
+%Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
+%Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
+
+Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
+% This pseudo-partition $\lambda^{\mm}$ has $p_{\ell-1}(\mm) = r$ entries.
+Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain
+\[
+\lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}
+= \tup{\gamma_1, \gamma_2, \ldots, \gamma_r}
+\]
+(since $\ell - v_j = \gamma_j$ for all $j \in \ive{r}$).
+
+The definition of $\swt{u}$ yields
+\begin{align*}
+\swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1\dotsm 1)}}\wt(\qq) \\
+%&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+% The above is just a trivial rewording of the summation set for the equation below -- Travis
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+&  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
+\end{align*}
+where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $r$, $\gamma_i$, $B$ and $b_i$ instead of $k$, $\lambda_i$, $S$ and $s_i$).
+\begin{verlong}
+Hence the claim follows since $\prod_{i=1}^r x_{b_i} = \prod_{b \in B} x_b$.
+\end{verlong}
+\end{proof}
+
 
 
 
