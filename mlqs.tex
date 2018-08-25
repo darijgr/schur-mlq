@@ -2269,8 +2269,9 @@ We now state the main result of this section: a Jacobi--Trudi-like formula for $
 \label{thm:determinant_form}
 Let $\ell$ be a positive integer.
 Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
-Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.\travis{We probably want to introduce the notation of a weakly decreasing word, then we can just say ``Let $v = v_1 v_2 \dotsm v_r$ be a weakly decreasing packed word.''}
-\darij{I don't. Our words are cyclic with $n$ letters. Since we don't do wordy things with $v$, why call it a word?}\ 
+Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
+%\travis{We probably want to introduce the notation of a weakly decreasing word, then we can just say ``Let $v = v_1 v_2 \dotsm v_r$ be a weakly decreasing packed word.''}
+%\darij{I don't. Our words are cyclic with $n$ letters. Since we don't do wordy things with $v$, why call it a word?}\ 
 Define a word $u \in \mcW_n$ by $u_i=v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
 For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
 (The value $\gamma_j$ can also be described as the number of distinct letters among $v_1, v_2, \dotsc, v_j$.)
@@ -3919,7 +3920,7 @@ Consider a woman named $W_k$ for each $k \in q$ (for a total of $\abs{q}$ many w
 The \defn{age} of a man $M_k$ or woman $W_k$ is defined to be the number $k \in \ive{n}$.
 
 \Travis{This is a horrible model with potentially dangerous politically consequences: \emph{it is definitely not PC}. Also, how much of this is really just a rephrasing the algorithm in a more complicated (or at least new) language? Why not just use what will be the language in Section~\ref{sec:thm_proof} of brackets?}
-\Darij{Where exactly is this not PC? And should we care? My suggestion is to move this proof into verlong anyway, while in vershort it gets replaced by some good pictures showing the ``balls'' ßin the $r^{(j)}$ and $q^{(j)}$ and how everything moves to the right place. But I can't draw that picture, at least not in LaTeX.}
+\Darij{Where exactly is this not PC? And should we care? My suggestion is to move this proof into verlong anyway, while in vershort it gets replaced by some good pictures showing the ``balls'' in the $r^{(j)}$ and $q^{(j)}$ and how everything moves to the right place. But I can't draw that picture, at least not in LaTeX.}
 
 We subdivide the (altogether $\abs{r} + \abs{q}$ many) people into $h$ \defn{age brackets}, numbered $1, 2, \ldots, h$:
 Namely, for each $j \in \ive{h}$, the $j$-th age bracket shall contain
