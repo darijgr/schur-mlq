@@ -1269,7 +1269,7 @@ A \defn{path} simply means a (directed) path in the lattice.
 The \defn{weight} of a path $p$, denoted $\wt(p)$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
 If $A$ and $B$ are two vertices, then \defn{$N(A,B)$} shall denote the set of all paths from $A$ to $B$.
 
-It is easy to see that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
+It is easy to see (see, \textit{e.g.}, \cite[(2.36)]{Stanley-EC1}) that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
 \begin{equation}
 \label{eq.LGV.single-paths}
 \sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
@@ -1278,7 +1278,7 @@ It is easy to see that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
 %(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
 
 \begin{comment}
-We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and classical fact that appears implicitly in various texts on enumerative combinatorics (e.g., \cite[(2.36)]{Stanley-EC1}).
+We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and classical fact that appears implicitly in various texts on enumerative combinatorics (\textit{e.g.}, \cite[(2.36)]{Stanley-EC1}).
 
 \begin{proof}[Proof of~\eqref{eq.LGV.single-paths}.]
 Let $A = (a,b)$ and $B = (c,d)$ be two vertices.
