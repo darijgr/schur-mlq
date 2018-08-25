@@ -341,6 +341,7 @@ This paper is organized as follows.
 In Section~\ref{sec:background}, we give the necessary background and definitions of MLQs and spectral weight.
 In Section~\ref{sec:result}, we give our main results, and use them to prove some of the conjectures in~\cite{AasLin17}.
 In Section~\ref{sec:tasep}, we describe the connection between MLQs and the TASEP.
+In Section~\ref{sec:JT-proofs}, we give a proof of our Jacobi-Trudi-type formula (Theorem~\ref{thm:determinant_form}).
 In Section~\ref{sec:thm_proof}, we give a proof of our main theorem (Theorem~\ref{thm:permutation}).
 In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 
@@ -1239,7 +1240,7 @@ Then
 \]
 \end{thm}
 
-The proof of this theorem is given in the Appendix (Section~\ref{app:JT-proofs}).
+The proof of this theorem is given in Section~\ref{sec:JT-proofs}.
 
 
 
@@ -1414,942 +1415,11 @@ Note however that queues give us \emph{a} random process with this property: for
 
 
 
-%=====================================================================
-\section{Proof of Theorem~\ref{thm:permutation}}
-\label{sec:thm_proof}
-
-In this section, we shall prove Theorem~\ref{thm:permutation} by relying on the
-braid relation for dual configurations. We need some definitions first.
-
-An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
-As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
-We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
-
-We begin by constructing a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
-\begin{itemize}
-\item an opening parenthesis `$($' if $j \in q_1$ and $j \notin q_2$;
-\item a closing parenthesis `$)$' if $j \notin q_1$ and $j \in q_2$;
-\item a matched pair of parentheses `$()$' if $j \in q_1$ and $j \in q_2$;
-\item nothing otherwise.
-\end{itemize}
-We say that these parentheses are \defn{contributed} by the site $j$.
-Next, we match as many parentheses as possible following the \defn{standard parenthesis-matching algorithm}:
-every time you find an opening parenthesis to the left of a closing one, with only frozen parentheses between them, you match these two parentheses and declare them frozen.
-Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (\textit{i.e.}, to the right of the former and to the left of the latter) are frozen.
-
-At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parentheses left unmatched; these unmatched parentheses will be opening if $r_1 > r_2$ and closing if $r_1 < r_2$. The unmatched parentheses will not depend on the order in which we perform the matching.
-This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
-If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
-When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
-
-We define \defn{$\SP(q_1, q_2)$} to be the following data:
-\begin{itemize}
-\item the sequence of parentheses obtained from $q_1$ and $q_2$;
-\item the matching obtained by the algorithm; and
-\item the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
-\end{itemize}
-
-Note that each $j \in \ZZ/n\ZZ$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `$()$`, which can be immediately matched (to each other) at the beginning of the algorithm.
-Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
-Hence, if we skip the sites $j \in q_1 \cap q_2$ in the definition of our sequence of parentheses, then the outcome of the algorithm (specifically, the set of unmatched parentheses) will be the same.
-The sequence of parentheses obtained as above, but skipping these sites $j$, will be called the \defn{reduced parenthesis sequence}.
-
-%If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
-A site $j \in \ZZ/n\ZZ$ is \defn{unbalanced} if it contributes an unmatched parenthesis; otherwise we say $j$ is \defn{balanced}.
-There are exactly $\abs{r_1 - r_2}$ unbalanced sites.
-
-We construct $C' = (q'_1, q'_2)$ as follows.
-For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
-For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
-Note that $C$ and $C'$ have the same balanced sites, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
-Hence, we have $C'' = C$. Also, we have $\wt(C) = \wt(C')$.
-
-\begin{example}
-Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
-The dual configuration $C'$ is given by sliding all of the circles not boxed from the upper level to the lower level.
-In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
-\end{example}
-
-\begin{figure}[t]
-\[
-\begin{tikzpicture}[scale=0.75]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \draw[fill=blue!30] (1.5*\sc,\l-.5) rectangle(4.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (6.5*\sc,\l-.5) rectangle(7.5*\sc,\ll+.5);
-  \draw[fill=blue!30] (8.5*\sc,\l-.5) rectangle(20.5*\sc,\ll+.5);
-  \foreach \i in {1,2,5,6,8,11,13,14,17,18,19} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {3,4,7,9,10,12,15,16,20} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,12,15,16,18,19,20} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,3,4,5,6,7,8,9,10,11,13,14,17} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-\end{tikzpicture}
-\]
-\caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
-The purple boxes mark the balanced sites.}
-\label{fig:balanced}
-\end{figure}
-
-\begin{figure}[t]
-\[
-\begin{tikzpicture}[scale=0.45]
-\draw[-,thin,red!50] (0,0) -- (24,0);
-\draw[-,thin,red!50] (1,1) -- (24,1);
-\draw[-,thin,red!50] (8,2) -- (24,2);
-\draw[-,thin,red!50] (9,3) -- (24,3);
-\draw[-,thin,red!50] (11,4) -- (24,4);
-\draw[-,thin,red!50] (14,5) -- (16,5);
-\draw[-,thin,red!50] (18,5) -- (22,5);
-\draw[-,thick,dashed] (-1,1) -- (0,0);
-\draw[-,dotted] (1,0) -- (1,1);
-\draw[-,dotted] (3,0) -- (3,1);
-\draw[-,dotted] (4,0) -- (4,1);
-\draw[-,dotted] (5,0) -- (5,1);
-\draw[-,dotted] (6,0) -- (6,2);
-\draw[-,dotted] (7,0) -- (7,2);
-\draw[-,dotted] (8,0) -- (8,2);
-\draw[-,dotted] (9,0) -- (9,3);
-\draw[-,dotted] (10,0) -- (10,4);
-\draw[-,dotted] (11,0) -- (11,4);
-\draw[-,dotted] (12,0) -- (12,5);
-\draw[-,dotted] (13,0) -- (13,4);
-\draw[-,dotted] (14,0) -- (14,5);
-\draw[-,dotted] (15,0) -- (15,6);
-\draw[-,dotted] (16,0) -- (16,5);
-\draw[-,dotted] (17,0) -- (17,4);
-\draw[-,dotted] (18,0) -- (18,5);
-\draw[-,dotted] (20,0) -- (20,5);
-\draw[-,dotted] (22,0) -- (22,5);
-\draw[-,dotted] (23,0) -- (23,4);
-\draw[-,thick] (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,1) -- (5,1) -- (6,2) -- (7,2) -- (8,2) -- (9,3) -- (10,4) -- (11,4) -- (12,5) -- (13,4) -- (14,5) -- (15,6) -- (16,5) -- (17,4) -- (18,5) -- (19,6) -- (20,5) -- (21,6) -- (22,5) -- (23,4);
-\draw[-,thick,dashed] (23,4) -- (24,5);
-\fill[blue] (0,0) circle (4pt);
-\fill[blue] (5,1) circle (4pt);
-\fill[blue] (8,2) circle (4pt);
-\fill[blue] (9,3) circle (4pt);
-\fill[blue] (23,4) circle (4pt);
-\end{tikzpicture}
-\]
-\caption{The Motzkin path corresponding to the configuration in Figure~\ref{fig:balanced}.
-The corresponding unbalanced up-steps are marked by dots.}
-\label{fig:balanced_motzkin}
-\end{figure}
-
-Recall the notations introduced just before Lemma~\ref{le:dual}.
-
-\begin{remark}
-\label{rmk:balanced-dual-let}
-Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
-Thus, the dual configuration of the $(n-r_1, n-r_2)$-configuration $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
-\begin{equation}
- (C^*)' = \bigl( (q_1')^*, (q_2')^* \bigr) .
- \label{eq.rmk:balanced-dual-let.dual}
-\end{equation}
-To see this, we compute the dual configurations of both $C$ and $C^*$ using the reduced parenthesis sequences. The sequence for $C^*$ is obtained from that for $C$ by reflecting both the parentheses (\textit{i.e.}, opening become closing and vice versa) and the sequence itself. Thus, the parenthesis matching algorithm proceeds in the same way.
-
-In addition, applying Lemma~\ref{le:dual} twice, we obtain
-\[
-C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( (q^*_1(u^*))^* \bigr) = \bigl( q_2^*\bigl( q_1^*(u^*) \bigr) \bigr)^* = \bigl( C^*(u^*) \bigr)^* .
-\]
-%In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 5 - C^*(u^*)_{n+1-i}$, where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
-\end{remark}
-
-Fix $k \geq 1$.
-In the following, we simplify our terminology and say that an MLQ
-is a $k$-tuple of queues (without any restriction on their sizes).
-We want to define an action of $\SymGp{k}$ on MLQs.
-%by letting each simple transposition $s_i$ act as the map
-For each $i \in \ive{k-1}$, we define a map $\fraks_i \colon \set{\text{MLQs}} \to \set{\text{MLQs}}$ by
-\[
-\fraks_i(q_1, q_2, \dotsc, q_k) = (q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k),
-\]
-where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
-From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
-It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
-Thus, the following proposition shows that $\fraks_i$ defines an action of $\SymGp{k}$ on the set of all MLQs.
-
-\begin{prop} \label{prop:braid}
-We have
-\[
-\fraks_i \fraks_{i+1} \fraks_i \qq
-	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
-\]
-for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots, k-2}$.
-\end{prop}
-
-\begin{proof}
-We shall deduce the claim from~\cite[Ch.~5, (5.6.3)]{Loth}.
-
-Let $A$ be the $\tup{k+1}$-element set $\set{\circ, 1, 2, \ldots, k}$.
-Let $A^*$ denote the set of all words on the alphabet $A$
-(of any finite length).
-
-We construct a $k \times n$-matrix $M_{\qq} \in A^{k \times n}$ from $\qq$ by setting the $\tup{i, j}$-th
-entry to $i$ if $j \in q_i$ and $\circ$ otherwise.
-We then construct a word $\word(\qq) \in A^*$ by reading $M_{\qq}$ from top-to-bottom, left-to-right (\textit{i.e.}, column by column).
-For example, if $n = 5$, $k = 3$, then
-\begin{align*}
-\qq = \tup{\set{1, 3}, \set{2},
-\set{2, 5}}
-& \longleftrightarrow
- M_{\qq}
- =
- \begin{array}{ccccc}
-  1 & \circ & 1 & \circ & \circ \\
-  \circ & 2 & \circ  & \circ & \circ \\
-  \circ & 3  & \circ & \circ & 3
- \end{array}
- \\ & \longrightarrow
- \word(\qq) = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
-\end{align*}
-Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$ since $n$ is fixed.
-In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
-is injective.
-
-Following~\cite[\S5.5]{Loth}, for each $i \in \set{1, 2, \ldots, k-1}$, we give an operator
-$\sigma_i \colon A^* \to A^*$.
-This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
-as follows:
-\begin{enumerate}
- \item Treat all letters $i$ in $p$ as opening parentheses `$($',
-       all letters $i+1$ as closing parentheses `$)$',
-       and consider all other letters to be frozen.
-       Now, match as many parentheses as possible
-       according to the standard parenthesis-matching algorithm,
-       but treating the word as a word in the usual sense
-       (\textit{i.e.}, not written on a circle, but having a beginning
-       and an end).
-       The result is independent of the choices in the algorithm,
-       and is always a word whose non-frozen
-       part (\textit{i.e.}, the word obtained by removing
-       all frozen letters) is
-       \begin{equation}
-       \label{eq:reduced_parens}
-       \underbrace{))\cdots)}_{a\text{ parentheses}}
-       \underbrace{((\cdots(}_{b\text{ parentheses}}
-       \end{equation}
-       for some integers $a, b \geq 0$.
- \item Now, replace the non-frozen part~\eqref{eq:reduced_parens} by
-       \[
-       \underbrace{))\cdots)}_{b\text{ parentheses}}
-       \underbrace{((\cdots(}_{a\text{ parentheses}}
-       \]
-       while keeping all frozen letters in their places.
-       The resulting word is $\sigma_i p$.
-\end{enumerate}
-From~\cite[Eq.~(5.6.3)]{Loth}, these operators
-$\sigma_i$ satisfy
-\begin{equation}
- \sigma_i \sigma_{i+1} \sigma_i
- = \sigma_{i+1} \sigma_i \sigma_{i+1}
- \label{pf.prop:braid.loth-eq}
-\end{equation}
-for all $i \in \set{1, 2, \ldots, k-2}$.
-
-Let $\zeta \colon \mcW_n \to \mcW_n$ be the cyclic shift map that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
-We also abuse the notation $\zeta$ for the map that sends each queue $q$ to the queue $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites).
-This map $\zeta$ shall act on MLQs entrywise (since an MLQ is a tuple of queues).
-Clearly,
-\begin{equation}
- \word(\zeta \qq) = \zeta^k \word(\qq)
- \label{pf.prop:braid.word-zeta}
-\end{equation}
-for any MLQ $\qq = (q_1, \ldots, q_k)$.
-
-Now, we claim that
-\begin{equation}
- \word(\fraks_i \qq) = \sigma_i\bigl( \word(\qq) \bigr)
- \qquad \text{ for each MLQ } \qq \text{ and each } i .
- \label{pf.prop:braid.inter}
-\end{equation}
-Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$ for $\qq = (q_1, q_2)$
-(because the definition of $\sigma_i$ only relies on the letters $i$ and $i+1$, while all other letters stay in their places and have no effect).
-
-Thus, let $\qq = (q_1, q_2)$.
-We want to show $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
-If $\abs{q_1} = \abs{q_2}$, then $\fraks_1 \qq = \qq$ by the definition of $\fraks_1$.
-Moreover, we have $\sigma_1\bigl( \word(\qq) \bigr) = \word(\qq)$ in this case, since the word $\word(\qq)$ has as many letters $1$ as it has letters $2$, but the map $\sigma_1$ leaves such words unchanged.
-Hence, the claim holds when $\abs{q_1} = \abs{q_2}$.
-Thus, we assume that $\abs{q_1} \neq \abs{q_2}$.
-Therefore, there exists at least one unbalanced site for the configuration $\qq = (q_1, q_2)$.
-
-The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because the standard parenthesis-matching algorithm used in the definition of dual configurations is clearly invariant under cyclic shift.
-The operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ by~\cite[Prop.~5.6.1]{Loth}.
-Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $\qq$ any number of times without loss of generality.
-Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
-Thus, in the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$, the site $1$ induces a parenthesis that stays unmatched throughout the algorithm.
-Hence, no two parentheses that get matched to each other during this algorithm have this parenthesis lying between them.
-Therefore, it does not matter whether we regard the sequence of parentheses as written on a cycle or on a straight line (as the wrapping-around is not used in the matching process).
-Hence, the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$ proceeds exactly the same way as the standard parenthesis-matching algorithm used when applying $\sigma_1$ to $\word(\qq)$ (ignoring the letters that are neither $i$ nor $i+1$). That is, the parentheses that get matched in the former are the same as those that get matched in the latter.
-% Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
-Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `$)$'s with the number of unmatched `$($'s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `$)$' into a `$($' or vice versa, because one of these numbers is $0$).
-Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
-This proves~\eqref{pf.prop:braid.inter}.
-
-The equality~\eqref{pf.prop:braid.inter} can be rewritten as the
-commutative diagram
-\[
-\xymatrix{
- \set{\text{MLQs}} \ar[r]^{\fraks_i} \ar[d]_{\word} & \set{\text{MLQs}} \ar[d]^{\word} \\
- A^* \ar[r]_{\sigma_i} & A^*
-}
-\]
-for all $i \in \set{1, 2, \dotsc, k-1}$.
-In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
-this diagram allows us to translate~\eqref{pf.prop:braid.loth-eq} into
-$\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
-\end{proof}
-
-\begin{remark}
-Our letters $1, \ldots, k$ correspond to the letters $a_k, \ldots, a_1$ in~\cite{Loth},
-since the definition of $\sigma_i$ in~\cite{Loth} involves $a_i$ rather
-than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
-Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
-but this makes no difference to the proof, since all letters $\circ$ are always frozen.
-% Note that we have arbitrarily chosen to break our cycle at $n$,
-% however by~\cite[Prop.~5.6.1]{Loth}, the result does not depend on this choice.
-\end{remark}
-
-\begin{remark}
-The operator $\sigma_i$ is essentially a combination of co-plactic operators.
-Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
-Note that the bracketing rule given above is precisely the usual signature rule (see, \textit{e.g.},~\cite[Sec.~2.4]{BS17} for a description) for computing tensor products.
-This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
-\end{remark}
-
-Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
-Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
-corresponding to the $k$ smallest letters $w_i$ of $w$.
-
-Our proof of Theorem~\ref{thm:permutation} will rely on a connection between dual configurations and the action of queues on words.
-We begin with a string of lemmas.
-
-\begin{lemma} \label{lem:SL.reconstruct}
-Let $w, w' \in \mcW_n$ be two words of the same type $\mm$.
-Assume that $[w]_k = [w']_k$ for each $k \in \set{p_i(\mm) \mid i \geq 0}$.
-Then, $w = w'$.
-\end{lemma}
-
-\begin{proof}
-Fix some $i \geq 1$.
-The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}$
-(since $w$ has type $\mm$).
-Likewise,
-the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
-Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
-= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$, %\travis{FYI: still fighting us.},
-we conclude that these are the same sites.
-Since this holds for all letters $i$, we have $w = w'$.
-\end{proof}
-
-\begin{lemma} \label{lem:SL.dual.1}
-Let $\tup{q_1, q_2}$ be a configuration with $\abs{q_1} \leq \abs{q_2}$.
-Let $i \in q_1$.
-Let $j$ be the first site weakly to the right of $i$ that belongs to $q_2$.
-Then, $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing a pair of matched parentheses.\footnote{The matching of all other parentheses remains the same, and so does the correspondence between sites and closing parentheses (except for the one we removed).}
-Moreover, the closing parenthesis of that pair is contributed by $j \in q_2$.
-\end{lemma}
-
-\begin{proof}
-The assumption $\abs{q_1} \leq \abs{q_2}$ implies that all closing parentheses in $\SP(q_1, q_2)$ are matched.
-In particular, the closing parenthesis $\gamma$ contributed by $j \in q_2$ is matched.
-Let $\alpha$ be the opening parenthesis contributed by $i \in q_1$.
-All parentheses between $\alpha$ and $\gamma$ are opening (by the minimality of $j$).
-We know that $\gamma$ is matched to an opening parenthesis $\beta$.
-Hence, the parenthesis sequence $\SP(q_1, q_2)$ between $\alpha$ and $\gamma$ (inclusive) is
-\[
-\begin{array}{cccccc}
-( & ( & ( & \cdots & ( & ) \\
-\alpha & & & & \beta & \gamma,
-\end{array}
-\]
-where $\alpha$ and $\beta$ may be the same parenthesis.
-Therefore $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing $\alpha$ and $\gamma$.
-Yet this is tantamount to removing $\beta$ and $\gamma$ from $\SP(q_1, q_2)$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
-\end{proof}
-
-\begin{lemma} \label{lem:SL.dual.3}
-Let $u \in \mcW_n$ be a word of type $\mm$.
-Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
-Let $q$ be a queue such that $k \leq \abs{q}$.
-Each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
-\end{lemma}
-
-\begin{proof}
-Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $(1, 2, \dotsc, n)$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-Use this permutation to construct $q(u)$ as per the definition.
-For each $p \in \ive{n}$, let $j_p$ denote the site that is set while processing $i = i_p$ when constructing $q(u)$.
-Thus, $(q(u))_{j_p} = u_{i_p}$ whenever $p \leq \abs{q}$ (since these entries of $q(u)$ are set in Phase~II),
-and $(q(u))_{j_p} = u_{i_p} + 1$ otherwise (Phase~I).
-Therefore, $\ive{q(u)}_k = \set{j_1, j_2, \ldots, j_k}$ (since $k \leq \abs{q}$).
-Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
-Denote $q_1^{(p)} := q_1 \setminus \{i_1, i_2, \dotsc, i_p\}$ and $q_2^{(p)} := q_2 \setminus \{j_1, j_2, \dotsc, j_p\}$.
-
-\begin{claim}
-\label{claim:matching_SP}
-Let $p \in \set{0, 1, \ldots, k}$.
-Then, $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1 , q_2)$ by removing $p$ pairs of matched parentheses.
-The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots, j_p$.
-\end{claim}
-
-\begin{subproof}
-We shall prove Claim~\ref{claim:matching_SP} by induction on $p$.
-The base case ($p = 0$) is obvious.
-For the induction step, we assume that Claim~\ref{claim:matching_SP} holds for $p-1$.
-The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and therefore $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2^{(p-1)}$.
-Hence, Lemma~\ref{lem:SL.dual.1}
-(applied to $q_1^{(p-1)}$, $q_2^{(p-1)}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$)
-implies that $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1^{(p-1)}, q_2^{(p-1)})$ by removing a pair of matched parentheses.
-Moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2^{(p-1)}$.
-Thus, Claim~\ref{claim:matching_SP} follows from the induction hypothesis.
-This completes the induction step.
-\end{subproof}
-
-The above claim applied to $p = k$ shows that $\SP(q_1^{(k)}, q_2^{(k)})$ is obtained from $\SP(q_1 , q_2)$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$.
-Hence, each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
-\end{proof}
-
-\begin{prop} \label{prop:SL.dual}
-Let $u \in \mcW_n$ be a word of type $\mm$.
-Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
-Let $q$ be a queue.
-The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [q(u)]_k }$, where $q^{\dagger}$ is some queue.
-\end{prop}
-
-\begin{proof}
-Let $\tup{q'_1, q'_2}$ be the dual configuration of $\tup{ [u]_k , q }$.
-We must then prove that $q'_2 = \ive{q(u)}_k$.
-Note that $\abs{q'_2} = \abs{\ive{u}_k} = k = \abs{\ive{q(u)}_k}$.
-
-Suppose $k \leq \abs{q}$.
-Then, Lemma~\ref{lem:SL.dual.3} shows that each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
-Therefore, all of these sites are balanced, and hence belong to $q'_2$.
-Thus, $q'_2 \supseteq \ive{q(u)}_k$, whence $q'_2 = \ive{q(u)}_k$
-(since $\abs{q'_2} = \abs{\ive{q(u)}_k}$).
-
-Now suppose $k > \abs{q}$.
-Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
-Thus, $n-k < n - \abs{q} = \abs{q^*}$.
-Hence, applying the $k \leq \abs{q}$ case (proven above)
-to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$,
-we see that
-$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
-for some queue $q^\dagger$.
-Now,
-\begin{align*}
- %\label{eq:dual_config_equalities}
- \bigl( (q'_1)^*, (q'_2)^* \bigr)
- &= \bigl( ([u]_k)^* , q^* \bigr)'
- = \tup{ [u^*]_{n-k} , q^* }' \\
- & = \tup{ q^{\dagger} , [q^*(u^*)]_{n-k} }
- = \tup{ q^{\dagger} , \bigl[\bigl(q(u) \bigr)^* \bigr]_{n-k} } ,
-\end{align*}
-where
-\begin{itemize}
- \item the first equality follows from~\eqref{eq.rmk:balanced-dual-let.dual};
- \item the second equality is because $([u]_k)^* = [u^*]_{n-k}$; and
- \item the fourth equality follows from Lemma~\ref{le:dual}.
-\end{itemize}
-Therefore, $(q'_2)^* = \bigl[\bigl( q(u) \bigr)^* \bigr]_{n-k} = ([q(u)]_k)^*$, so that
-$q'_2 = [q(u)]_k$.
-Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
-Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
-Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
-Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
-
-In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
-The only nontrivial part is showing $u = (\fraks_i\qq) (1 \dotsm 1)$.
-More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
-The proof of this claim reduces to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
-
-Each word $w$ can be obtained from a standard word by a sequence of
-merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
-$k \in \set{ p_j(\mm) \mid j \geq 1 }$, where $\mm$ is the type of
-$u$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
-commute with the action of a queue (and thus of an MLQ).
-Hence, it is sufficient to consider standard words $w$.
-Thus, assume that $w$ is standard of type $\mm$.
-It is straightforward to see
-(using Equation~\eqref{eq:queue_type_change} and $\abs{q'_2} = \abs{q_1}$ and $\abs{q'_1} = \abs{q_2}$)
-that the words
-$C(w) = q_2\bigl( q_1(w) \bigr)$
-and
-$C'(w) = q'_2\bigl( q_1'(w) \bigr)$
-have the same type.
-%indeed, the action of a queue $q$ on a word $w$ modifies its
-%type in a predictable way (namely, the number $\abs{q}$ is
-%inserted into the type of $w$ at the place where it would
-%keep the type weakly increasing).
-Let $\nn$ be this type.
-We shall now show that
-$[C'(w)]_k = [C(w)]_k$
-for all $k \in \set{ p_i(\nn) \mid i \geq 0}$.
-According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(w) = C(w)$, and thus our proof will be complete.
-
-Let $k \in \set{ p_i(\nn) \mid i \geq 0}$.
-Thus, $k \in \set{0, 1, \ldots, n} = \set{ p_i(\mm) \mid i \geq 0 }$ (since $w$ is standard).
-Hence, $[w]_k$ is well-defined.
-Note that $q_i(w)$ and $q'_i(w)$ are also standard words.
-Using Proposition~\ref{prop:SL.dual} to compute dual
-configurations, we can see how the MLQ
-$\qq = \tup{[w]_k, q_1, q_2}$ transforms under the action of
-$\fraks_1 \fraks_2 \fraks_1$: Namely, we have
-\begin{align*}
-\tup{[w]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(w)]_k, q_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k},
-\end{align*}
-where $\ast$ denotes some queue.
-Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
-\begin{align*}
-\tup{[w]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[w]_k, q'_1, q'_2}
-\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(w)]_k , q'_2}
-\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k}.
-\end{align*}
-(See Figure~\ref{fig:crossing_diagrams} for the actions depicted using crossing diagrams.)
-Yet, the two maps are equal by Proposition~\ref{prop:braid}.
-Thus, the resulting MLQs must be identical:
-\[
-\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(w) \bigr) \bigr]_k}
-=
-\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(w) \bigr) \bigr]_k}.
-\]
-Hence, we have
-\[
-\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k.
-\]
-In other words, $[C'(w)]_k = [C(w)]_k$.
-\end{proof}
-
-\begin{figure}
-\begin{gather*}
-\begin{tikzpicture}[xscale=3.5]
-\node (i1) at (0,0) {$[w]_k$};
-\node (i2) at (0,-1) {$q_1$};
-\node (i3) at (0,-2) {$q_2$};
-\node (s11) at (1,0) {$\ast$};
-\node (s12) at (1,-1) {$[q_1(w)]_k$};
-\node (s13) at (1,-2) {$q_2$};
-\node (s21) at (2,0) {$\ast$};
-\node (s22) at (2,-1) {$\ast$};
-\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
-\node (t1) at (3,0) {$\ast$};
-\node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
-\path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
-\path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
-\path[-,red,thick] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
-\end{tikzpicture}
-\\
-\begin{tikzpicture}[xscale=3.5]
-\node (i1) at (0,0) {$[w]_k$};
-\node (i2) at (0,-1) {$q_1$};
-\node (i3) at (0,-2) {$q_2$};
-\node (s11) at (1,0) {$[w]_k$};
-\node (s12) at (1,-1) {$q'_1$};
-\node (s13) at (1,-2) {$q'_2$};
-\node (s21) at (2,0) {$\ast$};
-\node (s22) at (2,-1) {$[q'_1(w)]_k$};
-\node (s23) at (2,-2) {$q'_2$};
-\node (t1) at (3,0) {$\ast$};
-\node (t2) at (3,-1) {$\ast$};
-\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k$};
-\path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
-\path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
-\path[-,red,thick] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
-\end{tikzpicture}
-\end{gather*}
-\caption{Crossing diagrams representing the action of $\fraks_1 \fraks_2 \fraks_1$ (top) and $\fraks_2 \fraks_1 \fraks_2$ (bottom).}
-\label{fig:crossing_diagrams}
-\end{figure}
-
-\begin{remark}
-Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
-We also sketch an alternative direct approach in the FPSAC extended abstract version of this work~\cite{AGS18}.
-\end{remark}
-
-
-
-
-
 
 %=====================================================================
-\section{Final remarks}
-\label{sec:remarks}
-
-We conclude by giving some additional examples, remarks, and comments about our results.
-We begin with an example to illustrate the proof of Theorem~\ref{thm:merge} in more detail.
-
-\begin{example}
-\label{ex:merge_theorem}
-In order to compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
-We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
-\[
-\qq = \;
-\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
-\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; \xrightarrow{\hspace{30pt}} \;
-\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
-\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; = \widetilde{\qq}.
-\]
-Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
-Furthermore, note that $135452 = \merge{5} 135462$.
-Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
-In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
-By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
-\begin{align*}
-\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; \xrightarrow[\hspace{15pt}]{R_2} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\allowdisplaybreaks
-\\[1.3em] &
-\; \xrightarrow[\hspace{15pt}]{R_3} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
-\; \xrightarrow[\hspace{15pt}]{R_4} \;
-\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
-\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
-\end{tikzpicture}
-\; = \widetilde{\qq}',
-\end{align*}
-which contributes to $\swt{135462}$.
-\end{example}
-
-There is the natural cyclic symmetry on our special weights.
-
-\begin{prop}
-  Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
-  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions, and similarly on monomials in $\xx$.
-\end{prop}
-
-\begin{proof}
-  For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
-  It is clear from the definition of a queue that $q(u \sigma) = \bigl( (\sigma q)(u) \bigr) \sigma$.
-  Hence, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
-  where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
-  Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (1 \dotsm 1) = \bigl( (\sigma \qq)(1 \dotsm 1) \bigr) \sigma$.
-  From here, the claim follows by an obvious bijection
-  (given by the action of $\sigma$) between the sums defining
-  $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
-\end{proof}
-
-Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
-Recall from~\cite{NY97,Shimozono02} that the combinatorial $R$-matrix is the unique crystal isomorphism
-\[
-R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_1}.
-\]
-There is a well-known (in slightly different terminology) bijection $\Xi_r$ relating $r$-queues with an element of the KR crystal $B^{r,1}$ in type $A_{n-1}^{(1)}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
-In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
-\[
-\Xi(\qq) = \Xi_{p_1}(q_1) \otimes \Xi_{p_2}(q_2) \otimes \dotsm \otimes \Xi_{p_{\ell}}(q_{\ell}).
-\]
-Thus, by comparing the description of the combinatorial $R$-matrix for $B^{r_1,1}$ and $B^{r_2,1}$ from~\cite{NY97}, we obtain that taking the dual configuration is equivalent to applying the combinatorial $R$-matrix under $\Xi$.
-
-\begin{prop}
-\label{prop:dual_is_R}
-Let $C$ be an $(r_1, r_2)$-configuration. Then
-\[
-\Xi(C') = R\bigl( \Xi(C) \bigr),
-\]
-where $C'$ is the dual configuration of $C$.
-\end{prop}
-
-Note that Proposition~\ref{prop:dual_is_R} gives another proof of Proposition~\ref{prop:braid} since the combinatorial $R$-matrix is well-known to satisfy the Yang-Baxter equation.
-
-\begin{example}
-Suppose $n = 9$.
-Consider the $(4,6)$-configuration and dual $(6,4)$-configuration
-\[
-C = (\set{1,4,5,6}, \set{2,3,4,6,7,8}),
-\qquad\quad
-C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7}).
-\]
-We have
-\[
-\begin{tikzpicture}[xscale=6,yscale=4,>=stealth]
-\node (C) at (0,0) { %{$(\set{1,4,5,6}, \set{2,3,4,6,7,8})$};
-\begin{tikzpicture}[scale=0.7]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \foreach \i in {1,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,3,7,8,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,3,4,6,7,8} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,5,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-\end{tikzpicture}
-};
-\node (Cp) at (0,-1) { %{$(\set{1,3,4,5,6,8}, \set{2,4,6,7})$};
-\begin{tikzpicture}[scale=0.7]
-  \def\sc{0.85}   % Change this to adjust the x-scaling
-  \def\ll{2}   % level 2
-  \def\l{1}   % level 1
-  \foreach \i in {1,3,4,5,6,8} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
-  \foreach \i in {2,7,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
-  \foreach \i in {2,4,6,7} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
-  \foreach \i in {1,3,5,8,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
-\end{tikzpicture}
-};
-\node (KR) at (1,0) {$\young(1,4,5,6) \otimes \young(2,3,4,6,7,8)$};
-\node (KRp) at (1,-1) {$\young(1,3,4,5,6,8) \otimes \young(2,4,6,7)$};
-\draw[<->] (C) -- (Cp) node[midway,anchor=east] {dual};
-\draw[<->] (C) -- (KR) node[midway,anchor=south] {$\Xi$};
-\draw[<->] (KR) -- (KRp) node[midway,anchor=west] {$R$};
-\draw[<->] (Cp) -- (KRp) node[midway,anchor=north] {$\Xi$};
-\end{tikzpicture}
-\]
-\end{example}
-
-Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
-Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$-action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
-Furthermore, the $\SymGp{\ell}$-action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
-Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
-
-Next, we describe how to interpret our action from looking at the corner transfer matrix described in~\cite{KMO15}, which can be given diagrammatically by
-\[
-\begin{tikzpicture}[>=latex,scale=0.5]
-\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,8);
-\foreach \x in {1,2} {
-  \draw[->] (0,\x+1) node[anchor=east] {$\mathbf{b}_{\ell-\x}$} -- (\x+1,\x+1) -- (\x+1,8);
-}
-\foreach \x in {1,2,3} {
-  \draw[->] (0,8-\x) node[anchor=east] {$\mathbf{b}_{\x}$} -- (8-\x,8-\x) -- (8-\x,8);
-}
-\node at (4,7.5) {$\cdots$};
-\node at (0.5,4) {$\vdots$};
-\end{tikzpicture}
-\]
-where every crossing is a combinatorial $R$-matrix and $\mathbf{b}_i \in B^{p_i,1}$.
-Our action effectively does the following on the corner transfer matrix:
-\[
-\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
-\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
-\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
-\draw[->] (-1,3) node[anchor=east] {$\mathbf{b}_i$} -- (0,4) -- (4,4) -- (4,7) -- (3,8);
-\draw[->] (-1,4) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (0,3) -- (3,3) -- (3,7) -- (4,8);
-\node at (2,6.5) {$\cdots$};
-\node at (0.5,2) {$\vdots$};
-\node at (5,6.5) {$\cdots$};
-\node at (0.5,5) {$\vdots$};
-\end{tikzpicture}
-\qquad = \qquad
-\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
-\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
-\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
-\draw[->] (0,4) node[anchor=east] {$\mathbf{b}_i$} -- (4,4) -- (4,7);
-\draw[->] (0,3) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (3,3) -- (3,7);
-\node at (2,6.5) {$\cdots$};
-\node at (0.5,2) {$\vdots$};
-\node at (5,6.5) {$\cdots$};
-\node at (0.5,5) {$\vdots$};
-\end{tikzpicture}
-\]
-where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
-
-It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
-
-
-
-
-
-
-\appendix
-
-%=====================================================================
-\section{Connections with other constructions}
-\label{app:queue-relations}
-
-We describe how our definition of $q(u)$ (when $q$ is a queue and $u$ a word) is connected to the construction of~\cite{FM07}, which was coined bully paths in~\cite{AasLin17}, and the tableaux combinatorics of~\cite{AssSea18}.
-
-To clarify the connection, we recall our visualization of a queue $q$ in~\eqref{eq:boxes-and-balls-1} by a row of circles and squares.
-We modify this visualization slightly:
-Namely, we still represent each $i \in q$ by a circle as in Example~\ref{ex:first_queue}, but we no longer represent the $i \notin q$ by squares.
-We refer to the circles as ``boxes''.
-
-\subsection{Connection with Ferrari--Martin and Aas--Linusson MLQs}
-
-We first connect our MLQs with those from~\cite{FM07}.
-We will use the language of~\cite{AasLin17}, where we are only considering ``discrete MLQs'' as we consider our ring to have a finite number of sites.
-
-Consider a MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$.
-A \defn{labeling} of $\qq$ is a sequence of maps $\ff = (f_1, \dotsc, f_{\ell})$, where $f_i \colon q_i \to \ive{i}$.
-We represent this by placing an $f_i(j)$, which we call the \defn{label}, inside of the circle corresponding to $j \in q_i$.
-The \defn{canonical labeling} $\ff_{\qq}$ of $\qq$ is the labeling $(f_1, \dotsc, f_{\ell})$ defined by
-\begin{equation}
-f_k(j) = \bigl( q_k( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j.
-\label{eq.AasLin-lab.formula}
-\end{equation}
-For example, the labeling of each MLQ in Example~\ref{ex:merge_theorem} is precisely the circled values.
-When $\qq$ is an ordinary MLQ, we can also construct this canonical labeling recursively as follows:
-\begin{enumerate}
-\item Set $q_0 = \emptyset$, and let $f_0 : q_0 \to \ive{0}$ be the trivial map.
-\item For each $k = 0, 1, \ldots, \ell-1$:
-\begin{itemize}
-\item Suppose $f_k \colon q_k \to \ive{k}$ is already defined. Let $\tup{j_1, j_2, \ldots, j_r}$ be a list of all elements of $q_k$ in the order of increasing label in $f_k$; that is, $f_k(j_1) \leq f_k(j_2) \leq \cdots \leq f_k(j_r)$.
-      (The relative order between elements with equal label is immaterial.)
-\item For $i = i_1, i_2, \ldots, i_r$, do the following:
-      Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q_{k+1}$ and $f_{k+1}(j)$ is not set; then set $f_{k+1}(j) = f_k(i)$.
-\item For all sites $j \in q_{k+1}$ for which $f_{k+1}(j)$ is not set yet, set $f_{k+1}(j) = k+1$.
-\end{itemize}
-This defines $f_{k+1} \colon q_{k+1} \to \ive{k+1}$.
-\end{enumerate}
-
-\begin{verlong}
-In order to see that this recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}, we can proceed as follows:
-
-If $r$ is a queue and $I$ is a set, then a \defn{labeling} of $r$ by $I$ means a map $f \colon r \to I$.
-Of course, we refer to a value $f \tup{i}$ of such a labeling as the \defn{label} of $i$ in $f$.
-To represent such a labeling $f$, we label each of the boxes of $r$ with its corresponding value (i.e., we label the box in position $i$ by $f\tup{i}$).
-Thus, a labeling of an MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$ is a sequence of labelings $f_i \colon q_i \to \ive{i}$ of each of its queues $q_i$; and its visual representation is obtained by stacking the visual representations of the $f_i$ one atop another.
-
-Now, fix a $k \in \NN$ and two queues $r$ and $q$ with $\abs{r} \leq \abs{q}$. Also fix a labeling $f \colon r \to \ive{k}$ of $r$ by $\ive{k}$.
-Then, we can define a labeling \defn{$q(f)$} of $q$ by $\ive{k+1}$ as follows:
-\begin{enumerate}
-\item Let $\tup{i_1, i_2, \ldots, i_{\abs{r}}}$ be a list of all elements of $r$ in the order of increasing label in $f$ (that is, $f(i_1) \leq f(i_2) \leq \cdots \leq f(i_{\abs{r}})$.
- (The relative order between elements with equal label is immaterial.)
-
-\item Initialize a labeling $g$ of $q$ by $\ive{k+1}$. For now, none of its values is set.
-
-\item For $i = i_1, i_2, \ldots, i_{\abs{r}}$, do the following.
-    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $g\tup{j}$ is not set.
-    Then set $g\tup{j} = f\tup{i}$.
-
-\item For all sites $j \in q$ for which $g \tup{j}$ is not set yet, set $g \tup{j} = k+1$.
-
-\item Define $q(f)$ to be the resulting labeling $g$.
-\end{enumerate}
-
-The connection between this labeling and the action of queues on words is simple.
-Indeed, let $k \in \NN$, let $r$ be a queue, and let $f \colon r \to \ive{k}$ be a labeling.
-Then we can can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
-For each $j \in r$, we set $\tup{\omega_k f}_j = f \tup{j}$.
-All other letters of $\omega_k f$ shall be $k+1$.
-Now, it is easy to see that if $q$ is a queue satisfying $\abs{r} \leq \abs{q}$, then
-\begin{equation}
-q \tup{ \omega_k f } = \omega_{k+1} \tup{ q(f) } .
-\label{eq.AasLin-lab.two-actions}
-\end{equation}
-Thus, the action of a queue on a labeling can be computed in terms of its action on a word.
-(The converse is not true, since the condition $\abs{r} \leq \abs{q}$ is restrictive.
-Thus, our action of queues on words, with its two phases, is more general than their
-action on labelings.)
-
-Now, let $\qq = (q_1, q_2, \dotsc, q_{\ell})$ be an ordinary MLQ
-(so that $\abs{q_1} \leq \abs{q_2} \leq \cdots \leq \abs{q_{\ell}}$),
-and consider the labeling $\ff_\qq = (f_1, \dotsc, f_{\ell})$ constructed by the above recursive procedure
-(not by~\eqref{eq.AasLin-lab.formula}).
-Then, the recursive procedure clearly yields
-\begin{align*}
-f_i &= q_i \tup{ f_{i-1} } \qquad \text{for all } i \in \ive{\ell} ,
-\end{align*}
-where $f_0$ is understood to be the (trivial) labeling of the empty queue $\varnothing$.
-In view of~\eqref{eq.AasLin-lab.two-actions}, this entails
-\[
-\omega_i \tup{ f_i } = q_i \tup{ \omega_{i-1} \tup{ f_{i-1} } } \qquad \text{for all } i \in \ive{\ell} .
-\]
-Thus, by induction,
-\[
-\omega_i \tup{ f_i } = q_i( \cdots q_1(1 \dotsm 1) \cdots )
- \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
-\]
-(since $\omega_0 \tup{ f_0 } = 1 \dotsm 1$).
-Hence,
-\[
-f_i(j) = \bigl( q_i( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j
- \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
-        \text{ and } j \in q_i .
-\]
-But this is precisely the equality~\eqref{eq.AasLin-lab.formula}.
-Hence, we have shown that the recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}.
-\end{verlong}
-
-Now consider the labeling procedure in~\cite[\S 2.2]{AasLin17} given by \defn{$k$-bully paths}.
-Note that a $k$-bully path from one line to the next precisely corresponds to the path of a letter $k$ under Phase~II of our definition of a queue as a function on words.
-For example, the bully paths would correspond to the blue paths in Example~\ref{ex:first_queue}.
-In addition, this is exactly the recursive labeling procedure given above.
-Thus, we obtain the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17}.
-
-\Darij{I find the above paragraph vague and unclear, but I have a verlong argument anyway.}
-
-\Darij{TODO: Connect this with parking functions?}
-
-\subsection{Connection with Kohnert diagrams and Assaf--Searles theory}
-
-Next we relate the action of queues on words with the \defn{Kohnert fillings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
-We remark that the thread decomposition is the same as the Kohnert filling procedure when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
-Roughly speaking, a Kohnert filling (and a thread decomposition) is a standardization of the bully path construction.
-
-In more detail, for a Kohnert diagram $D \in \KM(\alpha)$ for any fixed weak composition $\alpha$ (see~\cite{AssSea18} for notations), we view its columns as queues.
-This time, our queues are subsets of $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$; thus, there is no ``wrapping around''.
-We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$: namely, a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$.
-We then apply the bully path construction to the boxes of this reflected Kohnert diagram.
-To obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm, where we consider the labels to be decreasing from left to right.
-Hence, this can be considered as a standardization of our construction or, equivalently, as fixing specific permutations for how the queues act on words.
-
-Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $\qq_D$ and all $i$, we have
-\[
-\abs{\set{ j \in q_i \mid j \geq k }} \leq \abs{\set{  j \in q_{i+1} \mid j \geq k }},
-\]
-which means we can apply~\cite[Lemma~2.2]{AssSea18} to see that there is no ``wrapping'' around the cylinder.
-
-To obtain a Kohnert filling from a Kohnert diagram of height $K$ (for this, we require $n \gg 1$), we can construct an MLQ
-\[
-\widetilde{\qq}_D = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
-\]
-from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings.
-Indeed, a label added in column $i$ comes from a $k \in q$ with $k > K$ for sufficiently many queues $q$ before $q_i$.
-We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
-We leave the precise details for the interested reader.
-
-\Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
-
-\Darij{I find this part quite hard to follow, but so is everything about Kohnert diagrams.}
-
-\begin{comment}
-In more detail, let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
-So a queue is now a finite subset of $\NN$.
-In the above definition of the labeling $q(f)$, we must replace the ``$\abs{r} \leq \abs{q}$'' requirement by the stronger requirement that every $k \in \NN$ satisfy
-\begin{equation}
-\label{eq:queue-relations.kohnert}
-\abs{\set{ j \in r \mid j \geq k }} \leq \abs{\set{  j \in q \mid j \geq k }} .
-\end{equation}
-This stronger requirement can be shown to guarantee that $q(f)$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
-It is, actually, necessary and sufficient.
-
-TODO: Should we prove this? Not quite trivial.
-
-Given a Kohnert diagram $D \in \KM(a)$ (see~\cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
-(\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$.
-To see that this is well-defined, we need merely to observe that~\eqref{eq:queue-relations.kohnert} holds by~\cite[Lemma 2.2]{AssSea18}.)
-The resulting labeling is similar to (but different from) the Kohnert labeling in~\cite[Def.~2.5]{AssSea18}. It is also related to the ``thread decomposition'' in~\cite[Def.~3.5]{AssSea18} (indeed, all cells in a single thread will receive identical labels in the labeling).
-\end{comment}
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Proof of Theorem~\ref{thm:determinant_form}}
-\label{app:JT-proofs}
+\label{sec:JT-proofs}
 
 %In this section, we gather some technical proofs that have been omitted from Section~\ref{sec:JT_formula}.
 % [Use the above line if we end up moving further unrelated proofs into this appendix.]
@@ -2500,204 +1570,120 @@ the vertex $A'$ does not belong to the path $p$.
 Recall that each arc of the lattice is either an east-step or a north-step.
 Thus, the $x$-coordinates of the vertices of a path are always weakly
 increasing, and so are the $y$-coordinates. Hence, the existence of a path $p$
-from $A$ to $B'$ shows that $\xcoord\left(  A\right)
-\leq\xcoord\left(  B'\right)  $ and
-$\ycoord\left(  A\right)  \leq\ycoord\left(  B'\right)  $.
-Similarly, the existence of a path $p'$ from $A'$ to $B$ yields
-$\xcoord\left(  A'\right)  \leq\xcoord\left(  B\right)  $ and
-$\ycoord\left(  A'\right)  \leq\ycoord\left(  B\right)  $.
+from $A$ to $B'$ shows that $\xcoord(A) \leq \xcoord(B')$ and $\ycoord(A) \leq \ycoord(B')$.
+Similarly, the existence of a path $p'$ from $A'$ to $B$ yields $\xcoord(A') \leq \xcoord(B)$ and $\ycoord(A') \leq \ycoord(B)$.
 
-Next, we claim that $\ell\left(  p\right)  \neq0$.
+Next, we claim that $\ell(p) \neq 0$.
 
-[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p\right)  =0$. Hence,
-the path $p$ has no steps. Therefore, $A=B'$ (since $p$ is a path from
-$A$ to $B'$). Hence, $\ycoord\left(  A\right)
-=\ycoord\left(  B'\right)  \geq\ycoord\left(
-B\right)  $, so that $\ycoord\left(  A'\right)
-\geq\ycoord\left(  A\right)  \geq\ycoord\left(  B\right)
-$. Combining this with $\ycoord\left(  A'\right)
-\leq\ycoord\left(  B\right)  $, we obtain $\ycoord\left(
-A'\right)  =\ycoord\left(  B\right)  $. Combining
-$\ycoord\left(  A'\right)  \geq\ycoord\left(
-A\right)  $ with $\ycoord\left(  A'\right)
-=\ycoord\left(  B\right)  \leq\ycoord\left(  A\right)  $,
-we obtain $\ycoord\left(  A'\right)  =\ycoord\left(  A\right)  $.
-Thus, $\ycoord\left(  A'\right)
-=\ycoord\left(  A\right)  =\ycoord\left(  B\right)  $.
-Therefore, the vertex $A$ lies on the horizontal line that contains
-$A'$ and $B$. Furthermore, this vertex $A$ must lie on the line
-segment between $A'$ and $B$ (since $\xcoord\left(
-A'\right)  \leq\xcoord\left(  \underbrace{A}_{=B'}\right)
-=\xcoord\left(  B'\right)  \leq\xcoord\left(  B\right)  $).
+[\textit{Proof:}
+Assume the contrary. Thus, $\ell(p) = 0$.
+Hence, the path $p$ has no steps.
+Therefore, $A=B'$ (since $p$ is a path from $A$ to $B'$).
+Hence, $\ycoord(A) = \ycoord(B') \geq \ycoord(B)$, so that $\ycoord(A') \geq \ycoord(A) \geq \ycoord(B)$.
+Combining this with $\ycoord(A') \leq \ycoord(B)$, we obtain $\ycoord(A') = \ycoord(B)$.
+Combining $\ycoord(A') \geq \ycoord(A)$ with $\ycoord(A') = \ycoord(B) \leq \ycoord(A)$, we obtain $\ycoord(A')  = \ycoord(A)$.
+Thus, $\ycoord(A') = \ycoord(A) = \ycoord(B)$.
+Therefore, the vertex $A$ lies on the horizontal line that contains $A'$ and $B$.
+Furthermore, this vertex $A$ must lie on the line segment between $A'$ and $B$ (since $\xcoord(A') \leq \xcoord( \underbrace{A}_{=B'} ) = \xcoord(B') \leq \xcoord(B)$).
 
-Recall again that the $y$-coordinates of the vertices a path are always weakly
-increasing. Moreover, they increase strictly whenever the path makes a
-north-step. Hence, if the path $p'$ would have any north-step, then we
-would have $\ycoord\left(  A'\right)  <\ycoord\left(  B\right)  $
-(since $p'$ is a path from $A'$ to $B$).
-But this would contradict $\ycoord\left(  A'\right)
-\geq\ycoord\left(  B\right)  $. Hence, the path $p'$ has no
-north-step. Thus, $p'$ consists entirely of east-steps. Hence,
-$p'$ contains every vertex on the line segment between $A'$
-and $B$. Therefore, $p'$ contains the vertex $A$ (since the vertex $A$
-lies on the line segment between $A'$ and $B$). This contradicts the
-fact that $A$ does not belong to the path $p'$. This contradiction
-shows that our assumption was false; hence, $\ell\left(  p\right)  \neq0$ is proven.]
+Recall again that the $y$-coordinates of the vertices a path are always weakly increasing.
+Moreover, they increase strictly whenever the path makes a north-step.
+Hence, if the path $p'$ would have any north-step, then we would have $\ycoord(A') < \ycoord(B)$ (since $p'$ is a path from $A'$ to $B$).
+But this would contradict $\ycoord(A') \geq \ycoord(B)$.
+Hence, the path $p'$ has no north-step.
+Thus, $p'$ consists entirely of east-steps.
+Hence, $p'$ contains every vertex on the line segment between $A'$ and $B$.
+Therefore, $p'$ contains the vertex $A$ (since the vertex $A$ lies on the line segment between $A'$ and $B$).
+This contradicts the fact that $A$ does not belong to the path $p'$.
+This contradiction shows that our assumption was false; hence, $\ell(p) \neq0$ is proven.]
 
-Furthermore, we claim that $\ell\left(  p'\right)  \neq0$.
+Furthermore, we claim that $\ell(p') \neq 0$. \travis{Isn't this basically the same as the above proof but with $\xcoord$ instead of $\ycood$?}
 
-[\textit{Proof:} Assume the contrary. Thus, $\ell\left(  p'\right)
-=0$. Hence, the path $p'$ has no steps. Therefore, $A'=B$
-(since $p'$ is a path from $A'$ to $B$). Hence,
-$\xcoord\left(  A'\right)  =\xcoord\left(
-B\right)  \geq\xcoord\left(  B'\right)  $, so that
-$\xcoord\left(  A\right)  \geq\xcoord\left(  A^{\prime
-}\right)  \geq\xcoord\left(  B'\right)  $. Combining this
-with $\xcoord\left(  A\right)  \leq\xcoord\left(
-B'\right)  $, we obtain $\xcoord\left(  A\right)
-=\xcoord\left(  B'\right)  $. Combining $\xcoord%
-\left(  A\right)  \geq\xcoord\left(  A'\right)  $ with
-$\xcoord\left(  A'\right)  \geq\xcoord\left(
-B'\right)  =\xcoord\left(  A\right)  $, we obtain
-$\xcoord\left(  A\right)  =\xcoord\left(  A^{\prime
-}\right)  $. Thus, $\xcoord\left(  A'\right)
-=\xcoord\left(  A\right)  =\xcoord\left(  B^{\prime
-}\right)  $. Therefore, the vertex $A'$ lies on the vertical line that
-contains $A$ and $B'$. Furthermore, this vertex $A'$ must lie
-on the line segment between $A$ and $B'$ (since $\ycoord%
-\left(  A'\right)  \geq\ycoord\left(  A\right)  $ and
-$\ycoord\left(  \underbrace{A'}_{=B}\right)
-=\ycoord\left(  B\right)  \leq\ycoord\left(  B^{\prime
-}\right)  $).
+[\textit{Proof:}
+Assume the contrary. Thus, $\ell(p') = 0$.
+Hence, the path $p'$ has no steps.
+Therefore, $A'=B$ (since $p'$ is a path from $A'$ to $B$).
+Hence, $\xcoord(A') = \xcoord(B) \geq \xcoord(B')$, so that $\xcoord(A) \geq \xcoord(A^') \geq \xcoord (B')$.
+Combining this with $\xcoord(A) \leq \xcoord(B')$, we obtain $\xcoord(A) = \xcoord(B')$.
+Combining $\xcoord(A) \geq \xcoord(A')$ with $\xcoord(A') \geq \xcoord(B') = \xcoord(A)$, we obtain $\xcoord(A)  = \xcoord(A')$.
+Thus, $\xcoord(A') = \xcoord(A) = \xcoord(B')$.
+Therefore, the vertex $A'$ lies on the vertical line that contains $A$ and $B'$.
+Furthermore, this vertex $A'$ must lie on the line segment between $A$ and $B'$ (since $\ycoord(A') \geq \ycoord(A)$ and $\ycoord(\underbrace{A'}_{=B}) = \ycoord(B) \leq \ycoord(B')$).
 
-Recall again that the $x$-coordinates of the vertices a path are always weakly
-increasing. Moreover, they increase strictly whenever the path makes an
-east-step. Hence, if the path $p$ would have any east-step, then we would have
-$\xcoord\left(  A\right)  <\xcoord\left(  B^{\prime
-}\right)  $ (since $p$ is a path from $A$ to $B'$). But this would
-contradict $\xcoord\left(  A\right)  =\xcoord\left(
-B'\right)  $. Hence, the path $p$ has no east-step. Thus, $p$ consists
-entirely of north-steps. Hence, $p$ contains every vertex on the line segment
-between $A$ and $B'$. Therefore, $p$ contains the vertex $A'$
-(since the vertex $A'$ lies on the line segment between $A$ and
-$B'$). This contradicts the fact that $A'$ does not belong to
-the path $p$. This contradiction shows that our assumption was false; hence,
-$\ell\left(  p'\right)  \neq0$ is proven.]
+Recall again that the $x$-coordinates of the vertices a path are always weakly increasing.
+Moreover, they increase strictly whenever the path makes an east-step.
+Hence, if the path $p$ would have any east-step, then we would have $\xcoord(A) < \xcoord(B')$ (since $p$ is a path from $A$ to $B'$).
+But this would contradict $\xcoord(A) = \xcoord(B')$.
+Hence, the path $p$ has no east-step.
+Thus, $p$ consists entirely of north-steps.
+Hence, $p$ contains every vertex on the line segment between $A$ and $B'$.
+Therefore, $p$ contains the vertex $A'$ (since the vertex $A'$ lies on the line segment between $A$ and $B'$).
+This contradicts the fact that $A'$ does not belong to the path $p$.
+This contradiction shows that our assumption was false; hence, $\ell(p') \neq 0$ is proven.]
 
-Let $P$ be the second vertex of the path $p$. (This is well-defined, since
-$\ell\left(  p\right)  \neq0$.) Hence, $P$ lies on a path from $A$ to
-$B'$ (namely, on the path $p$). Therefore, $\xcoord\left(
-A\right)  \leq\xcoord\left(  P\right)  \leq\xcoord\left(
-B'\right)  $ (since the $x$-coordinates of the vertices a path are
-always weakly increasing) and $\ycoord\left(  A\right)
-\leq\ycoord\left(  P\right)  \leq\ycoord\left(  B^{\prime
-}\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
-increasing). Let $r$ be the path from $P$ to $B'$ obtained by removing
-the first arc from $p$. Thus, $r$ is a subpath of $p$. Hence, the paths $r$
-and $p'$ have no vertex in common (since $p$ and $p'$ have no
-vertex in common). Also, $\ell\left(  r\right)  =\ell\left(  p\right)
--1<\ell\left(  p\right)  $ and thus $\underbrace{\ell\left(  r\right)
-}_{<\ell\left(  p\right)  }+\ell\left(  p'\right)  <\ell\left(
-p\right)  +\ell\left(  p'\right)  =N$.
+Let $P$ be the second vertex of the path $p$.
+(This is well-defined, since $\ell(p) \neq 0$.)
+Hence, $P$ lies on a path from $A$ to $B'$ (namely, on the path $p$).
+Therefore, $\xcoord(A) \leq \xcoord(P) \leq \xcoord(B')$ (since the $x$-coordinates of the vertices a path are
+always weakly increasing) and $\ycoord(A) \leq \ycoord(P) \leq \ycoord(B')$ (since the $y$-coordinates of the vertices a path are always weakly increasing).
+Let $r$ be the path from $P$ to $B'$ obtained by removing the first arc from $p$.
+Thus, $r$ is a subpath of $p$.
+Hence, the paths $r$ and $p'$ have no vertex in common (since $p$ and $p'$ have no vertex in common).
+Also, $\ell(r) = \ell(p) - 1 < \ell(p)$ and thus $\underbrace{\ell(r)}_{<\ell(p)} + \ell(p') < \ell(p) + \ell(p') = N$.
 
-Moreover, $\xcoord\left(  A'\right)  \leq\xcoord%
-\left(  A\right)  \leq\xcoord\left(  P\right)  $. If we had
-$\ycoord\left(  A'\right)  \geq\ycoord\left(
-P\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P$ and $r$
-instead of $A$ and $p$ (by the induction hypothesis, since $\ell\left(
-r\right)  +\ell\left(  p'\right)  <N$). We thus would conclude that
-the paths $r$ and $p'$ have a vertex in common; this would contradict
-the fact that the paths $r$ and $p'$ have no vertex in common. Hence,
-we cannot have $\ycoord\left(  A'\right)  \geq
-\ycoord\left(  P\right)  $. Thus, $\ycoord\left(
-A'\right)  <\ycoord\left(  P\right)  $. Hence,
-$\ycoord\left(  A'\right)  \leq\ycoord\left(
-P\right)  -1$ (since $\ycoord\left(  A'\right)  $ and
-$\ycoord\left(  P\right)  $ are integers).
+Moreover, $\xcoord(A') \leq \xcoord(A) \leq \xcoord(P)$.
+If we had $\ycoord(A') \geq \ycoord(P)$, then we could apply Lemma~\ref{lem.LGV.hex} to $P$ and $r$ instead of $A$ and $p$ (by the induction hypothesis, since $\ell(r) + \ell(p') < N$).
+We thus would conclude that the paths $r$ and $p'$ have a vertex in common; this would contradict the fact that the paths $r$ and $p'$ have no vertex in common.
+Hence, we cannot have $\ycoord(A') \geq \ycoord(P)$.
+Thus, $\ycoord(A') < \ycoord(P)$.
+Hence, $\ycoord(A') \leq \ycoord(P)  -1$ (since $\ycoord(A')$ and $\ycoord(P)$ are integers).
 
-But $P$ is the next vertex after $A$ on the path $p$. Hence, there is an arc
-from $A$ to $P$. If this arc was an east-step, then we would have
-$\ycoord\left(  P\right)  =\ycoord\left(  A\right)  $,
-which would contradict $\ycoord\left(  A\right)  \leq
-\ycoord\left(  A'\right)  <\ycoord\left(
-P\right)  $. Hence, this arc cannot be an east-step. Thus, this arc must be a
-north-step. Therefore, $\ycoord\left(  P\right)  =\ycoord%
-\left(  A\right)  +1$ and $\xcoord\left(  P\right)
-=\xcoord\left(  A\right)  $. Combining $\ycoord\left(
-A'\right)  \leq\ycoord\left(  P\right)  -1=\ycoord%
-\left(  A\right)  $ (since $\ycoord\left(  P\right)
-=\ycoord\left(  A\right)  +1$) with $\ycoord\left(
-A'\right)  \geq\ycoord\left(  A\right)  $, we obtain
-$\ycoord\left(  A'\right)  =\ycoord\left(
-A\right)  $.
+But $P$ is the next vertex after $A$ on the path $p$.
+Hence, there is an arc from $A$ to $P$. If this arc was an east-step, then we would have $\ycoord(P) = \ycoord(A)$, which would contradict $\ycoord(A) \leq \ycoord(A') < \ycoord(P)$.
+Hence, this arc cannot be an east-step.
+Thus, this arc must be a north-step.
+Therefore, $\ycoord(P) = \ycoord(A) + 1$ and $\xcoord(P) = \xcoord(A)$.
+Combining $\ycoord(A') \leq \ycoord(P) - 1 = \ycoord(A)$ (since $\ycoord(P) = \ycoord(A) + 1$) with $\ycoord(A') \geq \ycoord(A)$, we obtain $\ycoord(A') = \ycoord(A)$.
 
-Let $P'$ be the second vertex on the path $p'$. (This is
-well-defined, since $\ell\left(  p'\right)  \neq0$.) Hence,
-$P'$ lies on a path from $A'$ to $B$ (namely, on the path
-$p'$). Therefore, $\xcoord\left(  A'\right)
-\leq\xcoord\left(  P'\right)  \leq\xcoord\left(
-B\right)  $ (since the $x$-coordinates of the vertices a path are always weakly
-increasing) and $\ycoord\left(  A'\right)  \leq
-\ycoord\left(  P'\right)  \leq\ycoord\left(
-B\right)  $ (since the $y$-coordinates of the vertices a path are always weakly
-increasing). Let $r'$ be the path from $P'$ to $B$ obtained by
-removing the first arc from $p'$. Thus, $r'$ is a subpath of
-$p'$. Hence, the paths $p$ and $r'$ have no vertex in common
-(since $p$ and $p'$ have no vertex in common). Also, $\ell\left(
-r'\right)  =\ell\left(  p'\right)  -1<\ell\left(  p^{\prime
-}\right)  $ and thus $\ell\left(  p\right)  +\underbrace{\ell\left(
-r'\right)  }_{<\ell\left(  p'\right)  }<\ell\left(  p\right)
-+\ell\left(  p'\right)  =N$.
+\travis{Isn't this just the same as the above, but with primes and $\xcoord \leftrightarrow \ycoord$?}
+Let $P'$ be the second vertex on the path $p'$.
+(This is well-defined, since $\ell(p') \neq0 $.)
+Hence, $P'$ lies on a path from $A'$ to $B$ (namely, on the path $p'$).
+Therefore, $\xcoord(A') \leq \xcoord(P') \leq \xcoord(B)$ (since the $x$-coordinates of the vertices a path are always weakly increasing) and $\ycoord(A') \leq \ycoord(P') \leq \ycoord(B)$ (since the $y$-coordinates of the vertices a path are always weakly increasing).
+Let $r'$ be the path from $P'$ to $B$ obtained by removing the first arc from $p'$.
+Thus, $r'$ is a subpath of $p'$.
+Hence, the paths $p$ and $r'$ have no vertex in common (since $p$ and $p'$ have no vertex in common).
+Also, $\ell(r') = \ell(p') - 1 < \ell(p')$, and thus $\ell(p) + \underbrace{\ell\left(r')}_{<\ell(p')} < \ell(p) + \ell(p') = N$.
 
-Moreover, $\ycoord\left(  P'\right)  \geq\ycoord%
-\left(  A'\right)  \geq\ycoord\left(  A\right)  $. If we had
-$\xcoord\left(  P'\right)  \leq\xcoord\left(
-A\right)  $, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and
-$r'$ instead of $A'$ and $p'$ (by the induction
-hypothesis, since $\ell\left(  p\right)  +\ell\left(  r'\right)  <N$).
-We thus would conclude that the paths $p$ and $r'$ have a vertex in
-common; this would contradict the fact that the paths $p$ and $r'$
-have no vertex in common. Hence, we cannot have $\xcoord\left(
-P'\right)  \leq\xcoord\left(  A\right)  $. Thus,
-$\xcoord\left(  P'\right)  >\xcoord\left(
-A\right)  $. Hence, $\xcoord\left(  P'\right)
-\geq\xcoord\left(  A\right)  +1$ (since $\xcoord\left(
-P'\right)  $ and $\xcoord\left(  A\right)  $ are integers).
+Moreover, $\ycoord(P') \geq \ycoord(A') \geq \ycoord(A)$.
+If we had $\xcoord(P') \leq \xcoord(A)$, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and $r'$ instead of $A'$ and $p'$ (by the induction hypothesis, since $\ell(p) + \ell(r') < N$).
+We thus would conclude that the paths $p$ and $r'$ have a vertex in common; this would contradict the fact that the paths $p$ and $r'$ have no vertex in common.
+Hence, we cannot have $\xcoord(P') \leq \xcoord(A)$.
+Thus, $\xcoord(P') > \xcoord(A)$.
+Hence, $\xcoord(P') \geq \xcoord(A) + 1$ (since $\xcoord(P')$ and $\xcoord(A)$ are integers).
 
-But $P'$ is the next vertex after $A'$ on the path $p^{\prime
-}$. Hence, there is an arc from $A'$ to $P'$. If this arc was
-a north-step, then we would have $\xcoord\left(  P'\right)
-=\xcoord\left(  A'\right)  $, which would contradict
-$\xcoord\left(  A'\right)  \leq\xcoord\left(
-A\right)  <\xcoord\left(  P'\right)  $. Hence, this arc
-cannot be a north-step. Thus, this arc must be an east-step. Therefore,
-$\ycoord\left(  P'\right)  =\ycoord\left(
-A'\right)  $ and $\xcoord\left(  P'\right)
-=\xcoord\left(  A'\right)  +1$. Hence, $\xcoord%
-\left(  A'\right)  +1=\xcoord\left(  P'\right)
-\geq\xcoord\left(  A\right)  +1$, so that $\xcoord\left(
-A'\right)  \geq\xcoord\left(  A\right)  $. Combining this
-with $\xcoord\left(  A'\right)  \leq\xcoord\left(
-A\right)  $, we obtain $\xcoord\left(  A'\right)
-=\xcoord\left(  A\right)  $.
+But $P'$ is the next vertex after $A'$ on the path $p'$.
+Hence, there is an arc from $A'$ to $P'$.
+If this arc was a north-step, then we would have $\xcoord(P') = \xcoord(A')$, which would contradict $\xcoord(A') \leq \xcoord(A) < \xcoord(P')$.
+Hence, this arc cannot be a north-step.
+Thus, this arc must be an east-step.
+Therefore, $\ycoord(P') = \ycoord(A')$ and $\xcoord(P') = \xcoord(A') + 1$.
+Hence, $\xcoord(A') + 1 = \xcoord(P') \geq \xcoord(A) + 1$, so that $\xcoord(A') \geq \xcoord(A)$.
+Combining this with $\xcoord(A') \leq \xcoord(A)$, we obtain $\xcoord(A') = \xcoord(A)$.
 
-Now, the vertices $A$ and $A'$ have the same $x$-coordinate (since
-$\xcoord\left(  A'\right)  =\xcoord\left(
-A\right)  $) and the same $y$-coordinate (since $\ycoord\left(
-A'\right)  =\ycoord\left(  A\right)  $). Hence, these two
-vertices are equal. In other words, $A=A'$. Hence, the vertex $A$
-belongs to the path $p'$ (since the vertex $A'$ belongs to the
-path $p'$). This contradicts the fact that the vertex $A$ does not
-belong to the path $p'$. This contradiction shows that our assumption
-was false. Hence, we have shown that $p$ and $p'$ have a vertex in common.
+Now, the vertices $A$ and $A'$ have the same $x$-coordinate (since $\xcoord(A') = \xcoord(A)$) and the same $y$-coordinate (since $\ycoord(A') = \ycoord(A)$).
+Hence, these two vertices are equal.
+In other words, $A = A'$.
+Hence, the vertex $A$ belongs to the path $p'$ (since the vertex $A'$ belongs to the path $p'$).
+This contradicts the fact that the vertex $A$ does not belong to the path $p'$.
+This contradiction shows that our assumption was false.
+Hence, we have shown that $p$ and $p'$ have a vertex in common.
 
-Now, forget that we fixed $A$, $B$, $A'$, $B'$, $p$ and
-$p'$. We thus have proven that if $A$, $B$, $A'$, $B'%
-$, $p$ and $p'$ are as in Lemma~\ref{lem.LGV.hex}, and if $\ell\left(
-p\right)  +\ell\left(  p'\right)  =N$, then $p$ and $p'$ have
-a vertex in common. In other words, Lemma~\ref{lem.LGV.hex} holds when
-$\ell\left(  p\right)  +\ell\left(  p'\right)  =N$. This completes the
-induction step. Hence, Lemma~\ref{lem.LGV.hex} is proven.
+Now, forget that we fixed $A$, $B$, $A'$, $B'$, $p$ and $p'$.
+We thus have proven that if $A$, $B$, $A'$, $B'$, $p$ and $p'$ are as in Lemma~\ref{lem.LGV.hex}, and if $\ell(p) + \ell(p') = N$, then $p$ and $p'$ have a vertex in common.
+In other words, Lemma~\ref{lem.LGV.hex} holds when $\ell(p) + \ell(p') = N$.
+This completes the induction step.
+Hence, Lemma~\ref{lem.LGV.hex} is proven.
 \end{proof}
 
 \begin{proof}[Second proof of Lemma~\ref{lem.LGV.hex} (sketched).]
@@ -2708,108 +1694,53 @@ Similarly, the existence of $p'$ yields $\xcoord(A') \leq \xcoord(B')$ and $\yco
 
 Thus,
 \begin{align}
-\xcoord\left(  A'\right)   &  \leq\xcoord\left(
-A\right)  \leq\xcoord\left(  B'\right)  \leq
-\xcoord\left(  B\right)  \qquad\text{and}\label{pf.lem.LGV.hex.1}\\
-\ycoord\left(  A\right)   &  \leq\ycoord\left(  A^{\prime
-}\right)  \leq\ycoord\left(  B\right)  \leq\ycoord\left(
-B'\right)  . \label{pf.lem.LGV.hex.2}
+\xcoord(A')  & \leq \xcoord(A)  \leq \xcoord(B') \leq \xcoord(B) \qquad \text{and} \label{pf.lem.LGV.hex.1} \\
+\ycoord(A)  & \leq \ycoord(A') \leq \ycoord(B) \leq \ycoord(B'). \label{pf.lem.LGV.hex.2}
 \end{align}
 Now, consider the rectangle whose four sides are given by the equations
 \[
-x=\xcoord\left(  A'\right)  , \qquad
-y=\ycoord\left(  A\right)  , \qquad
-x=\xcoord\left(  B\right)  , \qquad
-y=\ycoord\left(  B'\right)  ,
+x = \xcoord(A'), \qquad
+y = \ycoord(A), \qquad
+x = \xcoord(B), \qquad
+y = \ycoord(B'),
 \]
-respectively (all in Cartesian coordinates). Then, the path $p$ joins two
-opposite sides of this rectangle (namely, the second and the fourth), whereas
-the path $p'$ joins the other two sides of this rectangle; moreover,
-both paths stay fully within the rectangle (due to~\eqref{pf.lem.LGV.hex.1}
-and~\eqref{pf.lem.LGV.hex.2}). Hence, it is geometrically obvious that $p$ and
-$p'$ must meet; in other words, $p$ and $p'$ have a vertex in common.
+respectively (all in Cartesian coordinates).
+Then, the path $p$ joins two opposite sides of this rectangle (namely, the second and the fourth), whereas
+the path $p'$ joins the other two sides of this rectangle; moreover, both paths stay fully within the rectangle (due to~\eqref{pf.lem.LGV.hex.1} and~\eqref{pf.lem.LGV.hex.2}).
+Hence, it is geometrically obvious that $p$ and $p'$ must meet; in other words, $p$ and $p'$ have a vertex in common.
 
-[This last geometric argument can also be substituted by a purely
-combinatorial one. Namely: Assume the contrary. Hence, the paths $p$ and
-$p'$ have no vertex in common.
+[This last geometric argument can also be substituted by a purely combinatorial one.
+Namely: Assume the contrary. Hence, the paths $p$ and $p'$ have no vertex in common.
 
-We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by
-vertical steps (\textit{i.e.}, arcs of the form $\left(  i,j\right)  \rightarrow\left(
-i,j+1\right)  $) in both directions (so the path $\widetilde{p}$ first reaches
-$A$ through infinitely many north-steps, then proceeds to $B'$ along
-$p$, and then leaves $B'$ along infinitely many north-steps). We
-extend the path $p'$ to a bidirectionally infinite path
-$\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $\left(
-i,j\right)  \rightarrow\left(  i+1,j\right)  $) in both directions. The
-resulting infinite paths $\widetilde{p}$ and $\widetilde{p'}$ have no
-vertex in common (indeed, the paths $p$ and $p'$ stay within the
-rectangle discussed above, and have no vertex in common; meanwhile, the new
-steps we have added to them to obtain $\widetilde{p}$ and
-$\widetilde{p'}$ escape this rectangle normally in four different
-directions, whence they intersect neither each other nor $p$ or $p'$).
+We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by vertical steps (\textit{i.e.}, arcs of the form $(i,j) \to (i,j+1)$) in both directions (so the path $\widetilde{p}$ first reaches $A$ through infinitely many north-steps, then proceeds to $B'$ along $p$, and then leaves $B'$ along infinitely many north-steps).
+We extend the path $p'$ to a bidirectionally infinite path $\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $(i,j) \to (i+1,j)$) in both directions.
+The resulting infinite paths $\widetilde{p}$ and $\widetilde{p'}$ have no vertex in common (indeed, the paths $p$ and $p'$ stay within the rectangle discussed above, and have no vertex in common; meanwhile, the new
+steps we have added to them to obtain $\widetilde{p}$ and $\widetilde{p'}$ escape this rectangle normally in four different directions, whence they intersect neither each other nor $p$ or $p'$).
 Recall that each arc of the lattice is either an east-step or a north-step.
-Thus, if a vertex $C$ runs through a path, the value $\xcoord\left(
-C\right)  +\ycoord\left(  C\right)  $ is incremented by $1$ with
-each step. Hence, if $q$ is a bidirectionally infinite path, then, for each
-$N\in\mathbb{Z}$, there is a unique vertex $C$ of $q$ satisfying
-$\xcoord\left(  C\right)  +\ycoord\left(  C\right)  =N$.
-Denote this vertex $C$ by $h_N\left(  q\right)  $. Thus, the vertices of $q$
-are $\ldots,h_{-1}\left(  q\right)  ,h_{0}\left(  q\right)  ,h_1\left(
-q\right)  ,\ldots$ in this order.
+Thus, if a vertex $C$ runs through a path, the value $\xcoord(C) + \ycoord(C)$ is incremented by $1$ with each step.
+Hence, if $q$ is a bidirectionally infinite path, then, for each $N \in \ZZ$, there is a unique vertex $C$ of $q$ satisfying $\xcoord(C) + \ycoord(C) = N$.
+Denote this vertex $C$ by $h_N(q)$.
+Thus, the vertices of $q$ are $\ldots, h_{-1}(q), h_{0}(q), h_1(q), \ldots$ in this order.
 
-All sufficiently low $N\in\mathbb{Z}$ satisfy $\xcoord\left(
-h_N\left(  \widetilde{p'}\right)  \right)  <\xcoord\left(
-h_N\left(  \widetilde{p}\right)  \right)  $, whereas all sufficiently high
-$N\in\mathbb{Z}$ satisfy $\xcoord\left(  h_N\left(
-\widetilde{p'}\right)  \right)  >\xcoord\left(  h_N\left(
-\widetilde{p}\right)  \right)  $. Hence, the set of all $N\in\mathbb{Z}$ that
-satisfy $\xcoord\left(  h_N\left(  \widetilde{p'}\right)
-\right)  <\xcoord\left(  h_N\left(  \widetilde{p}\right)  \right)$
-is a nonempty set of integers that is bounded from above. Therefore, this
-set has a maximum. Let $M$ be this maximum. Thus, $M\in\mathbb{Z}$ satisfies
-$\xcoord\left(  h_{M}\left(  \widetilde{p'}\right)  \right)
-<\xcoord\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $ but
-$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
-\right)  $.
+All sufficiently low $N \in \ZZ$ satisfy $\xcoord\bigl( h_N(\widetilde{p'}) \bigr) < \xcoord\bigl( h_N(\widetilde{p}) \bigr)$, whereas all sufficiently high $N \in \ZZ$ satisfy $\xcoord\bigl( h_N(\widetilde{p'}) \bigr) > \xcoord\bigl( h_N(\widetilde{p}) \bigr)$.
+Hence, the set of all $N \in \ZZ$ that satisfy $\xcoord\bigl( h_N(\widetilde{p'}) \bigr) < \xcoord\bigl( h_N(\widetilde{p}) \bigr)$ is a nonempty set of integers that is bounded from above.
+Therefore, this set has a maximum.
+Let $M$ be this maximum.
+Thus, $M \in \ZZ$ satisfies $\xcoord\bigl( h_{M}(\widetilde{p'}) \bigr) < \xcoord\bigl( h_{M}(\widetilde{p}) \bigr)$ but $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \geq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$.
 
-But the point $h_{M+1}\left(  \widetilde{p'}\right)  $ is either the
-eastern or the northern neighbor of
-$h_{M}\left(  \widetilde{p'}\right)  $; hence,
-$\xcoord\left(  h_{M+1}\left(
-\widetilde{p'}\right)  \right)  \leq\xcoord\left(
-h_{M}\left(  \widetilde{p'}\right)  \right)  +1$. Also, the point
-$h_{M+1}\left(  \widetilde{p}\right)  $ is either the eastern or the northern
-neighbor of $h_{M}\left(  \widetilde{p}\right)  $; thus, $\xcoord%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  \geq\xcoord%
-\left(  h_{M}\left(  \widetilde{p}\right)  \right)  $. Hence,
+But the point $h_{M+1}(\widetilde{p'})$ is either the eastern or the northern neighbor of $h_{M}(\widetilde{p'})$; hence, $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \leq \xcoord\bigl( h_{M}(\widetilde{p'}) \bigr) + 1$.
+Also, the point $h_{M+1}(\widetilde{p})$ is either the eastern or the northern neighbor of $h_{M}(\widetilde{p})$; thus, $\xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr) \geq \xcoord\bigl( h_{M}(\widetilde{p}) \bigr)$.
+Hence,
 \[
-\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \leq\underbrace{\xcoord\left(  h_{M}\left(
-\widetilde{p'}\right)  \right)  }_{<\xcoord\left(
-h_{M}\left(  \widetilde{p}\right)  \right)  }+1<\underbrace{\xcoord%
-\left(  h_{M}\left(  \widetilde{p}\right)  \right)  }_{\leq\xcoord%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  }+1\leq\xcoord%
-\left(  h_{M+1}\left(  \widetilde{p}\right)  \right)  +1.
+\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \leq \underbrace{\xcoord\bigl( h_{M}(\widetilde{p'}) \bigr)}_{<\xcoord\bigl( h_{M}(\widetilde{p}) \bigr)} + 1 < \underbrace{\xcoord\bigl( h_{M}(\widetilde{p}) \bigr)}_{\leq\xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)} + 1 \leq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr) + 1.
 \]
-Therefore, $\xcoord\left(  h_{M+1}\left(  \widetilde{p'%
-}\right)  \right)  \leq\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  $ (since both sides are integers). Combining this with
-$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  \geq\xcoord\left(  h_{M+1}\left(  \widetilde{p}\right)
-\right)  $, we obtain $\xcoord\left(  h_{M+1}\left(
-\widetilde{p'}\right)  \right)  =\xcoord\left(
-h_{M+1}\left(  \widetilde{p}\right)  \right)  $. Hence, $h_{M+1}\left(
-\widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $ (since
-$\xcoord\left(  h_{M+1}\left(  \widetilde{p'}\right)
-\right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p'%
-}\right)  \right)  =M+1=\xcoord\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  -\ycoord\left(  h_{M+1}\left(  \widetilde{p}%
-\right)  \right)  $ as well). Thus, the paths $\widetilde{p}$ and
-$\widetilde{p'}$ have a vertex in common (namely, $h_{M+1}\left(
-\widetilde{p'}\right)  =h_{M+1}\left(  \widetilde{p}\right)  $). This
-contradicts the fact that they don't. This contradiction shows that our
-assumption was false. Hence, the paths $p$ and $p'$ have a vertex in common.]
+Therefore, $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \leq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$ (since both sides are integers).
+Combining this with $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \geq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$, we obtain $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) = \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$.
+Hence, $h_{M+1}(\widetilde{p'}) = h_{M+1}(\widetilde{p})$ (since $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) -\ycoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) = M + 1 = \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr) - \ycoord( h_{M+1}(\widetilde{p}) \bigr)$ as well).
+Thus, the paths $\widetilde{p}$ and $\widetilde{p'}$ have a vertex in common (namely, $h_{M+1}(\widetilde{p'}) = h_{M+1}(\widetilde{p})$).
+This contradicts the fact that they don't.
+This contradiction shows that our assumption was false.
+Hence, the paths $p$ and $p'$ have a vertex in common.]
 \end{proof}
 
 We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
@@ -2831,9 +1762,8 @@ Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ b
 \end{align*}
 Then,
 \[
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left(  \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{i, j \in \ive{k}} .
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{i, j \in \ive{k}} .
 \]
-
 \end{prop}
 
 \begin{verlong}
@@ -2842,10 +1772,9 @@ This will follow immediately from Proposition~\ref{prop.LGV.nonper}
 once we have shown that $\left( \uu,\vv\right)  $ is nonpermutable.
 Thus, it remains to show the latter fact.
 
-Let $\sigma\neq\id$ be a permutation in $\SymGp{k}$. We
-must show that $N\left(  \uu,\sigma\left(  \vv\right)  \right)
-=\emptyset$. Indeed, let $\pp\in N\left(  \uu,\sigma\left(
-\vv\right)  \right)  $.
+Let $\sigma\neq\id$ be a permutation in $\SymGp{k}$.
+We must show that $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$.
+Indeed, let $\pp\in N\bigl( \uu,\sigma(\vv) \bigr)$.
 
 The permutation $\sigma$ has an inversion (since $\sigma \neq \id$).
 In other words, there exist some $i<j$ in $\ive{k}$ such that $\sigma(i) > \sigma(j)$.
@@ -4381,6 +3310,945 @@ where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (appl
 Hence the claim follows since $\prod_{i=1}^r x_{b_i} = \prod_{b \in B} x_b$.
 \end{verlong}
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+%=====================================================================
+\section{Proof of Theorem~\ref{thm:permutation}}
+\label{sec:thm_proof}
+
+In this section, we shall prove Theorem~\ref{thm:permutation} by relying on the
+braid relation for dual configurations. We need some definitions first.
+
+An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
+As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
+
+We begin by constructing a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
+\begin{itemize}
+\item an opening parenthesis `$($' if $j \in q_1$ and $j \notin q_2$;
+\item a closing parenthesis `$)$' if $j \notin q_1$ and $j \in q_2$;
+\item a matched pair of parentheses `$()$' if $j \in q_1$ and $j \in q_2$;
+\item nothing otherwise.
+\end{itemize}
+We say that these parentheses are \defn{contributed} by the site $j$.
+Next, we match as many parentheses as possible following the \defn{standard parenthesis-matching algorithm}:
+every time you find an opening parenthesis to the left of a closing one, with only frozen parentheses between them, you match these two parentheses and declare them frozen.
+Here, we understand our sequence of parentheses as being written on a circle -- so the last opening parenthesis can be matched with the first closing parenthesis if all parentheses ``between them'' (\textit{i.e.}, to the right of the former and to the left of the latter) are frozen.
+
+At the end of this algorithm, there will be exactly $\abs{r_1 - r_2}$ parentheses left unmatched; these unmatched parentheses will be opening if $r_1 > r_2$ and closing if $r_1 < r_2$. The unmatched parentheses will not depend on the order in which we perform the matching.
+This can be easily seen by considering the parentheses as an infinite shifted-periodic Motzkin path (see Figure~\ref{fig:balanced_motzkin}), where a ``nothing'' corresponds to a flat step.
+If $r_1 > r_2$, then the unmatched positions correspond to down steps in the Motzkin path such that the path never returns to the same height.
+When $r_1 < r_2$, the unmatched positions correspond to the up steps where the Motzkin path first obtains a certain height.
+
+We define \defn{$\SP(q_1, q_2)$} to be the following data:
+\begin{itemize}
+\item the sequence of parentheses obtained from $q_1$ and $q_2$;
+\item the matching obtained by the algorithm; and
+\item the correspondence between sites and \emph{closing} parentheses (\textit{i.e.}, which site contributes which closing parenthesis).
+\end{itemize}
+
+Note that each $j \in \ZZ/n\ZZ$ that belongs to both $q_1$ and $q_2$ contributes a pair of parentheses `$()$`, which can be immediately matched (to each other) at the beginning of the algorithm.
+Thus, if we disregard these pairs of parentheses, the outcome of the algorithm does not change (apart from these pairs disappearing).
+Hence, if we skip the sites $j \in q_1 \cap q_2$ in the definition of our sequence of parentheses, then the outcome of the algorithm (specifically, the set of unmatched parentheses) will be the same.
+The sequence of parentheses obtained as above, but skipping these sites $j$, will be called the \defn{reduced parenthesis sequence}.
+
+%If a site $j \in \ZZ / n \ZZ$ contributes a matched parenthesis or two matched parentheses or no parenthesis at all, we say $j$ is \defn{balanced}; otherwise we say $j$ is \defn{unbalanced}.
+A site $j \in \ZZ/n\ZZ$ is \defn{unbalanced} if it contributes an unmatched parenthesis; otherwise we say $j$ is \defn{balanced}.
+There are exactly $\abs{r_1 - r_2}$ unbalanced sites.
+
+We construct $C' = (q'_1, q'_2)$ as follows.
+For balanced $j$, we have $j \in q'_i$ if and only if $j \in q_i$ for $i=1,2$.
+For unbalanced $j$, we have $j \in q'_i$ if and only if $j \in q_{3-i}$ for $i = 1,2$.
+Note that $C$ and $C'$ have the same balanced sites, since the parentheses that were matched for $C$ remain matched in $C'$ and the remaining parentheses are all of one kind.
+Hence, we have $C'' = C$. Also, we have $\wt(C) = \wt(C')$.
+
+\begin{example}
+Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
+The dual configuration $C'$ is given by sliding all of the circles not boxed from the upper level to the lower level.
+In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
+\end{example}
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}[scale=0.75]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \draw[fill=blue!30] (1.5*\sc,\l-.5) rectangle(4.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (6.5*\sc,\l-.5) rectangle(7.5*\sc,\ll+.5);
+  \draw[fill=blue!30] (8.5*\sc,\l-.5) rectangle(20.5*\sc,\ll+.5);
+  \foreach \i in {1,2,5,6,8,11,13,14,17,18,19} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {3,4,7,9,10,12,15,16,20} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,12,15,16,18,19,20} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,3,4,5,6,7,8,9,10,11,13,14,17} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+\]
+\caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
+The purple boxes mark the balanced sites.}
+\label{fig:balanced}
+\end{figure}
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}[scale=0.45]
+\draw[-,thin,red!50] (0,0) -- (24,0);
+\draw[-,thin,red!50] (1,1) -- (24,1);
+\draw[-,thin,red!50] (8,2) -- (24,2);
+\draw[-,thin,red!50] (9,3) -- (24,3);
+\draw[-,thin,red!50] (11,4) -- (24,4);
+\draw[-,thin,red!50] (14,5) -- (16,5);
+\draw[-,thin,red!50] (18,5) -- (22,5);
+\draw[-,thick,dashed] (-1,1) -- (0,0);
+\draw[-,dotted] (1,0) -- (1,1);
+\draw[-,dotted] (3,0) -- (3,1);
+\draw[-,dotted] (4,0) -- (4,1);
+\draw[-,dotted] (5,0) -- (5,1);
+\draw[-,dotted] (6,0) -- (6,2);
+\draw[-,dotted] (7,0) -- (7,2);
+\draw[-,dotted] (8,0) -- (8,2);
+\draw[-,dotted] (9,0) -- (9,3);
+\draw[-,dotted] (10,0) -- (10,4);
+\draw[-,dotted] (11,0) -- (11,4);
+\draw[-,dotted] (12,0) -- (12,5);
+\draw[-,dotted] (13,0) -- (13,4);
+\draw[-,dotted] (14,0) -- (14,5);
+\draw[-,dotted] (15,0) -- (15,6);
+\draw[-,dotted] (16,0) -- (16,5);
+\draw[-,dotted] (17,0) -- (17,4);
+\draw[-,dotted] (18,0) -- (18,5);
+\draw[-,dotted] (20,0) -- (20,5);
+\draw[-,dotted] (22,0) -- (22,5);
+\draw[-,dotted] (23,0) -- (23,4);
+\draw[-,thick] (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,1) -- (5,1) -- (6,2) -- (7,2) -- (8,2) -- (9,3) -- (10,4) -- (11,4) -- (12,5) -- (13,4) -- (14,5) -- (15,6) -- (16,5) -- (17,4) -- (18,5) -- (19,6) -- (20,5) -- (21,6) -- (22,5) -- (23,4);
+\draw[-,thick,dashed] (23,4) -- (24,5);
+\fill[blue] (0,0) circle (4pt);
+\fill[blue] (5,1) circle (4pt);
+\fill[blue] (8,2) circle (4pt);
+\fill[blue] (9,3) circle (4pt);
+\fill[blue] (23,4) circle (4pt);
+\end{tikzpicture}
+\]
+\caption{The Motzkin path corresponding to the configuration in Figure~\ref{fig:balanced}.
+The corresponding unbalanced up-steps are marked by dots.}
+\label{fig:balanced_motzkin}
+\end{figure}
+
+Recall the notations introduced just before Lemma~\ref{le:dual}.
+
+\begin{remark}
+\label{rmk:balanced-dual-let}
+Let $C = (q_1, q_2)$ be an $(r_1, r_2)$-configuration.
+Thus, the dual configuration of the $(n-r_1, n-r_2)$-configuration $C^* = \tup{q_1^*, q_2^*}$ is obtained from the dual configuration $\tup{q_1', q_2'}$ of $C$ by
+\begin{equation}
+ (C^*)' = \bigl( (q_1')^*, (q_2')^* \bigr) .
+ \label{eq.rmk:balanced-dual-let.dual}
+\end{equation}
+To see this, we compute the dual configurations of both $C$ and $C^*$ using the reduced parenthesis sequences. The sequence for $C^*$ is obtained from that for $C$ by reflecting both the parentheses (\textit{i.e.}, opening become closing and vice versa) and the sequence itself. Thus, the parenthesis matching algorithm proceeds in the same way.
+
+In addition, applying Lemma~\ref{le:dual} twice, we obtain
+\[
+C(u) = q_2\bigl( q_1(u) \bigr) = q_2\bigl( (q^*_1(u^*))^* \bigr) = \bigl( q_2^*\bigl( q_1^*(u^*) \bigr) \bigr)^* = \bigl( C^*(u^*) \bigr)^* .
+\]
+%In particular, for $u \in \set{1,2}^n$, we have $C(u)_i = 5 - C^*(u^*)_{n+1-i}$, where we treat $u$ and $C^*(u^*)$ as a word with $2$ and $4$ classes, respectively.
+\end{remark}
+
+Fix $k \geq 1$.
+In the following, we simplify our terminology and say that an MLQ
+is a $k$-tuple of queues (without any restriction on their sizes).
+We want to define an action of $\SymGp{k}$ on MLQs.
+%by letting each simple transposition $s_i$ act as the map
+For each $i \in \ive{k-1}$, we define a map $\fraks_i \colon \set{\text{MLQs}} \to \set{\text{MLQs}}$ by
+\[
+\fraks_i(q_1, q_2, \dotsc, q_k) = (q_1, \dotsc, q_{i-1}, q'_i, q'_{i+1}, q_{i+2}, \dotsc, q_k),
+\]
+where $\tup{q'_i, q'_{i+1}}$ is the dual configuration of $\tup{q_i, q_{i+1}}$.
+From the definition of a dual configuration, it is clear that $\fraks_i \fraks_i \qq = \qq$.
+It is also clear from the definition that $\fraks_i \fraks_j \qq = \fraks_j \fraks_i \qq$ if $\abs{i - j} > 1$.
+Thus, the following proposition shows that $\fraks_i$ defines an action of $\SymGp{k}$ on the set of all MLQs.
+
+\begin{prop} \label{prop:braid}
+We have
+\[
+\fraks_i \fraks_{i+1} \fraks_i \qq
+	   = \fraks_{i+1} \fraks_i \fraks_{i+1} \qq
+\]
+for any MLQ $\qq = \tup{q_1, \dotsc, q_k}$ and any $i \in \set{1, 2, \ldots, k-2}$.
+\end{prop}
+
+\begin{proof}
+We shall deduce the claim from~\cite[Ch.~5, (5.6.3)]{Loth}.
+
+Let $A$ be the $\tup{k+1}$-element set $\set{\circ, 1, 2, \ldots, k}$.
+Let $A^*$ denote the set of all words on the alphabet $A$
+(of any finite length).
+
+We construct a $k \times n$-matrix $M_{\qq} \in A^{k \times n}$ from $\qq$ by setting the $\tup{i, j}$-th
+entry to $i$ if $j \in q_i$ and $\circ$ otherwise.
+We then construct a word $\word(\qq) \in A^*$ by reading $M_{\qq}$ from top-to-bottom, left-to-right (\textit{i.e.}, column by column).
+For example, if $n = 5$, $k = 3$, then
+\begin{align*}
+\qq = \tup{\set{1, 3}, \set{2},
+\set{2, 5}}
+& \longleftrightarrow
+ M_{\qq}
+ =
+ \begin{array}{ccccc}
+  1 & \circ & 1 & \circ & \circ \\
+  \circ & 2 & \circ  & \circ & \circ \\
+  \circ & 3  & \circ & \circ & 3
+ \end{array}
+ \\ & \longrightarrow
+ \word(\qq) = 1 \circ \circ \circ 2 3 1 \circ \circ \circ \circ \circ \circ \circ 3 .
+\end{align*}
+Clearly, an MLQ $\qq$ is uniquely determined by $\word(\qq)$ since $n$ is fixed.
+In other words, the map $\word \colon \set{\text{MLQs}} \to A^*$
+is injective.
+
+Following~\cite[\S5.5]{Loth}, for each $i \in \set{1, 2, \ldots, k-1}$, we give an operator
+$\sigma_i \colon A^* \to A^*$.
+This operator $\sigma_i$ acts on a word $p \in A^*$ % = \tup{p_1, p_2, \ldots, p_\ell}$
+as follows:
+\begin{enumerate}
+ \item Treat all letters $i$ in $p$ as opening parentheses `$($',
+       all letters $i+1$ as closing parentheses `$)$',
+       and consider all other letters to be frozen.
+       Now, match as many parentheses as possible
+       according to the standard parenthesis-matching algorithm,
+       but treating the word as a word in the usual sense
+       (\textit{i.e.}, not written on a circle, but having a beginning
+       and an end).
+       The result is independent of the choices in the algorithm,
+       and is always a word whose non-frozen
+       part (\textit{i.e.}, the word obtained by removing
+       all frozen letters) is
+       \begin{equation}
+       \label{eq:reduced_parens}
+       \underbrace{))\cdots)}_{a\text{ parentheses}}
+       \underbrace{((\cdots(}_{b\text{ parentheses}}
+       \end{equation}
+       for some integers $a, b \geq 0$.
+ \item Now, replace the non-frozen part~\eqref{eq:reduced_parens} by
+       \[
+       \underbrace{))\cdots)}_{b\text{ parentheses}}
+       \underbrace{((\cdots(}_{a\text{ parentheses}}
+       \]
+       while keeping all frozen letters in their places.
+       The resulting word is $\sigma_i p$.
+\end{enumerate}
+From~\cite[Eq.~(5.6.3)]{Loth}, these operators
+$\sigma_i$ satisfy
+\begin{equation}
+ \sigma_i \sigma_{i+1} \sigma_i
+ = \sigma_{i+1} \sigma_i \sigma_{i+1}
+ \label{pf.prop:braid.loth-eq}
+\end{equation}
+for all $i \in \set{1, 2, \ldots, k-2}$.
+
+Let $\zeta \colon \mcW_n \to \mcW_n$ be the cyclic shift map that sends each word $w_1 w_2 \cdots w_n$ to $w_2 w_3 \cdots w_n w_1$.
+We also abuse the notation $\zeta$ for the map that sends each queue $q$ to the queue $\zeta q = \set{ i - 1 \mid i \in q }$ (recall that $0 = n$ as sites).
+This map $\zeta$ shall act on MLQs entrywise (since an MLQ is a tuple of queues).
+Clearly,
+\begin{equation}
+ \word(\zeta \qq) = \zeta^k \word(\qq)
+ \label{pf.prop:braid.word-zeta}
+\end{equation}
+for any MLQ $\qq = (q_1, \ldots, q_k)$.
+
+Now, we claim that
+\begin{equation}
+ \word(\fraks_i \qq) = \sigma_i\bigl( \word(\qq) \bigr)
+ \qquad \text{ for each MLQ } \qq \text{ and each } i .
+ \label{pf.prop:braid.inter}
+\end{equation}
+Note that it is sufficient to show that $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$ for $\qq = (q_1, q_2)$
+(because the definition of $\sigma_i$ only relies on the letters $i$ and $i+1$, while all other letters stay in their places and have no effect).
+
+Thus, let $\qq = (q_1, q_2)$.
+We want to show $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
+If $\abs{q_1} = \abs{q_2}$, then $\fraks_1 \qq = \qq$ by the definition of $\fraks_1$.
+Moreover, we have $\sigma_1\bigl( \word(\qq) \bigr) = \word(\qq)$ in this case, since the word $\word(\qq)$ has as many letters $1$ as it has letters $2$, but the map $\sigma_1$ leaves such words unchanged.
+Hence, the claim holds when $\abs{q_1} = \abs{q_2}$.
+Thus, we assume that $\abs{q_1} \neq \abs{q_2}$.
+Therefore, there exists at least one unbalanced site for the configuration $\qq = (q_1, q_2)$.
+
+The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because the standard parenthesis-matching algorithm used in the definition of dual configurations is clearly invariant under cyclic shift.
+The operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ by~\cite[Prop.~5.6.1]{Loth}.
+Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $\qq$ any number of times without loss of generality.
+Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
+Thus, in the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$, the site $1$ induces a parenthesis that stays unmatched throughout the algorithm.
+Hence, no two parentheses that get matched to each other during this algorithm have this parenthesis lying between them.
+Therefore, it does not matter whether we regard the sequence of parentheses as written on a cycle or on a straight line (as the wrapping-around is not used in the matching process).
+Hence, the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$ proceeds exactly the same way as the standard parenthesis-matching algorithm used when applying $\sigma_1$ to $\word(\qq)$ (ignoring the letters that are neither $i$ nor $i+1$). That is, the parentheses that get matched in the former are the same as those that get matched in the latter.
+% Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
+Now, recall that $\fraks_1$ merely toggles the unbalanced sites between $q_1$ and $q_2$, whereas $\sigma_1$ switches the number of unmatched `$)$'s with the number of unmatched `$($'s (which, in the case of $\word(\qq)$, boils down to just turning each unmatched `$)$' into a `$($' or vice versa, because one of these numbers is $0$).
+Since the sites of the unmatched parentheses are precisely the unbalanced sites, this shows that the two maps agree -- that is, we have $\word(\fraks_1 \qq) = \sigma_1\bigl( \word(\qq) \bigr)$.
+This proves~\eqref{pf.prop:braid.inter}.
+
+The equality~\eqref{pf.prop:braid.inter} can be rewritten as the
+commutative diagram
+\[
+\xymatrix{
+ \set{\text{MLQs}} \ar[r]^{\fraks_i} \ar[d]_{\word} & \set{\text{MLQs}} \ar[d]^{\word} \\
+ A^* \ar[r]_{\sigma_i} & A^*
+}
+\]
+for all $i \in \set{1, 2, \dotsc, k-1}$.
+In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
+this diagram allows us to translate~\eqref{pf.prop:braid.loth-eq} into
+$\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
+\end{proof}
+
+\begin{remark}
+Our letters $1, \ldots, k$ correspond to the letters $a_k, \ldots, a_1$ in~\cite{Loth},
+since the definition of $\sigma_i$ in~\cite{Loth} involves $a_i$ rather
+than $i+1$ as closing parenthesis and $a_{i+1}$ rather than $i$ as opening one.
+Also,~\cite{Loth} does not include the letter $\circ$ in the alphabet,
+but this makes no difference to the proof, since all letters $\circ$ are always frozen.
+% Note that we have arbitrarily chosen to break our cycle at $n$,
+% however by~\cite[Prop.~5.6.1]{Loth}, the result does not depend on this choice.
+\end{remark}
+
+\begin{remark}
+The operator $\sigma_i$ is essentially a combination of co-plactic operators.
+Moreover, it corresponds to the Weyl group action on a tensor product of crystals~\cite{BS17}.
+Note that the bracketing rule given above is precisely the usual signature rule (see, \textit{e.g.},~\cite[Sec.~2.4]{BS17} for a description) for computing tensor products.
+This arises from considering the MLQ as a binary $m \times n$ matrix and the natural $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
+\end{remark}
+
+Next, we define two queues corresponding to a word $w \in \mcW_n$ of type $\mm$.
+Namely, for $k \in \set{p_i(\mm) \mid i \geq 0}$, let $[w]_k$ denote the set of the indices $i \in \ive{n}$
+corresponding to the $k$ smallest letters $w_i$ of $w$.
+
+Our proof of Theorem~\ref{thm:permutation} will rely on a connection between dual configurations and the action of queues on words.
+We begin with a string of lemmas.
+
+\begin{lemma} \label{lem:SL.reconstruct}
+Let $w, w' \in \mcW_n$ be two words of the same type $\mm$.
+Assume that $[w]_k = [w']_k$ for each $k \in \set{p_i(\mm) \mid i \geq 0}$.
+Then, $w = w'$.
+\end{lemma}
+
+\begin{proof}
+Fix some $i \geq 1$.
+The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}$
+(since $w$ has type $\mm$).
+Likewise,
+the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
+Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
+= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$, %\travis{FYI: still fighting us.},
+we conclude that these are the same sites.
+Since this holds for all letters $i$, we have $w = w'$.
+\end{proof}
+
+\begin{lemma} \label{lem:SL.dual.1}
+Let $\tup{q_1, q_2}$ be a configuration with $\abs{q_1} \leq \abs{q_2}$.
+Let $i \in q_1$.
+Let $j$ be the first site weakly to the right of $i$ that belongs to $q_2$.
+Then, $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing a pair of matched parentheses.\footnote{The matching of all other parentheses remains the same, and so does the correspondence between sites and closing parentheses (except for the one we removed).}
+Moreover, the closing parenthesis of that pair is contributed by $j \in q_2$.
+\end{lemma}
+
+\begin{proof}
+The assumption $\abs{q_1} \leq \abs{q_2}$ implies that all closing parentheses in $\SP(q_1, q_2)$ are matched.
+In particular, the closing parenthesis $\gamma$ contributed by $j \in q_2$ is matched.
+Let $\alpha$ be the opening parenthesis contributed by $i \in q_1$.
+All parentheses between $\alpha$ and $\gamma$ are opening (by the minimality of $j$).
+We know that $\gamma$ is matched to an opening parenthesis $\beta$.
+Hence, the parenthesis sequence $\SP(q_1, q_2)$ between $\alpha$ and $\gamma$ (inclusive) is
+\[
+\begin{array}{cccccc}
+( & ( & ( & \cdots & ( & ) \\
+\alpha & & & & \beta & \gamma,
+\end{array}
+\]
+where $\alpha$ and $\beta$ may be the same parenthesis.
+Therefore $\SP(q_1 \setminus \set{i}, q_2 \setminus \set{j})$ is obtained from $\SP(q_1, q_2)$ by removing $\alpha$ and $\gamma$.
+Yet this is tantamount to removing $\beta$ and $\gamma$ from $\SP(q_1, q_2)$, since both times we are simply shortening the string of opening parentheses before $\gamma$ by $1$ (and since we do not store the positions of the opening parentheses).
+\end{proof}
+
+\begin{lemma} \label{lem:SL.dual.3}
+Let $u \in \mcW_n$ be a word of type $\mm$.
+Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
+Let $q$ be a queue such that $k \leq \abs{q}$.
+Each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
+\end{lemma}
+
+\begin{proof}
+Choose a permutation $(i_1, i_2, \dotsc, i_n)$ of $(1, 2, \dotsc, n)$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+Use this permutation to construct $q(u)$ as per the definition.
+For each $p \in \ive{n}$, let $j_p$ denote the site that is set while processing $i = i_p$ when constructing $q(u)$.
+Thus, $(q(u))_{j_p} = u_{i_p}$ whenever $p \leq \abs{q}$ (since these entries of $q(u)$ are set in Phase~II),
+and $(q(u))_{j_p} = u_{i_p} + 1$ otherwise (Phase~I).
+Therefore, $\ive{q(u)}_k = \set{j_1, j_2, \ldots, j_k}$ (since $k \leq \abs{q}$).
+Thus, we only need to prove that each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
+Denote $q_1^{(p)} := q_1 \setminus \{i_1, i_2, \dotsc, i_p\}$ and $q_2^{(p)} := q_2 \setminus \{j_1, j_2, \dotsc, j_p\}$.
+
+\begin{claim}
+\label{claim:matching_SP}
+Let $p \in \set{0, 1, \ldots, k}$.
+Then, $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1 , q_2)$ by removing $p$ pairs of matched parentheses.
+The closing parentheses of these $p$ pairs are contributed by $j_1, j_2, \ldots, j_p$.
+\end{claim}
+
+\begin{subproof}
+We shall prove Claim~\ref{claim:matching_SP} by induction on $p$.
+The base case ($p = 0$) is obvious.
+For the induction step, we assume that Claim~\ref{claim:matching_SP} holds for $p-1$.
+The site $j_p$ is chosen in Phase~II (since $p \leq k \leq \abs{q}$), and therefore $j_p$ is the first site weakly to the right of $i_p$ that belongs to $q_2^{(p-1)}$.
+Hence, Lemma~\ref{lem:SL.dual.1}
+(applied to $q_1^{(p-1)}$, $q_2^{(p-1)}$, $i_p$ and $j_p$ instead of $q_1$, $q_2$, $i$ and $j$)
+implies that $\SP(q_1^{(p)}, q_2^{(p)})$ is obtained from $\SP(q_1^{(p-1)}, q_2^{(p-1)})$ by removing a pair of matched parentheses.
+Moreover, the closing parenthesis of that pair is contributed by $j_p \in q_2^{(p-1)}$.
+Thus, Claim~\ref{claim:matching_SP} follows from the induction hypothesis.
+This completes the induction step.
+\end{subproof}
+
+The above claim applied to $p = k$ shows that $\SP(q_1^{(k)}, q_2^{(k)})$ is obtained from $\SP(q_1 , q_2)$ by removing $k$ pairs of matched parentheses, and that the closing parentheses of these $k$ pairs are contributed by $j_1, j_2, \ldots, j_k$.
+Hence, each of the sites $j_1, j_2, \ldots, j_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
+\end{proof}
+
+\begin{prop} \label{prop:SL.dual}
+Let $u \in \mcW_n$ be a word of type $\mm$.
+Let $k = p_{\alpha}(\mm)$ for some $\alpha$.
+Let $q$ be a queue.
+The dual configuration of $\tup{ [u]_k , q }$ has the form $\tup{q^{\dagger} , [q(u)]_k }$, where $q^{\dagger}$ is some queue.
+\end{prop}
+
+\begin{proof}
+Let $\tup{q'_1, q'_2}$ be the dual configuration of $\tup{ [u]_k , q }$.
+We must then prove that $q'_2 = \ive{q(u)}_k$.
+Note that $\abs{q'_2} = \abs{\ive{u}_k} = k = \abs{\ive{q(u)}_k}$.
+
+Suppose $k \leq \abs{q}$.
+Then, Lemma~\ref{lem:SL.dual.3} shows that each site $j \in \ive{q(u)}_k$ contributes a matched closing parenthesis to $\SP(\ive{u}_k, q)$.
+Therefore, all of these sites are balanced, and hence belong to $q'_2$.
+Thus, $q'_2 \supseteq \ive{q(u)}_k$, whence $q'_2 = \ive{q(u)}_k$
+(since $\abs{q'_2} = \abs{\ive{q(u)}_k}$).
+
+Now suppose $k > \abs{q}$.
+Let $\ell$ be the number of classes in $u$, and consider the contragredient duals $q^*$ and $u^*$ as in Lemma~\ref{le:dual}.
+Thus, $n-k < n - \abs{q} = \abs{q^*}$.
+Hence, applying the $k \leq \abs{q}$ case (proven above)
+to $n-k$, $u^*$ and $q^*$ instead of $k$, $u$ and $q$,
+we see that
+$\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
+for some queue $q^\dagger$.
+Now,
+\begin{align*}
+ %\label{eq:dual_config_equalities}
+ \bigl( (q'_1)^*, (q'_2)^* \bigr)
+ &= \bigl( ([u]_k)^* , q^* \bigr)'
+ = \tup{ [u^*]_{n-k} , q^* }' \\
+ & = \tup{ q^{\dagger} , [q^*(u^*)]_{n-k} }
+ = \tup{ q^{\dagger} , \bigl[\bigl(q(u) \bigr)^* \bigr]_{n-k} } ,
+\end{align*}
+where
+\begin{itemize}
+ \item the first equality follows from~\eqref{eq.rmk:balanced-dual-let.dual};
+ \item the second equality is because $([u]_k)^* = [u^*]_{n-k}$; and
+ \item the fourth equality follows from Lemma~\ref{le:dual}.
+\end{itemize}
+Therefore, $(q'_2)^* = \bigl[\bigl( q(u) \bigr)^* \bigr]_{n-k} = ([q(u)]_k)^*$, so that
+$q'_2 = [q(u)]_k$.
+Hence, Proposition~\ref{prop:SL.dual} is proven in the case when $k > \abs{q}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:permutation}.]
+Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transpositions $s_1, s_2, \ldots, s_{\ell-2}$.
+Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
+Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
+
+In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
+The only nontrivial part is showing $u = (\fraks_i\qq) (1 \dotsm 1)$.
+More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
+The proof of this claim reduces to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
+
+Each word $w$ can be obtained from a standard word by a sequence of
+merges (each of which sends a word $u$ to $\vee^{(k)} u$ for some
+$k \in \set{ p_j(\mm) \mid j \geq 1 }$, where $\mm$ is the type of
+$u$). Lemma~\ref{lemma:queue_merge_commute} shows that these merges
+commute with the action of a queue (and thus of an MLQ).
+Hence, it is sufficient to consider standard words $w$.
+Thus, assume that $w$ is standard of type $\mm$.
+It is straightforward to see
+(using Equation~\eqref{eq:queue_type_change} and $\abs{q'_2} = \abs{q_1}$ and $\abs{q'_1} = \abs{q_2}$)
+that the words
+$C(w) = q_2\bigl( q_1(w) \bigr)$
+and
+$C'(w) = q'_2\bigl( q_1'(w) \bigr)$
+have the same type.
+%indeed, the action of a queue $q$ on a word $w$ modifies its
+%type in a predictable way (namely, the number $\abs{q}$ is
+%inserted into the type of $w$ at the place where it would
+%keep the type weakly increasing).
+Let $\nn$ be this type.
+We shall now show that
+$[C'(w)]_k = [C(w)]_k$
+for all $k \in \set{ p_i(\nn) \mid i \geq 0}$.
+According to Lemma~\ref{lem:SL.reconstruct}, this will yield $C'(w) = C(w)$, and thus our proof will be complete.
+
+Let $k \in \set{ p_i(\nn) \mid i \geq 0}$.
+Thus, $k \in \set{0, 1, \ldots, n} = \set{ p_i(\mm) \mid i \geq 0 }$ (since $w$ is standard).
+Hence, $[w]_k$ is well-defined.
+Note that $q_i(w)$ and $q'_i(w)$ are also standard words.
+Using Proposition~\ref{prop:SL.dual} to compute dual
+configurations, we can see how the MLQ
+$\qq = \tup{[w]_k, q_1, q_2}$ transforms under the action of
+$\fraks_1 \fraks_2 \fraks_1$: Namely, we have
+\begin{align*}
+\tup{[w]_k, q_1, q_2} & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q_1(w)]_k, q_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, \ast, \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k},
+\end{align*}
+where $\ast$ denotes some queue.
+Likewise, the action of $\fraks_2 \fraks_1 \fraks_2$ is given by
+\begin{align*}
+\tup{[w]_k, q_1, q_2} & \overset{\fraks_2}{\longmapsto} \tup{[w]_k, q'_1, q'_2}
+\\ & \overset{\fraks_1}{\longmapsto} \tup{\ast, [q'_1(w)]_k , q'_2}
+\\ & \overset{\fraks_2}{\longmapsto} \tup{\ast, \ast, \bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k}.
+\end{align*}
+(See Figure~\ref{fig:crossing_diagrams} for the actions depicted using crossing diagrams.)
+Yet, the two maps are equal by Proposition~\ref{prop:braid}.
+Thus, the resulting MLQs must be identical:
+\[
+\tup{\ast, \ast, \bigl[ q'_2\bigl(q'_1(w) \bigr) \bigr]_k}
+=
+\tup{\ast, \ast, \bigl[ q_2\bigl(q_1(w) \bigr) \bigr]_k}.
+\]
+Hence, we have
+\[
+\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k = \bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k.
+\]
+In other words, $[C'(w)]_k = [C(w)]_k$.
+\end{proof}
+
+\begin{figure}
+\begin{gather*}
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$[w]_k$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$\ast$};
+\node (s12) at (1,-1) {$[q_1(w)]_k$};
+\node (s13) at (1,-2) {$q_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$\ast$};
+\node (s23) at (2,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$\bigl[ q_2\bigl( q_1(w) \bigr) \bigr]_k$};
+\path[-] (i2) edge (s11) (s11) edge (s21) (s21) edge (t2);
+\path[-] (i3) edge (s13) (s13) edge (s22) (s22) edge (t1);
+\path[-,red,thick] (i1) edge (s12) (s12) edge (s23) (s23) edge (t3);
+\end{tikzpicture}
+\\
+\begin{tikzpicture}[xscale=3.5]
+\node (i1) at (0,0) {$[w]_k$};
+\node (i2) at (0,-1) {$q_1$};
+\node (i3) at (0,-2) {$q_2$};
+\node (s11) at (1,0) {$[w]_k$};
+\node (s12) at (1,-1) {$q'_1$};
+\node (s13) at (1,-2) {$q'_2$};
+\node (s21) at (2,0) {$\ast$};
+\node (s22) at (2,-1) {$[q'_1(w)]_k$};
+\node (s23) at (2,-2) {$q'_2$};
+\node (t1) at (3,0) {$\ast$};
+\node (t2) at (3,-1) {$\ast$};
+\node (t3) at (3,-2) {$\bigl[ q'_2\bigl( q'_1(w) \bigr) \bigr]_k$};
+\path[-] (i2) edge (s13) (s13) edge (s23) (s23) edge (t2);
+\path[-] (i3) edge (s12) (s12) edge (s21) (s21) edge (t1);
+\path[-,red,thick] (i1) edge (s11) (s11) edge (s22) (s22) edge (t3);
+\end{tikzpicture}
+\end{gather*}
+\caption{Crossing diagrams representing the action of $\fraks_1 \fraks_2 \fraks_1$ (top) and $\fraks_2 \fraks_1 \fraks_2$ (bottom).}
+\label{fig:crossing_diagrams}
+\end{figure}
+
+\begin{remark}
+Theorem~\ref{thm:permutation} for the special case of $x_1 = \cdots = x_n = 1$ was proven in~\cite{AAMP} using different techniques.
+We also sketch an alternative direct approach in the FPSAC extended abstract version of this work~\cite{AGS18}.
+\end{remark}
+
+
+
+
+
+
+%=====================================================================
+\section{Final remarks}
+\label{sec:remarks}
+
+We conclude by giving some additional examples, remarks, and comments about our results.
+We begin with an example to illustrate the proof of Theorem~\ref{thm:merge} in more detail.
+
+\begin{example}
+\label{ex:merge_theorem}
+In order to compute $\swt{135452}$, we need to examine MLQs of type $(1,1,1,1, 2, 0, 0, \ldots)$.
+We take a particular MLQ $\qq$ and add the $5$-queue $\set{1,2,3,5,6}$ as follows:
+\[
+\qq = \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
+\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){2};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){3};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){4};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){5};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; \xrightarrow{\hspace{30pt}} \;
+\begin{tikzpicture}[baseline=66,scale=0.75,every node/.style={inner sep=2pt}]
+\node[circle, draw=black] at (0, 5){1};\node[circle, draw=black] at (1, 5){1};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node[circle, draw=black] at (4, 5){1};\node[circle, draw=black] at (5, 5){1};\node at (0, 4){2};\node at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node at (4, 4){2};\node at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; = \widetilde{\qq}.
+\]
+Thus, we obtain a $(s_4 s_3 s_2 s_1)$-twisted MLQ $\widetilde{\qq}$ of type $(1, 1, 1, 1, 1, 1, 0, \ldots)$.
+Furthermore, note that $135452 = \merge{5} 135462$.
+Now, by Theorem~\ref{thm:permutation}, such MLQs $\widetilde{\qq}$ are in bijection with ordinary MLQs contributing to, in this case, $\swt{135462}$.
+In more detail, let $R_i(\widetilde{\qq})$ be the MLQ formed by taking the configuration $C = (\widetilde{q}_i, \widetilde{q}_{i+1})$ and replacing it with the dual configuration.
+By taking $R_4 R_3 R_2 R_1(\widetilde{\qq})$ to bring the top row to the bottom, we obtain the ordinary MLQ as follows:
+\begin{align*}
+\; \widetilde{\qq} & \xrightarrow[\hspace{15pt}]{R_1} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node[circle, draw=black] at (0, 4){2};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node[circle, draw=black] at (3, 4){1};\node[circle, draw=black] at (4, 4){2};\node[circle, draw=black] at (5, 4){2};\node at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node at (3, 3){3};\node at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; \xrightarrow[\hspace{15pt}]{R_2} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node[circle, draw=black] at (2, 3){2};\node[circle, draw=black] at (3, 3){3};\node[circle, draw=black] at (4, 3){3};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){4};\node at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\allowdisplaybreaks
+\\[1.3em] &
+\; \xrightarrow[\hspace{15pt}]{R_3} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node[circle, draw=black] at (2, 2){4};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};\end{tikzpicture}
+\; \xrightarrow[\hspace{15pt}]{R_4} \;
+\begin{tikzpicture}[xscale=0.7,yscale=0.7,every node/.style={inner sep=0.8pt},baseline=55]
+\node at (0, 5){2};\node at (1, 5){2};\node[circle, draw=black] at (2, 5){1};\node at (3, 5){2};\node at (4, 5){2};\node at (5, 5){2};\node at (0, 4){3};\node[circle, draw=black] at (1, 4){2};\node at (2, 4){3};\node at (3, 4){3};\node at (4, 4){3};\node[circle, draw=black] at (5, 4){1};\node[circle, draw=black] at (0, 3){3};\node at (1, 3){4};\node at (2, 3){4};\node at (3, 3){4};\node[circle, draw=black] at (4, 3){2};\node[circle, draw=black] at (5, 3){1};\node[circle, draw=black] at (0, 2){1};\node[circle, draw=black] at (1, 2){3};\node at (2, 2){5};\node[circle, draw=black] at (3, 2){4};\node[circle, draw=black] at (4, 2){2};\node at (5, 2){5};\node[circle, draw=black] at (0, 1){1};\node[circle, draw=black] at (1, 1){3};\node[circle, draw=black] at (2, 1){5};\node[circle, draw=black] at (3, 1){4};\node at (4, 1){6};\node[circle, draw=black] at (5, 1){2};
+\end{tikzpicture}
+\; = \widetilde{\qq}',
+\end{align*}
+which contributes to $\swt{135462}$.
+\end{example}
+
+There is the natural cyclic symmetry on our special weights.
+
+\begin{prop}
+  Let $C_n \subseteq \SymGp{n}$ denote the cyclic group of order $n$ generated by the $n$-cycle $(1 \; 2 \; \dotsm \; n)$ and $u \in \mcW_n$.
+  We have $\swt{u}_{\tau}\sigma = \swt{u \sigma}_{\tau}$ for any $\sigma \in C_n$ and $\tau \in \SymGp{\ell-1}$, where $\SymGp{n}$ acts on $\mcW_n$ from the right by $(u_1 \dotsm u_n) \sigma = u_{\sigma(1)} \dotsm u_{\sigma(n)}$, that is to say permutations act on positions, and similarly on monomials in $\xx$.
+\end{prop}
+
+\begin{proof}
+  For a queue $q$, define $\sigma q := \{ \sigma(i) \mid i \in q\}$.
+  It is clear from the definition of a queue that $q(u \sigma) = \bigl( (\sigma q)(u) \bigr) \sigma$.
+  Hence, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
+  $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
+  where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
+  Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
+  $\qq (1 \dotsm 1) = \bigl( (\sigma \qq)(1 \dotsm 1) \bigr) \sigma$.
+  From here, the claim follows by an obvious bijection
+  (given by the action of $\sigma$) between the sums defining
+  $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
+\end{proof}
+
+Let $B^{r,s}$, where $r \in [n-1]$ and $s \in \ZZ_{>0}$, be a \defn{Kirillov--Reshetikhin (KR) crystal} in type $A_{n-1}^{(1)}$~\cite{KKMMNN92}.
+Recall from~\cite{NY97,Shimozono02} that the combinatorial $R$-matrix is the unique crystal isomorphism
+\[
+R \colon B^{r_1,s_1} \otimes B^{r_2,s_2} \to B^{r_2,s_2} \otimes B^{r_1,s_1}.
+\]
+There is a well-known (in slightly different terminology) bijection $\Xi_r$ relating $r$-queues with an element of the KR crystal $B^{r,1}$ in type $A_{n-1}^{(1)}$ by considering $q = \{b_1 < \cdots < b_r\}$  as a single-column Young tableau of height $r$.
+In~\cite{KMO15}, this was extended to a bijection $\Xi$ between multiline queues of type $\mm$ with $\ell+1$ classes and $B^{p_1,1} \otimes B^{p_2,1} \otimes \dotsm \otimes B^{p_{\ell},1}$ by
+\[
+\Xi(\qq) = \Xi_{p_1}(q_1) \otimes \Xi_{p_2}(q_2) \otimes \dotsm \otimes \Xi_{p_{\ell}}(q_{\ell}).
+\]
+Thus, by comparing the description of the combinatorial $R$-matrix for $B^{r_1,1}$ and $B^{r_2,1}$ from~\cite{NY97}, we obtain that taking the dual configuration is equivalent to applying the combinatorial $R$-matrix under $\Xi$.
+
+\begin{prop}
+\label{prop:dual_is_R}
+Let $C$ be an $(r_1, r_2)$-configuration. Then
+\[
+\Xi(C') = R\bigl( \Xi(C) \bigr),
+\]
+where $C'$ is the dual configuration of $C$.
+\end{prop}
+
+Note that Proposition~\ref{prop:dual_is_R} gives another proof of Proposition~\ref{prop:braid} since the combinatorial $R$-matrix is well-known to satisfy the Yang-Baxter equation.
+
+\begin{example}
+Suppose $n = 9$.
+Consider the $(4,6)$-configuration and dual $(6,4)$-configuration
+\[
+C = (\set{1,4,5,6}, \set{2,3,4,6,7,8}),
+\qquad\quad
+C' = (\set{1,3,4,5,6,8}, \set{2,4,6,7}).
+\]
+We have
+\[
+\begin{tikzpicture}[xscale=6,yscale=4,>=stealth]
+\node (C) at (0,0) { %{$(\set{1,4,5,6}, \set{2,3,4,6,7,8})$};
+\begin{tikzpicture}[scale=0.7]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \foreach \i in {1,4,5,6} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,3,7,8,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,3,4,6,7,8} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,5,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+};
+\node (Cp) at (0,-1) { %{$(\set{1,3,4,5,6,8}, \set{2,4,6,7})$};
+\begin{tikzpicture}[scale=0.7]
+  \def\sc{0.85}   % Change this to adjust the x-scaling
+  \def\ll{2}   % level 2
+  \def\l{1}   % level 1
+  \foreach \i in {1,3,4,5,6,8} { \draw[fill=white] (\i*\sc,\ll) circle (0.3); }
+  \foreach \i in {2,7,9} { \draw[fill=white] (\i*\sc-.3,\ll-.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {2,4,6,7} { \draw[fill=white] (\i*\sc,\l) circle (0.3); }
+  \foreach \i in {1,3,5,8,9} { \draw[fill=white] (\i*\sc-.3,\l-.3) rectangle +(0.6,+0.6); }
+\end{tikzpicture}
+};
+\node (KR) at (1,0) {$\young(1,4,5,6) \otimes \young(2,3,4,6,7,8)$};
+\node (KRp) at (1,-1) {$\young(1,3,4,5,6,8) \otimes \young(2,4,6,7)$};
+\draw[<->] (C) -- (Cp) node[midway,anchor=east] {dual};
+\draw[<->] (C) -- (KR) node[midway,anchor=south] {$\Xi$};
+\draw[<->] (KR) -- (KRp) node[midway,anchor=west] {$R$};
+\draw[<->] (Cp) -- (KRp) node[midway,anchor=north] {$\Xi$};
+\end{tikzpicture}
+\]
+\end{example}
+
+Since the combinatorial $R$-matrix satisfies the Yang--Baxter equation, we have an action of the symmetric group $\SymGp{\ell}$ acting on MLQs with $\ell + 1$ queues.
+Given the description of the combinatorial $R$-matrix using the Robinson--Schensted--Knuth (RSK) bijection~\cite{Shimozono02}, this $\SymGp{\ell}$-action can be considered as corresponding to the one given by van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}.\footnote{This could also be considered as an interpretation of the Littlewood--Richardson rule, along with the fact that $s_{\lambda} s_{\mu}$, where $s_{\lambda}$ and $s_{\mu}$ are Schur functions corresponding to rectangles, is multiplicity free~\cite{Stembridge01}, and using Howe duality~\cite[Ch.~9,App.~B]{BS17}.}
+Furthermore, the $\SymGp{\ell}$-action on MLQs has been considered by Danilov and Koshevoy~\cite{DanilovKoshevoy} in a different context (see also~\cite[Ch.~4]{Gorodentsev2}).
+Unlike the combinatorial $R$-matrix perspective, they do not have the natural interpretation of the weight since $\wt(\qq) = \wt\bigl( \Xi(\qq) \bigr)$, where the crystal weight is the usual tableaux weight.
+
+Next, we describe how to interpret our action from looking at the corner transfer matrix described in~\cite{KMO15}, which can be given diagrammatically by
+\[
+\begin{tikzpicture}[>=latex,scale=0.5]
+\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,8);
+\foreach \x in {1,2} {
+  \draw[->] (0,\x+1) node[anchor=east] {$\mathbf{b}_{\ell-\x}$} -- (\x+1,\x+1) -- (\x+1,8);
+}
+\foreach \x in {1,2,3} {
+  \draw[->] (0,8-\x) node[anchor=east] {$\mathbf{b}_{\x}$} -- (8-\x,8-\x) -- (8-\x,8);
+}
+\node at (4,7.5) {$\cdots$};
+\node at (0.5,4) {$\vdots$};
+\end{tikzpicture}
+\]
+where every crossing is a combinatorial $R$-matrix and $\mathbf{b}_i \in B^{p_i,1}$.
+Our action effectively does the following on the corner transfer matrix:
+\[
+\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
+\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
+\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
+\draw[->] (-1,3) node[anchor=east] {$\mathbf{b}_i$} -- (0,4) -- (4,4) -- (4,7) -- (3,8);
+\draw[->] (-1,4) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (0,3) -- (3,3) -- (3,7) -- (4,8);
+\node at (2,6.5) {$\cdots$};
+\node at (0.5,2) {$\vdots$};
+\node at (5,6.5) {$\cdots$};
+\node at (0.5,5) {$\vdots$};
+\end{tikzpicture}
+\qquad = \qquad
+\begin{tikzpicture}[>=latex,scale=0.5,baseline=50]
+\draw[->] (0,1) node[anchor=east] {$\mathbf{b}_{\ell}$} -- (1,1) -- (1,7);
+\draw[->] (0,6) node[anchor=east] {$\mathbf{b}_1$} -- (6,6) -- (6,7);
+\draw[->] (0,4) node[anchor=east] {$\mathbf{b}_i$} -- (4,4) -- (4,7);
+\draw[->] (0,3) node[anchor=east] {$\mathbf{b}_{i+1}$} -- (3,3) -- (3,7);
+\node at (2,6.5) {$\cdots$};
+\node at (0.5,2) {$\vdots$};
+\node at (5,6.5) {$\cdots$};
+\node at (0.5,5) {$\vdots$};
+\end{tikzpicture}
+\]
+where the equality comes from applying the Yang--Baxter equation and $R^2 = \id$.
+
+It could be interesting to see if our proof has any implications for the work of Danilov and Koshevoy~\cite{DanilovKoshevoy} or van Leeuwen~\cite{vanLeeuwen-dc}.
+
+
+
+
+
+
+\appendix
+
+%=====================================================================
+\section{Connections with other constructions}
+\label{app:queue-relations}
+
+We describe how our definition of $q(u)$ (when $q$ is a queue and $u$ a word) is connected to the construction of~\cite{FM07}, which was coined bully paths in~\cite{AasLin17}, and the tableaux combinatorics of~\cite{AssSea18}.
+
+To clarify the connection, we recall our visualization of a queue $q$ in~\eqref{eq:boxes-and-balls-1} by a row of circles and squares.
+We modify this visualization slightly:
+Namely, we still represent each $i \in q$ by a circle as in Example~\ref{ex:first_queue}, but we no longer represent the $i \notin q$ by squares.
+We refer to the circles as ``boxes''.
+
+\subsection{Connection with Ferrari--Martin and Aas--Linusson MLQs}
+
+We first connect our MLQs with those from~\cite{FM07}.
+We will use the language of~\cite{AasLin17}, where we are only considering ``discrete MLQs'' as we consider our ring to have a finite number of sites.
+
+Consider a MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$.
+A \defn{labeling} of $\qq$ is a sequence of maps $\ff = (f_1, \dotsc, f_{\ell})$, where $f_i \colon q_i \to \ive{i}$.
+We represent this by placing an $f_i(j)$, which we call the \defn{label}, inside of the circle corresponding to $j \in q_i$.
+The \defn{canonical labeling} $\ff_{\qq}$ of $\qq$ is the labeling $(f_1, \dotsc, f_{\ell})$ defined by
+\begin{equation}
+f_k(j) = \bigl( q_k( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j.
+\label{eq.AasLin-lab.formula}
+\end{equation}
+For example, the labeling of each MLQ in Example~\ref{ex:merge_theorem} is precisely the circled values.
+When $\qq$ is an ordinary MLQ, we can also construct this canonical labeling recursively as follows:
+\begin{enumerate}
+\item Set $q_0 = \emptyset$, and let $f_0 : q_0 \to \ive{0}$ be the trivial map.
+\item For each $k = 0, 1, \ldots, \ell-1$:
+\begin{itemize}
+\item Suppose $f_k \colon q_k \to \ive{k}$ is already defined. Let $\tup{j_1, j_2, \ldots, j_r}$ be a list of all elements of $q_k$ in the order of increasing label in $f_k$; that is, $f_k(j_1) \leq f_k(j_2) \leq \cdots \leq f_k(j_r)$.
+      (The relative order between elements with equal label is immaterial.)
+\item For $i = i_1, i_2, \ldots, i_r$, do the following:
+      Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q_{k+1}$ and $f_{k+1}(j)$ is not set; then set $f_{k+1}(j) = f_k(i)$.
+\item For all sites $j \in q_{k+1}$ for which $f_{k+1}(j)$ is not set yet, set $f_{k+1}(j) = k+1$.
+\end{itemize}
+This defines $f_{k+1} \colon q_{k+1} \to \ive{k+1}$.
+\end{enumerate}
+
+\begin{verlong}
+In order to see that this recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}, we can proceed as follows:
+
+If $r$ is a queue and $I$ is a set, then a \defn{labeling} of $r$ by $I$ means a map $f \colon r \to I$.
+Of course, we refer to a value $f \tup{i}$ of such a labeling as the \defn{label} of $i$ in $f$.
+To represent such a labeling $f$, we label each of the boxes of $r$ with its corresponding value (i.e., we label the box in position $i$ by $f\tup{i}$).
+Thus, a labeling of an MLQ $\qq = (q_1, q_2, \dotsc, q_{\ell})$ is a sequence of labelings $f_i \colon q_i \to \ive{i}$ of each of its queues $q_i$; and its visual representation is obtained by stacking the visual representations of the $f_i$ one atop another.
+
+Now, fix a $k \in \NN$ and two queues $r$ and $q$ with $\abs{r} \leq \abs{q}$. Also fix a labeling $f \colon r \to \ive{k}$ of $r$ by $\ive{k}$.
+Then, we can define a labeling \defn{$q(f)$} of $q$ by $\ive{k+1}$ as follows:
+\begin{enumerate}
+\item Let $\tup{i_1, i_2, \ldots, i_{\abs{r}}}$ be a list of all elements of $r$ in the order of increasing label in $f$ (that is, $f(i_1) \leq f(i_2) \leq \cdots \leq f(i_{\abs{r}})$.
+ (The relative order between elements with equal label is immaterial.)
+
+\item Initialize a labeling $g$ of $q$ by $\ive{k+1}$. For now, none of its values is set.
+
+\item For $i = i_1, i_2, \ldots, i_{\abs{r}}$, do the following.
+    Find the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $g\tup{j}$ is not set.
+    Then set $g\tup{j} = f\tup{i}$.
+
+\item For all sites $j \in q$ for which $g \tup{j}$ is not set yet, set $g \tup{j} = k+1$.
+
+\item Define $q(f)$ to be the resulting labeling $g$.
+\end{enumerate}
+
+The connection between this labeling and the action of queues on words is simple.
+Indeed, let $k \in \NN$, let $r$ be a queue, and let $f \colon r \to \ive{k}$ be a labeling.
+Then we can can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
+For each $j \in r$, we set $\tup{\omega_k f}_j = f \tup{j}$.
+All other letters of $\omega_k f$ shall be $k+1$.
+Now, it is easy to see that if $q$ is a queue satisfying $\abs{r} \leq \abs{q}$, then
+\begin{equation}
+q \tup{ \omega_k f } = \omega_{k+1} \tup{ q(f) } .
+\label{eq.AasLin-lab.two-actions}
+\end{equation}
+Thus, the action of a queue on a labeling can be computed in terms of its action on a word.
+(The converse is not true, since the condition $\abs{r} \leq \abs{q}$ is restrictive.
+Thus, our action of queues on words, with its two phases, is more general than their
+action on labelings.)
+
+Now, let $\qq = (q_1, q_2, \dotsc, q_{\ell})$ be an ordinary MLQ
+(so that $\abs{q_1} \leq \abs{q_2} \leq \cdots \leq \abs{q_{\ell}}$),
+and consider the labeling $\ff_\qq = (f_1, \dotsc, f_{\ell})$ constructed by the above recursive procedure
+(not by~\eqref{eq.AasLin-lab.formula}).
+Then, the recursive procedure clearly yields
+\begin{align*}
+f_i &= q_i \tup{ f_{i-1} } \qquad \text{for all } i \in \ive{\ell} ,
+\end{align*}
+where $f_0$ is understood to be the (trivial) labeling of the empty queue $\varnothing$.
+In view of~\eqref{eq.AasLin-lab.two-actions}, this entails
+\[
+\omega_i \tup{ f_i } = q_i \tup{ \omega_{i-1} \tup{ f_{i-1} } } \qquad \text{for all } i \in \ive{\ell} .
+\]
+Thus, by induction,
+\[
+\omega_i \tup{ f_i } = q_i( \cdots q_1(1 \dotsm 1) \cdots )
+ \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
+\]
+(since $\omega_0 \tup{ f_0 } = 1 \dotsm 1$).
+Hence,
+\[
+f_i(j) = \bigl( q_i( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j
+ \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
+        \text{ and } j \in q_i .
+\]
+But this is precisely the equality~\eqref{eq.AasLin-lab.formula}.
+Hence, we have shown that the recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}.
+\end{verlong}
+
+Now consider the labeling procedure in~\cite[\S 2.2]{AasLin17} given by \defn{$k$-bully paths}.
+Note that a $k$-bully path from one line to the next precisely corresponds to the path of a letter $k$ under Phase~II of our definition of a queue as a function on words.
+For example, the bully paths would correspond to the blue paths in Example~\ref{ex:first_queue}.
+In addition, this is exactly the recursive labeling procedure given above.
+Thus, we obtain the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17}.
+
+\Darij{I find the above paragraph vague and unclear, but I have a verlong argument anyway.}
+
+\Darij{TODO: Connect this with parking functions?}
+
+\subsection{Connection with Kohnert diagrams and Assaf--Searles theory}
+
+Next we relate the action of queues on words with the \defn{Kohnert fillings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
+We remark that the thread decomposition is the same as the Kohnert filling procedure when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
+Roughly speaking, a Kohnert filling (and a thread decomposition) is a standardization of the bully path construction.
+
+In more detail, for a Kohnert diagram $D \in \KM(\alpha)$ for any fixed weak composition $\alpha$ (see~\cite{AssSea18} for notations), we view its columns as queues.
+This time, our queues are subsets of $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$; thus, there is no ``wrapping around''.
+We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$: namely, a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$.
+We then apply the bully path construction to the boxes of this reflected Kohnert diagram.
+To obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm, where we consider the labels to be decreasing from left to right.
+Hence, this can be considered as a standardization of our construction or, equivalently, as fixing specific permutations for how the queues act on words.
+
+Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $\qq_D$ and all $i$, we have
+\[
+\abs{\set{ j \in q_i \mid j \geq k }} \leq \abs{\set{  j \in q_{i+1} \mid j \geq k }},
+\]
+which means we can apply~\cite[Lemma~2.2]{AssSea18} to see that there is no ``wrapping'' around the cylinder.
+
+To obtain a Kohnert filling from a Kohnert diagram of height $K$ (for this, we require $n \gg 1$), we can construct an MLQ
+\[
+\widetilde{\qq}_D = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
+\]
+from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings.
+Indeed, a label added in column $i$ comes from a $k \in q$ with $k > K$ for sufficiently many queues $q$ before $q_i$.
+We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
+We leave the precise details for the interested reader.
+
+\Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
+
+\Darij{I find this part quite hard to follow, but so is everything about Kohnert diagrams.}
+
+\begin{comment}
+In more detail, let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
+So a queue is now a finite subset of $\NN$.
+In the above definition of the labeling $q(f)$, we must replace the ``$\abs{r} \leq \abs{q}$'' requirement by the stronger requirement that every $k \in \NN$ satisfy
+\begin{equation}
+\label{eq:queue-relations.kohnert}
+\abs{\set{ j \in r \mid j \geq k }} \leq \abs{\set{  j \in q \mid j \geq k }} .
+\end{equation}
+This stronger requirement can be shown to guarantee that $q(f)$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
+It is, actually, necessary and sufficient.
+
+TODO: Should we prove this? Not quite trivial.
+
+Given a Kohnert diagram $D \in \KM(a)$ (see~\cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
+(\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$.
+To see that this is well-defined, we need merely to observe that~\eqref{eq:queue-relations.kohnert} holds by~\cite[Lemma 2.2]{AssSea18}.)
+The resulting labeling is similar to (but different from) the Kohnert labeling in~\cite[Def.~2.5]{AssSea18}. It is also related to the ``thread decomposition'' in~\cite[Def.~3.5]{AssSea18} (indeed, all cells in a single thread will receive identical labels in the labeling).
+\end{comment}
+
+
+
+
+
+
 
 
 
