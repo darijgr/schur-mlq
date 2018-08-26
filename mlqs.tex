@@ -1925,10 +1925,8 @@ The following are two tableaux of shape $\tup{3,2,3,1}$:
 \text{and}\qquad
 \begin{ytableau} 1 & 1 & 4 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}\,.
 \]
-%\travis{I changed the first example to something that is more subtly not semistandard.}
 The right tableau is semistandard, while the left one is not (the two $5$'s in the rightmost column).
 These tableaux have surfaces $(5,3,5,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
-\travis{I consolidated these examples because someone used to tableaux only needs to see this example to understand (or extrapolate what should be) the definitions.}
 \end{example}
 
 We now state the main result of this subsection:
@@ -1945,52 +1943,47 @@ Then,
 
 We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of a \defn{multi-Schur function} as defined in~\cite[(SCHUR.2.2)]{LLPT18}.
 
+\begin{vershort}
+\begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
+The proof is similar to the usual Jacobi--Trudi bijection relating semistandard tableaux and NILPs.
+For example, see~\cite[First proof of Thm. 7.16.1]{Stanley-EC2}.\footnote{Note that in this proof, those paths go west instead of east, but this is just a reflection around the $x$-axis.}
+We note on the differences.
+The first is that the fixed surface $s$ condition on the semistandard tableaux translates into requiring each path $p_i$ having the final arc be an east-step.
+The next is that we can have the bottom row be longer than the row above it, but this is equivalent to being in the top row.
+The last is that we can have gaps between entries in a column, but the semistandard condition imply that intermediate rows can be removed from consideration.
+\end{proof}
+\end{vershort}
+
+\begin{verlong}
 \begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
 Let us define two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$ by
 \[
 A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
-\begin{vershort}
-Since $\lambda$ is a pseudo-partition and $s$ is weakly increasing, we can apply Proposition~\ref{prop.LGV.concrete} to obtain
+The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
+Thus, Proposition~\ref{prop.LGV.concrete} yields
 \begin{equation}
 \label{pf.thm.tableau.jt.1}
 \begin{split}
 \sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \\
-& \overset{\eqref{eq.LGV.single-paths}}{=} \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
+& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
 \end{split}
 \end{equation}
-\end{vershort}
-\begin{verlong}
-The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
-Thus, Proposition~\ref{prop.LGV.concrete} yields
-\begin{align}
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \nonumber \\
-& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
-\label{pf.thm.tableau.jt.1}
-\end{align}
 where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
 \[
 \sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
 \]
 (by~\eqref{eq.LGV.single-paths}, applied to $A = A_i$ and $B = B_j$).
-\end{verlong}
 
 Next, let us define a bijection
 \[
 \Phi \colon N(\uu, \vv) \to \SST(\lambda, s).
 \]
 
-\begin{vershort}
-Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be an arbitrary NILP.
-
-Then, for each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$, and therefore contains exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
-\end{vershort}
-\begin{verlong}
 Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be arbitrary.
 Thus, each $p_i$ is a path from $A_i$ to $B_i$, and no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
 
 For each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$; thus, it must contain exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
-\end{verlong}
 
 Let $p_{i,1},p_{i,2}, \dotsc, p_{i,\lambda_i-1}$ be the $y$-coordinates of these east-steps (from first to last).
 Also, set $p_{i,\lambda_i} = s_i$.
@@ -2021,28 +2014,18 @@ First, we claim that if $i \in \ive{k-1}$, then, for all $j \in \ive{\lambda_i} 
 p_{i,j} < p_{i+1,j}.
 \end{equation}
 
-\Darij{This is classical and should be replaced in vershort by something like "Follow the classical JT proof."}
-
-[\textit{Proof of~\eqref{pf.thm.tableau.jt.col-strict-no-gap}:}
-\begin{vershort}
-We assume the contrary and pick the $i, j$ with the \emph{smallest} $j$ for which $p_{i,j} \geq p_{i+1,j}$.
-We first consider the case when $j > 1$.
-\end{vershort}
-\begin{verlong}
+\begin{subproof}
+We will show~\eqref{pf.thm.tableau.jt.col-strict-no-gap} holds.
 Let $i \in \ive{k-1}$.
 We must prove~\eqref{pf.thm.tableau.jt.col-strict-no-gap} for each $j \in \ive{\lambda_i}  \cap \ive{\lambda_{i+1}}  $.
 To do so, we assume the contrary, and pick the \emph{smallest} $j$ for which~\eqref{pf.thm.tableau.jt.col-strict-no-gap} fails.
 Thus, $p_{i,j} \geq p_{i+1,j}$.
 Assume that $j > 1$ (the argument for the case $j=1$ is similar).
-\end{verlong}
 Thus, the minimality of $j$ forces $p_{i,j-1} < p_{i+1,j-1}$.
 Finally,~\eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1} \leq p_{i+1,j}$.
 Hence, $p_{i,j-1} < p_{i+1,j-1} \leq p_{i+1,j} \leq p_{i,j}$.
-
-\begin{verlong}
 No two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
 Hence, $p_i$ and $p_{i+1}$ have no vertex in common.
-\end{verlong}
 Note that~\eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j}}$.
 Also,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $j-1$ instead of $j$) yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j-1}}$.
 However, the vertex $\tup{k-i+j-1, p_{i+1,j}}$ lies on the vertical line segment connecting the two vertices $\tup{k-i+j-1, p_{i,j}}$ and $\tup{k-i+j-1,p_{i,j-1}}$ (since $p_{i,j-1} \leq p_{i+1,j} \leq p_{i,j}$).
@@ -2052,25 +2035,20 @@ From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j} \leq s_i < s_{i+1}$ 
 If we had $j = \lambda_{i+1}$, then we would have $p_{i+1,j} = p_{i+1,\lambda_{i+1}} = s_{i+1}$ (by the definition of
 $p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j} \leq p_{i,j} < s_{i+1}$.
 Hence, $j \neq \lambda_{i+1}$. Thus, $j \in \ive{\lambda_{i+1}-1}$ (since $j \in \ive{\lambda_{i+1}}$).
-Therefore,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows that $p_{i+1}$ contains the vertex $\tup{k-\left(  i+1\right)+j, p_{i+1,j}} = \tup{k-i+j-1, p_{i+1,j}}$.
+Therefore,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows that $p_{i+1}$ contains the vertex $\tup{k-(i+1)+j, p_{i+1,j}} = \tup{k-i+j-1, p_{i+1,j}}$.
 So we have shown that both $p_i$ and $p_{i+1}$ contain the vertex $\tup{k-i+j-1, p_{i+1,j}}$.
 This contradicts the fact that $p_i$ and $p_{i+1}$ have no vertex in common.
 
-\begin{vershort}
-The same argument works for $j = 1$ with minor changes (we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
-Thus, we always obtain a contradiction, and hence~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
-\end{vershort}
-\begin{verlong}
 We have assumed that $j > 1$; but the same argument works for $j = 1$ with minor 
 changes
 (we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
 Thus, we always obtain a contradiction.
-This contradiction shows that our assumption was false; hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.]
-\end{verlong}
+This contradiction shows that our assumption was false; hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.
+\end{subproof}
 
 Next, we claim that the entries of $T$ are strictly increasing down each column.
 
-[\textit{Proof:}
+\begin{subproof}
 Let $i_1,i_2\in\ive{k}$ be such that $i_1 < i_2$.
 Let $j \in \ive{\lambda_{i_1}} \cap \ive{\lambda_{i_2}}$.
 We must show that $T( i_1,j) < T(i_2, j)$.
@@ -2083,37 +2061,23 @@ Consider the \emph{largest} such $q$.
 Clearly, $i_1 < q < i_2$.
 Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
 
-The maximality of $q$ shows that column $j$ of $[\lambda]$ has
-no gaps between row $q$ and row $i_2$. Hence,
-\eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$
-(since $q<i_2$).
+The maximality of $q$ shows that column $j$ of $[\lambda]$ has no gaps between row $q$ and row $i_2$.
+Hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$ (since $q<i_2$).
 
-From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain
-$p_{i_1,j}\leq s_{i_1}\leq s_{q}$ (since $i_1<q$, but the sequence
-$s$ is weakly increasing).
-Also, $p_{q,\lambda_{q}}=s_{q}$ (by the definition of $p_{q,\lambda_{q}}$),
-whence $s_{q}=p_{q,\lambda_{q}}\leq p_{q,j}$ (by
-\eqref{pf.thm.tableau.jt.row-weak}, since $\lambda_{q}<j$). Hence,
-$p_{i_1,j}\leq s_{q}\leq p_{q,j}<p_{i_2,j}$. This proves our claim.]
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i_1,j} \leq s_{i_1} \leq s_{q}$ (since $i_1 < q$, but the sequence $s$ is weakly increasing).
+Also, $p_{q,\lambda_{q}} = s_{q}$ (by the definition of $p_{q,\lambda_{q}}$), whence $s_{q} = p_{q,\lambda_{q}} \leq p_{q,j}$ (by~\eqref{pf.thm.tableau.jt.row-weak}, since $\lambda_{q} < j$).
+Hence, $p_{i_1,j} \leq s_{q} \leq p_{q,j} < p_{i_2,j}$. This proves our claim.
+\end{subproof}
 
-Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$
-and surface $s$ (since
-$T\left(  i,\lambda_i\right)  =p_{i,\lambda_i}=s_i$ for all $i\in\ive{k}$).
+Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$ and surface $s$ (since $T(i, \lambda_i) = p_{i,\lambda_i} = s_i$ for all $i \in \ive{k}$).
 That is, $T \in \SST(\lambda, s)$.
 So let us set
 \[
-\Phi\left(  p_1,p_2,\ldots,p_k\right)  =T.
+\Phi(p_1, p_2, \dotsc, p_k) = T.
 \]
 Thus, the map $\Phi$ is defined.
 
-It is easy to see that this map $\Phi$ is injective (indeed, $\left(
-p_1,p_2,\ldots,p_k\right)  $ can be reconstructed from $T$, since the
-$i$-th row of $T$ encodes the $y$-coordinates of all the east-steps of $p_i$)
-and surjective (indeed, the reverse of the above construction turns every
-$T \in \SST(\lambda, s)$ into a $k$-tuple
-$\left(  p_1,p_2,\ldots,p_k\right)  $ of paths $p_i$ from $A_i$ to
-$B_i$; furthermore, the strict increase of the entries of $T$ down columns
-forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
+It is easy to see that this map $\Phi$ is injective (indeed, $\tup{p_1,p_2,\dotsc,p_k}$ can be reconstructed from $T$, since the $i$-th row of $T$ encodes the $y$-coordinates of all the east-steps of $p_i$) and surjective (indeed, the reverse of the above construction turns every $T \in \SST(\lambda, s)$ into a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths $p_i$ from $A_i$ to $B_i$; furthermore, the strict increase of the entries of $T$ down columns forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
 Thus, $\Phi$ is a bijection.
 Moreover, it is easy to see that
 \[
@@ -2128,8 +2092,9 @@ Hence,
 \end{align*}
 \end{proof}
 
-We note that during the construction of the bijection $\Phi$, the fixed surface $s$ condition on the semistandard tableaux translated into requiring each path $p_i$ to having a final arc $B_i \to (\lambda_i + k - i, s_i)$.
+We note that during the construction of the bijection $\Phi$, the fixed surface $s$ condition on the semistandard tableaux translates into requiring each path $p_i$ to having a final arc $B_i \to (\lambda_i + k - i, s_i)$.
 Otherwise the rest of the proof is similar to the usual Jacobi--Trudi bijection relating semistandard tableaux and NILPs.
+\end{verlong}
 
 \Darij{TODO: Example.}
 
@@ -2449,6 +2414,7 @@ So we have shown that
 \end{subequations}
 \Travis{This follows trivially from the definition of Phase~II: the $\abs{q}$ smallest elements of $q(u)$ are at $j \in q$, which by assumption are at most $t$. Everything else is strictly larger than $t$ (which is used during Phase~I). It does not need a whole paragraph to explain!}
 \Darij{The paragraph also shows other things, which are used further below.}
+\Travis{I don't really see it. Can we verlong the above paragraph?}
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $> t$.
 
@@ -2781,12 +2747,12 @@ we see that the word $u$ has type
 $\tup{\abs{r^{(1)}}, \abs{r^{(2)}}, \ldots, \abs{r^{(h-1)}}, n - \abs{r}}$.
 Hence,~\eqref{eq:queue_type_change} (using $\abs{q} \geq \abs{r}$)
 shows that the word $q(u)$ has type
-\begin{align}
+\begin{align*}
 &\tup{\abs{r^{(1)}}, \abs{r^{(2)}}, \ldots, \abs{r^{(h-1)}}, \abs{q} - \abs{r} ,
 n - \abs{q}} \\
 &= \tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
 n - \abs{q}}
-\end{align}
+\end{align*}
 (by~\eqref{pf.lem:determinant_form.interl-B.qj=rj} and due to
 $\abs{q} - \abs{r} = \abs{q^{(h)}}$).
 Thus, in particular, the $n - \abs{q}$ largest letters of $q(u)$
@@ -2974,8 +2940,8 @@ For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
 \[
 u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1 \dotsm 1)  = q_i\bigl( \cdots q_2\bigl( q_1(1 \dotsm 1) \bigr) \cdots \bigr)  \in \mcW_n .
 \]
-Note that $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
-(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = m_1 + m_2 + \cdots + m_i$.)
+Note that $u^{\left[  i\right]  }$ has type $\mm^{[i]} := \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
+(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = p_i(\mm)$.)
 The definition of $u^{\left[  i\right]  }$ yields
 \begin{equation}
 \label{pf.lem:determinant_form.interl-act.rec}
@@ -3002,10 +2968,10 @@ The base case ($i=\ell-1$) follows from the fact that $u^{\left[  \ell-1\right]}
 For the induction step, we fix some $i \in \ive{\ell-1}$, and we assume that $u^{\left[i\right]}$ is weakly decreasing up to level $i$.
 Our goal is then to show that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
 
-But~\eqref{pf.lem:determinant_form.interl-act.rec} yields $u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right)$.
+But~\eqref{pf.lem:determinant_form.interl-act.rec} yields $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]} )$.
 % We know that all letters of $u^{\left[i-1\right]}$ belong to $\ive{i}$ (since $u^{\left[i-1\right]}$ has type $\tup{m_1, m_2, \dotsc, m_{i-1}, n-p_{i-1}(\mm), 0, 0, \ldots}$).
-This word $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
-Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm)$).
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u^{\left[i-1\right]}$ and $q_i$ instead of $u$ and $q$)
 yields that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
 This completes the induction step; Claim~\ref{claim:weakly_decreasing_level_i} is thus proven.
@@ -3021,11 +2987,11 @@ q_i^{(j)} = \set{ p \in \ive{n} \mid \left( u^{\left[  i\right] } \right)_p = j 
 \end{claim}
 
 \begin{subproof}
-If $q$ is any queue and $w \in \mcW_n$ is any word, then each of the letters $(q(w))_j$ with $j \notin q$ is larger than each of the letters $(q(w))_j$ with $j \in q$.
+If $q$ is any queue and $w \in \mcW_n$ is any word, then each of the letters $\bigl( q(w) \bigr)_j$ with $j \notin q$ is larger than each of the letters $\bigl( q(w) \bigr)_j$ with $j \in q$.
 (This follows from the construction of $q(w)$.)
 Applying this to $q = q_i$ and $w = u^{\left[i-1\right]}$, we conclude that
 each of the letters $(u^{\left[  i\right]})_j$ with $j \notin q_i$ is larger than each of the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$
-(since~\eqref{pf.lem:determinant_form.interl-act.rec} yields $q_i\left(  u^{\left[  i-1\right]  }\right) = u^{\left[  i\right]}$).
+(since~\eqref{pf.lem:determinant_form.interl-act.rec} yields $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$).
 Thus,
 \begin{equation}
 \label{pf.claim:description_q_i^(j).1}
@@ -3037,12 +3003,12 @@ Thus,
 
 Claim~\ref{claim:weakly_decreasing_level_i} shows that the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
 Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (i.e., first all $i$'s, then all $i-1$'s, etc.).
-Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$).
+Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$).
 
-Recall that the word $u^{\left[  i\right]  }$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
-Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $m_1 + m_2 + \cdots + m_i$ \travis{Why not use $p_i(\mm)$?} smallest letters of this word.
-In other words, they are the $\abs{q_i}$ smallest letters of this word (since $m_1 + m_2 + \cdots + m_i = \abs{q_i}$\travis{Same here. I think it gives a better association.}).
-In view of \eqref{pf.claim:description_q_i^(j).1}, this rewrites as follows:
+Recall that the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$.
+Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $p_i(\mm)$ smallest letters of this word.
+In other words, they are the $\abs{q_i}$ smallest letters of this word (since $p_i(\mm) = \abs{q_i}$).
+In view of~\eqref{pf.claim:description_q_i^(j).1}, this rewrites as follows:
 The letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ are exactly the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$.
 In other words, these letters appear precisely in the positions $j \in q_i$.
 Since these letters must appear in weakly decreasing order, and since we know how often each letter appears, we thus know the exact position of each of these letters:
@@ -3079,15 +3045,15 @@ Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 
 \begin{subproof}
 From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]  } )$.
-This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
+This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$.
 Thus, it has at least one letter equal to $i$ (since $m_i > 0$)
 and is weakly decreasing up to level $i$ (by Claim~\ref{claim:weakly_decreasing_level_i}).
 Also, this word has exactly $\abs{q_i}$ letters that are at most $i$
 \begin{vershort}
-(since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+(since $\abs{q_i} = p_i(\mm)$).
 \end{vershort}
 \begin{verlong}
-(since its type is $\tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$, and since $\abs{q_i} = m_1 + m_2 + \cdots + m_i$).
+(since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm)$).
 \end{verlong}
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(b) (applied to $u^{\left[i-1\right]}$, $q_i$ and $j$ instead of $u$, $q$ and $h$)
 yields
@@ -3165,14 +3131,10 @@ i+1 & \text{if } t \notin q_i.
 \end{claim}
 
 \begin{subproof}
-Induction on $i$.
-For convenience, we extend the claim to $i \in \set{0, 1, \ldots, \ell-1}$;
-thus, we can take the trivial case $i = 0$ as base case
-(remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1\dotsm1$).
+We proceed by induction on $i$.
+For convenience, we extend the claim so that the base case is the trivial case $i = 0$ (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1\dotsm1$).
 
-For the induction step, we fix $h \in \ive{\ell-1}$, and we assume
-(as induction hypothesis)
-that Claim~\ref{claim:describing_u^[i]} holds for $i = h - 1$.
+For the induction step, we fix $h \in \ive{\ell-1}$, and we assume (as induction hypothesis) that Claim~\ref{claim:describing_u^[i]} holds for $i = h - 1$.
 We now must prove that Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
 
 The induction hypothesis shows that each $t \in \ive{n}$ satisfies
@@ -3223,32 +3185,17 @@ j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
 \ell & \text{if } t \notin q_{\ell-1}.
 \end{cases}
 \end{equation}
-On the other hand, the definition of the word $u$ shows that
-the letters of $u$ are given as follows:
+On the other hand, the letters of $u$ are given, from the construction, by
 \[
 u_t =
 \begin{cases}
-v_j & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
-\ell & \text{otherwise}
-\end{cases}
-\in
-\begin{cases}
-\ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
-\set{\ell} & \text{otherwise} .
+v_j \in \ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\ell & \text{otherwise.}
 \end{cases}
 \]
-In view of $\set{b_1, b_2, \ldots, b_r} = B = q_{\ell-1}$,
-this shows that
-the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$,
-whereas
-the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
-Hence, the letters $u_t$ for $t \in q_{\ell-1}$ are precisely
-those letters of $u$ that are at most $\ell-1$.
-Thus, these letters appear in weakly decreasing order
-(since $u$ is weakly decreasing up to level $\ell-1$), and we
-also know how often each of the letters $1, 2, \ldots, \ell-1$
-appears among them (namely, each $k \in \ive{\ell-1}$ appears
-$m_k$ times, since $u$ has type $\mm$).
+In view of $\set{b_1, b_2, \ldots, b_r} = B = q_{\ell-1}$, this shows that the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$, whereas the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
+Hence, the letters $u_t$ for $t \in q_{\ell-1}$ are precisely those letters of $u$ that are at most $\ell-1$.
+Thus, these letters appear in weakly decreasing order (since $u$ is weakly decreasing up to level $\ell-1$), and we also know how often each of the letters $1, 2, \ldots, \ell-1$ appears among them (namely, each $k \in \ive{\ell-1}$ appears $m_k$ times, since $u$ has type $\mm$).
 Hence,
 \begin{itemize}
 \item the rightmost $m_1$ of these letters are $1$,
@@ -3276,8 +3223,7 @@ j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
 \ell & \text{if } t \notin q_{\ell-1}.
 \end{cases}
 \]
-Comparing this with~\eqref{pf.lem:determinant_form.interl-act.fwd.5}, we conclude that
-$\left( u^{\left[\ell-1\right]} \right)_t = u_t$ for all $t \in \ive{n}$.
+Comparing this with~\eqref{pf.lem:determinant_form.interl-act.fwd.5}, we conclude that $( u^{\left[\ell-1\right]} )_t = u_t$ for all $t \in \ive{n}$.
 Thus, $u^{\left[\ell-1\right]} = u$.
 Hence, $u = u^{\left[\ell-1\right]} = \qq(1 \dotsm 1)$.
 This proves the $\Longleftarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
