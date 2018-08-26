@@ -1461,9 +1461,9 @@ We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and clas
 Let $A = (a,b)$ and $B = (c,d)$ be two vertices.
 If $p$ is a path from $A$ to $B$, then $p$ must have exactly $c-a$ east-steps, and the $y$-coordinates of these
 east-steps must belong to the interval $\set{b,b+1,\dotsc,d}$.
-Let $\bigl(  y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ be the weakly increasing $(c-a)$-tuple of elements of $\set{b,b+1, \dotsc, d}$ corresponding to the $y$-coordinates of the $c-a$ east-steps of $p$ (from left to right).
-Moreover, $p$ can be uniquely reconstructed from this $(c-a)$-tuple (since these $(c-a)$-tuple determines the east-steps of $p$).
-Conversely, any weakly increasing $(c-a)$-tuple of elements of $\set{b, b+1, \dotsc,d}$ has the form $\bigl(  y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ for a unique path $p$ from $A$ to $B$.
+Let $\bigl( y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr) \in \set{b,b+1, \dotsc, d}^{c-a}$ be the weakly increasing $(c-a)$-tuple consisting of the $y$-coordinates of the $c-a$ east-steps of $p$ (from left to right).
+Moreover, $p$ can be uniquely reconstructed from this $(c-a)$-tuple (since this $(c-a)$-tuple determines the east-steps of $p$).
+Conversely, any weakly increasing $(c-a)$-tuple of elements of $\set{b, b+1, \dotsc,d}$ has the form $\bigl( y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ for a unique path $p$ from $A$ to $B$.
 Thus, there is a bijection between the paths $p$ from $A$ to $B$ and the weakly increasing $(c-a)$-tuples of elements of $\set{b, b+1, \dotsc, d}$.
 This yields
 \begin{align*}
@@ -2503,25 +2503,25 @@ Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the const
 This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
 \end{subproof}
 
-\Travis{How easy would it be to pull these claims out into separate lemmas?}
-\Darij{Not very easy. They refer to the $j_k$, which are temporary objects in the construction of $q(u)$.}
+% \Travis{How easy would it be to pull these claims out into separate lemmas?}
+% \Darij{Not very easy. They refer to the $j_k$, which are temporary objects in the construction of $q(u)$.}
 
 We are now ready to prove the two parts of the lemma:
 
 (a) Assume the contrary.
-Thus, there exist sites $x$ and $y$ in $\ive{n}$ such that $x<y$ and $u_{x} < u_{y} < t$.
-Let $k$ and $\ell $ be such that $x = i_k$ and $y = i_{\ell}$; then, $u_{i_k} = u_{x} < u_{y} = u_{i_{\ell}}$, and thus $u_{i_k} < u_{i_{\ell}} = u_{y} < t$.
+Thus, there exist sites $x$ and $y$ in $\ive{n}$ such that $x < y$ and $u_x < u_y < t$.
+Let $k$ and $\ell$ be such that $x = i_k$ and $y = i_{\ell}$; then, $u_{i_k} = u_x < u_y = u_{i_{\ell}}$, and thus $u_{i_k} < u_{i_{\ell}} = u_y < t$.
 % But $k < \ell$ (since $u_{i_k} < u_{i_{\ell}}$ and $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$).
 Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
 Similarly, $\ell \leq \abs{q}$ and
 $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell}}$.
 Therefore, $\bigl( q(u) \bigr)_{j_k} = u_{i_k} < u_{i_{\ell}} = \bigl( q(u) \bigr)_{j_{\ell}}$.
-Since the letters $\bigl( q(u) \bigr) _{j_k}$ and $\bigl( q(u) \bigr)_{j_{\ell}}$ of $q(u)$ are also at most $t$ (because $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_{x} < t$ and  $\bigl( q(u) \bigr)_{j_{\ell }} = u_{i_{\ell}} = u_{y} < t$), this entails $j_k > j_{\ell }$ (since $q(u)$ is weakly decreasing up to level $t$).
+Since the letters $\bigl( q(u) \bigr) _{j_k}$ and $\bigl( q(u) \bigr)_{j_{\ell}}$ of $q(u)$ are also at most $t$ (because $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_x < t$ and $\bigl( q(u) \bigr)_{j_{\ell }} = u_{i_{\ell}} = u_y < t$), this entails $j_k > j_{\ell}$ (since $q(u)$ is weakly decreasing up to level $t$).
 From Claim~\ref{claim:fixed_k_decreasing_i_from_j}, we have $i_k \leq j_k$ and similarly $i_{\ell} \leq j_{\ell}$.
 Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
 Hence, $j_{\ell} \inter \inter[i_k, j_k]$.
 Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\ell}$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
-This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell }} > u_{i_k}$.
+This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell}} > u_{i_k}$.
 \begin{vershort}
 Therefore, Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
 \end{vershort}
@@ -2533,7 +2533,7 @@ This contradiction shows that our assumption was false, and so Lemma~\ref{lem:de
 \begin{verlong}
 Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
 
-Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u) $ is set exactly once during the construction of $q(u)$).
+Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u)$ is set exactly once during the construction of $q(u)$).
 Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
 \end{verlong}
 Define
@@ -2567,9 +2567,9 @@ Next, we claim that the map $\phi$ is surjective.
 We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
 
 Indeed, recall that $\left( j_1,j_2,\ldots ,j_n\right) $ is a permutation of $\tup{1, 2, \dotsc, n}$.
-Thus, there exists some $k \in \ive{n} $ satisfying $j_k = a$.
+Thus, there exists some $k \in \ive{n}$ satisfying $j_k = a$.
 Consider this $k$.
-All we need to prove now is that $i_k\in B$.
+All we need to prove now is that $i_k \in B$.
 
 We have $j_k = a$, and thus $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h$ (since $a \in A$).
 Hence, $\bigl( q(u) \bigr)_{j_k} = h < t$ (since $h \in \ive{t-1}$).
