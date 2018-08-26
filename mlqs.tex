@@ -452,12 +452,13 @@ the steps of Phase~I (resp.\ Phase~II) are processed in the order $i = i_n, i_{n
 
 \begin{lemma}
 \label{lemma:order_indep}
-The resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1, i_2, \dotsc, i_n)$.
+The resulting word $v = q(u)$ does not depend on the choice of permutation $(i_1, i_2, \dotsc, i_n)$
+(as long as $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$ holds).
 \end{lemma}
 
 \begin{proof}
-Consider some $k$ such that $u_{i_k} = u_{i_{k+1}}$.
-If we switch the two (equal) adjacent entries $i_k$ and $i_{k+1}$ of the
+Consider some $k \in \ive{n-1}$ such that $u_{i_k} = u_{i_{k+1}}$.
+If we switch the two adjacent entries $i_k$ and $i_{k+1}$ of the
 permutation $\tup{i_1, i_2, \ldots, i_n}$,
 then the resulting word $v$ is unchanged.
 Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
@@ -886,7 +887,6 @@ where we have $2663344511 = \merge{4} 2773455611$.
 \label{lemma:queue_merge}
   Let $q'$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
   Let the type $\mm$ have $\ell$ classes, and let $\sigma \in \SymGp{\ell-1}$.
-  % be such that $\sigma(j) = j$ for all $j \geq i$.
   Let $\qq$ be a $\sigma$-twisted MLQ of type $\merge{i}\mm$.
   % Darij: Yes, we need $\sigma$-twisted here, due to how we apply this
   % lemma repeatedly in the proof of Theorem~\ref{thm:determinant_form}.
@@ -926,19 +926,6 @@ $q(\merge{h} u)$ depending on whether ...
 Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
 It has type $\merge{i} \mm$.
 
-% Thus, the queue $q_j$ has size
-% $p_{\sigma(j)}(\merge{i} \mm) = p_{\sigma(j)}(\mm)$
-% for each $j < i$
-% (here, we have used the fact that $j < i$ entails
-% $\sigma(j) < i$;
-% this is a consequence of our assumption on $\sigma$),
-% and size
-% $p_{\sigma(j)}(\merge{i} \mm) = p_j(\merge{i} \mm) = p_{j+1}(\mm)$
-% for each $j \geq i$.
-
-% The permutation
-% $\zeta := s_{i-1} \cdots s_2 s_1 \in \SymGp{\ell-1}$ is the
-% $i$-cycle sending $1, 2, \ldots, i$ to $i, 1, 2, \ldots, i-1$.
 Set $\qq' := \tup{q', q_1, \ldots, q_{\ell-1}}$; this is easily
 seen to be a $\zeta$-twisted MLQ of type $\mm$, for some
 $\zeta \in \SymGp{\ell}$
@@ -949,10 +936,10 @@ Furthermore, the definition of $u$ becomes $u = \qq' (1 \dotsm 1)$.
 Hence, the type of $u$ is $\mm$ (by Lemma~\ref{rmk:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
-$\nn$ of the word $q(1 \dots 1)$ satisfies $p_1(\nn) = k$.
-Hence, any word obtained by actions of queues on $q'(1 \dots 1)$
+$\nn$ of the word $q'(1 \dotsm 1)$ satisfies $p_1(\nn) = k$.
+Hence, any word obtained by actions of queues on $q'(1 \dotsm 1)$
 will have its type $\nn$ satisfy
-$k \in \set{ p_j(\nn) \mid j \geq 0 } $.
+$k \in \set{ p_j(\nn) \mid j \geq 1 } $.
 
 Since the type of $u$ is $\mm$, and since $k = p_i(\mm)$, we have
 \begin{equation}
@@ -1091,20 +1078,6 @@ u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{
   \]
   where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
 \end{thm}
-
-%For the proof of this theorem, we need to lay some groundwork.
-%
-%\begin{dfn}
-%If $k$ is a positive integer, then a \defn{$k$-frow} will mean a word $w \in \mcW_n$ such that:
-%\begin{itemize}
-% \item $w_i \leq k$ for all $i \in \ive{n}$;
-% \item each of the letters $1,2,\ldots,k-1$ appears at least once in $w$;
-% \item removing all letters $k$ from $w$ yields a weakly decreasing word.
-%\end{itemize}
-%\end{dfn}
-%
-%For example, $43443342242114$ is a $4$-frow; so is $3321$ (we don't require $k$ to appear in $w$).
-%Note that the word $u$ in Theorem~\ref{thm:determinant_form} is an $\ell$-frow.
 
 \begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
 Let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
@@ -1385,7 +1358,7 @@ It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$.
 \draw[->,dgreencolor] (2123) .. controls (-1,0) and (-1,3) .. (3122);
 \end{tikzpicture}
 \]
-\caption{The states and transitions for $\mcW_{\emptyset}$ for $n =3$ (left) and $\mcW_{\set{2}}$ for $n = 4$ (right).
+\caption{The states and transitions for $\mcW_{\emptyset}$ for $n = 3$ (left) and $\mcW_{\set{2}}$ for $n = 4$ (right).
 All probabilities of the drawn transitions are $1/n$.}
 \end{figure}
 
