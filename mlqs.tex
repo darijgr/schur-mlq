@@ -1490,10 +1490,10 @@ See Figure~\ref{fig:NILP_example} for an illustration.
 \begin{figure}[t]
 \[
 \begin{tikzpicture}
-  \draw[densely dotted] (0,0) grid (7,7);
+  \draw[densely dotted] (0,0) grid (7.2,7.2);
   % axes:
-  \draw[->] (0,0) -- (0,7);
-  \draw[->] (0,0) -- (7,0);
+  \draw[->] (0,0) -- (0,7.2);
+  \draw[->] (0,0) -- (7.2,0);
   \foreach \x/\xtext in {0, 1, 2, 3, 4, 5, 6, 7}
      \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\xtext$};
   \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6, 7}
@@ -1516,6 +1516,8 @@ See Figure~\ref{fig:NILP_example} for an illustration.
       \draw (4,5) edge (4,5.4);
       \draw (4,5.4) node[anchor=east] {$1$};
       \draw (4,5.4) edge[->] (4,5.7);
+  \end{scope}
+  \begin{scope}[thick,>=stealth,blue]
       % $p_2$:
       \draw (3,1) edge (3.6,1);
       \draw (3.6,1) node[anchor=north] {$x_1$};
@@ -1538,6 +1540,8 @@ See Figure~\ref{fig:NILP_example} for an illustration.
       \draw (5,5) edge (5,5.4);
       \draw (5,5.4) node[anchor=west] {$1$};
       \draw (5,5.4) edge[->] (5,5.7);
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dgreencolor]
       % $p_1$:
       \draw (5,1) edge (5,1.6);
       \draw (5,1.6) node[anchor=east] {$1$};
@@ -1553,15 +1557,16 @@ See Figure~\ref{fig:NILP_example} for an illustration.
       \draw (6,3.4) edge[->] (6,3.7);
   \end{scope}
   
-  \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (2,3) {$A_3$};
-  \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (3,1) {$A_2$};
-  \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (5,1) {$A_1$};
+  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] at (2,3) {$A_3$};
+  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] at (3,1) {$A_2$};
+  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] at (5,1) {$A_1$};
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] at (4,6) {$B_3$};
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] at (5,6) {$B_2$};
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] at (6,4) {$B_1$};
 \end{tikzpicture}
 \]
-\caption{A NILP from the $3$-vertex $\tup{A_1, A_2, A_3}$ to the $3$-vertex $\tup{B_1, B_2, B_3}$. Here, $A_1 = \tup{5,1}, A_2 = \tup{3,1}$, and so on. The weights of the edges of the paths are written atop the edges. The weight of this NILP is $x_1 x_2 x_3 x_4^2$.}
+\caption{A NILP from the $3$-vertex $\tup{A_1, A_2, A_3}$ to the $3$-vertex $\tup{B_1, B_2, B_3}$ of weight $x_1 x_2 x_3 x_4^2$.
+  The weights of the edges of the paths are written next to the edges.}
 \label{fig:NILP_example}
 \end{figure}
 
