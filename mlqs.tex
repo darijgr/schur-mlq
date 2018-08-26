@@ -385,6 +385,7 @@ The \defn{type} of a word $u$ is the vector $\mm = (m_1, m_2, \ldots)$, where $m
 Let $\ell = \max\{i \mid m_i \neq 0 \}$, which we say is the number of \defn{classes} in $u$ or $\mm$.
 A word $u$ or type $\mm$ with $\ell$ classes is \defn{packed} if $m_i \neq 0$ for all $1 \leq i \leq \ell$.
 A word $w$ of type $\mm$ is \defn{standard} if $m_i \leq 1$ for all $i$.
+We will write $1^n = 1 \dotsm 1$ for the (unique) word of type $(n, 0, \dotsc)$.
 
 We \defn{merge} two adjacent classes $i,i+1$ in a word $u$ to obtain a new word by replacing all occurrences of $j$ by $j-1$ in $u$ for each $j = i+1, i+2, \ldots$ in that order.
 We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
@@ -645,7 +646,7 @@ We also consider $\qq$ as a function on words by
 \end{dfn}
 
 \begin{remark}
-Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we can recover the labeling of level $k$ from the word $q_k( \cdots q_1(1 \dotsm 1) \cdots )$.
+Our notion of an (ordinary) MLQ is equivalent to what is called a ``discrete MLQ'' in~\cite[\S 2.2]{AasLin17}, where we can recover the labeling of level $k$ from the word $q_k( \cdots q_1(1^n) \cdots )$.
 See Appendix~\ref{app:queue-relations} for more details.
 We omit the word ``discrete'' as these are the only MLQs in this note.
 \end{remark}
@@ -673,8 +674,8 @@ For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ 
   \swt{u}_{\sigma} := \sum_{\qq} \wt(\qq),
 %\end{equation}
 \]
-where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1 \dotsm 1)$.
-(Here, $1 \dotsm 1$ denotes the word in $\mcW_n$ whose all letters are $1$.)
+where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1^n)$.
+(Here, $1^n$ denotes the word in $\mcW_n$ whose all letters are $1$.)
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
@@ -682,7 +683,7 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \label{rmk:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
 Let $\qq$ be a $\sigma$-twisted MLQ.
-Then the type of the word $\qq(1 \dotsm 1)$ is the type of $\qq$.
+Then the type of the word $\qq(1^n)$ is the type of $\qq$.
 \end{lemma}
 
 \begin{vershort}
@@ -696,11 +697,11 @@ Repeatedly apply~\eqref{eq:queue_type_change}.
 Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
 Let $\mm = \tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots}$ be the type of $\qq$.
 Thus, $m_1 + m_2 + \cdots + m_\ell = p_{\ell}(\mm) = n$.
-Now, the word $1 \dotsm 1$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
+Now, the word $1^n$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + m_\ell, 0, 0, \ldots}$
 (since $n = m_1 + m_2 + \cdots + m_\ell$).
 Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way (because of~\eqref{eq:queue_type_change}): Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
-Hence, the action of $\qq$ transforms $1 \dotsm 1$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
-In other words, the type of the word $\qq(1 \dotsm 1)$ is $\mm$.
+Hence, the action of $\qq$ transforms $1^n$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
+In other words, the type of the word $\qq(1^n)$ is $\mm$.
 This proves Lemma~\ref{rmk:mlq-type}.
 
 [The above proof is a bit informal.
@@ -709,10 +710,10 @@ Thus, $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing per
 Now, define the \defn{p-sequence} of a type $\nn$ to be the weakly increasing infinite sequence $\tup{p_0(\nn), p_1(\nn), p_2(\nn), \ldots}$ of integers (which uniquely determines $\nn$).
 Furthermore, if $u$ is a word of type $\nn$, then we define the p-sequence of $u$ to be the p-sequence of $\nn$.
 Then,~\eqref{eq:queue_type_change} shows the following: If $q$ is a queue and $u$ is a word, then the p-sequence of $q(u)$ is obtained from the p-sequence of $u$ by inserting $\abs{q}$ into the p-sequence at the appropriate position (appropriate in the sense that the resulting sequence is still weakly increasing).
-Hence, the p-sequence of the word $\qq (1 \dotsm 1)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1 \dotsm 1$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions.
-In other words, the p-sequence of the word $\qq (1 \dotsm 1)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$).
+Hence, the p-sequence of the word $\qq (1^n)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1^n$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions.
+In other words, the p-sequence of the word $\qq (1^n)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$).
 In other words, this p-sequence is $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$.
-Hence, the type of the word $\qq (1 \dotsm 1)$ is $\mm$.]
+Hence, the type of the word $\qq (1^n)$ is $\mm$.]
 \end{proof}
 \end{verlong}
 
@@ -721,7 +722,7 @@ Let $\ell \geq 1$.
 Let $u$ be a packed word with $\ell$ classes and type $\mm$.
 For each $k \in \ive{\ell-1}$, let $q_k$ be the set of all sites $i$ such that $u_i \leq k$.
 It is then easy to check that $\qq := \tup{q_1, q_2, \ldots, q_{\ell-1}}$ is an
-MLQ of type $\mm$ satisfying $\qq(1 \dotsm 1) = u$ and has weight
+MLQ of type $\mm$ satisfying $\qq(1^n) = u$ and has weight
 $\wt(\qq) = \prod_{j \in \ZZ / n \ZZ} x_j^{\ell - u_j}$.
 Hence, $\swt{u} \neq 0$ (as a polynomial over $\ZZ$).
 \end{example}
@@ -894,11 +895,11 @@ where we have $2663344511 = \merge{4} 2773455611$.
   % MLQ might become $\sigma$-twisted after the first application.)
   For the word
   $
-  u = \qq\bigl( q'(1 \dotsm 1) \bigr),
+  u = \qq\bigl( q'(1^n) \bigr),
   $
   we have
   \[
-  \qq(1 \dotsm 1) = \merge{i} u.
+  \qq(1^n) = \merge{i} u.
   \]
 \end{lemma}
 
@@ -932,26 +933,26 @@ $\zeta \in \SymGp{\ell}$
 (since the multiset of the $p_k(\merge{i}\mm)$ for $k \geq 1$
 is precisely the multiset of the $p_k(\mm)$ for $k \geq 1$
 with one copy of $p_i(\mm) = \abs{q'}$ removed).
-Furthermore, the definition of $u$ becomes $u = \qq' (1 \dotsm 1)$.
+Furthermore, the definition of $u$ becomes $u = \qq' (1^n)$.
 Hence, the type of $u$ is $\mm$ (by Lemma~\ref{rmk:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
-$\nn$ of the word $q'(1 \dotsm 1)$ satisfies $p_1(\nn) = k$.
-Hence, any word obtained by actions of queues on $q'(1 \dotsm 1)$
+$\nn$ of the word $q'(1^n)$ satisfies $p_1(\nn) = k$.
+Hence, any word obtained by actions of queues on $q'(1^n)$
 will have its type $\nn$ satisfy
 $k \in \set{ p_j(\nn) \mid j \geq 1 } $.
 
 Since the type of $u$ is $\mm$, and since $k = p_i(\mm)$, we have
 \begin{equation}
 \label{pf.lemma:queue_merge.4}
- \merge{i} u = \vee^{(k)} (u) = \vee^{(k)} \qq\bigl( q' (1 \dotsm 1) \bigr) = \qq\bigl( \vee^{(k)} q' (1 \dotsm 1) \bigr)
+ \merge{i} u = \vee^{(k)} (u) = \vee^{(k)} \qq\bigl( q' (1^n) \bigr) = \qq\bigl( \vee^{(k)} q' (1^n) \bigr)
 \end{equation}
 by repeated use of Lemma~\ref{lemma:queue_merge_commute}
-(since any word obtained by actions of queues on $q'(1 \dotsm 1)$
+(since any word obtained by actions of queues on $q'(1^n)$
 will have its type $\nn$ satisfy
 $k \in \set{ p_j(\nn) \mid j \geq 1 } $).
-It is clear that $\vee^{(k)} q'(1 \dotsm 1) = 1 \dotsm 1$,
-and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1 \dotsm 1) = \merge{i} u$.
+It is clear that $\vee^{(k)} q'(1^n) = 1^n$,
+and so~\eqref{pf.lemma:queue_merge.4} becomes $\qq(1^n) = \merge{i} u$.
 \end{proof}
 
 \subsection{Spectral weights of merged words}
@@ -980,7 +981,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \]
   where we sum over all pairs $(\qq, q')$ such that
   \begin{itemize}
-  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1\dotsm 1)$ and
+  \item $\qq = (q_1, \dotsc, q_{\ell-1})$ is an MLQ of type $\merge{i}\mm$ such that $v = \qq(1^n)$ and
   \item $q'$ is a $p_i(\mm)$-queue.
   \end{itemize}
   Given any such pair $\tup{\qq, q'}$, we set
@@ -989,12 +990,12 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \]
   the result is a $(s_{i-1} \dotsm s_2 s_1)$-twisted MLQ of type $\mm$ with weight
   $\wt\bigl( \theta(\qq, q') \bigr) = \wt(\qq) \wt(q')$.
-  But recall that $v = \qq(1 \dotsm 1$); thus, by Lemma~\ref{lemma:queue_merge}, we have
+  But recall that $v = \qq(1^n$); thus, by Lemma~\ref{lemma:queue_merge}, we have
   \[
-  v = \qq(1 \dotsm 1) = \merge{i} \qq\bigl( q'(1 \dotsm 1) \bigr) = \merge{i} \bigl( \theta(\qq, q')(1 \dotsm 1) \bigr).
+  v = \qq(1^n) = \merge{i} \qq\bigl( q'(1^n) \bigr) = \merge{i} \bigl( \theta(\qq, q')(1^n) \bigr).
   \]
   Thus, we have defined a weight preserving bijection $\theta$ from the set of all pairs $(\qq, q')$ as above
-  to the set of all $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ of type $\mm$ satisfying $v = \merge{i} \widetilde{\qq} \tup{1 \dotsm 1}$.
+  to the set of all $(s_{i-1} \dotsm s_1)$-twisted MLQs $\widetilde{\qq}$ of type $\mm$ satisfying $v = \merge{i} \widetilde{\qq} (1^n)$.
   Hence, we have
   \[
   \sum_{(\qq,q')} \wt(\qq) \wt(q')
@@ -1081,7 +1082,7 @@ u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{
 
 \begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
 Let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
-Thus, $\qq (1 \dotsm 1) = u$, and the type of $\qq$ is the type $\mm = (m_1, m_2, \ldots, m_\ell, 0, 0, \ldots)$ of $u$.
+Thus, $\qq (1^n) = u$, and the type of $\qq$ is the type $\mm = (m_1, m_2, \ldots, m_\ell, 0, 0, \ldots)$ of $u$.
 In particular,
 $\abs{q_{\ell-1}} = p_{\ell-1}(\mm) = r = \abs{B}$.
 Since the positions of the smallest $\abs{B}$ entries of $u$
@@ -1093,7 +1094,7 @@ we shall disregard this factor in the following.
 
 Let $\std{u}$ be the near standardization of $u$, and note that $W = B$ from Definition~\ref{def:near_std} (but in the reverse order).
 There exists $T$ such that $\bigvee_T \std{u} = u$.
-Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1 \dotsm 1) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1 \dotsm 1) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
+Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1^n) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1^n) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
 As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ corresponds to disjoint $r$-paths with initial points $\iota_i := (0,i)$ and terminal points $(b_i,0)$.
 Note that these are precisely the bully paths of~\cite{AasLin17}.
 We claim it is sufficient to show that for every MLQ $\qq$, there exists unique disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ such that $\rho_i$ passes through the point $\tau_i := (b_i, i - \gamma_i)$.
@@ -1856,7 +1857,7 @@ we will then express a generating function for these tableaux by a determinantal
 A pseudo-partition is similar to the concept of a partition, except it allows entries to increase by $1$.
 The semistandard tableaux of a pseudo-partition shape are defined just like for partitions.
 The generating function in our determinantal formula is going to be a sum over the semistandard tableaux of a fixed pseudo-partition shape with given rightmost entries in each row.
-Later we will translate these tableaux into MLQs that yield a specific word when applied to $1\dotsm 1$.
+Later we will translate these tableaux into MLQs that yield a specific word when applied to $1^n$.
 
 Let us formalize these definitions.
 A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ of positive integers (for some $k \in \NN$) such that
@@ -2311,7 +2312,7 @@ where the second equality follows from Property~(a) and Property~(b) and the las
 Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
 \end{proof}
 
-Next, we shall connect the interlacingness of an MLQ with its action on the word $1\dotsm 1$:
+Next, we shall connect the interlacingness of an MLQ with its action on the word $1^n$:
 
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
@@ -2322,7 +2323,7 @@ Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise
 
 Let $\mm$ be the type of $u$.
 Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
-Then, $u = \qq(1\dotsm 1)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
+Then, $u = \qq(1^n)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 \end{lemma}
 
 \Darij{TODO: Example.}
@@ -2938,7 +2939,7 @@ Since $\qq$ is an MLQ of type $\mm$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 +
 
 For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
 \[
-u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1 \dotsm 1)  = q_i\bigl( \cdots q_2\bigl( q_1(1 \dotsm 1) \bigr) \cdots \bigr)  \in \mcW_n .
+u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1^n)  = q_i\bigl( \cdots q_2\bigl( q_1(1^n) \bigr) \cdots \bigr)  \in \mcW_n .
 \]
 Note that $u^{\left[  i\right]  }$ has type $\mm^{[i]} := \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
 (This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = p_i(\mm)$.)
@@ -2947,14 +2948,14 @@ The definition of $u^{\left[  i\right]  }$ yields
 \label{pf.lem:determinant_form.interl-act.rec}
 u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right) \qquad \text{for each } i \in \ive{\ell-1}.
 \end{equation}
-The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[\ell-1\right]} = \qq(1\dotsm 1)$.
+The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[\ell-1\right]} = \qq(1^n)$.
 Our construction of $u$ shows that $u$ is weakly decreasing up to level $\ell-1$.
 
 $\Longrightarrow:$
-Assume that $u = \qq(1 \dotsm 1)$.
+Assume that $u = \qq(1^n)$.
 We must prove that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 
-We have $u = \qq(1\dotsm 1) = u^{\left[  \ell-1\right]  }$.
+We have $u = \qq(1^n) = u^{\left[  \ell-1\right]  }$.
 
 \begin{claim}
 \label{claim:weakly_decreasing_level_i}
@@ -3115,7 +3116,7 @@ This proves the $\Longrightarrow$ direction of Lemma~\ref{lem:determinant_form.i
 
 $\Longleftarrow:$
 Assume that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
-We must prove that $u = \qq(1 \dotsm 1)$.
+We must prove that $u = \qq(1^n)$.
 
 \begin{claim}
 \label{claim:describing_u^[i]}
@@ -3132,7 +3133,7 @@ i+1 & \text{if } t \notin q_i.
 
 \begin{subproof}
 We proceed by induction on $i$.
-For convenience, we extend the claim so that the base case is the trivial case $i = 0$ (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1\dotsm1$).
+For convenience, we extend the claim so that the base case is the trivial case $i = 0$ (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1^n$).
 
 For the induction step, we fix $h \in \ive{\ell-1}$, and we assume (as induction hypothesis) that Claim~\ref{claim:describing_u^[i]} holds for $i = h - 1$.
 We now must prove that Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
@@ -3225,7 +3226,7 @@ j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
 \]
 Comparing this with~\eqref{pf.lem:determinant_form.interl-act.fwd.5}, we conclude that $( u^{\left[\ell-1\right]} )_t = u_t$ for all $t \in \ive{n}$.
 Thus, $u^{\left[\ell-1\right]} = u$.
-Hence, $u = u^{\left[\ell-1\right]} = \qq(1 \dotsm 1)$.
+Hence, $u = u^{\left[\ell-1\right]} = \qq(1^n)$.
 This proves the $\Longleftarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
 \end{proof}
 
@@ -3288,7 +3289,7 @@ Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determi
 
 The definition of $\swt{u}$ yields
 \begin{align*}
-\swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1\dotsm 1)}}\wt(\qq) \\
+\swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1^n)}}\wt(\qq) \\
 %&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
 % The above is just a trivial rewording of the summation set for the equation below -- Travis
 &  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
@@ -3757,8 +3758,8 @@ Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transposi
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
 Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 
-In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
-The only nontrivial part is showing $u = (\fraks_i\qq) (1 \dotsm 1)$.
+In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1^n)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1^n)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
+The only nontrivial part is showing $u = (\fraks_i\qq) (1^n)$.
 More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
 The proof of this claim reduces to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
 
@@ -3937,7 +3938,7 @@ There is the natural cyclic symmetry on our special weights.
   $\qq (u \sigma) = \bigl( (\sigma \qq)(u) \bigr) \sigma$,
   where the action of $C_n$ on MLQs is obtained by acting on each queue separately.
   Thus, in particular, for any $\tau$-twisted MLQ $\qq$ of type $\mm$, we have
-  $\qq (1 \dotsm 1) = \bigl( (\sigma \qq)(1 \dotsm 1) \bigr) \sigma$.
+  $\qq (1^n) = \bigl( (\sigma \qq)(1^n) \bigr) \sigma$.
   From here, the claim follows by an obvious bijection
   (given by the action of $\sigma$) between the sums defining
   $\swt{u}_{\tau} \sigma$ and $\swt{u \sigma}_{\tau}$.
@@ -4085,7 +4086,7 @@ A \defn{labeling} of $\qq$ is a sequence of maps $\ff = (f_1, \dotsc, f_{\ell})$
 We represent this by placing an $f_i(j)$, which we call the \defn{label}, inside of the circle corresponding to $j \in q_i$.
 The \defn{canonical labeling} $\ff_{\qq}$ of $\qq$ is the labeling $(f_1, \dotsc, f_{\ell})$ defined by
 \begin{equation}
-f_k(j) = \bigl( q_k( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j.
+f_k(j) = \bigl( q_k( \cdots q_1(1^n) \cdots ) \bigr)_j.
 \label{eq.AasLin-lab.formula}
 \end{equation}
 For example, the labeling of each MLQ in Example~\ref{ex:merge_theorem} is precisely the circled values.
@@ -4158,13 +4159,13 @@ In view of~\eqref{eq.AasLin-lab.two-actions}, this entails
 \]
 Thus, by induction,
 \[
-\omega_i \tup{ f_i } = q_i( \cdots q_1(1 \dotsm 1) \cdots )
+\omega_i \tup{ f_i } = q_i( \cdots q_1(1^n) \cdots )
  \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
 \]
-(since $\omega_0 \tup{ f_0 } = 1 \dotsm 1$).
+(since $\omega_0 \tup{ f_0 } = 1^n$).
 Hence,
 \[
-f_i(j) = \bigl( q_i( \cdots q_1(1 \dotsm 1) \cdots ) \bigr)_j
+f_i(j) = \bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_j
  \qquad \text{for all } i \in \set{0, 1, \dotsc, \ell}
         \text{ and } j \in q_i .
 \]
@@ -4659,8 +4660,8 @@ Recall that any permutation in $\SymGp{\ell-1}$ is a product of simple transposi
 Hence, in order to prove Theorem~\ref{thm:permutation}, it suffices to show that $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$ for each $\sigma \in \SymGp{\ell-1}$ and $i \in \ive{\ell-2}$.
 Then, Theorem~\ref{thm:permutation} follows by induction on length, \textit{i.e.} the minimal number of simple transpositions needed to write $\sigma$.
 
-In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1 \dotsm 1)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1 \dotsm 1)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
-The only nontrivial part is showing $u = (\fraks_i\qq) (1 \dotsm 1)$.
+In order to prove $\swt{u}_{\sigma} = \swt{u}_{\sigma s_i}$, we need to show, for a $\sigma$-twisted MLQ $\qq$ of type $\mm$ satisfying $u = \qq (1^n)$, that $\fraks_i \qq$ is a $\sigma s_i$-twisted MLQ of type $\mm$ satisfying $u = (\fraks_i \qq) (1^n)$ (since this will show that $\fraks_i$ bijects the former MLQs to the latter).
+The only nontrivial part is showing $u = (\fraks_i\qq) (1^n)$.
 More generally, we will show that $(\fraks_i\qq)(w) = \qq(w)$ for any word $w \in \mcW_n$.
 The proof of this claim reduces to showing that for any configuration $C = \tup{q_1, q_2}$ and any word $w \in \mcW_n$ the dual configuration $\fraks_1 C = C' = (q'_1, q'_2)$ of $C$ satisfies $C'(w) = C(w)$.
 
