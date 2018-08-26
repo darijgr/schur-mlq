@@ -107,7 +107,9 @@
 \renewcommand{\bigcup}{\cupnonlimits\limits}
 \renewcommand{\bigcap}{\capnonlimits\limits}
 
-\newenvironment{subproof}{$\lceil$ \textit{Proof.} }{\hfill$\blacksquare \rfloor$ \medskip}
+\newenvironment{subproof}{\textit{Proof.} }{\hfill$\blacksquare$ \medskip}
+% Darij's alternative:
+% \newenvironment{subproof}{$\lceil$ \textit{Proof.} }{\hfill$\blacksquare \rfloor$ \medskip}
 
 \newenvironment{verlong}{}{}
 \newenvironment{vershort}{}{}
@@ -274,8 +276,6 @@ We give a determinant formula for the spectral weight of a word, which gives a p
 \end{abstract}
 
 \maketitle
-
-\Darij{Travis doesn't like the bracketty subproof formatting; I want it to have some "enclosing" element. Travis, is this better? I'd prefer elephant bookends, but I don't see them in LaTeX.}
 
 %=====================================================================
 \section{Introduction}
