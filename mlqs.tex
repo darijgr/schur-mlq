@@ -499,7 +499,7 @@ The word $v = q(u)$ then has type
 (m_1, \dots, m_{t-1}, r-p_{t-1}, p_{t}-r, m_{t+1}, m_{t+2}, \ldots).
 \end{equation}
 Note that $p_{t} - r = m_{t} + (p_{t-1} - r)$.
-We think of this as splitting the class $t$ into two new classes $t$ and $t+1$. % and so we call $t$ the \defn{splitting class} of $q(u)$.
+We think of this as splitting the class $t$ into two new classes $t$ and $t+1$.
 
 For all $i$ processed in Phase~I (resp.\ Phase~II) of the algorithm, we have $u_i \geq t$ (resp.~$u_i \leq t$).
 The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \ive{n}$ satisfying $v_j \leq t$.
@@ -769,7 +769,6 @@ In this section, we state our main results and use them to prove the commutativi
 \end{thm}
 
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
-%In order to prove our next result, we need the following.
 
 \subsection{Queue action and merges}
 We shall next study the interplay between the action of queues on words and the merging of adjacent classes.
@@ -1398,9 +1397,6 @@ Note however that queues give us \emph{a} random process with this property: for
 
 \section{Proof of Theorem~\ref{thm:determinant_form}}
 \label{sec:JT-proofs}
-
-%In this section, we gather some technical proofs that have been omitted from Section~\ref{sec:JT_formula}.
-% [Use the above line if we end up moving further unrelated proofs into this appendix.]
 
 The goal of this section is to prove Theorem~\ref{thm:determinant_form}.
 Along the way, we shall derive a number of intermediate results, some of which may be of independent interest.
@@ -3047,7 +3043,7 @@ For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
 u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1^n)  = q_i\bigl( \cdots q_2\bigl( q_1(1^n) \bigr) \cdots \bigr)  \in \mcW_n .
 \]
 Note that $u^{\left[  i\right]  }$ has type $\mm^{[i]} := \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
-(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = p_i(\mm)$.)
+(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$.)
 The definition of $u^{\left[  i\right]  }$ yields
 \begin{equation}
 \label{pf.lem:determinant_form.interl-act.rec}
@@ -3076,8 +3072,8 @@ Our goal is then to show that $u^{\left[i-1\right]}$ is weakly decreasing up to 
 
 But~\eqref{pf.lem:determinant_form.interl-act.rec} yields $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]} )$.
 % We know that all letters of $u^{\left[i-1\right]}$ belong to $\ive{i}$ (since $u^{\left[i-1\right]}$ has type $\tup{m_1, m_2, \dotsc, m_{i-1}, n-p_{i-1}(\mm), 0, 0, \ldots}$).
-This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$; thus, it has at least one letter equal to $i$ (since $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
-Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm)$).
+This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$; thus, it has at least one letter equal to $i$ (since the $i$-th entry of $\mm^{[i]}$ is $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$).
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u^{\left[i-1\right]}$ and $q_i$ instead of $u$ and $q$)
 yields that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
 This completes the induction step; Claim~\ref{claim:weakly_decreasing_level_i} is thus proven.
@@ -3109,11 +3105,11 @@ Thus,
 
 Claim~\ref{claim:weakly_decreasing_level_i} shows that the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
 Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (i.e., first all $i$'s, then all $i-1$'s, etc.).
-Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$).
+Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]} = \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$).
 
 Recall that the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$.
-Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $p_i(\mm)$ smallest letters of this word.
-In other words, they are the $\abs{q_i}$ smallest letters of this word (since $p_i(\mm) = \abs{q_i}$).
+Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $p_i(\mm^{[i]})$ smallest letters of this word.
+In other words, they are the $\abs{q_i}$ smallest letters of this word (since $p_i(\mm^{[i]}) = p_i(\mm) = \abs{q_i}$).
 In view of~\eqref{pf.claim:description_q_i^(j).1}, this rewrites as follows:
 The letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ are exactly the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$.
 In other words, these letters appear precisely in the positions $j \in q_i$.
@@ -3152,14 +3148,14 @@ Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
 \begin{subproof}
 From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]  } )$.
 This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$.
-Thus, it has at least one letter equal to $i$ (since $m_i > 0$)
+Thus, it has at least one letter equal to $i$ (since the $i$-th entry of $\mm^{[i]}$ is $m_i > 0$)
 and is weakly decreasing up to level $i$ (by Claim~\ref{claim:weakly_decreasing_level_i}).
 Also, this word has exactly $\abs{q_i}$ letters that are at most $i$
 \begin{vershort}
-(since $\abs{q_i} = p_i(\mm)$).
+(since $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$).
 \end{vershort}
 \begin{verlong}
-(since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm)$).
+(since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$).
 \end{verlong}
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(b) (applied to $u^{\left[i-1\right]}$, $q_i$ and $j$ instead of $u$, $q$ and $h$)
 yields
@@ -3238,7 +3234,8 @@ i+1 & \text{if } t \notin q_i.
 
 \begin{subproof}
 We proceed by induction on $i$.
-For convenience, we extend the claim so that the base case is the trivial case $i = 0$ (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1^n$).
+For convenience, we extend the claim to all $i \in \set{0, 1, \ldots, \ell-1}$.
+Thus, the base case is the trivial case $i = 0$ (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1^n$).
 
 For the induction step, we fix $h \in \ive{\ell-1}$, and we assume (as induction hypothesis) that Claim~\ref{claim:describing_u^[i]} holds for $i = h - 1$.
 We now must prove that Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
@@ -3291,10 +3288,18 @@ j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
 \ell & \text{if } t \notin q_{\ell-1}.
 \end{cases}
 \end{equation}
-On the other hand, the letters of $u$ are given, from the construction, by
+On the other hand, the definition of the word $u$ shows that
+the letters of $u$ are given as follows:
 \[
 u_t =
 \begin{cases}
+v_j & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\ell & \text{otherwise}
+\end{cases}
+\in
+\begin{cases}
+\ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\set{\ell} & \text{otherwise} .
 v_j \in \ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
 \ell & \text{otherwise.}
 \end{cases}
