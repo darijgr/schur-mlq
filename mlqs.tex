@@ -2040,20 +2040,19 @@ We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of
 
 \begin{vershort}
 \begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
-The proof is similar to the usual Jacobi--Trudi bijection relating semistandard tableaux and NILPs.
+The proof is similar to the usual bijection relating semistandard tableaux and NILPs that is used in proving the Jacobi--Trudi identity.
 For example, see~\cite[First proof of Thm. 7.16.1]{Stanley-EC2}.\footnote{Note that in this proof, those paths go west instead of east, but this is just a reflection across the $y$-axis.}
-We note on the differences.
-\begin{itemize}
-\item The fixed surface $s = (s_1, \dotsc, s_k)$ condition on the semistandard tableaux of shape $\lambda = (\lambda_1, \dotsc, \lambda_k)$ translates into requiring each path $p_i$ having the final arc be an east-step.
-However, the corresponding NILP coming from the LGV Lemma is without this final arc, and more precisely, it would start and end $k$-vertices are $\uu = (A_1, \dotsc, A_k)$ and $\vv = (B_1, \dotsc, B_k)$, respectively, with
+Thus, we define two $k$-vertices $\uu = (A_1, \dotsc, A_k)$ and $\vv = (B_1, \dotsc, B_k)$ with
 \[
 A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
-This fixed surface $s$ (or fixed final east steps) yields the $\prod_{i=1}^k x_{s_i}$ factor.
-Removing these final steps yields the NILP coming from the LGV Lemma.
-\item We can have the bottom row be longer than the row above it, but then these final steps are free (except for being larger than things to their left).
-\item We can have gaps between entries in a column, but the semistandard and strictly increasing surface conditions hold when removing intermediate rows from consideration.
-Indeed, removing these rows and their corresponding paths gives a natural injection on both the tableaux their corresponding NILPs.
+We can then define a bijection $\Phi \colon N(\uu, \vv) \to \SST(\lambda, s)$ by requiring that if $\pp = \tup{p_1, p_2, \dotsc, p_k} \in N(\uu, \vv)$ is a NILP, then the first $\lambda_i - 1$ entries of the $i$-th row of the tableau $\Phi(\pp)$ will be the $y$-coordinates of the east-steps of the path $p_i$ (while the last entry of the $i$-th row must of course be $s_i$).
+Then, Proposition~\ref{prop.LGV.concrete} and~\eqref{eq.LGV.single-paths} yield Theorem~\ref{thm.tableau.jt}.
+We comment on the differences to~\cite[First proof of Thm. 7.16.1]{Stanley-EC2}:
+\begin{itemize}
+\item The points $B_1, B_2, \ldots, B_k$ no longer lie on a horizontal line; but the conditions of Proposition~\ref{prop.LGV.concrete} are still satisfied since $s$ is strictly increasing and $\lambda$ is a pseudo-partition.
+\item In the tableau $\Phi(\pp)$, only the first $\lambda_i - 1$ entries of the $i$-th row come from the path $p_i$; the last entry is $s_i$. Thus the $\prod_{i=1}^k x_{s_i}$ factor in $\sum_{T \in \SST(\lambda, s)} \wt(T)$.
+\item Since $\lambda$ is only a pseudo-partition, a column of $[\lambda]$ can have gaps between cells. Thus, we need to argue that if a tableau $T$ of shape $\lambda$ with surface $s$ has weakly increasing rows and its columns are strictly increasing between consecutive rows (\textit{i.e.}, we have $T(i, j) < T(i+1, j)$ whenever both entries exist), then the columns of $T$ are also strictly increasing across gaps (\textit{i.e.}, we have $T(i_1, j) < T(i_2, j)$ for all $i_1 < i_2$). This is an easy exercise using the assumption that $s$ is strictly increasing.
 \end{itemize}
 \end{proof}
 \end{vershort}
@@ -2198,7 +2197,7 @@ We note that during the construction of the bijection $\Phi$, the fixed surface 
 Otherwise the rest of the proof is similar to the usual Jacobi--Trudi bijection relating semistandard tableaux and NILPs.
 \end{verlong}
 
-See Figure~\ref{fig:tableau_to_NILP} for an example of the bijection between semistandard tableaux with a fixed (strictly increasing) surface and NILPs used in the proof of Theorem~\ref{thm.tableau.jt}.
+See Figure~\ref{fig:tableau_to_NILP} for an example of the bijection $\Phi$ used in the proof of Theorem~\ref{thm.tableau.jt}.
 
 
 %%%%%%%%%%
@@ -3300,8 +3299,6 @@ v_j & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
 \begin{cases}
 \ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
 \set{\ell} & \text{otherwise} .
-v_j \in \ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
-\ell & \text{otherwise.}
 \end{cases}
 \]
 In view of $\set{b_1, b_2, \ldots, b_r} = B = q_{\ell-1}$, this shows that the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$, whereas the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
