@@ -319,7 +319,7 @@ This interpretation gives a connection with five-vertex models, corner transfer 
 
 In this paper, we introduce a new weighting of MLQs, which is the weight of the MLQ considered as a tensor product of Kirillov--Reshetikhin crystals.
 We also interpret MLQs as functions on words of a fixed length $n$ following~\cite{AAMP}, where it was referred to as the generalized FM algorithm.
-This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$.
+This allows us to define the spectral weight or amplitude of a word $u$ to be the sum over all the weight of all ordinary MLQs $\qq$ such that $u = \qq(1^n)$, where $1^n$ is the word $1 \dotsm 1$.
 Furthermore, we introduce the notion of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
 Our main result (Theorem~\ref{thm:permutation}) is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
@@ -675,7 +675,7 @@ For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ 
 %\end{equation}
 \]
 where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1^n)$.
-(Here, $1^n$ denotes the word in $\mcW_n$ whose all letters are $1$.)
+(Recall that $1^n$ denotes the word in $\mcW_n$ whose all letters are $1$.)
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
@@ -1224,13 +1224,17 @@ The proof of this theorem is given in Section~\ref{sec:JT-proofs}.
 
 We can use Theorem~\ref{thm:determinant_form} to settle two conjectures from~\cite{AasLin17}. Here is an outline:
 
-Now, fix a sequence $b_1 < b_2 < \cdots < b_r$, and for a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
-Furthermore let $S \subseteq \ive{r-1}$ be such that $i\in S$ implies $i+1 \notin S$, and define the permutation $\sigma_S := \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
-Note that the elements $\{s_i \mid i \in S\}$ all commute, so the product, and hence $\sigma_S$, is well-defined.
+Fix a sequence $b_1 < b_2 < \cdots < b_r$ of sites.
+For a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
+\darij{What does this mean?}
+We say that a set $S$ of integers is \defn{lacunar} if $i\in S$ implies $i+1 \notin S$.
+Let $S \subseteq \ive{r-1}$ be lacunar, and define the permutation $\sigma_S := \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
+Note that the elements $\{s_i \mid i \in S\}$ all commute, so their product, and hence $\sigma_S$, is well-defined.
 In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
 
-Let $T \subseteq \ive{r-1}$, and let $\phi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
+Let $T \subseteq \ive{r-1}$ be lacunar, and let $\psi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
 By Theorem~\ref{thm:permutation}, we have
+\darij{Do you perhaps mean Theorem~\ref{thm:merge} instead? And if so, why exactly?}
 \begin{align*}
   \psi(T) & = \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
   \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
@@ -2060,13 +2064,11 @@ A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
 \]
 The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
 Thus, Proposition~\ref{prop.LGV.concrete} yields
-\begin{equation}
+\begin{align}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \nonumber \\
+ & = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
 \label{pf.thm.tableau.jt.1}
-\begin{split}
-\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \\
-& = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
-\end{split}
-\end{equation}
+\end{align}
 where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
 \[
 \sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
