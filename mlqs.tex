@@ -175,6 +175,11 @@
 \newcommand{\dred}{\color{dredcolor}\bf}
 \newcommand{\dblack}{\color{dblackcolor}\bf}
 
+\definecolor{UQgold}{RGB}{196, 158, 54} % UQ gold
+\definecolor{UQpurple}{RGB}{73, 7, 94} % UQ purple
+\definecolor{UMNgold}{RGB}{255,200,46} % UMN gold
+\definecolor{UMNmaroon}{RGB}{106,0,50} % UMN maroon
+
 \usepackage{xparse}
 
 \makeatletter
@@ -1500,15 +1505,15 @@ See Figure~\ref{fig:NILP_example} for an illustration.
   \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6, 7}
      \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\ytext$};
 
-  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] (A3) at (2,3) {$A_3$};
-  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] (A2) at (3,1) {$A_2$};
-  \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] (A1) at (5,1) {$A_1$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A3) at (2,3) {$A_3$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A2) at (3,1) {$A_2$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A1) at (5,1) {$A_1$};
 
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B3) at (4,6) {$B_3$};
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B2) at (5,6) {$B_2$};
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B1) at (6,4) {$B_1$};
 
-  \begin{scope}[thick,>=stealth,red]
+  \begin{scope}[thick,>=stealth,darkred]
       % $p_3$:
       \draw (A3) edge[->] (2,4);
       \draw (2,3.6) node[anchor=east] {$1$};
@@ -1521,7 +1526,7 @@ See Figure~\ref{fig:NILP_example} for an illustration.
       \draw (4,5) edge[->] (B3);
       \draw (4,5.4) node[anchor=east] {$1$};
   \end{scope}
-  \begin{scope}[thick,>=stealth,blue]
+  \begin{scope}[thick,>=stealth,dbluecolor]
       % $p_2$:
       \draw (A2) edge[->] (4,1);
       \draw (3.6,1) node[anchor=north] {$x_1$};
@@ -1930,7 +1935,7 @@ The right tableau is semistandard, while the left one is not (the two $5$'s in t
 These tableaux have surfaces $(5,3,5,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
 \end{example}
 
-We now state the main result of this subsection:
+We now state the main result of this subsection.
 
 \begin{thm}
 \label{thm.tableau.jt}
@@ -1959,7 +1964,7 @@ We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of
   \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6}
      \draw (-1cm+1pt,\y cm) -- (-1cm-1pt,\y cm) node[anchor=east] {$\ytext$};
   \foreach \x in {1, 2, 3, 4}
-    \node[circle,fill=white,draw=black,text=darkred,inner sep=1pt] (A\x) at (4-\x,1) {$A_{\x}$};
+    \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A\x) at (4-\x,1) {$A_{\x}$};
 
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B4p) at (1+4-4-1,6) {$B_4$};
   \node[circle,fill=black,inner sep=1.5pt] (B4) at (1+4-4,6) {};
@@ -1970,7 +1975,7 @@ We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of
   \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B1p) at (3+4-1-1,2) {$B_1$};
   \node[circle,fill=black,inner sep=1.5pt] (B1) at (3+4-1,2) {};
 
-  \begin{scope}[thick,>=stealth,brown]
+  \begin{scope}[thick,>=stealth,UQpurple]
       % $p_4$:
       \draw (A4) edge[->] (0,2);
       \draw (0,1.6) node[anchor=east] {$1$};
@@ -1985,7 +1990,7 @@ We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of
       \draw (B4p) edge[->,color=black] (B4);
       \draw[color=black] (0.6,6) node[anchor=south] {$x_6$};
   \end{scope}
-  \begin{scope}[thick,>=stealth,red]
+  \begin{scope}[thick,>=stealth,darkred]
       % $p_3$:
       \draw (A3) edge[->] (1,2);
       \draw (1,1.6) node[anchor=east] {$1$};
@@ -2002,7 +2007,7 @@ We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of
       \draw (B3p) edge[->,color=black] (B3);
       \draw[color=black] (3.6,5) node[anchor=south] {$x_5$};
   \end{scope}
-  \begin{scope}[thick,>=stealth,blue]
+  \begin{scope}[thick,>=stealth,dbluecolor]
       % $p_2$:
       \draw (A2) edge[->] (2,2);
       \draw (2,1.6) node[anchor=east] {$1$};
@@ -2210,7 +2215,7 @@ First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\i
 \begin{itemize}
 \item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
 
-\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$.
+\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$ (for nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
 \end{itemize}
 
 For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
@@ -2382,9 +2387,9 @@ Then,
 \end{align*}
 \end{cor}
 
-\begin{proof}[Proof of Corollary~\ref{cor:determinant_form.bij1c}.]
+\begin{proof}
 Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
-Property~(c) shows that this injection $P$ restricts to an injection
+Property~(c) shows that $P$ restricts to an injection
 \[
 \set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
 \]
@@ -3353,7 +3358,7 @@ Write the $r$-tuple $\tup{v_1, v_2, \dotsc, v_r}$ in the form
   \underbrace{1,\ldots,1}_{m_1\text{ times}}
 )
 \end{equation}
-for some $m_1, m_2, \ldots, m_{\ell-1} \geq 0$
+for some $m_1, m_2, \ldots, m_{\ell-1} > 0$
 (we can do this, since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$ and $v_1 \geq v_2 \geq \cdots \geq v_r$).
 \begin{verlong}
 Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
@@ -3366,8 +3371,7 @@ by the construction of $u$.
 \begin{verlong}
 (since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
 \end{verlong}
-Note that $m_i > 0$ for all $i \in \ive{\ell-1}$ (since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$).
-Hence, the word $u$ is packed.
+Additionally, note that the word $u$ is packed.
 Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
 \begin{verlong}
 Each $i \in \ive{\ell}$ satisfies
