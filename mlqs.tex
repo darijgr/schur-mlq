@@ -32,14 +32,12 @@
 \newcommand{\qbinom}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
 \newcommand{\absval}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\case}[1]{\vspace{12pt}\noindent\underline{#1}:}
-\newcommand{\fs}{\mathcal{S}} % flagged Schur function
 \newcommand{\mbf}{\mathbf}
 \newcommand{\0}{\phantom{c}}
 \newcommand{\swt}[1]{\left\langle #1 \right\rangle} % Spectral weight or amplitude
 \newcommand{\merge}[1]{\vee_{#1}} % merge
 \newcommand{\SymGp}[1]{\mathfrak{S}_{#1}} % symmetric group
 \newcommand{\std}[1]{\widetilde{#1}} % standardization
-\newcommand{\MLQ}{\mathbf{S}} % (old symbol for) MLQs
 \newcommand{\diag}[1]{\left[#1\right]} % diagram
 
 \DeclareMathOperator{\supp}{supp} % Support
@@ -80,21 +78,6 @@
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\CC}{\mathbb{C}}
-
-\newcommand{\bze}{\overline{0}}
-\newcommand{\bon}{\overline{1}}
-\newcommand{\btw}{\overline{2}}
-\newcommand{\bth}{\overline{3}}
-\newcommand{\bfo}{\overline{4}}
-\newcommand{\bfive}{\overline{5}}
-\newcommand{\bsix}{\overline{6}}
-\newcommand{\bseven}{\overline{7}}
-\newcommand{\beight}{\overline{8}}
-\newcommand{\bi}{\overline\imath}
-\newcommand{\bk}{\overline{k}}
-\newcommand{\brr}{\overline{r}}
-\newcommand{\bn}{\overline{n}}
-\newcommand{\ellbar}{\overline{\ell}}
 
 \newcommand{\fraks}{\mathfrak{s}}
 
@@ -149,6 +132,7 @@
 \definecolor{darkred}{rgb}{0.7,0,0} % darkred color
 \newcommand{\defn}[1]{{\color{darkred}\emph{#1}}} % emphasis of a definition
 
+\begin{comment}
 %% For typesetting code listings                                                
 \usepackage{listings}
 \lstdefinelanguage{Sage}[]{Python}
@@ -167,6 +151,8 @@
   belowskip=0.75em,
   xleftmargin=.15in,
 }
+\end{comment}
+
 \definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
 \definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
 \definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
@@ -2057,7 +2043,7 @@ We comment on the differences to~\cite[First proof of Thm. 7.16.1]{Stanley-EC2}:
 \begin{itemize}
 \item The points $B_1, B_2, \ldots, B_k$ no longer lie on a horizontal line; but the conditions of Proposition~\ref{prop.LGV.concrete} are still satisfied since $s$ is strictly increasing and $\lambda$ is a pseudo-partition.
 \item In the tableau $\Phi(\pp)$, only the first $\lambda_i - 1$ entries of the $i$-th row come from the path $p_i$; the last entry is $s_i$. Thus the $\prod_{i=1}^k x_{s_i}$ factor in $\sum_{T \in \SST(\lambda, s)} \wt(T)$.
-\item Since $\lambda$ is only a pseudo-partition, a column of $[\lambda]$ can have gaps between cells. Thus, we need to argue that if a tableau $T$ of shape $\lambda$ with surface $s$ has weakly increasing rows and its columns are strictly increasing between consecutive rows (\textit{i.e.}, we have $T(i, j) < T(i+1, j)$ whenever both entries exist), then the columns of $T$ are also strictly increasing across gaps (\textit{i.e.}, we have $T(i_1, j) < T(i_2, j)$ for all $i_1 < i_2$). This is an easy exercise using the assumption that $s$ is strictly increasing.
+\item Since $\lambda$ is only a pseudo-partition, a column of $\diag{\lambda}$ can have gaps between cells. Thus, we need to argue that if a tableau $T$ of shape $\lambda$ with surface $s$ has weakly increasing rows and its columns are strictly increasing between consecutive rows (\textit{i.e.}, we have $T(i, j) < T(i+1, j)$ whenever both entries exist), then the columns of $T$ are also strictly increasing across gaps (\textit{i.e.}, we have $T(i_1, j) < T(i_2, j)$ for all $i_1 < i_2$). This is an easy exercise using the assumption that $s$ is strictly increasing.
 \end{itemize}
 \end{proof}
 \end{vershort}
@@ -2167,7 +2153,7 @@ Consider the \emph{largest} such $q$.
 Clearly, $i_1 < q < i_2$.
 Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
 
-The maximality of $q$ shows that column $j$ of $[\lambda]$ has no gaps between row $q$ and row $i_2$.
+The maximality of $q$ shows that column $j$ of $\diag{\lambda}$ has no gaps between row $q$ and row $i_2$.
 Hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$ (since $q<i_2$).
 
 From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i_1,j} \leq s_{i_1} \leq s_{q}$ (since $i_1 < q$, but the sequence $s$ is weakly increasing).
@@ -2215,7 +2201,7 @@ First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\i
 \begin{itemize}
 \item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
 
-\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$ (for nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
+\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$. (For nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
 \end{itemize}
 
 For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
@@ -3371,7 +3357,7 @@ by the construction of $u$.
 \begin{verlong}
 (since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
 \end{verlong}
-Additionally, note that the word $u$ is packed.
+Additionally, the word $u$ is packed (since $m_1, m_2, \ldots, m_{\ell-1} > 0$).
 Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
 \begin{verlong}
 Each $i \in \ive{\ell}$ satisfies
