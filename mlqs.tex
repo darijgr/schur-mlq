@@ -1579,7 +1579,55 @@ Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
 Then, $p$ and $p'$ have a vertex in common.
 \end{lemma}
 
-TODO: Example picture.
+\begin{figure}[t]
+\[
+\begin{tikzpicture}
+  \draw[densely dotted] (0,0) grid (7.2,7.2);
+  % axes:
+  \draw[->] (0,0) -- (0,7.2);
+  \draw[->] (0,0) -- (7.2,0);
+  \foreach \x/\xtext in {0, 1, 2, 3, 4, 5, 6, 7}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\xtext$};
+  \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6, 7}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\ytext$};
+
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A') at (1,3) {$A^{\prime}$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A) at (2,1) {$A$};
+  
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B') at (5,6) {$B^{\prime}$};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B) at (6,4) {$B$};
+  
+  \begin{scope}[thick,>=stealth,darkred]
+      % $p$:
+      \draw (A) edge[->] (3,1);
+      \draw (2.6,1) node[anchor=north] {$p$};
+      \draw (3,1) edge[->] (3,2);
+      \draw (3,2) edge[->] (4,2);
+      \draw (4,2) edge[->] (4,3);
+      \draw (4,3) edge[->] (4,4);
+      \draw (4,4) edge[->] (4,5);
+      \draw (4,5) edge[->] (5,5);
+      \draw (5,5) edge[->] (B');
+      \draw (5,5.4) node[anchor=east] {$p$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dbluecolor]
+      % $p^{\prime}$:
+      \draw (A') edge[->] (2,3);
+      \draw (1.6,3) node[anchor=north] {$p^{\prime}$};
+      \draw (2,3) edge[->] (2,4);
+      \draw (2,4) edge[->] (3,4);
+      \draw (3,4) edge[->] (4,4);
+      \draw (4,4) edge[->] (5,4);
+      \draw (5,4) edge[->] (B);
+      \draw (5.4,4) node[anchor=north] {$p^{\prime}$};
+  \end{scope}
+\end{tikzpicture}
+\]
+\caption{Illustration for Lemma~\ref{lem.LGV.hex}.}
+\label{fig:LGV.hex.example}
+\end{figure}
+
+See Figure~\ref{fig:LGV.hex.example} for an illustration of the situation of this lemma.
 
 \begin{proof}[First proof of Lemma~\ref{lem.LGV.hex}.]
 If $q$ is any path, then the \defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
@@ -1737,16 +1785,88 @@ y = \ycoord(A), \qquad
 x = \xcoord(B), \qquad
 y = \ycoord(B'),
 \]
-respectively (all in Cartesian coordinates).
+respectively (all in Cartesian coordinates).\footnote{See Figure~\ref{fig:LGV.hex.pf2} for this rectangle.}
 Then, the path $p$ joins two opposite sides of this rectangle (namely, the second and the fourth), whereas
 the path $p'$ joins the other two sides of this rectangle; moreover, both paths stay fully within the rectangle (due to~\eqref{pf.lem.LGV.hex.1} and~\eqref{pf.lem.LGV.hex.2}).
 Hence, it is geometrically obvious that $p$ and $p'$ must meet; in other words, $p$ and $p'$ have a vertex in common.
 
+\begin{figure}[t]
+\[
+\begin{tikzpicture}
+  \draw[densely dotted] (-1.2,-1.2) grid (8.2,8.2);
+  
+  \draw (1,-1.2) -- (1,8.2);
+  \draw (1,4.3) node[anchor=east] {$x = \xcoord(A')$};
+  \draw (-1.2,1) -- (8.2,1);
+  \draw (4,1) node[anchor=north] {$y = \ycoord(A)$};
+  \draw (6,-1.2) -- (6,8.2);
+  \draw (6,2.7) node[anchor=west] {$x = \xcoord(B)$};
+  \draw (-1.2,6) -- (8.2,6);
+  \draw (3,6) node[anchor=south] {$y = \ycoord(B')$};
+  
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A') at (1,3) {$A^{\prime}$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A) at (2,1) {$A$};
+  
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B') at (5,6) {$B^{\prime}$};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B) at (6,4) {$B$};
+  
+  \begin{scope}[thick,>=stealth,darkred]
+      % $p$:
+      \draw (A) edge[->] (3,1);
+      \draw (2.6,1) node[anchor=north] {$p$};
+      \draw (3,1) edge[->] (3,2);
+      \draw (3,2) edge[->] (4,2);
+      \draw (4,2) edge[->] (4,3);
+      \draw (4,3) edge[->] (4,4);
+      \draw (4,4) edge[->] (4,5);
+      \draw (4,5) edge[->] (5,5);
+      \draw (5,5) edge[->] (B');
+      \draw (5,5.4) node[anchor=east] {$p$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dashed,darkred]
+      % $\widetilde{p}$:
+      \draw (2,0) edge[->] (A);
+      \draw (2,-1) edge[->] (2,0);
+      \draw (2,-1.2) edge[->] (2,-1);
+      \draw (2,-0.3) node[anchor=west] {$\widetilde{p}$};
+      \draw (B') edge[->] (5,7);
+      \draw (5,7) edge[->] (5,8);
+      \draw (5,8) edge (5,8.2);
+      \draw (5,7.3) node[anchor=west] {$\widetilde{p}$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dbluecolor]
+      % $p^{\prime}$:
+      \draw (A') edge[->] (2,3);
+      \draw (1.6,3) node[anchor=north] {$p^{\prime}$};
+      \draw (2,3) edge[->] (2,4);
+      \draw (2,4) edge[->] (3,4);
+      \draw (3,4) edge[->] (4,4);
+      \draw (4,4) edge[->] (5,4);
+      \draw (5,4) edge[->] (B);
+      \draw (5.4,4) node[anchor=north] {$p^{\prime}$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dashed,dbluecolor]
+      % $\widetilde{p^{\prime}}$:
+      \draw (0,3) edge[->] (A');
+      \draw (-1,3) edge[->] (0,3);
+      \draw (-1.2,3) edge[->] (-1,3);
+      \draw (-0.3,3) node[anchor=north] {$\widetilde{p^{\prime}}$};
+      \draw (B) edge[->] (7,4);
+      \draw (7,4) edge[->] (8,4);
+      \draw (8,4) edge (8.2,4);
+      \draw (7.3,4) node[anchor=south] {$\widetilde{p^{\prime}}$};
+  \end{scope}
+\end{tikzpicture}
+\]
+\caption{Illustration for the Second proof of Lemma~\ref{lem.LGV.hex}.}
+\label{fig:LGV.hex.pf2}
+\end{figure}
+
 [This last geometric argument can also be substituted by a purely combinatorial one.
 Namely: Assume the contrary. Hence, the paths $p$ and $p'$ have no vertex in common.
 
-We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by vertical steps (\textit{i.e.}, arcs of the form $(i,j) \to (i,j+1)$) in both directions (so the path $\widetilde{p}$ first reaches $A$ through infinitely many north-steps, then proceeds to $B'$ along $p$, and then leaves $B'$ along infinitely many north-steps).
-We extend the path $p'$ to a bidirectionally infinite path $\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $(i,j) \to (i+1,j)$) in both directions.
+We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by vertical steps (\textit{i.e.}, arcs of the form $(i,j) \to (i,j+1)$) in both directions (so the path $\widetilde{p}$ first reaches $A$ through infinitely many north-steps, then proceeds to $B'$ along $p$, and then leaves $B'$ along infinitely many north-steps).\footnote{These new steps are the dashed red steps in Figure~\ref{fig:LGV.hex.pf2}.}
+We extend the path $p'$ to a bidirectionally infinite path $\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $(i,j) \to (i+1,j)$) in both directions.\footnote{These new steps are the dashed blue steps in Figure~\ref{fig:LGV.hex.pf2}.}
 The resulting infinite paths $\widetilde{p}$ and $\widetilde{p'}$ have no vertex in common (indeed, the paths $p$ and $p'$ stay within the rectangle discussed above, and have no vertex in common; meanwhile, the new
 steps we have added to them to obtain $\widetilde{p}$ and $\widetilde{p'}$ escape this rectangle normally in four different directions, whence they intersect neither each other nor $p$ or $p'$).
 Recall that each arc of the lattice is either an east-step or a north-step.
