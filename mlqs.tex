@@ -411,6 +411,10 @@ then a new word $v = q(u) \in \mcW_n$ is defined by the following algorithm:
 In the beginning, no letter of $v \in \mcW_n$ is set.
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+\begin{verlong}
+(The result of the algorithm will not depend on this choice,
+as we will show in Lemma~\ref{lemma:order_indep} below.)
+\end{verlong}
 
 \begin{description}
 \item[Phase~I]
@@ -1895,11 +1899,15 @@ Hence, the paths $p$ and $p'$ have a vertex in common.]
 \end{proof}
 
 We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
-suited for our applications:
+suited for our applications:\footnote{%
+Proposition~\ref{prop.LGV.concrete} is also the particular case of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$).
+The proof we are giving here is precisely the proof from \url{https://math.stackexchange.com/questions/2870640}.}
 \end{verlong}
 
+\begin{vershort}
 We now shall state a folklore result, which follows from the Lindstr\"om--Gessel--Viennot lemma:\footnote{%
 See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
+\end{vershort}
 
 \begin{prop}
 \label{prop.LGV.concrete}
@@ -2009,7 +2017,7 @@ A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only i
 For example, the second tableau in~\eqref{eq.tableau.exas-long} is semistandard, while the first is not.
 \end{verlong}
 
-If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, and if $T$ is a tableau of shape $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$,
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, and if $T$ is a tableau of shape $\lambda$,
 then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
 
 If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
@@ -2317,7 +2325,7 @@ Let us introduce some further notations now.
 First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
 
 \begin{itemize}
-\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}} $ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $a_k \geq b_k$ for all $1 \leq k \leq \alpha$.
+\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}}$ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $1 \leq k \leq \alpha$ satisfies $a_k \geq b_k$.
 
 \item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$. (For nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
 \end{itemize}
