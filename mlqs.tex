@@ -2808,28 +2808,14 @@ i_k & \mapsto j_k
 \end{align*}
 (since each element of $B$ can be written as $i_k$ for a unique $k\in \ive{n} $), and it satisfies $\phi(b) \geq b$ for each $b \in B$ (since $j_k \geq i_k$).
 This map $\phi$ is injective since the $j_1, j_2, \dotsc, j_n$ are distinct (indeed, $\tup{j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ because each letter of $q(u)$ is set exactly once during the construction of $q(u)$).
+To show $\phi$ is surjective, consider some $a \in A$, and let $k$ be such that $j_k = a$.
+We need to prove that $i_k \in B$.
+Now we have $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h < t$ since $a \in A$ and $h \in \ive{t-1}$.
+Thus, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.for_surj} yields $u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
+In other words, $i_k \in B$, and hence, $\phi$ is surjective.
 
-Next, we claim that the map $\phi$ is surjective.
-
-[\textit{Proof.} Let $a\in A$.
-We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
-
-Indeed, recall that $\left( j_1,j_2,\ldots ,j_n\right) $ is a permutation of $\tup{1, 2, \dotsc, n}$.
-Thus, there exists some $k \in \ive{n}$ satisfying $j_k = a$.
-Consider this $k$.
-All we need to prove now is that $i_k \in B$.
-
-We have $j_k = a$, and thus $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h$ (since $a \in A$).
-Hence, $\bigl( q(u) \bigr)_{j_k} = h < t$ (since $h \in \ive{t-1}$).
-Thus, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.for_surj} yields
-$u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
-In other words, $i_k \in B$.
-This completes the proof that $\phi$ is surjective.]
-
-We have thus shown that $\phi$ is both injective and surjective. Therefore, $\phi$ is bijective.
-Hence, we have found a bijection $\phi \colon B \to A$ that
-furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
-Therefore, Lemma~\ref{lem:determinant_form.gale1} shows that $A \succeq B$.
+Thus, we have constructed a bijection $\phi \colon B \to A$ such that $\phi(b) \geq b$ for each $b\in B$.
+Therefore, Lemma~\ref{lem:determinant_form.gale1} implies that $A \succeq B$.
 
 It remains to show that $B \gg C$.
 To do so, we need to check that $b > c$ for every $b \in B$ and $c \in C$.
