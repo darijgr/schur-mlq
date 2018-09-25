@@ -2846,6 +2846,7 @@ Let $u \in \mcW_n$ and let $h>0$ be a positive integer.
 Let $r$ and $q$ be two queues.
 Let $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ be nonempty disjoint subsets of $r$ satisfying
 \begin{subequations}
+\label{eq.lem:determinant_form.interl-B.rj}
 \begin{align}
 \label{eq.lem:determinant_form.interl-B.rj.1}
   r  & = r^{(1)} \cup r^{(2)} \cup \cdots \cup r^{(h-1)}
@@ -2857,16 +2858,15 @@ Let $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ be nonempty disjoint subsets of $r$ sa
 \end{subequations}
 \travis{You need a term for this. You don't need to be referencing these equations but a definition. Perhaps a ``decreasing partition''.}
 Let $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ be nonempty disjoint subsets of $q$ satisfying
-\begin{subequations}
-\begin{align}
-\label{eq.lem:determinant_form.interl-B.qj.1}
+\begin{equation}
+\label{eq.lem:determinant_form.interl-B.qj}
+\begin{split}
   q  & = q^{(1)} \cup q^{(2)} \cup \cdots \cup q^{(h)}
 \qquad \text{and}
 \\
-\label{eq.lem:determinant_form.interl-B.qj.2}
   q^{(1)} & \gg q^{(2)} \gg \cdots \gg q^{(h)} .
-\end{align}
-\end{subequations}
+\end{split}
+\end{equation}
 Furthermore, assume that $q^{(j)} \succeq r^{(j)} \gg q^{(j+1)}$ for all $j \in \ive{h-1}$.
 Finally, assume that each $t \in \ive{n}$ satisfies
 \begin{equation}
@@ -2915,14 +2915,8 @@ Summing these equations over all $j \in \ive{h-1}$, we obtain
 \abs{r^{(1)}} + \abs{r^{(2)}} + \cdots + \abs{r^{(h-1)}}
 = \abs{r}
 \]
-(since~\eqref{eq.lem:determinant_form.interl-B.rj.1}
-and~\eqref{eq.lem:determinant_form.interl-B.rj.2}
-show that the sets $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ partition
-$r$).
-But~\eqref{eq.lem:determinant_form.interl-B.qj.1}
-and~\eqref{eq.lem:determinant_form.interl-B.qj.2}
-show that the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$;
-thus,
+(since~\eqref{eq.lem:determinant_form.interl-B.rj} show that the sets $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ partition $r$).
+But~\eqref{eq.lem:determinant_form.interl-B.qj} show that the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$; thus,
 \begin{vershort}
 \[
  \abs{q}
@@ -2968,8 +2962,7 @@ In other words,
 \qquad \text{ for every } t \in \ive{n} \text{ satisfying } t \notin q .
 \end{equation}
 
-The properties~\eqref{eq.lem:determinant_form.interl-B.rj.1}
-and~\eqref{eq.lem:determinant_form.interl-B.rj.2} show that
+The properties~\eqref{eq.lem:determinant_form.interl-B.rj} show that
 the set $r^{(1)}$ consists of the $\abs{r^{(1)}}$ largest elements of $r$;
 the set $r^{(2)}$ consists of the $\abs{r^{(2)}}$ next-largest elements of $r$;
 and so on.
