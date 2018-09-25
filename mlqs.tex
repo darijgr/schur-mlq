@@ -3149,12 +3149,16 @@ We have $u = \qq(1^n) = u^{\left[  \ell-1\right]  }$.
 
 \begin{claim}
 \label{claim:weakly_decreasing_level_i}
-For each $i \in \set{0, 1, \dotsc, \ell-1} $, the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
+For each $i \in \set{0, \dotsc, \ell-1} $, the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
 \end{claim}
 
 \begin{subproof}
 We proceed by descending induction on $i$.
 The base case ($i=\ell-1$) follows from the fact that $u^{\left[  \ell-1\right]} = u$ is weakly decreasing up to level $\ell-1$.
+\begin{vershort}
+The induction step follows from Lemma~\ref{lem:determinant_form.interl-A}(a).
+\end{vershort}
+\begin{verlong}
 
 For the induction step, we fix some $i \in \ive{\ell-1}$, and we assume that $u^{\left[i\right]}$ is weakly decreasing up to level $i$.
 Our goal is then to show that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
@@ -3166,6 +3170,7 @@ Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its 
 Hence, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u^{\left[i-1\right]}$ and $q_i$ instead of $u$ and $q$)
 yields that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
 This completes the induction step; Claim~\ref{claim:weakly_decreasing_level_i} is thus proven.
+\end{verlong}
 \end{subproof}
 
 \begin{claim}
@@ -3193,7 +3198,7 @@ Thus,
 \end{equation}
 
 Claim~\ref{claim:weakly_decreasing_level_i} shows that the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
-Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (i.e., first all $i$'s, then all $i-1$'s, etc.).
+Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (\textit{i.e.}, first all $i$'s, then all $i-1$'s, etc.).
 Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$).
 
 Recall that the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$.
@@ -3228,13 +3233,8 @@ Therefore, we have proven Claim~\ref{claim:description_q_i^(j)}.
 % So many words and so little content.
 \end{subproof}
 
-\begin{claim}
-\label{claim:interlacing_subqueues}
+We now show that $\qq$ is interlacing.
 Let $i\in \ive{\ell-1}$ and $j\in \ive{i-1}$.
-Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
-\end{claim}
-
-\begin{subproof}
 From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]  } )$.
 This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$.
 Thus, it has at least one letter equal to $i$ (since the $i$-th entry of $\mm^{[i]}$ is $m_i > 0$)
@@ -3258,15 +3258,9 @@ yields
 (since $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$).
 However, the three sets appearing in this relation are $q_i^{(j)}$, $q_{i-1}^{(j)}$, and $q_i^{(j+1)}$ (from left to right), as follows from Claim~\ref{claim:description_q_i^(j)}.
 Thus, this relation becomes $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
-\end{subproof}
 
-\begin{claim}
-\label{claim:the_last_queue}
-We have $q_{\ell-1} = B$.
-\end{claim}
-
+To finish the proof of the $\Longrightarrow$ direction, it remains to show $q_{\ell-1} = B$.
 \begin{vershort}
-\begin{subproof}
 For each $i \in \ive{\ell-1}$, Equation~\eqref{eq.determinant_form.qij.1} and Claim~\ref{claim:description_q_i^(j)} leads to
 \[
   q_i = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
@@ -3280,10 +3274,8 @@ Applying this to $i = \ell-1$, we obtain
   = B
 \]
 since $u^{\left[  \ell-1\right]  } = u$ and by the construction of $u$.
-\end{subproof}
 \end{vershort}
 \begin{verlong}
-\begin{subproof}
 For each $i \in \ive{\ell-1}$, the equality~\eqref{eq.determinant_form.qij.1} leads to
 \begin{align*}
   q_i & = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
@@ -3298,11 +3290,7 @@ Applying this to $i = \ell-1$, we obtain
    \qquad \left(\text{since } u^{\left[  \ell-1\right]  } = u \right) \\
   &= B \qquad \left(\text{by the construction of } u \right) .
 \end{align*}
-\end{subproof}
 \end{verlong}
-
-Now, the MLQ $\qq$ is interlacing (by Claim~\ref{claim:interlacing_subqueues}) and satisfies $q_{\ell-1} = B$ (by Claim~\ref{claim:the_last_queue}).
-This proves the $\Longrightarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
 
 $\Longleftarrow:$
 Assume that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
