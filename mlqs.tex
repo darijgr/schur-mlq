@@ -245,7 +245,7 @@
 \author[T.~Scrimshaw]{Travis Scrimshaw}
 \address[T. Scrimshaw]{School of Mathematics and Physics, The University of Queensland, St. Lucia, QLD 4072, Australia}
 \email{tcscrims@gmail.com}
-\urladdr{https://sites.google.com/view/tscrim/home}
+\urladdr{https://people.smp.uq.edu.au/TravisScrimshaw/}
 
 \date{\today}
 
@@ -1473,13 +1473,12 @@ If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-v
 \item no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
 \end{itemize}
 (Visually speaking, the paths must neither cross nor touch.)
-
 The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is the monomial $\wt(\pp)$ defined by
 \[
 \wt(\pp) := \prod_{i=1}^{k} \wt(p_i).
 \]
-
 See Figure~\ref{fig:NILP_example} for an illustration.
+If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the set of all NILPs from $\uu$ to $\vv$.
 
 \begin{figure}[t]
 \[
@@ -1548,8 +1547,6 @@ See Figure~\ref{fig:NILP_example} for an illustration.
   The weights of the edges of the paths are written next to the edges.}
 \label{fig:NILP_example}
 \end{figure}
-
-If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the set of all NILPs from $\uu$ to $\vv$.
 
 \begin{verlong}
 A pair $(\uu, \vv)$ of two $k$-vertices $\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
@@ -2146,7 +2143,7 @@ We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of
 \]
 \begin{vershort}
 \caption{A semistandard tableau of surface $(2,3,5,6)$ (left) and the corresponding NILP (right).
-  Note that the final horizontal steps are fixed.}
+  Note that the final horizontal steps are fixed and correspond to the surface.}
 \end{vershort}
 \begin{verlong}
 \caption{A semistandard tableau of surface $(2,3,5,6)$ (left) and the corresponding NILP (right).
@@ -2325,7 +2322,7 @@ Let us introduce some further notations now.
 First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
 
 \begin{itemize}
-\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}}$ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $1 \leq k \leq \alpha$ satisfies $a_k \geq b_k$.
+\item Given two subsets $A = \set{a_1 > \cdots > a_{\alpha}}$ and $B = \set{b_1 > \cdots > b_{\beta}}$ \travis{I reversed these inequalities to avoid confusion below, and it doesn't make a difference here.} of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $1 \leq k \leq \alpha$ satisfies $a_k \geq b_k$.
 
 \item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$. (For nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
 \end{itemize}
@@ -2351,6 +2348,10 @@ Consider an (ordinary) MLQ $\qq = \tup{q_1,\ldots,q_{\ell-1}}$ of type $\mm$.
 Thus, for each $i \in \ive{\ell-1}$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$.
 Hence, for each $i \in \ive{\ell-1}$, we can subdivide the set $q_i$ into $i$ blocks: the block containing the largest $m_1$ elements; the block containing the next-largest $m_2$ elements; and so on, until the block containing the smallest $m_i$ elements.
 Denote these $i$ blocks by $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$, respectively.
+Pictorially, we write $q_i$ as
+\[
+\bigl\{ \underbrace{a_1 > \cdots > a_{p_1(\mm)}}_{=q_i^{(1)}} > \underbrace{a_{p_1(\mm)+1} > \cdots > a_{p_2(\mm)}}_{=q_i^{(2)}} > \cdots > \underbrace{a_{p_{i-1}(\mm)+1} > \cdots > a_{p_i(\mm)}}_{=q_i^{(i)}} \bigr\}.
+\]
 Thus, $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$ are pairwise disjoint nonempty subsets of $\ive{n}$ satisfying
 \begin{subequations}
 \begin{align}
@@ -2395,7 +2396,7 @@ Define a pseudo-partition
   \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
 ).
 \end{equation}
-Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
+Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
 
 \begin{lemma}
 \label{lem:determinant_form.bij1}
@@ -2410,39 +2411,43 @@ with the following properties:
 
 \item[(b)] If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$, then the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
 
-\item[(c)] If $\qq$ is an interlacing MLQ of type $\mm$, then $P(\qq)$ is a semistandard tableau of shape $\lambda^{\mm}$.
-
-\item[(d)] Any semistandard tableau $T$ of shape $\lambda^{\mm}$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+\item[(c)] The map $P$ restricts to a bijection
+\[
+\overline{P} \colon \set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
+\]
 \end{enumerate}
+(In the border case $\ell = 1$, we interpret $q_0$ as the empty set whenever $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ.)
 \end{lemma}
 
-(To make sense of this in the border case $\ell = 1$, we agree to interpret $q_0$ as the empty set whenever $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ.)
-
-\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.bij1}.]
-If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
-For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
-
-Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda^{\mm}$:
+\begin{proof}
+We define a map $P$ as follows.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$.
+Let $\widetilde{q}_i^{(j)}$ shall denote the entries of $q_i^{(j)}$ written vertically in a column, strictly increasing from top to bottom.
+For example, if $q_i^{(j)} = \set{2,5,6}$, then
+\[
+\widetilde{q}_i^{(j)} = \raisebox{10pt}{$\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$}\ .
+\]
+We construct $P(\qq)$ as the following tableau of shape $\lambda^{\mm}$:
 \begin{equation}
 \label{pf.lem:determinant_form.bij1.visual}
 \begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
 \cline{2-2}%
 m_{\ell-1} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_{\ell-1}^{(\ell-1)}} &  &  &  &  & \\\cline{2-3}
+    & \widetilde{q}_{\ell-1}^{(\ell-1)} &  &  &  &  & \\\cline{2-3}
 m_{\ell-2} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_{\ell-2}^{(\ell-2)}} & \widetilde{q_{\ell-1}^{(\ell-2)}} & \multicolumn{1}{|c}{} &  &  & \\\cline{2-4}
+    & \widetilde{q}_{\ell-2}^{(\ell-2)} & \widetilde{q}_{\ell-1}^{(\ell-2)} & \multicolumn{1}{|c}{} &  &  & \\\cline{2-4}
 m_{\ell-3} \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_{\ell-3}^{(\ell-3)}} & \widetilde{q_{\ell-2}^{(\ell-3)}} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(  \ell-3)}}} & \multicolumn{1}{|c}{} &  & \\\cline{2-4}%
-\vdots & \mathbf{\vdots} & \mathbf{\vdots} & \multicolumn{1}{|c}{\vdots} & \multicolumn{1}{|c}{\ddots} &  & \\\cline{2-4}\cline{6-6}
+    & \widetilde{q}_{\ell-3}^{(\ell-3)} & \widetilde{q}_{\ell-2}^{(\ell-3)} & \multicolumn{1}{|c}{\widetilde{q}_{\ell-1}^{(  \ell-3)}} & \multicolumn{1}{|c}{} &  & \\\cline{2-5}%
+\vdots & \mathbf{\vdots} & \mathbf{\vdots} & \multicolumn{1}{|c}{\vdots} & \multicolumn{1}{|c|}{\ddots} &  & \\\cline{2-6}
 m_2 \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_2^{(2)}} & \widetilde{q_{3}^{(2)}} & \multicolumn{1}{|c}{\widetilde{q_{4}^{(2)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(2)}}} & \multicolumn{1}{|c}{}\\\cline{2-4}\cline{6-7}
+    & \widetilde{q}_2^{(2)} & \widetilde{q}_{3}^{(2)} & \multicolumn{1}{|c}{\widetilde{q}_{4}^{(2)}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q}_{\ell-1}^{(2)}} & \multicolumn{1}{|c}{}\\\cline{2-7}
 m_1 \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
-    & \widetilde{q_1^{(1)}} & \widetilde{q_2^{(1)}} & \multicolumn{1}{|c}{\widetilde{q_{3}^{(1)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-2}^{(1)}}} & \multicolumn{1}{|c|}{\widetilde{q_{\ell-1}^{(1)}}}\\\cline{2-4}\cline{6-7}
+    & \widetilde{q}_1^{(1)} & \widetilde{q}_2^{(1)} & \multicolumn{1}{|c}{\widetilde{q}_{3}^{(1)}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q}_{\ell-2}^{(1)}} & \multicolumn{1}{|c|}{\widetilde{q}_{\ell-1}^{(1)}}\\\cline{2-7}
 \end{array}
 \end{equation}
 Formally speaking, this is the tableau of shape $\lambda^{\mm}$ whose $\ell-1$ columns are given as follows:
-For each $j \in \ive{\ell-1}$, the $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{(\ell-j)}}, \widetilde{q_{\ell-2}^{(\ell-j-1)}}, \dotsc, \widetilde{q_j^{(1)}}$ stacked atop each other (with $\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top, $\widetilde{q_{\ell-2}^{(\ell-j-1)}}$ coming next under it, and so on).
-Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q_i^{(i)}}, \widetilde{q_{i+1}^{(i)}}, \dotsc, \widetilde{q_{\ell-1}^{(i)}}$ of columns $1,2,\ldots,\ell-i$ align with each other horizontally (and together form the topmost $m_i$ among the bottommost $m_1+m_2+\cdots+m_i$ rows of $P(\qq)$).
+For each $j \in \ive{\ell-1}$, the $j$-th column consists of the columns $\widetilde{q}_{\ell-1}^{(\ell-j)}, \widetilde{q}_{\ell-2}^{(\ell-j-1)}, \dotsc, \widetilde{q}_j^{(1)}$ stacked atop each other (with $\widetilde{q}_{\ell-1}^{(\ell-j)}$ at the very top, $\widetilde{q}_{\ell-2}^{(\ell-j-1)}$ coming next under it, and so on).
+Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q}_i^{(i)}, \widetilde{q}_{i+1}^{(i)}, \dotsc, \widetilde{q}_{\ell-1}^{(i)}$ of columns $1,2,\ldots,\ell-i$ align with each other horizontally (and together form the topmost $m_i$ among the bottommost $m_1+m_2+\cdots+m_i$ rows of $P(\qq)$).
 
 Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda^{\mm}}$ is defined.
 This map $P$ is an injection, because the MLQ $\qq$ can be recovered
@@ -2450,39 +2455,33 @@ from the tableau $P(\qq)$ (indeed, each of the elements
 of each of the queues of $\qq$ lands in some predictable cell of
 $P(\qq)$).
 
-We shall now prove the four properties we claimed about this injection $P$.
+We shall now prove the three properties we claimed about this injection $P$ to complete the proof.
 
-Property (a) is clear, since the entries of $q_1, q_2, \dotsc, q_{\ell-1}$ are in 1-to-1 correspondence with the entries of the tableau $P(\qq)$.
+Property~(a) is clear, since the entries of $q_1, q_2, \dotsc, q_{\ell-1}$ are in 1-to-1 correspondence with the entries of the tableau $P(\qq)$.
 
-Furthermore, the surface of $P(\qq)$ is the concatenation of the sequences $\widetilde{q_{\ell-1}^{(\ell-1)}},\widetilde{q_{\ell-1}^{(\ell-2)}}, \dotsc, \widetilde{q_{\ell-1}^{(1)}}$ (regarded as lists); but this concatenation is simply the sequence $\widetilde{q_{\ell-1}}$ (regarded as a list) (because of~\eqref{eq.determinant_form.qij.1} and~\eqref{eq.determinant_form.qij.2}).
+Furthermore, the surface of $P(\qq)$ is simply
+\[
+q_{\ell-1}^{(\ell-1)} \cup q_{\ell-1}^{(\ell-2)} \cup \cdots \cup q_{\ell-1}^{(2)} \cup q_{\ell-1}^{(1)} = q_{\ell-1}
+\]
+written in increasing order from top to bottom because of~\eqref{eq.determinant_form.qij.1} and~\eqref{eq.determinant_form.qij.2}.
 In other words, the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
-This proves property~(b).
+This proves~(b).
 
 Let $\qq$ be an MLQ of type $\mm$.
-Then, the columns $\widetilde{q_i^{(j)}}$ are strictly increasing. Hence, from~\eqref{pf.lem:determinant_form.bij1.visual}, we see the following:
+Recall that the columns $\widetilde{q}_i^{(j)}$ are strictly increasing.
+Hence, from~\eqref{pf.lem:determinant_form.bij1.visual}, we see the following:
 \begin{itemize}
-\item The entries of the tableau $P(\qq)$ are weakly increasing along each row
-if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
-$q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
-\item The entries of the tableau $P(\qq)$ are strictly increasing down each
-column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
-$q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
-(Here, we are also tacitly using the fact that the sets
-$q_i^{\left(  j\right)  }$ are nonempty. This ensures that the southern
-neighbor of a cell in $\widetilde{q_i^{\left(  j\right)  }}$ belongs either
-to $\widetilde{q_i^{\left(  j\right)  }}$ again or to
-$\widetilde{q_{i-1}^{\left(  j-1\right)  }}$, rather than (say) to
-$\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
+\item The entries of the tableau $P(\qq)$ are weakly increasing along each row if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy $q_i^{(j)} \succeq q_{i-1}^{(j)}$.
+\item The entries of the tableau $P(\qq)$ are strictly increasing down each column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy $q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
+  (Here, we are also tacitly using the fact that the sets $q_i^{(j)}$ are nonempty.
+  This ensures that the southern neighbor of a cell in $\widetilde{q}_i^{(j)}$ belongs either to $\widetilde{q}_i^{(j)}$ again or to $\widetilde{q}_{i-1}^{(j-1)}$, rather than (say) to $\widetilde{q}_{i-2}^{(j-2)}$.)
 \end{itemize}
 Combining these two observations, we conclude that the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def}.
 In other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
-This proves property (c).
-
-Finally, if $T$ is a semistandard tableau of shape $\lambda^{\mm}$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
-(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combining them to obtain queues $q_i$ and an MLQ $\qq$.
-This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
-This proves property~(d).
-Hence, we have proven all four properties (a--d).
+Moreover, it is clear that given any semistandard tableau of shape $\lambda^{\mm}$, we can construct an interlacing MLQ $\qq$ of type $\mm$.
+(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual} and combining them to obtain queues $q_i$ and an MLQ $\qq$.)
+Hence, the map $P$ restricted to interlacing MLQs is surjective on the set of semstandard tableaux of shape $\lambda^{\mm}$, and since $P$ is injective, we have a bijection.
+This proves~(c).
 \end{proof}
 
 \begin{cor}
@@ -2500,13 +2499,8 @@ Then,
 \end{cor}
 
 \begin{proof}
-Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
-Property~(c) shows that $P$ restricts to an injection
-\[
-\set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
-\]
-Property~(d) shows that this restricted injection is also surjective, and thus a bijection.
-Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
+Consider the bijection $\overline{P}$ from Lemma~\ref{lem:determinant_form.bij1}(c), and recall the properties~(a) and~(b).
+Hence, we can substitute $\overline{P}(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
 \begin{vershort}
 We thus obtain
 \begin{align*}
@@ -2520,7 +2514,7 @@ where the second equality follows from Property~(a) and Property~(b) and that $s
 We thus obtain
 \begin{align*}
 \sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
-  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of } \overline{P}(\qq) \text{ is } s}} \wt\bigl(  \overline{P}(\qq) \bigr) \\
 &  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
 &  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
 \end{align*}
@@ -3221,7 +3215,7 @@ Thus,
 
 Claim~\ref{claim:weakly_decreasing_level_i} shows that the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
 Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (i.e., first all $i$'s, then all $i-1$'s, etc.).
-Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]} = \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$).
+Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$).
 
 Recall that the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$.
 Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $p_i(\mm^{[i]})$ smallest letters of this word.
@@ -3404,20 +3398,15 @@ j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
 \ell & \text{if } t \notin q_{\ell-1}.
 \end{cases}
 \end{equation}
-On the other hand, the definition of the word $u$ shows that
-the letters of $u$ are given as follows:
+On the other hand, the letters of $u$ are given, from the construction, by
 \[
 u_t =
 \begin{cases}
 v_j & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
-\ell & \text{otherwise}
-\end{cases}
-\in
-\begin{cases}
-\ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
-\set{\ell} & \text{otherwise} .
+\ell & \text{otherwise.}
 \end{cases}
 \]
+Recall that $v_j \in \ive{\ell-1}$.
 In view of $\set{b_1, b_2, \ldots, b_r} = B = q_{\ell-1}$, this shows that the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$, whereas the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
 Hence, the letters $u_t$ for $t \in q_{\ell-1}$ are precisely those letters of $u$ that are at most $\ell-1$.
 Thus, these letters appear in weakly decreasing order (since $u$ is weakly decreasing up to level $\ell-1$), and we also know how often each of the letters $1, 2, \ldots, \ell-1$ appears among them (namely, each $k \in \ive{\ell-1}$ appears $m_k$ times, since $u$ has type $\mm$).
