@@ -2383,7 +2383,7 @@ For a fixed $i > 1$ and $j \in \ive{i-1}$, define the \defn{$(i,j)$-alley} the s
 \[
 \set{ i \in \ive{n} \mid \max q_{i-1}^{(j-1)} \leq i \leq \min q_i^{(j+1)} },
 \]
-where we consider $q_{i-1}^(0) = n$ and $q_i^{i} = 0$.
+where we consider $q_{i-1}^{(0)} = n$ and $q_i^{(i)} = 0$.
 \end{dfn}
 
 \begin{example}
@@ -2670,8 +2670,6 @@ Then:
 \end{enumerate}
 \end{lemma}
 
-\Travis{Todo for myself: figure out why this lemma is more complicated if we forbid $\emptyset$. Can these sets even be empty?}
-
 \begin{example}
 \mbox{}
 \begin{itemize}
@@ -2698,6 +2696,67 @@ Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, 
 \end{itemize}
 \end{example}
 
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
+Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
+From the definition of $q(u)$ and there are precisely $\abs{q}$, all letters set during Phase~II of the algorithm are at most $t$, while all of letters set during Phase~I are strictly greater than $t$ (see also Remark~\ref{rmk:t-splitting}).
+Therefore, it is sufficient to consider the letters set during Phase~II.
+Let $m_t$ denote the number of occurrences of $t$ in $u$.
+We first show that no ``wrapping around the cycle'' can occur during Phase~II.
+Let $j_{\kappa}$ denote the site set in the $\kappa$-th step of Phase~II.
+
+\begin{claim}
+\label{claim:no_wrapping}
+We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q} - m_t$.
+\end{claim}
+
+\begin{subproof}
+Suppose there exists a $\kappa$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path $u_{i_{\kappa}}$ ``wraps around the cycle'').
+Without loss of generality, assume $\kappa$ is minimal.
+Thus, we have $j_{\kappa} = \min q$.
+However, since there exists at least one $t$ in $q(u)$, we must have $t = q(u)_{j_!}$ for some $j_! \in q \setminus \set{\min q}$.
+This contradicts that $q(u)$ is weakly decreasing up to level $t$.
+\end{subproof}
+
+Next, suppose Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+Thus, there exists a $k$ such that $i_{k'} < i_k$ and $u_{i_{k'}} < u_{i_k}$ for some $k' < k$.
+Without loss of generality, assume $k$ is the minimal (\textit{i.e.}, $k$ is the first time we are setting a letter that is not weakly decreasing in $u$).
+Since $q(u)_{j_{\kappa}} = u_{i_{\kappa}}$, we have $q(u)_{j_{k'}} < q(u)_{j_k}$.
+From our assumption that $q(u)$ is weakly decreasing, we have $j_{k'} > j_k$.
+Claim~\ref{claim:no_wrapping} shows that $j_k < i_k$ is impossible.
+Therefore, we assume $j_k \geq i_k$.
+However, this is a contradiction since during Phase~II, the site $j_k$ would have been set by $u_{i_{k'}}$ previously since $i_{k'} \leq j_{k'} < j_k$.
+
+%Since $u$ is weakly decreasing, by Lemma~\ref{lemma:order_indep} we can assume that $i_{\abs{q}-m_t} < \cdots < i_2 < i_1$.
+Now we prove Lemma~\ref{lem:determinant_form.interl-A}(b).
+Let
+\begin{align*}
+A & = \set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h },
+\\
+B & = \set{ p \in \ive{n} \mid u_p = h },
+\\
+C & = \set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1 }.
+\end{align*}
+
+We first show $A \succeq B$.
+Define a map $\phi \colon B \to A$ by $\phi(i_k) = j_k$, where $i_k \in B$.
+The map $\phi$ is well-defined (\textit{i.e.}, we have $j_k \in A$ for all applicable $k$) and bijective from the definition of Phase~II (see also Remark~\ref{rmk:t-splitting} for why $\abs{A} = \abs{B}$).
+We have $\phi(i_k) = j_k \geq i_k$ by Claim~\ref{claim:no_wrapping}.
+Hence $A \succeq B$ by Lemma~\ref{lem:determinant_form.gale1}.
+
+Now suppose that $B \not\gg C$, and so there exists $c \in C$ such that $b \leq c$ for some $b \in B$.
+Let $k$ be minimal such that $i_k \leq c$.
+Since $q(u)$ is weakly decreasing up to $t$ and $h < t$, we must have $C \gg A$.
+Hence, we have $i_k \leq c < j_k$ since $j_k \in A$.
+However, this is a contradiction since $q(u)_c$ would have been set during the $k$-th step of Phase~II, where $i_k = b$.
+Hence $B \gg C$.
+\end{proof}
+
+
+% ############################################################
+%       Begin old proof of lemma
+% ############################################################
+
+\begin{comment}
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
 We introduce another piece of notation.
 For any two sites $i$ and $j$, let $\inter[i,j]$ denote the closed (cyclic) interval from $i$ to $j$.
@@ -2849,9 +2908,6 @@ Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the const
 This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
 \end{subproof}
 
-% \Travis{How easy would it be to pull these claims out into separate lemmas?}
-% \Darij{Not very easy. They refer to the $j_k$, which are temporary objects in the construction of $q(u)$.}
-
 We are now ready to prove the two parts of the lemma:
 
 (a) Assume the contrary.
@@ -2935,6 +2991,11 @@ Hence, we have $B\gg C$.
 Combining this with $A\succeq B$, we obtain $A \succeq B \gg C$.
 This completes the proof of Lemma~\ref{lem:determinant_form.interl-A}(b).
 \end{proof}
+
+\end{comment}
+% ############################################################
+%       End old proof of lemma
+% ############################################################
 
 Our next lemma gives an explicit expression for $q(u)$ when the queue $q$ and the word $u$ have a special form (essentially, when the word $u$ has all its letters belong to $\ive{h}$ for some positive integer $h$ and is weakly decreasing up to level $h-1$, and the queue $q$ is tailored to ``shift the letters of $u$ right''):
 
