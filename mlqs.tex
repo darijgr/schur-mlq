@@ -1216,17 +1216,19 @@ The proof of this theorem is given in Section~\ref{sec:JT-proofs}.
 
 We can use Theorem~\ref{thm:determinant_form} to settle two conjectures from~\cite{AasLin17}. Here is an outline:
 
-Fix a sequence $b_1 < b_2 < \cdots < b_r$ of sites.
-For a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form}.
+Fix a set $B = \set{b_1 < b_2 < \cdots < b_r}$ of sites.
+For a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form} from $v$ and $B$.
 \darij{What does this mean?}
+\travis{The word $u(v)$ is the word $u$ given in the statement of the theorem. I have tried to explain this more. Does this answer your question?}
 We say that a set $S$ of integers is \defn{lacunar} if $i\in S$ implies $i+1 \notin S$.
 Let $S \subseteq \ive{r-1}$ be lacunar, and define the permutation $\sigma_S := \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
 Note that the elements $\{s_i \mid i \in S\}$ all commute, so their product, and hence $\sigma_S$, is well-defined.
 In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
 
 Let $T \subseteq \ive{r-1}$ be lacunar, and let $\psi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
-By Theorem~\ref{thm:permutation}, we have
+By repeated application of Theorem~\ref{thm:merge}, we have
 \darij{Do you perhaps mean Theorem~\ref{thm:merge} instead? And if so, why exactly?}
+\travis{Yes, it should be Theorem~\ref{thm:merge}, and you need to apply it for each $t \in T$.}
 \begin{align*}
   \psi(T) & = \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
   \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in S} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
