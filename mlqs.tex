@@ -1217,15 +1217,17 @@ The proof of this theorem is given in Section~\ref{sec:JT-proofs}.
 
 We can use Theorem~\ref{thm:determinant_form} to settle two conjectures from~\cite{AasLin17}.
 
+Fix a set of sites $B = \set{b_1 < b_2 < \cdots < b_r}$.
 We say that a set $S$ of integers is \defn{lacunar} if $i\in S$ implies $i+1 \notin S$.
 Let $S \subseteq \ive{r-1}$ be lacunar, and define the permutation $\sigma_S := \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
-We will consider $\sigma_S$ as a word written in one-line notation.
+To ease notation, for every permutation $\tau \in \SymGp{r}$, we will consider its one-line notation as the word $u$ as given in Theorem~\ref{thm:determinant_form} with $v = \tau$.
 Note that the elements $\{s_i \mid i \in S\}$ all commute, so their product, and hence $\sigma_S$, is well-defined.
 In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{\sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured.
-We now prove this conjecture.
+We now prove a special weight version of this conjecture.
 
 \begin{cor}
 \label{cor:special_weight_lacunar}
+Let $B = \set{b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
 Let $T \subseteq \ive{r-1}$ be lacunar, and let $\psi(T) = \sum_{S \subseteq T} \swt{\sigma_S}$.
 Then we have
 \[
@@ -1236,27 +1238,41 @@ Then we have
 \begin{proof}
 By repeated applications of Theorem~\ref{thm:merge}, we have
 \begin{align*}
-  \psi(T) & = \left(\prod_{i\in T} e_i (x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
-  \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in T} e_i(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
+  \psi(T) & = \left(\prod_{t \in T} e_t(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
+  \\ & = \left( \prod_{b \in B} x_b \right) \left(\prod_{t \in T} e_t(x_1, \dotsc, x_n) \right) \det\bigl(h_{\gamma_j+i-j-1}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
 \end{align*}
-where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is by Theorem~\ref{thm:determinant_form}.
+\travis{I think this was suppose to be a $-1$ in the $h_k$ subscripts as per Theorem~\ref{thm:determinant_form}.}
+where $\gamma_j = j - \lvert \{t \in T \mid t < j \} \rvert$ and the second equality is by Theorem~\ref{thm:determinant_form}.
 By M\"obius inversion, the claim follows.
 \end{proof}
 
 \begin{example}
-Consider $n = 5$ and $T = \set{1,4}$.
-Then we have $\bigvee_T w_0 = 33211$, and
+Consider $n = 8$, $B = \set{1,2,5,6,8}$, and $T = \set{1,4}$.
+Then we have $\bigvee_T w_0 = 33{\color{gray}44}21{\color{gray}4}1$, and
 \[
-\psi(T) = \swt{54321} + \swt{45321} + \swt{54312} + \swt{45312}.
+\psi(T) = \swt{54{\color{gray}66}32{\color{gray}6}1} + \swt{45{\color{gray}66}32{\color{gray}6}1} + \swt{54{\color{gray}66}31{\color{gray}6}2} + \swt{45{\color{gray}66}31{\color{gray}6}2}.
 \]
-Applying Theorem~\ref{thm:merge} to $i = 4$ then to $i=1$, we obtain
+Applying Theorem~\ref{thm:merge} to $t = 4$ then to $t=1$, we obtain
 \begin{align*}
-\psi(T) & = e_4(x_1, \dotsc, x_5) (\swt{44321} + \swt{44312})
-\\ & = e_1(x_1, \dotsc, x_5) e_4(x_1, \dotsc, x_5) \swt{33211}.
+\psi(T) & = e_4(x_1, \dotsc, x_8) \, \bigl( \swt{44{\color{gray}55}32{\color{gray}5}1} + \swt{44{\color{gray}55}31{\color{gray}5}2} \bigr)
+\\ & = e_1(x_1, \dotsc, x_8) \, e_4(x_1, \dotsc, x_8) \swt{33{\color{gray}44}21{\color{gray}4}1}.
 \end{align*}
+Now, by Theorem~\ref{thm:determinant_form}, we obtain
+\begin{align*}
+\psi(T) & = x_1 x_2 x_5 x_6 x_8 \, e_1(x_1, \dotsc, x_8) \, e_4(x_1, \dotsc, x_8)
+\\ & \hspace{20pt} \times \det \begin{pmatrix}
+%gamma_j = 1,1,2,3,3
+1 & 0 & 0 & 0 & 0 \\
+h_1[1] & 1 & 1 & 1 & 0 \\
+h_2[1] & h_1[2] & h_1[5] & h_1[6] & 1 \\
+h_3[1] & h_2[2] & h_2[5] & h_2[6] & h_1[8] \\
+h_4[1] & h_3[2] & h_3[5] & h_3[6] & h_2[8] \\
+\end{pmatrix},
+\end{align*}
+where $h_i[k] := h_i(x_1, \dotsc, x_k)$.
 \end{example}
 
-By taking Corollary~\ref{cor:special_weight_lacunar} specialized at $x_1 = \cdots = x_n = 1$, we obtain~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
+Therefore, by taking Corollary~\ref{cor:special_weight_lacunar} specialized at $x_1 = \cdots = x_n = 1$, we obtain~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
 Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
 
 
