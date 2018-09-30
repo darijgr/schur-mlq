@@ -589,7 +589,7 @@ Using this convention, we can write Example~\ref{ex:first_queue} as
 \end{tikzpicture}
 \label{eq:boxes-and-balls-1}
 \end{equation}
-We call this the \defn{graveyard diagram} of $q$.
+We call this the \defn{graveyard diagram} of $q$ and $u$.
 
 \begin{comment}  % s-flow only seems to be used in this paragraph
 Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
@@ -1215,28 +1215,48 @@ The proof of this theorem is given in Section~\ref{sec:JT-proofs}.
 %%%%%%%%%%
 \subsection{Conclusions for Aas--Linusson MLQs}
 
-We can use Theorem~\ref{thm:determinant_form} to settle two conjectures from~\cite{AasLin17}. Here is an outline:
+We can use Theorem~\ref{thm:determinant_form} to settle two conjectures from~\cite{AasLin17}.
 
-Fix a set $B = \set{b_1 < b_2 < \cdots < b_r}$ of sites.
-For a permutation $v \in \SymGp{r}$, let $u(v)$ be the corresponding word as defined in Theorem~\ref{thm:determinant_form} from $v$ and $B$.
-\darij{What does this mean?}
-\travis{The word $u(v)$ is the word $u$ given in the statement of the theorem. I have tried to explain this more. Does this answer your question?}
 We say that a set $S$ of integers is \defn{lacunar} if $i\in S$ implies $i+1 \notin S$.
 Let $S \subseteq \ive{r-1}$ be lacunar, and define the permutation $\sigma_S := \left( \prod_{i \in S} s_i \right) w_0$, where $s_i, w_0 \in \SymGp{r}$.
+We will consider $\sigma_S$ as a word written in one-line notation.
 Note that the elements $\{s_i \mid i \in S\}$ all commute, so their product, and hence $\sigma_S$, is well-defined.
-In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{u \sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured, where $u \sigma_S = u_{\sigma_S(1)} \cdots u_{\sigma_S(r)}$.
+In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{\sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured.
+We now prove this conjecture.
 
-Let $T \subseteq \ive{r-1}$ be lacunar, and let $\psi(T) = \sum_{S \subseteq T} \swt{u \sigma_S}$.
+\begin{cor}
+\label{cor:special_weight_lacunar}
+Let $T \subseteq \ive{r-1}$ be lacunar, and let $\psi(T) = \sum_{S \subseteq T} \swt{\sigma_S}$.
+Then we have
+\[
+\swt{\sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T).
+\]
+\end{cor}
+
+\begin{proof}
 By repeated applications of Theorem~\ref{thm:merge}, we have
-\darij{Why exactly?}
-\travis{Yes, it should be Theorem~\ref{thm:merge}, and you need to apply it for each $i \in T$.}
 \begin{align*}
-  \psi(T) & = \left(\prod_{i\in T} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
-  \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in T} e_{p_i(\mm)}(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
+  \psi(T) & = \left(\prod_{i\in T} e_i (x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
+  \\ & = \left( \prod_{i\in B} x_i \right) \left(\prod_{i\in T} e_i(x_1, \dotsc, x_n) \right) \det\bigl(h_{i-j+1+\gamma_j}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
 \end{align*}
 where $\gamma_i = i - \lvert \{j\in T \mid j < i \} \rvert$ and the second equality is by Theorem~\ref{thm:determinant_form}.
-By M\"obius inversion we have $\swt{u \sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)$.
-Taken together with $x_1 = \cdots = x_n = 1$, this proves~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
+By M\"obius inversion, the claim follows.
+\end{proof}
+
+\begin{example}
+Consider $n = 5$ and $T = \set{1,4}$.
+Then we have $\bigvee_T w_0 = 33211$, and
+\[
+\psi(T) = \swt{54321} + \swt{45321} + \swt{54312} + \swt{45312}.
+\]
+Applying Theorem~\ref{thm:merge} to $i = 4$ then to $i=1$, we obtain
+\begin{align*}
+\psi(T) & = e_4(x_1, \dotsc, x_5) (\swt{44321} + \swt{44312})
+\\ & = e_1(x_1, \dotsc, x_5) e_4(x_1, \dotsc, x_5) \swt{33211}.
+\end{align*}
+\end{example}
+
+By taking Corollary~\ref{cor:special_weight_lacunar} specialized at $x_1 = \cdots = x_n = 1$, we obtain~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
 Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
 
 
@@ -2325,7 +2345,7 @@ Let us introduce some further notations now.
 First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
 
 \begin{itemize}
-\item Given two subsets $A = \set{a_1 > \cdots > a_{\alpha}}$ and $B = \set{b_1 > \cdots > b_{\beta}}$ \travis{I reversed these inequalities to avoid confusion below, and it doesn't make a difference here.} of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $1 \leq k \leq \alpha$ satisfies $a_k \geq b_k$.
+\item Given two subsets $A = \set{a_1 > \cdots > a_{\alpha}}$ and $B = \set{b_1 > \cdots > b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $1 \leq k \leq \alpha$ satisfies $a_k \geq b_k$.
 
 \item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$. (For nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
 \end{itemize}
@@ -2373,7 +2393,7 @@ Thus, we have defined nonempty queues $q_i^{(j)} \subseteq \ive{n}$ for all $i \
 
 \begin{example}
 \label{ex:qij_generic}
-Consider $n = 13$.
+Consider $n = 15$.
 Let $\mm = \tup{4,2,2}$ and $\qq = \tup{q_1, q_2, q_3}$, where
 \[
 q_1 = \set{2,4,9,12},
@@ -2396,7 +2416,7 @@ q_3^{(2)} = \set{4,5},
 \hspace{50pt}
 q_3^{(1)} = \set{8,9,13,14}.
 \end{gather*}
-Similar to the graveyard diagram of~\eqref{eq:boxes-and-balls-1}, we depict the graveyard diagram of $\qq$ with row $i$ having the element $p \in q_i^{(j)}$ represented a circle at position $p$ labeled by $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$ for all $j \in \ive{i-1}$ and elements of $\ive{15} \setminus q_i$ represented by squares (\textit{i.e.}, we suppress filling the squares with an $i+1$):
+Similar to the graveyard diagram of~\eqref{eq:boxes-and-balls-1}, we depict the graveyard diagram of $\qq$ with row $i$ having the element $p \in q_i$ represented a circle at position $p$ labeled by $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$ and elements of $\ive{n} \setminus q_i$ represented by squares (\textit{i.e.}, we suppress filling the squares with an $i+1$):
 \[
 \begin{tikzpicture}[scale=0.8,baseline=-30]
 % q_1
@@ -2718,7 +2738,7 @@ Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, 
 
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
 Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
-From the definition of $q(u)$ and there are precisely $\abs{q}$, all letters set during Phase~II of the algorithm are at most $t$, while all of letters set during Phase~I are strictly greater than $t$ (see also Remark~\ref{rmk:t-splitting}).
+From the definition of $q(u)$ and since there are precisely $\abs{q}$ letters at most $t$, all letters set during Phase~II of the algorithm are at most $t$, while all of letters set during Phase~I are strictly greater than $t$ (see also Remark~\ref{rmk:t-splitting}).
 Therefore, it is sufficient to consider the letters set during Phase~II.
 Let $m_t$ denote the number of occurrences of $t$ in $u$.
 We first show that no ``wrapping around the cycle'' can occur during Phase~II.
