@@ -1233,10 +1233,10 @@ Note that the elements $\{s_i \mid i \in S\}$ all commute, so their product, and
 In one-line notation, $\sigma_S$ is the list of all elements of $\ive{r}$ in decreasing order, except that for each $i \in S$, the pair $\tup{i, i+1}$ is sorted back into increasing order.
 
 For each permutation $\tau \in \SymGp{r}$, we let $v_\tau$ be the $r$-tuple $\tup{\tau_1, \tau_2, \ldots, \tau_r}$ (that is, the one-line notation of $\tau$).
-To ease notation, we shall identify any $\tau \in \SymGp{r}$ with the corresponding $u(v_{\tau}) \in \mcW_n$ from~\eqref{eq:weakly_decreasing_construction}.
+To ease notation, we shall identify any $\tau \in \SymGp{r}$ with the corresponding word $u(v_{\tau}) \in \mcW_n$ defined by~\eqref{eq:weakly_decreasing_construction}, where we set $\ell=r+1$.
 
 In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{\sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured.
-We now prove a spectral weight version of this conjecture.
+We now prove a version of this conjecture for general $x_i$.
 
 \begin{cor}
 \label{cor:special_weight_lacunar}
@@ -1251,8 +1251,25 @@ where $\gamma_j = j - \abs{ \{t \in T \mid t < j \} }$.
 \end{cor}
 
 \begin{proof}
-By repeated applications of Theorem~\ref{thm:merge}, we have the first equality.
-The second equality follows by Theorem~\ref{thm:determinant_form}.
+Recall that we identify the permutation $w_0$ with the word $u(v_{w_0}) \in \mcW_n$;
+the latter word has type
+$\mm := \tup{1,1,\ldots,1,n-r,0,0,\ldots}$ (starting with $r$
+ones).
+Hence, the word $\bigvee_T w_0$ has type $\bigvee_T \mm$.
+By repeated applications of Theorem~\ref{thm:merge}, we see that
+\[
+\left(\prod_{t \in T} e_t(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0} = \sum \swt{u'} ,
+\]
+where the sum ranges over all words $u' \in \mcW_n$
+of type $\mm$ satisfying
+$\bigvee_T u' = \bigvee_T w_0$.
+But the words $u' \in \mcW_n$ of type $\mm$ satisfying
+$\bigvee_T u' = \bigvee_T w_0$ are precisely the words of the form
+$\sigma_S$ for $S \subseteq T$.
+Hence, the $\sum \swt{u'}$ in the above equality rewrites as $\psi(T)$.
+This proves the first equality of the corollary.
+The second equality follows by Theorem~\ref{thm:determinant_form}
+(applied to $v = v_{\bigvee_T w_0}$).
 \end{proof}
 
 \begin{example}
@@ -1281,12 +1298,12 @@ h_4[1] & h_3[2] & h_3[5] & h_3[6] & h_2[8] \\
 where $h_i[k] := h_i(x_1, \dotsc, x_k)$.
 \end{example}
 
-Note that
+Note that the well-known formula for M\"obius inversion on the boolean lattice yields
 \[
-\swt{\sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T).
+\swt{\sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T)
 \]
-by using the well-known formula for M\"obius inversion on the boolean lattice.
-Therefore, by taking Corollary~\ref{cor:special_weight_lacunar} specialized at $x_1 = \cdots = x_n = 1$, we obtain~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
+for any $S \subseteq \ive{r-1}$.
+Therefore, by specializing Corollary~\ref{cor:special_weight_lacunar} at $x_1 = \cdots = x_n = 1$, we obtain~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
 Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
 
 
