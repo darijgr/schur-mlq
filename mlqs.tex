@@ -381,6 +381,7 @@ We denote the merging of $i$ and $i+1$ in $u$ by $\merge{i} u$.
 Note that $\merge{i} u$ is packed whenever $u$ is packed.
 For $T = \set{t_1 < \cdots < t_k} \subseteq \ive{\ell-1}$, we set $\bigvee_T u := \merge{t_1} \cdots \merge{t_k} u$.
 Similarly, the merging of $i,i+1$ in a type $\mm = (m_1, m_2, \ldots)$ is $\merge{i}(\mm) = (m_1, \dotsc, m_{i-1}, m_i + m_{i+1}, m_{i+2}, \ldots)$.
+Likewise, we define $\bigvee_T \mm$ for a type $\mm$.
 These operations interact as one would hope:
 If the type of a word $u$ is $\mm$, then the type of $\merge{i} u$ is $\merge{i}(\mm)$.
 
@@ -1023,6 +1024,21 @@ By examining all possible MLQs for these words, we obtain
 We verify Theorem~\ref{thm:merge} in this case by computing $\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) = \swt{13245} + \swt{14235}$.
 \end{example}
 
+By repeated applications of Theorem~\ref{thm:merge}, we obtain the following:
+
+\begin{cor}
+\label{cor:merges}
+  Let $T$ be a finite set of positive integers.
+  Let $\mm$ be a type such that every $t \in T$ satisfies
+  $m_t \neq 0$ and $m_{t+1} \neq 0$.
+  Let $v$ be a packed word of type $\merge{T}\mm$.
+  Then,
+  \[
+  \swt{v} \prod_{t \in T} e_{p_t(\mm)}(x_1, \dotsc, x_n) = \sum_u \swt{u},
+  \]
+where we sum over all $u$ of type $\mm$ such that $v = \bigvee_T u$.
+\end{cor}
+
 \subsection{A Jacobi-Trudi-like formula for special $u$}
 \label{subsec:JT_formula}
 
@@ -1256,7 +1272,7 @@ the latter word has type
 $\mm := \tup{1,1,\ldots,1,n-r,0,0,\ldots}$ (starting with $r$
 ones).
 Hence, the word $\bigvee_T w_0$ has type $\bigvee_T \mm$.
-By repeated applications of Theorem~\ref{thm:merge}, we see that
+By Corollary~\ref{cor:merges}
 \[
 \left(\prod_{t \in T} e_t(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0} = \sum \swt{u'} ,
 \]
