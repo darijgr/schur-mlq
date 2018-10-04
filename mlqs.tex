@@ -1188,7 +1188,19 @@ See Figure~\ref{fig:lattice_path_bijection} for an example of the resulting bije
 Throughout this subsection, we shall regard the sites $1, 2, \ldots, n$ as elements of $\set{1, 2, \ldots, n}$ rather than of $\ZZ/n\ZZ$.
 In particular, they are totally ordered by $1 < 2 < \cdots < n$.
 
-We shall now state a determinantal formula for $\swt{u}$ in the special case when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and becomes weakly decreasing if we disregard all letters $\ell$.
+Let $\ell$ and $r$ be positive integers.
+Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
+Let $v \in \mcW_r$ with at most $\ell - 1$ classes.
+Define a word $u(v) \in \mcW_n$ by
+\begin{equation}
+\label{eq:weakly_decreasing_construction}
+\bigl( u(v) \bigr)_i = \begin{cases}
+v_j & \text{if $i = b_j$ for some $j$}, \\
+\ell & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+We shall now state a determinantal formula for the special case of $\swt{u(v)}$ when $v$ is a weakly decreasing packed word with $\ell-1$ classes.
 %For example, $u = {\color{gray}4}3{\color{gray}44}33{\color{gray}4}22{\color{gray}4}211{\color{gray}4}$ is such a word, with $\ell=4$.
 
 \begin{thm}
@@ -1196,14 +1208,11 @@ We shall now state a determinantal formula for $\swt{u}$ in the special case whe
 Let $\ell$ be a positive integer.
 Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
 Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
-%\travis{We probably want to introduce the notation of a weakly decreasing word, then we can just say ``Let $v = v_1 v_2 \dotsm v_r$ be a weakly decreasing packed word.''}
-%\darij{I don't. Our words are cyclic with $n$ letters. Since we don't do wordy things with $v$, why call it a word?}\ 
-Define a word $u \in \mcW_n$ by $u_i=v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
 For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
 (The value $\gamma_j$ can also be described as the number of distinct letters among $v_1, v_2, \dotsc, v_j$.)
 Then
 \[
-\swt{u} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{i, j \in \ive{r}}.
+\swt{u(v)} = \left(  \prod_{b \in B} x_b \right)  \det \left(  h_{\gamma_j+i-j-1}(x_1,\dotsc,x_{b_j}) \right)_{i, j \in \ive{r}}.
 \]
 \end{thm}
 
@@ -1223,12 +1232,8 @@ Let $S \subseteq \ive{r-1}$ be lacunar, and define the permutation $\sigma_S := 
 Note that the elements $\{s_i \mid i \in S\}$ all commute, so their product, and hence $\sigma_S$, is well-defined.
 In one-line notation, $\sigma_S$ is the list of all elements of $\ive{r}$ in decreasing order, except that for each $i \in S$, the pair $\tup{i, i+1}$ is sorted back into increasing order.
 
-For each permutation $\tau \in \SymGp{r}$, we let $v_\tau$ be the $r$-tuple
-$\tup{\tau_1, \tau_2, \ldots, \tau_r}$ (that is, the one-line notation of $\tau$),
-and we define the word $u_\tau \in \mcW_n$ by $(u_\tau)_i = \tau_j$
-if $i = b_j$ for some $j$, otherwise $(u_\tau)_i = r+1$.
-(Thus, $u_\tau$ is the word $u$ as given in Theorem~\ref{thm:determinant_form} with $\ell = r+1$ and $v = v_\tau$.)
-To ease notation, we shall identify any $\tau \in \SymGp{r}$ with the corresponding $u_\tau \in \mcW_n$.
+For each permutation $\tau \in \SymGp{r}$, we let $v_\tau$ be the $r$-tuple $\tup{\tau_1, \tau_2, \ldots, \tau_r}$ (that is, the one-line notation of $\tau$).
+To ease notation, we shall identify any $\tau \in \SymGp{r}$ with the corresponding $u(v_{\tau}) \in \mcW_n$ from~\eqref{eq:weakly_decreasing_construction}.
 
 In~\cite[Conj.~3.10]{AasLin17}, a formula for the spectral weight $\swt{\sigma_S}$ at $x_1 = \cdots = x_n = 1$ is conjectured.
 We now prove a spectral weight version of this conjecture.
@@ -1238,20 +1243,16 @@ We now prove a spectral weight version of this conjecture.
 Let $B = \set{b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
 Let $T \subseteq \ive{r-1}$ be lacunar, and let $\psi(T) = \sum_{S \subseteq T} \swt{\sigma_S}$.
 Then we have
-\[
-\swt{\sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T).
-\]
-\end{cor}
-
-\begin{proof}
-By repeated applications of Theorem~\ref{thm:merge}, we have
 \begin{align*}
   \psi(T) & = \left(\prod_{t \in T} e_t(x_1, \dotsc, x_n) \right) \swt{ \bigvee_T w_0}
   \\ & = \left( \prod_{b \in B} x_b \right) \left(\prod_{t \in T} e_t(x_1, \dotsc, x_n) \right) \det\bigl(h_{\gamma_j+i-j-1}(x_1, \dotsc, x_{b_j})\bigr)_{i, j \in \ive{r}},
 \end{align*}
-\travis{I think this was suppose to be a $-1$ in the $h_k$ subscripts as per Theorem~\ref{thm:determinant_form}.}
-where $\gamma_j = j - \lvert \{t \in T \mid t < j \} \rvert$ and the second equality is by Theorem~\ref{thm:determinant_form}.
-By using the well-known formula for M\"obius inversion on the boolean lattice, the claim follows.
+where $\gamma_j = j - \abs{ \{t \in T \mid t < j \} }$.
+\end{cor}
+
+\begin{proof}
+By repeated applications of Theorem~\ref{thm:merge}, we have the first equality.
+The second equality follows by Theorem~\ref{thm:determinant_form}.
 \end{proof}
 
 \begin{example}
@@ -1280,6 +1281,11 @@ h_4[1] & h_3[2] & h_3[5] & h_3[6] & h_2[8] \\
 where $h_i[k] := h_i(x_1, \dotsc, x_k)$.
 \end{example}
 
+Note that
+\[
+\swt{\sigma_S} = \sum_{T\subseteq S} (-1)^{|S|-|T|} \psi(T).
+\]
+by using the well-known formula for M\"obius inversion on the boolean lattice.
 Therefore, by taking Corollary~\ref{cor:special_weight_lacunar} specialized at $x_1 = \cdots = x_n = 1$, we obtain~\cite[Conj.~3.10]{AasLin17} (which is a generalization of~\cite[Conj.~3.9]{AasLin17}).
 Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization of~\cite[Conj.~3.4]{AasLin17}).
 
@@ -2905,7 +2911,8 @@ with $q_{\ell} = \set{p \mid u_p < \ell+1}$.
 %%%%%%%%%%
 \subsection{Proof of Theorem~\ref{thm:determinant_form}}
 
-We are now ready to prove Theorem~\ref{thm:determinant_form}:
+We are now ready to prove Theorem~\ref{thm:determinant_form}.
+We will simply $u := u(v)$ from~\eqref{eq:weakly_decreasing_construction} when there is no danger of confusion.
 
 \begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
 First note that for any set $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$, weakly decreasing $r$-tuple $\tup{v_1 \geq v_2 \geq \dotsm \geq v_r}$ such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$, the word $u \in \mcW_n$ defined by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$ is weakly decreasing up to level $\ell-1$.
