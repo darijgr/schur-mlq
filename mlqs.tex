@@ -2859,7 +2859,7 @@ Now we prove our main technical lemma: that $\qq(1^n)$ is weakly decreasing if a
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
 Let $\ell$ be a positive integer.
-Let $u = u_1 u_2 \dotsm u_n \in \mcW_n$ be a weakly decreasing word up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$.
+Let $u = u_1 u_2 \dotsm u_n \in \mcW_n$ be weakly decreasing up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$.
 Let $\mm$ be the type of $u$.
 Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
 Then, $u = \qq(1^n)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = \set{ p \mid u_p < \ell }$.
@@ -2911,7 +2911,7 @@ We prove the claim by induction on $\ell$.
 The base case of $\ell = 1$ is trivial.
 Thus, we assume the claim holds for $\ell$.
 Let $\qq = \tup{q_1, \dotsc, q_{\ell-1}, q_{\ell}}$ be an MLQ of type $\mm$.
-Note that $u$ is a weakly decreasing word up to level $\ell$.
+Note that $u$ is weakly decreasing up to level $\ell$.
 
 $\Longrightarrow:$
 Suppose $u = \qq(1^n)$.
@@ -2931,7 +2931,7 @@ Therefore, by Lemma~\ref{lem:determinant_form.interl-A}(b), we have that $\qq$ i
 $\Longleftarrow:$
 Suppose the MLQ $\qq$ is interlacing and satisfies $q_{\ell} = \{ p \mid u_p < \ell \}$.
 Let $\qq' = \tup{q_1, \dotsc, q_{\ell-1}}$, and note that $\qq'$ is also interlacing.
-By our induction assumption, we have $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$ is a weakly decreasing word up to level $\ell - 1$ such that $\ive{\ell-1} \subseteq \set{u'_1, u'_2, \dotsc, u'_n}$.
+By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$ with $\ive{\ell-1} \subseteq \set{u'_1, u'_2, \dotsc, u'_n}$.
 Now since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, we note that from the definition of Phase~II and Lemma~\ref{lem:determinant_form.gale1}, we have $q(u'_{i_k})_{j_k} = u'_{i_k} = h$ for any $i_k \in q_{\ell-1}^{(h)}$ and some unique $j_k \in q_{\ell}^{(h)}$.
 Hence, we have
 \[
@@ -2949,7 +2949,7 @@ We will simply $u := u(v)$ from~\eqref{eq:weakly_decreasing_construction} when t
 
 \begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
 First note that for any set $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$, weakly decreasing $r$-tuple $\tup{v_1 \geq v_2 \geq \dotsm \geq v_r}$ such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$, the word $u \in \mcW_n$ defined by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$ is weakly decreasing up to level $\ell-1$.
-Conversely, for any word $u = u_1 \dotsm u_n \in \mcW_n$ that is weakly decreasing word up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$, we can construct the set $B = \set{ b_1 < b_2 < \cdots < b_r \mid u_{b_k} < \ell} \subseteq \ive{n}$ and the $r$-tuple $\tup{u_{b_1} \geq u_{b_2} \geq \cdots \geq u_{b_r}}$.
+Conversely, for any word $u = u_1 \dotsm u_n \in \mcW_n$ that is weakly decreasing up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$, we can construct the set $B = \set{ b_1 < b_2 < \cdots < b_r \mid u_{b_k} < \ell} \subseteq \ive{n}$ and the $r$-tuple $\tup{u_{b_1} \geq u_{b_2} \geq \cdots \geq u_{b_r}}$.
 Therefore, we can apply Lemma~\ref{lem:determinant_form.interl-act} to $u$.
 
 Write the $r$-tuple $\tup{v_1, v_2, \dotsc, v_r}$ in the form
