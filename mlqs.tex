@@ -2479,7 +2479,8 @@ q_3^{(2)} = \set{4,5},
 \hspace{50pt}
 q_3^{(1)} = \set{8,9,13,14}.
 \end{gather*}
-Similar to the graveyard diagram of~\eqref{eq:boxes-and-balls-1}, we depict the graveyard diagram of $\qq$ with row $i$ having the element $p \in q_i$ represented a circle at position $p$ labeled by $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$ and elements of $\ive{n} \setminus q_i$ represented by squares (\textit{i.e.}, we suppress filling the squares with an $i+1$):
+Similar to the graveyard diagram~\eqref{eq:boxes-and-balls-1}, we define the graveyard diagram of an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$ as a matrix with $\ell-1$ rows, whose entries are circles and squares; its row $i$ has each element $p \in q_i$ represented as a circle at position $p$ labeled by the letter $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$, and each element of $\ive{n} \setminus q_i$ represented as an unlabeled square (\textit{i.e.}, we suppress filling the squares with an $i+1$).
+For example, the $\qq$ in this example is represented by the following graveyard diagram:
 \[
 \begin{tikzpicture}[scale=0.8,baseline=-30]
 % q_1
@@ -2620,6 +2621,8 @@ Define a pseudo-partition
 \end{equation}
 Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
 
+For the following lemma, note that $\mm$ is fixed but $\qq$ is not.
+
 \begin{lemma}
 \label{lem:determinant_form.bij1}
 Let $\ell$, $\mm$, and $m_i$ be as above.
@@ -2643,8 +2646,8 @@ with the following properties:
 
 \begin{proof}
 We define a map $P$ as follows.
-Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$.
-Let $\widetilde{q}_i^{(j)}$ shall denote the entries of $q_i^{(j)}$ written vertically in a column, strictly increasing from top to bottom.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be any MLQ of type $\mm$.
+Let $\widetilde{q}_i^{(j)}$ denote the entries of $q_i^{(j)}$ written vertically in a column, strictly increasing from top to bottom.
 For example, if $q_i^{(j)} = \set{2,5,6}$, then
 \[
 \widetilde{q}_i^{(j)} = \raisebox{10pt}{$\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$}\ .
@@ -2813,9 +2816,10 @@ We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q} - m_t$.
 \end{claim}
 
 \begin{subproof}
-Suppose there exists a $\kappa$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path $u_{i_{\kappa}}$ ``wraps around the cycle'').
+Suppose there exists a $\kappa$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
 Without loss of generality, assume $\kappa$ is minimal.
 Thus, we have $j_{\kappa} = \min q$.
+\Darij{Why? Don't we need some specific choice of $i_1, \ldots, i_n$ for that?}
 However, since there exists at least one $t$ in $q(u)$, we must have $t = q(u)_{j_!}$ for some $j_! \in q \setminus \set{\min q}$.
 This contradicts that $q(u)$ is weakly decreasing up to level $t$.
 \end{subproof}
@@ -3818,7 +3822,7 @@ When $\qq$ is an ordinary MLQ, we can also construct this canonical labeling rec
 \end{itemize}
 This defines $f_{k+1} \colon q_{k+1} \to \ive{k+1}$.
 \end{enumerate}
-Note that the canonical labeling are the elements in the circles in the corresponding graveyard diagram.
+Note that the canonical labeling are the elements in the circles in the graveyard diagram of $\qq$ (as in Example~\ref{ex:qij_generic}).
 
 \begin{verlong}
 In order to see that this recursive construction yields the same labeling $\ff_\qq$ as the equality~\eqref{eq.AasLin-lab.formula}, we can proceed as follows:
