@@ -2480,7 +2480,7 @@ q_3^{(2)} = \set{4,5},
 q_3^{(1)} = \set{8,9,13,14}.
 \end{gather*}
 Similar to the graveyard diagram~\eqref{eq:boxes-and-balls-1}, we define the graveyard diagram of an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$ as a matrix with $\ell-1$ rows, whose entries are circles and squares; its row $i$ has each element $p \in q_i$ represented as a circle at position $p$ labeled by the letter $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$, and each element of $\ive{n} \setminus q_i$ represented as an unlabeled square (\textit{i.e.}, we suppress filling the squares with an $i+1$).
-For example, the $\qq$ in this example is represented by the following graveyard diagram:
+The $\qq$ in this example is represented by the following graveyard diagram:
 \[
 \begin{tikzpicture}[scale=0.8,baseline=-30]
 % q_1
@@ -2818,8 +2818,9 @@ We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q} - m_t$.
 \begin{subproof}
 Suppose there exists a $\kappa$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
 Without loss of generality, assume $\kappa$ is minimal.
+Note that $u_{i_{\kappa}} < t$ since $\kappa \leq \abs{q} - m_t$.
+Moreover, there does not exist an $h < \kappa$ such that $j_h = \min q$ as otherwise this would violate the weakly decreasing up to level $t$ condition as $u_{i_h} < t$ as well.
 Thus, we have $j_{\kappa} = \min q$.
-\Darij{Why? Don't we need some specific choice of $i_1, \ldots, i_n$ for that?}
 However, since there exists at least one $t$ in $q(u)$, we must have $t = q(u)_{j_!}$ for some $j_! \in q \setminus \set{\min q}$.
 This contradicts that $q(u)$ is weakly decreasing up to level $t$.
 \end{subproof}
