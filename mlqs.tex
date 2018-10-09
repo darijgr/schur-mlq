@@ -1207,12 +1207,7 @@ In particular, they are totally ordered by $1 < 2 < \cdots < n$.
 Let $\ell$ and $r$ be positive integers.
 Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
 Let $v = \tup{v_1, v_2, \ldots, v_r}$ be an $r$-tuple of elements of $\ive{\ell-1}$.
-% We have not defined words with $r$ letters.
-% And our words are cyclic, while $v$ is not.
-% One fewer line isn't worth the extra confusion.
-Define a word $u(v) \in \mcW_n$
-with $\ell$ classes
-by
+Define a word $u(v) \in \mcW_n$ with $\ell$ classes by
 \begin{equation}
 \label{eq:weakly_decreasing_construction}
 \bigl( u(v) \bigr)_i = \begin{cases}
@@ -1286,22 +1281,24 @@ where the sum ranges over all words $u' \in \mcW_n$
 of type $\mm$ satisfying
 $\bigvee_T u' = \bigvee_T w_0$.
 But the words $u' \in \mcW_n$ of type $\mm$ satisfying
-$\bigvee_T u' = \bigvee_T w_0$ are precisely the words of the form
-$\sigma_S$ (recall that this stands for $u(v_{\sigma_S})$)
+$\bigvee_T u' = \bigvee_T w_0$ are precisely the words of the form $\sigma_S$
+\begin{verlong}
+(recall that this stands for $u(v_{\sigma_S})$)
+\end{verlong}
 for $S \subseteq T$.
 Hence, the $\sum \swt{u'}$ in the above equality rewrites as $\psi(T)$.
 This proves the first equality of the corollary.
-To prove the second equality, we set
-$\ell = r - \abs{T} + 1$, and we let
-$v = \tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be the
-$r$-tuple of integers given by $v_j = \ell - j + \abs{\set{t \in T \mid t > r-j}}$.
-Note that this $r$-tuple $v$ can be uniquely characterized by the properties
-that $v_1 = r - \abs{T} = \ell-1$ and $v_r = 1$ and
-$v_{i+1} = v_i - \begin{cases} 0, & \text{if } r-i \in T; \\ 1, & \text{if } r-i \notin T
-                 \end{cases}$ for each $i \in \ive{r-1}$;
-thus, it is weakly decreasing and satisfies
-$\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
-This characterization yields $u(v) = \bigvee_T w_0$.
+To prove the second equality, we consider $\ell = r - \abs{T} + 1$ and
+\[
+v = \bigl(v_j = \ell - j + \abs{\set{t \in T \mid t > r-j}} = \ell - \gamma_j \bigr)_{j=1}^r.
+\]
+Note that $v_1 = r - \abs{T} = \ell-1$ and $v_r = 1$ and
+\[
+v_{i+1} = v_i - \begin{cases} 0 & \text{if } r-i \in T, \\ 1 & \text{if } r-i \notin T, \end{cases}
+\qquad
+\text{for each $i \in \ive{r-1}$.}
+\]
+Thus, $v$ is weakly decreasing and $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$ and $u(v) = \bigvee_T w_0$.
 Hence, the second equality follows from Theorem~\ref{thm:determinant_form}.
 \end{proof}
 
@@ -1319,7 +1316,7 @@ Applying Theorem~\ref{thm:merge} to $t = 4$ twice and then to $t=1$, we obtain
 Using Theorem~\ref{thm:determinant_form}, this further becomes
 \begin{align*}
 \psi(T) & = x_1 x_2 x_5 x_6 x_8 \, e_1(x_1, \dotsc, x_8) \, e_4(x_1, \dotsc, x_8)
-\\ & \hspace{20pt} \cdot \det \begin{pmatrix}
+\\ & \hspace{20pt} \times \det \begin{pmatrix}
 %gamma_j = 1,1,2,3,3
 1 & 0 & 0 & 0 & 0 \\
 h_1[1] & 1 & 1 & 1 & 0 \\
@@ -3012,9 +3009,12 @@ m_i =
 
 %First note that for any set $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$, weakly decreasing $r$-tuple $\tup{v_1 \geq v_2 \geq \dotsm \geq v_r}$ such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$, the word $u \in \mcW_n$ defined by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$ is weakly decreasing up to level $\ell-1$.
 %Conversely, for any word $u = u_1 \dotsm u_n \in \mcW_n$ that is weakly decreasing up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$, we can construct the set $B = \set{ b_1 < b_2 < \cdots < b_r \mid u_{b_k} < \ell} \subseteq \ive{n}$ and the $r$-tuple $\tup{u_{b_1} \geq u_{b_2} \geq \cdots \geq u_{b_r}}$.
-The word $u(v)$ is weakly decreasing up to level $\ell-1$
-(since $v_1 \geq v_2 \geq \cdots \geq v_r$ and
-$\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$).
+\begin{vershort}
+The word $u(v)$ is weakly decreasing up to level $\ell-1$.
+\end{vershort}
+\begin{verlong}
+The word $u(v)$ is weakly decreasing up to level $\ell-1$ since $v_1 \geq v_2 \geq \cdots \geq v_r$ and $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
+\end{verlong}
 Therefore, we can apply Lemma~\ref{lem:determinant_form.interl-act} to $u = u(v)$.
 
 Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
