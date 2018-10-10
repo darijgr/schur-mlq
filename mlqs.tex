@@ -2953,7 +2953,7 @@ The base case of $\ell = 1$ is trivial.
 Thus, we assume the claim holds for $\ell$.
 Now, let $u = u_1 u_2 \dotsm u_n \in \mcW_n$ be weakly decreasing
 up to level $\ell$ such that $\ive{\ell} \subseteq \set{u_1, u_2, \ldots, u_n}$,
-let $\mm$ be the type of $u$,
+let $\mm = \tup{m_1, m_2, \ldots, m_{\ell+1}}$ be the type of $u$,
 and let $\qq = \tup{q_1, \dotsc, q_{\ell-1}, q_{\ell}}$ be an MLQ of type $\mm$.
 
 $\Longrightarrow:$
@@ -2966,15 +2966,24 @@ Furthermore, the type of $\qq'$ and $u'$ is
 \mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
 \]
 since $\abs{q_{\ell}} = m_{\ell}$.
-By Lemma~\ref{lem:determinant_form.interl-A}(a), we have that $u'$ is weakly decreasing up to level $\ell-2$.
+Lemma~\ref{lem:determinant_form.interl-A}(a)
+(applied to $u'$, $q_\ell$ and $\ell$ instead of $u$, $q$ and $t$)
+shows that $u'$ is weakly decreasing up to level $\ell-1$.
 Hence, by our induction assumption, $\qq'$ is interlacing.
-Moreover, since $q_{\ell-1} = \{p \mid u'_p < \ell-1\}$ and $u'$ is weakly decreasing of type $\mm'$, we have $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-2}$.
-Therefore, by Lemma~\ref{lem:determinant_form.interl-A}(b), we have that $\qq$ is interlacing.
+Moreover, knowing that $u'$ has type $\mm'$, we see that $q_{\ell-1} = \{p \mid u'_p \leq \ell-1\}$;
+hence, $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$
+(since $u'$ has type $\mm'$ and is weakly decreasing up to level $\ell-1$).
+Similarly, $q_\ell^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$.
+Therefore, by Lemma~\ref{lem:determinant_form.interl-A}(b), we obtain
+$q_\ell^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_\ell^{(h+1)}$ for each $h \in \ive{\ell-1}$.
+Hence, $\qq$ is interlacing.
+Also, $q_{\ell} = \set{ p \mid u_p < \ell+1 }$ for simple reasons.
 
 $\Longleftarrow:$
-Suppose the MLQ $\qq$ is interlacing and satisfies $q_{\ell} = \{ p \mid u_p < \ell \}$.
+Suppose the MLQ $\qq$ is interlacing and satisfies $q_{\ell} = \{ p \mid u_p < \ell+1 \}$.
 Let $\qq' = \tup{q_1, \dotsc, q_{\ell-1}}$, and note that $\qq'$ is also interlacing.
 By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$ with $\ive{\ell-1} \subseteq \set{u'_1, u'_2, \dotsc, u'_n}$.
+\Darij{I don't think this follows from the induction assumption! We prolly need to reformulate the lemma. As it stands, it REQUIRES weak decreasingness up to a level.}
 Now since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, we note that from the definition of Phase~II and Lemma~\ref{lem:determinant_form.gale1}, we have $\bigl( q(u'_{i_k}) \bigr)_{j_k} = u'_{i_k} = h$ for any $i_k \in q_{\ell-1}^{(h)}$ and some unique $j_k \in q_{\ell}^{(h)}$.
 Hence, we have
 \[
