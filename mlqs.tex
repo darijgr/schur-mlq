@@ -2717,9 +2717,9 @@ Hence, from~\eqref{pf.lem:determinant_form.bij1.visual}, we see the following:
 \end{itemize}
 Combining these two observations, we conclude that the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def}.
 In other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
-Moreover, it is clear that given any semistandard tableau of shape $\lambda^{\mm}$, we can construct an interlacing MLQ $\qq$ of type $\mm$.
+Moreover, it is clear that given any semistandard tableau $T$ of shape $\lambda^{\mm}$, we can construct an interlacing MLQ $\qq$ of type $\mm$ satisfying $P(\qq) = T$.
 (Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual} and combining them to obtain queues $q_i$ and an MLQ $\qq$.)
-Hence, the map $P$ restricted to interlacing MLQs is surjective on the set of semstandard tableaux of shape $\lambda^{\mm}$, and since $P$ is injective, we have a bijection.
+Hence, the map $P$ restricted to interlacing MLQs is surjective onto the set of semistandard tableaux of shape $\lambda^{\mm}$, and since $P$ is injective, we have a bijection.
 This proves~(c).
 \end{proof}
 
@@ -2739,7 +2739,7 @@ Then,
 
 \begin{proof}
 Consider the bijection $\overline{P}$ from Lemma~\ref{lem:determinant_form.bij1}(c), and recall the properties~(a) and~(b).
-Hence, we can substitute $\overline{P}(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
+Hence, we can substitute $\overline{P}(\qq) = P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
 \begin{vershort}
 We thus obtain
 \begin{align*}
@@ -2753,7 +2753,7 @@ where the second equality follows from Property~(a) and Property~(b) and that $s
 We thus obtain
 \begin{align*}
 \sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
-  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of } \overline{P}(\qq) \text{ is } s}} \wt\bigl(  \overline{P}(\qq) \bigr) \\
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of } \overline{P}(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
 &  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
 &  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
 \end{align*}
@@ -2818,11 +2818,17 @@ Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, 
 
 \begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
 Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
-From the definition of $q(u)$ and since there are precisely $\abs{q}$ letters at most $t$, all letters set during Phase~II of the algorithm are at most $t$, while all of letters set during Phase~I are strictly greater than $t$ (see also Remark~\ref{rmk:t-splitting}).
+From the definition of $q(u)$ and since $q(u)$ has precisely $\abs{q}$ letters at most $t$,
+we see that
+all letters set during Phase~II of the algorithm computing $q(u)$ are at most $t$,
+while all letters set during Phase~I are strictly greater than $t$
+(see also Remark~\ref{rmk:t-splitting}).
 Therefore, it is sufficient to consider the letters set during Phase~II.
 Let $m_t$ denote the number of occurrences of $t$ in $u$.
 We first show that no ``wrapping around the cycle'' can occur during Phase~II.
 Let $j_{\kappa}$ denote the site set in the $\kappa$-th step of Phase~II.
+\Darij{Clarify this definition a bit.}
+Hence, $\set{j_1, j_2, \ldots, j_{\abs{q}}} = q$.
 
 \begin{claim}
 \label{claim:no_wrapping}
@@ -2830,10 +2836,11 @@ We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q} - m_t$.
 \end{claim}
 
 \begin{subproof}
-Suppose there exists a $\kappa$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
+Suppose there exists a $\kappa \leq \abs{q} - m_t$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
 Without loss of generality, assume $\kappa$ is minimal.
 Note that $u_{i_{\kappa}} < t$ since $\kappa \leq \abs{q} - m_t$.
-Moreover, there does not exist an $h < \kappa$ such that $j_h = \min q$ as otherwise this would violate the weakly decreasing up to level $t$ condition as $u_{i_h} < t$ as well.
+Moreover, there does not exist an $h < \kappa$ such that $j_h = \min q$,
+as otherwise this would violate the weakly decreasing up to level $t$ condition as $u_{i_h} < t$ as well.
 Thus, we have $j_{\kappa} = \min q$.
 However, since there exists at least one $t$ in $q(u)$, we must have $t = q(u)_{j_!}$ for some $j_! \in q \setminus \set{\min q}$.
 This contradicts that $q(u)$ is weakly decreasing up to level $t$.
@@ -3927,13 +3934,16 @@ Thus, the labeling $\ff_{\qq}$ is equivalently constructed following the labelin
 
 \subsection{Connection with Kohnert diagrams and Assaf--Searles theory}
 
-Next we relate the action of queues on words with the \defn{Kohnert fillings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
-We remark that the thread decomposition is the same as the Kohnert filling procedure when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
-Roughly speaking, a Kohnert filling (and a thread decomposition) is a standardization of the bully path construction.
+Next we relate the action of queues on words with the \defn{Kohnert labelings} in~\cite[Def.~2.5]{AssSea18} and the \defn{thread decomposition} in~\cite[Def.~3.5]{AssSea18}.
+We remark that the thread decomposition is the same as the Kohnert labeling when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
+Roughly speaking, Kohnert diagrams are MLQs built of queues that live on a half-line (instead of a circle), and the construction of the Kohnert labeling (and the thread decomposition) is a standardization of the bully path construction.
 
-In more detail, for a Kohnert diagram $D \in \KM(\alpha)$ for any fixed weak composition $\alpha$ (see~\cite{AssSea18} for notations), we view its columns as queues.
+In more detail (and using the notations of~\cite{AssSea18}):
+If $\alpha$ is a weak composition, and if $D \in \KM(\alpha)$ is a Kohnert diagram, then we view the columns of $D$ as queues.
 This time, our queues are subsets of $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$; thus, there is no ``wrapping around''.
-We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$: namely, a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$ and $\ell$ is the number of columns in $D$.
+We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$:
+namely, a cell in row $i$ and column $j$ in the reflected diagram corresponds to a $j \in q_i$,
+and $\ell$ is the number of columns in $D$.
 We then apply the bully path construction to the boxes of this reflected Kohnert diagram.
 To obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm, where we consider the labels to be decreasing from left to right.
 Hence, this can be considered as a standardization of our construction or, equivalently, as fixing specific permutations for how the queues act on words.
@@ -3963,7 +3973,8 @@ Consider the thread decomposition of the Kohnert diagram
 \end{tikzpicture}
 \]
 given in~\cite[Fig.~11]{AssSea18}.
-Thus, the corresponding MLQ is $\tup{\set{2}, \set{1,2,3}, \set{2,3,4}}$, which if we draw it using bully paths, we obtain
+Thus, the corresponding MLQ is $\tup{\set{2}, \set{1,2,3}, \set{2,3,4}}$;
+we can draw it using bully paths as follows:
 \[
 \begin{tikzpicture}[>=latex]
 \def\xs{1.5}
@@ -3992,19 +4003,19 @@ Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $
 \]
 which means we can apply~\cite[Lemma~2.2]{AssSea18} to see that there is no ``wrapping'' around the cylinder.
 
-To obtain a Kohnert filling from a Kohnert diagram of height $K$ (for this, we require $n \gg 1$), we can construct an MLQ
+To obtain a Kohnert labeling from a Kohnert diagram of height $K$ (for this, we require $n \gg 1$), we can construct an MLQ
 \[
 \widetilde{\qq}_D = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
 \]
-from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings, where $\ell + \ell'$ is the largest label appearing in the Kohnert filling.
+from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings, where $\ell + \ell'$ is the largest label appearing in the Kohnert labeling.
 Indeed, a label added in column $i$ comes from a $k \in q$ with $k > K$ for sufficiently many queues $q$ before $q_i$.
 In particular, when a smaller label appears, it must be in the bottom row of the Kohnert diagram, which would correspond to the bully path wrapping around the cylinder.
 We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
 We leave the precise details for the interested reader.
 
 \begin{example}
-We consider the Kohnert filling from Example~\ref{ex:thread_decomp}.
-The following MLQ, given as a graveyard diagram, is an MLQ that gives the corresponding Kohnert filling:
+We consider the Kohnert labeling from Example~\ref{ex:thread_decomp}.
+The following MLQ, given as a graveyard diagram, is an MLQ that gives the corresponding Kohnert labeling:
 \[
 \begin{tikzpicture}[scale=0.8]
 \foreach \pt in {(6,-1), (2,-2),(6,-2), (1,-3),(2,-3),(3,-3), (2,-4),(3,-4),(4,-4)}
@@ -4021,7 +4032,7 @@ The following MLQ, given as a graveyard diagram, is an MLQ that gives the corres
 \end{tikzpicture}
 \]
 where we have suppressed the $(i+1)$'s that appear in row $i$.
-Note that all circles that appear to the left of the dashed line correspond to the Kohnert filling and that the labels match.
+Note that all circles that appear to the left of the dashed line correspond to the Kohnert labeling and that the labels match.
 \end{example}
 
 \Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
