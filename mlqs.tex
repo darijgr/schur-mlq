@@ -2871,16 +2871,21 @@ The map $\phi$ is well-defined (\textit{i.e.}, we have $j_k \in A$ for all appli
 We have $\phi(i_k) = j_k \geq i_k$ by Claim~\ref{claim:no_wrapping}.
 Hence $A \succeq B$ by Lemma~\ref{lem:determinant_form.gale1}.
 
-Now suppose that we don't have $B \gg C$.
+To prove $B \gg C$, assume the contrary.
 Thus, there exist $b \in B$ and $c \in C$ such that $b \leq c$.
 Let $k$ be minimal such that $i_k \in B$ and $i_k \leq c$.
 Since $q(u)$ is weakly decreasing up to level $t$ and $h < t$, we must have $A \gg C$.
 Hence, we have $i_k \leq c < j_k$ since $j_k \in A$.
+\begin{vershort}
+However, this is a contradiction since $q(u)_c$ would instead have been set during the $k$-th step of Phase~II.
+\end{vershort}
+\begin{verlong}
 But during Phase~II, at the time when $i = i_k$,
 the letter $(q(u))_c$ is not set yet (since $(q(u))_c = h+1$ is
 larger than $u_{i_k} = h$).
 Thus, at this time, the first site $j$ weakly to the right of $i$ such that $j \in q$ and $(q(u))_j$ is not set cannot be $j_k$ (because $c$ comes before it, and $(q(u))_c$ is still not set).
 This contradicts the definition of $j_k$.
+\end{verlong}
 This shows $B \gg C$.
 \end{proof}
 
