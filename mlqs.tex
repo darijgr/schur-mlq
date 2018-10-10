@@ -2830,39 +2830,17 @@ Let $j_{\kappa}$ denote the site set in the $\kappa$-th step of Phase~II
 Hence, $\set{j_1, j_2, \ldots, j_{\abs{q}}} = q$.
 
 \begin{claim}
-\label{claim:no_wrapping0}
-We have $j_{\kappa} \neq \min q$
-for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$.
-\end{claim}
-
-\begin{subproof}
-Consider the leftmost letter of $q(u)$ set during Phase~II.
-This letter is the leftmost letter of $q(u)$ that is $\leq t$ (since Phase~II sets precisely the
-letters $\leq t$),
-and thus equals $t$ (since we assumed that $q(u)$ is weakly decreasing up to level $t$
-and has at least one letter $t$).
-In other words, $(q(u))_{\min q} = t$
-(since Phase~II sets exactly the letters in the positions $j \in q$).
-But if $\kappa \leq \abs{q}$ satisfies $u_{i_{\kappa}} \leq t-1$,
-then $(q(u))_{j_{\kappa}} = u_{i_{\kappa}} \leq t-1 < t$
-and thus $(q(u))_{j_{\kappa}} \neq t = (q(u))_{\min q}$,
-hence $j_{\kappa} \neq \min q$.
-\end{subproof}
-\begin{claim}
-
 \label{claim:no_wrapping}
-We have $j_{\kappa} \geq i_{\kappa}$
-for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$.
+We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$ (equivalently, for all for all $\kappa \leq \abs{q} - m_t$).
 \end{claim}
 
 \begin{subproof}
 Assume the contrary.
-Thus, there exists a $\lambda \leq \abs{q}$ satisfying $u_{i_{\lambda}} \leq t-1$
-such that $j_{\lambda} < i_{\lambda}$ (\textit{i.e.}, the path of $u_{i_{\lambda}}$ ``wraps around the cycle'').
-Then, some $\kappa \in \ive{\lambda}$ satisfies
-$j_{\kappa} = \min q$ (due to how the search for $j$ in Phase~II works).
-But this contradicts Claim~\ref{claim:no_wrapping0}
-(since $\kappa \leq \lambda$ yields $u_{i_{\kappa}} \leq u_{i_{\lambda}} \leq t-1$).
+Thus, there exists a $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
+Without loss of generality, assume $\kappa$ is minimal.
+Then either $j_{\kappa} = \min q$ or $\min q$ has already been set on a previous step of Phase~II, and in either case, we have $q(u)_{\min q} < t$.
+Since $q(u)$ contains at least one $t$, there exists an $h > \kappa$ such that $q(u)_{j_h} = t$ with $j_h > \min q$.
+This contradicts that $q(u)$ is weakly decreasing up to level $t$.
 \end{subproof}
 
 Next, suppose Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
