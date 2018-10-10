@@ -2831,16 +2831,16 @@ Hence, $\set{j_1, j_2, \ldots, j_{\abs{q}}} = q$.
 
 \begin{claim}
 \label{claim:no_wrapping}
-We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$ (equivalently, for all for all $\kappa \leq \abs{q} - m_t$).
+We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$.
 \end{claim}
 
 \begin{subproof}
 Assume the contrary.
 Thus, there exists a $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
 Without loss of generality, assume $\kappa$ is minimal.
-Then either $j_{\kappa} = \min q$ or $\min q$ has already been set on a previous step of Phase~II, and in either case, we have $q(u)_{\min q} < t$.
-Since $q(u)$ contains at least one $t$, there exists an $h > \kappa$ such that $q(u)_{j_h} = t$ with $j_h > \min q$.
-This contradicts that $q(u)$ is weakly decreasing up to level $t$.
+Then either $j_{\kappa} = \min q$ or $\min q$ has already been set on a previous step of Phase~II, and in either case, we have $\bigl( q(u) \bigr)_{\min q} < t$.
+Since $q(u)$ contains at least one $t$ (which is set during Phase~II), there exists an $h > \kappa$ such that $\bigl( q(u) \bigr)_{j_h} = t$ with $j_h > \min q$.
+However, this contradicts that $q(u)$ is weakly decreasing up to level $t$.
 \end{subproof}
 
 Next, suppose Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
