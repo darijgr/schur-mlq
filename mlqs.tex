@@ -677,7 +677,7 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \end{dfn}
 
 \begin{lemma}
-\label{rmk:mlq-type}
+\label{lemma:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
 Let $\qq$ be a $\sigma$-twisted MLQ.
 Then the type of the word $\qq(1^n)$ is the type of $\qq$.
@@ -699,7 +699,7 @@ Now, the word $1^n$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + 
 Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way (because of~\eqref{eq:queue_type_change}): Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
 Hence, the action of $\qq$ transforms $1^n$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
 In other words, the type of the word $\qq(1^n)$ is $\mm$.
-This proves Lemma~\ref{rmk:mlq-type}.
+This proves Lemma~\ref{lemma:mlq-type}.
 
 [The above proof is a bit informal.
 To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$.
@@ -930,7 +930,7 @@ $\zeta \in \SymGp{\ell}$
 is precisely the multiset of the $p_k(\mm)$ for $k \geq 1$
 with one copy of $p_i(\mm) = \abs{q'}$ removed).
 Furthermore, the definition of $u$ becomes $u = \qq' (1^n)$.
-Hence, the type of $u$ is $\mm$ (by Lemma~\ref{rmk:mlq-type}).
+Hence, the type of $u$ is $\mm$ (by Lemma~\ref{lemma:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
 $\nn$ of the word $q'(1^n)$ satisfies $p_1(\nn) = k$.
@@ -2900,10 +2900,9 @@ Now we prove our main technical lemma:
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
 Let $\ell$ be a positive integer.
-Let $u = u_1 u_2 \dotsm u_n \in \mcW_n$ be weakly decreasing up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$.
-Let $\mm$ be the type of $u$.
-Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
-Then, $u = \qq(1^n)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = \set{ p \mid u_p < \ell }$.
+Let $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ be such that $m_i > 0$ for all $1 \leq i < \ell$.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ with $\ell-1$ queues.
+Then, $u = \qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$ if and only if the MLQ $\qq$ has type $\mm$ and is interlacing.
 \end{lemma}
 
 \begin{example}
@@ -2951,13 +2950,13 @@ Then, $u = \qq(1^n)$ if and only if the MLQ $\qq$ is interlacing and satisfies $
 We prove the claim by induction on $\ell$.
 The base case of $\ell = 1$ is trivial.
 Thus, we assume the claim holds for $\ell$.
-Now, let $u = u_1 u_2 \dotsm u_n \in \mcW_n$ be weakly decreasing
-up to level $\ell$ such that $\ive{\ell} \subseteq \set{u_1, u_2, \ldots, u_n}$,
-let $\mm = \tup{m_1, m_2, \ldots, m_{\ell+1}}$ be the type of $u$,
-and let $\qq = \tup{q_1, \dotsc, q_{\ell-1}, q_{\ell}}$ be an MLQ of type $\mm$.
+Let $\mm = \tup{m_1, m_2, \ldots, m_{\ell+1}, 0, \ldots}$ with $m_i > 0$ for all $1 \leq i < \ell + 1$.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell}}$.
+Note that $u = \qq(1^n)$ has type $\mm$ if and only if $\qq$ has type $\mm$ by Lemma~\ref{lemma:mlq-type}.
+Thus it is remains to show that $u = \qq(1^n)$ is weakly decreasing up to level $\ell - 1$ if and only if $\qq$ is interlacing.
 
 $\Longrightarrow:$
-Suppose $u = \qq(1^n)$.
+Suppose $u = \qq(1^n)$ is weakly decreasing up level $\ell$.
 Recall the definition of $q_i^{(h)}$ given by~\eqref{eq.determinant_form.qij}.
 Let $\qq' := \tup{q_1, \dotsc, q_{\ell-1}}$ and $u' := \qq'(1^n)$.
 Note that we have $u = q_{\ell}(u')$ by the definition of $\qq$.
@@ -2966,30 +2965,24 @@ Furthermore, the type of $\qq'$ and $u'$ is
 \mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
 \]
 since $\abs{q_{\ell}} = m_{\ell}$.
-Lemma~\ref{lem:determinant_form.interl-A}(a)
-(applied to $u'$, $q_\ell$ and $\ell$ instead of $u$, $q$ and $t$)
-shows that $u'$ is weakly decreasing up to level $\ell-1$.
+Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u'$, $q_\ell$ and $\ell$ instead of $u$, $q$ and $t$) shows that $u'$ is weakly decreasing up to level $\ell-1$.
 Hence, by our induction assumption, $\qq'$ is interlacing.
-Moreover, knowing that $u'$ has type $\mm'$, we see that $q_{\ell-1} = \{p \mid u'_p \leq \ell-1\}$;
-hence, $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$
-(since $u'$ has type $\mm'$ and is weakly decreasing up to level $\ell-1$).
-Similarly, $q_\ell^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$.
-Therefore, by Lemma~\ref{lem:determinant_form.interl-A}(b), we obtain
-$q_\ell^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_\ell^{(h+1)}$ for each $h \in \ive{\ell-1}$.
+Since $u'$ has type $\mm'$ and is weakly decreasing up to level $\ell-1$, we see that $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$.
+Similarly, we have $q_\ell^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$.
+Therefore, by Lemma~\ref{lem:determinant_form.interl-A}(b), we obtain $q_\ell^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_\ell^{(h+1)}$ for each $h \in \ive{\ell-1}$.
 Hence, $\qq$ is interlacing.
-Also, $q_{\ell} = \set{ p \mid u_p < \ell+1 }$ for simple reasons.
 
 $\Longleftarrow:$
-Suppose the MLQ $\qq$ is interlacing and satisfies $q_{\ell} = \{ p \mid u_p < \ell+1 \}$.
+Suppose the MLQ $\qq$ is interlacing.
 Let $\qq' = \tup{q_1, \dotsc, q_{\ell-1}}$, and note that $\qq'$ is also interlacing.
-By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$ with $\ive{\ell-1} \subseteq \set{u'_1, u'_2, \dotsc, u'_n}$.
-\Darij{I don't think this follows from the induction assumption! We prolly need to reformulate the lemma. As it stands, it REQUIRES weak decreasingness up to a level.}
-Now since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, we note that from the definition of Phase~II and Lemma~\ref{lem:determinant_form.gale1}, we have $\bigl( q(u'_{i_k}) \bigr)_{j_k} = u'_{i_k} = h$ for any $i_k \in q_{\ell-1}^{(h)}$ and some unique $j_k \in q_{\ell}^{(h)}$.
-Hence, we have
+By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$ of type
 \[
-\qq(1^n) = q_{\ell}\bigl( \qq'(1^n) \bigr) = q_{\ell}(u') = u
+\mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
 \]
-with $q_{\ell} = \set{p \mid u_p < \ell+1}$.
+since $\abs{q_{\ell}} = m_{\ell}$.
+Hence, we have $q_{\ell}^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$ from the definition of Phase~II, that $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, and Lemma~\ref{lem:determinant_form.gale1}.
+Furthermore, for all $h \in \ive{\ell-1}$, we have $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$ and from Lemma~\ref{lem:determinant_form.gale1}.
+Therefore, $u$ is weakly decreasing up to level $\ell$.
 \end{proof}
 
 
