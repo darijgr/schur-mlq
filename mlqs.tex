@@ -2824,40 +2824,61 @@ all letters set during Phase~II of the algorithm computing $q(u)$ are at most $t
 while all letters set during Phase~I are strictly greater than $t$
 (see also Remark~\ref{rmk:t-splitting}).
 Therefore, it is sufficient to consider the letters set during Phase~II.
-Let $m_t$ denote the number of occurrences of $t$ in $u$.
 We first show that no ``wrapping around the cycle'' can occur during Phase~II.
-Let $j_{\kappa}$ denote the site set in the $\kappa$-th step of Phase~II.
-\Darij{Clarify this definition a bit.}
+Let $j_{\kappa}$ denote the site set in the $\kappa$-th step of Phase~II
+(that is, the site $j$ found at the time when $i = i_\kappa$).
 Hence, $\set{j_1, j_2, \ldots, j_{\abs{q}}} = q$.
 
 \begin{claim}
-\label{claim:no_wrapping}
-We have $j_{\kappa} \geq i_{\kappa}$ for all $\kappa \leq \abs{q} - m_t$.
+\label{claim:no_wrapping0}
+We have $j_{\kappa} \neq \min q$
+for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$.
 \end{claim}
 
 \begin{subproof}
-Suppose there exists a $\kappa \leq \abs{q} - m_t$ such that $j_{\kappa} < i_{\kappa}$ (\textit{i.e.}, the path of $u_{i_{\kappa}}$ ``wraps around the cycle'').
-Without loss of generality, assume $\kappa$ is minimal.
-Note that $u_{i_{\kappa}} < t$ since $\kappa \leq \abs{q} - m_t$.
-Moreover, there does not exist an $h < \kappa$ such that $j_h = \min q$,
-as otherwise this would violate the weakly decreasing up to level $t$ condition as $u_{i_h} < t$ as well.
-Thus, we have $j_{\kappa} = \min q$.
-However, since there exists at least one $t$ in $q(u)$, we must have $t = q(u)_{j_!}$ for some $j_! \in q \setminus \set{\min q}$.
-This contradicts that $q(u)$ is weakly decreasing up to level $t$.
+Consider the leftmost letter of $q(u)$ set during Phase~II.
+This letter is the leftmost letter of $q(u)$ that is $\leq t$ (since Phase~II sets precisely the
+letters $\leq t$),
+and thus equals $t$ (since we assumed that $q(u)$ is weakly decreasing up to level $t$
+and has at least one letter $t$).
+In other words, $(q(u))_{\min q} = t$
+(since Phase~II sets exactly the letters in the positions $j \in q$).
+But if $\kappa \leq \abs{q}$ satisfies $u_{i_{\kappa}} \leq t-1$,
+then $(q(u))_{j_{\kappa}} = u_{i_{\kappa}} \leq t-1 < t$
+and thus $(q(u))_{j_{\kappa}} \neq t = (q(u))_{\min q}$,
+hence $j_{\kappa} \neq \min q$.
+\end{subproof}
+\begin{claim}
+
+\label{claim:no_wrapping}
+We have $j_{\kappa} \geq i_{\kappa}$
+for all $\kappa \leq \abs{q}$ satisfying $u_{i_{\kappa}} \leq t-1$.
+\end{claim}
+
+\begin{subproof}
+Assume the contrary.
+Thus, there exists a $\lambda \leq \abs{q}$ satisfying $u_{i_{\lambda}} \leq t-1$
+such that $j_{\lambda} < i_{\lambda}$ (\textit{i.e.}, the path of $u_{i_{\lambda}}$ ``wraps around the cycle'').
+Then, some $\kappa \in \ive{\lambda}$ satisfies
+$j_{\kappa} = \min q$ (due to how the search for $j$ in Phase~II works).
+But this contradicts Claim~\ref{claim:no_wrapping0}
+(since $\kappa \leq \lambda$ yields $u_{i_{\kappa}} \leq u_{i_{\lambda}} \leq t-1$).
 \end{subproof}
 
 Next, suppose Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
-Thus, there exists a $k$ such that $i_{k'} < i_k$ and $u_{i_{k'}} < u_{i_k}$ for some $k' < k$.
-Without loss of generality, assume $k$ is the minimal (\textit{i.e.}, $k$ is the first time we are setting a letter that is not weakly decreasing in $u$).
-Since $q(u)_{j_{\kappa}} = u_{i_{\kappa}}$, we have $q(u)_{j_{k'}} < q(u)_{j_k}$.
-From our assumption that $q(u)$ is weakly decreasing, we have $j_{k'} > j_k$.
-Claim~\ref{claim:no_wrapping} shows that $j_k < i_k$ is impossible.
-Therefore, we assume $j_k \geq i_k$.
-However, this is a contradiction since during Phase~II, the site $j_k$ would have been set by $u_{i_{k'}}$ previously since $i_{k'} \leq j_{k'} < j_k$.
+Thus, there exists a $k$ such that $i_{k'} < i_k$ and $u_{i_{k'}} < u_{i_k} \leq t-1$ for some $k' < k$.
+Without loss of generality, assume $k$ is minimal with this property.
+Since $q(u)_{j_{\kappa}} = u_{i_{\kappa}}$ for all $\kappa \leq \abs{q}$,
+we thus have $q(u)_{j_{k'}} < q(u)_{j_k} \leq t-1$.
+From our assumption that $q(u)$ is weakly decreasing up to level $t$, we have $j_{k'} > j_k$.
+Claim~\ref{claim:no_wrapping} shows that $j_k \geq i_k$.
+Hence, $i_{k'} < i_k \leq j_k \leq j_{k'}$.
+Thus, during Phase~II, at the time when $i = i_{k'}$, the first site $j$ weakly to the right of $i$ such that $j \in q$ and $(q(u))_j$ is not set cannot be $j_{k'}$ (because $j_k$ comes before it, and $(q(u))_{i_k}$ is still not set).
+This contradicts the definition of $j_{k'}$.
+This proves Lemma~\ref{lem:determinant_form.interl-A}(a).
 
-%Since $u$ is weakly decreasing, by Lemma~\ref{lemma:order_indep} we can assume that $i_{\abs{q}-m_t} < \cdots < i_2 < i_1$.
 Now we prove Lemma~\ref{lem:determinant_form.interl-A}(b).
-Let
+Let $h \in \ive{t-1}$, and set
 \begin{align*}
 A & = \set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h },
 \\
@@ -2872,15 +2893,22 @@ The map $\phi$ is well-defined (\textit{i.e.}, we have $j_k \in A$ for all appli
 We have $\phi(i_k) = j_k \geq i_k$ by Claim~\ref{claim:no_wrapping}.
 Hence $A \succeq B$ by Lemma~\ref{lem:determinant_form.gale1}.
 
-Now suppose that $B \not\gg C$, and so there exists $c \in C$ such that $b \leq c$ for some $b \in B$.
-Let $k$ be minimal such that $i_k \leq c$.
-Since $q(u)$ is weakly decreasing up to $t$ and $h < t$, we must have $C \gg A$.
+Now suppose that we don't have $B \gg C$.
+Thus, there exist $b \in B$ and $c \in C$ such that $b \leq c$.
+Let $k$ be minimal such that $i_k \in B$ and $i_k \leq c$.
+Since $q(u)$ is weakly decreasing up to level $t$ and $h < t$, we must have $A \gg C$.
 Hence, we have $i_k \leq c < j_k$ since $j_k \in A$.
-However, this is a contradiction since $q(u)_c$ would have been set during the $k$-th step of Phase~II, where $i_k = b$.
-Hence $B \gg C$.
+But during Phase~II, at the time when $i = i_k$,
+the letter $(q(u))_c$ is not set yet (since $(q(u))_c = h+1$ is
+larger than $u_{i_k} = h$).
+Thus, at this time, the first site $j$ weakly to the right of $i$ such that $j \in q$ and $(q(u))_j$ is not set cannot be $j_k$ (because $c$ comes before it, and $(q(u))_c$ is still not set).
+This contradicts the definition of $j_k$.
+This shows $B \gg C$.
 \end{proof}
 
-Now we prove our main technical lemma: that $\qq(1^n)$ is weakly decreasing if and only if the MLQ $\qq$ is interlacing.
+Now we prove our main technical lemma:
+% that $\qq(1^n)$ is weakly decreasing if and only if the MLQ $\qq$ is interlacing.
+% [Darij:] This needs a lot more relativization to be correct.
 
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
