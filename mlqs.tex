@@ -2955,22 +2955,28 @@ We prove the claim by induction on $\ell$.
 The base case of $\ell = 1$ is trivial.
 Thus, we assume the claim holds for $\ell$.
 Let $\mm = \tup{m_1, m_2, \ldots, m_{\ell+1}, 0, \ldots}$ with $m_i > 0$ for all $1 \leq i < \ell + 1$.
-Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell}}$.
-Note that $u := \qq(1^n)$ has type $\mm$ if and only if $\qq$ has type $\mm$ by Lemma~\ref{lemma:mlq-type}.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell}}$ be an ordinary MLQ.
+The word $u := \qq(1^n)$ has type $\mm$ if and only if $\qq$ has type $\mm$ by Lemma~\ref{lemma:mlq-type}.
 Thus we can assume that both of these statements hold,
 and it is remains to show that $u = \qq(1^n)$ is weakly decreasing up to level $\ell$ if and only if $\qq$ is interlacing.
+We shall prove the $\Longrightarrow$ and $\Longleftarrow$ directions separately.
 
-$\Longrightarrow:$
-Suppose $u = \qq(1^n)$ is weakly decreasing up level $\ell$.
-Recall the definition of $q_i^{(h)}$ given by~\eqref{eq.determinant_form.qij}.
+First, let us prepare.
 Let $\qq' := \tup{q_1, \dotsc, q_{\ell-1}}$ and $u' := \qq'(1^n)$.
-Note that we have $u = q_{\ell}(u')$ by the definition of $\qq$.
-Furthermore, the type of $\qq'$ and $u'$ is
+Thus, $u = \qq(1^n) = q_{\ell} (u')$.
+Both the word $u'$ and the ordinary MLQ $\qq'$ have type
 \[
 \mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
 \]
 since $\abs{q_{\ell}} = p_{\ell}(\mm)$.
-Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u'$, $q_\ell$ and $\ell$ instead of $u$, $q$ and $t$) shows that $u'$ is weakly decreasing up to level $\ell-1$.
+
+Recall the definition of $q_i^{(h)}$ given by~\eqref{eq.determinant_form.qij}.
+
+$\Longrightarrow:$
+Suppose $u = \qq(1^n)$ is weakly decreasing up level $\ell$.
+Thus, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u'$, $q_\ell$ and $\ell$ instead of $u$, $q$ and $t$) shows that $u'$ is weakly decreasing up to level $\ell-1$
+(since $u = q_{\ell}(u')$ has type $\mm$ with $m_{\ell} > 0$
+and $p_{\ell}(\mm) = \abs{q_{\ell}}$).
 Hence, by our induction assumption, $\qq'$ is interlacing.
 Since $u'$ has type $\mm'$ and is weakly decreasing up to level $\ell-1$, we see that $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$.
 Similarly, we have $q_\ell^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$.
@@ -2979,19 +2985,49 @@ Hence, $\qq$ is interlacing.
 
 $\Longleftarrow:$
 Suppose the MLQ $\qq$ is interlacing.
-Let $\qq' = \tup{q_1, \dotsc, q_{\ell-1}}$, and note that $\qq'$ is also interlacing.
-By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$ of type
-\[
-\mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
-\]
-since $\abs{q_{\ell}} = p_{\ell}(\mm)$.
-\Darij{I don't understand the argument starting from the next sentence.}
-\Travis{The bijection given by Lemma~\ref{lem:determinant_form.gale1} exactly corresponds to Phase~II under a particular choice of permutation (i.e., doing letters from right to left) using $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$. I got tired of stating obvious things once you spend a quick moment unraveling all the definitions and restating what was in the other direction. However, I have added this last bit to emphasize it more.
+Thus, $\qq'$ is also interlacing.
+Hence, by our induction assumption, the word $u' = \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$;
+recall that this word has type $\mm'$.
+Hence, writing $u'$ as $u'_1 u'_2 \cdots u'_n$, we have
+$q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$.
 
-The $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ is equivalent to the weakly decreasing condition once you have $q_{\ell}^{(h)} = \{p \mid u_p = h\}$. I removed the second reinvocation of Lemma~\ref{lem:determinant_form.gale1} as the definition of $\succeq$ is sufficient to see $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$. }
-Furthermore, note that $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$.
-Hence, we have $q_{\ell}^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$ from the definition of Phase~II, that $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, and Lemma~\ref{lem:determinant_form.gale1}.
-Furthermore, for all $h \in \ive{\ell-1}$, we have $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$.
+Now, we compute $u = q_{\ell} (u')$ using the algorithm constructing $q_{\ell} (u')$,
+choosing the permutation
+$\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
+in such a way that $(u_{i_1}, 1) \leq (u_{i_2}, 2) \leq \cdots \leq (u_{i_n}, n)$
+in lexicographic order
+(thus, in Phase~II, we pick our sites $i$ in order of increasing letters in $u$,
+while breaking ties by moving left to right).
+For each $k \in \ive{n}$, we let $j_k$ be the site $j$ found at the step at which $i = i_k$.
+
+The interlacingness relation $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$,
+combined with the fact that $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$,
+reveals that throughout Phase~II of our algorithm,
+whenever the site $i_k$ belongs to $q_{\ell-1}^{(h)}$,
+the corresponding site $j_k$ will belong to $q_{\ell}^{(h)}$
+(and, more precisely, as the $i$ in our algorithm runs through the
+sites in $q_{\ell-1}^{(h)}$ from left to right,
+the $j$ will run through the sites in $q_{\ell}^{(h)}$ from left to right);
+indeed, the $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$ part guarantees that
+each site in $q_{\ell-1}^{(h)}$ is reachable from the corresponding
+site in $q_{\ell}^{(h)}$ by moving right, whereas the
+$q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$ part ensures that the search for $j$
+will actually reach this site
+(rather than already stopping at some other site in $q_{\ell}$ further left of it).
+(Strictly speaking, this argument is a strong induction on $k$, as we are
+using that all the previous sites have been correctly dispatched.)
+Hence, the converse also holds:
+If $j_k \in q_{\ell}^{(h)}$, then $i_k \in q_{\ell-1}^{(h)}$
+(since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$ yields
+$\abs{q_{\ell}^{(h)}} = \abs{q_{\ell-1}^{(h)}}$).
+
+As a consequence, we have $u_p = h$ for each $p \in q_{\ell}^{(h)}$ for each $h \in \ive{\ell-1}$
+(since $p = j_k$ for some $k \in \ive{n}$ found during Phase~II of our
+algorithm, and thus
+$u_p = u_{j_k} = ( q_{\ell}(u') )_{j_k} = u'_{i_k} = h$ since the corresponding
+$i_k$ lies in $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$).
+Hence, $q_{\ell}^{(h)} = \{p \mid u_p = h\}$ for each $h \in \ive{\ell-1}$, and thus also for $h = \ell$
+(by the exclusion principle: the letters of $u$ that are $\leq \ell$ appear in the positions $p \in q_{\ell}$).
 Therefore, $u$ is weakly decreasing up to level $\ell$.
 \end{proof}
 
