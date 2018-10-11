@@ -677,7 +677,7 @@ When $\sigma = \id$ is the identity permutation, we simply call this the \defn{s
 \end{dfn}
 
 \begin{lemma}
-\label{rmk:mlq-type}
+\label{lemma:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
 Let $\qq$ be a $\sigma$-twisted MLQ.
 Then the type of the word $\qq(1^n)$ is the type of $\qq$.
@@ -699,7 +699,7 @@ Now, the word $1^n$ has type $\tup{n, 0, 0, \ldots} = \tup{m_1 + m_2 + \cdots + 
 Every time we apply one of the queues $q_i$ to this word, the type changes in a simple way (because of~\eqref{eq:queue_type_change}): Namely, the plus sign between $m_{\sigma(i)}$ and $m_{\sigma(i)+1}$ turns into a comma (so, for example, the application of $q_1$ transforms it into $\tup{m_1 + m_2 + \cdots + m_{\sigma(1)}, m_{\sigma(1)+1} + m_{\sigma(1)+2} + \cdots + m_\ell, 0, 0, \ldots}$).
 Hence, the action of $\qq$ transforms $1^n$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
 In other words, the type of the word $\qq(1^n)$ is $\mm$.
-This proves Lemma~\ref{rmk:mlq-type}.
+This proves Lemma~\ref{lemma:mlq-type}.
 
 [The above proof is a bit informal.
 To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$.
@@ -930,7 +930,7 @@ $\zeta \in \SymGp{\ell}$
 is precisely the multiset of the $p_k(\mm)$ for $k \geq 1$
 with one copy of $p_i(\mm) = \abs{q'}$ removed).
 Furthermore, the definition of $u$ becomes $u = \qq' (1^n)$.
-Hence, the type of $u$ is $\mm$ (by Lemma~\ref{rmk:mlq-type}).
+Hence, the type of $u$ is $\mm$ (by Lemma~\ref{lemma:mlq-type}).
 
 Set $k = p_i(\mm)$. Then, $q'$ is a $k$-queue, so that the type
 $\nn$ of the word $q'(1^n)$ satisfies $p_1(\nn) = k$.
@@ -3399,7 +3399,7 @@ For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
 u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1^n)  = q_i\bigl( \cdots q_2\bigl( q_1(1^n) \bigr) \cdots \bigr)  \in \mcW_n .
 \]
 Note that $u^{\left[  i\right]  }$ has type $\mm^{[i]} := \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
-(This is proven similarly to Lemma~\ref{rmk:mlq-type}, using $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$.)
+(This is proven similarly to Lemma~\ref{lemma:mlq-type}, using $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$.)
 The definition of $u^{\left[  i\right]  }$ yields
 \begin{equation}
 \label{pf.lem:determinant_form.interl-act.rec}
