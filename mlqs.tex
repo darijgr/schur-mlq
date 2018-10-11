@@ -2989,7 +2989,13 @@ Thus, $\qq'$ is also interlacing.
 Hence, by our induction assumption, the word $u' = \qq'(1^n)$ is weakly decreasing up to level $\ell - 1$;
 recall that this word has type $\mm'$.
 Hence, writing $u'$ as $u'_1 u'_2 \cdots u'_n$, we have
-$q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$.
+$q_{\ell-1}^{(h)} = \set{p \mid u'_p = h}$ for all $h \in \ive{\ell-1}$.
+\begin{vershort}
+We compute $u = q_{\ell}(u')$ by choosing the permutation such that we pick all letters $h$ in $u'$ from left to right.
+Therefore, from the interlacing relation, we have $q_{\ell}^{(h)} = \set{p \mid u_p = h}$ for all $h \in \ive{\ell}$ and $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$.
+Hence, the word $u$ is weakly decreasing up to level $\ell$.
+\end{vershort}
+\begin{verlong}
 
 Now, we compute $u = q_{\ell} (u')$ using the algorithm constructing $q_{\ell} (u')$,
 choosing the permutation
@@ -3029,6 +3035,7 @@ $i_k$ lies in $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$).
 Hence, $q_{\ell}^{(h)} = \{p \mid u_p = h\}$ for each $h \in \ive{\ell-1}$, and thus also for $h = \ell$
 (by the exclusion principle: the letters of $u$ that are $\leq \ell$ appear in the positions $p \in q_{\ell}$).
 Therefore, $u$ is weakly decreasing up to level $\ell$.
+\end{verlong}
 \end{proof}
 
 
