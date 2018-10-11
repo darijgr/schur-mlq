@@ -2910,10 +2910,11 @@ Then, the following are equivalent:
 \end{lemma}
 
 \Darij{The following example needs to be revamped since the lemma was changed.}
+\Travis{I tweaked the two sentences, but it really does not need to be altered. I guess we could remove the second bullet point if you feel it is a little out of place, but the first is fine and I am inclined to leave it there.}
 \begin{example}
 \mbox{}
 \begin{itemize}
-\item We require that every letter in $\ive{\ell-1}$ appears in $u$.
+\item We require that $m_i > 0$ for all $1 \leq i \leq \ell - 1$.
   To see why, consider $u = 2{\color{gray}4}1{\color{gray}4}$, which is of type $\mm = \tup{1,1,0,2,0,\ldots}$ and is weakly decreasing up to level $3$.
   However, the MLQ $\qq = \tup{\set{2}, \set{3,4}, \set{1,3}}$ is not interlacing but $\qq(1111) = u$:
   \[
@@ -2946,7 +2947,7 @@ Then, the following are equivalent:
   }
   \end{tikzpicture}
   \]
-\item The interlacing is necessary as seen by Example~\ref{ex:qij_generic}.
+\item The interlacing of the MLQ (equivalently the weakly decreasing up to level $\ell - 1$) is necessary as seen by Example~\ref{ex:qij_generic}.
 \end{itemize}
 \end{example}
 
@@ -2987,8 +2988,12 @@ By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$
 \]
 since $\abs{q_{\ell}} = p_{\ell}(\mm)$.
 \Darij{I don't understand the argument starting from the next sentence.}
+\Travis{The bijection given by Lemma~\ref{lem:determinant_form.gale1} exactly corresponds to Phase~II under a particular choice of permutation (i.e., doing letters from right to left) using $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$. I got tired of stating obvious things once you spend a quick moment unraveling all the definitions and restating what was in the other direction. However, I have added this last bit to emphasize it more.
+
+The $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ is equivalent to the weakly decreasing condition once you have $q_{\ell}^{(h)} = \{p \mid u_p = h\}$. I removed the second reinvocation of Lemma~\ref{lem:determinant_form.gale1} as the definition of $\succeq$ is sufficient to see $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$. }
+Furthermore, note that $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$.
 Hence, we have $q_{\ell}^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$ from the definition of Phase~II, that $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, and Lemma~\ref{lem:determinant_form.gale1}.
-Furthermore, for all $h \in \ive{\ell-1}$, we have $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$ and from Lemma~\ref{lem:determinant_form.gale1}.
+Furthermore, for all $h \in \ive{\ell-1}$, we have $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$.
 Therefore, $u$ is weakly decreasing up to level $\ell$.
 \end{proof}
 
@@ -3049,16 +3054,14 @@ The word $u(v)$ is weakly decreasing up to level $\ell-1$.
 The word $u(v)$ is weakly decreasing up to level $\ell-1$ since $v_1 \geq v_2 \geq \cdots \geq v_r$ and $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
 \end{verlong}
 Moreover, the letters $\leq \ell-1$ of this word lie in the positions $j \in B$.
-Therefore, for an MLQ $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ of type $\mm$, we have the following chain of equivalences:
-\begin{align*}
-     & \tup{u(v) = \qq(1^n)} \\
-\iff & \left( \text{the word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$} \right. \\
-     & \qquad \left. \text{ and its letters $\leq \ell-1$ lie in the positions $j \in B$} \right) \\
-\iff & \left( \text{the word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$,} \right. \\
-     & \qquad \left. \text{ and we have $q_{\ell-1} = B$} \right) \\
-\iff & \left( \text{the MLQ $\qq$ has type $\mm$ and is interlacing, and we have $q_{\ell-1} = B$} \right)
-\end{align*}
-(by Lemma~\ref{lem:determinant_form.interl-act}).
+Therefore, for an MLQ $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ of type $\mm$, the following are equivalent:
+\begin{enumerate}
+\item We have $u(v) = \qq(1^n)$.
+\item The word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$ and its letters $\leq \ell-1$ lie in the positions $j \in B$.
+\item The word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$ and we have $q_{\ell-1} = B$.
+\item The MLQ $\qq$ has type $\mm$ and is interlacing, and we have $q_{\ell-1} = B$.
+\end{enumerate}
+It is straightforward to see $(1) \Longleftrightarrow (2) \Longleftrightarrow (3)$, and we have $(3) \Longleftrightarrow (4)$ by Lemma~\ref{lem:determinant_form.interl-act}.
 
 Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
 % This pseudo-partition $\lambda^{\mm}$ has $p_{\ell-1}(\mm) = r$ entries.
@@ -3074,7 +3077,7 @@ The definition of $\swt{u(v)}$ yields
 \swt{u(v)} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u(v)=\qq(1^n)}}\wt(\qq) \\
 %&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
 % The above is just a trivial rewording of the summation set for the equation below -- Travis
-&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by the above chain of equivalences)} \\
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by $(1) \Longleftrightarrow (4)$)} \\
 &  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
 \end{align*}
 where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $r$, $\gamma_i$, $B$ and $b_i$ instead of $k$, $\lambda_i$, $S$ and $s_i$).
