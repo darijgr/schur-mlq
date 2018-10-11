@@ -2991,8 +2991,8 @@ recall that this word has type $\mm'$.
 Hence, writing $u'$ as $u'_1 u'_2 \cdots u'_n$, we have
 $q_{\ell-1}^{(h)} = \set{p \mid u'_p = h}$ for all $h \in \ive{\ell-1}$.
 \begin{vershort}
-We compute $u = q_{\ell}(u')$ by choosing the permutation such that we pick all letters $h$ in $u'$ from left to right.
-Therefore, from the interlacing relation, we have $q_{\ell}^{(h)} = \set{p \mid u_p = h}$ for all $h \in \ive{\ell}$ and $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$.
+We compute $u = q_{\ell}(u')$ by choosing the permutation such that for each $h$, we pick all letters $h$ in $u'$ from left to right.
+Therefore, the interlacingness of $\qq$ shows that $q_{\ell}^{(h)} = \set{p \mid u_p = h}$ for all $h \in \ive{\ell}$.
 Hence, the word $u$ is weakly decreasing up to level $\ell$.
 \end{vershort}
 \begin{verlong}
@@ -3081,10 +3081,6 @@ m_i =
 \]
 (by~\eqref{pf.thm:determinant_form.v=} and the definition of $m_{\ell}$).
 \end{verlong}
-
-%This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
-%Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
-%Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
 
 %First note that for any set $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$, weakly decreasing $r$-tuple $\tup{v_1 \geq v_2 \geq \dotsm \geq v_r}$ such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$, the word $u \in \mcW_n$ defined by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$ is weakly decreasing up to level $\ell-1$.
 %Conversely, for any word $u = u_1 \dotsm u_n \in \mcW_n$ that is weakly decreasing up to level $\ell-1$ such that $\ive{\ell-1} \subseteq \set{u_1, u_2, \dotsc, u_n}$, we can construct the set $B = \set{ b_1 < b_2 < \cdots < b_r \mid u_{b_k} < \ell} \subseteq \ive{n}$ and the $r$-tuple $\tup{u_{b_1} \geq u_{b_2} \geq \cdots \geq u_{b_r}}$.
