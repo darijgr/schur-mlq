@@ -2454,12 +2454,13 @@ Consider an (ordinary) MLQ $\qq = \tup{q_1,\ldots,q_{\ell-1}}$ of type $\mm$.
 Thus, for each $i \in \ive{\ell-1}$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$.
 Hence, for each $i \in \ive{\ell-1}$, we can subdivide the set $q_i$ into $i$ blocks: the block containing the largest $m_1$ elements; the block containing the next-largest $m_2$ elements; and so on, until the block containing the smallest $m_i$ elements.
 Denote these $i$ blocks by $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$, respectively.
-Pictorially, we thus can write $q_i$ as
+Pictorially, we can thus write $q_i$ as
 \[
 \bigl\{ \underbrace{a_1 > \cdots > a_{p_1(\mm)}}_{=q_i^{(1)}} > \underbrace{a_{p_1(\mm)+1} > \cdots > a_{p_2(\mm)}}_{=q_i^{(2)}} > \cdots > \underbrace{a_{p_{i-1}(\mm)+1} > \cdots > a_{p_i(\mm)}}_{=q_i^{(i)}} \bigr\}.
 \]
 Thus, $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$ are pairwise disjoint nonempty subsets of $\ive{n}$ satisfying
 \begin{subequations}
+\label{eq.determinant_form.qij}
 \begin{align}
 \label{eq.determinant_form.qij.1}
   q_i  & = q_i^{(1)} \cup q_i^{(2)} \cup \cdots \cup q_i^{(i)}
@@ -3858,7 +3859,7 @@ In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \
 \end{tikzpicture}
 \]
 \caption{We draw a $\bigcirc$ in position $i$ in row $j$ corresponding to $i \in q_j$ and a $\square$ if $i \notin q_j$.
-The purple boxes mark the balanced sites.}
+The shaded boxes mark the balanced sites.}
 \label{fig:balanced}
 \end{figure}
 
@@ -4648,10 +4649,10 @@ Hence, we have shown that the recursive construction yields the same labeling $\
 \end{verlong}
 
 Now consider the labeling procedure in~\cite[\S 2.2]{AasLin17} given by \defn{$k$-bully paths}.
-Note that a $k$-bully path from one line to the next precisely corresponds to the path of a letter $k$ under Phase~II of our definition of a queue as a function on words.
+Note that a $k$-bully path from one queue to the next precisely corresponds to the path of a letter $k$ under Phase~II of our definition of a queue as a function on words.
 For example, the bully paths would correspond to the blue paths in Example~\ref{ex:first_queue}.
 In addition, this is exactly the recursive labeling procedure given above.
-Thus, we obtain the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17}.
+Thus, the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17} using bully paths.
 
 \Darij{I find the above paragraph vague and unclear, but I have a verlong argument anyway.}
 
@@ -4663,12 +4664,64 @@ Next we relate the action of queues on words with the \defn{Kohnert labelings} i
 We remark that the thread decomposition is the same as the Kohnert labeling when the shape is an antipartition (\textit{i.e.} a weakly increasing sequence of positive integers).
 Roughly speaking, Kohnert diagrams are MLQs built of queues that live on a half-line (instead of a circle), and the construction of the Kohnert labeling (and the thread decomposition) is a standardization of the bully path construction.
 
-In more detail, for a Kohnert diagram $D \in \KM(\alpha)$ for any fixed weak composition $\alpha$ (see~\cite{AssSea18} for notations), we view its columns as queues.
+In more detail (and using the notations of~\cite{AssSea18}):
+If $\alpha$ is a weak composition, and if $D \in \KM(\alpha)$ is a Kohnert diagram, then we view the columns of $D$ as queues.
 This time, our queues are subsets of $\NN$ (or $\ZZ$) instead of $\ZZ/n\ZZ$; thus, there is no ``wrapping around''.
-We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$: namely, a cell in row $i$  and column $j$ in the reflected diagram corresponds to a $j \in q_i$.
+We consider the reflection of $D$ across the line $x = y$ as an MLQ $\qq_D = (q_1, \dotsc, q_{\ell})$:
+namely, a cell in row $i$ and column $j$ in the reflected diagram corresponds to a $j \in q_i$,
+and $\ell$ is the number of columns in $D$.
 We then apply the bully path construction to the boxes of this reflected Kohnert diagram.
 To obtain the thread decomposition we need to distinguish paths with a fixed label such that these paths are also constructed by the bully path algorithm, where we consider the labels to be decreasing from left to right.
 Hence, this can be considered as a standardization of our construction or, equivalently, as fixing specific permutations for how the queues act on words.
+
+\begin{example}
+\label{ex:thread_decomp}
+Consider the thread decomposition of the Kohnert diagram
+\[
+%K =\ 
+\begin{tikzpicture}[scale=0.6, baseline=-40]
+\draw[thick] (0,0.2) -- (0,-4.2);
+\foreach \x/\y in {0/0, 0/-1, 1/-1, 0/-2, 1/-2, 2/-2, 1/-3} {
+    \draw (\x,\y) rectangle (\x+1,\y-1);
+}
+\foreach \x/\y in {0/0, 1/-1} {
+    \node at (\x+0.5,\y-0.5) {$4$};
+    \draw (\x+0.5-0.35,\y-0.5+0.35) rectangle (\x+0.5+0.35,\y-0.5-0.35);
+}
+\foreach \x/\y in {0/-1, 1/-2, 2/-2}
+    \node at (\x+0.5,\y-0.5) {$3$};
+\foreach \x/\y in {0/-2, 1/-3}
+    \node at (\x+0.5,\y-0.5) {$2$};
+\foreach \x in {0,1,2}
+    \draw (\x+0.5,-2.5) circle (0.35);
+\foreach \x/\y in {0/-1, 1/-3}
+    \draw[shift={(\x+0.5,\y-0.5)},rotate=45] (-0.3,0.3) rectangle (0.3,-0.3);
+\end{tikzpicture}
+\]
+given in~\cite[Fig.~11]{AssSea18}.
+Thus, the corresponding MLQ is $\tup{\set{2}, \set{1,2,3}, \set{2,3,4}}$;
+we can draw it using bully paths as follows:
+\[
+\begin{tikzpicture}[>=latex]
+\def\xs{1.5}
+\def\ys{1.1}
+\foreach \y in {0,1,2}
+    \node[draw,circle,minimum size=0.35cm] (2\y) at (2*\xs,-\y*\ys) {};
+\foreach \x/\y in {1/1, 3/2}
+    \node[draw,rectangle,rotate=45,minimum size=0.35cm] (\x\y) at (\x*\xs,-\y*\ys) {};
+\foreach \x/\y in {3/1, 4/2}
+    \node[draw,rectangle,minimum size=0.35cm] (\x\y) at (\x*\xs,-\y*\ys) {};
+\draw[very thick, blue, ->] (20) -- (21);
+\draw[very thick, blue, ->] (21) -- (22);
+\draw[very thick, darkred, ->, rounded corners] (11) -- (1*\xs,-1.45*\ys) -- (3*\xs,-1.45*\ys) -- (32);
+\draw[very thick, dgreencolor, ->, rounded corners] (31) -- (3*\xs,-1.45*\ys) -- (4*\xs,-1.45*\ys) -- (42);
+\foreach \pt in {(1*\xs,0), (3*\xs,0), (4*\xs,0), (4*\xs,-1*\ys), (1*\xs,-2*\ys)}
+    \fill[black] \pt circle(0.075);
+\end{tikzpicture}
+\]
+where each bully path matches with a thread in the decomposition.
+Note that we must start each path going from left to right, as otherwise the diamond and square in the bottom row would be interchanged.
+\end{example}
 
 Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $\qq_D$ and all $i$, we have
 \[
@@ -4680,14 +4733,37 @@ To obtain a Kohnert labeling from a Kohnert diagram of height $K$ (for this, we 
 \[
 \widetilde{\qq}_D = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
 \]
-from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings.
+from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings, where $\ell + \ell'$ is the largest label appearing in the Kohnert labeling.
 Indeed, a label added in column $i$ comes from a $k \in q$ with $k > K$ for sufficiently many queues $q$ before $q_i$.
+In particular, when a smaller label appears, it must be in the bottom row of the Kohnert diagram, which would correspond to the bully path wrapping around the cylinder.
 We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
 We leave the precise details for the interested reader.
 
-\Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
+\begin{example}
+We consider the Kohnert labeling from Example~\ref{ex:thread_decomp}.
+The following MLQ, given as a graveyard diagram, is an MLQ that gives the corresponding Kohnert labeling:
+\[
+\begin{tikzpicture}[scale=0.8]
+\foreach \pt in {(6,-1), (2,-2),(6,-2), (1,-3),(2,-3),(3,-3), (2,-4),(3,-4),(4,-4)}
+    \draw \pt circle (0.35);
+\foreach \x/\y in {1/0,2/0,3/0,4/0,5/0,6/0, 1/-1,2/-1,3/-1,4/-1,5/-1, 1/-2,3/-2,4/-2,5/-2, 4/-3,5/-3,6/-3, 1/-4,5/-4,6/-4}
+    \draw (\x-0.35,\y+0.35) rectangle (\x+0.35,\y-0.35);
+\foreach \x/\y in {6/-1, 6/-2, 1/-3, 2/-4}
+    \node[blue] at (\x,\y) {$2$};
+\foreach \x/\y in {2/-2, 2/-3, 3/-4}
+    \node[darkred] at (\x,\y) {$3$};
+\foreach \x/\y in {3/-3, 4/-4}
+    \node[dgreencolor] at (\x,\y) {$4$};
+\draw[dashed,thick] (4.5,0.4) -- (4.5,-4.4);
+\end{tikzpicture}
+\]
+where we have suppressed the $(i+1)$'s that appear in row $i$.
+Note that all circles that appear to the left of the dashed line correspond to the Kohnert labeling and that the labels match.
+\end{example}
 
+\Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
 \Darij{I find this part quite hard to follow, but so is everything about Kohnert diagrams.}
+\Travis{I added some examples, which should make it clear what is going on, even if it is not entirely rigorous.}
 
 \begin{comment}
 In more detail, let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
