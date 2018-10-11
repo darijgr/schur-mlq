@@ -2443,7 +2443,7 @@ Let $A, B \subseteq \ive{n}$.
 We have $A \succeq B$ if and only if there exists a bijection $\phi \colon B \to A$ satisfying $\phi(b) \geq b$ for each $b \in B$.
 \end{lemma}
 
-Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\ell$ classes.
+Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\leq \ell$ classes.
 Assume that $m_i > 0$ for all $i \in \ive{\ell-1}$ (but $m_{\ell}$ may be $0$).
 
 Our next few definitions concern MLQs.
@@ -2901,10 +2901,15 @@ Now we prove our main technical lemma:
 \label{lem:determinant_form.interl-act}
 Let $\ell$ be a positive integer.
 Let $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ be such that $m_i > 0$ for all $1 \leq i < \ell$.
-Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ with $\ell-1$ queues.
-Then, $u = \qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$ if and only if the MLQ $\qq$ has type $\mm$ and is interlacing.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an ordinary MLQ with $\ell-1$ queues.
+Then, the following are equivalent:
+\begin{enumerate}
+\item[($\alpha$)] The word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$.
+\item[($\beta$)] The MLQ $\qq$ has type $\mm$ and is interlacing.
+\end{enumerate}
 \end{lemma}
 
+\Darij{The following example needs to be revamped since the lemma was changed.}
 \begin{example}
 \mbox{}
 \begin{itemize}
@@ -2952,8 +2957,9 @@ The base case of $\ell = 1$ is trivial.
 Thus, we assume the claim holds for $\ell$.
 Let $\mm = \tup{m_1, m_2, \ldots, m_{\ell+1}, 0, \ldots}$ with $m_i > 0$ for all $1 \leq i < \ell + 1$.
 Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell}}$.
-Note that $u = \qq(1^n)$ has type $\mm$ if and only if $\qq$ has type $\mm$ by Lemma~\ref{lemma:mlq-type}.
-Thus it is remains to show that $u = \qq(1^n)$ is weakly decreasing up to level $\ell - 1$ if and only if $\qq$ is interlacing.
+Note that $u := \qq(1^n)$ has type $\mm$ if and only if $\qq$ has type $\mm$ by Lemma~\ref{lemma:mlq-type}.
+Thus we can assume that both of these statement hold,
+and it is remains to show that $u = \qq(1^n)$ is weakly decreasing up to level $\ell$ if and only if $\qq$ is interlacing.
 
 $\Longrightarrow:$
 Suppose $u = \qq(1^n)$ is weakly decreasing up level $\ell$.
@@ -2964,7 +2970,7 @@ Furthermore, the type of $\qq'$ and $u'$ is
 \[
 \mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
 \]
-since $\abs{q_{\ell}} = m_{\ell}$.
+since $\abs{q_{\ell}} = p_{\ell}(\mm)$.
 Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u'$, $q_\ell$ and $\ell$ instead of $u$, $q$ and $t$) shows that $u'$ is weakly decreasing up to level $\ell-1$.
 Hence, by our induction assumption, $\qq'$ is interlacing.
 Since $u'$ has type $\mm'$ and is weakly decreasing up to level $\ell-1$, we see that $q_{\ell-1}^{(h)} = \{p \mid u'_p = h\}$ for all $h \in \ive{\ell-1}$.
@@ -2979,7 +2985,8 @@ By our induction assumption, the word $u' = u'_1 u'_2 \dotsm u'_n  := \qq'(1^n)$
 \[
 \mm' := (m_1, m_2, \dotsc, m_{\ell-1}, n - p_{\ell-1}(\mm), 0, \ldots)
 \]
-since $\abs{q_{\ell}} = m_{\ell}$.
+since $\abs{q_{\ell}} = p_{\ell}(\mm)$.
+\Darij{I don't understand the argument starting from the next sentence.}
 Hence, we have $q_{\ell}^{(h)} = \{p \mid u_p = h\}$ for all $h \in \ive{\ell}$ from the definition of Phase~II, that $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)}$, and Lemma~\ref{lem:determinant_form.gale1}.
 Furthermore, for all $h \in \ive{\ell-1}$, we have $q_{\ell}^{(h)} \gg q_{\ell}^{(h+1)}$ since $q_{\ell}^{(h)} \succeq q_{\ell-1}^{(h)} \gg q_{\ell}^{(h+1)}$ and from Lemma~\ref{lem:determinant_form.gale1}.
 Therefore, $u$ is weakly decreasing up to level $\ell$.
@@ -3041,7 +3048,17 @@ The word $u(v)$ is weakly decreasing up to level $\ell-1$.
 \begin{verlong}
 The word $u(v)$ is weakly decreasing up to level $\ell-1$ since $v_1 \geq v_2 \geq \cdots \geq v_r$ and $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
 \end{verlong}
-Therefore, we can apply Lemma~\ref{lem:determinant_form.interl-act} to $u = u(v)$.
+Moreover, the letters $\leq \ell-1$ of this word lie in the positions $j \in B$.
+Therefore, for an MLQ $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ of type $\mm$, we have the following chain of equivalences:
+\begin{align*}
+     & \tup{u(v) = \qq(1^n)} \\
+\iff & \left( \text{the word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$} \right. \\
+     & \qquad \left. \text{ and its letters $\leq \ell-1$ lie in the positions $j \in B$} \right) \\
+\iff & \left( \text{the word $\qq(1^n)$ has type $\mm$ and is weakly decreasing up to level $\ell-1$,} \right. \\
+     & \qquad \left. \text{ and we have $q_{\ell-1} = B$} \right) \\
+\iff & \left( \text{the MLQ $\qq$ has type $\mm$ and is interlacing, and we have $q_{\ell-1} = B$} \right)
+\end{align*}
+(by Lemma~\ref{lem:determinant_form.interl-act}).
 
 Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
 % This pseudo-partition $\lambda^{\mm}$ has $p_{\ell-1}(\mm) = r$ entries.
@@ -3057,7 +3074,7 @@ The definition of $\swt{u(v)}$ yields
 \swt{u(v)} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u(v)=\qq(1^n)}}\wt(\qq) \\
 %&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
 % The above is just a trivial rewording of the summation set for the equation below -- Travis
-&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act} for $u = u(v)$)} \\
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by the above chain of equivalences)} \\
 &  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
 \end{align*}
 where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $r$, $\gamma_i$, $B$ and $b_i$ instead of $k$, $\lambda_i$, $S$ and $s_i$).
