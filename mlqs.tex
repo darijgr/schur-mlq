@@ -1,7 +1,6 @@
 \documentclass[reqno]{amsart}
 \usepackage{setspace,tikz,mathrsfs,listings,multicol}
 \usepackage{amssymb}
-\usepackage{rotating}
 \usepackage[vcentermath]{youngtab}
 \usepackage[all,cmtip]{xy}
 \usetikzlibrary{arrows,matrix}
@@ -11,6 +10,7 @@
 \usepackage{needspace}
 \usepackage{tabls}
 \usepackage{ytableau}
+%\usepackage{rotating}
 %\usepackage{amsmath}
 %\usepackage{amsthm}
 %\usepackage{subcaption}
@@ -92,9 +92,11 @@
 % Darij's alternative:
 % \newenvironment{subproof}{$\lceil$ \textit{Proof.} }{\hfill$\blacksquare \rfloor$ \medskip}
 
+\newenvironment{verlonglong}{}{}
 \newenvironment{verlong}{}{}
 \newenvironment{vershort}{}{}
 \newenvironment{noncompile}{}{}
+\excludecomment{verlonglong}
 \excludecomment{verlong}
 \includecomment{vershort}
 \excludecomment{noncompile}
@@ -698,9 +700,11 @@ Every time we apply one of the queues $q_i$ to this word, the type changes in a 
 Hence, the action of $\qq$ transforms $1^n$ into a word whose type has all the plus signs replaced by commas -- \textit{i.e.}, whose type is $\tup{m_1, m_2, \ldots, m_\ell, 0, 0, \ldots} = \mm$.
 In other words, the type of the word $\qq(1^n)$ is $\mm$.
 This proves Lemma~\ref{lemma:mlq-type}.
+\end{proof}
 
-[The above proof is a bit informal.
-To make it more rigorous, we can proceed as follows: Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$.
+\begin{proof}[Alternative proof of Lemma~\ref{lemma:mlq-type}.]
+Here is an alternative way of presenting essentially the same argument, using a different point of view:
+Since $\tup{q_1, \ldots, q_{\ell-1}} = \qq$ is a $\sigma$-twisted MLQ of type $\mm$, we know that the sizes $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ of its queues are a permutation of $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$.
 Thus, $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$.
 Now, define the \defn{p-sequence} of a type $\nn$ to be the weakly increasing infinite sequence $\tup{p_0(\nn), p_1(\nn), p_2(\nn), \ldots}$ of integers (which uniquely determines $\nn$).
 Furthermore, if $u$ is a word of type $\nn$, then we define the p-sequence of $u$ to be the p-sequence of $\nn$.
@@ -708,7 +712,7 @@ Then,~\eqref{eq:queue_type_change} shows the following: If $q$ is a queue and $u
 Hence, the p-sequence of the word $\qq (1^n)$ is obtained from the p-sequence $\tup{0, n, n, n, \ldots}$ of the word $1^n$ by inserting $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$ at the appropriate positions.
 In other words, the p-sequence of the word $\qq (1^n)$ is $\tup{0, p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm), n, n, \ldots, n}$ (since $p_1(\mm), p_2(\mm), \ldots, p_{\ell-1}(\mm)$ is the weakly increasing permutation of the sequence $\abs{q_1}, \abs{q_2}, \ldots, \abs{q_{\ell-1}}$).
 In other words, this p-sequence is $\tup{p_0(\mm), p_1(\mm), p_2(\mm), \ldots}$.
-Hence, the type of the word $\qq (1^n)$ is $\mm$.]
+Hence, the type of the word $\qq (1^n)$ is $\mm$.
 \end{proof}
 \end{verlong}
 
@@ -1648,7 +1652,7 @@ If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the se
 \label{fig:NILP_example}
 \end{figure}
 
-\begin{verlong}
+\begin{verlonglong}
 A pair $(\uu, \vv)$ of two $k$-vertices $\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
 if every permutation $\sigma \neq \id$ in $\SymGp{k}$ satisfies $N\bigl( \uu,\sigma(\vv) \bigr) = \emptyset$.
 Note that we are not requiring that $N(\uu, \vv) \neq \emptyset$ here.
@@ -1998,12 +2002,10 @@ We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
 suited for our applications:\footnote{%
 Proposition~\ref{prop.LGV.concrete} is also the particular case of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$).
 The proof we are giving here is precisely the proof from \url{https://math.stackexchange.com/questions/2870640}.}
-\end{verlong}
+\end{verlonglong}
 
-\begin{vershort}
 We now shall state a folklore result, which follows from the Lindstr\"om--Gessel--Viennot lemma:\footnote{%
 See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
-\end{vershort}
 
 \begin{prop}
 \label{prop.LGV.concrete}
@@ -2023,7 +2025,7 @@ Then,
 
 The situation of this proposition is illustrated in Figure~\ref{fig:NILP_example}.
 
-\begin{verlong}
+\begin{verlonglong}
 \begin{proof}[Proof of Proposition~\ref{prop.LGV.concrete}.]
 This will follow immediately from Proposition~\ref{prop.LGV.nonper}
 once we have shown that $\left( \uu,\vv\right)  $ is nonpermutable.
@@ -2060,7 +2062,7 @@ This contradicts the fact that the paths $p_i$ and $p_j$ have no vertex in commo
 Thus we have found a contradiction for each $\pp\in N\bigl( \uu,\sigma(\vv) \bigr)$.
 Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
 \end{proof}
-\end{verlong}
+\end{verlonglong}
 
 %%%%%%%%%%
 \subsection{Pseudo-partitions and tableaux}
