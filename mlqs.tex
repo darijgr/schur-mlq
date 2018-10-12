@@ -2772,8 +2772,7 @@ First, we need another notion:
 If $u \in \mcW_n$ and $t \in \NN$, then we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if every two sites $i < j$ in $\ive{n}$ satisfying $u_j \leq t$ must satisfy $u_i \geq u_j$.
 Equivalently, $u$ is weakly decreasing up to level $t$ if and only if $u$ becomes weakly decreasing when all letters larger than $t$ are removed.
 For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up to level $4$ (and up to any level $\leq 4$).
-We also need the following auxiliary lemma about what queues preserve weakly decreasing words.
-\Darij{Don't like the previous sentence too much: it would better fit a lemma that assumes weak decreasingness of $u$ and claims weak decreasingness of $q(u)$, but our lemma does the exact opposite! I think "reflects" is a better word (as in category theory's "reflects limits"), but not many would understand it.}
+We also need the following auxiliary lemma about what queues can yield weakly decreasing words and that we must input a weakly decreasing word.
 
 \begin{lemma}
 \label{lem:determinant_form.interl-A}
@@ -4074,7 +4073,8 @@ we can draw it using bully paths as follows:
 \end{tikzpicture}
 \]
 where each bully path matches with a thread in the decomposition.
-Note that we must start each path going from left to right, as otherwise the diamond and square in the bottom row would be interchanged.
+Note that for each fixed $k$, the $k$-bully paths must be constructed from left to right.\footnote{In terms of our permutation $(i_1, i_2, \dotsc, i_n)$ for Phase~II, for $u_{i_j} = u_{i_{j+1}} = \cdots u_{i_{j'}} = k$, we must have $i_j < i_{j+1} < \cdots < i_{j'}$.}
+If not, the diamond and square in the bottom row would be interchanged.
 \end{example}
 
 Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $\qq_D$ and all $i$, we have
@@ -4115,10 +4115,6 @@ where we have suppressed the $(i+1)$'s that appear in row $i$.
 Note that all circles that appear to the left of the dashed line correspond to the Kohnert labeling and that the labels match.
 \end{example}
 
-\Travis{Is it worthwhile to be more formal about this? It isn't too hard, but it is a lot of annoying bookkeeping.}
-\Darij{I find this part quite hard to follow, but so is everything about Kohnert diagrams.}
-\Travis{I added some examples, which should make it clear what is going on, even if it is not entirely rigorous.}
-
 \begin{comment}
 In more detail, let us replace $\ZZ / n \ZZ$ by $\NN$ everywhere in the above definitions.
 So a queue is now a finite subset of $\NN$.
@@ -4129,8 +4125,6 @@ In the above definition of the labeling $q(f)$, we must replace the ``$\abs{r} \
 \end{equation}
 This stronger requirement can be shown to guarantee that $q(f)$ is well-defined (\textit{i.e.}, the ``find the first site $j$'' step in the construction will never fail to find a $j$).
 It is, actually, necessary and sufficient.
-
-TODO: Should we prove this? Not quite trivial.
 
 Given a Kohnert diagram $D \in \KM(a)$ (see~\cite{AssSea18} for notations), we can view its columns as queues, and then we can recursively label them from right to left by starting with the trivial labeling of the empty queue and applying each column-queue to find a labeling for the next column to its left.
 (\textit{I.e.}, if $f_{j+1}$ is the labeling of column $j+1$, then the labeling of column $j$ is $q_j (f_{j+1})$, where $q_j$ is the queue that describes column $j$.
