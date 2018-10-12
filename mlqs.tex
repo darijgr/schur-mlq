@@ -243,7 +243,7 @@
 \urladdr{http://www.cip.ifi.lmu.de/~grinberg/}
 
 \author[T.~Scrimshaw]{Travis Scrimshaw}
-\address[T. Scrimshaw]{School of Mathematics and Physics, The University of Queensland, St. Lucia, QLD 4072, Australia}
+\address[T. Scrimshaw]{School of Mathematics and Physics, The University of Queensland, St.\ Lucia, QLD 4072, Australia}
 \email{tcscrims@gmail.com}
 \urladdr{https://people.smp.uq.edu.au/TravisScrimshaw/}
 
@@ -403,9 +403,7 @@ For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
 \end{vershort}
 \begin{verlong}
 We define a \defn{queue} to be any set of sites.
-%\travis{As I said on Skype, I do not like this extra level of indirection for the reader. You also loose some of the explicitness of the $n$ dependence.}
 A queue of size $r$ will be called an \defn{$r$-queue}.
-%\travis{I think it is much better to have the general definition as an $r$-queue. This otherwise is a useless definition as everywhere we should be saying ``Let $q$ be a queue of size $r$'' or ``Let $q$ be a queue such that $|q| = r$''.}
 
 We shall now define an action of queues on words.
 Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
@@ -778,9 +776,6 @@ In other words, this is only well-defined if $k \in \set{ p_j(\mm) \mid j \geq 1
 Note that $\vee^{(k)} w = \merge{j} w$, where $j$ is such that $k = p_j(\mm)$.
 % Note that $j$ is not necessarily unique, in which case $w$ is not a packed word, but the result is independent of the choice of $j$.
 
-% \Travis{I am becoming less convinced of this notation as it makes things less explicit.
-% Well-definedness is equivalent to the existence of a $j$ such that $p_j(\mm) = k$, and we really want to do the $j$-merge.
-% It might be a little extra verbage, but I feel like it means more details and concepts are on the surface.}
 
 \begin{lemma}
 \label{lemma:queue_merge_commute}
@@ -1782,7 +1777,7 @@ Therefore, $p'$ contains the vertex $A$ (since the vertex $A$ lies on the line s
 This contradicts the fact that $A$ does not belong to the path $p'$.
 This contradiction shows that our assumption was false; hence, $\ell(p) \neq0$ is proven.]
 
-Furthermore, we claim that $\ell(p') \neq 0$. \travis{Isn't this basically the same as the above proof but with $\xcoord$ instead of $\ycoord$?}
+Furthermore, we claim that $\ell(p') \neq 0$.
 
 [\textit{Proof:}
 Assume the contrary. Thus, $\ell(p') = 0$.
@@ -1830,7 +1825,6 @@ Thus, this arc must be a north-step.
 Therefore, $\ycoord(P) = \ycoord(A) + 1$ and $\xcoord(P) = \xcoord(A)$.
 Combining $\ycoord(A') \leq \ycoord(P) - 1 = \ycoord(A)$ (since $\ycoord(P) = \ycoord(A) + 1$) with $\ycoord(A') \geq \ycoord(A)$, we obtain $\ycoord(A') = \ycoord(A)$.
 
-\travis{Isn't this just the same as the above, but with primes and $\xcoord \leftrightarrow \ycoord$?}
 Let $P'$ be the second vertex on the path $p'$.
 (This is well-defined, since $\ell(p') \neq0 $.)
 Hence, $P'$ lies on a path from $A'$ to $B$ (namely, on the path $p'$).
@@ -2434,8 +2428,6 @@ First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\i
 
 For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
 Note that $A \gg \emptyset$ and $\emptyset \gg A$ for any subset $A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial order (but it becomes a partial order if we forbid $\emptyset$).
-%\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
-%\darij{Yeah, tried that, it made Lemma \ref{lem:determinant_form.interl-A} even more complicated.}
 
 The following criterion (proof left to the reader) will be useful:
 
@@ -3458,7 +3450,7 @@ The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \
 Likewise,
 the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
 Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
-= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$, %\travis{FYI: still fighting us.},
+= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$,
 we conclude that these are the same sites.
 Since this holds for all letters $i$, we have $w = w'$.
 \end{proof}
@@ -4005,11 +3997,6 @@ For example, the bully paths would correspond to the blue paths in Example~\ref{
 In addition, this is exactly the recursive labeling procedure given above.
 Thus, the labeling $\ff_{\qq}$ is equivalently constructed following the labeling procedure of~\cite{AasLin17} using bully paths.
 
-%\Darij{I find the above paragraph vague and unclear, but I have a verlong argument anyway.}
-
-%\Darij{TODO: Connect this with parking functions?}
-
-
 
 \subsection{Connection with Kohnert diagrams and Assaf--Searles theory}
 
@@ -4439,7 +4426,7 @@ The sites containing the letter $i$ in $w$ are the elements of $[w]_{p_i(\mm)} \
 Likewise,
 the sites containing the letter $i$ in $w'$ are the elements of $[w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$.
 Since our assumption ($[w]_k = [w']_k$) yields $[w]_{p_i(\mm)} \setminus [w]_{p_{i-1}(\mm)}
-= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$, %\travis{FYI: still fighting us.},
+= [w']_{p_i(\mm)} \setminus [w']_{p_{i-1}(\mm)}$,
 we conclude that these are the same sites.
 Since this holds for all letters $i$, we have $w = w'$.
 \end{proof}
@@ -4460,7 +4447,6 @@ Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
 Use this permutation to construct $q(u)$ (as in the definition of $q(u)$).
 For each $p \in \ive{n}$, let $j_p$ be the site $j$ that is found in this construction when $i = i_p$.
-%\Darij{We might want a more formal way to refer to this site $j$. ``Landing site''?}
 Thus, $j_p \in q$ if $p \leq \abs{q}$, whereas $j_p \notin q$ if $p > \abs{q}$.
 Also, $q(u)_{j_1} \leq q(u)_{j_2} \leq \cdots \leq q(u)_{j_n}$, so that
 $[q(u)]_k = \set{j_1, j_2, \ldots, j_k}$ for each $k$ for which $[q(u)]_k$ is well-defined.
