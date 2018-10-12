@@ -3171,9 +3171,18 @@ Note that $C$ and $C'$ have the same balanced sites, since the parentheses that 
 Hence, we have $C'' = C$. Also, we have $\wt(C) = \wt(C')$.
 
 \begin{example}
-Consider the configuration $C$ given in Figure~\ref{fig:balanced}.
-The dual configuration $C'$ is given by sliding all of the circles not boxed from the upper level to the lower level.
-In particular, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
+Consider the configuration
+\[
+C = (q_1, q_2) = (\{1,2,5,6,8,11,13,14,17,18,19\}, \{2,12,15,16,18,19,20\})
+\]
+which is given pictorially in Figure~\ref{fig:balanced}.
+Converting $C$ to a parenthesis sequence, we obtain
+\[
+( \quad () \quad \cdot \quad \cdot \quad ( \quad ( \quad \cdot \quad ( \quad \cdot \quad \cdot \quad ( \quad ) \quad ( \quad ( \quad ) \quad ) \quad ( \quad () \quad () \quad ),
+\]
+which results in 4 unpaired $($'s from positions $\{1,5,6,8\}$.
+Therefore, we have $q_1' = q_1 \setminus \{1,5,6,8\}$ and $q_2' = q_2 \cup \{1,5,6,8\}$.
+Alternatively, the dual configuration $C'$ is given by sliding all of the circles not in a shaded box from the upper level to the lower level.
 \end{example}
 
 \begin{figure}[t]
