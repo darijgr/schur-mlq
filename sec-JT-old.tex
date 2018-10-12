@@ -295,7 +295,7 @@ Therefore, $p'$ contains the vertex $A$ (since the vertex $A$ lies on the line s
 This contradicts the fact that $A$ does not belong to the path $p'$.
 This contradiction shows that our assumption was false; hence, $\ell(p) \neq0$ is proven.]
 
-Furthermore, we claim that $\ell(p') \neq 0$. \travis{Isn't this basically the same as the above proof but with $\xcoord$ instead of $\ycoord$?}
+Furthermore, we claim that $\ell(p') \neq 0$.
 
 [\textit{Proof:}
 Assume the contrary. Thus, $\ell(p') = 0$.
@@ -343,7 +343,6 @@ Thus, this arc must be a north-step.
 Therefore, $\ycoord(P) = \ycoord(A) + 1$ and $\xcoord(P) = \xcoord(A)$.
 Combining $\ycoord(A') \leq \ycoord(P) - 1 = \ycoord(A)$ (since $\ycoord(P) = \ycoord(A) + 1$) with $\ycoord(A') \geq \ycoord(A)$, we obtain $\ycoord(A') = \ycoord(A)$.
 
-\travis{Isn't this just the same as the above, but with primes and $\xcoord \leftrightarrow \ycoord$?}
 Let $P'$ be the second vertex on the path $p'$.
 (This is well-defined, since $\ell(p') \neq0 $.)
 Hence, $P'$ lies on a path from $A'$ to $B$ (namely, on the path $p'$).
@@ -1136,8 +1135,6 @@ In this case, the elements of $q_i^{(j)}$ will be labeled by $j$ (as we shall se
 \end{example}
 
 Forget that we fixed $\qq$.
-% I don't understand what purpose this sentence serves -- Travis
-% It serves to clarify that $\qq$ is no longer fixed. --Darij
 
 %Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
 Define a pseudo-partition
@@ -1298,8 +1295,6 @@ Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
 Then, $u = \qq(1^n)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
 \end{lemma}
 
-\Darij{TODO: Example.}
-
 The proof of Lemma~\ref{lem:determinant_form.interl-act} is tedious and technical; it will be completed in the next subsection (after a few auxiliary lemmas).
 
 \subsection{Proof of Lemma~\ref{lem:determinant_form.interl-act}}
@@ -1383,9 +1378,6 @@ So we have shown that
 \bigl( q(u) \bigr)_j  & > t && \text{for each } j \notin q.
 \end{align}
 \end{subequations}
-\Travis{This follows trivially from the definition of Phase~II: the $\abs{q}$ smallest elements of $q(u)$ are at $j \in q$, which by assumption are at most $t$. Everything else is strictly larger than $t$ (which is used during Phase~I). It does not need a whole paragraph to explain!}
-\Darij{The paragraph also shows other things, which are used further below.}
-\Travis{I don't really see it. Can we verlong the above paragraph?}
 Thus, all letters set during Phase~II of the algorithm are $\leq t$,
 while all letters set during Phase~I of the algorithm are $> t$.
 
@@ -1776,9 +1768,6 @@ Consider a man named $M_k$ for each $k \in r$ (for a total of $\abs{r}$ many men
 Consider a woman named $W_k$ for each $k \in q$ (for a total of $\abs{q}$ many women).
 
 The \defn{age} of a man $M_k$ or woman $W_k$ is defined to be the number $k \in \ive{n}$.
-
-\Travis{This is a horrible model with potentially dangerous politically consequences: \emph{it is definitely not PC}. Also, how much of this is really just a rephrasing the algorithm in a more complicated (or at least new) language? Why not just use what will be the language in Section~\ref{sec:thm_proof} of brackets?}
-\Darij{Where exactly is this not PC? And should we care? My suggestion is to move this proof into verlong anyway, while in vershort it gets replaced by some good pictures showing the ``balls'' in the $r^{(j)}$ and $q^{(j)}$ and how everything moves to the right place. But I can't draw that picture, at least not in LaTeX.}
 
 We subdivide the (altogether $\abs{r} + \abs{q}$ many) people into $h$ \defn{age brackets}, numbered $1, 2, \ldots, h$:
 Namely, for each $j \in \ive{h}$, the $j$-th age bracket shall contain

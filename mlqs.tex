@@ -2614,11 +2614,6 @@ In this case, the elements of $q_i^{(j)}$ will be labeled by $j$ (as we shall se
 \]
 \end{example}
 
-%Forget that we fixed $\qq$.
-% I don't understand what purpose this sentence serves -- Travis
-% It serves to clarify that $\qq$ is no longer fixed. --Darij
-% I still think this is useless. We never fixed $\qq$. -- Travis
-
 %Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
 Define a pseudo-partition
 \begin{equation}
@@ -2764,7 +2759,7 @@ First, we need another notion:
 If $u \in \mcW_n$ and $t \in \NN$, then we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if every two sites $i < j$ in $\ive{n}$ satisfying $u_j \leq t$ must satisfy $u_i \geq u_j$.
 Equivalently, $u$ is weakly decreasing up to level $t$ if and only if $u$ becomes weakly decreasing when all letters larger than $t$ are removed.
 For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up to level $4$ (and up to any level $\leq 4$).
-We also need the following auxiliary lemma about what queues can yield weakly decreasing words and that we must input a weakly decreasing word.
+We also need the following auxiliary lemma about what queues can yield weakly decreasing words.
 
 \begin{lemma}
 \label{lem:determinant_form.interl-A}
@@ -2887,8 +2882,6 @@ This shows $B \gg C$.
 \end{proof}
 
 Now we prove our main technical lemma:
-% that $\qq(1^n)$ is weakly decreasing if and only if the MLQ $\qq$ is interlacing.
-% [Darij:] This needs a lot more relativization to be correct.
 
 \begin{lemma}
 \label{lem:determinant_form.interl-act}
@@ -4060,7 +4053,7 @@ we can draw it using bully paths as follows:
 \end{tikzpicture}
 \]
 where each bully path matches with a thread in the decomposition.
-Note that for each fixed $k$, the $k$-bully paths must be constructed from left to right.\footnote{In terms of our permutation $(i_1, i_2, \dotsc, i_n)$ for Phase~II, for $u_{i_j} = u_{i_{j+1}} = \cdots u_{i_{j'}} = k$, we must have $i_j < i_{j+1} < \cdots < i_{j'}$.}
+Note that for each fixed $k$, the $k$-bully paths must be constructed from left to right.\footnote{In terms of our permutation $(i_1, i_2, \dotsc, i_n)$ for Phase~II, for $u_{i_j} = u_{i_{j+1}} = \cdots = u_{i_{j'}} = k$, we must have $i_j < i_{j+1} < \cdots < i_{j'}$.}
 If not, the diamond and square in the bottom row would be interchanged.
 \end{example}
 
