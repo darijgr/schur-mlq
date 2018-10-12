@@ -1,0 +1,2289 @@
+%% The following is the *old version* of Section \ref{sec:JT-proofs}
+%% of mlqs.tex,
+%% with clumsier but more detailed arguments in several places.
+
+%=====================================================================
+
+\section{Proof of Theorem~\ref{thm:determinant_form}}
+\label{sec:JT-proofs}
+
+The goal of this section is to prove Theorem~\ref{thm:determinant_form}.
+Along the way, we shall derive a number of intermediate results, some of which may be of independent interest.
+
+As in Subsection~\ref{subsec:JT_formula}, we shall consider the sites as elements of the totally ordered set $\set{1, 2, \ldots, n}$ (ordered by $1 < 2 < \cdots < n$) throughout this section.
+Moreover, we shall use infinitely many distinct commuting indeterminates $\ldots, x_{-2}, x_{-1}, x_0, x_1, x_2, \ldots$ instead of those indexed by $\ZZ/n\ZZ$; thus we do not have $x_{n+k} = x_k$ in this section.
+
+%%%%%%%%%%
+\subsection{Lattice paths and the Lindstr\"{o}m--Gessel--Viennot theorem}
+
+Our arguments will rely on the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{GV85,Lindstrom73} and on a re-interpretation of MLQs as a certain kind of semistandard tableaux (of non-partition shape).
+This takes inspiration from the ``bully paths'' of~\cite{AasLin17} as well as from the standard proof of the Jacobi--Trudi identities for Schur functions~\cite[First proof of Theorem 7.16.1]{Stanley-EC2}.
+We begin with basic definitions.
+
+The \defn{lattice} shall mean the (infinite) directed graph whose vertices are
+all pairs of integers (that is, its vertex set is $\ZZ^2$), and whose arcs are
+\begin{align*}
+(i,j) & \to (i,j+1) & & \text{for all } (i,j) \in \ZZ^2, \qquad \text{and} \\
+(i,j) & \to (i+1,j) & & \text{for all } (i,j) \in \ZZ^2.
+\end{align*}
+The arcs of the first kind are called \defn{north-steps}, whereas the arcs of
+the second kind are called \defn{east-steps}.
+\begin{verlong}
+The vertices of the lattice will just be called \defn{vertices}.
+\end{verlong}
+We consider the lattice as the usual integer lattice in the Cartesian plane.
+
+For each vertex $v = (i,j) \in \ZZ^2$, we set $\xcoord(v) = i$ and $\ycoord(v) = j$.
+We refer to $\xcoord(v)$ (resp.~$\ycoord(v)$) as the \defn{$x$-coordinate} (resp.~\defn{$y$-coordinate}) of $v$.
+The \defn{$y$-coordinate} of an east-step $(i,j) \to (i+1, j)$ is defined to be $j$.
+
+For each arc $a$ of the lattice, we define the \defn{weight} of $a$ as the monomial
+\[
+\wt(a) :=
+\begin{cases}
+x_j & \text{if $a$ is an east-step } (i,j) \to (i+1,j), \\
+1 & \text{if $a$ is a north-step } (i,j) \to (i,j+1).
+\end{cases}
+\]
+Thus, all north-steps have weight $1$, while east-steps with $y$-coordinate $j$ have weight $x_j$.
+
+Fix $k \in \NN$.
+A $k$-tuple of vertices of the lattice will be called a \defn{$k$-vertex}.
+\begin{verlong}
+If $\vv = \tup{A_1, A_2, \dotsc, A_k}$ is a $k$-vertex, and if $\sigma \in \SymGp{k}$ is a permutation, then $\sigma(\vv)$ denotes the $k$-vertex $\tup{A_{\sigma(1)}, A_{\sigma(2)}, \dotsc, A_{\sigma(k)}}$.
+\end{verlong}
+A \defn{path} simply means a (directed) path in the lattice.
+The \defn{weight} of a path $p$, denoted $\wt(p)$, is defined as the product of the weights of all arcs of this path; this weight is a monomial.
+If $A$ and $B$ are two vertices, then \defn{$N(A,B)$} shall denote the set of all paths from $A$ to $B$.
+
+It is easy to see (see, \textit{e.g.}, \cite[(2.36)]{Stanley-EC1}) that any two vertices $A = (a,b)$ and $B = (c,d)$ satisfy
+\begin{equation}
+\label{eq.LGV.single-paths}
+\sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
+\end{equation}
+% This really is just a substitution and we can assume the readers are not completely incompetent
+%(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
+
+\begin{comment}
+We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and classical fact that appears implicitly in various texts on enumerative combinatorics (\textit{e.g.}, \cite[(2.36)]{Stanley-EC1}).
+
+\begin{proof}[Proof of~\eqref{eq.LGV.single-paths}.]
+Let $A = (a,b)$ and $B = (c,d)$ be two vertices.
+If $p$ is a path from $A$ to $B$, then $p$ must have exactly $c-a$ east-steps, and the $y$-coordinates of these
+east-steps must belong to the interval $\set{b,b+1,\dotsc,d}$.
+Let $\bigl( y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr) \in \set{b,b+1, \dotsc, d}^{c-a}$ be the weakly increasing $(c-a)$-tuple consisting of the $y$-coordinates of the $c-a$ east-steps of $p$ (from left to right).
+Moreover, $p$ can be uniquely reconstructed from this $(c-a)$-tuple (since this $(c-a)$-tuple determines the east-steps of $p$).
+Conversely, any weakly increasing $(c-a)$-tuple of elements of $\set{b, b+1, \dotsc,d}$ has the form $\bigl( y_1(p), y_2(p), \dotsc, y_{c-a}(p) \bigr)$ for a unique path $p$ from $A$ to $B$.
+Thus, there is a bijection between the paths $p$ from $A$ to $B$ and the weakly increasing $(c-a)$-tuples of elements of $\set{b, b+1, \dotsc, d}$.
+This yields
+\begin{align*}
+\sum_{p \in N(A,B)} \wt(p) & = \sum_{\substack{ \tup{k_1,k_2,\ldots,k_{c-a}} \text{ is a weakly increasing} \\ (c-a)\text{-tuple of elements of }\set{b,b+1,\dotsc,d} }} x_{k_1} x_{k_2} \cdots x_{k_{c-a}}
+\\ & = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
+\end{align*}
+\end{proof}
+\end{comment}
+
+If $\tup{A_1, A_2, \dotsc, A_k}$ and $\tup{B_1, B_2, \dotsc, B_k}$ are two $k$-vertices, then a \defn{non-intersecting lattice path tuple (NILP)} from $\tup{A_1, A_2, \dotsc, A_k}$ to $\tup{B_1, B_2, \dotsc, B_k}$ shall mean a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths such that
+\begin{itemize}
+\item each $p_i$ is a path from $A_i$ to $B_i$;
+\item no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+\end{itemize}
+(Visually speaking, the paths must neither cross nor touch.)
+
+The \defn{weight} of a NILP $\pp = \tup{p_1, p_2, \dotsc, p_k}$ is the monomial $\wt(\pp)$ defined by
+\[
+\wt(\pp) := \prod_{i=1}^{k} \wt(p_i).
+\]
+See Figure~\ref{fig:NILP_example} for an illustration.
+
+If $\uu$ and $\vv$ are two $k$-vertices, then \defn{$N(\uu,\vv)$} denotes the set of all NILPs from $\uu$ to $\vv$.
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}
+  \draw[densely dotted] (0,0) grid (7.2,7.2);
+  % axes:
+  \draw[->] (0,0) -- (0,7.2);
+  \draw[->] (0,0) -- (7.2,0);
+  \foreach \x/\xtext in {0, 1, 2, 3, 4, 5, 6, 7}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\xtext$};
+  \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6, 7}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\ytext$};
+
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A3) at (2,3) {$A_3$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A2) at (3,1) {$A_2$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A1) at (5,1) {$A_1$};
+
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B3) at (4,6) {$B_3$};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B2) at (5,6) {$B_2$};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B1) at (6,4) {$B_1$};
+
+  \begin{scope}[thick,>=stealth,darkred]
+      % $p_3$:
+      \draw (A3) edge[->] (2,4);
+      \draw (2,3.6) node[anchor=east] {$1$};
+      \draw (2,4) edge[->] (3,4);
+      \draw (2.5,4) node[anchor=north] {$x_4$};
+      \draw (3,4) edge[->] (3,5);
+      \draw (3,4.5) node[anchor=east] {$1$};
+      \draw (3,5) edge[->] (4,5);
+      \draw (3.5,5) node[anchor=north] {$x_5$};
+      \draw (4,5) edge[->] (B3);
+      \draw (4,5.4) node[anchor=east] {$1$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dbluecolor]
+      % $p_2$:
+      \draw (A2) edge[->] (4,1);
+      \draw (3.6,1) node[anchor=north] {$x_1$};
+      \draw (4,1) edge[->] (4,2);
+      \draw (4,1.5) node[anchor=east] {$1$};
+      \draw (4,2) edge[->] (4,3);
+      \draw (4,2.5) node[anchor=east] {$1$};
+      \draw (4,3) edge[->] (4,4);
+      \draw (4,3.5) node[anchor=west] {$1$};
+      \draw (4,4) edge[->] (5,4);
+      \draw (4.5,4) node[anchor=south] {$x_4$};
+      \draw (5,4) edge[->] (5,5);
+      \draw (5,4.5) node[anchor=west] {$1$};
+      \draw (5,5) edge[->] (B2);
+      \draw (5,5.4) node[anchor=west] {$1$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dgreencolor]
+      % $p_1$:
+      \draw (A1) edge[->] (5,2);
+      \draw (5,1.6) node[anchor=east] {$1$};
+      \draw (5,2) edge[->] (6,2);
+      \draw (5.5,2) node[anchor=south] {$x_2$};
+      \draw (6,2) edge[->] (6,3);
+      \draw (6,2.5) node[anchor=west] {$1$};
+      \draw (6,3) edge[->] (B1);
+      \draw (6,3.4) node[anchor=west] {$1$};
+  \end{scope}
+\end{tikzpicture}
+\]
+\caption{A NILP from the $3$-vertex $\tup{A_1, A_2, A_3}$ to the $3$-vertex $\tup{B_1, B_2, B_3}$ of weight $x_1 x_2 x_4^2 x_5$.
+  The weights of the edges of the paths are written next to the edges.}
+\label{fig:NILP_example}
+\end{figure}
+
+\begin{verlong}
+A pair $(\uu, \vv)$ of two $k$-vertices $\uu$ and $\vv$ is said to be \defn{nonpermutable} if and only
+if every permutation $\sigma \neq \id$ in $\SymGp{k}$ satisfies $N\bigl( \uu,\sigma(\vv) \bigr) = \emptyset$.
+Note that we are not requiring that $N(\uu, \vv) \neq \emptyset$ here.
+
+The following fact (a particular case of~\cite[Corollary 2]{GesVie89}) is crucial:
+
+\begin{prop}
+\label{prop.LGV.nonper}
+Let $k \in \NN$.
+Let $(\uu, \vv)$ be a nonpermutable pair of two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$.
+Then,
+\[
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p \in N(A_i,B_j)} \wt(p) \right)_{i, j \in \ive{k}}.
+\]
+\end{prop}
+
+Next, we state a simple lemma that will help us show that certain pairs of $k$-vertices are nonpermutable:
+
+\begin{lemma}
+\label{lem.LGV.hex}
+Let $A$, $B$, $A'$ and $B'$ be four vertices of the lattice such that
+\[
+\xcoord(A') \leq \xcoord(A), \qquad \ycoord(A') \geq \ycoord(A), \qquad
+\xcoord(B') \leq \xcoord(B), \qquad \ycoord(B') \geq \ycoord(B).
+\]
+Let $p$ be a path from $A$ to $B'$. Let $p'$ be a path from $A'$ to $B$.
+Then, $p$ and $p'$ have a vertex in common.
+\end{lemma}
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}
+  \draw[densely dotted] (0,0) grid (7.2,7.2);
+  % axes:
+  \draw[->] (0,0) -- (0,7.2);
+  \draw[->] (0,0) -- (7.2,0);
+  \foreach \x/\xtext in {0, 1, 2, 3, 4, 5, 6, 7}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\xtext$};
+  \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6, 7}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\ytext$};
+
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A') at (1,3) {$A^{\prime}$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A) at (2,1) {$A$};
+  
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B') at (5,6) {$B^{\prime}$};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B) at (6,4) {$B$};
+  
+  \begin{scope}[thick,>=stealth,darkred]
+      % $p$:
+      \draw (A) edge[->] (3,1);
+      \draw (2.6,1) node[anchor=north] {$p$};
+      \draw (3,1) edge[->] (3,2);
+      \draw (3,2) edge[->] (4,2);
+      \draw (4,2) edge[->] (4,3);
+      \draw (4,3) edge[->] (4,4);
+      \draw (4,4) edge[->] (4,5);
+      \draw (4,5) edge[->] (5,5);
+      \draw (5,5) edge[->] (B');
+      \draw (5,5.4) node[anchor=east] {$p$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dbluecolor]
+      % $p^{\prime}$:
+      \draw (A') edge[->] (2,3);
+      \draw (1.6,3) node[anchor=north] {$p^{\prime}$};
+      \draw (2,3) edge[->] (2,4);
+      \draw (2,4) edge[->] (3,4);
+      \draw (3,4) edge[->] (4,4);
+      \draw (4,4) edge[->] (5,4);
+      \draw (5,4) edge[->] (B);
+      \draw (5.4,4) node[anchor=north] {$p^{\prime}$};
+  \end{scope}
+\end{tikzpicture}
+\]
+\caption{Illustration for Lemma~\ref{lem.LGV.hex}.}
+\label{fig:LGV.hex.example}
+\end{figure}
+
+See Figure~\ref{fig:LGV.hex.example} for an illustration of the situation of this lemma.
+
+\begin{proof}[First proof of Lemma~\ref{lem.LGV.hex}.]
+If $q$ is any path, then the \defn{length $\ell\left(q\right)$} of $q$ is defined to be the number of arcs
+of $q$.
+
+We shall now prove Lemma~\ref{lem.LGV.hex} by strong induction on $\ell(p) + \ell(p')$:
+
+\textit{Induction step:}
+Fix $N \in \NN$. Assume (as the induction hypothesis) that Lemma~\ref{lem.LGV.hex} holds whenever $\ell(p) + \ell(p') < N$.
+We must now prove that Lemma~\ref{lem.LGV.hex} holds when $\ell(p) + \ell(p') = N$.
+
+So let $A$, $B$, $A'$, $B'$, $p$ and $p'$ be as in Lemma~\ref{lem.LGV.hex}, and let us assume that $\ell(p) + \ell(p') = N$.
+We must prove that $p$ and $p'$ have a vertex in common.
+
+Assume the contrary. Thus, $p$ and $p'$ have no vertex in common.
+
+The vertex $A$ belongs to the path $p$, and thus does not belong to the path
+$p'$ (since $p$ and $p'$ have no vertex in common). Similarly,
+the vertex $A'$ does not belong to the path $p$.
+
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, the $x$-coordinates of the vertices of a path are always weakly
+increasing, and so are the $y$-coordinates. Hence, the existence of a path $p$
+from $A$ to $B'$ shows that $\xcoord(A) \leq \xcoord(B')$ and $\ycoord(A) \leq \ycoord(B')$.
+Similarly, the existence of a path $p'$ from $A'$ to $B$ yields $\xcoord(A') \leq \xcoord(B)$ and $\ycoord(A') \leq \ycoord(B)$.
+
+Next, we claim that $\ell(p) \neq 0$.
+
+[\textit{Proof:}
+Assume the contrary. Thus, $\ell(p) = 0$.
+Hence, the path $p$ has no steps.
+Therefore, $A=B'$ (since $p$ is a path from $A$ to $B'$).
+Hence, $\ycoord(A) = \ycoord(B') \geq \ycoord(B)$, so that $\ycoord(A') \geq \ycoord(A) \geq \ycoord(B)$.
+Combining this with $\ycoord(A') \leq \ycoord(B)$, we obtain $\ycoord(A') = \ycoord(B)$.
+Combining $\ycoord(A') \geq \ycoord(A)$ with $\ycoord(A') = \ycoord(B) \leq \ycoord(A)$, we obtain $\ycoord(A')  = \ycoord(A)$.
+Thus, $\ycoord(A') = \ycoord(A) = \ycoord(B)$.
+Therefore, the vertex $A$ lies on the horizontal line that contains $A'$ and $B$.
+Furthermore, this vertex $A$ must lie on the line segment between $A'$ and $B$ (since $\xcoord(A') \leq \xcoord( \underbrace{A}_{=B'} ) = \xcoord(B') \leq \xcoord(B)$).
+
+Recall again that the $y$-coordinates of the vertices a path are always weakly increasing.
+Moreover, they increase strictly whenever the path makes a north-step.
+Hence, if the path $p'$ would have any north-step, then we would have $\ycoord(A') < \ycoord(B)$ (since $p'$ is a path from $A'$ to $B$).
+But this would contradict $\ycoord(A') \geq \ycoord(B)$.
+Hence, the path $p'$ has no north-step.
+Thus, $p'$ consists entirely of east-steps.
+Hence, $p'$ contains every vertex on the line segment between $A'$ and $B$.
+Therefore, $p'$ contains the vertex $A$ (since the vertex $A$ lies on the line segment between $A'$ and $B$).
+This contradicts the fact that $A$ does not belong to the path $p'$.
+This contradiction shows that our assumption was false; hence, $\ell(p) \neq0$ is proven.]
+
+Furthermore, we claim that $\ell(p') \neq 0$. \travis{Isn't this basically the same as the above proof but with $\xcoord$ instead of $\ycoord$?}
+
+[\textit{Proof:}
+Assume the contrary. Thus, $\ell(p') = 0$.
+Hence, the path $p'$ has no steps.
+Therefore, $A'=B$ (since $p'$ is a path from $A'$ to $B$).
+Hence, $\xcoord(A') = \xcoord(B) \geq \xcoord(B')$, so that $\xcoord(A) \geq \xcoord(A') \geq \xcoord (B')$.
+Combining this with $\xcoord(A) \leq \xcoord(B')$, we obtain $\xcoord(A) = \xcoord(B')$.
+Combining $\xcoord(A) \geq \xcoord(A')$ with $\xcoord(A') \geq \xcoord(B') = \xcoord(A)$, we obtain $\xcoord(A)  = \xcoord(A')$.
+Thus, $\xcoord(A') = \xcoord(A) = \xcoord(B')$.
+Therefore, the vertex $A'$ lies on the vertical line that contains $A$ and $B'$.
+Furthermore, this vertex $A'$ must lie on the line segment between $A$ and $B'$ (since $\ycoord(A') \geq \ycoord(A)$ and $\ycoord(\underbrace{A'}_{=B}) = \ycoord(B) \leq \ycoord(B')$).
+
+Recall again that the $x$-coordinates of the vertices a path are always weakly increasing.
+Moreover, they increase strictly whenever the path makes an east-step.
+Hence, if the path $p$ would have any east-step, then we would have $\xcoord(A) < \xcoord(B')$ (since $p$ is a path from $A$ to $B'$).
+But this would contradict $\xcoord(A) = \xcoord(B')$.
+Hence, the path $p$ has no east-step.
+Thus, $p$ consists entirely of north-steps.
+Hence, $p$ contains every vertex on the line segment between $A$ and $B'$.
+Therefore, $p$ contains the vertex $A'$ (since the vertex $A'$ lies on the line segment between $A$ and $B'$).
+This contradicts the fact that $A'$ does not belong to the path $p$.
+This contradiction shows that our assumption was false; hence, $\ell(p') \neq 0$ is proven.]
+
+Let $P$ be the second vertex of the path $p$.
+(This is well-defined, since $\ell(p) \neq 0$.)
+Hence, $P$ lies on a path from $A$ to $B'$ (namely, on the path $p$).
+Therefore, $\xcoord(A) \leq \xcoord(P) \leq \xcoord(B')$ (since the $x$-coordinates of the vertices a path are
+always weakly increasing) and $\ycoord(A) \leq \ycoord(P) \leq \ycoord(B')$ (since the $y$-coordinates of the vertices a path are always weakly increasing).
+Let $r$ be the path from $P$ to $B'$ obtained by removing the first arc from $p$.
+Thus, $r$ is a subpath of $p$.
+Hence, the paths $r$ and $p'$ have no vertex in common (since $p$ and $p'$ have no vertex in common).
+Also, $\ell(r) = \ell(p) - 1 < \ell(p)$ and thus $\underbrace{\ell(r)}_{<\ell(p)} + \ell(p') < \ell(p) + \ell(p') = N$.
+
+Moreover, $\xcoord(A') \leq \xcoord(A) \leq \xcoord(P)$.
+If we had $\ycoord(A') \geq \ycoord(P)$, then we could apply Lemma~\ref{lem.LGV.hex} to $P$ and $r$ instead of $A$ and $p$ (by the induction hypothesis, since $\ell(r) + \ell(p') < N$).
+We thus would conclude that the paths $r$ and $p'$ have a vertex in common; this would contradict the fact that the paths $r$ and $p'$ have no vertex in common.
+Hence, we cannot have $\ycoord(A') \geq \ycoord(P)$.
+Thus, $\ycoord(A') < \ycoord(P)$.
+Hence, $\ycoord(A') \leq \ycoord(P)  -1$ (since $\ycoord(A')$ and $\ycoord(P)$ are integers).
+
+But $P$ is the next vertex after $A$ on the path $p$.
+Hence, there is an arc from $A$ to $P$. If this arc was an east-step, then we would have $\ycoord(P) = \ycoord(A)$, which would contradict $\ycoord(A) \leq \ycoord(A') < \ycoord(P)$.
+Hence, this arc cannot be an east-step.
+Thus, this arc must be a north-step.
+Therefore, $\ycoord(P) = \ycoord(A) + 1$ and $\xcoord(P) = \xcoord(A)$.
+Combining $\ycoord(A') \leq \ycoord(P) - 1 = \ycoord(A)$ (since $\ycoord(P) = \ycoord(A) + 1$) with $\ycoord(A') \geq \ycoord(A)$, we obtain $\ycoord(A') = \ycoord(A)$.
+
+\travis{Isn't this just the same as the above, but with primes and $\xcoord \leftrightarrow \ycoord$?}
+Let $P'$ be the second vertex on the path $p'$.
+(This is well-defined, since $\ell(p') \neq0 $.)
+Hence, $P'$ lies on a path from $A'$ to $B$ (namely, on the path $p'$).
+Therefore, $\xcoord(A') \leq \xcoord(P') \leq \xcoord(B)$ (since the $x$-coordinates of the vertices a path are always weakly increasing) and $\ycoord(A') \leq \ycoord(P') \leq \ycoord(B)$ (since the $y$-coordinates of the vertices a path are always weakly increasing).
+Let $r'$ be the path from $P'$ to $B$ obtained by removing the first arc from $p'$.
+Thus, $r'$ is a subpath of $p'$.
+Hence, the paths $p$ and $r'$ have no vertex in common (since $p$ and $p'$ have no vertex in common).
+Also, $\ell(r') = \ell(p') - 1 < \ell(p')$, and thus $\ell(p) + \underbrace{\ell(r')}_{<\ell(p')} < \ell(p) + \ell(p') = N$.
+
+Moreover, $\ycoord(P') \geq \ycoord(A') \geq \ycoord(A)$.
+If we had $\xcoord(P') \leq \xcoord(A)$, then we could apply Lemma~\ref{lem.LGV.hex} to $P'$ and $r'$ instead of $A'$ and $p'$ (by the induction hypothesis, since $\ell(p) + \ell(r') < N$).
+We thus would conclude that the paths $p$ and $r'$ have a vertex in common; this would contradict the fact that the paths $p$ and $r'$ have no vertex in common.
+Hence, we cannot have $\xcoord(P') \leq \xcoord(A)$.
+Thus, $\xcoord(P') > \xcoord(A)$.
+Hence, $\xcoord(P') \geq \xcoord(A) + 1$ (since $\xcoord(P')$ and $\xcoord(A)$ are integers).
+
+But $P'$ is the next vertex after $A'$ on the path $p'$.
+Hence, there is an arc from $A'$ to $P'$.
+If this arc was a north-step, then we would have $\xcoord(P') = \xcoord(A')$, which would contradict $\xcoord(A') \leq \xcoord(A) < \xcoord(P')$.
+Hence, this arc cannot be a north-step.
+Thus, this arc must be an east-step.
+Therefore, $\ycoord(P') = \ycoord(A')$ and $\xcoord(P') = \xcoord(A') + 1$.
+Hence, $\xcoord(A') + 1 = \xcoord(P') \geq \xcoord(A) + 1$, so that $\xcoord(A') \geq \xcoord(A)$.
+Combining this with $\xcoord(A') \leq \xcoord(A)$, we obtain $\xcoord(A') = \xcoord(A)$.
+
+Now, the vertices $A$ and $A'$ have the same $x$-coordinate (since $\xcoord(A') = \xcoord(A)$) and the same $y$-coordinate (since $\ycoord(A') = \ycoord(A)$).
+Hence, these two vertices are equal.
+In other words, $A = A'$.
+Hence, the vertex $A$ belongs to the path $p'$ (since the vertex $A'$ belongs to the path $p'$).
+This contradicts the fact that the vertex $A$ does not belong to the path $p'$.
+This contradiction shows that our assumption was false.
+Hence, we have shown that $p$ and $p'$ have a vertex in common.
+
+Now, forget that we fixed $A$, $B$, $A'$, $B'$, $p$ and $p'$.
+We thus have proven that if $A$, $B$, $A'$, $B'$, $p$ and $p'$ are as in Lemma~\ref{lem.LGV.hex}, and if $\ell(p) + \ell(p') = N$, then $p$ and $p'$ have a vertex in common.
+In other words, Lemma~\ref{lem.LGV.hex} holds when $\ell(p) + \ell(p') = N$.
+This completes the induction step.
+Hence, Lemma~\ref{lem.LGV.hex} is proven.
+\end{proof}
+
+\begin{proof}[Second proof of Lemma~\ref{lem.LGV.hex} (sketched).]
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, the $x$-coordinates of the vertices of a path are always weakly increasing, and so are the $y$-coordinates.
+Hence, the existence of a path $p$ from $A$ to $B'$ shows that $\xcoord(A) \leq \xcoord(B')$ and $\ycoord(A) \leq \ycoord(B')$.
+Similarly, the existence of $p'$ yields $\xcoord(A') \leq \xcoord(B')$ and $\ycoord(A') \leq\ycoord(B)$.
+
+Thus,
+\begin{align}
+\xcoord(A')  & \leq \xcoord(A)  \leq \xcoord(B') \leq \xcoord(B) \qquad \text{and} \label{pf.lem.LGV.hex.1} \\
+\ycoord(A)  & \leq \ycoord(A') \leq \ycoord(B) \leq \ycoord(B'). \label{pf.lem.LGV.hex.2}
+\end{align}
+Now, consider the rectangle whose four sides are given by the equations
+\[
+x = \xcoord(A'), \qquad
+y = \ycoord(A), \qquad
+x = \xcoord(B), \qquad
+y = \ycoord(B'),
+\]
+respectively (all in Cartesian coordinates).\footnote{See Figure~\ref{fig:LGV.hex.pf2} for this rectangle.}
+Then, the path $p$ joins two opposite sides of this rectangle (namely, the second and the fourth), whereas
+the path $p'$ joins the other two sides of this rectangle; moreover, both paths stay fully within the rectangle (due to~\eqref{pf.lem.LGV.hex.1} and~\eqref{pf.lem.LGV.hex.2}).
+Hence, it is geometrically obvious that $p$ and $p'$ must meet; in other words, $p$ and $p'$ have a vertex in common.
+
+\begin{figure}[t]
+\[
+\begin{tikzpicture}
+  \draw[densely dotted] (-1.2,-1.2) grid (8.2,8.2);
+  
+  \draw (1,-1.2) -- (1,8.2);
+  \draw (1,4.3) node[anchor=east] {$x = \xcoord(A')$};
+  \draw (-1.2,1) -- (8.2,1);
+  \draw (4,1) node[anchor=north] {$y = \ycoord(A)$};
+  \draw (6,-1.2) -- (6,8.2);
+  \draw (6,2.7) node[anchor=west] {$x = \xcoord(B)$};
+  \draw (-1.2,6) -- (8.2,6);
+  \draw (3,6) node[anchor=south] {$y = \ycoord(B')$};
+  
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A') at (1,3) {$A^{\prime}$};
+  \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A) at (2,1) {$A$};
+  
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B') at (5,6) {$B^{\prime}$};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B) at (6,4) {$B$};
+  
+  \begin{scope}[thick,>=stealth,darkred]
+      % $p$:
+      \draw (A) edge[->] (3,1);
+      \draw (2.6,1) node[anchor=north] {$p$};
+      \draw (3,1) edge[->] (3,2);
+      \draw (3,2) edge[->] (4,2);
+      \draw (4,2) edge[->] (4,3);
+      \draw (4,3) edge[->] (4,4);
+      \draw (4,4) edge[->] (4,5);
+      \draw (4,5) edge[->] (5,5);
+      \draw (5,5) edge[->] (B');
+      \draw (5,5.4) node[anchor=east] {$p$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dashed,darkred]
+      % $\widetilde{p}$:
+      \draw (2,0) edge[->] (A);
+      \draw (2,-1) edge[->] (2,0);
+      \draw (2,-1.2) edge[->] (2,-1);
+      \draw (2,-0.3) node[anchor=west] {$\widetilde{p}$};
+      \draw (B') edge[->] (5,7);
+      \draw (5,7) edge[->] (5,8);
+      \draw (5,8) edge (5,8.2);
+      \draw (5,7.3) node[anchor=west] {$\widetilde{p}$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dbluecolor]
+      % $p^{\prime}$:
+      \draw (A') edge[->] (2,3);
+      \draw (1.6,3) node[anchor=north] {$p^{\prime}$};
+      \draw (2,3) edge[->] (2,4);
+      \draw (2,4) edge[->] (3,4);
+      \draw (3,4) edge[->] (4,4);
+      \draw (4,4) edge[->] (5,4);
+      \draw (5,4) edge[->] (B);
+      \draw (5.4,4) node[anchor=north] {$p^{\prime}$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dashed,dbluecolor]
+      % $\widetilde{p^{\prime}}$:
+      \draw (0,3) edge[->] (A');
+      \draw (-1,3) edge[->] (0,3);
+      \draw (-1.2,3) edge[->] (-1,3);
+      \draw (-0.3,3) node[anchor=north] {$\widetilde{p^{\prime}}$};
+      \draw (B) edge[->] (7,4);
+      \draw (7,4) edge[->] (8,4);
+      \draw (8,4) edge (8.2,4);
+      \draw (7.3,4) node[anchor=south] {$\widetilde{p^{\prime}}$};
+  \end{scope}
+\end{tikzpicture}
+\]
+\caption{Illustration for the Second proof of Lemma~\ref{lem.LGV.hex}.}
+\label{fig:LGV.hex.pf2}
+\end{figure}
+
+[This last geometric argument can also be substituted by a purely combinatorial one.
+Namely: Assume the contrary. Hence, the paths $p$ and $p'$ have no vertex in common.
+
+We extend the path $p$ to a bidirectionally infinite path $\widetilde{p}$ by vertical steps (\textit{i.e.}, arcs of the form $(i,j) \to (i,j+1)$) in both directions (so the path $\widetilde{p}$ first reaches $A$ through infinitely many north-steps, then proceeds to $B'$ along $p$, and then leaves $B'$ along infinitely many north-steps).\footnote{These new steps are the dashed red steps in Figure~\ref{fig:LGV.hex.pf2}.}
+We extend the path $p'$ to a bidirectionally infinite path $\widetilde{p'}$ by horizontal steps (\textit{i.e.}, arcs of the form $(i,j) \to (i+1,j)$) in both directions.\footnote{These new steps are the dashed blue steps in Figure~\ref{fig:LGV.hex.pf2}.}
+The resulting infinite paths $\widetilde{p}$ and $\widetilde{p'}$ have no vertex in common (indeed, the paths $p$ and $p'$ stay within the rectangle discussed above, and have no vertex in common; meanwhile, the new
+steps we have added to them to obtain $\widetilde{p}$ and $\widetilde{p'}$ escape this rectangle normally in four different directions, whence they intersect neither each other nor $p$ or $p'$).
+Recall that each arc of the lattice is either an east-step or a north-step.
+Thus, if a vertex $C$ runs through a path, the value $\xcoord(C) + \ycoord(C)$ is incremented by $1$ with each step.
+Hence, if $q$ is a bidirectionally infinite path, then, for each $N \in \ZZ$, there is a unique vertex $C$ of $q$ satisfying $\xcoord(C) + \ycoord(C) = N$.
+Denote this vertex $C$ by $h_N(q)$.
+Thus, the vertices of $q$ are $\ldots, h_{-1}(q), h_{0}(q), h_1(q), \ldots$ in this order.
+
+All sufficiently low $N \in \ZZ$ satisfy $\xcoord\bigl( h_N(\widetilde{p'}) \bigr) < \xcoord\bigl( h_N(\widetilde{p}) \bigr)$, whereas all sufficiently high $N \in \ZZ$ satisfy $\xcoord\bigl( h_N(\widetilde{p'}) \bigr) > \xcoord\bigl( h_N(\widetilde{p}) \bigr)$.
+Hence, the set of all $N \in \ZZ$ that satisfy $\xcoord\bigl( h_N(\widetilde{p'}) \bigr) < \xcoord\bigl( h_N(\widetilde{p}) \bigr)$ is a nonempty set of integers that is bounded from above.
+Therefore, this set has a maximum.
+Let $M$ be this maximum.
+Thus, $M \in \ZZ$ satisfies $\xcoord\bigl( h_{M}(\widetilde{p'}) \bigr) < \xcoord\bigl( h_{M}(\widetilde{p}) \bigr)$ but $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \geq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$.
+
+But the point $h_{M+1}(\widetilde{p'})$ is either the eastern or the northern neighbor of $h_{M}(\widetilde{p'})$; hence, $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \leq \xcoord\bigl( h_{M}(\widetilde{p'}) \bigr) + 1$.
+Also, the point $h_{M+1}(\widetilde{p})$ is either the eastern or the northern neighbor of $h_{M}(\widetilde{p})$; thus, $\xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr) \geq \xcoord\bigl( h_{M}(\widetilde{p}) \bigr)$.
+Hence,
+\[
+\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \leq \underbrace{\xcoord\bigl( h_{M}(\widetilde{p'}) \bigr)}_{<\xcoord\bigl( h_{M}(\widetilde{p}) \bigr)} + 1 < \underbrace{\xcoord\bigl( h_{M}(\widetilde{p}) \bigr)}_{\leq\xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)} + 1 \leq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr) + 1.
+\]
+Therefore, $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \leq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$ (since both sides are integers).
+Combining this with $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) \geq \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$, we obtain $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) = \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr)$.
+Hence, $h_{M+1}(\widetilde{p'}) = h_{M+1}(\widetilde{p})$ (since $\xcoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) -\ycoord\bigl( h_{M+1}(\widetilde{p'}) \bigr) = M + 1 = \xcoord\bigl( h_{M+1}(\widetilde{p}) \bigr) - \ycoord( h_{M+1}(\widetilde{p}) \bigr)$ as well).
+Thus, the paths $\widetilde{p}$ and $\widetilde{p'}$ have a vertex in common (namely, $h_{M+1}(\widetilde{p'}) = h_{M+1}(\widetilde{p})$).
+This contradicts the fact that they don't.
+This contradiction shows that our assumption was false.
+Hence, the paths $p$ and $p'$ have a vertex in common.]
+\end{proof}
+
+We can now specialize Proposition~\ref{prop.LGV.nonper} to a form that is most
+suited for our applications:\footnote{%
+Proposition~\ref{prop.LGV.concrete} is also the particular case of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$).
+The proof we are giving here is precisely the proof from \url{https://math.stackexchange.com/questions/2870640}.}
+\end{verlong}
+
+\begin{vershort}
+We now shall state a folklore result, which follows from the Lindstr\"om--Gessel--Viennot lemma:\footnote{%
+See the proof of Corollary~4 in \url{https://math.stackexchange.com/questions/2870640} (applied to $\omega_{a} = \wt(a)$) for a detailed derivation of Proposition~\ref{prop.LGV.concrete}.}
+\end{vershort}
+
+\begin{prop}
+\label{prop.LGV.concrete}
+Let $k \in \NN$.
+Let $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1,B_2, \dotsc, B_k}$ be two $k$-vertices such that
+\begin{align*}
+\xcoord(A_1) & \geq \xcoord(A_2) \geq \cdots \geq \xcoord(A_k), \\
+\ycoord(A_1) & \leq \ycoord(A_2) \leq \cdots \leq \ycoord(A_k), \\
+\xcoord(B_1) & \geq \xcoord(B_2) \geq \cdots \geq \xcoord(B_k), \\
+\ycoord(B_1) & \leq \ycoord(B_2) \leq \cdots \leq \ycoord(B_k).
+\end{align*}
+Then,
+\[
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) = \det\left( \sum_{p\in N(A_i,B_j) } \wt(p) \right)_{i, j \in \ive{k}} .
+\]
+\end{prop}
+
+The situation of this proposition is illustrated in Figure~\ref{fig:NILP_example}.
+
+\begin{verlong}
+\begin{proof}[Proof of Proposition~\ref{prop.LGV.concrete}.]
+This will follow immediately from Proposition~\ref{prop.LGV.nonper}
+once we have shown that $\left( \uu,\vv\right)  $ is nonpermutable.
+Thus, it remains to show the latter fact.
+
+Let $\sigma\neq\id$ be a permutation in $\SymGp{k}$.
+We must show that $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$.
+Indeed, let $\pp\in N\bigl( \uu,\sigma(\vv) \bigr)$.
+
+The permutation $\sigma$ has an inversion (since $\sigma \neq \id$).
+In other words, there exist some $i<j$ in $\ive{k}$ such that $\sigma(i) > \sigma(j)$.
+Consider such $i$ and $j$.
+
+Write $\pp$ in the form $\pp = \tup{p_1, p_2, \dotsc, p_k}$.
+Thus, $\tup{p_1, p_2, \dotsc, p_k}$ is a NILP from $\uu$ to $\sigma(\vv)$ (since $\tup{p_1, p_2, \dotsc, p_k} = \pp\in N\bigl( \uu, \sigma(\vv) \bigr)$).
+
+By the definition of a NILP, this implies that
+\begin{itemize}
+\item $p_i$ is a path from $A_i$ to $B_{\sigma(i)}$;
+
+\item $p_j$ is a path from $A_j$ to $B_{\sigma(j)}$;
+
+\item the paths $p_i$ and $p_j$ have no vertex in common.
+\end{itemize}
+
+However, the assumptions of Proposition~\ref{prop.LGV.concrete} yield
+$\xcoord(A_j) \leq \xcoord(A_i)$,
+$\ycoord(A_j) \geq \ycoord(A_i)$,
+$\xcoord(B_{\sigma(i)}) \leq \xcoord(B_{\sigma(j)})$, and
+$\ycoord(B_{\sigma(i)}) \geq \ycoord(B_{\sigma(j)})$.
+Hence, Lemma~\ref{lem.LGV.hex} (applied to $A = A_i$, $B = B_{\sigma(j)}$, $A' = A_j$, $B' = B_{\sigma(i)}$, $p = p_i$ and $p' = p_j$) shows that $p_i$ and $p_j$ have a vertex in common.
+This contradicts the fact that the paths $p_i$ and $p_j$ have no vertex in common.
+
+Thus we have found a contradiction for each $\pp\in N\bigl( \uu,\sigma(\vv) \bigr)$.
+Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
+\end{proof}
+\end{verlong}
+
+%%%%%%%%%%
+\subsection{Pseudo-partitions and tableaux}
+
+We shall next introduce the concepts of pseudo-partitions and their corresponding semistandard tableaux;
+we will then express a generating function for these tableaux by a determinantal formula (Theorem~\ref{thm.tableau.jt}) akin to the Jacobi--Trudi formula for Schur functions (and, like the latter, the proof will rely on Proposition~\ref{prop.LGV.concrete}).
+A pseudo-partition is similar to the concept of a partition, except it allows entries to increase by $1$.
+The semistandard tableaux of a pseudo-partition shape are defined just like for partitions.
+The generating function in our determinantal formula is going to be a sum over the semistandard tableaux of a fixed pseudo-partition shape with given rightmost entries in each row.
+Later we will translate these tableaux into MLQs that yield a specific word when applied to $1^n$.
+
+Let us formalize these definitions.
+A \defn{pseudo-partition} shall mean a $k$-tuple $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ of positive integers (for some $k \in \NN$) such that
+\[
+\text{each } i \in \ive{k-1} \text{ satisfies } \lambda_i + 1 \geq \lambda_{i+1}.
+\]
+For example, both $\tup{5,3,4,2,2}$ and $\tup{6,2,3,4,1}$ are pseudo-partitions.
+
+The \defn{diagram $\diag{\lambda}$} of a pseudo-partition $\lambda = \tup{\lambda_1, \lambda_2, \dotsc,\lambda_k}$ is defined as the set
+$\set{  \left(  i,j\right)  \in \ive{k} \times \set{ 1,2,3,\ldots }  \mid  j \leq \lambda_i }$.
+This diagram is drawn in the plane like usual Young diagrams, in English notation.
+\begin{verlong}
+For example, the diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
+\[
+\ydiagram{3,2,3,1}.
+\]
+\end{verlong}
+
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, then a \defn{tableau of shape $\lambda$} is a map $T \colon \diag{\lambda} \to \set{1,2,3,\ldots}$.
+For each such tableau $T$ and each $(i,j) \in \diag{\lambda}$, we refer to the value $T(i,j)$ as the \defn{entry of $T$ in cell $\left(i,j\right)$}.
+As usual, we represent a tableau $T$ of shape $\lambda$ by placing the entry $T(i,j)$ into the box corresponding to $(i,j) \in \diag{\lambda}$.
+\begin{verlong}
+For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
+\begin{equation}
+\label{eq.tableau.exas-long}
+\begin{ytableau} 2 & 5 & 3 \\ 1 & 1 \\ 2 & 4 & 1 \\ 7 \end{ytableau}\qquad
+\text{and}\qquad
+\begin{ytableau} 1 & 1 & 3 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}.
+\end{equation}
+\end{verlong}
+
+A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only if
+\begin{itemize}
+\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(i,j_2)$ whenever $(i,j_1) \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
+
+\item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
+\end{itemize}
+
+\begin{verlong}
+For example, the second tableau in~\eqref{eq.tableau.exas-long} is semistandard, while the first is not.
+\end{verlong}
+
+If $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ is a pseudo-partition, and if $T$ is a tableau of shape $\lambda$,
+then the \defn{surface} of $T$ is defined to be the $k$-tuple $(s_1, s_2, \dotsc, s_k)$, where $s_i$ is the rightmost entry of the $i$-th row of $T$ (that is, $s_i = T(i,\lambda_i)$).
+
+If $T$ is a tableau of shape $\lambda$ whose entries belong to $\ive{n}$, then the \defn{weight} of $T$ is defined as the monomial
+\[
+\wt(T) := \prod_{(i,j) \in \diag{\lambda}} x_{T(i,j)}
+\]
+(that is, the product of $x_{d}$ for $d$ ranging over all entries of $T$).
+\begin{verlong}
+For example, the two tableaux in~\eqref{eq.tableau.exas-long} have weights $x_1^{3}x_2^{2}x_{3}x_{4}x_{5}x_{7}$ and $x_1^{2}x_2x_{3}^{2}x_{4}x_{5}^{3}$, respectively (assuming that $n \geq 7$).
+\end{verlong}
+Let $\SST(\lambda, s)$ denote the set of all semistandard tableaux of shape $\lambda$ and surface $s$.
+
+\begin{example}
+The diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
+\[
+\ydiagram{3,2,3,1}\,.
+\]
+The following are two tableaux of shape $\tup{3,2,3,1}$:
+% $n$ doesn't appear in our definitions; we fix the surface in our formula, which ensures no too-high entries.
+\[
+\label{eq.tableau.exas}
+\begin{ytableau} 1 & 2 & 5 \\ 2 & 3 \\ 3 & 4 & 5 \\ 7 \end{ytableau}\qquad
+\text{and}\qquad
+\begin{ytableau} 1 & 1 & 4 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}\,.
+\]
+The right tableau is semistandard, while the left one is not (the two $5$'s in the rightmost column).
+These tableaux have surfaces $(5,3,5,7)$ and $(4,3,5,5)$, respectively, and weights $x_1 x_2^2 x_3^2 x_4 x_5^2 x_7$ and $x_1^2 x_2 x_3 x_4^2 x_5^3$, respectively.
+\end{example}
+
+We now state the main result of this subsection.
+
+\begin{thm}
+\label{thm.tableau.jt}
+Let $\lambda = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$ be a pseudo-partition.
+Let $s = \tup{s_1, s_2, \dotsc, s_k}$ be a strictly increasing sequence of elements of $\ive{n}$.
+Then,
+\[
+\sum_{T \in \SST(\lambda, s)} \wt(T) = \left(  \prod_{i=1}^{k} x_{s_i} \right)  \det\left(  h_{\lambda_j-j+i-1}(  x_1,x_2,\ldots,x_{s_j})  \right)_{i, j \in \ive{k}} .
+\]
+\end{thm}
+
+We remark that the determinant in Theorem~\ref{thm.tableau.jt} is an instance of a \defn{multi-Schur function} as defined in~\cite[(SCHUR.2.2)]{LLPT18}.
+
+
+\begin{figure}[t]
+\[
+\begin{ytableau} 1 & 1 & 2 \\ 2 & 3 \\ 4 & 5 & 5 \\ 6 \end{ytableau}
+\quad \longleftrightarrow \quad
+\begin{tikzpicture}[baseline=3.5cm]
+  \draw[densely dotted] (-1,0) grid (6.2,6.2);
+  % axes:
+  \draw[->] (-1,0) -- (-1,6.2);
+  \draw[->] (-1,0) -- (6.2,0);
+  \foreach \x/\xtext in {-1, 0, 1, 2, 3, 4, 5, 6}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\xtext$};
+  \foreach \y/\ytext in {0, 1, 2, 3, 4, 5, 6}
+     \draw (-1cm+1pt,\y cm) -- (-1cm-1pt,\y cm) node[anchor=east] {$\ytext$};
+  \foreach \x in {1, 2, 3, 4}
+    \node[circle,fill=white,draw=black,text=UMNmaroon,inner sep=1pt] (A\x) at (4-\x,1) {$A_{\x}$};
+
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B4p) at (1+4-4-1,6) {$B_4$};
+  \node[circle,fill=black,inner sep=1.5pt] (B4) at (1+4-4,6) {};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B3p) at (3+4-3-1,5) {$B_3$};
+  \node[circle,fill=black,inner sep=1.5pt] (B3) at (3+4-3,5) {};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B2p) at (2+4-2-1,3) {$B_2$};
+  \node[circle,fill=black,inner sep=1.5pt] (B2) at (2+4-2,3) {};
+  \node[circle,fill=white,draw=black,text=black,inner sep=1pt] (B1p) at (3+4-1-1,2) {$B_1$};
+  \node[circle,fill=black,inner sep=1.5pt] (B1) at (3+4-1,2) {};
+
+  \begin{scope}[thick,>=stealth,UQpurple]
+      % $p_4$:
+      \draw (A4) edge[->] (0,2);
+      \draw (0,1.6) node[anchor=east] {$1$};
+      \draw (0,2) edge[->] (0,3);
+      \draw (0,2.5) node[anchor=east] {$1$};
+      \draw (0,3) edge[->] (0,4);
+      \draw (0,3.5) node[anchor=east] {$1$};
+      \draw (0,4) edge[->] (0,5);
+      \draw (0,4.5) node[anchor=east] {$1$};
+      \draw (0,5) edge[->] (B4p);
+      \draw (0,5.4) node[anchor=east] {$1$};
+      \draw (B4p) edge[->,color=black] (B4);
+      \draw[color=black] (0.6,6) node[anchor=south] {$x_6$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,darkred]
+      % $p_3$:
+      \draw (A3) edge[->] (1,2);
+      \draw (1,1.6) node[anchor=east] {$1$};
+      \draw (1,2) edge[->] (1,3);
+      \draw (1,2.5) node[anchor=east] {$1$};
+      \draw (1,3) edge[->] (1,4);
+      \draw (1,3.5) node[anchor=east] {$1$};
+      \draw (1,4) edge[->] (2,4);
+      \draw (1.5,4) node[anchor=north] {$x_4$};
+      \draw (2,4) edge[->] (2,5);
+      \draw (2,4.5) node[anchor=east] {$1$};
+      \draw (2,5) edge[->] (B3p);
+      \draw (2.4,5) node[anchor=north] {$x_5$};
+      \draw (B3p) edge[->,color=black] (B3);
+      \draw[color=black] (3.6,5) node[anchor=south] {$x_5$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dbluecolor]
+      % $p_2$:
+      \draw (A2) edge[->] (2,2);
+      \draw (2,1.6) node[anchor=east] {$1$};
+      \draw (2,2) edge[->] (3,2);
+      \draw (2.5,2) node[anchor=north] {$x_2$};
+      \draw (3,2) edge[->] (B2p);
+      \draw (3,2.4) node[anchor=east] {$1$};
+      \draw (B2p) edge[->,color=black] (B2);
+      \draw[color=black] (3.6,3) node[anchor=south] {$x_3$};
+  \end{scope}
+  \begin{scope}[thick,>=stealth,dgreencolor]
+      % $p_1$:
+      \draw (A1) edge[->] (4,1);
+      \draw (3.6,1) node[anchor=north] {$x_1$};
+      \draw (4,1) edge[->] (5,1);
+      \draw (4.6,1) node[anchor=north] {$x_1$};
+      \draw (5,1) edge[->] (B1p);
+      \draw (5,1.4) node[anchor=east] {$1$};
+      \draw (B1p) edge[->,color=black] (B1);
+      \draw[color=black] (5.6,2) node[anchor=south] {$x_2$};
+  \end{scope}
+  
+\end{tikzpicture}
+\]
+\begin{vershort}
+\caption{A semistandard tableau of surface $(2,3,5,6)$ (left) and the corresponding NILP (right).
+  Note that the final horizontal steps are fixed and correspond to the surface.}
+\end{vershort}
+\begin{verlong}
+\caption{A semistandard tableau of surface $(2,3,5,6)$ (left) and the corresponding NILP (right).
+  The black horizontal steps don't belong to the paths of the NILP; they stand for the last entries of the rows of the tableau.}
+\end{verlong}
+\label{fig:tableau_to_NILP}
+\end{figure}
+
+\begin{vershort}
+\begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
+The proof is similar to the usual bijection relating semistandard tableaux and NILPs that is used in proving the Jacobi--Trudi identity.
+For example, see~\cite[First proof of Thm. 7.16.1]{Stanley-EC2}.\footnote{Note that in this proof, those paths go west instead of east, but this is just a reflection across the $y$-axis.}
+Thus, we define two $k$-vertices $\uu = (A_1, \dotsc, A_k)$ and $\vv = (B_1, \dotsc, B_k)$ with
+\[
+A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
+\]
+We can then define a bijection $\Phi \colon N(\uu, \vv) \to \SST(\lambda, s)$ by requiring that if $\pp = \tup{p_1, p_2, \dotsc, p_k} \in N(\uu, \vv)$ is a NILP, then the first $\lambda_i - 1$ entries of the $i$-th row of the tableau $\Phi(\pp)$ will be the $y$-coordinates of the east-steps of the path $p_i$ (while the last entry of the $i$-th row must of course be $s_i$).
+Then, Proposition~\ref{prop.LGV.concrete} and~\eqref{eq.LGV.single-paths} yield Theorem~\ref{thm.tableau.jt}.
+We comment on the differences to~\cite[First proof of Thm. 7.16.1]{Stanley-EC2}:
+\begin{itemize}
+\item The points $B_1, B_2, \ldots, B_k$ no longer lie on a horizontal line; but the conditions of Proposition~\ref{prop.LGV.concrete} are still satisfied since $s$ is strictly increasing and $\lambda$ is a pseudo-partition.
+\item In the tableau $\Phi(\pp)$, only the first $\lambda_i - 1$ entries of the $i$-th row come from the path $p_i$; the last entry is $s_i$. Thus the $\prod_{i=1}^k x_{s_i}$ factor in $\sum_{T \in \SST(\lambda, s)} \wt(T)$.
+\item Since $\lambda$ is only a pseudo-partition, a column of $\diag{\lambda}$ can have gaps between cells. Thus, we need to argue that if a tableau $T$ of shape $\lambda$ with surface $s$ has weakly increasing rows and its columns are strictly increasing between consecutive rows (\textit{i.e.}, we have $T(i, j) < T(i+1, j)$ whenever both entries exist), then the columns of $T$ are also strictly increasing across gaps (\textit{i.e.}, we have $T(i_1, j) < T(i_2, j)$ for all $i_1 < i_2$). This is an easy exercise using the assumption that $s$ is strictly increasing.
+\end{itemize}
+\end{proof}
+\end{vershort}
+
+\begin{verlong}
+\begin{proof}[Proof of Theorem~\ref{thm.tableau.jt}.]
+Let us define two $k$-vertices $\uu = \tup{A_1, A_2, \dotsc, A_k}$ and $\vv = \tup{B_1, B_2, \dotsc, B_k}$ by
+\[
+A_i = (k-i,1)  \qquad \text{and} \qquad B_i = (\lambda_i+k-i-1, s_i).
+\]
+The conditions of Proposition~\ref{prop.LGV.concrete} are satisfied (since $\lambda$ is a pseudo-partition and $s$ is weakly increasing).
+Thus, Proposition~\ref{prop.LGV.concrete} yields
+\begin{align}
+\sum_{\pp \in N(\uu,\vv)} \wt(\pp) & = \det\left(  \sum_{p \in  N(A_i,B_j)}\wt(p) \right)_{i, j \in \ive{k}} \nonumber \\
+ & = \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}},
+\label{pf.thm.tableau.jt.1}
+\end{align}
+where the second equality follows from the fact each $i,j \in \ive{k}$ satisfy
+\[
+\sum_{p \in N(A_i,B_j)} \wt(p) = h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j})
+\]
+(by~\eqref{eq.LGV.single-paths}, applied to $A = A_i$ and $B = B_j$).
+
+Next, let us define a bijection
+\[
+\Phi \colon N(\uu, \vv) \to \SST(\lambda, s).
+\]
+
+Indeed, let $\tup{p_1, p_2, \dotsc, p_k} \in N(\uu,\vv)$ be arbitrary.
+Thus, each $p_i$ is a path from $A_i$ to $B_i$, and no two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+
+For each $i \in \ive{k}$, the path $p_i$ is a path from $A_i = (k-i, 1)$ to $B_i = (\lambda_i+k-i-1,s_i)$; thus, it must contain exactly $(\lambda_i+k-i-1) - (k-i) = \lambda_i - 1$ east-steps.
+
+Let $p_{i,1},p_{i,2}, \dotsc, p_{i,\lambda_i-1}$ be the $y$-coordinates of these east-steps (from first to last).
+Also, set $p_{i,\lambda_i} = s_i$.
+Thus,
+\begin{equation}
+\label{pf.thm.tableau.jt.row-weak}
+1 \leq p_{i,1} \leq p_{i,2} \leq \cdots \leq p_{i,\lambda_i-1} \leq p_{i,\lambda_i} = s_i
+\end{equation}
+for each $i \in \ive{k}$.
+Note that for each $i \in \ive{k}$,
+\begin{subequations}
+\begin{gather}
+\label{pf.thm.tableau.jt.pi-vert-1}
+\text{the path }p_i\text{ contains the vertices } (k-i+j-1, p_{i,j})  \text{ for all } j \in \ive{\lambda_i}
+\\
+\label{pf.thm.tableau.jt.pi-vert-2}
+\text{and the vertices } (k-i+j, p_{i,j}) \text{ for all } j \in \ive{\lambda_i-1}.
+\end{gather}
+\end{subequations}
+
+Now, let $T$ be the tableau of shape $\lambda$ that sends each $(i,j) \in \diag{\lambda}$  to $p_{i,j}$.
+Then, the entries of $T$ are weakly increasing along each row by~\eqref{pf.thm.tableau.jt.row-weak}.
+We shall next show that the entries of $T$ are strictly increasing down each column.
+
+First, we claim that if $i \in \ive{k-1}$, then, for all $j \in \ive{\lambda_i} \cap \ive{\lambda_{i+1}}$, we have
+\begin{equation}
+\label{pf.thm.tableau.jt.col-strict-no-gap}
+p_{i,j} < p_{i+1,j}.
+\end{equation}
+
+\begin{subproof}
+We will show~\eqref{pf.thm.tableau.jt.col-strict-no-gap} holds.
+Let $i \in \ive{k-1}$.
+We must prove~\eqref{pf.thm.tableau.jt.col-strict-no-gap} for each $j \in \ive{\lambda_i}  \cap \ive{\lambda_{i+1}}  $.
+To do so, we assume the contrary, and pick the \emph{smallest} $j$ for which~\eqref{pf.thm.tableau.jt.col-strict-no-gap} fails.
+Thus, $p_{i,j} \geq p_{i+1,j}$.
+Assume that $j > 1$ (the argument for the case $j=1$ is similar).
+Thus, the minimality of $j$ forces $p_{i,j-1} < p_{i+1,j-1}$.
+Finally,~\eqref{pf.thm.tableau.jt.row-weak} yields $p_{i+1,j-1} \leq p_{i+1,j}$.
+Hence, $p_{i,j-1} < p_{i+1,j-1} \leq p_{i+1,j} \leq p_{i,j}$.
+No two of the paths $p_1, p_2, \dotsc, p_k$ have a vertex in common.
+Hence, $p_i$ and $p_{i+1}$ have no vertex in common.
+Note that~\eqref{pf.thm.tableau.jt.pi-vert-1} yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j}}$.
+Also,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $j-1$ instead of $j$) yields that $p_i$ contains the vertex $\tup{k-i+j-1, p_{i,j-1}}$.
+However, the vertex $\tup{k-i+j-1, p_{i+1,j}}$ lies on the vertical line segment connecting the two vertices $\tup{k-i+j-1, p_{i,j}}$ and $\tup{k-i+j-1,p_{i,j-1}}$ (since $p_{i,j-1} \leq p_{i+1,j} \leq p_{i,j}$).
+Hence, $p_i$ must contain the former vertex (since $p_i$ contains the latter two vertices).
+
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i,j} \leq s_i < s_{i+1}$ (since $s$ is strictly increasing).
+If we had $j = \lambda_{i+1}$, then we would have $p_{i+1,j} = p_{i+1,\lambda_{i+1}} = s_{i+1}$ (by the definition of
+$p_{i+1,\lambda_{i+1}}$), which would contradict $p_{i+1,j} \leq p_{i,j} < s_{i+1}$.
+Hence, $j \neq \lambda_{i+1}$. Thus, $j \in \ive{\lambda_{i+1}-1}$ (since $j \in \ive{\lambda_{i+1}}$).
+Therefore,~\eqref{pf.thm.tableau.jt.pi-vert-2} (applied to $i+1$ instead of $i$) shows that $p_{i+1}$ contains the vertex $\tup{k-(i+1)+j, p_{i+1,j}} = \tup{k-i+j-1, p_{i+1,j}}$.
+So we have shown that both $p_i$ and $p_{i+1}$ contain the vertex $\tup{k-i+j-1, p_{i+1,j}}$.
+This contradicts the fact that $p_i$ and $p_{i+1}$ have no vertex in common.
+
+We have assumed that $j > 1$; but the same argument works for $j = 1$ with minor 
+changes
+(we now need to use $\tup{k-i+j-1, 1}$ instead of $\tup{k-i+j-1, p_{i,j-1}}$).
+Thus, we always obtain a contradiction.
+This contradiction shows that our assumption was false; hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} is proven.
+\end{subproof}
+
+Next, we claim that the entries of $T$ are strictly increasing down each column.
+
+\begin{subproof}
+Let $i_1,i_2\in\ive{k}$ be such that $i_1 < i_2$.
+Let $j \in \ive{\lambda_{i_1}} \cap \ive{\lambda_{i_2}}$.
+We must show that $T( i_1,j) < T(i_2, j)$.
+In other words, we must prove that $p_{i_1,j} < p_{i_2,j}$ (since $T(i,j) = p_{i,j}$ for all $i$).
+
+If the column $j$ of $\diag{\lambda}$ has no gaps between row $i_1$ and row $i_2$ (that is, if we have $(i,j) \in \diag{\lambda}$ for each $i \in \set{i_1, i_1+1, \dotsc, i_2}$), then this follows from~\eqref{pf.thm.tableau.jt.col-strict-no-gap}.
+Hence, without loss of generality, we assume that column $j$ of $\diag{\lambda}$ has at least one gap between row $i_1$ and row $i_2$.
+In other words, there exists some $q \in \set{i_1, i_1+1, \dotsc, i_2}$ such that $(q,j) \notin \diag{\lambda}$.
+Consider the \emph{largest} such $q$.
+Clearly, $i_1 < q < i_2$.
+Also, $\lambda_{q} < j$ (since $(q,j) \notin \diag{\lambda}$).
+
+The maximality of $q$ shows that column $j$ of $\diag{\lambda}$ has no gaps between row $q$ and row $i_2$.
+Hence,~\eqref{pf.thm.tableau.jt.col-strict-no-gap} shows that $p_{q,j}<p_{i_2,j}$ (since $q<i_2$).
+
+From~\eqref{pf.thm.tableau.jt.row-weak}, we obtain $p_{i_1,j} \leq s_{i_1} \leq s_{q}$ (since $i_1 < q$, but the sequence $s$ is weakly increasing).
+Also, $p_{q,\lambda_{q}} = s_{q}$ (by the definition of $p_{q,\lambda_{q}}$), whence $s_{q} = p_{q,\lambda_{q}} \leq p_{q,j}$ (by~\eqref{pf.thm.tableau.jt.row-weak}, since $\lambda_{q} < j$).
+Hence, $p_{i_1,j} \leq s_{q} \leq p_{q,j} < p_{i_2,j}$. This proves our claim.
+\end{subproof}
+
+Altogether, we thus know that $T$ is a semistandard tableau of shape $\lambda$ and surface $s$ (since $T(i, \lambda_i) = p_{i,\lambda_i} = s_i$ for all $i \in \ive{k}$).
+That is, $T \in \SST(\lambda, s)$.
+So let us set
+\[
+\Phi(p_1, p_2, \dotsc, p_k) = T.
+\]
+Thus, the map $\Phi$ is defined.
+
+It is easy to see that this map $\Phi$ is injective (indeed, $\tup{p_1,p_2,\dotsc,p_k}$ can be reconstructed from $T$, since the $i$-th row of $T$ encodes the $y$-coordinates of all the east-steps of $p_i$) and surjective (indeed, the reverse of the above construction turns every $T \in \SST(\lambda, s)$ into a $k$-tuple $\tup{p_1, p_2, \dotsc, p_k}$ of paths $p_i$ from $A_i$ to $B_i$; furthermore, the strict increase of the entries of $T$ down columns forces these paths $p_1,p_2,\ldots,p_k$ to have no vertices in common).
+Thus, $\Phi$ is a bijection.
+Moreover, it is easy to see that
+\[
+\wt\bigl(  \Phi(\pp) \bigr) = \left( \prod_{i=1}^k x_{s_i} \right) \wt(\pp)
+\]
+for each $\pp \in N(\uu,\vv)$.
+Hence,
+\begin{align*}
+\sum_{T \in \SST(\lambda, s)} \wt(T)  &  = \sum_{\pp\in N(\uu,\vv)  }\left( \prod_{i=1}^k x_{s_i} \right)  \wt(\pp)
+= \left( \prod_{i=1}^k x_{s_i} \right) \sum_{\pp\in N(\uu,\vv)  } \wt(\pp) \\
+&  \overset{\eqref{pf.thm.tableau.jt.1}}{=} \left(  \prod_{i=1}^k x_{s_i} \right)  \det\left( h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}}.
+\end{align*}
+\end{proof}
+
+We note that during the construction of the bijection $\Phi$, the fixed surface $s$ condition on the semistandard tableaux translates into requiring each path $p_i$ to having a final arc $B_i \to (\lambda_i + k - i, s_i)$.
+Otherwise the rest of the proof is similar to the usual Jacobi--Trudi bijection relating semistandard tableaux and NILPs.
+\end{verlong}
+
+See Figure~\ref{fig:tableau_to_NILP} for an example of the bijection $\Phi$ used in the proof of Theorem~\ref{thm.tableau.jt}.
+
+
+%%%%%%%%%%
+\subsection{Interlacing MLQs}
+
+Let us introduce some further notations now.
+
+First, we define two binary relations $\succeq$ and $\gg$ on the powerset of $\ive{n}$:
+
+\begin{itemize}
+\item Given two subsets $A = \set{a_1 < \cdots < a_{\alpha}}$ and $B = \set{b_1 < \cdots < b_{\beta}}$ of $\ive{n}$, we say that \defn{$A\succeq B$} if and only if $\alpha =\beta$ and every $1 \leq k \leq \alpha$ satisfies $a_k \geq b_k$.
+
+\item Given two subsets $A$ and $B$ of $\ive{n}$, we say that \defn{$A \gg B$} if and only if every $a \in A$ and $b \in B$ satisfy $a > b$. (For nonempty $A$ and $B$, this is equivalent to $\min A > \max B$).
+\end{itemize}
+
+For example, $\set{10,8} \gg \set{4,6,7} \succeq \set{4,5,7} \succeq \set{2,5,6}  \gg \set{1}$.
+Note that $A \gg \emptyset$ and $\emptyset \gg A$ for any subset $A$ of $\ive{n}$ (for vacuous reasons), so that $\gg$ is not a partial order (but it becomes a partial order if we forbid $\emptyset$).
+%\travis{Does the $\emptyset$ come up at all? Can we say for $\gg$ that $A$ and $B$ are nonempty sets and make it a partial order?}
+%\darij{Yeah, tried that, it made Lemma \ref{lem:determinant_form.interl-A} even more complicated.}
+
+The following criterion (proof left to the reader) will be useful:
+
+\begin{lemma}
+\label{lem:determinant_form.gale1}
+Let $A, B \subseteq \ive{n}$.
+We have $A \succeq B$ if and only if there exists a bijection $\phi \colon B \to A$ satisfying $\phi(b) \geq b$ for each $b \in B$.
+\end{lemma}
+
+Fix some $\ell \in \NN$ and a type $\mm = \tup{m_1,m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$ with $\ell$ classes.
+Assume that $m_i > 0$ for all $i \in \ive{\ell-1}$ (but $m_{\ell}$ may be $0$).
+
+Our next few definitions concern MLQs.
+Consider an (ordinary) MLQ $\qq = \tup{q_1,\ldots,q_{\ell-1}}$ of type $\mm$.
+Thus, for each $i \in \ive{\ell-1}$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$.
+Hence, for each $i \in \ive{\ell-1}$, we can subdivide the set $q_i$ into $i$ blocks: the block containing the largest $m_1$ elements; the block containing the next-largest $m_2$ elements; and so on, until the block containing the smallest $m_i$ elements.
+Denote these $i$ blocks by $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$, respectively.
+Pictorially, we can thus write $q_i$ as
+\[
+\bigl\{ \underbrace{a_1 > \cdots > a_{p_1(\mm)}}_{=q_i^{(1)}} > \underbrace{a_{p_1(\mm)+1} > \cdots > a_{p_2(\mm)}}_{=q_i^{(2)}} > \cdots > \underbrace{a_{p_{i-1}(\mm)+1} > \cdots > a_{p_i(\mm)}}_{=q_i^{(i)}} \bigr\}.
+\]
+Thus, $q_i^{(1)}, q_i^{(2)}, \dotsc, q_i^{(i)}$ are pairwise disjoint nonempty subsets of $\ive{n}$ satisfying
+\begin{subequations}
+\label{eq.determinant_form.qij}
+\begin{align}
+\label{eq.determinant_form.qij.1}
+  q_i  & = q_i^{(1)} \cup q_i^{(2)} \cup \cdots \cup q_i^{(i)}
+\qquad \text{and}
+\\ \label{eq.determinant_form.qij.2}
+  q_i^{(1)} & \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}
+\qquad \text{and}
+\\ \label{eq.determinant_form.qij.3}
+  \abs{q_i^{(j)}} & = m_j \text{ for all } j \in \ive{i}.
+\end{align}
+\end{subequations}
+Thus, we have defined nonempty queues $q_i^{(j)} \subseteq \ive{n}$ for all $i \in \ive{\ell-1}$ and $j \in \ive{i}$ whenever $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$.
+
+\begin{example}
+\label{ex:qij_generic}
+Consider $n = 15$.
+Let $\mm = \tup{4,2,2}$ and $\qq = \tup{q_1, q_2, q_3}$, where
+\[
+q_1 = \set{2,4,9,12},
+\qquad
+q_2 = \set{1,5,6,8,12,15},
+\qquad
+q_3 = \set{1,2,4,5,8,9,13,14}.
+\]
+Therefore, we have
+\begin{gather*}
+q_1^{(1)} = \set{2,4,9,12},
+\\
+q_2^{(2)} = \set{1,5},
+\hspace{50pt}
+q_2^{(1)} = \set{6,8,12,15},
+\\
+q_3^{(3)} = \set{1,2},
+\hspace{50pt}
+q_3^{(2)} = \set{4,5},
+\hspace{50pt}
+q_3^{(1)} = \set{8,9,13,14}.
+\end{gather*}
+Similar to the graveyard diagram~\eqref{eq:boxes-and-balls-1}, we define the graveyard diagram of an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$ as a matrix with $\ell-1$ rows, whose entries are circles and squares; its row $i$ has each element $p \in q_i$ represented as a circle at position $p$ labeled by the letter $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$, and each element of $\ive{n} \setminus q_i$ represented as an unlabeled square (\textit{i.e.}, we suppress filling the squares with an $i+1$).
+The $\qq$ in this example is represented by the following graveyard diagram:
+\[
+\begin{tikzpicture}[scale=0.8,baseline=-30]
+% q_1
+\foreach \x in {2,4,9,12} {
+    \node[blue] at (\x,0) {$1$};
+    \draw (\x,0) circle (0.3);
+}
+\foreach \x in {1,3,5,6,7,8,10,11,13,14,15}
+    \draw (\x-0.3, -0.3) rectangle (\x+0.3, +0.3);
+% q_2
+\foreach \x in {6,12,15} {
+    \node[blue] at (\x,-1) {$1$};
+    \draw (\x,-1) circle (0.3);
+}
+  \node[darkred] at (5,-1) {$1$};
+  \draw (5,-1) circle (0.3);
+  \node[darkred] at (1,-1) {$2$};
+  \draw (1,-1) circle (0.3);
+  \node[blue] at (8,-1) {$2$};
+  \draw (8,-1) circle (0.3);
+\foreach \x in {2,3,4,7,9,10,11,13,14}
+    \draw (\x-0.3, -1-0.3) rectangle (\x+0.3, -1+0.3);
+% q_3
+  \node[dgreencolor] at (1,-2) {$1$};
+  \draw (1,-2) circle (0.3);
+  \node[dgreencolor] at (2,-2) {$2$};
+  \draw (2,-2) circle (0.3);
+  \node[darkred] at (4,-2) {$3$};
+  \draw (4,-2) circle (0.3);
+  \node[darkred] at (5,-2) {$1$};
+  \draw (5,-2) circle (0.3);
+\foreach \x in {8,13} {
+    \node[blue] at (\x,-2) {$1$};
+    \draw (\x,-2) circle (0.3);
+}
+  \node[blue] at (9,-2) {$2$};
+  \draw (9,-2) circle (0.3);
+  \node[blue] at (14,-2) {$3$};
+  \draw (14,-2) circle (0.3);
+\foreach \x in {3,6,7,10,11,12,15}
+    \draw (\x-0.3, -2-0.3) rectangle (\x+0.3, -2+0.3);
+\end{tikzpicture}\ .
+\]
+\end{example}
+
+\begin{dfn}
+We say that the MLQ $\qq = \tup{q_1, \dotsc, q_{\ell-1}}$ is \defn{interlacing} if each $i \in \set{2,3,\dotsc,\ell-1}$ satisfies
+\begin{equation}
+\label{eq.determinant_form.interlacing.def}
+q_i^{(1)} \succeq q_{i-1}^{(1)} \gg
+q_i^{(2)} \succeq q_{i-1}^{(2)} \gg
+q_i^{(3)} \succeq q_{i-1}^{(3)} \gg \cdots \gg
+q_i^{(i)}
+\end{equation}
+(that is, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$ for all $j \in \ive{i-1}$).
+\end{dfn}
+
+\begin{example}
+Consider $n = 15$.
+Let $\mm = \tup{3,2,4,0,\ldots}$ and $\qq = \tup{q_1, q_2, q_3}$, where
+\[
+q_1 = \set{9,12,13},
+\qquad
+q_2 = \set{7,8,11,12,14},
+\qquad
+q_3 = \set{1,3,5,6,8,10,11,14,15}.
+\]
+Therefore, we have
+\begin{gather*}
+q_1^{(1)} = \set{9,12,13},
+\\
+q_2^{(2)} = \set{7,8},
+\hspace{50pt}
+q_2^{(1)} = \set{11,12,14},
+\\
+q_3^{(3)} = \set{1,3,5,6},
+\hspace{50pt}
+q_3^{(2)} = \set{8,10},
+\hspace{50pt}
+q_3^{(1)} = \set{11,14,15}.
+\end{gather*}
+Thus $\qq$ is interlacing.
+In this case, the elements of $q_i^{(j)}$ will be labeled by $j$ (as we shall see more generally in the proof of Lemma~\ref{lem:determinant_form.interl-act} below), and so the graveyard diagram of $\qq$ is
+\[
+\begin{tikzpicture}[scale=0.8,baseline=-30]
+% q_1
+\foreach \x in {9,10,13} {
+    \node[blue] at (\x,0) {$1$};
+    \draw (\x,0) circle (0.3);
+}
+\foreach \x in {1,...,8,11,12,14,15}
+    \draw (\x-0.3, -0.3) rectangle (\x+0.3, +0.3);
+% q_2
+\foreach \x in {7,8} {
+    \node[darkred] at (\x,-1) {$2$};
+    \draw (\x,-1) circle (0.3);
+}
+\foreach \x in {11,12,14} {
+    \node[blue] at (\x,-1) {$1$};
+    \draw (\x,-1) circle (0.3);
+}
+\foreach \x in {1,2,3,4,5,6,9,10,13,15}
+    \draw (\x-0.3, -1-0.3) rectangle (\x+0.3, -1+0.3);
+% q_3
+\foreach \x in {1,3,5,6} {
+    \node[dgreencolor] at (\x,-2) {$3$};
+    \draw (\x,-2) circle (0.3);
+}
+\foreach \x in {8,10} {
+    \node[darkred] at (\x,-2) {$2$};
+    \draw (\x,-2) circle (0.3);
+}
+\foreach \x in {11,14,15} {
+    \node[blue] at (\x,-2) {$1$};
+    \draw (\x,-2) circle (0.3);
+}
+\foreach \x in {2,4,7,9,12,13}
+    \draw (\x-0.3, -2-0.3) rectangle (\x+0.3, -2+0.3);
+\end{tikzpicture}\ .
+\]
+\end{example}
+
+Forget that we fixed $\qq$.
+% I don't understand what purpose this sentence serves -- Travis
+% It serves to clarify that $\qq$ is no longer fixed. --Darij
+
+%Let $k = p_{\ell-1}(\mm) = m_1 + m_2 + \cdots + m_{\ell-1} = n - m_{\ell} \in \NN$.
+Define a pseudo-partition
+\begin{equation}
+\label{eq.determinant_form.interlacing.lam}
+\lambda^{\mm} := (
+  \underbrace{1,1,\ldots,1}_{m_{\ell-1}\text{ times}},
+  \underbrace{2,2,\ldots,2}_{m_{\ell-2}\text{ times}},
+  \ldots,
+  \underbrace{\ell-1,\ell-1,\ldots,\ell-1}_{m_1\text{ times}}
+).
+\end{equation}
+Thus, the columns of the diagram $\diag{\lambda^{\mm}}$ are aligned to the bottom, and have lengths $p_{\ell-1}(\mm), p_{\ell-2}(\mm), \dotsc, p_1(\mm)$ (from left to right).
+
+\begin{lemma}
+\label{lem:determinant_form.bij1}
+Let $\ell$, $\mm$, and $m_i$ be as above.
+Then, there is an injection
+\[
+P \colon \set{ \text{MLQs of type } \mm } \to \set{ \text{tableaux of shape } \lambda^{\mm} }
+\]
+with the following properties:
+\begin{enumerate}
+\item[(a)] We have $\wt\bigl(  P(\qq) \bigr) = \wt(\qq)$ for each MLQ $\qq$ of type $\mm$.
+
+\item[(b)] If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ of type $\mm$, then the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
+
+\item[(c)] If $\qq$ is an interlacing MLQ of type $\mm$, then $P(\qq)$ is a semistandard tableau of shape $\lambda^{\mm}$.
+
+\item[(d)] Any semistandard tableau $T$ of shape $\lambda^{\mm}$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+\end{enumerate}
+\end{lemma}
+
+(To make sense of this in the border case $\ell = 1$, we agree to interpret $q_0$ as the empty set whenever $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is an MLQ.)
+
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.bij1}.]
+If $r \subseteq \ive{n}$ is any queue, then $\widetilde{r}$ shall denote the entries of $r$ written vertically in a column, strictly increasing from top to bottom.
+For example, if $r = \set{2,5,6}$, then $\widetilde{r}$ is the column $\begin{ytableau} 2 \\ 5 \\ 6 \end{ytableau}$.
+
+Now, we define the map $P$ as follows: If $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ is any MLQ of type $\mm$, then we let $P(\qq)$ be the following tableau of shape $\lambda^{\mm}$:
+\begin{equation}
+\label{pf.lem:determinant_form.bij1.visual}
+\begin{array}[c]{r|c|ccc@{\hspace{30pt}}c@{\hspace{35pt}}c@{\hspace{35pt}}}
+\cline{2-2}%
+m_{\ell-1} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_{\ell-1}^{(\ell-1)}} &  &  &  &  & \\\cline{2-3}
+m_{\ell-2} \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_{\ell-2}^{(\ell-2)}} & \widetilde{q_{\ell-1}^{(\ell-2)}} & \multicolumn{1}{|c}{} &  &  & \\\cline{2-4}
+m_{\ell-3} \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_{\ell-3}^{(\ell-3)}} & \widetilde{q_{\ell-2}^{(\ell-3)}} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(  \ell-3)}}} & \multicolumn{1}{|c}{} &  & \\\cline{2-4}%
+\vdots & \mathbf{\vdots} & \mathbf{\vdots} & \multicolumn{1}{|c}{\vdots} & \multicolumn{1}{|c}{\ddots} &  & \\\cline{2-4}\cline{6-6}
+m_2 \text{ rows } \left\{  \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_2^{(2)}} & \widetilde{q_{3}^{(2)}} & \multicolumn{1}{|c}{\widetilde{q_{4}^{(2)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-1}^{(2)}}} & \multicolumn{1}{|c}{}\\\cline{2-4}\cline{6-7}
+m_1 \text{ rows } \left\{ \vphantom{\dfrac{2^2}{2^2}}\right.
+    & \widetilde{q_1^{(1)}} & \widetilde{q_2^{(1)}} & \multicolumn{1}{|c}{\widetilde{q_{3}^{(1)}}} & \multicolumn{1}{|c}{\cdots} & \multicolumn{1}{|c}{\widetilde{q_{\ell-2}^{(1)}}} & \multicolumn{1}{|c|}{\widetilde{q_{\ell-1}^{(1)}}}\\\cline{2-4}\cline{6-7}
+\end{array}
+\end{equation}
+Formally speaking, this is the tableau of shape $\lambda^{\mm}$ whose $\ell-1$ columns are given as follows:
+For each $j \in \ive{\ell-1}$, the $j$-th column consists of the columns $\widetilde{q_{\ell-1}^{(\ell-j)}}, \widetilde{q_{\ell-2}^{(\ell-j-1)}}, \dotsc, \widetilde{q_j^{(1)}}$ stacked atop each other (with $\widetilde{q_{\ell-1}^{\left(  \ell-j\right)  }}$ at the very top, $\widetilde{q_{\ell-2}^{(\ell-j-1)}}$ coming next under it, and so on).
+Note that for each $i \in \ive{\ell-1}$, the parts $\widetilde{q_i^{(i)}}, \widetilde{q_{i+1}^{(i)}}, \dotsc, \widetilde{q_{\ell-1}^{(i)}}$ of columns $1,2,\ldots,\ell-i$ align with each other horizontally (and together form the topmost $m_i$ among the bottommost $m_1+m_2+\cdots+m_i$ rows of $P(\qq)$).
+
+Thus, the map $P \colon \set{ \text{MLQs of type } \mm } \to \set{\text{tableaux of shape } \lambda^{\mm}}$ is defined.
+This map $P$ is an injection, because the MLQ $\qq$ can be recovered
+from the tableau $P(\qq)$ (indeed, each of the elements
+of each of the queues of $\qq$ lands in some predictable cell of
+$P(\qq)$).
+
+We shall now prove the four properties we claimed about this injection $P$.
+
+Property (a) is clear, since the entries of $q_1, q_2, \dotsc, q_{\ell-1}$ are in 1-to-1 correspondence with the entries of the tableau $P(\qq)$.
+
+Furthermore, the surface of $P(\qq)$ is the concatenation of the sequences $\widetilde{q_{\ell-1}^{(\ell-1)}},\widetilde{q_{\ell-1}^{(\ell-2)}}, \dotsc, \widetilde{q_{\ell-1}^{(1)}}$ (regarded as lists); but this concatenation is simply the sequence $\widetilde{q_{\ell-1}}$ (regarded as a list) (because of~\eqref{eq.determinant_form.qij.1} and~\eqref{eq.determinant_form.qij.2}).
+In other words, the surface of $P(\qq)$ is the list of all elements of $q_{\ell-1}$ in increasing order.
+This proves property~(b).
+
+Let $\qq$ be an MLQ of type $\mm$.
+Then, the columns $\widetilde{q_i^{(j)}}$ are strictly increasing. Hence, from~\eqref{pf.lem:determinant_form.bij1.visual}, we see the following:
+\begin{itemize}
+\item The entries of the tableau $P(\qq)$ are weakly increasing along each row
+if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
+$q_i^{\left(j\right)} \succeq q_{i-1}^{\left(j\right)}$.
+\item The entries of the tableau $P(\qq)$ are strictly increasing down each
+column if and only if all $i \in \ive{\ell-1}$ and $j \in \ive{i-1}$ satisfy
+$q_{i-1}^{\left(j\right)} \gg q_i^{\left(j+1\right)}$.
+(Here, we are also tacitly using the fact that the sets
+$q_i^{\left(  j\right)  }$ are nonempty. This ensures that the southern
+neighbor of a cell in $\widetilde{q_i^{\left(  j\right)  }}$ belongs either
+to $\widetilde{q_i^{\left(  j\right)  }}$ again or to
+$\widetilde{q_{i-1}^{\left(  j-1\right)  }}$, rather than (say) to
+$\widetilde{q_{i-2}^{\left(  j-2\right)  }}$.)
+\end{itemize}
+Combining these two observations, we conclude that the tableau $P(\qq)$ is semistandard if and only if the sets $q_i^{(j)}$ satisfy~\eqref{eq.determinant_form.interlacing.def}.
+In other words, the tableau $P(\qq)$ is semistandard if and only if $\qq$ is interlacing.
+This proves property (c).
+
+Finally, if $T$ is a semistandard tableau of shape $\lambda^{\mm}$, then $T$ has the form $P(\qq)$ for some interlacing MLQ $\qq$ of type $\mm$.
+(Namely, we can construct this $\qq$ by recovering the sets $q_i^{(j)}$ from the appropriate cells of $T$ in~\eqref{pf.lem:determinant_form.bij1.visual}, and combining them to obtain queues $q_i$ and an MLQ $\qq$.
+This latter MLQ $\qq$ then satisfies $T = P(\qq)$ because the interlacing conditions~\eqref{eq.determinant_form.interlacing.def} imply $q_i^{(1)} \gg q_i^{(2)} \gg \cdots \gg q_i^{(i)}$.)
+This proves property~(d).
+Hence, we have proven all four properties (a--d).
+\end{proof}
+
+\begin{cor}
+\label{cor:determinant_form.bij1c}
+Let $\ell$, $\mm$, and $m_i$ be as above.
+Let $k \in \NN$ and $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
+% This awkward wording should repel the misunderstanding that we are *defining* $\lambda^{\mm}$ here.
+Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
+Then,
+\begin{align*}
+&  \sum_{\substack{\qq=\tup{q_1,q_2,\ldots,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type $\mm$ with } q_{\ell-1}=S}} \wt(\qq) \\
+&  = \left(  \prod_{i=1}^{k}x_{s_i}\right)
+    \det\left(h_{\lambda_j-j+i-1}(x_1, x_2, \dotsc, x_{s_j}) \right)_{i, j \in \ive{k}} .
+\end{align*}
+\end{cor}
+
+\begin{proof}
+Consider the injection $P$ from Lemma~\ref{lem:determinant_form.bij1}, and recall the properties (a--d).
+Property~(c) shows that $P$ restricts to an injection
+\[
+\set{\text{interlacing MLQs of type } \mm}  \to \set{  \text{semistandard tableaux of shape } \lambda^{\mm}}.
+\]
+Property~(d) shows that this restricted injection is also surjective, and thus a bijection.
+Hence, we can substitute $P(\qq)$ for $T$ in the sum on the left hand side of Theorem~\ref{thm.tableau.jt} (applied to $\lambda = \lambda^{\mm}$).
+\begin{vershort}
+We thus obtain
+\begin{align*}
+\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
+&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
+\end{align*}
+where the second equality follows from Property~(a) and Property~(b) and that $s = S$ (where we consider $s$ as a set).
+\end{vershort}
+\begin{verlong}
+We thus obtain
+\begin{align*}
+\sum_{T \in \SST(\lambda^{\mm}, s)} \wt(T)
+  & = \sum_{\substack{\qq=\tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that} \\\text{the surface of }P(\qq) \text{ is } s}} \wt\bigl(  P(\qq) \bigr) \\
+&  = \sum_{\substack{\qq= \tup{q_1, q_2, \dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ such that}\\\text{the list of all elements of } q_{\ell-1} \text{ in} \\\text{increasing order is } s}} \wt(\qq) \\
+&  = \sum_{\substack{\qq = \tup{q_1,q_2,\dotsc,q_{\ell-1}} \text{ is an interlacing}\\\text{MLQ of type } \mm \text{ with } q_{\ell-1} = S}} \wt(\qq)
+\end{align*}
+where the second equality follows from Property~(a) and Property~(b) and the last equality is since the list of all elements of $q_{\ell-1}$ in increasing order is $s$ if and only if $q_{\ell-1}=S$.
+\end{verlong}
+Therefore, the claim of Corollary~\ref{cor:determinant_form.bij1c} follows from Theorem~\ref{thm.tableau.jt}.
+\end{proof}
+
+Next, we shall connect the interlacingness of an MLQ with its action on the word $1^n$:
+
+\begin{lemma}
+\label{lem:determinant_form.interl-act}
+Let $\ell$ be a positive integer.
+Let $B = \set{ b_1 < b_2 < \cdots < b_r }  \subseteq \ive{n}$.
+Let $\left( v_1 \geq v_2 \geq \dotsm \geq v_r \right)$ be a weakly decreasing $r$-tuple of integers such that $\set{ v_1, v_2, \dotsc, v_r } = \ive{\ell-1}$.
+Define a word $u \in \mcW_n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
+
+Let $\mm$ be the type of $u$.
+Let $\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}}$ be an MLQ of type $\mm$.
+Then, $u = \qq(1^n)$ if and only if the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
+\end{lemma}
+
+\Darij{TODO: Example.}
+
+The proof of Lemma~\ref{lem:determinant_form.interl-act} is tedious and technical; it will be completed in the next subsection (after a few auxiliary lemmas).
+
+\subsection{Proof of Lemma~\ref{lem:determinant_form.interl-act}}
+
+There is nothing deep or surprising to this proof; it is merely a lengthy combinatorial argument that does not lend itself to a neat formalization.
+Before we begin the proof, we will pave our way with several lemmas.
+
+First, we need another notion:
+If $u \in \mcW_n$ and $t \in \NN$, then we say that $u$ is \defn{weakly decreasing up to level $t$} if and only if every two sites $i < j$ in $\ive{n}$ satisfying $u_j \leq t$ must satisfy $u_i \geq u_j$.
+Equivalently, $u$ is weakly decreasing up to level $t$ if and only if $u$ becomes weakly decreasing when all letters larger than $t$ are removed.
+For example, the word ${\color{gray}5}4{\color{gray}55}4332{\color{gray}5}221{\color{gray}5}$ is weakly decreasing up to level $4$ (and up to any level $\leq 4$).
+
+\begin{lemma}
+\label{lem:determinant_form.interl-A}
+Let $u \in \mcW_n$ and $t > 0$.
+Let $q$ be a queue.
+Assume that the word $q(u)$ has at least one letter equal to $t$, is weakly decreasing up to level $t$, and has exactly $\abs{q}$ letters that are at most $t$.
+Then:
+
+\begin{enumerate}
+\item[(a)] The word $u$ is weakly decreasing up to level $t-1$.
+
+\item[(b)] For each $h \in \ive{t-1}$, we have
+\[
+\set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h }
+\succeq
+\set{ p \in \ive{n} \mid u_p = h }
+\gg
+\set{ p \in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1 } .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{example}
+\mbox{}
+\begin{itemize}
+\item Let $n = 9$, $u = {\color{gray}3}221{\color{gray}3}11{\color{gray}33}$, $t = 3$ and $q = \set{1, 2, 3, 5, 6, 7}$.
+Then, $q(u) = 322{\color{gray}4}111{\color{gray}44}$ satisfies all assumptions of
+Lemma~\ref{lem:determinant_form.interl-A}.
+Thus, part (a) of the lemma says that $u$ is weakly decreasing up to level $2$ (which is evident).
+% Part (b) of the lemma, applied to $h = 2$, says that
+% $\set{ 2, 3 } \succeq \set{ 2, 3 } \gg \set{ 1 }$.
+Part (b) of the lemma, applied to $h = 1$, says that
+\[
+\set{ 5, 6, 7 } \succeq \set{ 4, 6, 7 } \gg \set{ 2, 3 }.
+\]
+
+\item The assumption that $q(u)$ has at least one letter equal to $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
+Indeed, if $n = 4$, $u = {\color{gray}33}12$, $t = 3$ and $q = \set{1, 3}$, then $q(u) = 2{\color{gray}4}1{\color{gray}4}$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+
+\item The assumption that $q(u)$ is weakly decreasing up to level $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
+Indeed, if $n = 4$, $u = 12{\color{gray}33}$, $t = 3$ and $q = \set{1, 2, 3}$, then $q(u) = 123{\color{gray}4}$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+
+\item The assumption that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
+Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, then $q(u) = 321{\color{gray}4}1$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
+% I think we can loosen this assumption to ``$q(u)$ has \emph{at most} $\abs{q}$ letters that are at most $t$'', at least as far as part (a) of the lemma is concerned. But not for part (b); the counterexample for that is $n = 4$, $u = 3312$, $t = 2$ and $q = \set{1, 2, 3}$.
+\end{itemize}
+\end{example}
+
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-A}.]
+We introduce another piece of notation.
+For any two sites $i$ and $j$, let $\inter[i,j]$ denote the closed (cyclic) interval from $i$ to $j$.
+This is the set $\set{i, i+1, \ldots, j}$ when $i \leq j$ and the set $\set{i, i+1, \ldots, n, 1, 2, \ldots, j}$ when $i > j$. (Thus, if $j = i-1$, then $\inter[i,j] = \ive{n}$.)
+
+Fix a permutation $\tup{i_1, i_2, \dotsc, i_n}$ of $\tup{1, 2, \dotsc, n}$ such that $u_{i_1}\leq u_{i_2}\leq \cdots \leq u_{i_n}$.
+Recall the construction of $q(u)$ (using this permutation).
+For each $k \in \ive{n}$, there is exactly one step in this construction at which $i = i_k$; we let $j_k$ denote the site $j$ that is found during this step.
+This step is part of Phase~II if $k \leq \abs{q}$, and otherwise is part of Phase~I.
+Hence, we have $\bigl( q(u) \bigr)_{j_k}=u_{i_k}$ if $k\leq \abs{q}$, and otherwise $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$.
+This shows that the letters of $q(u)$ at the sites $j \in q$ are all smaller than the letters of $q(u)$ at the sites $j \notin q$.
+Therefore, the former letters are the $\abs{q}$ smallest letters of $q(u)$, and thus must all be at most $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$).
+Meanwhile, all the latter letters of $q(u)$ must be strictly greater than $t$ (since $q(u)$ has exactly $\abs{q}$ letters at most $t$, and we have already accounted for them all).
+So we have shown that
+\begin{subequations}
+\label{pf.lem:determinant_form.interl}
+\begin{align}
+\label{pf.lem:determinant_form.interl-A.1}
+\bigl( q(u) \bigr)_j  & \leq t && \text{for each } j \in q;
+\\
+\label{pf.lem:determinant_form.interl-A.2}
+\bigl( q(u) \bigr)_j  & > t && \text{for each } j \notin q.
+\end{align}
+\end{subequations}
+\Travis{This follows trivially from the definition of Phase~II: the $\abs{q}$ smallest elements of $q(u)$ are at $j \in q$, which by assumption are at most $t$. Everything else is strictly larger than $t$ (which is used during Phase~I). It does not need a whole paragraph to explain!}
+\Darij{The paragraph also shows other things, which are used further below.}
+\Travis{I don't really see it. Can we verlong the above paragraph?}
+Thus, all letters set during Phase~II of the algorithm are $\leq t$,
+while all letters set during Phase~I of the algorithm are $> t$.
+
+We first argue five auxiliary claims:
+
+\begin{claim}
+\label{claim:little_interlacing}
+Let $k\in \ive{n} $ be such that $k\leq \abs{q}$.
+Let $j_{!} \in q$ be a site that belongs to $\inter[i_k, j_k]$.
+%(If $i_k > j_k$, then this means that $j_{!} \geq i_k$ or $j_{!} \leq j_k$; otherwise, it means that $i_k \leq j_{!} \leq j_k$.)
+Then, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+\end{claim}
+
+\begin{subproof}
+Consider the unique step of the construction of $q(u)$ at which $i = i_k$.
+This step is part of Phase~II, since $k \leq \abs{q}$.
+Therefore, this step sees $j_k$ being defined as the first $j$ weakly to the right (cyclically) of $i = i_k$ such that $j \in q$ and $\bigl( q(u) \bigr)_j$ is not set.
+Also, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
+If $j_{!} = j_k$, then Claim~\ref{claim:little_interlacing} follows immediately from this.
+Thus, without loss of generality, let us assume that $j_{!} \neq j_k$.
+That is, $j_{!}$ is distinct from $j_k$.
+
+Recall again that $j_k$ is the first $j$ weakly to the right (cyclically) of $i = i_k$ such that $j \in q$ and $\bigl( q(u) \bigr)_j$ is not set.
+Hence, for every site $j_{?}$ in $q$ that lies in $\inter[i_k, j_k]$ but is distinct from $j_k$, the letter $\bigl( q(u) \bigr)_{j_{?}}$ must already be set.
+Applying this to $j_{?} = j_{!}$, we conclude that the letter $a := \bigl( q(u) \bigr)_{j_{!}}$ must already be set (since $j_{!}$ is distinct from $j_k$).
+Moreover, $a$ must have been set in Phase~II (because the site $j_{!}$ belongs to $q$, whereas Phase~I only sets letters in sites outside of $q$).
+Hence, $a \leq u_{i_k}$ because all letters that have been set in Phase~II before the current step are $\leq u_{i_k}$.
+Thus, $\bigl( q(u) \bigr)_{j_{!}} = a \leq u_{i_k}$.
+Combining this with $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, we obtain $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k}=u_{i_k}$.
+This proves Claim~\ref{claim:little_interlacing}.
+\end{subproof}
+
+\begin{claim}
+\label{claim:fixed_k_decreasing_i_from_j}
+Let $k\in \ive{n} $ be such that $k\leq \abs{q}$ and $u_{i_k} < t$.
+Then, $i_k \leq j_k$.
+\end{claim}
+
+\begin{subproof}
+Assume the contrary. That is, $i_k>j_k$.
+Hence, the interval $\inter[i_k, j_k]$ ``wraps around'' the circle (\textit{i.e.}, it is an interval only in $\ZZ/n\ZZ$, not in $\ive{n} $).
+
+Let $j_{\min}$ be the smallest element of $q$.
+\begin{vershort}
+Thus, the dichotomy~\eqref{pf.lem:determinant_form.interl} and the fact that $q(u)$ is weakly decreasing up to level $t$ yield
+\[
+\bigl( q(u) \bigr)_{j_{\min}} = \max \set{\bigl( q(u) \bigr)_j \mid j \in q} = t ,
+\]
+since $q(u)$ has at least one letter equal to $t$.
+\end{vershort}
+\begin{verlong}
+Then,~\eqref{pf.lem:determinant_form.interl-A.1} and~\eqref{pf.lem:determinant_form.interl-A.2} reveal that $\bigl( q(u) \bigr)_{j_{\min}}$ is the first among the letters of $q(u)$ that are at most $t$, and therefore also the largest of these letters (since $q(u)$ is weakly decreasing up to level $t$).
+Yet, this largest letter must be $t$ since the word $q(u)$ has at least one letter equal to $t$.
+Hence, we have $\bigl( q(u) \bigr)_{j_{\min}} = t$.
+\end{verlong}
+
+If we had $j_{\min} \in \inter[i_k, j_k]$, then Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\min}$) would yield $\bigl( q(u) \bigr)_{j_{\min}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+This would contradict $\bigl( q(u) \bigr)_{j_{\min}} = t > u_{i_k}$.
+Hence, we cannot have $j_{\min} \in \inter[i_k, j_k]$.
+Since the interval $\inter[i_k, j_k]$ ``wraps around'' the circle, this shows that $j_{\min} > j_k$.
+Thus, $j_k\notin q$ (since $j_{\min}$ is the smallest element of $q$).
+However, $k \leq \abs{q}$, and thus $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II; therefore, $j_k\in q$.
+This contradicts $j_k\notin q$, and so Claim~\ref{claim:fixed_k_decreasing_i_from_j} is proven.
+\end{subproof}
+
+\begin{claim}
+\label{claim:smaller_site_jbang}
+Let $k\in \ive{n} $ be such that $k \leq \abs{q}$.
+Let $j_{!} \in q$ such that $j_{!} \geq i_k$.
+Then, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+\end{claim}
+
+\begin{subproof}
+If $j_{!}\leq j_k$, then Claim~\ref{claim:smaller_site_jbang} follows from Claim~\ref{claim:little_interlacing}.
+Hence, without loss of generality assume that $j_{!} > j_k$.
+
+Consider the unique step of the construction of $q(u) $ at which  $i=i_k$.
+This step is part of Phase~II, since $k\leq \abs{q}$.
+Recall that $j_k$ is the value of $j$ found during this step; thus, $j_k\in q$ (since this step is part of Phase~II). Also, $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
+Both $j_k$ and $j_{!}$ belong to $q$; hence, both letters $\bigl( q(u) \bigr)_{j_k}$ and $\bigl( q(u) \bigr)_{j_{!}}$ are $\leq t$ (by~\eqref{pf.lem:determinant_form.interl-A.1}).
+Hence, from $j_k < j_{!}$, we obtain $\bigl( q(u) \bigr)_{j_k} \geq \bigl( q(u) \bigr)_{j_{!}}$ (since $q(u)$ is weakly decreasing up to level $t$).
+Thus, $\bigl( q(u) \bigr)_{j_{!}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$, proving Claim~\ref{claim:smaller_site_jbang}.
+\end{subproof}
+
+\begin{claim}
+\label{claim:pf.lem:determinant_form.interl-A.b.1}
+Let $k\in \ive{n}$ be such that $u_{i_k} < t$. Then, $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+\end{claim}
+
+\begin{subproof}
+Assume that $k > \abs{q}$.
+Consider the unique step of the construction of $q(u)$ at which $i = i_k$.
+This step is part of Phase~I, since $k > \abs{q}$.
+Hence, $j_k \notin q$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}+1$ (by the way Phase~I operates).
+Thus, $u_{i_k}+1 = \bigl( q(u) \bigr)_{j_k} > t$ (by~\eqref{pf.lem:determinant_form.interl-A.2}, since $j_k\notin q$), so that $u_{i_k} > t-1$.
+In other words, $u_{i_k} \geq t$.
+\begin{vershort}
+This contradicts $u_{i_k} < t$, and hence, we have $k \leq \abs{q}$.
+\end{vershort}
+\begin{verlong}
+This contradicts $u_{i_k} < t$.
+Thus, our assumption (that $k > \abs{q}$) was false.
+Hence, $k \leq \abs{q}$.
+\end{verlong}
+Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ must be set in Phase~II of the algorithm that constructs $q(u)$.
+So we have $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$ (due to how Phase~II works).
+Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} is thus proven.
+\end{subproof}
+
+\begin{claim}
+\label{claim:pf.lem:determinant_form.interl-A.b.for_surj}
+Let $k \in \ive{n}$ be such that $\bigl( q(u) \bigr)_{j_k} < t$. Then, $u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
+\end{claim}
+
+\begin{subproof}
+If we had $k > \abs{q}$, then the letter $\bigl( q(u) \bigr)_{j_k}$ would be set in Phase~I of the construction;
+thus, we would have $j_k \notin q$, so that $\bigl( q(u) \bigr)_{j_k} > t$ by~\eqref{pf.lem:determinant_form.interl-A.2}.
+However, this would contradict $\bigl( q(u) \bigr)_{j_k} < t$.
+Thus, we cannot have $k > \abs{q}$.
+Hence, $k \leq \abs{q}$.
+Therefore, the letter $\bigl( q(u) \bigr)_{j_k}$ is set in Phase~II of the construction.
+This implies $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$, so that $u_{i_k} = \bigl( q(u) \bigr)_{j_k}$.
+\end{subproof}
+
+% \Travis{How easy would it be to pull these claims out into separate lemmas?}
+% \Darij{Not very easy. They refer to the $j_k$, which are temporary objects in the construction of $q(u)$.}
+
+We are now ready to prove the two parts of the lemma:
+
+(a) Assume the contrary.
+Thus, there exist sites $x$ and $y$ in $\ive{n}$ such that $x < y$ and $u_x < u_y < t$.
+Let $k$ and $\ell$ be such that $x = i_k$ and $y = i_{\ell}$; then, $u_{i_k} = u_x < u_y = u_{i_{\ell}}$, and thus $u_{i_k} < u_{i_{\ell}} = u_y < t$.
+% But $k < \ell$ (since $u_{i_k} < u_{i_{\ell}}$ and $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$).
+Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+Similarly, $\ell \leq \abs{q}$ and
+$\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell}}$.
+Therefore, $\bigl( q(u) \bigr)_{j_k} = u_{i_k} < u_{i_{\ell}} = \bigl( q(u) \bigr)_{j_{\ell}}$.
+Since the letters $\bigl( q(u) \bigr) _{j_k}$ and $\bigl( q(u) \bigr)_{j_{\ell}}$ of $q(u)$ are also at most $t$ (because $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_x < t$ and $\bigl( q(u) \bigr)_{j_{\ell }} = u_{i_{\ell}} = u_y < t$), this entails $j_k > j_{\ell}$ (since $q(u)$ is weakly decreasing up to level $t$).
+From Claim~\ref{claim:fixed_k_decreasing_i_from_j}, we have $i_k \leq j_k$ and similarly $i_{\ell} \leq j_{\ell}$.
+Thus, $i_k = x < y = i_{\ell} \leq j_{\ell} < j_k$.
+Hence, $j_{\ell} \inter \inter[i_k, j_k]$.
+Therefore, Claim~\ref{claim:little_interlacing} (applied to $j_{!} = j_{\ell}$) yields $\bigl( q(u) \bigr)_{j_{\ell}} \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+This contradicts $\bigl( q(u) \bigr)_{j_{\ell}} = u_{i_{\ell}} > u_{i_k}$.
+\begin{vershort}
+Therefore, Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
+\end{vershort}
+\begin{verlong}
+This contradiction shows that our assumption was false, and so Lemma~\ref{lem:determinant_form.interl-A}(a) is proven.
+\end{verlong}
+
+(b) Let $h \in \ive{t-1}$.
+\begin{verlong}
+Thus, $h \leq t-1$, so that $h + 1 \leq t$ and $h < t$.
+
+Note that $\tup{ j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ (since each letter of $q(u)$ is set exactly once during the construction of $q(u)$).
+Thus, the $j_1, j_2, \dotsc, j_n$ are distinct.
+\end{verlong}
+Define
+\begin{align*}
+A & := \set{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h },
+\\ B & := \set{ p\in \ive{n} \mid u_p = h },
+\\ C & := \set{ p\in \ive{n} \mid \bigl( q(u) \bigr)_p = h+1 }.
+\end{align*}
+Then, we must prove that $A \succeq B \gg C$.
+
+Let us first prove $A \succeq B$.
+Indeed, let $i_k\in B$ for some $k \in \ive{n}$.
+From $i_k\in B$, we obtain $u_{i_k} = h$ (by the definition of $B$), so that $u_{i_k} = h < t$.
+Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k\leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = h$.
+Therefore, $j_k\in A$ (by the definition of $A$).
+Also, Claim~\ref{claim:fixed_k_decreasing_i_from_j} yields $i_k\leq j_k$.
+Hence, $j_k\geq i_k$.
+
+Forget that we fixed $k$. We thus have shown that if $i_k\in B$ for some $k \in \ive{n} $, then $j_k\in A$ and $j_k\geq i_k$.
+Hence, we can define a map
+\begin{align*}
+\phi \colon B & \to A, \\
+i_k & \mapsto j_k
+\end{align*}
+(since each element of $B$ can be written as $i_k$ for a unique $k\in \ive{n} $), and it satisfies $\phi(b) \geq b$ for each $b \in B$ (since $j_k \geq i_k$).
+This map $\phi$ is injective since the $j_1, j_2, \dotsc, j_n$ are distinct (indeed, $\tup{j_1, j_2, \dotsc, j_n}$ is a permutation of $\tup{1, 2, \dotsc, n}$ because each letter of $q(u)$ is set exactly once during the construction of $q(u)$).
+
+Next, we claim that the map $\phi$ is surjective.
+
+[\textit{Proof.} Let $a\in A$.
+We must prove that there exists some $k\in \ive{n}$ satisfying $i_k \in B$ and $j_k = a$ (because then, $i_k$ will be a preimage of $a$ under $\phi$).
+
+Indeed, recall that $\left( j_1,j_2,\ldots ,j_n\right) $ is a permutation of $\tup{1, 2, \dotsc, n}$.
+Thus, there exists some $k \in \ive{n}$ satisfying $j_k = a$.
+Consider this $k$.
+All we need to prove now is that $i_k \in B$.
+
+We have $j_k = a$, and thus $\bigl( q(u) \bigr)_{j_k} = \bigl( q(u) \bigr)_a = h$ (since $a \in A$).
+Hence, $\bigl( q(u) \bigr)_{j_k} = h < t$ (since $h \in \ive{t-1}$).
+Thus, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.for_surj} yields
+$u_{i_k} = \bigl( q(u) \bigr)_{j_k} = h$.
+In other words, $i_k \in B$.
+This completes the proof that $\phi$ is surjective.]
+
+We have thus shown that $\phi$ is both injective and surjective. Therefore, $\phi$ is bijective.
+Hence, we have found a bijection $\phi \colon B \to A$ that
+furthermore satisfies $\phi(b) \geq b$ for each $b\in B$.
+Therefore, Lemma~\ref{lem:determinant_form.gale1} shows that $A \succeq B$.
+
+It remains to show that $B \gg C$.
+To do so, we need to check that $b > c$ for every $b \in B$ and $c \in C$.
+So let us fix $b \in B$ and $c \in C$.
+We must prove that $b > c$. Assume instead $c \geq b$.
+
+From $b\in B$, we obtain $b \in \ive{n}$ and $u_{b} = h$.
+From $c\in C$, we obtain $c\in \ive{n}$ and $\bigl( q(u) \bigr)_{c} = h+1$.
+Write $b$ in the form $b=i_k$ for some $k\in \ive{n}$.
+Then, $i_k=b\in B$, so that $u_{i_k} = h$ (by the definition of $B$).
+Thus, $u_{i_k} = h < t$.
+Hence, Claim~\ref{claim:pf.lem:determinant_form.interl-A.b.1} yields $k \leq \abs{q}$ and $\bigl( q(u) \bigr)_{j_k} = u_{i_k}$.
+Also, if we had $c\notin q$, then~\eqref{pf.lem:determinant_form.interl-A.2} would yield $\bigl( q(u) \bigr)_{c} > t$, which would contradict $\bigl( q(u) \bigr)_c = h + 1 \leq t$.
+Thus, we have $c\in q$.
+Also, $c \geq b = i_k$.
+Hence, Claim~\ref{claim:smaller_site_jbang} (applied to $j_{!} = c$) shows that $\bigl( q(u) \bigr)_c \leq \bigl( q(u) \bigr)_{j_k} = u_{i_k} = u_{b}$ (since $i_k = b$).
+This contradicts $\bigl( q(u) \bigr)_c = h + 1 > h = u_{b}$.
+Hence, we have $B\gg C$.
+Combining this with $A\succeq B$, we obtain $A \succeq B \gg C$.
+This completes the proof of Lemma~\ref{lem:determinant_form.interl-A}(b).
+\end{proof}
+
+Our next lemma gives an explicit expression for $q(u)$ when the queue $q$ and the word $u$ have a special form (essentially, when the word $u$ has all its letters belong to $\ive{h}$ for some positive integer $h$ and is weakly decreasing up to level $h-1$, and the queue $q$ is tailored to ``shift the letters of $u$ right''):
+
+\begin{lemma}
+\label{lem:determinant_form.interl-B}
+Let $u \in \mcW_n$ and let $h>0$ be a positive integer.
+Let $r$ and $q$ be two queues.
+Let $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ be nonempty disjoint subsets of $r$ satisfying
+\begin{subequations}
+\begin{align}
+\label{eq.lem:determinant_form.interl-B.rj.1}
+  r  & = r^{(1)} \cup r^{(2)} \cup \cdots \cup r^{(h-1)}
+\qquad \text{and}
+\\
+\label{eq.lem:determinant_form.interl-B.rj.2}
+  r^{(1)} & \gg r^{(2)} \gg \cdots \gg r^{(h-1)} .
+\end{align}
+\end{subequations}
+\travis{You need a term for this. You don't need to be referencing these equations but a definition. Perhaps a ``decreasing partition''.}
+Let $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ be nonempty disjoint subsets of $q$ satisfying
+\begin{subequations}
+\begin{align}
+\label{eq.lem:determinant_form.interl-B.qj.1}
+  q  & = q^{(1)} \cup q^{(2)} \cup \cdots \cup q^{(h)}
+\qquad \text{and}
+\\
+\label{eq.lem:determinant_form.interl-B.qj.2}
+  q^{(1)} & \gg q^{(2)} \gg \cdots \gg q^{(h)} .
+\end{align}
+\end{subequations}
+Furthermore, assume that $q^{(j)} \succeq r^{(j)} \gg q^{(j+1)}$ for all $j \in \ive{h-1}$.
+Finally, assume that each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{eq.lem:determinant_form.interl-B.asslast}
+u_t =
+\begin{cases}
+j & \text{if } t \in r^{(j)} \text{ for some } j \in\ive{h-1}\!, \\
+h & \text{if } t \notin r .
+\end{cases}
+\end{equation}
+Then, each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{eq.lem:determinant_form.interl-B.claim}
+\bigl( q(u) \bigr)_t =
+\begin{cases}
+j & \text{if } t \in q^{(j)} \text{ for some } j \in\ive{h}\!, \\
+h+1 & \text{if } t \notin q .
+\end{cases}
+\end{equation}
+\end{lemma}
+
+\begin{example}
+Let $n = 11$, $u = 332 232 131 13$, $h = 3$,
+$r = \set{3, 4, 6, 7, 9, 10}$, $q = \set{2, 4, 5, 6, 9, 10, 11}$,
+$r^{(1)} = \set{7, 9, 10}$, $r^{(2)} = \set{3, 4, 6}$,
+$q^{(1)} = \set{9, 10, 11}$, $q^{(2)} = \set{4, 5, 6}$, and
+$q^{(3)} = \set{2}$.
+Then, the assumptions of Lemma~\ref{lem:determinant_form.interl-B}
+are satisfied.
+As Lemma~\ref{lem:determinant_form.interl-B} predicts, we then have
+$q(u) = 434 222 441 11$.
+\end{example}
+
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-B}.]
+For each $j \in \ive{h-1}$, we have
+$q^{(j)} \succeq r^{(j)}$ (by assumption), and thus in particular
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.qj=rj}
+\abs{q^{(j)}} = \abs{r^{(j)}}
+\end{equation}
+(by the definition of $\succeq$).
+Summing these equations over all $j \in \ive{h-1}$, we obtain
+\[
+\abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}}
+=
+\abs{r^{(1)}} + \abs{r^{(2)}} + \cdots + \abs{r^{(h-1)}}
+= \abs{r}
+\]
+(since~\eqref{eq.lem:determinant_form.interl-B.rj.1}
+and~\eqref{eq.lem:determinant_form.interl-B.rj.2}
+show that the sets $r^{(1)}, r^{(2)}, \ldots, r^{(h-1)}$ partition
+$r$).
+But~\eqref{eq.lem:determinant_form.interl-B.qj.1}
+and~\eqref{eq.lem:determinant_form.interl-B.qj.2}
+show that the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$;
+thus,
+\begin{vershort}
+\[
+ \abs{q}
+ = \abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}} + \abs{q^{(h)}}
+ = \abs{r} + \abs{q^{(h)}} .
+\]
+\end{vershort}
+\begin{verlong}
+\[
+ \abs{q}
+ = \underbrace{\abs{q^{(1)}} + \abs{q^{(2)}} + \cdots + \abs{q^{(h-1)}}}_{= \abs{r}} + \abs{q^{(h)}}
+ = \abs{r} + \abs{q^{(h)}} .
+\]
+\end{verlong}
+Therefore, $\abs{q} - \abs{r} = \abs{q^{(h)}}$
+and $\abs{q} \geq \abs{r}$.
+
+From~\eqref{eq.lem:determinant_form.interl-B.asslast},
+we see that the word $u$ has type
+$\tup{\abs{r^{(1)}}, \abs{r^{(2)}}, \ldots, \abs{r^{(h-1)}}, n - \abs{r}}$.
+Hence,~\eqref{eq:queue_type_change} (using $\abs{q} \geq \abs{r}$)
+shows that the word $q(u)$ has type
+\begin{align*}
+&\tup{\abs{r^{(1)}}, \abs{r^{(2)}}, \ldots, \abs{r^{(h-1)}}, \abs{q} - \abs{r} ,
+n - \abs{q}} \\
+&= \tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
+n - \abs{q}}
+\end{align*}
+(by~\eqref{pf.lem:determinant_form.interl-B.qj=rj} and due to
+$\abs{q} - \abs{r} = \abs{q^{(h)}}$).
+Thus, in particular, the $n - \abs{q}$ largest letters of $q(u)$
+equal $h+1$.
+
+The construction of $q(u)$ shows that each of the letters $\bigl( q(u) \bigr)_j$ with $j \notin q$ is larger than each of the letters $\bigl( q(u) \bigr)_j$ with $j \in q$.
+(This is true for any queue $q$ and word $u$.)
+Hence, the letters $\bigl( q(u) \bigr)_j$ with $j \notin q$ are the $n - \abs{q}$ largest letters of $q(u)$.
+\travis{It took you a fairly large paragraph to say the same thing in the previous lemma. This is sufficient.}
+Thus, these letters equal $h+1$ (since the $n - \abs{q}$ largest letters of $q(u)$ equal $h+1$).
+In other words,
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.res3}
+(q(u))_t = h+1
+\qquad \text{ for every } t \in \ive{n} \text{ satisfying } t \notin q .
+\end{equation}
+
+The properties~\eqref{eq.lem:determinant_form.interl-B.rj.1}
+and~\eqref{eq.lem:determinant_form.interl-B.rj.2} show that
+the set $r^{(1)}$ consists of the $\abs{r^{(1)}}$ largest elements of $r$;
+the set $r^{(2)}$ consists of the $\abs{r^{(2)}}$ next-largest elements of $r$;
+and so on.
+\travis{I am pretty sure you have said this same thing in a few places in similar forms.}
+
+Now, we construct a permutation $\tup{i_1, i_2, \ldots, i_n}$ of
+$\tup{1, 2, \ldots, n}$ as follows:
+First list the elements of $r$ in decreasing order
+ (this automatically causes the list to start with the
+ elements of $r^{(1)}$, then with the elements
+ of $r^{(2)}$, and so on, because of what we just said);
+ then list the elements of $\ive{n} \setminus r$ in an arbitrary order.
+Thus, this permutation begins with a list of all elements of $r^{(1)}$,
+then continues with the elements of $r^{(2)}$, and so on, and finally
+ends with the elements of $\ive{n} \setminus r$.
+Hence, this permutation has the property that
+$u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$
+(by~\eqref{eq.lem:determinant_form.interl-B.asslast}).
+Hence, we can use this permutation in the construction of
+$q(u)$.
+For each $k \in \ive{n}$, let $j_k$ be the site $j$ that
+is found in this construction during the step at which $i = i_k$.
+Note that $i$ ranges over $i_1, i_2, \ldots, i_{\abs{q}}$ in
+Phase~II of the construction, and ranges over
+$i_n, i_{n-1}, \ldots, i_{\abs{q}+1}$ in Phase~I.
+Also, the sites $j_1, j_2, \ldots, j_n$ are distinct.
+
+In order to better understand Phase~II, let us give a mental model for it.
+
+Consider a man named $M_k$ for each $k \in r$ (for a total of $\abs{r}$ many men).
+Consider a woman named $W_k$ for each $k \in q$ (for a total of $\abs{q}$ many women).
+
+The \defn{age} of a man $M_k$ or woman $W_k$ is defined to be the number $k \in \ive{n}$.
+
+\Travis{This is a horrible model with potentially dangerous politically consequences: \emph{it is definitely not PC}. Also, how much of this is really just a rephrasing the algorithm in a more complicated (or at least new) language? Why not just use what will be the language in Section~\ref{sec:thm_proof} of brackets?}
+\Darij{Where exactly is this not PC? And should we care? My suggestion is to move this proof into verlong anyway, while in vershort it gets replaced by some good pictures showing the ``balls'' in the $r^{(j)}$ and $q^{(j)}$ and how everything moves to the right place. But I can't draw that picture, at least not in LaTeX.}
+
+We subdivide the (altogether $\abs{r} + \abs{q}$ many) people into $h$ \defn{age brackets}, numbered $1, 2, \ldots, h$:
+Namely, for each $j \in \ive{h}$, the $j$-th age bracket shall contain
+ the men $M_k$ with $k \in r^{(j)}$ (where $r^{(h)} := \emptyset$), and
+ the women $W_k$ with $k \in q^{(j)}$.
+
+Observe the following facts:
+\begin{enumerate}
+\item[(A)] Each age bracket has at least one woman (since the $q^{(j)}$ are nonempty); likewise, each but the $h$-th age bracket has at least one man.
+\item[(B)] If $j_1 < j_2$, then every man in the $j_1$-th age bracket is older than every man in the $j_2$-th age bracket (by~\eqref{eq.lem:determinant_form.interl-B.rj.2}). The same holds for women.
+\item[(C)] If $j \in \ive{h-1}$, then any man in the $j$-th age bracket is (strictly) older than any woman in the $j+1$-st age bracket (since $r^{(j)} \gg q^{(j+1)}$), and therefore is also older than any woman in the $j'$-th age bracket for all $j' > j$ (because of facts (A) and (B)).
+\item[(D)] If $j \in \ive{h-1}$, then the $j$-th age bracket has as many men as it has women (by~\eqref{pf.lem:determinant_form.interl-B.qj=rj}), and the women are ``generally older'' (this means that for each $p$, the $p$-th oldest woman in the $j$-th age bracket is at least as old as the $p$-th oldest man in the $j$-th age bracket). (This follows from $q^{(j)} \succeq r^{(j)}$.)
+\end{enumerate}
+
+We now consider a ``marriage procedure'' in which we try to marry off all men (monogamously).
+The procedure proceeds step-by-step:
+The men marry in the order of decreasing age; each man marries the youngest available woman that is \emph{at least as old} as him.
+Theoretically, it could happen that this procedure fails, in the sense that some man finds no such woman; we will soon see that this does not happen.
+
+Let us now see how the ``marriage procedure'' actually proceeds.
+The men marry in the order of decreasing age: thus, the men in the $1$-st age bracket marry first, then the men in the $2$-nd age bracket marry, and so on, until finally the men in the $h-1$-st age bracket marry (or the procedure fails).
+We now claim the following fact:
+\begin{enumerate}
+\item[(E)] Each man marries ``within his own age bracket'' (\textit{i.e.}, if the man belongs to the $j$-th age bracket for some $j \in \ive{h-1}$, then he marries a woman in the $j$-th age bracket).\footnote{In particular, we are saying that each man does marry; thus, the procedure does not fail.}
+\end{enumerate}
+[\textit{Proof:} To prove this, we argue by strong induction on the time -- i.e., we consider some man $M_\alpha$ marrying during the procedure, and we assume (as induction hypothesis) that all older men have married within their own age brackets. We then need to show that $M_\alpha$ also marries within his age bracket (and in particular, that he does marry).
+Let's say that $M_\alpha$ belongs to the $j$-th age bracket, and is the $p$-th oldest man in this age bracket. Then, by the induction assumption, we know that all men in the $1$-st, $2$-nd, ..., $j-1$-st age brackets are already married, and so are $p-1$ men in the $j$-th age bracket. Hence, by fact (D), we conclude that all women in the $1$-st, $2$-nd, ..., $j-1$-st age brackets are already married, and so are $p-1$ women in the $j$-th age bracket. Thus, man $M_\alpha$ seeks his wife-to-be among the remaining women in the $j$-th age bracket, as well as the higher brackets (\textit{i.e.}, the $j'$-th age brackets for $j' > j$). But since he must marry a woman that is at least as old as him, he finds no suitable candidates within the higher brackets (indeed, Fact (C) shows that all women in these higher brackets are younger than him); thus, he can only find a wife in the $j$-th age bracket. Fact (D) shows that the $p$-th oldest woman in the $j$-th age bracket is at least as old as him; thus, there are at least $p$ women in the $j$-th age bracket that are at least as old as him. Since only $p-1$ women in this bracket are already married, this implies that at least one unmarried woman is at least as old as him. Hence, $M_\alpha$ succeeds and marries a woman in the $j$-th age bracket. This completes the proof of fact (E).]
+
+Fact (E) shows that, in particular, each man marries; hence, the ``marriage procedure'' does not fail.
+
+Now, we claim that the ``marriage procedure'' precisely follows the first $\abs{r}$ steps of Phase~II:
+The men that get married are precisely the men $M_k$ with $k \in r$, in order of decreasing age; thus, they are $M_{i_1}, M_{i_2}, \ldots, M_{i_{\abs{r}}}$ (in this order)\footnote{This is because the permutation $\tup{i_1, i_2, \ldots, i_n}$ begins with the elements of $r$ listed in decreasing order.}.
+Furthermore, each man $M_{i_k}$ marries woman $W_{j_k}$ (because his search for the youngest available woman that is at least as old as him is precisely the search for the first available site $j$ to the right of $i$ in Phase~II\footnote{Except for the fact that his search doesn't ``wrap around the circle'' (\textit{i.e.}, if he finds no wife older than him, then he doesn't wrap over to the youngest women), whereas the search for $j$ in Phase~II does. But this difference is immaterial, because we know from Fact (E) that man $M_{i_k}$ necessarily finds a wife, so that ``wrapping around the circle'' isn't necessary.}).
+% This is not very well explained, but I can't do better.
+
+Fact (E) thus shows that (for each man $M_{i_k}$) man $M_{i_k}$ and woman $W_{j_k}$ belong to the same age bracket.
+In other words, for each man $M_{i_k}$, we have
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.reso1}
+\text{if $i_k \in r^{(j)}$ for some $j \in \ive{h-1}$, then $j_k \in q^{(j)}$}
+\end{equation}
+(because of how age brackets are defined).
+
+Next, we claim that
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.res1}
+\bigl( q(u) \bigr)_t = j
+\qquad \text{ for every } j \in \ive{h-1} \text{ and } t \in q^{(j)} .
+\end{equation}
+
+[\textit{Proof of~\eqref{pf.lem:determinant_form.interl-B.res1}:}
+Let $j \in \ive{h-1}$.
+
+Fix $k \in \ive{n}$ satisfying $i_k \in r^{(j)}$.
+Then, $i_k \in r$, so that man $M_{i_k}$ exists.
+Hence,~\eqref{pf.lem:determinant_form.interl-B.reso1} yields $j_k \in q^{(j)}$.
+Consider the step in the construction of $q(u)$ at which $i = i_k$.
+This step belongs to Phase~II (because otherwise, it would belong to Phase~I,
+which would entail $j_k \notin q$, which would contradict $j_k \in q^{(j)} \subseteq q$).
+Hence, the construction of $q(u)$ yields $\bigl( q(u) \bigr)_{j_k} = u_{i_k} = j$
+(by~\eqref{eq.lem:determinant_form.interl-B.asslast}, since $i_k \in r^{(j)}$).
+
+Forget that we fixed $k$.
+We thus have shown that each $k \in \ive{n}$ satisfying $i_k \in r^{(j)}$
+satisfies $j_k \in q^{(j)}$ and $\bigl( q(u) \bigr)_{j_k} = j$.
+Hence, we have found at least $\abs{r^{(j)}}$ many sites $t \in q^{(j)}$
+satisfying $\bigl( q(u) \bigr)_t = j$ (namely, all the sites $j_k$ for $k \in \ive{n}$
+satisfying $i_k \in r^{(j)}$).
+(Here, we have used the fact that the sites $j_1, j_2, \ldots, j_n$ are distinct.)
+But~\eqref{pf.lem:determinant_form.interl-B.qj=rj} shows that there are
+only $\abs{r^{(j)}}$ many sites $t \in q^{(j)}$;
+hence, the $\abs{r^{(j)}}$ many sites that we found must cover all the
+sites $t \in q^{(j)}$.
+Therefore, all the sites $t \in q^{(j)}$ satisfy $\bigl( q(u) \bigr)_t = j$.
+This proves~\eqref{pf.lem:determinant_form.interl-B.res1}.]
+
+Finally, we claim that
+\begin{equation}
+\label{pf.lem:determinant_form.interl-B.res2}
+\bigl( q(u) \bigr)_t = h
+\qquad \text{ for every } t \in q^{(h)} .
+\end{equation}
+
+[\textit{Proof of~\eqref{pf.lem:determinant_form.interl-B.res2}:}
+We have seen that the word $q(u)$ has type
+\[
+\tup{\abs{q^{(1)}}, \abs{q^{(2)}}, \ldots, \abs{q^{(h-1)}}, \abs{q^{(h)}} ,
+n - \abs{q}} .
+\]
+Thus, it has $\abs{q^{(h)}}$ many letters equal to $h$.
+In other words, there are $\abs{q^{(h)}}$ many positions $t \in \ive{n}$
+satisfying $(q(u))_t = h$.
+These positions $t$ cannot satisfy $t \notin q$ (since
+otherwise,~\eqref{pf.lem:determinant_form.interl-B.res3}
+would yield $(q(u))_t = h+1 \neq h$, contradicting $(q(u))_t = h$);
+thus, they have to belong to $q$.
+But they cannot belong to any of the $q^{(j)}$ with $j \in \ive{h-1}$
+(since otherwise,~\eqref{pf.lem:determinant_form.interl-B.res1}
+would yield $\bigl( q(u) \bigr)_t = j \leq h-1 < h$, contradicting $\bigl( q(u) \bigr)_t = h$);
+thus, they have to belong to
+\[
+q \setminus \tup{q^{(1)} \cup q^{(2)} \cup \cdots \cup q^{(h-1)}} = q^{(h)}
+\]
+(since the sets $q^{(1)}, q^{(2)}, \ldots, q^{(h)}$ partition $q$).
+Thus, we know that there are $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$ satisfying $\bigl( q(u) \bigr)_t = h$.
+These positions must cover all of $q^{(h)}$ (since there are only $\abs{q^{(h)}}$ many positions $t \in q^{(h)}$).
+Hence, every position $t \in q^{(h)}$ must satisfy $\bigl( q(u) \bigr)_t = h$.
+This proves~\eqref{pf.lem:determinant_form.interl-B.res2}.]
+
+Combining~\eqref{pf.lem:determinant_form.interl-B.res1}
+with~\eqref{pf.lem:determinant_form.interl-B.res2}, we conclude that
+\[
+\bigl( q(u) \bigr)_t = j
+\qquad \text{ for every } j \in \ive{h} \text{ and } t \in q^{(j)} .
+\]
+Combining this with~\eqref{pf.lem:determinant_form.interl-B.res3},
+we obtain~\eqref{eq.lem:determinant_form.interl-B.claim}.
+Thus, Lemma~\ref{lem:determinant_form.interl-B} is proven.
+\end{proof}
+
+We are now ready to prove Lemma~\ref{lem:determinant_form.interl-act}:
+
+\begin{proof}[Proof of Lemma~\ref{lem:determinant_form.interl-act}.]
+Consider the queues $q_i^{(j)}$ defined as above.
+
+Write the type $\mm$ as $\tup{m_1, m_2, m_3, \ldots}$.
+Since $\qq$ is an MLQ of type $\mm$, we have $\abs{q_i} = p_i(\mm) = m_1 + m_2 + \cdots + m_i$ for each $i \in \ive{\ell-1}$.
+
+For each $i \in \set{0, 1, \dotsc, \ell-1}$, define
+\[
+u^{\left[  i\right]} := (q_1, q_2, \dotsc, q_i)(1^n)  = q_i\bigl( \cdots q_2\bigl( q_1(1^n) \bigr) \cdots \bigr)  \in \mcW_n .
+\]
+Note that $u^{\left[  i\right]  }$ has type $\mm^{[i]} := \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$.
+(This is proven similarly to Lemma~\ref{lemma:mlq-type}, using $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$.)
+The definition of $u^{\left[  i\right]  }$ yields
+\begin{equation}
+\label{pf.lem:determinant_form.interl-act.rec}
+u^{\left[  i\right]} = q_i\left(  u^{\left[  i-1\right]  }\right) \qquad \text{for each } i \in \ive{\ell-1}.
+\end{equation}
+The definition of $u^{\left[  \ell-1\right]  }$ yields $u^{\left[\ell-1\right]} = \qq(1^n)$.
+Our construction of $u$ shows that $u$ is weakly decreasing up to level $\ell-1$.
+
+$\Longrightarrow:$
+Assume that $u = \qq(1^n)$.
+We must prove that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
+
+We have $u = \qq(1^n) = u^{\left[  \ell-1\right]  }$.
+
+\begin{claim}
+\label{claim:weakly_decreasing_level_i}
+For each $i \in \set{0, 1, \dotsc, \ell-1} $, the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
+\end{claim}
+
+\begin{subproof}
+We proceed by descending induction on $i$.
+The base case ($i=\ell-1$) follows from the fact that $u^{\left[  \ell-1\right]} = u$ is weakly decreasing up to level $\ell-1$.
+
+For the induction step, we fix some $i \in \ive{\ell-1}$, and we assume that $u^{\left[i\right]}$ is weakly decreasing up to level $i$.
+Our goal is then to show that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
+
+But~\eqref{pf.lem:determinant_form.interl-act.rec} yields $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]} )$.
+% We know that all letters of $u^{\left[i-1\right]}$ belong to $\ive{i}$ (since $u^{\left[i-1\right]}$ has type $\tup{m_1, m_2, \dotsc, m_{i-1}, n-p_{i-1}(\mm), 0, 0, \ldots}$).
+This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$; thus, it has at least one letter equal to $i$ (since the $i$-th entry of $\mm^{[i]}$ is $m_i > 0$), and is weakly decreasing up to level $i$ (by the induction hypothesis).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$ (since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$).
+Hence, Lemma~\ref{lem:determinant_form.interl-A}(a) (applied to $u^{\left[i-1\right]}$ and $q_i$ instead of $u$ and $q$)
+yields that $u^{\left[i-1\right]}$ is weakly decreasing up to level $i-1$.
+This completes the induction step; Claim~\ref{claim:weakly_decreasing_level_i} is thus proven.
+\end{subproof}
+
+\begin{claim}
+\label{claim:description_q_i^(j)}
+Let $i\in \ive{\ell-1}$. Then,
+\[
+q_i^{(j)} = \set{ p \in \ive{n} \mid \left( u^{\left[  i\right] } \right)_p = j }
+\qquad \text{for each } j \in \ive{i} .
+\]
+\end{claim}
+
+\begin{subproof}
+If $q$ is any queue and $w \in \mcW_n$ is any word, then each of the letters $\bigl( q(w) \bigr)_j$ with $j \notin q$ is larger than each of the letters $\bigl( q(w) \bigr)_j$ with $j \in q$.
+(This follows from the construction of $q(w)$.)
+Applying this to $q = q_i$ and $w = u^{\left[i-1\right]}$, we conclude that
+each of the letters $(u^{\left[  i\right]})_j$ with $j \notin q_i$ is larger than each of the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$
+(since~\eqref{pf.lem:determinant_form.interl-act.rec} yields $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$).
+Thus,
+\begin{equation}
+\label{pf.claim:description_q_i^(j).1}
+\begin{split}
+&\text{the $\abs{q_i}$ smallest letters of the word $u^{\left[  i\right]}$} \\
+&\text{are exactly the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$} .
+\end{split}
+\end{equation}
+
+Claim~\ref{claim:weakly_decreasing_level_i} shows that the word $u^{\left[  i\right]  }$ is weakly decreasing up to level $i$.
+Hence, the letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ must appear in weakly decreasing order (i.e., first all $i$'s, then all $i-1$'s, etc.).
+Moreover, we know how often each letter appears: namely, each $k \in \ive{i}$ appears exactly $m_k$ times (since the word $u^{\left[  i\right]  }$ has type $\mm^{[i]} = \tup{m_1, m_2, \dotsc, m_i, n-p_i(\mm), 0, 0, \ldots}$).
+
+Recall that the word $u^{\left[  i\right]  }$ has type $\mm^{[i]}$.
+Hence, the letters $1,2,\dotsc,i$ that appear in this word are exactly the $p_i(\mm^{[i]})$ smallest letters of this word.
+In other words, they are the $\abs{q_i}$ smallest letters of this word (since $p_i(\mm^{[i]}) = p_i(\mm) = \abs{q_i}$).
+In view of~\eqref{pf.claim:description_q_i^(j).1}, this rewrites as follows:
+The letters $1,2,\dotsc,i$ that appear in $u^{\left[  i\right]  }$ are exactly the letters $(u^{\left[  i\right]})_j$ with $j \in q_i$.
+In other words, these letters appear precisely in the positions $j \in q_i$.
+Since these letters must appear in weakly decreasing order, and since we know how often each letter appears, we thus know the exact position of each of these letters:
+\begin{itemize}
+\item The letters $1$ appear in the largest $m_1$ positions of $q_i$.
+\item The letters $2$ appear in the next-largest $m_2$ positions of $q_i$.
+\item And so on, until we get to the letters $i$.
+\end{itemize}
+\begin{verlong}
+In other words:
+\begin{itemize}
+\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 1$ are precisely the largest $m_1$ elements of $q_i$.
+\item The $p \in \ive{n}$ satisfying $( u^{\left[  i\right] } )_p = 2$ are precisely the next-largest $m_2$ elements of $q_i$.
+\item And so on, until we get to the $p \in \ive{n}$ satisfying $(u^{\left[  i\right]})_p = i$.
+\end{itemize}
+\end{verlong}
+In other words:
+\begin{itemize}
+\item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 1 }$ consists of the largest $m_1$ elements of $q_i$, so that it is $q_i^{(1)}$.
+\item The set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = 2 }$ consists of the next-largest $m_2$ elements of $q_i$, so that it is $q_i^{(2)}$.
+\item And so on, until we get to the set $\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = i }$.
+\end{itemize}
+Thus, for each $j \in \ive{i}$, we have
+$\set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j } = q_i^{(j)}$.
+Therefore, we have proven Claim~\ref{claim:description_q_i^(j)}.
+% So many words and so little content.
+\end{subproof}
+
+\begin{claim}
+\label{claim:interlacing_subqueues}
+Let $i\in \ive{\ell-1}$ and $j\in \ive{i-1}$.
+Then, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
+\end{claim}
+
+\begin{subproof}
+From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have $u^{\left[  i\right]} = q_i( u^{\left[  i-1\right]  } )$.
+This word $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$ has type $\mm^{[i]}$.
+Thus, it has at least one letter equal to $i$ (since the $i$-th entry of $\mm^{[i]}$ is $m_i > 0$)
+and is weakly decreasing up to level $i$ (by Claim~\ref{claim:weakly_decreasing_level_i}).
+Also, this word has exactly $\abs{q_i}$ letters that are at most $i$
+\begin{vershort}
+(since $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$).
+\end{vershort}
+\begin{verlong}
+(since its type is $\mm^{[i]}$, and since $\abs{q_i} = p_i(\mm) = p_i(\mm^{[i]})$).
+\end{verlong}
+Hence, Lemma~\ref{lem:determinant_form.interl-A}(b) (applied to $u^{\left[i-1\right]}$, $q_i$ and $j$ instead of $u$, $q$ and $h$)
+yields
+\[
+\set{ p \in \ive{n} \mid \bigl( u^{\left[i\right]} \bigr)_p = j }
+\succeq
+\set{ p \in \ive{n} \mid \bigl( u^{\left[i-1\right]} \bigr)_p = j }
+\gg
+\set{ p \in \ive{n} \mid \bigl( u^{\left[i\right]} \bigr)_p = j+1 }
+\]
+(since $q_i( u^{\left[  i-1\right]} ) = u^{\left[  i\right]}$).
+However, the three sets appearing in this relation are $q_i^{(j)}$, $q_{i-1}^{(j)}$, and $q_i^{(j+1)}$ (from left to right), as follows from Claim~\ref{claim:description_q_i^(j)}.
+Thus, this relation becomes $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$.
+\end{subproof}
+
+\begin{claim}
+\label{claim:the_last_queue}
+We have $q_{\ell-1} = B$.
+\end{claim}
+
+\begin{vershort}
+\begin{subproof}
+For each $i \in \ive{\ell-1}$, Equation~\eqref{eq.determinant_form.qij.1} and Claim~\ref{claim:description_q_i^(j)} leads to
+\[
+  q_i = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
+      = \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p \leq i } .
+\]
+Applying this to $i = \ell-1$, we obtain
+\[
+  q_{\ell-1}
+  = \set{ p \in \ive{n} \mid ( u^{\left[\ell-1\right] } )_p \leq \ell-1 }
+  = \set{ p \in \ive{n} \mid u_p \leq \ell-1 }
+  = B
+\]
+since $u^{\left[  \ell-1\right]  } = u$ and by the construction of $u$.
+\end{subproof}
+\end{vershort}
+\begin{verlong}
+\begin{subproof}
+For each $i \in \ive{\ell-1}$, the equality~\eqref{eq.determinant_form.qij.1} leads to
+\begin{align*}
+  q_i & = \bigcup_{j=1}^i q_i^{(j)} = \bigcup_{j=1}^i \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p = j }
+            \qquad \left(\text{by \eqref{claim:description_q_i^(j)}}\right) \\
+      &= \set{ p \in \ive{n} \mid ( u^{\left[  i\right] } )_p \leq i } .
+\end{align*}
+Applying this to $i = \ell-1$, we obtain
+\begin{align*}
+  q_{\ell-1}
+  &= \set{ p \in \ive{n} \mid ( u^{\left[\ell-1\right] } )_p \leq \ell-1 } \\
+  &= \set{ p \in \ive{n} \mid u_p \leq \ell-1 }
+   \qquad \left(\text{since } u^{\left[  \ell-1\right]  } = u \right) \\
+  &= B \qquad \left(\text{by the construction of } u \right) .
+\end{align*}
+\end{subproof}
+\end{verlong}
+
+Now, the MLQ $\qq$ is interlacing (by Claim~\ref{claim:interlacing_subqueues}) and satisfies $q_{\ell-1} = B$ (by Claim~\ref{claim:the_last_queue}).
+This proves the $\Longrightarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
+
+$\Longleftarrow:$
+Assume that the MLQ $\qq$ is interlacing and satisfies $q_{\ell-1} = B$.
+We must prove that $u = \qq(1^n)$.
+
+\begin{claim}
+\label{claim:describing_u^[i]}
+Let $i \in \ive{\ell-1}$. Then, all letters of the
+word $u^{\left[  i\right]}$ are given as follows:
+\[
+\left( u^{\left[  i\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_i^{(j)} \text{ for some } j \in\ive{i}\!, \\
+i+1 & \text{if } t \notin q_i.
+\end{cases}
+\]
+\end{claim}
+
+\begin{subproof}
+We proceed by induction on $i$.
+For convenience, we extend the claim to all $i \in \set{0, 1, \ldots, \ell-1}$.
+Thus, the base case is the trivial case $i = 0$ (remember that $q_0 := \emptyset$ and $u^{\left[  0\right]} = 1^n$).
+
+For the induction step, we fix $h \in \ive{\ell-1}$, and we assume (as induction hypothesis) that Claim~\ref{claim:describing_u^[i]} holds for $i = h - 1$.
+We now must prove that Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
+
+The induction hypothesis shows that each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{pf.claim:describing_u^[i].IH}
+\left( u^{\left[  h-1\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_{h-1}^{(j)} \text{ for some } j \in\ive{h-1}\!, \\
+h & \text{if } t \notin q_{h-1} .
+\end{cases}
+\end{equation}
+
+Since $\qq$ is interlacing, we have
+$q_h^{(j)} \succeq q_{h-1}^{(j)} \gg q_h^{(j+1)}$ for all $j \in \ive{h-1}$.
+
+Altogether, we see that Lemma~\ref{lem:determinant_form.interl-B} (applied to $u^{\left[  h-1\right]  }$, $q_{h-1}$, $q_h$, $q_{h-1}^{(j)}$ and $q_h^{(j)}$ instead of $u$, $r$, $q$, $r^{(j)}$ and $q^{(j)}$) yields that each $t \in \ive{n}$ satisfies
+\begin{equation}
+\label{pf.claim:describing_u^[i].4}
+\biggl( q_h\Bigl(  u^{\left[  h-1\right]  }\Bigr) \biggr)_t =
+\begin{cases}
+j & \text{if } t \in q_h^{(j)} \text{ for some } j \in\ive{h}\!, \\
+h+1 & \text{if } t \notin q_h .
+\end{cases}
+\end{equation}
+
+From~\eqref{pf.lem:determinant_form.interl-act.rec}, we have
+$u^{\left[  h\right]} = q_h( u^{\left[  h-1\right]  } )$.
+Thus,~\eqref{pf.claim:describing_u^[i].4} rewrites as
+\[
+\left( u^{\left[  h\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_h^{(j)} \text{ for some } j \in\ive{h}\!, \\
+h+1 & \text{if } t \notin q_h .
+\end{cases}
+\]
+In other words, Claim~\ref{claim:describing_u^[i]} holds for $i = h$.
+This completes the induction step.
+Thus, Claim~\ref{claim:describing_u^[i]} is proven.
+\end{subproof}
+
+Applying Claim~\ref{claim:describing_u^[i]} to $i=\ell-1$, we conclude that
+all letters of the word $u^{\left[  \ell-1\right]}$ are given as follows:
+\begin{equation}
+\label{pf.lem:determinant_form.interl-act.fwd.5}
+\left( u^{\left[  \ell-1\right]} \right)_t =
+\begin{cases}
+j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
+\ell & \text{if } t \notin q_{\ell-1}.
+\end{cases}
+\end{equation}
+On the other hand, the definition of the word $u$ shows that
+the letters of $u$ are given as follows:
+\[
+u_t =
+\begin{cases}
+v_j & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\ell & \text{otherwise}
+\end{cases}
+\in
+\begin{cases}
+\ive{\ell-1} & \text{if } t = b_j \text{ for some } j \in \ive{r}\!, \\
+\set{\ell} & \text{otherwise} .
+\end{cases}
+\]
+In view of $\set{b_1, b_2, \ldots, b_r} = B = q_{\ell-1}$, this shows that the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$, whereas the letters $u_t$ for $t \in q_{\ell-1}$ are in $\ive{\ell-1}$.
+Hence, the letters $u_t$ for $t \in q_{\ell-1}$ are precisely those letters of $u$ that are at most $\ell-1$.
+Thus, these letters appear in weakly decreasing order (since $u$ is weakly decreasing up to level $\ell-1$), and we also know how often each of the letters $1, 2, \ldots, \ell-1$ appears among them (namely, each $k \in \ive{\ell-1}$ appears $m_k$ times, since $u$ has type $\mm$).
+Hence,
+\begin{itemize}
+\item the rightmost $m_1$ of these letters are $1$,
+\item the next-rightmost $m_2$ of these letters are $2$,
+\item and so on, until the letters that are $\ell-1$.
+\end{itemize}
+In other words,
+\begin{itemize}
+\item the letter $1$ appears in the rightmost $m_1$ positions in $q_{\ell-1}$;
+\item the letter $2$ appears in the next-rightmost $m_2$ positions in $q_{\ell-1}$;
+\item and so on, until the letter $\ell-1$.
+\end{itemize}
+In other words,
+\begin{itemize}
+\item the letter $1$ appears in the positions in $q_{\ell-1}^{(1)}$ (because these are the rightmost $m_1$ positions in $q_{\ell-1}$);
+\item the letter $2$ appears in the positions in $q_{\ell-1}^{(2)}$ (because these are the next-rightmost $m_2$ positions in $q_{\ell-1}$);
+\item and so on, until the letter $\ell-1$.
+\end{itemize}
+If we combine this with the fact that the remaining letters of $u$ are $\ell$ (indeed, the letters $u_t$ for $t \notin q_{\ell-1}$ are all $\ell$),
+we thus conclude that all letters of $u$ can be described as follows:
+\[
+u_t =
+\begin{cases}
+j & \text{if } t \in q_{\ell-1}^{(j)} \text{ for some } j \in\ive{\ell-1}\!, \\
+\ell & \text{if } t \notin q_{\ell-1}.
+\end{cases}
+\]
+Comparing this with~\eqref{pf.lem:determinant_form.interl-act.fwd.5}, we conclude that $( u^{\left[\ell-1\right]} )_t = u_t$ for all $t \in \ive{n}$.
+Thus, $u^{\left[\ell-1\right]} = u$.
+Hence, $u = u^{\left[\ell-1\right]} = \qq(1^n)$.
+This proves the $\Longleftarrow$ direction of Lemma~\ref{lem:determinant_form.interl-act}.
+\end{proof}
+
+%%%%%%%%%%
+\subsection{Proof of Theorem~\ref{thm:determinant_form}}
+
+We are now ready to prove Theorem~\ref{thm:determinant_form}:
+
+\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
+Let $u$ be the word $u(v) \in \mcW_n$.
+Thus, $u = u_1 u_2 \dotsm u_n$, where
+\begin{equation}
+\label{pf.thm:determinant_form.ui=}
+u_i = \begin{cases}
+v_j & \text{if $i = b_j$ for some $j$}, \\
+\ell & \text{otherwise}
+\end{cases}
+\qquad \text{for each } i \in \ive{n} .
+\end{equation}
+
+Write the $r$-tuple $\tup{v_1, v_2, \dotsc, v_r}$ in the form
+\begin{equation}
+\label{pf.thm:determinant_form.v=}
+\tup{v_1, v_2, \dotsc, v_r} = (
+  \underbrace{\ell-1,\ldots,\ell-1}_{m_{\ell-1}\text{ times}},
+  \underbrace{\ell-2,\ldots,\ell-2}_{m_{\ell-2}\text{ times}},
+  \dotsc,
+  \underbrace{1,\ldots,1}_{m_1\text{ times}}
+)
+\end{equation}
+for some $m_1, m_2, \ldots, m_{\ell-1} > 0$
+(we can do this, since $\set{v_1, v_2, \dotsc, v_r} = \ive{\ell-1}$ and $v_1 \geq v_2 \geq \cdots \geq v_r$).
+\begin{verlong}
+Thus, the first $m_{\ell-1}$ of the entries of the $r$-tuple $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ equal $\ell-1$; the next $m_{\ell-2}$ of its entries equal $\ell-2$; the next $m_{\ell-3}$ of its entries equal $\ell-3$; and so on.
+\end{verlong}
+Also set $m_{\ell} = n - r$, and define a type $\mm = \tup{m_1, m_2, \dotsc, m_{\ell}, 0, 0, \ldots}$.
+Then, the word $u$ has type $\mm$
+\begin{vershort}
+by \eqref{pf.thm:determinant_form.ui=}.
+\end{vershort}
+\begin{verlong}
+(since the entries of $u$ are precisely $v_1, v_2, \dotsc, v_r$ and also $n-r$ entries equal to $\ell$).
+\end{verlong}
+Additionally, the word $u$ is packed (since $m_1, m_2, \ldots, m_{\ell-1} > 0$).
+Furthermore, the definition of $\mm$ shows that $r = m_1 + m_2 + \cdots + m_{\ell-1} = p_{\ell-1}(\mm)$.
+\begin{verlong}
+Each $i \in \ive{\ell}$ satisfies
+\[
+m_i =
+  \begin{cases}
+  \abs{ \set{ j \in \ive{r} \mid v_j = i}} & \text{if } i < \ell,\\
+  n - r & \text{if } i = \ell
+  \end{cases}
+\]
+(by~\eqref{pf.thm:determinant_form.v=} and the definition of $m_{\ell}$).
+\end{verlong}
+
+%This paragraph is pointless;  you are basically just saying ``change $r$ to $k$,'' which a reader is certainly smart enough to do.  -- Travis
+%Let $k = p_{\ell-1}(\mm) \in \NN$; hence, $k = r$.
+%Thus, $B = \set{b_1 < b_2 < \cdots < b_r}$ can be rewritten as $B = \set{b_1 < b_2 < \cdots < b_k}$.
+
+Define the pseudo-partition $\lambda^{\mm}$ by~\eqref{eq.determinant_form.interlacing.lam}.
+% This pseudo-partition $\lambda^{\mm}$ has $p_{\ell-1}(\mm) = r$ entries.
+Comparing~\eqref{eq.determinant_form.interlacing.lam} with~\eqref{pf.thm:determinant_form.v=}, we obtain
+\[
+\lambda^{\mm} = \tup{\ell-v_1, \ell-v_2, \dotsc, \ell-v_r}
+= \tup{\gamma_1, \gamma_2, \ldots, \gamma_r}
+\]
+(since $\ell - v_j = \gamma_j$ for all $j \in \ive{r}$).
+
+The definition of $\swt{u}$ yields
+\begin{align*}
+\swt{u} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u=\qq(1^n)}}\wt(\qq) \\
+%&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+% The above is just a trivial rewording of the summation set for the equation below -- Travis
+&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
+&  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
+\end{align*}
+where the last equality is from Corollary~\ref{cor:determinant_form.bij1c} (applied to $r$, $\gamma_i$, $B$ and $b_i$ instead of $k$, $\lambda_i$, $S$ and $s_i$).
+\begin{verlong}
+Hence the claim follows since $\prod_{i=1}^r x_{b_i} = \prod_{b \in B} x_b$ and $u = u(v)$.
+\end{verlong}
+\end{proof}
