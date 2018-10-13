@@ -594,12 +594,6 @@ Using this convention, we can write Example~\ref{ex:first_queue} as
 \end{equation}
 We call this the \defn{graveyard diagram} of $q$ and $u$.
 
-\begin{comment}  % s-flow only seems to be used in this paragraph
-Consider a pair $k, k+1 \pmod{n}$ of consecutive columns.
-For $s > t$ the \defn{$s$-flow} from $k+1$ to $k$ is the number of $i$ such that $u_i=s$, and whose queueing interval $\inter[j,i]$ contains both $k$ and $k+1$.
-Similarly, for $s < t$, the \defn{$s$-flow} from $k$ to $k+1$ is the number of $i$ such that $u_i = s$, and whose queueing interval $\inter[i,j]$ contains both $k$ and $k+1$.
-\end{comment}
-
 There is a natural duality in the algorithm above.
 For each queue $q$, let $q^*$ be the \defn{contragredient dual queue}, defined by $\tup{i \in q^*} \Longleftrightarrow \tup{n+1-i \notin q}$.
 Similarly, for each word $u$ with $\ell$ classes, let $u^*$ be the \defn{contragredient dual word} defined by $u^*_i = \ell + 1 - u_{n+1-i}$.
@@ -619,10 +613,6 @@ Here, we treat $q(u)$ as a word with $\ell+1$ classes, even if it may have only 
 Phase~I (resp.~II) in the construction of $q(u)$ corresponds to Phase~II (resp.~I) in the construction of $q^*(u^*)$ when the word is reversed and the letters are replaced by their contragredient duals.
 Hence the claim follows.
 \end{proof}
-
-%\begin{remark} (Excision)
-%  Fix a queue $q$ and a word $u$, and let $i,j$ be columns. Suppose that the $s$-flow from $j+1$ to $j$ equals the $s$-flow from $i+1$ to $i$ for each $s > t$, and that the $s$-flow from $i$ to $i+1$ equals the $s$-flow from $j$ to $j+1$ for each $s < t$. Then we have $q_{|\inter[i,j]^c}(u_{|\inter[i,j]^c}) = \bigl( q(u) \bigr)_{|\inter[i,j]^c}$. Here, for a (cyclic) word $u$, we let $u_{|\inter[i,j]^c}$ denote the (cyclic) word gotten from simply removing the closed (cyclic) interval $\inter[i,j]$, and similarly for $q_{|\inter[i,j]^c}$.
-%\end{remark}
 
 We note that our construction is a minor variation of the construction given by~\cite[\S 3.1]{AAMP}, which is a reformulation of that of~\cite{FM07}.
 We more precisely describe the relationship with~\cite{FM07} in Appendix~\ref{app:queue-relations}, where we also discuss a small variant that has appeared in~\cite{AssSea18}.
@@ -666,10 +656,7 @@ The \defn{weight} of a $\sigma$-twisted MLQ $\qq = (q_1, \dotsc, q_{\ell-1})$ is
 \begin{dfn}
 For $\sigma \in \SymGp{\ell-1}$ and a packed word $u$ of type $\mm$ with $\ell$ classes, we define the \defn{$\sigma$-spectral weight} or \defn{$\sigma$-amplitude} as
 \[
-%\begin{equation}
-%\label{eq:amplitude}
   \swt{u}_{\sigma} := \sum_{\qq} \wt(\qq),
-%\end{equation}
 \]
 where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $u = \qq(1^n)$.
 (Recall that $1^n$ denotes the word in $\mcW_n$ whose all letters are $1$.)
@@ -884,10 +871,6 @@ where we have $2663344511 = \merge{4} 2773455611$.
   Let $q'$ be a $p_i(\mm)$-queue for some type $\mm$ and some $i \geq 1$.
   Let the type $\mm$ have $\ell$ classes, and let $\sigma \in \SymGp{\ell-1}$.
   Let $\qq$ be a $\sigma$-twisted MLQ of type $\merge{i}\mm$.
-  % Darij: Yes, we need $\sigma$-twisted here, due to how we apply this
-  % lemma repeatedly in the proof of Theorem~\ref{thm:determinant_form}.
-  % (To apply it repeatedly, we need $\sigma$-twisted MLQs, since an
-  % MLQ might become $\sigma$-twisted after the first application.)
   For the word
   $
   u = \qq\bigl( q'(1^n) \bigr),
@@ -899,26 +882,6 @@ where we have $2663344511 = \merge{4} 2773455611$.
 \end{lemma}
 
 \begin{proof}
-\begin{comment}
-Let us first show an auxiliary observation.
-Let $q$, $u$ and $t$ be as in Remark~\ref{rmk:t-splitting},
-and let $h \in \set{1, 2, \ldots}$.
-The permutation $\tup{i_1, i_2, \ldots, i_n}$ in the construction of $q(u)$
-also works for the construction of $q(\merge{h} u)$,
-since $(\merge{h} u)_a \leq (\merge{h} u)_b$ whenever $u_a \leq u_b$.
-Thus, the construction of $q(\merge{h} u)$ proceeds exactly as the
-construction of $q(u)$, except that the letters used to build
-the former word are those of $\merge{h} u$ instead of those of $u$.
-This yields an expression for each letter $(q(\merge{h} u))_i$ of
-$q(\merge{h} u)$ depending on whether ...
-\begin{equation}
- q(\merge{h} u) = \begin{cases}
-                   \merge{h} q(u) , & \text{ if } h < t ; \\
-                   \merge{h+1} q(u) , & \text{ if } h \geq t
-                  \end{cases} .
-\label{pf.lemma:queue_merge.1}
-\end{equation}
-\end{comment}
 Write the $\sigma$-twisted MLQ $\qq$ as $\tup{q_1, \ldots, q_{\ell-1}}$.
 It has type $\merge{i} \mm$.
 
@@ -1044,92 +1007,6 @@ where we sum over all $u$ of type $\mm$ such that $v = \bigvee_T u$.
 \label{subsec:JT_formula}
 
 \begin{comment}
-% Old version of this section, using too much handwaving. The graphics are probably worth reusing.
-
-We shall now prove a determinantal formula for $\swt{u}$ when $u$ is a packed word with either $\ell-1$ or $\ell$ classes and weakly decreasing if we disregard all letters $\ell$.
-
-\begin{dfn}
-\label{def:near_std}
-Define the \defn{$k$-near standardization} of a word $u \in \mcW_n$ of type $\mm$ to be the word $\std{u} := \std{u}_1 \cdots \std{u}_n$ obtained as follows.
-Define
-\[
-W := \{ w_1 > w_2 > \cdots > w_r \mid u_{w_i} < k \}
-\]
-such that $u_j \geq k$ for all $j \in \ive{n} \setminus W$.
-Let $r = \abs{W}$ and set
-\[
-\std{u}_i = \begin{cases}
-j & \text{if } u_i < k \text{ and } i = w_j \\
-r + 1 & \text{otherwise.}
-\end{cases}
-\]
-That is to say, the $k$-near standardization $\std{u}$ is obtained by replacing the $j$-th letter that is not $k$ read right-to-left with $j$ and all letters $k$ with $r + 1$.
-We say the \defn{near standardization} of a word with $\ell$ classes to be the $\ell$-near standardization.
-\end{dfn}
-
-Note that the $k$-near standardization is order preserving in the sense that $1 \leq i < j \leq n$ satisfy $u_i \geq u_j$ if and only if either $\std{u}_i > \std{u}_j$ or $\std{u}_i = \std{u}_j = r+1$.
-Additionally, note that the type of the near standardization of a word $u$ with $\ell$ classes is $\widetilde{\mm} = (\widetilde{m}_1, \widetilde{m}_2, \ldots, \widetilde{m}_{r+1}, 0, 0, \ldots)$ with $\widetilde{m}_i = 1$ for $i \leq r$ and $\widetilde{m}_{r+1} = m_k$.
-
-\begin{example}
-For $k = 4$, we have
-\begin{align*}
-u & = {\color{gray} 4}3{\color{gray} 44}33{\color{gray} 4}22{\color{gray} 4}211{\color{gray} 4},
-\\ \std{u} & = {\color{gray} 9}8{\color{gray} 99}76{\color{gray} 9}54{\color{gray} 9}321{\color{gray} 9}.
-\end{align*}
-\end{example}
-
-\begin{thm}
-\label{thm:determinant_form}
-  Let $B = \set{b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
-  Let $v_1v_2 \dotsm v_r$ be a weakly decreasing (non-cyclic) packed word of length $r$ with $\ell-1$ classes.
-  Define a word $u$ of length $n$ by $u_i = v_j$ if $i = b_j$ for some $j$, otherwise $u_i = \ell$.
-  Then
-  \[
-  \swt{u} = \left( \prod_{i\in B} x_i \right) \det\bigl( h_{i-j-1+\gamma_j}(x_1, \dotsc, x_{b_j}) \bigr)_{i, j \in \ive{r}}\,,
-  \]
-  where $\gamma_j$ is the number of distinct letters in $v_1 \dotsm v_j$.
-\end{thm}
-
-\begin{proof}[Proof of Theorem~\ref{thm:determinant_form}.]
-Let $\qq = \tup{q_1, \ldots, q_{\ell-1}}$ be any MLQ appearing in the sum $\swt{u}$.
-Thus, $\qq (1^n) = u$, and the type of $\qq$ is the type $\mm = (m_1, m_2, \ldots, m_\ell, 0, 0, \ldots)$ of $u$.
-In particular,
-$\abs{q_{\ell-1}} = p_{\ell-1}(\mm) = r = \abs{B}$.
-Since the positions of the smallest $\abs{B}$ entries of $u$
-are exactly the sites in $B$, this entails that
-$q_{\ell-1} = B$.
-Hence, $\wt(q_{\ell-1}) = \prod_{i\in B} x_i$.
-Thus, the factor $\prod_{i\in B} x_i$ appears in each addend of $\swt{u}$;
-we shall disregard this factor in the following.
-
-Let $\std{u}$ be the near standardization of $u$, and note that $W = B$ from Definition~\ref{def:near_std} (but in the reverse order).
-There exists $T$ such that $\bigvee_T \std{u} = u$.
-Thus, from Lemma~\ref{lemma:queue_merge}, there exists some $\sigma$-twisted MLQ $\widetilde{\qq}'$ such that $\widetilde{\qq}'(1^n) = \std{u}$, and from Theorem~\ref{thm:permutation}, there exists a corresponding MLQ $\widetilde{\qq}$ such that $\widetilde{\qq}(1^n) = \std{u}$.\footnote{This is essentially the same as the proof of Theorem~\ref{thm:merge}. Moreover, this is done bijectively; see also Remark~\ref{rmk:bijective_proof}.}
-As shown in the proof of~\cite[Prop.~3.7]{AasLin17}, the MLQ $\widetilde{\qq}$ corresponds to disjoint $r$-paths with initial points $\iota_i := (0,i)$ and terminal points $(b_i,0)$.
-Note that these are precisely the bully paths of~\cite{AasLin17}.
-We claim it is sufficient to show that for every MLQ $\qq$, there exists unique disjoint $r$-paths $\{\rho_i\}_{i=1}^r$ such that $\rho_i$ passes through the point $\tau_i := (b_i, i - \gamma_i)$.
-This follows by applying the \defn{Lindstr\"om--Gessel--Viennot (LGV) Lemma}~\cite{Lindstrom73,GV85} and considering the initial points $\{ \iota_i \}_{i=1}^r$ and terminal points $\{ \tau_i \}_{i=1}^r$.
-We refer the reader to~\cite[\S2]{GesVie89} for details on the LGV Lemma.\footnote{The version we shall use is~\cite[Cor.~2]{GesVie89}.}
-
-Therefore, given disjoint $r$-paths $\rho = \{ \rho_i \}_{i=1}^r$ with corresponding MLQ $\widetilde{\qq} = (\widetilde{q}_1, \dotsc, \widetilde{q}_r)$, we construct $\qq_{\rho} = (q_1, \dotsc, q_{\ell-1})$ by
-\[
-j \in q_i \text{ if and only if } j \in \widetilde{q}_{i+t-\gamma_t},
-\]
-where $t \in \ive{r}$ such that $b_t \leq j < b_{t+1}$ (with $b_{r+1} = \infty$).
-Moreover, this map is invertible, where to construct the inverse, we first construct sets
-\[
-A_i := \left\{ a_{i,j} = \text{$i$-th largest entry in $q_j$} %= \max\bigl\{ q_j \setminus \{ a_{k,j} \mid K(j) \leq k < j \} \bigr\}
-\mid K(i) \leq j <\ell \right\},
-\]
-where $K(i) := \min\{\kappa \mid i \leq \lvert q_{\kappa} \rvert \}$. We will use the convention that $a_{i,j} = a_{i,\ell-1}$ for all $j \geq \ell$.
-This then forms the disjoint $r$-paths $\rho' = \{\rho'_i\}_{i=1}^r$ by
-\begin{align*}
-\rho'_i \colon (0,i) \to (a_{i,K(i)},i) & \to (a_{i,K(i)},i+1) \to (a_{i,K(i)+1},i+1) \to
-\\ \cdots & \to (a_{i,\ell-1}, i + \ell - K(i)) = (b_i, i - \gamma_i).
-\end{align*}
-The fact that $\qq = \qq_{\rho'}$ follows from Lemma~\ref{lemma:queue_merge_commute}.
-\end{proof}
-
 \begin{figure}[t]
 \[
 \begin{tikzpicture}[xscale=1.3,yscale=0.9]
@@ -1160,11 +1037,6 @@ The fact that $\qq = \qq_{\rho'}$ follows from Lemma~\ref{lemma:queue_merge_comm
   \draw[thick,draw=red] (1,4)--(4,4)--(4,3)--(6,3);
   \draw[thick,draw=red] (1,5)--(6,5)--(6,4)--(7,4);
   \draw[thick,draw=red] (1,6)--(7,6)--(7,5)--(8,5)--(8,4)--(9,4);
-  %\draw[thick,blue,dashed] (2,2) -- (2,1);
-  %\draw[thick,blue,dashed] (4,2) -- (4,1);
-  %\draw[thick,blue,dashed] (6,3) -- (6,1);
-  %\draw[thick,blue,dashed] (7,4) -- (7,1);
-  %\draw[thick,blue,dashed] (9,4) -- (9,1);
   
   \node[circle,fill=white,draw=black,inner sep=1pt] at (1,1) {$3$};
   \node[circle,fill=white,draw=black,text=blue,inner sep=1pt] at (2,2) {$3$};
@@ -1319,7 +1191,6 @@ Using Theorem~\ref{thm:determinant_form}, this further becomes
 \begin{align*}
 \psi(T) & = x_1 x_2 x_5 x_6 x_8 \, e_1(x_1, \dotsc, x_8) \, e_4(x_1, \dotsc, x_8)
 \\ & \hspace{20pt} \times \det \begin{pmatrix}
-%gamma_j = 1,1,2,3,3
 1 & 0 & 0 & 0 & 0 \\
 h_1[1] & 1 & 1 & 1 & 0 \\
 h_2[1] & h_1[2] & h_1[5] & h_1[6] & 1 \\
@@ -1547,8 +1418,6 @@ It is easy to see (see, \textit{e.g.}, \cite[(2.36)]{Stanley-EC1}) that any two 
 \label{eq.LGV.single-paths}
 \sum_{p \in N(A,B)} \wt(p) = h_{c-a}(x_{b}, x_{b+1}, \dotsc, x_{d}).
 \end{equation}
-% This really is just a substitution and we can assume the readers are not completely incompetent
-%(Here, $h_{\ell}(x_{b}, x_{b+1}, \ldots, x_{d})$ is defined as $\sum_{\substack{(k_1,k_2,\ldots,k_{\ell}) \in \set{b,b+1,\ldots,d}^{\ell}; \\ k_1 \leq k_2 \leq \cdots \leq k_{\ell}}} x_{k_1} x_{k_2} \dotsm x_{k_{\ell}}$ for all $\ell \in\NN$, and is $0$ otherwise.)
 
 \begin{comment}
 We begin with a proof of~\eqref{eq.LGV.single-paths}, which is a simple and classical fact that appears implicitly in various texts on enumerative combinatorics (\textit{e.g.}, \cite[(2.36)]{Stanley-EC1}).
@@ -2064,6 +1933,7 @@ Hence, $N\bigl(\uu, \sigma(\vv) \bigr) = \emptyset$, as we desired.
 \end{proof}
 \end{verlonglong}
 
+
 %%%%%%%%%%
 \subsection{Pseudo-partitions and tableaux}
 
@@ -2134,7 +2004,6 @@ The diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
 \ydiagram{3,2,3,1}\,.
 \]
 The following are two tableaux of shape $\tup{3,2,3,1}$:
-% $n$ doesn't appear in our definitions; we fix the surface in our formula, which ensures no too-high entries.
 \[
 \label{eq.tableau.exas}
 \begin{ytableau} 1 & 2 & 5 \\ 2 & 3 \\ 3 & 4 & 5 \\ 7 \end{ytableau}\qquad
@@ -2721,7 +2590,6 @@ This proves~(c).
 \label{cor:determinant_form.bij1c}
 Let $\ell$, $\mm$, and $m_i$ be as above.
 Let $k \in \NN$ and $\lambda_1, \lambda_2, \ldots, \lambda_k$ be such that $\lambda^{\mm} = \tup{\lambda_1, \lambda_2, \dotsc, \lambda_k}$.
-% This awkward wording should repel the misunderstanding that we are *defining* $\lambda^{\mm}$ here.
 Let $S = \set{s_1 < s_2 < \cdots < s_k}$ be a $k$-queue.
 Then,
 \begin{align*}
@@ -2791,8 +2659,7 @@ Then:
 Then, $q(u) = 322{\color{gray}4}111{\color{gray}44}$ satisfies all assumptions of
 Lemma~\ref{lem:determinant_form.interl-A}.
 Thus, part (a) of the lemma says that $u$ is weakly decreasing up to level $2$ (which is evident).
-% Part (b) of the lemma, applied to $h = 2$, says that
-% $\set{ 2, 3 } \succeq \set{ 2, 3 } \gg \set{ 1 }$.
+% Part (b) of the lemma, applied to $h = 2$, says that $\set{ 2, 3 } \succeq \set{ 2, 3 } \gg \set{ 1 }$.
 Part (b) of the lemma, applied to $h = 1$, says that
 \[
 \set{ 5, 6, 7 } \succeq \set{ 4, 6, 7 } \gg \set{ 2, 3 }.
@@ -2806,7 +2673,7 @@ Indeed, if $n = 4$, $u = 12{\color{gray}33}$, $t = 3$ and $q = \set{1, 2, 3}$, t
 
 \item The assumption that $q(u)$ has exactly $\abs{q}$ letters that are at most $t$ cannot be removed from Lemma~\ref{lem:determinant_form.interl-A}.
 Indeed, if $n = 5$, $u = {\color{gray}3}2112$, $t = 3$ and $q = \set{2, 3, 5}$, then $q(u) = 321{\color{gray}4}1$ satisfies all assumptions except for this one, but the claim of Lemma~\ref{lem:determinant_form.interl-A}(a) does not hold.
-% I think we can loosen this assumption to ``$q(u)$ has \emph{at most} $\abs{q}$ letters that are at most $t$'', at least as far as part (a) of the lemma is concerned. But not for part (b); the counterexample for that is $n = 4$, $u = 3312$, $t = 2$ and $q = \set{1, 2, 3}$.
+% We might be able to loosen this assumption to ``$q(u)$ has \emph{at most} $\abs{q}$ letters that are at most $t$'', at least as far as part (a) of the lemma is concerned. But not for part (b); the counterexample for that is $n = 4$, $u = 3312$, $t = 2$ and $q = \set{1, 2, 3}$.
 \end{itemize}
 \end{example}
 
@@ -3101,7 +2968,6 @@ The definition of $\swt{u(v)}$ yields
 \begin{align*}
 \swt{u(v)} & = \sum_{\substack{\qq \text{ is an MLQ of type } \mm; \\ u(v)=\qq(1^n)}}\wt(\qq) \\
 %&  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an MLQ of type } \mm; \\ \qq \text{ is interlacing and satisfies } q_{\ell-1} = B}} \wt(\qq) \qquad \text{(by Lemma~\ref{lem:determinant_form.interl-act})} \\
-% The above is just a trivial rewording of the summation set for the equation below -- Travis
 &  = \sum_{\substack{\qq = \tup{q_1, q_2, \dotsc, q_{\ell-1}} \text{ is an interlacing} \\\text{MLQ of type } \mm \text{ with } q_{\ell-1}=B}} \wt(\qq) \qquad \text{(by $(1) \Longleftrightarrow (4)$)} \\
 &  = \left(  \prod_{i=1}^r x_{b_i} \right) \det\biggl( h_{\gamma_j-j+i-1}\left(x_1,x_2,\ldots,x_{b_j}\right)  \biggr)_{i, j \in \ive{r}} ,
 \end{align*}
@@ -3560,7 +3426,6 @@ $\tup{ [u^*]_{n-k} , q^* }' = \tup{ q^\dagger , [q^*(u^*)]_{n-k} }$
 for some queue $q^\dagger$.
 Now,
 \begin{align*}
- %\label{eq:dual_config_equalities}
  \bigl( (q'_1)^*, (q'_2)^* \bigr)
  &= \bigl( ([u]_k)^* , q^* \bigr)'
  = \tup{ [u^*]_{n-k} , q^* }' \\
@@ -4377,7 +4242,6 @@ We construct a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n
 Note that this is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
 Furthermore, every `$($' and `$)$' corresponds to a contribution to $c^{\uparrow}[1,n]$ and $c^{\downarrow}[1,n]$, respectively.
 Additionally, every matched pair of parentheses from sites $j \leq j'$ under the standard matching algorithm corresponds to the endpoints of a balanced interval $\inter[j,j']$. (This is easily proven by induction on the time at which the parentheses got matched: At this time, all the parentheses inbetween have already been matched, thus forming balanced intervals, and the newly matched pair merely wraps them in a bigger balanced interval.)
-% [Darij: The following is vague.] Since matched parentheses (resp.\ balanced intervals) do not change under $\sigma_1$ (resp.~$\fraks_1$), we can consider $w$ (resp.\ $\qq$) such that there are no matched parentheses (resp.\ balanced intervals that are subintervals of $\inter[1,n]$).
 Thus, if the algorithm would leave both a `$)$' and a `$($' unmatched, then the (cyclic) interval between the rightmost unmatched `$)$' and the leftmost unmatched `$($' would also be a balanced interval, which would contradict the fact that no balanced interval has the form $\inter[i,j]$ with $i > j$.
 Consequently, the algorithm either leaves only `$)$' parentheses unmatched, or leaves only `$($' parentheses unmatched.
 The precise outcome depends on which of $\abs{q_1}$ and $\abs{q_2}$ is larger.
