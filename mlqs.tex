@@ -401,7 +401,7 @@ When $\mm$ is clear, we simply write $p_i$ for this.
 \begin{vershort}
 We define an \defn{$r$-queue} $q$ to be any subset of $\ive{n}$ of size $r$. When $r$ is clear, we will simply call $q$ a \defn{queue}.
 We equate $q$ with a function from $\mcW_n$ to itself defined as follows.
-For any $u \in \mcW_n$, the following algorithm computes $v = q(u)$.
+For any $u \in \mcW_n$, the following algorithm from~\cite[Sec.~4.5]{AAMP} computes $v = q(u)$.
 \end{vershort}
 \begin{verlong}
 We define a \defn{queue} to be any set of sites.
@@ -409,7 +409,7 @@ A queue of size $r$ will be called an \defn{$r$-queue}.
 
 We shall now define an action of queues on words.
 Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
-then a new word $v = q(u) \in \mcW_n$ is defined by the following algorithm:
+then a new word $v = q(u) \in \mcW_n$ is defined by the following algorithm from~\cite[Sec.~4.5]{AAMP}:
 \end{verlong}
 In the beginning, no letter of $v \in \mcW_n$ is set.
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
@@ -3943,7 +3943,7 @@ Note that the distinction between $\NN$ and $\ZZ/n\ZZ$ never arises since, for $
 \[
 \abs{\set{ j \in q_i \mid j \geq k }} \leq \abs{\set{  j \in q_{i+1} \mid j \geq k }},
 \]
-which means we can apply~\cite[Lemma~2.2]{AssSea18} to see that there is no ``wrapping'' around the cylinder.
+(by~\cite[Lemma~2.2]{AssSea18}), which means that there is no ``wrapping'' around the cylinder.
 
 To obtain a Kohnert labeling from a Kohnert diagram of height $K$ (for this, we require $n \gg 1$), we can construct an MLQ
 \[
