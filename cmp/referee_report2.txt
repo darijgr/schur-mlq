@@ -1,0 +1,37 @@
+Reviewer #2: In this paper, the authors study generalized multiline queues, as functions on words, defined by Arita-Ayyer-Mallick-Prolhac in 2011. The authors define a weight on the MLQs called the "spectral weight", and study the resulting generating functions over MLQs that output a fixed word. The authors then prove some identities for these generating functions.
+
+In particular, a determinantal formula is given for the generating function for MLQs of certain decreasing words. Such words correspond to "interlacing MLQs" which are MLQs of a simplified type that are in bijection with semistandard tableaux of pseudo-partition shape, and whose generating function is given by a Lingstom-Gessel-Viennot-style determinantal formula.
+
+The main result of the paper is showing there is an action of the symmetric group on MLQs that fixes the generating function over MLQs of a given type. They do this through a bijection that uses an existing parenthesis-matching algorithm, and which commutes with the generators of the symmetric group in the desired way.
+
+The results of the paper are interesting and I recommend it for publication. Some parts of the paper are a bit dense and difficult to read (section 2 in particular), and could be helped with some examples/figures.
+
+Below are some suggestions.
+
+----------------------------------------
+
+Section 2 is not written in a clear way, and many of the definitions given are hard to parse, especially some of the most important ones.
+
+p 4, the algorithm beginning at line 50: For such a simple algorithm, this definition in particular is overly complicated and hard to understand. Instead of choosing a permutation (i_1,...,i_n) it is better to describe the order of setting sites to be from largest value to smallest in Phase 1 and from smallest to largest in Phase 2, in arbitrary order (say, left to right). Then state Lemma 2.2 separately. Moreover, refer to Example 2.4 in this definition, or move the example before the remarks.
+
+Example 2.4: please indicate the order in which the values are set.
+
+Def 2.6: Add an example of {\bf q}(u) and a \sigma-twisted version. I also suggest to define \sigma-twisted MLQs after defining ordinary MLQs, since adding the \sigma twist is independent of all other relevant definitions, and this would make the presentation cleaner.
+
+Def 2.9: Give a small example of this definition and of Theorem 3.1.
+
+Cor 3.8: Is V_T defined anywhere? An example would be helpful.
+
+Cor 3.10: Is V_T w_0 simply a weakly decreasing word with descents given by T? Give an example.
+
+p 12: line 53 - this paragraph gives a confusing definition and needs an example. By "merging i and i+1", do you mean applying the operator V_i?
+
+p20, line 24: the comma after the expression looks like p'
+figure on line 28: please make it clear that the labelling of the diagram is already determined by the diagram and doesn't carry additional data.
+
+Def 5.6: can be made more clear by giving the statement on line 51 as a separate remark
+
+p29, line 21: should be ``left to right, top to bottom''
+
+p30, paragraph beginning at line 24: make the proof more readable, perhaps by including an example/figure
+
