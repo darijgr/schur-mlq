@@ -22,7 +22,7 @@ R: We have added this ordering to the example (now Example 2.1).
 
 Def 2.6: Add an example of {\bf q}(u) and a \sigma-twisted version. I also suggest to define \sigma-twisted MLQs after defining ordinary MLQs, since adding the \sigma twist is independent of all other relevant definitions, and this would make the presentation cleaner.
 
-R: This is done in Example 2.11.
+R: This is done in Example 2.11. However, we prefer to keep it the way it is because when we tried to implement your suggestion, we realized that it would require us to mostly repeat the definition for \sigma-twisted MLQs. As such, we believe the current description is more clear.
 
 Def 2.9: Give a small example of this definition and of Theorem 3.1.
 
