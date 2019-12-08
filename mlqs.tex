@@ -416,27 +416,19 @@ Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
 then a new word $v = q(u) \in \mcW_n$ is defined by the following algorithm from~\cite[Sec.~4.5]{AAMP}:
 \end{verlong}
 Choose an ordering of the sites $i \in \ive{n}$ so that the corresponding values $u_i$ are weakly increasing.
+We construct a perfect matching on the sites in $u$ and $v$ as follows.
 \begin{description}
 \item[Phase~I]
-   For each of the last $n - r$ sites $i \in \ive{n}$, traversed in decreasing order (with respect to our ordering), we pick the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ and $v_j$ has not been set yet, and we set $v_j = u_i + 1$.
+   For each of the last $n - r$ sites $i \in \ive{n}$ in decreasing order (in our ordering), match the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ that is unmatched and set $v_j = u_i + 1$.
 \item[Phase~II]
-   For each of the remaining $r$ sites $i \in \ive{n}$, traversed in increasing order (with respect to our ordering), we pick the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ and $v_j$ has not been set yet, and we set $v_j = u_i + 1$.
+   For each of the remaining $r$ sites $i \in \ive{n}$ in increasing order (in our ordering), match the site with value $u_i$ with the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ that is unmatched and set $v_j = u_i + 1$.
 \end{description}
-% I removed all references to ``matching'' and ``unmatchedness'',
-% since the first thing that would come to a reader's mind there
-% would be UNIPARTITE matching, while we are doing BIPARTITE
-% matching here (so a $j$ that has been an $i$ before is not
-% automatically considered matched).
-There is a choice inherent in ordering the sites
-(since some letters of $u$ can be equal), but we
-will later see that this choice does not affect
-the word $v$ obtained.
+There is a choice inherent in ordering the sites (since some letters of $u$ can be equal), but we will later see that this choice does not affect the word $v$ obtained.
 
 \begin{example}
 \label{ex:first_queue}
 We consider the $4$-queue $q = \{1, 4, 8, 9\}$, and let $u = 346613321$.
-We order the sites as $598176243$.
-% $598167234$ would produce a different picture.
+We order the sites as $598167243$.
 To compute $q(u)$, draw the following diagram
 (whose upper row shows $u$, whose lower row shows $q(u)$,
 and whose middle row represents the set $q$ by placing balls in the positions of its elements):
@@ -503,13 +495,10 @@ Hence, we have $q(346613321) = 277344511$.
 
 Let us give a more detailed formulation of the algorithm that will be useful for our proofs.
 In the beginning, no letter of $v \in \mcW_n$ is set.
-Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
-such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
-(This corresponds to the ordering of the sites that had to
-be chosen in the previous formulation of the algorithm.)
+Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$ such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
+(This corresponds to the ordering of the sites that had to be chosen in the previous formulation of the algorithm.)
 \begin{verlong}
-(The result of the algorithm will not depend on this choice,
-as we will show in Lemma~\ref{lemma:order_indep} below.)
+(The result of the algorithm will not depend on this choice, as we will show in Lemma~\ref{lemma:order_indep} below.)
 \end{verlong}
 
 \begin{description}
@@ -1106,7 +1095,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \bigvee_T u$.
 
 \begin{example}
 Let $\mm = (1,1,1,1,1)$ and $T = \{1,3\}$.
-Then $\bigvee_T = (2,2,1)$, and we take $v = 12123$.
+Then $\bigvee_T \mm = (2,2,1)$, and we take $v = 12123$.
 Then the words $u$ of type $\mm$ such that $v = \bigvee_T u = \vee_1 \vee_3 u$ are
 \[
 13245,
