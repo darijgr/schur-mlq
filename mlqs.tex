@@ -10,6 +10,7 @@
 \usepackage{needspace}
 \usepackage{tabls}
 \usepackage{ytableau}
+\usepackage{mathtools}  % for the underbracket
 %\usepackage{rotating}
 %\usepackage{amsmath}
 %\usepackage{amsthm}
@@ -344,6 +345,7 @@ In Section~\ref{sec:remarks}, we give some additional remarks about our results.
 We thank Atsuo Kuniba for explaining the results in his papers~\cite{KMO15,KMO16II,KMO16,KMO16TARZP,KMO16TARZPII}.
 We thank Olya Mandelshtam for useful discussions on the inhomogeneous TASEP.
 We thank Jae-Hoon Kwon for pointing out that the $\SymGp{n}$-action on MLQs comes from an $(\mathfrak{sl}_m \oplus \mathfrak{sl}_n)$-action.
+We thank the referees for their comments.
 This work benefited from computations using \textsc{SageMath}~\cite{sage,combinat}.
 
 
@@ -411,6 +413,84 @@ We shall now define an action of queues on words.
 Namely, if $q$ is any queue and $u \in \mcW_n$ is a word,
 then a new word $v = q(u) \in \mcW_n$ is defined by the following algorithm from~\cite[Sec.~4.5]{AAMP}:
 \end{verlong}
+Choose an ordering of the sites so that the corresponding values are weakly increasing.
+\begin{description}
+\item[Phase~I]
+   For the last $n - r$ values, in decreasing order, match the site with value $u_i$ with the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ that is unmatched and set $v_j = u_i + 1$.
+\item[Phase~II]
+   For the remaining $r$ values, in increasing order, match the site with value $u_i$ with the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ that is unmatched and set $v_j = u_i + 1$.
+\end{description}
+We will show later that this choice does not matter.
+
+\begin{example}
+\label{ex:first_queue}
+We consider the $4$-queue $q = \{1, 4, 8, 9\}$, and let $u = 346613321$.
+We order the sites as $598167234$.
+To compute $q(u)$, draw the following diagram
+(whose upper row shows $u$, whose lower row shows $q(u)$,
+and whose middle row represents the set $q$ by balls in the positions of its elements):
+\[
+\begin{tikzpicture}[>=latex,rounded corners,yscale=1.5,xscale=1.2,baseline=0]
+\def\passwidth{3pt};
+\node (i1) at (1,1) {$3$};
+\node (i2) at (2,1) {$4$};
+\node (i3) at (3,1) {$6$};
+\node (i4) at (4,1) {$6$};
+\node (i5) at (5,1) {$1$};
+\node (i6) at (6,1) {$3$};
+\node (i7) at (7,1) {$3$};
+\node (i8) at (8,1) {$2$};
+\node (i9) at (9,1) {$1$};
+\node (t1) at (1,-1) {$2$};
+\node (t2) at (2,-1) {$7$};
+\node (t3) at (3,-1) {$7$};
+\node (t4) at (4,-1) {$3$};
+\node (t5) at (5,-1) {$4$};
+\node (t6) at (6,-1) {$4$};
+\node (t7) at (7,-1) {$5$};
+\node (t8) at (8,-1) {$1$};
+\node (t9) at (9,-1) {$1$};
+\node[circle,draw=black] (q1) at (1,0) {};
+\node[circle,draw=black] (q2) at (4,0) {};
+\node[circle,draw=black] (q3) at (8,0) {};
+\node[circle,draw=black] (q4) at (9,0) {};
+\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
+\draw[->,red] (i3) -- (t3);
+\draw[->,red] (i2) -- (2,0.15) .. controls (1.8,-0.2) and (1.6,-0.25) .. (1.3,-0.25) -- (0,-0.25);
+\draw[>->,red] (10,-0.25) -- (8,-0.25) -- (7,-0.25) -- (t7);
+\draw[->,red] (i6) -- (t6);
+\draw[->,red] (i7) -- (7,0) -- (5,0) -- (t5);
+\draw[white,line width=\passwidth] (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);  % To simulate underpass
+\draw[->,blue] (i5) -- (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);
+\draw[white,line width=\passwidth] (q3) -- (t8);  % To simulate underpass
+\draw[->,blue] (q3) -- (t8);
+\draw[->,blue] (i9) -- (q4);
+\draw[white,line width=\passwidth] (q4) -- (t9);  % To simulate underpass
+\draw[->,blue] (q4) -- (t9);
+\draw[white,line width=\passwidth] (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);  % To simulate underpass
+\draw[->,blue] (i1) -- (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);
+\draw[->,blue] (q2) -- (t4);
+\draw[white,line width=\passwidth] (i8) -- (8,0.28) -- (10,0.28);  % To simulate underpass
+\draw[->,blue] (i8) -- (8,0.28) -- (10,0.28);
+\draw[>->,blue] (0,0.28) -- (0.3,0.28) .. controls (0.7,0.28) and (0.85,0.12) .. (q1);
+\draw[white,line width=\passwidth] (q1) -- (t1);  % To simulate underpass
+\draw[->,blue] (q1) -- (t1);
+\end{tikzpicture}
+\]
+\begin{vershort}
+where the paths in red correspond to Phase~I and those in blue are from Phase~II.
+\end{vershort}
+\begin{verlong}
+where the paths in red correspond to Phase~I and those in blue are from Phase~II
+(and where we have picked the permutation $\tup{i_1, i_2, \ldots, i_n}
+= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$ out of a total of $2! \cdot 3! \cdot 2! = 24$ permutations
+satisfying $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$;
+but any other among them would lead to the same result).
+\end{verlong}
+Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
+\end{example}
+
+Let us give a more detailed version of the algorithm that will be useful for our proofs.
 In the beginning, no letter of $v \in \mcW_n$ is set.
 Choose a permutation $\tup{i_1, i_2, \ldots, i_n}$ of $\tup{1, 2, \ldots, n}$
 such that $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$.
@@ -502,72 +582,8 @@ The queue $q$ can be reconstructed from $v$ and $t$ as the set of all $j \in \iv
 \end{remark}
 
 \begin{example}
-\label{ex:first_queue}
-We consider the $4$-queue $q = \{1, 4, 8, 9\}$, and let $u = 346613321$.
-Thus, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$.
+For $u$ in Example~\ref{ex:first_queue}, the type of $u$ is $\mm = (2, 1, 3, 1, 0, 2, 0, \ldots)$ with $p_2 = 3$ and $p_3 = 6$.
 Thus, the $t$ in Remark~\ref{rmk:t-splitting} equals $3$.
-To compute $q(u)$, draw the following diagram
-(whose upper row shows $u$, whose lower row shows $q(u)$,
-and whose middle row represents the set $q$ by balls in the positions of its elements):
-\[
-\begin{tikzpicture}[>=latex,rounded corners,yscale=1.5,xscale=1.2,baseline=0]
-\def\passwidth{3pt};
-\node (i1) at (1,1) {$3$};
-\node (i2) at (2,1) {$4$};
-\node (i3) at (3,1) {$6$};
-\node (i4) at (4,1) {$6$};
-\node (i5) at (5,1) {$1$};
-\node (i6) at (6,1) {$3$};
-\node (i7) at (7,1) {$3$};
-\node (i8) at (8,1) {$2$};
-\node (i9) at (9,1) {$1$};
-\node (t1) at (1,-1) {$2$};
-\node (t2) at (2,-1) {$7$};
-\node (t3) at (3,-1) {$7$};
-\node (t4) at (4,-1) {$3$};
-\node (t5) at (5,-1) {$4$};
-\node (t6) at (6,-1) {$4$};
-\node (t7) at (7,-1) {$5$};
-\node (t8) at (8,-1) {$1$};
-\node (t9) at (9,-1) {$1$};
-\node[circle,draw=black] (q1) at (1,0) {};
-\node[circle,draw=black] (q2) at (4,0) {};
-\node[circle,draw=black] (q3) at (8,0) {};
-\node[circle,draw=black] (q4) at (9,0) {};
-\draw[->,red] (i4) -- (4,0.5) .. controls (3.8,0.2) and (3.5,0) .. (3.1,0) -- (2,0) -- (t2);
-\draw[->,red] (i3) -- (t3);
-\draw[->,red] (i2) -- (2,0.15) .. controls (1.8,-0.2) and (1.6,-0.25) .. (1.3,-0.25) -- (0,-0.25);
-\draw[>->,red] (10,-0.25) -- (8,-0.25) -- (7,-0.25) -- (t7);
-\draw[->,red] (i6) -- (t6);
-\draw[->,red] (i7) -- (7,0) -- (5,0) -- (t5);
-\draw[white,line width=\passwidth] (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);  % To simulate underpass
-\draw[->,blue] (i5) -- (5,0.28) -- (7.3,0.28) .. controls (7.7,0.28) and (7.85,0.12) .. (q3);
-\draw[white,line width=\passwidth] (q3) -- (t8);  % To simulate underpass
-\draw[->,blue] (q3) -- (t8);
-\draw[->,blue] (i9) -- (q4);
-\draw[white,line width=\passwidth] (q4) -- (t9);  % To simulate underpass
-\draw[->,blue] (q4) -- (t9);
-\draw[white,line width=\passwidth] (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);  % To simulate underpass
-\draw[->,blue] (i1) -- (1,0.28) -- (3.3,0.28) .. controls (3.7,0.28) and (3.85,0.12) .. (q2);
-\draw[->,blue] (q2) -- (t4);
-\draw[white,line width=\passwidth] (i8) -- (8,0.28) -- (10,0.28);  % To simulate underpass
-\draw[->,blue] (i8) -- (8,0.28) -- (10,0.28);
-\draw[>->,blue] (0,0.28) -- (0.3,0.28) .. controls (0.7,0.28) and (0.85,0.12) .. (q1);
-\draw[white,line width=\passwidth] (q1) -- (t1);  % To simulate underpass
-\draw[->,blue] (q1) -- (t1);
-\end{tikzpicture}
-\]
-\begin{vershort}
-where the paths in red correspond to Phase~I and those in blue are from Phase~II.
-\end{vershort}
-\begin{verlong}
-where the paths in red correspond to Phase~I and those in blue are from Phase~II
-(and where we have picked the permutation $\tup{i_1, i_2, \ldots, i_n}
-= \tup{5, 9, 8, 1, 7, 6, 2, 4, 3}$ out of a total of $2! \cdot 3! \cdot 2! = 24$ permutations
-satisfying $u_{i_1} \leq u_{i_2} \leq \cdots \leq u_{i_n}$;
-but any other among them would lead to the same result).
-\end{verlong}
-Hence, we have $q(346613321) = 277344511$, which has type $(2,1,1,2,1,0,2,\ldots)$.
 \end{example}
 
 We illustrate the situation $v = q(u)$ with a $2 \times n$ array, where the first row is the word $u$
@@ -663,6 +679,73 @@ where the sum is over all $\sigma$-twisted MLQs $\qq$ of type $\mm$ satisfying $
 When $\sigma = \id$ is the identity permutation, we simply call this the \defn{spectral weight} or \defn{amplitude} and denote it by $\swt{u} := \swt{u}_{\id}$.
 \end{dfn}
 
+\begin{example}
+\label{ex:spectral_weight_example}
+Consider $u = 2312$, and let $\sigma = s_1$.
+We have the following MLQs $\qq$ (of type $\tup{1,3}$) such that $\qq(1111) = 2312$:
+\[
+\begin{tikzpicture}[baseline=-30]
+  \def\ll{0.75}   % level scaling
+  \foreach \i in {3} { \draw (\i,\ll*-1) circle (0.3); }
+  \foreach \i in {1,2,4} { \draw (\i-.3,\ll*-1 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,3,4} { \draw (\i,\ll*-2) circle (0.3); }
+  \foreach \i in {2} { \draw (\i-.3,\ll*-2 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4} { \node at (\i, \ll*0-.15) {$1$}; }
+  \foreach \i in {3} { \node at (\i, \ll*-1) {$1$}; }
+  \foreach \i in {1,2,4} { \node at (\i, \ll*-1) {$2$}; }
+  \foreach \i in {3} { \node at (\i, \ll*-2) {$1$}; }
+  \foreach \i in {1,4} { \node at (\i, \ll*-2) {$2$}; }
+  \foreach \i in {2} { \node at (\i, \ll*-2) {$3$}; }
+\end{tikzpicture}
+\hspace{50pt}
+\begin{tikzpicture}[baseline=-30]
+  \def\ll{0.75}   % level scaling
+  \foreach \i in {2} { \draw (\i,\ll*-1) circle (0.3); }
+  \foreach \i in {1,3,4} { \draw (\i-.3,\ll*-1 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,3,4} { \draw (\i,\ll*-2) circle (0.3); }
+  \foreach \i in {2} { \draw (\i-.3,\ll*-2 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4} { \node at (\i, \ll*0-.15) {$1$}; }
+  \foreach \i in {2} { \node at (\i, \ll*-1) {$1$}; }
+  \foreach \i in {1,3,4} { \node at (\i, \ll*-1) {$2$}; }
+  \foreach \i in {3} { \node at (\i, \ll*-2) {$1$}; }
+  \foreach \i in {1,4} { \node at (\i, \ll*-2) {$2$}; }
+  \foreach \i in {2} { \node at (\i, \ll*-2) {$3$}; }
+\end{tikzpicture}
+\]
+and hence we obtain $\swt{2312} = x_1 x_3^2 x_4 + x_1 x_2 x_3 x_4$.
+Next, we construct the corresponding $\sigma$-twisted MLQs $\qq$ (of type $\tup{3,1}$)
+\[
+\begin{tikzpicture}[baseline=-30]
+  \def\ll{0.75}   % level scaling
+  \foreach \i in {1,3,4} { \draw (\i,\ll*-1) circle (0.3); }
+  \foreach \i in {2} { \draw (\i-.3,\ll*-1 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {3} { \draw (\i,\ll*-2) circle (0.3); }
+  \foreach \i in {1,2,4} { \draw (\i-.3,\ll*-2 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4} { \node at (\i, \ll*0-.15) {$1$}; }
+  \foreach \i in {1,3,4} { \node at (\i, \ll*-1) {$1$}; }
+  \foreach \i in {2} { \node at (\i, \ll*-1) {$2$}; }
+  \foreach \i in {3} { \node at (\i, \ll*-2) {$1$}; }
+  \foreach \i in {1,4} { \node at (\i, \ll*-2) {$2$}; }
+  \foreach \i in {2} { \node at (\i, \ll*-2) {$3$}; }
+\end{tikzpicture}
+\hspace{50pt}
+\begin{tikzpicture}[baseline=-30]
+  \def\ll{0.75}   % level scaling
+  \foreach \i in {1,2,4} { \draw (\i,\ll*-1) circle (0.3); }
+  \foreach \i in {3} { \draw (\i-.3,\ll*-1 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {3} { \draw (\i,\ll*-2) circle (0.3); }
+  \foreach \i in {1,2,4} { \draw (\i-.3,\ll*-2 -.3) rectangle +(0.6,+0.6); }
+  \foreach \i in {1,2,3,4} { \node at (\i, \ll*0-.15) {$1$}; }
+  \foreach \i in {1,2,4} { \node at (\i, \ll*-1) {$1$}; }
+  \foreach \i in {3} { \node at (\i, \ll*-1) {$2$}; }
+  \foreach \i in {3} { \node at (\i, \ll*-2) {$1$}; }
+  \foreach \i in {1,4} { \node at (\i, \ll*-2) {$2$}; }
+  \foreach \i in {2} { \node at (\i, \ll*-2) {$3$}; }
+\end{tikzpicture}
+\]
+to obtain $\swt{2312}_{\sigma} = x_1 x_3^2 x_4 + x_1 x_2 x_3 x_4$.
+\end{example}
+
 \begin{lemma}
 \label{lemma:mlq-type}
 Let $\ell \geq 1$ and $\sigma \in \SymGp{\ell-1}$.
@@ -743,7 +826,7 @@ For more details on symmetric polynomials, we refer the reader to~\cite[Ch.~7]{S
 
 In this section, we state our main results and use them to prove the commutativity conjecture of~\cite{AAMP} and~\cite[Conj.~3.10]{AasLin17}.
 
-\subsection{$\sigma$-independence of the spectral weight}
+\subsection{\texorpdfstring{$\sigma$}{sigma}-independence of the spectral weight}
 
 \begin{thm}
 \label{thm:permutation}
@@ -755,6 +838,8 @@ In this section, we state our main results and use them to prove the commutativi
 \end{thm}
 
 We will give the proof of Theorem~\ref{thm:permutation} in Section~\ref{sec:thm_proof}.
+Note that we have verified a particular case of Theorem~\ref{thm:permutation} in Example~\ref{ex:spectral_weight_example}.
+
 
 \subsection{Queue action and merges}
 We shall next study the interplay between the action of queues on words and the merging of adjacent classes.
@@ -972,6 +1057,7 @@ Our proof of Theorem~\ref{thm:permutation} is by constructing a bijection $\omeg
 
 
 \begin{example}
+\label{ex:checking_merge_thm}
 Suppose $n = 5$.
 Let $v = 13234$, and we have that $v = \merge{3} u$ if and only if $u \in \set{13245, 14235}$.
 By examining all possible MLQs for these words, we obtain
@@ -1003,7 +1089,38 @@ By repeated applications of Theorem~\ref{thm:merge}, we obtain the following:
 where we sum over all $u$ of type $\mm$ such that $v = \bigvee_T u$.
 \end{cor}
 
-\subsection{A Jacobi-Trudi-like formula for special $u$}
+\begin{example}
+Let $\mm = (1,1,1,1,1)$ and $T = \{1,3\}$.
+Then $\bigvee_T = (2,2,1)$, and we take $v = 12123$.
+Then the words $u$ of type $\mm$ such that $v = \bigvee_T u = \vee_1 \vee_3 u$ are
+\[
+13245,
+\qquad
+14235,
+\qquad
+23145,
+\qquad
+24135.
+\]
+Note that $v = \vee_1 u'$ for $u' \in \{13234, 23134\}$, both of which have type $(1, 1, 2, 1)$.
+From Theorem~\ref{thm:merge} (see also Example~\ref{ex:checking_merge_thm}), we have
+\begin{align*}
+\swt{12223} e_1(x_1, x_2, x_3, x_4, x_5) & = \swt{13234} + \swt{23134},
+\\
+\swt{13234} e_3(x_1, x_2, x_3, x_4, x_5) & = \swt{13245} + \swt{14235},
+\\
+\swt{23134} e_3(x_1, x_2, x_3, x_4, x_5) & = \swt{23145} + \swt{24135}.
+\end{align*}
+Hence, we verify Corollary~\ref{cor:merges} in this case since
+\begin{gather*}
+\swt{13245} + \swt{14235} + \swt{23145} + \swt{24135}
+ = (\swt{13234} + \swt{23134}) e_3(x_1, x_2, x_3, x_4, x_5)
+\\ = \swt{12223} e_3(x_1, x_2, x_3, x_4, x_5) e_1(x_1, x_2, x_3, x_4, x_5).
+\end{gather*}
+\end{example}
+
+
+\subsection{A Jacobi-Trudi-like formula for special \texorpdfstring{$u$}{u}}
 \label{subsec:JT_formula}
 
 \begin{comment}
@@ -1097,7 +1214,7 @@ when $v$ is a weakly decreasing $r$-tuple whose entries cover $\ive{\ell-1}$:
 \label{thm:determinant_form}
 Let $\ell$ be a positive integer.
 Let $B = \set{ b_1 < b_2 < \cdots < b_r} \subseteq \ive{n}$.
-Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
+Let $\tup{v_1 \geq v_2 \geq \cdots \geq v_r}$ be a weakly decreasing $r$-tuple of integers such that we have $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$.
 For each $j \in \ive{r}$, set $\gamma_j = \ell - v_j$.
 (The value $\gamma_j$ can also be described as the number of distinct letters among $v_1, v_2, \dotsc, v_j$.)
 Then
@@ -1176,6 +1293,11 @@ Thus, $v$ is weakly decreasing and $\set{v_1, v_2, \ldots, v_r} = \ive{\ell-1}$ 
 Hence, the second equality follows from Theorem~\ref{thm:determinant_form}.
 \end{proof}
 
+\begin{remark}
+We note that $\bigvee_T w_0$ considered in $\mcW_r$ is a weakly decreasing packed word whose descents are in $[r-1] \setminus T$.
+When we lift $\bigvee_T w_0$ to $\mcW_n$ under the identification with $\bigvee_T u(v_{w_0}) \in \mcW_n$, we add in the values $r-\abs{T}+1$ at the positions specified by $B$.
+\end{remark}
+
 \begin{example}
 Consider $n = 8$, $B = \set{1,2,5,6,8}$, and $T = \set{1,4}$.
 Then we have $\bigvee_T w_0 = 33{\color{gray}44}21{\color{gray}4}1$, and
@@ -1225,7 +1347,7 @@ Additionally, this proves~\cite[Conj.~3.6]{AasLin17} (which is a generalization 
 We now explain how our proof of Theorem~\ref{thm:permutation} gives a proof of the commutativity conjecture of~\cite{AAMP}.
 
 There are $2^{n-1}$ packed types for words of length $n$, as they are the compositions of $n$ (see \cite[Section 1.2]{Stanley-EC1}).
-We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$.
+We let the subset $S \subseteq [n-1]$ correspond to the type of the word obtained by merging $i$ and $i+1$ in $12 \dotsm n$ for each $i \in S$; \textit{i.e.}, $\bigvee_S \mm$ for $\mm = \tup{1, \dotsc, 1, 0, \ldots}$ with $n$ occurrences of $1$.
 Denote this type by $\mm_S$.
 Note that $\set{p_1(\mm_S), \dotsc, p_{\ell-1}(\mm_S)} = [n-1] \setminus S$, where $\mm_S$ has $\ell$ classes; this is the complement of the usual bijection between subsets of $\ive{n-1}$ and compositions of $n$.
 Let $\mcW_S$ denote the set of words of type $\mm_S$.
@@ -1258,6 +1380,7 @@ Let $V_S$ be the vector space over $\RR$ with basis $\set{\epsilon_w \mid w \in 
   \end{tikzpicture}
   \]
   where we have drawn an arrow $\mm_S \to \mm_{S \cup \set{i}}$ for each $S \subseteq [n-1]$ and each $i \in [n-1] \setminus S$ (this is the Hasse diagram of the Boolean lattice of subsets of $[n-1]$).
+  As an example of the vector space $V_S$, we have $V_{\{2,3\}} = \RR \{ \epsilon_{1222}, \epsilon_{2122}, \epsilon_{2212}, \epsilon_{2221} \}$.
 \end{example}
 
 The \defn{totally asymmetric simple exclusion process} (TASEP) is a Markov chain on $\mcW_S$, where $S \subseteq[n-1]$, as follows.
@@ -1976,9 +2099,9 @@ For example, the following are two tableaux of shape $\tup{3,2,3,1}$:
 
 A tableau $T$ of shape $\lambda$ is said to be \defn{semistandard} if and only if
 \begin{itemize}
-\item the entries of $T$ are weakly increasing along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(i,j_2)$ whenever $(i,j_1) \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
+\item the entries of $T$ weakly increase along each row (\textit{i.e.}, we have $T(i,j_1) \leq T(i,j_2)$ whenever $(i,j_1) \in \diag{\lambda}$ and $(i,j_2) \in \diag{\lambda}$ satisfy $j_1 < j_2$);
 
-\item the entries of $T$ are strictly increasing down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
+\item the entries of $T$ strictly increase down each column (\textit{i.e.}, we have $T(i_1,j) < T(i_2,j)$ whenever $(i_1,j) \in \diag{\lambda}$ and $(i_2,j) \in \diag{\lambda}$ satisfy $i_1 < i_2$).
 \end{itemize}
 
 \begin{verlong}
@@ -2361,7 +2484,7 @@ q_3^{(2)} = \set{4,5},
 \hspace{50pt}
 q_3^{(1)} = \set{8,9,13,14}.
 \end{gather*}
-Similar to the graveyard diagram~\eqref{eq:boxes-and-balls-1}, we define the graveyard diagram of an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$ as a matrix with $\ell-1$ rows, whose entries are circles and squares; its row $i$ has each element $p \in q_i$ represented as a circle at position $p$ labeled by the letter $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$, and each element of $\ive{n} \setminus q_i$ represented as an unlabeled square (\textit{i.e.}, we suppress filling the squares with an $i+1$).
+Similar to the graveyard diagram~\eqref{eq:boxes-and-balls-1}, we define the graveyard diagram of an MLQ $\qq = \tup{q_1, q_2, \ldots, q_{\ell-1}}$ as a matrix with $\ell-1$ rows, whose entries are circles and squares; its row $i$ has each element $p \in q_i$ represented as a circle at position $p$ labeled by the letter $\bigl( q_i( \cdots q_1(1^n) \cdots ) \bigr)_p$ and each element of $\ive{n} \setminus q_i$ represented as an unlabeled square (\textit{i.e.}, we suppress filling the squares with an $i+1$).
 The $\qq$ in this example is represented by the following graveyard diagram:
 \[
 \begin{tikzpicture}[scale=0.8,baseline=-30]
@@ -2406,6 +2529,7 @@ The $\qq$ in this example is represented by the following graveyard diagram:
     \draw (\x-0.3, -2-0.3) rectangle (\x+0.3, -2+0.3);
 \end{tikzpicture}\ .
 \]
+Note that the labeling is determined solely by the diagram and carries no additional data.
 \end{example}
 
 \begin{dfn}
@@ -2417,8 +2541,9 @@ q_i^{(2)} \succeq q_{i-1}^{(2)} \gg
 q_i^{(3)} \succeq q_{i-1}^{(3)} \gg \cdots \gg
 q_i^{(i)}
 \end{equation}
-(that is, $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$ for all $j \in \ive{i-1}$).
 \end{dfn}
+
+Note that we can rewrite~\eqref{eq.determinant_form.interlacing.def} as $q_i^{(j)} \succeq q_{i-1}^{(j)} \gg q_i^{(j+1)}$ for all $j \in \ive{i-1}$.
 
 \begin{example}
 Consider $n = 15$.
@@ -3039,6 +3164,7 @@ Note that $C$ and $C'$ have the same balanced sites, since the parentheses that 
 Hence, we have $C'' = C$. Also, we have $\wt(C) = \wt(C')$.
 
 \begin{example}
+\label{ex:parentheses_form}
 Consider the configuration
 \[
 C = (q_1, q_2) = (\{1,2,5,6,8,11,13,14,17,18,19\}, \{2,12,15,16,18,19,20\})
@@ -3260,9 +3386,9 @@ Therefore, there exists at least one unbalanced site for the configuration $\qq 
 The operator $\fraks_1$ commutes with the cyclic shift map $\zeta$ on MLQs because the standard parenthesis-matching algorithm used in the definition of dual configurations is clearly invariant under cyclic shift.
 The operator $\sigma_1$ commutes with the cyclic shift map $\zeta$ on words in $A^*$ by~\cite[Prop.~5.6.1]{Loth}.
 Hence, and because of~\eqref{pf.prop:braid.word-zeta}, we can apply $\zeta$ to $\qq$ any number of times without loss of generality.
-Thus, we assume that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$, since at least one unbalanced site $j$ exists and we can cyclically shift until it is $1$.
+By our assumption that at least one unbalanced site $j$ exists, we can thus assume without loss of generality that the site $1$ is unbalanced for the configuration $\qq = (q_1, q_2)$ by cyclically shifting site $j$ until it is $1$.
 Thus, in the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$, the site $1$ induces a parenthesis that stays unmatched throughout the algorithm.
-Hence, no two parentheses that get matched to each other during this algorithm have this parenthesis lying between them.
+Hence, no two parentheses that get matched to each other during this algorithm have the parenthesis from site $1$ lying between them.
 Therefore, it does not matter whether we regard the sequence of parentheses as written on a cycle or on a straight line (as the wrapping-around is not used in the matching process).
 Hence, the standard parenthesis-matching algorithm used in the construction of the dual configuration $\fraks_1 \qq$ proceeds exactly the same way as the standard parenthesis-matching algorithm used when applying $\sigma_1$ to $\word(\qq)$ (ignoring the letters that are neither $i$ nor $i+1$). That is, the parentheses that get matched in the former are the same as those that get matched in the latter.
 % Note that the construction of balanced sites is exactly the sequence of parentheses constructed when applying $\sigma_1$ to $\word(\qq)$ (removing all $\circ$ letters).
@@ -3283,6 +3409,18 @@ In view of the injectivity of the map $\word \colon \set{\text{MLQs}} \to A^*$,
 this diagram allows us to translate~\eqref{pf.prop:braid.loth-eq} into
 $\fraks_i \fraks_{i+1} \fraks_i = \fraks_{i+1} \fraks_i \fraks_{i+1}$.
 \end{proof}
+
+\begin{example}
+We perform the parenthesis-matching algorithm to the parenthesis sequence from Example~\ref{ex:parentheses_form}:
+\[
+( \quad \underbracket{( \quad )} \quad ( \quad ( \quad ( \quad \underbracket{( \quad )} \quad \underbracket{( \quad \underbracket{( \quad )} \quad )} \quad \underbracket{( \quad \underbracket{( \quad )} \quad \underbracket{( \quad )} \quad )}.
+\]
+As noted in the proof of Proposition~\ref{prop:braid}, none of the unpaired parentheses are nested inside of a matched pair of parentheses.
+Hence, when we consider the corresponding dual configuration, we obtain the parenthesis sequence and matching
+\[
+) \quad \underbracket{( \quad )} \quad ) \quad ) \quad ) \quad \underbracket{( \quad )} \quad \underbracket{( \quad \underbracket{( \quad )} \quad )} \quad \underbracket{( \quad \underbracket{( \quad )} \quad \underbracket{( \quad )} \quad )}.
+\]
+\end{example}
 
 \begin{remark}
 Our letters $1, \ldots, k$ correspond to the letters $a_k, \ldots, a_1$ in~\cite{Loth},
