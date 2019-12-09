@@ -1095,7 +1095,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \bigvee_T u$.
 
 \begin{example}
 Let $\mm = (1,1,1,1,1,0,0,\ldots)$ and $T = \{1,3\}$.
-Then $\bigvee_T \mm = (2,2,1,\ldots)$, and we take $v = 12123$.
+Then we have $\bigvee_T \mm = (2,2,1,\ldots)$, and we take $v = 12123$.
 Then the words $u$ of type $\mm$ such that $v = \bigvee_T u = \vee_1 \vee_3 u$ are
 \[
 13245,
@@ -1106,7 +1106,7 @@ Then the words $u$ of type $\mm$ such that $v = \bigvee_T u = \vee_1 \vee_3 u$ a
 \qquad
 24135.
 \]
-Note that $v = \vee_1 u'$ for $u' \in \{13234, 23134\}$, both of which have type $(1, 1, 2, 1, 0, 0, \ldots)$.
+Note that $v = \vee_1 u'$ for $u' \in \{13234, 23134\}$, both of these possible $u'$ having type $(1, 1, 2, 1, 0, 0, \ldots)$.
 From Theorem~\ref{thm:merge} (see also Example~\ref{ex:checking_merge_thm}), we have
 \begin{align*}
 \swt{12223} e_1(x_1, x_2, x_3, x_4, x_5) & = \swt{13234} + \swt{23134},
