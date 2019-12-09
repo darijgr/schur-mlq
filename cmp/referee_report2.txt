@@ -47,7 +47,7 @@ Cor 3.10: Is V_T w_0 simply a weakly decreasing word with descents given by T? G
 
 R:
 No, it is not.
-The decents are given by $[r-1] \setminus T$.
+The descents are given by $[r-1] \setminus T$.
 We have added Remark 3.12 to help clarify this.
 There already is an example in Example 3.13 (previously Example 3.11).
 
@@ -75,7 +75,7 @@ p29, line 21: should be ``left to right, top to bottom''
 
 R:
 By our understanding, the current statement is correct.
-However, this might be due to a difference is how we learned to state reading orders, and we believe the example right after removes any abiguity.
+However, this might be due to a difference is how we learned to state reading orders, and we believe the example right after removes any ambiguity.
 
 p30, paragraph beginning at line 24: make the proof more readable, perhaps by including an example/figure
 
