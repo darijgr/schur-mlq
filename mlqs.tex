@@ -104,10 +104,6 @@
 
 \newenvironment{statement}{\begin{quote}}{\end{quote}}
 
-\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
-% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
-% $S$. The argument $k$ is optional, and if not provided, the result
-% is the whole powerset of $S$.
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 % $\set{...}$ yields $\left\{ ... \right\}$.
 \newcommand{\abs}[1]{\left| #1 \right|}
@@ -237,7 +233,7 @@
 \title[MLQs with spectral parameters]{Multiline queues with spectral parameters}
 
 \author[E.~Aas]{Erik Aas}
-\address[E. Aas]{Department of Mathematics, Pennsylvania State University, McAllister Building, State College, PA 116802, USA}
+\address[E. Aas]{Department of Mathematics, Pennsylvania State University, McAllister Building, State College, PA 16801, USA}
 \email{eaas@kth.se}
 
 \author[D.~Grinberg]{Darij Grinberg}
@@ -289,10 +285,10 @@ We also refer the reader to~\cite{PEM09,Schutz01,SZ95,TJHJ16} and references the
 
 The term exclusion process was coined by Spitzer~\cite{Spitzer70}, where he was focused on an application with Brownian motion with hard-core interactions.
 Moreover, it was~\cite{Spitzer70} that initiated the investigation of exclusion processes using probability theory.
-However, the applications of the ASEP (and its variations) has since spread to other areas, such as
+However, the applications of the ASEP (and its variations) have since spread to other areas, such as
 \begin{itemize}
 \item transportation processes in capillary vessels~\cite{Levitt73} or proteins within the cells along actin filaments~\cite{KNL05},
-\item anistropic conductors known as solid electrolytes~\cite{CL99},
+\item anisotropic conductors known as solid electrolytes~\cite{CL99},
 \item discrete models of traffic flow~\cite{Schad01},
 \item partition growth processes~\cite{Lam15},
 \item (non)symmetric Macdonald polynomials, Koornwinder polynomials, and (deformed) Knizhnik--Zamolodchikov (KZ) equations~\cite{CdGW15,KT07},
@@ -317,7 +313,7 @@ This allows us to define the spectral weight or amplitude of a word $u$ to be th
 Furthermore, we introduce the notion of a $\sigma$-twisted MLQ, where $\sigma$ is a permutation, although this is implicitly considered in~\cite{AAMP}.
 Our main result (Theorem~\ref{thm:permutation}) is that for a fixed permutation $\sigma$, the sum of the weights of all $\sigma$-twisted MLQs $\qq_{\sigma}$ such that $u = \qq_{\sigma}(1^n)$ equals the spectral weight of $u$.
 To this end, we construct an action of the symmetric group on MLQs that corresponds, under the usual FM algorithm, to the natural action by letters on words.
-We show that does not change the MLQ as a function on words.
+We show that this does not change the MLQ as a function on words.
 This action has previously appeared in a number of different guises, such as in Danilov and Koshevoy~\cite{DanilovKoshevoy} (see also~\cite[Ch.~4]{Gorodentsev2}), van Leeuwen~\cite[Lemma~2.3]{vanLeeuwen-dc}, and Lothaire~\cite[Ch.~5, (5.6.3)]{Loth}.
 In the context of Kirillov--Reshetikhin crystals, it can be described as applying a combinatorial $R$-matrix to an MLQ, where the weight remaining invariant is a condition of being a crystal isomorphism.
 
@@ -326,9 +322,9 @@ However, we note that the interlacing property of~\cite{AAMP} does not generaliz
 Furthermore, we give a determinant expression for the spectral weight of decreasing words by using the Lindstr\"om--Gessel--Viennot Lemma~\cite{GV85,Lindstrom73}.
 By combining these results, we obtain a proof of~\cite[Conj.~3.10]{AasLin17}, which in turn proves a number of other conjectures in~\cite{AasLin17}.
 
-We note that our weighting scheme can be extended to multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP) on a ring, where multiple particles can occupy the same site.
+We note that our weighting scheme can be extended to the multiline process used to determine the steady state distribution of the totally asymmetric zero range process (TARZP) on a ring, where multiple particles can occupy the same site.
 This comes from the fact that the TARZP steady state distribution can also be computed using a tensor product of Kirillov--Reshetikhin crystals (under rank-level duality) using combinatorial $R$-matrices with analogous connections to corner transfer matrices and the tetrahedron equation~\cite{KMO16TARZP,KMO16TARZPII}.
-Thus, we expect that a similar description of $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
+Thus, we expect that a similar description of a $\sigma$-twisted multiline process can be defined such that the weighting is invariant under the action of the combinatorial $R$-matrix.
 Yet it seems unlikely that our weighting is related to the steady state distribution for the inhomogeneous TASEP~\cite{AM13,AL14} or TARZP~\cite{KMO16II}.
 
 This paper is organized as follows.
@@ -421,7 +417,7 @@ We construct a perfect matching on the sites in $u$ and $v$ as follows.
 \item[Phase~I]
    For each of the last $n - r$ sites $i \in \ive{n}$ in decreasing order (in our ordering), match the first site $j$ weakly to the left (cyclically) of $i$ such that $j \notin q$ that is unmatched and set $v_j = u_i + 1$.
 \item[Phase~II]
-   For each of the remaining $r$ sites $i \in \ive{n}$ in increasing order (in our ordering), match the site with value $u_i$ with the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ that is unmatched and set $v_j = u_i + 1$.
+   For each of the remaining $r$ sites $i \in \ive{n}$ in increasing order (in our ordering), match the site with value $u_i$ with the first site $j$ weakly to the right (cyclically) of $i$ such that $j \in q$ that is unmatched and set $v_j = u_i$.
 \end{description}
 There is a choice inherent in ordering the sites (since some letters of $u$ can be equal), but we will later see that this choice does not affect the word $v$ obtained.
 
@@ -3963,7 +3959,7 @@ Then, we can define a labeling \defn{$q(f)$} of $q$ by $\ive{k+1}$ as follows:
 
 The connection between this labeling and the action of queues on words is simple.
 Indeed, let $k \in \NN$, let $r$ be a queue, and let $f \colon r \to \ive{k}$ be a labeling.
-Then we can can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
+Then we can assign to $f$ a word $\omega_k f \in \mcW_n$ as follows:
 For each $j \in r$, we set $\tup{\omega_k f}_j = f \tup{j}$.
 All other letters of $\omega_k f$ shall be $k+1$.
 Now, it is easy to see that if $q$ is a queue satisfying $\abs{r} \leq \abs{q}$, then
