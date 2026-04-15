@@ -1176,7 +1176,7 @@ Hence, we verify Corollary~\ref{cor:merges} in this case since
   }
 \end{tikzpicture}
 \]
-\caption{The bijection with  between MLQs and disjoint $r$-paths for Example~\ref{ex:NILP_bijection} as described in the proof of Theorem~\ref{thm:determinant_form}.}
+\caption{The bijection between MLQs and disjoint $r$-paths for Example~\ref{ex:NILP_bijection} as described in the proof of Theorem~\ref{thm:determinant_form}.}
 \label{fig:lattice_path_bijection}
 \end{figure}
 
@@ -1395,7 +1395,7 @@ Note that these moves preserve the type of the words; thus we could consider thi
 For $i \notin S$, we have the merging map $\Phi_i \colon \mcW_S \to \mcW_{S\cup\{i\}}$ given by
 $\Phi_i(\epsilon_u) = \epsilon_{\vee^{(i)} u}$.
 %$\Phi_i(\epsilon_u) = \epsilon_{\merge{t}u}$, where $t = \min\set{k \mid p_k(\mm_S) \geq i}$.
-It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$. 
+It is easy to see that $\Phi_i M_S = M_{S\cup \{i\}} \Phi_i$, where $\Phi_i$ denotes the linear map $V_S \to V_{S\cup\{i\}}$ that is given by $\Phi_i$ on the basis $\mcW_S$. 
 
 \begin{figure}
 \[
@@ -2129,7 +2129,7 @@ The diagram of the pseudo-partition $\tup{3,2,3,1}$ is drawn as
 \]
 The following are two tableaux of shape $\tup{3,2,3,1}$:
 \[
-\label{eq.tableau.exas}
+%\label{eq.tableau.exas}
 \begin{ytableau} 1 & 2 & 5 \\ 2 & 3 \\ 3 & 4 & 5 \\ 7 \end{ytableau}\qquad
 \text{and}\qquad
 \begin{ytableau} 1 & 1 & 4 \\ 2 & 3 \\ 4 & 5 & 5 \\ 5 \end{ytableau}\,.
@@ -3122,7 +3122,7 @@ In this section, we shall prove Theorem~\ref{thm:permutation} by relying on the
 braid relation for dual configurations. We need some definitions first.
 
 An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
-As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+As usual, we consider $C$ as a function on words by $C(u) := q_2\bigl(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
 We begin by constructing a sequence of parentheses as follows: For each $j = 1, 2, \dotsc, n$ (in that order), we write
@@ -4088,7 +4088,7 @@ To obtain a Kohnert labeling from a Kohnert diagram of height $K$ (for this, we 
 \[
 \widetilde{\qq}_D = (\widetilde{q}_1, \widetilde{q}_2, \dotsc, \widetilde{q}_{\widetilde{\ell}}, q_1, q_2, \dotsc, q_{\ell})
 \]
-from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings, where $\ell + \ell'$ is the largest label appearing in the Kohnert labeling.
+from the MLQ $\qq_D = (q_1, q_2, \dotsc, q_{\ell})$ to obtain the correct labelings, where $\ell + \widetilde{\ell}$ is the largest label appearing in the Kohnert labeling.
 Indeed, a label added in column $i$ comes from a $k \in q$ with $k > K$ for sufficiently many queues $q$ before $q_i$.
 In particular, when a smaller label appears, it must be in the bottom row of the Kohnert diagram, which would correspond to the bully path wrapping around the cylinder.
 We then only consider the labels in the regime $k \in q_i$ for all $1 \leq k \leq K$ and all $1 \leq i \leq \ell$.
@@ -4161,7 +4161,7 @@ in a different way, although the two definitions can be shown to be equivalent).
 We need some definitions first.
 
 An \defn{$(r_1,r_2)$-configuration} shall mean a pair $C = (q_1, q_2)$, where $q_1$ is an $r_1$-queue and $q_2$ is an $r_2$-queue.
-As usual, we consider $C$ as a function on words by $C(u) := q_2\bigr(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
+As usual, we consider $C$ as a function on words by $C(u) := q_2\bigl(q_1(u)\bigr)$, and we define the weight of $C$ by $\wt(C) := \wt(q_1) \wt(q_2)$.
 We construct the \defn{dual}\footnote{This is a different duality than the contragredient duality of Lemma~\ref{le:dual}.} $(r_2,r_1)$-configuration to $C$, which we denote by $C'$, as follows.
 
 We first consider the case $r_1 = r_2$, in which case we define $C' = C$.
