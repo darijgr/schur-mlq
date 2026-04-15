@@ -155,7 +155,6 @@
 \definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
 \definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
 \newcommand{\dblue}{\color{dbluecolor}\bf}
-\newcommand{\dred}{\color{dredcolor}\bf}
 \newcommand{\dblack}{\color{dblackcolor}\bf}
 
 \definecolor{UQgold}{RGB}{196, 158, 54} % UQ gold
@@ -542,8 +541,10 @@ Indeed, if we set $h = u_{i_k} = u_{i_{k+1}}$, then:
        steps in Phase~II, causing the corresponding letters $v_j$ to
        get set in a possibly different order; but this does not change $v$
        because these two letters are set to the same value
-       (namely, to $h+1$).
- \item If $k > \abs{q}$, then a similar argument works (using Phase~I instead).
+       (namely, to $h$).
+ \item If $k > \abs{q}$, then a similar argument works (this time, we
+       are interchanging two consecutive steps in Phase~I, and both
+       letters $v_j$ will be set to $h+1$).
  \item If $k = \abs{q}$, then recall from Remark~\ref{rmk:order-agnostic} that
        the two phases can be arbitrarily interleaved.
        In particular, we can first perform all but the last step of Phase~I,
@@ -1033,7 +1034,7 @@ where we sum over all $u$ of type $\mm$ such that $v = \merge{i} u$.
   \]
   the result is a $(s_{i-1} \dotsm s_2 s_1)$-twisted MLQ of type $\mm$ with weight
   $\wt\bigl( \theta(\qq, q') \bigr) = \wt(\qq) \wt(q')$.
-  But recall that $v = \qq(1^n$); thus, by Lemma~\ref{lemma:queue_merge}, we have
+  But recall that $v = \qq(1^n)$; thus, by Lemma~\ref{lemma:queue_merge}, we have
   \[
   v = \qq(1^n) = \merge{i} \qq\bigl( q'(1^n) \bigr) = \merge{i} \bigl( \theta(\qq, q')(1^n) \bigr).
   \]
@@ -2574,11 +2575,11 @@ In this case, the elements of $q_i^{(j)}$ will be labeled by $j$ (as we shall se
 \[
 \begin{tikzpicture}[scale=0.8,baseline=-30]
 % q_1
-\foreach \x in {9,10,13} {
+\foreach \x in {9,12,13} {
     \node[blue] at (\x,0) {$1$};
     \draw (\x,0) circle (0.3);
 }
-\foreach \x in {1,...,8,11,12,14,15}
+\foreach \x in {1,...,8,10,11,14,15}
     \draw (\x-0.3, -0.3) rectangle (\x+0.3, +0.3);
 % q_2
 \foreach \x in {7,8} {
@@ -4513,7 +4514,7 @@ From $\inter[a,b] \subseteq U$, we obtain
 \]
 Thus, for each $\ell \in \inter[a,b]$, the number $c^\uparrow[a,\ell] = \abs{\inter[a,\ell] \cap [u]_k}$ counts all of the $i_p$ with $p \in R$ that fall into the interval $\inter[a,\ell]$, while the number $c^\downarrow[a,\ell] = \abs{\inter[a,\ell] \cap q}$ counts all of the $j_p$ with $p \in R$ that fall into this interval.
 Hence, the former number is at least as large as the latter number (because if $p \in R$ is such that $j_p$ falls into $\inter[a,\ell]$, then $i_p$ must also fall into $\inter[a,\ell]$\footnote{In fact, let $p \in R$ be such that $j_p \in \inter[a,\ell]$. But $\inter[i_p,j_p] = I_p$ is a subinterval of $\inter[a,b]$, due to $\inter[a,b] = \bigcup_{p \in R} I_p$. The interval $\inter[a,\ell]$ is a ``prefix'' of $\inter[a,b]$; thus, every subinterval of $\inter[a,\ell]$ that ends inside $\inter[a,\ell]$ must also begin inside $\inter[a,\ell]$. Applying this to the subinterval $\inter[i_p, j_p]$, we conclude that $i_p \in \inter[a,\ell]$, as we wanted to show. Here, we have tacitly used the fact that $\inter[a,b] \neq \ive{n}$, which follows from $\inter[a,b] \subseteq U \neq \ive{n}$.}).
-We have thus proven that for each $\ell \in \inter[i,j]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
+We have thus proven that for each $\ell \in \inter[a,b]$, we have $c^\uparrow[a,\ell] \geq c^\downarrow[a,\ell]$. In other words, the interval $\inter[a,b]$ is top-heavy, qed.]
 
 Consider again the connected components of $U$. Each of them is top-heavy (as we have just shown), and thus contains at least as many elements of $[u]_k$ as it contains elements of $q$. Hence, the set $U$ altogether contains at least as many elements of $[u]_k$ as it contains elements of $q$, and this inequality becomes an equality only if each connected component of $U$ is balanced.
 But this inequality does become an equality, because the set $U$ contains all $k$ elements of $[u]_k$ (since $[u]_k = \set{i_1, i_2, \ldots, i_k} \subseteq U$) and contains exactly $k$ elements of $q$ (since $U \cap q = \set{j_1, j_2, \ldots, j_k}$).

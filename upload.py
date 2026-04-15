@@ -24,11 +24,11 @@ dirlist = os.listdir("./")
 versions = ["mlqs"]
 
 if "-P" in sys.argv:
-    print "Warning: purging working directory!"
+    print("Warning: purging working directory!")
     for fl in dirlist:
         flex = fl[-4:]
         if flex == ".aux" or flex == ".bak" or flex == ".cut" or flex == ".log" or flex == ".out" or flex == ".toc":
-            print "removing ", fl
+            print("removing ", fl)
             os.remove(fl)
     dirlist = os.listdir("./")
 
@@ -38,9 +38,9 @@ if "-n" in sys.argv:
 starting_folder = os.getcwd()
 
 for vernum in versions:
-    print ""
-    print "Compiling " + vernum + "..."
-    print ""
+    print("")
+    print("Compiling " + vernum + "...")
+    print("")
     os.chdir(starting_folder)
     fl = vernum + ".tex"
     fll = vernum + "-long.tex" # This file will be created in the temp folder;
@@ -107,7 +107,7 @@ for vernum in versions:
                p.terminate()
             except OSError:
                pass
-            print "Compilation aborted!"
+            print("Compilation aborted!")
             sys.exit()
         if i == 0: # compile bib
             p = subprocess.Popen(["bibtex", vernum + ".aux"])
@@ -137,7 +137,7 @@ for vernum in versions:
                p.terminate()
             except OSError:
                pass
-            print "Compilation aborted!"
+            print("Compilation aborted!")
             sys.exit()
         if i == 0: # compile bib
             p = subprocess.Popen(["bibtex", vernum + "-long.aux"])
@@ -147,19 +147,14 @@ for vernum in versions:
 
     if not local:
         # copy the files into website folder
-        os.system("cp " + fl_pdf  + " /cygdrive/d/math/mats/website/algebra/" + fl_pdf)
-        os.system("cp " + fll_pdf  + " /cygdrive/d/math/mats/website/algebra/" + fll_pdf)
+        os.system("cp " + fl_pdf  + " /mnt/c/priv/darijgrinberg.gitlab.io/public/algebra/" + fl_pdf)
+        os.system("cp " + fll_pdf  + " /mnt/c/priv/darijgrinberg.gitlab.io/public/algebra/" + fll_pdf)
         import zipfile # zipping the source:
         zipf = zipfile.ZipFile("mlqs.zip", 'w', zipfile.ZIP_DEFLATED)
         zipf.write(fl)
         zipf.write("queue.bib")
         zipf.write("sec-JT-old.tex")
         zipf.close()
-        os.system("cp mlqs.zip /cygdrive/d/math/mats/website/algebra/mlqs.zip")
-        print "Upload to CIP servers:"
+        os.system("cp mlqs.zip /mnt/c/priv/darijgrinberg.gitlab.io/public/algebra/mlqs.zip")
+        print("Upload to CIP servers:")
         os.system("scp mlqs.zip " + fl_pdf + " " + fll_pdf + " grinberg@remote.cip.ifi.lmu.de:~/public_html/algebra")
-    r"""
-        print "Upload to UMN servers:"
-        os.system("scp " + fl + " " + fl_pdf + " dgrinber@remote.math.umn.edu:~/www/")
-    """
-
